@@ -5,17 +5,33 @@
     "task_statement": "4.3",
     "type": "single_choice",
     "difficulty": "medium",
-    "theory_refs": ["TH-D4-012"],
+    "theory_refs": [
+      "TH-D4-012"
+    ],
     "case_study_id": null,
     "stem": "A user previously stated they live in City A, but now states they live in City B. What is a reasonable default way for the agent to handle this contradiction, for a routine, low-stakes case?",
     "select_count": 1,
     "options": [
-      { "key": "A", "text": "Treat City B as superseding City A, since the newer statement more likely reflects the user's current situation" },
-      { "key": "B", "text": "Store both cities as equally and permanently valid with no resolution of any kind" },
-      { "key": "C", "text": "Ignore the new statement entirely and keep using City A forever" },
-      { "key": "D", "text": "Delete all stored information about the user's location permanently with no replacement" }
+      {
+        "key": "A",
+        "text": "Treat City B as superseding City A, since the newer statement more likely reflects the user's current situation"
+      },
+      {
+        "key": "B",
+        "text": "Store both cities as equally and permanently valid with no resolution of any kind"
+      },
+      {
+        "key": "C",
+        "text": "Ignore the new statement entirely and keep using City A forever"
+      },
+      {
+        "key": "D",
+        "text": "Delete all stored information about the user's location permanently with no replacement"
+      }
     ],
-    "correct": ["A"],
+    "correct": [
+      "A"
+    ],
     "explanation": {
       "why_correct": "For a routine, low-stakes contradiction like this, treating the newer statement as superseding the older one is a reasonable default, since it's more likely to reflect the user's current reality.",
       "why_incorrect": {
@@ -25,7 +41,15 @@
       },
       "rule_of_thumb": "For routine, low-stakes contradictions, treating newer information as superseding older information is a reasonable default resolution policy."
     },
-    "tags": ["contradiction-resolution", "memory-updates"]
+    "tags": [
+      "contradiction-resolution",
+      "memory-updates"
+    ],
+    "concepts": [
+      "Memory",
+      "Context Engineering",
+      "Evaluation & Learning Loops"
+    ]
   },
   {
     "id": "Q-D4-0059",
@@ -33,17 +57,33 @@
     "task_statement": "4.3",
     "type": "single_choice",
     "difficulty": "hard",
-    "theory_refs": ["TH-D4-012"],
+    "theory_refs": [
+      "TH-D4-012"
+    ],
     "case_study_id": null,
     "stem": "A high-stakes medical record shows a contradiction between an old allergy note and a new statement that seems to contradict it. Should the agent automatically assume the newer statement is simply correct and silently override the old one?",
     "select_count": 1,
     "options": [
-      { "key": "A", "text": "Not necessarily -- given the high stakes, a clarifying check is more appropriate than silently resolving the contradiction by default" },
-      { "key": "B", "text": "Yes, always, with absolutely no exception for any level of stakes" },
-      { "key": "C", "text": "The agent should delete both pieces of information immediately with no further action" },
-      { "key": "D", "text": "The agent should ignore both pieces of information and guess randomly" }
+      {
+        "key": "A",
+        "text": "Not necessarily -- given the high stakes, a clarifying check is more appropriate than silently resolving the contradiction by default"
+      },
+      {
+        "key": "B",
+        "text": "Yes, always, with absolutely no exception for any level of stakes"
+      },
+      {
+        "key": "C",
+        "text": "The agent should delete both pieces of information immediately with no further action"
+      },
+      {
+        "key": "D",
+        "text": "The agent should ignore both pieces of information and guess randomly"
+      }
     ],
-    "correct": ["A"],
+    "correct": [
+      "A"
+    ],
     "explanation": {
       "why_correct": "Given the high stakes of a medical allergy record, a clarifying check (rather than silently assuming the newer statement is simply correct) is the more appropriate response, since acting on the wrong version could have serious consequences.",
       "why_incorrect": {
@@ -53,7 +93,16 @@
       },
       "rule_of_thumb": "High-stakes contradictions warrant a clarifying check rather than silently assuming the newer information is simply correct."
     },
-    "tags": ["contradiction-resolution", "high-stakes"]
+    "tags": [
+      "contradiction-resolution",
+      "high-stakes"
+    ],
+    "concepts": [
+      "Memory",
+      "Context Engineering",
+      "Guardrails",
+      "Evaluation & Learning Loops"
+    ]
   },
   {
     "id": "Q-D4-0060",
@@ -61,17 +110,33 @@
     "task_statement": "4.3",
     "type": "single_choice",
     "difficulty": "medium",
-    "theory_refs": ["TH-D4-010"],
+    "theory_refs": [
+      "TH-D4-010"
+    ],
     "case_study_id": null,
     "stem": "A fact has been independently observed and confirmed across many separate past interactions, each time consistently. What does this high frequency suggest about the fact's reliability as a generalizable pattern?",
     "select_count": 1,
     "options": [
-      { "key": "A", "text": "It suggests the fact is more likely to be a stable, generalizable pattern rather than a one-off anomaly" },
-      { "key": "B", "text": "It guarantees the fact is completely and permanently immune to ever changing" },
-      { "key": "C", "text": "It suggests the fact should be immediately discarded as noise" },
-      { "key": "D", "text": "Frequency has no bearing on reliability whatsoever" }
+      {
+        "key": "A",
+        "text": "It suggests the fact is more likely to be a stable, generalizable pattern rather than a one-off anomaly"
+      },
+      {
+        "key": "B",
+        "text": "It guarantees the fact is completely and permanently immune to ever changing"
+      },
+      {
+        "key": "C",
+        "text": "It suggests the fact should be immediately discarded as noise"
+      },
+      {
+        "key": "D",
+        "text": "Frequency has no bearing on reliability whatsoever"
+      }
     ],
-    "correct": ["A"],
+    "correct": [
+      "A"
+    ],
     "explanation": {
       "why_correct": "A fact repeatedly observed and confirmed across many separate occasions is more likely to represent a stable, generalizable pattern, as opposed to a one-off anomaly observed just once.",
       "why_incorrect": {
@@ -81,6 +146,13 @@
       },
       "rule_of_thumb": "High, consistent frequency of observation is a signal that a fact likely represents a stable pattern, not a one-off anomaly."
     },
-    "tags": ["frequency", "retrieval-signals"]
+    "tags": [
+      "frequency",
+      "retrieval-signals"
+    ],
+    "concepts": [
+      "Memory",
+      "Context Engineering"
+    ]
   }
 ]

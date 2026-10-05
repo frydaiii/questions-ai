@@ -44,6 +44,10 @@
     "tags": [
       "task-decomposition",
       "failure-recovery"
+    ],
+    "concepts": [
+      "Planning",
+      "Error Recovery"
     ]
   },
   {
@@ -93,6 +97,10 @@
       "tree-of-thought",
       "task-fit",
       "overhead"
+    ],
+    "concepts": [
+      "Chain of Thought (CoT)",
+      "Planning"
     ]
   },
   {
@@ -141,6 +149,10 @@
       "plan-and-execute",
       "react",
       "architecture-combination"
+    ],
+    "concepts": [
+      "State / State Management",
+      "Planning"
     ]
   },
   {
@@ -189,6 +201,9 @@
     "tags": [
       "task-decomposition",
       "planning"
+    ],
+    "concepts": [
+      "Planning"
     ]
   },
   {
@@ -236,6 +251,9 @@
     "tags": [
       "task-decomposition",
       "planning-strategy-selection"
+    ],
+    "concepts": [
+      "Planning"
     ]
   }
 ]

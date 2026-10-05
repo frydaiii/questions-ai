@@ -44,6 +44,10 @@
     "tags": [
       "calibration",
       "excessive-hedging"
+    ],
+    "concepts": [
+      "Context Engineering",
+      "Error Recovery"
     ]
   },
   {
@@ -91,6 +95,10 @@
     "tags": [
       "uncertainty",
       "false-confidence"
+    ],
+    "concepts": [
+      "Context Engineering",
+      "Error Recovery"
     ]
   },
   {
@@ -138,6 +146,9 @@
     "tags": [
       "error-detection",
       "sanity-check"
+    ],
+    "concepts": [
+      "Error Recovery"
     ]
   }
 ]

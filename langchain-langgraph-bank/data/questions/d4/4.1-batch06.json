@@ -43,6 +43,11 @@
     },
     "tags": [
       "memory-persistence-policy"
+    ],
+    "concepts": [
+      "State / State Management",
+      "Memory",
+      "Context Engineering"
     ]
   },
   {
@@ -91,6 +96,11 @@
       "memory-architecture",
       "working-memory",
       "long-term-memory"
+    ],
+    "concepts": [
+      "State / State Management",
+      "Memory",
+      "Context Engineering"
     ]
   },
   {
@@ -140,6 +150,11 @@
       "memory-persistence-policy",
       "working-memory",
       "long-term-memory"
+    ],
+    "concepts": [
+      "State / State Management",
+      "Memory",
+      "Context Engineering"
     ]
   }
 ]

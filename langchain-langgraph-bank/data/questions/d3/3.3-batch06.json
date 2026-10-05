@@ -46,6 +46,10 @@
     "tags": [
       "retry-strategy",
       "fallback-strategy"
+    ],
+    "concepts": [
+      "Tools & Tool Discovery",
+      "Error Recovery"
     ]
   },
   {
@@ -93,6 +97,11 @@
     "tags": [
       "sanity-checking",
       "misleading-results"
+    ],
+    "concepts": [
+      "Tools & Tool Discovery",
+      "Error Recovery",
+      "Evaluation & Learning Loops"
     ]
   },
   {
@@ -140,6 +149,10 @@
     "tags": [
       "failure-categorization",
       "retry-strategy"
+    ],
+    "concepts": [
+      "Tools & Tool Discovery",
+      "Error Recovery"
     ]
   }
 ]

@@ -5,17 +5,38 @@
     "task_statement": "4.3",
     "type": "multi_response",
     "difficulty": "hard",
-    "theory_refs": ["TH-D4-009", "TH-D4-010", "TH-D4-011", "TH-D4-012"],
+    "theory_refs": [
+      "TH-D4-009",
+      "TH-D4-010",
+      "TH-D4-011",
+      "TH-D4-012"
+    ],
     "case_study_id": null,
     "stem": "Which of the following practices contribute to a robust memory retrieval and maintenance system? (Select 3)",
     "select_count": 3,
     "options": [
-      { "key": "A", "text": "Combining relevance with recency and frequency signals rather than relying on relevance alone" },
-      { "key": "B", "text": "Applying targeted, judgment-based forgetting of superseded or reliably irrelevant content" },
-      { "key": "C", "text": "Using a clarifying check for high-stakes contradictions rather than always silently resolving them" },
-      { "key": "D", "text": "Storing every memory permanently with absolutely no mechanism to ever remove or deprioritize anything" }
+      {
+        "key": "A",
+        "text": "Combining relevance with recency and frequency signals rather than relying on relevance alone"
+      },
+      {
+        "key": "B",
+        "text": "Applying targeted, judgment-based forgetting of superseded or reliably irrelevant content"
+      },
+      {
+        "key": "C",
+        "text": "Using a clarifying check for high-stakes contradictions rather than always silently resolving them"
+      },
+      {
+        "key": "D",
+        "text": "Storing every memory permanently with absolutely no mechanism to ever remove or deprioritize anything"
+      }
     ],
-    "correct": ["A", "B", "C"],
+    "correct": [
+      "A",
+      "B",
+      "C"
+    ],
     "explanation": {
       "why_correct": "Combining multiple retrieval signals, applying targeted forgetting, and using clarifying checks for high-stakes contradictions are all practices that contribute to a robust, well-functioning memory system.",
       "why_incorrect": {
@@ -23,7 +44,16 @@
       },
       "rule_of_thumb": "Robust memory systems combine multiple retrieval signals, apply targeted forgetting, and handle high-stakes contradictions with appropriate caution -- not permanent, undifferentiated retention."
     },
-    "tags": ["relevance-based-retrieval", "forgetting-mechanisms", "contradiction-resolution"]
+    "tags": [
+      "relevance-based-retrieval",
+      "forgetting-mechanisms",
+      "contradiction-resolution"
+    ],
+    "concepts": [
+      "Memory",
+      "Context Engineering",
+      "Evaluation & Learning Loops"
+    ]
   },
   {
     "id": "Q-D4-0071",
@@ -31,17 +61,34 @@
     "task_statement": "4.3",
     "type": "single_choice",
     "difficulty": "medium",
-    "theory_refs": ["TH-D4-009", "TH-D4-010"],
+    "theory_refs": [
+      "TH-D4-009",
+      "TH-D4-010"
+    ],
     "case_study_id": null,
     "stem": "A system ranks candidate memories using semantic similarity to the current context, then further boosts memories formed within the last week. What combination of signals does this reflect?",
     "select_count": 1,
     "options": [
-      { "key": "A", "text": "Relevance combined with recency" },
-      { "key": "B", "text": "Frequency alone, with no relevance consideration" },
-      { "key": "C", "text": "No signals at all -- this is a purely random process" },
-      { "key": "D", "text": "A method that ignores the current context entirely" }
+      {
+        "key": "A",
+        "text": "Relevance combined with recency"
+      },
+      {
+        "key": "B",
+        "text": "Frequency alone, with no relevance consideration"
+      },
+      {
+        "key": "C",
+        "text": "No signals at all -- this is a purely random process"
+      },
+      {
+        "key": "D",
+        "text": "A method that ignores the current context entirely"
+      }
     ],
-    "correct": ["A"],
+    "correct": [
+      "A"
+    ],
     "explanation": {
       "why_correct": "Ranking by semantic similarity to the current context captures relevance, and further boosting recently formed memories captures recency -- this combination reflects relevance combined with recency.",
       "why_incorrect": {
@@ -51,7 +98,14 @@
       },
       "rule_of_thumb": "Combining semantic similarity (relevance) with a recency boost is a direct example of using relevance and recency together as retrieval signals."
     },
-    "tags": ["relevance-based-retrieval", "recency"]
+    "tags": [
+      "relevance-based-retrieval",
+      "recency"
+    ],
+    "concepts": [
+      "Memory",
+      "Context Engineering"
+    ]
   },
   {
     "id": "Q-D4-0072",
@@ -59,17 +113,33 @@
     "task_statement": "4.3",
     "type": "single_choice",
     "difficulty": "medium",
-    "theory_refs": ["TH-D4-012"],
+    "theory_refs": [
+      "TH-D4-012"
+    ],
     "case_study_id": null,
     "stem": "Why is it important to distinguish information that should be fully replaced from information that should coexist as still relevant in some contexts, when resolving a contradiction?",
     "select_count": 1,
     "options": [
-      { "key": "A", "text": "Because some apparent contradictions are context-specific exceptions rather than a complete, universal update, and treating them as a full replacement could discard still-valid context-specific information" },
-      { "key": "B", "text": "Because there is never any meaningful difference between these two cases" },
-      { "key": "C", "text": "Because all contradictions should always be resolved by deleting both pieces of information" },
-      { "key": "D", "text": "Because this distinction has no bearing on how useful the agent's memory remains" }
+      {
+        "key": "A",
+        "text": "Because some apparent contradictions are context-specific exceptions rather than a complete, universal update, and treating them as a full replacement could discard still-valid context-specific information"
+      },
+      {
+        "key": "B",
+        "text": "Because there is never any meaningful difference between these two cases"
+      },
+      {
+        "key": "C",
+        "text": "Because all contradictions should always be resolved by deleting both pieces of information"
+      },
+      {
+        "key": "D",
+        "text": "Because this distinction has no bearing on how useful the agent's memory remains"
+      }
     ],
-    "correct": ["A"],
+    "correct": [
+      "A"
+    ],
     "explanation": {
       "why_correct": "Some contradictions reflect a context-specific exception (e.g. a different shipping address just for one particular order) rather than a universal update, so treating every contradiction as a full replacement risks discarding still-valid, context-specific information that was actually correct for its original context.",
       "why_incorrect": {
@@ -79,6 +149,13 @@
       },
       "rule_of_thumb": "Not every contradiction is a full replacement -- some reflect context-specific exceptions that should coexist with, rather than fully replace, the original information."
     },
-    "tags": ["contradiction-resolution"]
+    "tags": [
+      "contradiction-resolution"
+    ],
+    "concepts": [
+      "Memory",
+      "Context Engineering",
+      "Evaluation & Learning Loops"
+    ]
   }
 ]

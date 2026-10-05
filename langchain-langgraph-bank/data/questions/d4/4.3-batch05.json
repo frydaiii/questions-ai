@@ -44,6 +44,11 @@
     "tags": [
       "contradiction-resolution",
       "frequency"
+    ],
+    "concepts": [
+      "Memory",
+      "Context Engineering",
+      "Evaluation & Learning Loops"
     ]
   },
   {
@@ -90,6 +95,10 @@
     },
     "tags": [
       "relevance-based-retrieval"
+    ],
+    "concepts": [
+      "Memory",
+      "Context Engineering"
     ]
   },
   {
@@ -136,6 +145,11 @@
     },
     "tags": [
       "forgetting-mechanisms"
+    ],
+    "concepts": [
+      "Memory",
+      "Context Engineering",
+      "Evaluation & Learning Loops"
     ]
   }
 ]

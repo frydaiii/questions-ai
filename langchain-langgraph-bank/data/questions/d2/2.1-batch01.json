@@ -44,6 +44,9 @@
     "tags": [
       "react",
       "reasoning-action-loop"
+    ],
+    "concepts": [
+      "Reasoning Loop (ReAct)"
     ]
   },
   {
@@ -91,6 +94,11 @@
     "tags": [
       "grounding",
       "error-compounding"
+    ],
+    "concepts": [
+      "Tools & Tool Discovery",
+      "Reasoning Loop (ReAct)",
+      "Error Recovery"
     ]
   },
   {
@@ -138,6 +146,9 @@
     "tags": [
       "reasoning-action-balance",
       "design-tradeoffs"
+    ],
+    "concepts": [
+      "Reasoning Loop (ReAct)"
     ]
   },
   {
@@ -186,6 +197,10 @@
       "react",
       "failure-diagnosis",
       "looping"
+    ],
+    "concepts": [
+      "Reasoning Loop (ReAct)",
+      "Error Recovery"
     ]
   },
   {
@@ -234,6 +249,10 @@
       "chain-of-thought",
       "react",
       "task-fit"
+    ],
+    "concepts": [
+      "Reasoning Loop (ReAct)",
+      "Chain of Thought (CoT)"
     ]
   },
   {
@@ -282,6 +301,10 @@
       "react",
       "failure-diagnosis",
       "ignoring-observations"
+    ],
+    "concepts": [
+      "Reasoning Loop (ReAct)",
+      "Error Recovery"
     ]
   }
 ]

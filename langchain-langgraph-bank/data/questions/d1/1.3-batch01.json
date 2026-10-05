@@ -44,6 +44,10 @@
     "tags": [
       "reactive-agent",
       "agent-types"
+    ],
+    "concepts": [
+      "Agent",
+      "Reflex Agents"
     ]
   },
   {
@@ -92,6 +96,10 @@
       "deliberative-agent",
       "planning",
       "agent-types"
+    ],
+    "concepts": [
+      "Agent",
+      "Planning"
     ]
   },
   {
@@ -140,6 +148,10 @@
       "hybrid-agent",
       "escalation",
       "agent-types"
+    ],
+    "concepts": [
+      "Agent",
+      "Environment"
     ]
   },
   {
@@ -188,6 +200,12 @@
       "architecture-selection",
       "reactive-agent",
       "task-fit"
+    ],
+    "concepts": [
+      "Agent",
+      "Environment",
+      "Planning",
+      "Reflex Agents"
     ]
   },
   {
@@ -236,6 +254,9 @@
     "tags": [
       "agent-types",
       "tradeoffs"
+    ],
+    "concepts": [
+      "Agent"
     ]
   },
   {
@@ -283,6 +304,10 @@
     "tags": [
       "reactive-agent",
       "limitations"
+    ],
+    "concepts": [
+      "Agent",
+      "Reflex Agents"
     ]
   }
 ]

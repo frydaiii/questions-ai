@@ -44,6 +44,9 @@
     "tags": [
       "agent-components",
       "minimal-agent"
+    ],
+    "concepts": [
+      "Agent"
     ]
   },
   {
@@ -92,6 +95,11 @@
       "limitations",
       "tool-use-motivation",
       "self-critique"
+    ],
+    "concepts": [
+      "Agent",
+      "Tools & Tool Discovery",
+      "Evaluation & Learning Loops"
     ]
   },
   {
@@ -140,6 +148,10 @@
     "tags": [
       "workflow-vs-agent",
       "control-flow"
+    ],
+    "concepts": [
+      "Agent",
+      "Tools & Tool Discovery"
     ]
   },
   {
@@ -188,6 +200,11 @@
       "autonomy",
       "risk",
       "design-tradeoffs"
+    ],
+    "concepts": [
+      "Agent",
+      "Utility & Goal-Based Agents",
+      "Guardrails"
     ]
   },
   {
@@ -236,6 +253,11 @@
       "agent-definition",
       "autonomy",
       "goal-directedness"
+    ],
+    "concepts": [
+      "Agent",
+      "Tools & Tool Discovery",
+      "Utility & Goal-Based Agents"
     ]
   }
 ]

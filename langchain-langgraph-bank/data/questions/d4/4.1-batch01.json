@@ -44,6 +44,11 @@
     "tags": [
       "working-memory",
       "long-term-memory"
+    ],
+    "concepts": [
+      "State / State Management",
+      "Memory",
+      "Context Engineering"
     ]
   },
   {
@@ -91,6 +96,11 @@
     "tags": [
       "long-term-memory",
       "memory-retrieval"
+    ],
+    "concepts": [
+      "State / State Management",
+      "Memory",
+      "Context Engineering"
     ]
   },
   {
@@ -139,6 +149,11 @@
       "working-memory",
       "long-term-memory",
       "memory-architecture"
+    ],
+    "concepts": [
+      "State / State Management",
+      "Memory",
+      "Context Engineering"
     ]
   }
 ]

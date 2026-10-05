@@ -44,6 +44,10 @@
     "tags": [
       "chain-of-thought",
       "task-fit"
+    ],
+    "concepts": [
+      "Reasoning Loop (ReAct)",
+      "Chain of Thought (CoT)"
     ]
   },
   {
@@ -92,6 +96,9 @@
     "tags": [
       "reasoning-action-balance",
       "design-tradeoffs"
+    ],
+    "concepts": [
+      "Reasoning Loop (ReAct)"
     ]
   },
   {
@@ -140,6 +147,10 @@
       "react",
       "failure-diagnosis",
       "premature-conclusion"
+    ],
+    "concepts": [
+      "Reasoning Loop (ReAct)",
+      "Error Recovery"
     ]
   },
   {
@@ -189,6 +200,10 @@
       "grounding",
       "react",
       "healthy-behavior"
+    ],
+    "concepts": [
+      "Tools & Tool Discovery",
+      "Reasoning Loop (ReAct)"
     ]
   },
   {
@@ -237,6 +252,10 @@
       "chain-of-thought",
       "react",
       "task-fit"
+    ],
+    "concepts": [
+      "Reasoning Loop (ReAct)",
+      "Chain of Thought (CoT)"
     ]
   }
 ]

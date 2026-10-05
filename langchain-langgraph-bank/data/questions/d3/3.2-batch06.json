@@ -45,6 +45,10 @@
     "tags": [
       "tool-selection",
       "tool-exposure-scoping"
+    ],
+    "concepts": [
+      "Tools & Tool Discovery",
+      "Context Engineering"
     ]
   },
   {
@@ -91,6 +95,10 @@
     },
     "tags": [
       "tool-exposure-scoping"
+    ],
+    "concepts": [
+      "Tools & Tool Discovery",
+      "Context Engineering"
     ]
   },
   {
@@ -139,6 +147,9 @@
     "tags": [
       "tool-selection",
       "parameter-construction"
+    ],
+    "concepts": [
+      "Tools & Tool Discovery"
     ]
   }
 ]

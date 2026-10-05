@@ -5,22 +5,44 @@
     "task_statement": "2.2",
     "type": "ordering",
     "difficulty": "medium",
-    "theory_refs": ["TH-D2-007"],
+    "theory_refs": [
+      "TH-D2-007"
+    ],
     "case_study_id": null,
     "stem": "Place the following steps of a plan-and-execute agent's workflow in the correct order.",
     "select_count": 3,
     "options": [
-      { "key": "A", "text": "Generate a full multi-step plan before executing any step" },
-      { "key": "B", "text": "Execute the first planned step and observe its result" },
-      { "key": "C", "text": "Revise the remaining plan if the observed result invalidates an assumption" }
+      {
+        "key": "A",
+        "text": "Generate a full multi-step plan before executing any step"
+      },
+      {
+        "key": "B",
+        "text": "Execute the first planned step and observe its result"
+      },
+      {
+        "key": "C",
+        "text": "Revise the remaining plan if the observed result invalidates an assumption"
+      }
     ],
-    "correct": ["A", "B", "C"],
+    "correct": [
+      "A",
+      "B",
+      "C"
+    ],
     "explanation": {
       "why_correct": "A plan-and-execute agent first generates the full plan, then executes steps in order while observing results, and revises the remaining plan if a result reveals an invalidated assumption -- in that order.",
       "why_incorrect": {},
       "rule_of_thumb": "Plan-and-execute always proceeds: full upfront plan, then execution with observation, then revision if needed."
     },
-    "tags": ["plan-and-execute", "execution-order"]
+    "tags": [
+      "plan-and-execute",
+      "execution-order"
+    ],
+    "concepts": [
+      "State / State Management",
+      "Planning"
+    ]
   },
   {
     "id": "Q-D2-0031",
@@ -28,22 +50,45 @@
     "task_statement": "2.2",
     "type": "ordering",
     "difficulty": "hard",
-    "theory_refs": ["TH-D2-008"],
+    "theory_refs": [
+      "TH-D2-008"
+    ],
     "case_study_id": null,
     "stem": "Order the following tree-of-thought steps as they occur at a single branching point.",
     "select_count": 3,
     "options": [
-      { "key": "A", "text": "Generate several candidate next-step options from the current reasoning state" },
-      { "key": "B", "text": "Evaluate or score each candidate option's promise" },
-      { "key": "C", "text": "Prune weaker candidates and continue exploring the stronger ones" }
+      {
+        "key": "A",
+        "text": "Generate several candidate next-step options from the current reasoning state"
+      },
+      {
+        "key": "B",
+        "text": "Evaluate or score each candidate option's promise"
+      },
+      {
+        "key": "C",
+        "text": "Prune weaker candidates and continue exploring the stronger ones"
+      }
     ],
-    "correct": ["A", "B", "C"],
+    "correct": [
+      "A",
+      "B",
+      "C"
+    ],
     "explanation": {
       "why_correct": "At each branching point, candidates are first generated, then evaluated for promise, and finally the weaker ones are pruned while stronger ones continue to be explored -- in that order.",
       "why_incorrect": {},
       "rule_of_thumb": "Tree-of-thought branching always proceeds: generate candidates, evaluate them, then prune and continue with the strongest."
     },
-    "tags": ["tree-of-thought", "execution-order"]
+    "tags": [
+      "tree-of-thought",
+      "execution-order"
+    ],
+    "concepts": [
+      "State / State Management",
+      "Chain of Thought (CoT)",
+      "Planning"
+    ]
   },
   {
     "id": "Q-D2-0032",
@@ -51,28 +96,60 @@
     "task_statement": "2.2",
     "type": "matching",
     "difficulty": "medium",
-    "theory_refs": ["TH-D2-006", "TH-D2-007", "TH-D2-008"],
+    "theory_refs": [
+      "TH-D2-006",
+      "TH-D2-007",
+      "TH-D2-008"
+    ],
     "case_study_id": null,
     "stem": "Match each planning concept on the left to its correct description on the right.",
     "select_count": 3,
     "matching": {
       "left": [
-        { "key": "L1", "text": "Task decomposition" },
-        { "key": "L2", "text": "Plan-and-execute" },
-        { "key": "L3", "text": "Tree-of-thought" }
+        {
+          "key": "L1",
+          "text": "Task decomposition"
+        },
+        {
+          "key": "L2",
+          "text": "Plan-and-execute"
+        },
+        {
+          "key": "L3",
+          "text": "Tree-of-thought"
+        }
       ],
       "right": [
-        { "key": "R1", "text": "Breaking a complex goal into smaller, individually verifiable sub-tasks" },
-        { "key": "R2", "text": "Generating a full multi-step plan upfront, then executing it with possible revision" },
-        { "key": "R3", "text": "Exploring and evaluating multiple candidate reasoning branches, pruning weaker ones" }
+        {
+          "key": "R1",
+          "text": "Breaking a complex goal into smaller, individually verifiable sub-tasks"
+        },
+        {
+          "key": "R2",
+          "text": "Generating a full multi-step plan upfront, then executing it with possible revision"
+        },
+        {
+          "key": "R3",
+          "text": "Exploring and evaluating multiple candidate reasoning branches, pruning weaker ones"
+        }
       ]
     },
-    "correct_pairs": { "L1": "R1", "L2": "R2", "L3": "R3" },
+    "correct_pairs": {
+      "L1": "R1",
+      "L2": "R2",
+      "L3": "R3"
+    },
     "explanation": {
       "why_correct": "Each concept maps to its defining description: decomposition splits a goal into sub-tasks, plan-and-execute commits to an upfront plan with possible revision, and tree-of-thought explores and prunes multiple candidate branches.",
       "why_incorrect": {},
       "rule_of_thumb": "Decomposition = splitting the goal; plan-and-execute = upfront full plan; tree-of-thought = multi-branch exploration and pruning."
     },
-    "tags": ["planning-strategies", "architecture-comparison"]
+    "tags": [
+      "planning-strategies",
+      "architecture-comparison"
+    ],
+    "concepts": [
+      "Planning"
+    ]
   }
 ]

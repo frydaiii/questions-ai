@@ -44,6 +44,9 @@
     "tags": [
       "task-decomposition",
       "planning"
+    ],
+    "concepts": [
+      "Planning"
     ]
   },
   {
@@ -91,6 +94,10 @@
     "tags": [
       "plan-and-execute",
       "re-planning"
+    ],
+    "concepts": [
+      "State / State Management",
+      "Planning"
     ]
   },
   {
@@ -138,6 +145,10 @@
     "tags": [
       "tree-of-thought",
       "task-fit"
+    ],
+    "concepts": [
+      "Chain of Thought (CoT)",
+      "Planning"
     ]
   },
   {
@@ -186,6 +197,9 @@
       "task-decomposition",
       "overhead",
       "design-tradeoffs"
+    ],
+    "concepts": [
+      "Planning"
     ]
   }
 ]

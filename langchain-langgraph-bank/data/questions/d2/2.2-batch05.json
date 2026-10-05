@@ -44,6 +44,10 @@
     "tags": [
       "plan-and-execute",
       "limitations"
+    ],
+    "concepts": [
+      "State / State Management",
+      "Planning"
     ]
   },
   {
@@ -91,6 +95,9 @@
     "tags": [
       "planning-strategy-selection",
       "task-fit"
+    ],
+    "concepts": [
+      "Planning"
     ]
   },
   {
@@ -139,6 +146,9 @@
     "tags": [
       "planning-strategy-selection",
       "tradeoffs"
+    ],
+    "concepts": [
+      "Planning"
     ]
   }
 ]

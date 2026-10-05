@@ -44,6 +44,10 @@
     "tags": [
       "action-tools",
       "tool-categories"
+    ],
+    "concepts": [
+      "Tools & Tool Discovery",
+      "Guardrails"
     ]
   },
   {
@@ -91,6 +95,9 @@
     "tags": [
       "tool-necessity",
       "private-data"
+    ],
+    "concepts": [
+      "Tools & Tool Discovery"
     ]
   },
   {
@@ -137,6 +144,10 @@
     },
     "tags": [
       "grounding"
+    ],
+    "concepts": [
+      "Environment",
+      "Tools & Tool Discovery"
     ]
   }
 ]

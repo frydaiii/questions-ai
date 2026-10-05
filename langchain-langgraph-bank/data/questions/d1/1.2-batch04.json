@@ -44,6 +44,10 @@
     "tags": [
       "reasoning-depth",
       "deliberation"
+    ],
+    "concepts": [
+      "Agent",
+      "Reasoning Loop (ReAct)"
     ]
   },
   {
@@ -91,6 +95,11 @@
     "tags": [
       "perception",
       "multi-agent-context"
+    ],
+    "concepts": [
+      "Agent",
+      "Perception",
+      "Reasoning Loop (ReAct)"
     ]
   },
   {
@@ -139,6 +148,11 @@
       "feedback-loop",
       "adaptive-behavior",
       "misconceptions"
+    ],
+    "concepts": [
+      "Agent",
+      "State / State Management",
+      "Reasoning Loop (ReAct)"
     ]
   },
   {
@@ -186,6 +200,12 @@
     "tags": [
       "perceive-reason-act",
       "agent-loop"
+    ],
+    "concepts": [
+      "Agent",
+      "Perception",
+      "State / State Management",
+      "Reasoning Loop (ReAct)"
     ]
   },
   {
@@ -234,6 +254,12 @@
       "failure-diagnosis",
       "perception",
       "root-cause-analysis"
+    ],
+    "concepts": [
+      "Agent",
+      "Perception",
+      "Reasoning Loop (ReAct)",
+      "Error Recovery"
     ]
   }
 ]

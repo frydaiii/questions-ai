@@ -44,6 +44,11 @@
     "tags": [
       "misleading-results",
       "failure-categorization"
+    ],
+    "concepts": [
+      "Tools & Tool Discovery",
+      "Error Recovery",
+      "Evaluation & Learning Loops"
     ]
   },
   {
@@ -91,6 +96,10 @@
     "tags": [
       "retry-strategy",
       "transient-vs-persistent"
+    ],
+    "concepts": [
+      "Tools & Tool Discovery",
+      "Error Recovery"
     ]
   },
   {
@@ -138,6 +147,10 @@
     "tags": [
       "fallback-strategy",
       "permanent-failure"
+    ],
+    "concepts": [
+      "Tools & Tool Discovery",
+      "Error Recovery"
     ]
   }
 ]

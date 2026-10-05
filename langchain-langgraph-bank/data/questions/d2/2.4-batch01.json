@@ -44,6 +44,10 @@
     "tags": [
       "false-confidence",
       "uncertainty"
+    ],
+    "concepts": [
+      "Context Engineering",
+      "Error Recovery"
     ]
   },
   {
@@ -91,6 +95,10 @@
     "tags": [
       "ambiguity-handling",
       "assumption-stating"
+    ],
+    "concepts": [
+      "Context Engineering",
+      "Error Recovery"
     ]
   },
   {
@@ -138,6 +146,10 @@
     "tags": [
       "error-detection",
       "backtracking"
+    ],
+    "concepts": [
+      "Planning",
+      "Error Recovery"
     ]
   }
 ]

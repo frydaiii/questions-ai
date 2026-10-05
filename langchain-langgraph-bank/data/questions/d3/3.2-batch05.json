@@ -44,6 +44,10 @@
     "tags": [
       "tool-selection",
       "tool-descriptions"
+    ],
+    "concepts": [
+      "Tools & Tool Discovery",
+      "Context Engineering"
     ]
   },
   {
@@ -91,6 +95,9 @@
     "tags": [
       "parameter-construction",
       "tool-call-errors"
+    ],
+    "concepts": [
+      "Tools & Tool Discovery"
     ]
   },
   {
@@ -140,6 +147,11 @@
       "parallel-invocation",
       "sequential-invocation",
       "tool-invocation-strategy"
+    ],
+    "concepts": [
+      "State / State Management",
+      "Tools & Tool Discovery",
+      "Orchestration"
     ]
   }
 ]

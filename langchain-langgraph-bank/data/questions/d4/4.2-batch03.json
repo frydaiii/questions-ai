@@ -5,17 +5,37 @@
     "task_statement": "4.2",
     "type": "multi_response",
     "difficulty": "medium",
-    "theory_refs": ["TH-D4-005", "TH-D4-006", "TH-D4-007"],
+    "theory_refs": [
+      "TH-D4-005",
+      "TH-D4-006",
+      "TH-D4-007"
+    ],
     "case_study_id": null,
     "stem": "Which of the following are accurate characterizations of episodic, semantic, or procedural memory? (Select 3)",
     "select_count": 3,
     "options": [
-      { "key": "A", "text": "Episodic memory records specific past events tied to a particular time and context" },
-      { "key": "B", "text": "Semantic memory holds general facts useful independent of any specific past event" },
-      { "key": "C", "text": "Procedural memory stores knowledge of how to perform a task or sequence of actions" },
-      { "key": "D", "text": "All three memory types are retrieved using the exact same method with no variation" }
+      {
+        "key": "A",
+        "text": "Episodic memory records specific past events tied to a particular time and context"
+      },
+      {
+        "key": "B",
+        "text": "Semantic memory holds general facts useful independent of any specific past event"
+      },
+      {
+        "key": "C",
+        "text": "Procedural memory stores knowledge of how to perform a task or sequence of actions"
+      },
+      {
+        "key": "D",
+        "text": "All three memory types are retrieved using the exact same method with no variation"
+      }
     ],
-    "correct": ["A", "B", "C"],
+    "correct": [
+      "A",
+      "B",
+      "C"
+    ],
     "explanation": {
       "why_correct": "These are the correct, defining characterizations: episodic for specific events, semantic for general facts, and procedural for methods/sequences of action.",
       "why_incorrect": {
@@ -23,7 +43,15 @@
       },
       "rule_of_thumb": "Episodic = specific events; semantic = general facts; procedural = methods/sequences -- each typically retrieved differently."
     },
-    "tags": ["episodic-memory", "semantic-memory", "procedural-memory"]
+    "tags": [
+      "episodic-memory",
+      "semantic-memory",
+      "procedural-memory"
+    ],
+    "concepts": [
+      "Memory",
+      "Context Engineering"
+    ]
   },
   {
     "id": "Q-D4-0036",
@@ -31,22 +59,46 @@
     "task_statement": "4.2",
     "type": "ordering",
     "difficulty": "medium",
-    "theory_refs": ["TH-D4-005", "TH-D4-006"],
+    "theory_refs": [
+      "TH-D4-005",
+      "TH-D4-006"
+    ],
     "case_study_id": null,
     "stem": "Place the following steps in the order they would occur as episodic observations generalize into semantic memory.",
     "select_count": 3,
     "options": [
-      { "key": "A", "text": "A specific preference is observed and recorded as an episodic memory in one conversation" },
-      { "key": "B", "text": "The same preference is observed again in several additional, separate conversations" },
-      { "key": "C", "text": "The pattern across those observations is generalized into a standing semantic fact about the user" }
+      {
+        "key": "A",
+        "text": "A specific preference is observed and recorded as an episodic memory in one conversation"
+      },
+      {
+        "key": "B",
+        "text": "The same preference is observed again in several additional, separate conversations"
+      },
+      {
+        "key": "C",
+        "text": "The pattern across those observations is generalized into a standing semantic fact about the user"
+      }
     ],
-    "correct": ["A", "B", "C"],
+    "correct": [
+      "A",
+      "B",
+      "C"
+    ],
     "explanation": {
       "why_correct": "Generalization starts with a single episodic observation, continues as the same pattern recurs across multiple separate episodes, and culminates in that pattern being generalized into a standing semantic fact -- in that order.",
       "why_incorrect": {},
       "rule_of_thumb": "Semantic memory often emerges by generalizing a recurring pattern observed across multiple separate episodic memories, in that sequence."
     },
-    "tags": ["episodic-memory", "semantic-memory", "execution-order"]
+    "tags": [
+      "episodic-memory",
+      "semantic-memory",
+      "execution-order"
+    ],
+    "concepts": [
+      "Memory",
+      "Context Engineering"
+    ]
   },
   {
     "id": "Q-D4-0037",
@@ -54,28 +106,62 @@
     "task_statement": "4.2",
     "type": "matching",
     "difficulty": "medium",
-    "theory_refs": ["TH-D4-005", "TH-D4-006", "TH-D4-007"],
+    "theory_refs": [
+      "TH-D4-005",
+      "TH-D4-006",
+      "TH-D4-007"
+    ],
     "case_study_id": null,
     "stem": "Match each memory example on the left to its correct memory type on the right.",
     "select_count": 3,
     "matching": {
       "left": [
-        { "key": "L1", "text": "A record of a specific support ticket resolved last month for a particular customer" },
-        { "key": "L2", "text": "The general fact that a certain product category always requires a signature on delivery" },
-        { "key": "L3", "text": "A refined, reusable step-by-step process for escalating urgent tickets" }
+        {
+          "key": "L1",
+          "text": "A record of a specific support ticket resolved last month for a particular customer"
+        },
+        {
+          "key": "L2",
+          "text": "The general fact that a certain product category always requires a signature on delivery"
+        },
+        {
+          "key": "L3",
+          "text": "A refined, reusable step-by-step process for escalating urgent tickets"
+        }
       ],
       "right": [
-        { "key": "R1", "text": "Episodic memory" },
-        { "key": "R2", "text": "Semantic memory" },
-        { "key": "R3", "text": "Procedural memory" }
+        {
+          "key": "R1",
+          "text": "Episodic memory"
+        },
+        {
+          "key": "R2",
+          "text": "Semantic memory"
+        },
+        {
+          "key": "R3",
+          "text": "Procedural memory"
+        }
       ]
     },
-    "correct_pairs": { "L1": "R1", "L2": "R2", "L3": "R3" },
+    "correct_pairs": {
+      "L1": "R1",
+      "L2": "R2",
+      "L3": "R3"
+    },
     "explanation": {
       "why_correct": "A specific past ticket tied to a particular customer and date is episodic, a general standing fact about a product category's delivery requirement is semantic, and a refined, reusable escalation process is procedural -- each example maps cleanly to its defining memory type.",
       "why_incorrect": {},
       "rule_of_thumb": "Specific past event = episodic; general standing fact = semantic; reusable method = procedural."
     },
-    "tags": ["episodic-memory", "semantic-memory", "procedural-memory"]
+    "tags": [
+      "episodic-memory",
+      "semantic-memory",
+      "procedural-memory"
+    ],
+    "concepts": [
+      "Memory",
+      "Context Engineering"
+    ]
   }
 ]

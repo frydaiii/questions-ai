@@ -43,6 +43,10 @@
     },
     "tags": [
       "relevance-based-retrieval"
+    ],
+    "concepts": [
+      "Memory",
+      "Context Engineering"
     ]
   },
   {
@@ -90,6 +94,10 @@
     "tags": [
       "recency",
       "relevance-based-retrieval"
+    ],
+    "concepts": [
+      "Memory",
+      "Context Engineering"
     ]
   },
   {
@@ -136,6 +144,11 @@
     },
     "tags": [
       "forgetting-mechanisms"
+    ],
+    "concepts": [
+      "Memory",
+      "Context Engineering",
+      "Evaluation & Learning Loops"
     ]
   },
   {
@@ -186,6 +199,11 @@
       "relevance-based-retrieval",
       "recency",
       "forgetting-mechanisms"
+    ],
+    "concepts": [
+      "Memory",
+      "Context Engineering",
+      "Evaluation & Learning Loops"
     ]
   },
   {
@@ -233,6 +251,11 @@
     "tags": [
       "contradiction-resolution",
       "frequency"
+    ],
+    "concepts": [
+      "Memory",
+      "Context Engineering",
+      "Evaluation & Learning Loops"
     ]
   },
   {
@@ -279,6 +302,10 @@
     },
     "tags": [
       "relevance-based-retrieval"
+    ],
+    "concepts": [
+      "Memory",
+      "Context Engineering"
     ]
   },
   {
@@ -327,6 +354,11 @@
     "tags": [
       "recency",
       "forgetting-mechanisms"
+    ],
+    "concepts": [
+      "Memory",
+      "Context Engineering",
+      "Evaluation & Learning Loops"
     ]
   },
   {
@@ -373,6 +405,11 @@
     },
     "tags": [
       "contradiction-resolution"
+    ],
+    "concepts": [
+      "Memory",
+      "Context Engineering",
+      "Evaluation & Learning Loops"
     ]
   }
 ]

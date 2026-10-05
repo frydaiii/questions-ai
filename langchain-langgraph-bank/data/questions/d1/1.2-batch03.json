@@ -5,22 +5,46 @@
     "task_statement": "1.2",
     "type": "ordering",
     "difficulty": "easy",
-    "theory_refs": ["TH-D1-007"],
+    "theory_refs": [
+      "TH-D1-007"
+    ],
     "case_study_id": null,
     "stem": "Place the three core phases of the agent control loop in their canonical order, from first to last, for a single cycle.",
     "select_count": 3,
     "options": [
-      { "key": "A", "text": "Perceive" },
-      { "key": "B", "text": "Reason" },
-      { "key": "C", "text": "Act" }
+      {
+        "key": "A",
+        "text": "Perceive"
+      },
+      {
+        "key": "B",
+        "text": "Reason"
+      },
+      {
+        "key": "C",
+        "text": "Act"
+      }
     ],
-    "correct": ["A", "B", "C"],
+    "correct": [
+      "A",
+      "B",
+      "C"
+    ],
     "explanation": {
       "why_correct": "The canonical cycle gathers information first (perceive), processes it into a decision second (reason), and executes that decision third (act), after which the cycle repeats with the action's outcome becoming the next perception.",
       "why_incorrect": {},
       "rule_of_thumb": "Perceive-reason-act is named in its canonical execution order: gather information, decide, then execute."
     },
-    "tags": ["perceive-reason-act", "execution-order"]
+    "tags": [
+      "perceive-reason-act",
+      "execution-order"
+    ],
+    "concepts": [
+      "Agent",
+      "Perception",
+      "State / State Management",
+      "Reasoning Loop (ReAct)"
+    ]
   },
   {
     "id": "Q-D1-0042",
@@ -28,23 +52,52 @@
     "task_statement": "1.2",
     "type": "ordering",
     "difficulty": "hard",
-    "theory_refs": ["TH-D1-011", "TH-D1-012"],
+    "theory_refs": [
+      "TH-D1-011",
+      "TH-D1-012"
+    ],
     "case_study_id": null,
     "stem": "An agent's search tool call initially returns irrelevant results. Place the following events in the order they occur in a well-functioning, adaptive agent loop, from first to last.",
     "select_count": 4,
     "options": [
-      { "key": "A", "text": "The agent calls the search tool with its first query" },
-      { "key": "B", "text": "The agent observes that the returned results are irrelevant to the task" },
-      { "key": "C", "text": "The agent reasons about how to refine the query based on what was irrelevant" },
-      { "key": "D", "text": "The agent calls the search tool again with a refined query" }
+      {
+        "key": "A",
+        "text": "The agent calls the search tool with its first query"
+      },
+      {
+        "key": "B",
+        "text": "The agent observes that the returned results are irrelevant to the task"
+      },
+      {
+        "key": "C",
+        "text": "The agent reasons about how to refine the query based on what was irrelevant"
+      },
+      {
+        "key": "D",
+        "text": "The agent calls the search tool again with a refined query"
+      }
     ],
-    "correct": ["A", "B", "C", "D"],
+    "correct": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
     "explanation": {
       "why_correct": "The adaptive sequence starts with the initial action (first search), followed by observing the outcome (irrelevant results), then reasoning about how to improve based on that observation, and finally acting again with the improved query -- a complete cycle of the feedback loop in action.",
       "why_incorrect": {},
       "rule_of_thumb": "Each adaptive cycle follows act, then observe the outcome, then reason about adjustment, then act again -- repeating the loop with each outcome informing the next attempt."
     },
-    "tags": ["feedback-loop", "execution-order", "adaptive-behavior"]
+    "tags": [
+      "feedback-loop",
+      "execution-order",
+      "adaptive-behavior"
+    ],
+    "concepts": [
+      "Agent",
+      "State / State Management",
+      "Reasoning Loop (ReAct)"
+    ]
   },
   {
     "id": "Q-D1-0043",
@@ -52,29 +105,62 @@
     "task_statement": "1.2",
     "type": "matching",
     "difficulty": "medium",
-    "theory_refs": ["TH-D1-012"],
+    "theory_refs": [
+      "TH-D1-012"
+    ],
     "case_study_id": null,
     "stem": "Match each failure scenario on the left to the loop phase it represents on the right.",
     "select_count": 3,
     "matching": {
       "left": [
-        { "key": "L1", "text": "The agent was never given the current date and miscalculated a relative date" },
-        { "key": "L2", "text": "The agent had all correct information but drew an incorrect conclusion from it" },
-        { "key": "L3", "text": "The agent chose the correct tool but the tool's API call timed out" }
+        {
+          "key": "L1",
+          "text": "The agent was never given the current date and miscalculated a relative date"
+        },
+        {
+          "key": "L2",
+          "text": "The agent had all correct information but drew an incorrect conclusion from it"
+        },
+        {
+          "key": "L3",
+          "text": "The agent chose the correct tool but the tool's API call timed out"
+        }
       ],
       "right": [
-        { "key": "R1", "text": "Perception failure" },
-        { "key": "R2", "text": "Reasoning failure" },
-        { "key": "R3", "text": "Action failure" }
+        {
+          "key": "R1",
+          "text": "Perception failure"
+        },
+        {
+          "key": "R2",
+          "text": "Reasoning failure"
+        },
+        {
+          "key": "R3",
+          "text": "Action failure"
+        }
       ]
     },
-    "correct_pairs": { "L1": "R1", "L2": "R2", "L3": "R3" },
+    "correct_pairs": {
+      "L1": "R1",
+      "L2": "R2",
+      "L3": "R3"
+    },
     "explanation": {
       "why_correct": "Missing contextual information (the date) is a perception failure, drawing a wrong conclusion from correct information is a reasoning failure, and a correct decision whose execution fails (timeout) is an action failure -- each scenario maps to exactly one distinct phase.",
       "why_incorrect": {},
       "rule_of_thumb": "Missing/bad inputs = perception failure; wrong conclusion from good inputs = reasoning failure; good decision, failed execution = action failure."
     },
-    "tags": ["failure-diagnosis", "perceive-reason-act"]
+    "tags": [
+      "failure-diagnosis",
+      "perceive-reason-act"
+    ],
+    "concepts": [
+      "Agent",
+      "Perception",
+      "Reasoning Loop (ReAct)",
+      "Error Recovery"
+    ]
   },
   {
     "id": "Q-D1-0044",
@@ -82,30 +168,70 @@
     "task_statement": "1.2",
     "type": "matching",
     "difficulty": "medium",
-    "theory_refs": ["TH-D1-010"],
+    "theory_refs": [
+      "TH-D1-010"
+    ],
     "case_study_id": null,
     "stem": "Match each action on the left to its correct risk category on the right.",
     "select_count": 4,
     "matching": {
       "left": [
-        { "key": "L1", "text": "Deleting a customer's account record" },
-        { "key": "L2", "text": "Generating a draft email for user review" },
-        { "key": "L3", "text": "Sending a payment through a connected API" },
-        { "key": "L4", "text": "Producing a summary of search results" }
+        {
+          "key": "L1",
+          "text": "Deleting a customer's account record"
+        },
+        {
+          "key": "L2",
+          "text": "Generating a draft email for user review"
+        },
+        {
+          "key": "L3",
+          "text": "Sending a payment through a connected API"
+        },
+        {
+          "key": "L4",
+          "text": "Producing a summary of search results"
+        }
       ],
       "right": [
-        { "key": "R1", "text": "Side-effecting, likely irreversible" },
-        { "key": "R2", "text": "Output-only, low direct risk" },
-        { "key": "R3", "text": "Side-effecting, likely irreversible" },
-        { "key": "R4", "text": "Output-only, low direct risk" }
+        {
+          "key": "R1",
+          "text": "Side-effecting, likely irreversible"
+        },
+        {
+          "key": "R2",
+          "text": "Output-only, low direct risk"
+        },
+        {
+          "key": "R3",
+          "text": "Side-effecting, likely irreversible"
+        },
+        {
+          "key": "R4",
+          "text": "Output-only, low direct risk"
+        }
       ]
     },
-    "correct_pairs": { "L1": "R1", "L2": "R2", "L3": "R3", "L4": "R4" },
+    "correct_pairs": {
+      "L1": "R1",
+      "L2": "R2",
+      "L3": "R3",
+      "L4": "R4"
+    },
     "explanation": {
       "why_correct": "Deleting a record and sending a payment both change external state in ways that are typically hard to reverse (side-effecting), while drafting an email for review and summarizing results are purely informational outputs with no direct external change (output-only).",
       "why_incorrect": {},
       "rule_of_thumb": "Actions that change external state irreversibly are side-effecting and warrant extra scrutiny; actions that only produce content for review are output-only and lower risk."
     },
-    "tags": ["action-space", "side-effects", "risk"]
+    "tags": [
+      "action-space",
+      "side-effects",
+      "risk"
+    ],
+    "concepts": [
+      "Agent",
+      "Reasoning Loop (ReAct)",
+      "Guardrails"
+    ]
   }
 ]

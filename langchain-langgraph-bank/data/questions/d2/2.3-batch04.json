@@ -44,6 +44,10 @@
     "tags": [
       "reflection",
       "self-critique"
+    ],
+    "concepts": [
+      "Context Engineering",
+      "Evaluation & Learning Loops"
     ]
   },
   {
@@ -92,6 +96,10 @@
       "self-reflection-limitations",
       "external-verification",
       "high-stakes"
+    ],
+    "concepts": [
+      "Guardrails",
+      "Evaluation & Learning Loops"
     ]
   },
   {
@@ -139,6 +147,10 @@
     "tags": [
       "self-critique-loop",
       "stopping-condition"
+    ],
+    "concepts": [
+      "Context Engineering",
+      "Evaluation & Learning Loops"
     ]
   }
 ]

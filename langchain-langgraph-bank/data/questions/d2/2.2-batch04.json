@@ -44,6 +44,9 @@
     "tags": [
       "task-decomposition",
       "planning"
+    ],
+    "concepts": [
+      "Planning"
     ]
   },
   {
@@ -92,6 +95,9 @@
       "task-decomposition",
       "task-structure",
       "design-tradeoffs"
+    ],
+    "concepts": [
+      "Planning"
     ]
   },
   {
@@ -139,6 +145,10 @@
     "tags": [
       "tree-of-thought",
       "branch-evaluation"
+    ],
+    "concepts": [
+      "Chain of Thought (CoT)",
+      "Planning"
     ]
   }
 ]

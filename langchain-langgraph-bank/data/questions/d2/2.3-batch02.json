@@ -44,6 +44,10 @@
     "tags": [
       "reflection",
       "self-critique"
+    ],
+    "concepts": [
+      "Context Engineering",
+      "Evaluation & Learning Loops"
     ]
   },
   {
@@ -91,6 +95,10 @@
     "tags": [
       "self-critique-loop",
       "stopping-condition"
+    ],
+    "concepts": [
+      "Context Engineering",
+      "Evaluation & Learning Loops"
     ]
   },
   {
@@ -138,6 +146,10 @@
     "tags": [
       "self-critique-loop",
       "design-tradeoffs"
+    ],
+    "concepts": [
+      "Context Engineering",
+      "Evaluation & Learning Loops"
     ]
   }
 ]

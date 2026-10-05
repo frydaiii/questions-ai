@@ -43,6 +43,10 @@
     },
     "tags": [
       "fallback-strategy"
+    ],
+    "concepts": [
+      "Tools & Tool Discovery",
+      "Error Recovery"
     ]
   },
   {
@@ -90,6 +94,12 @@
     "tags": [
       "sanity-checking",
       "high-stakes"
+    ],
+    "concepts": [
+      "Tools & Tool Discovery",
+      "Guardrails",
+      "Error Recovery",
+      "Evaluation & Learning Loops"
     ]
   },
   {
@@ -138,6 +148,10 @@
     "tags": [
       "retry-strategy",
       "fallback-strategy"
+    ],
+    "concepts": [
+      "Tools & Tool Discovery",
+      "Error Recovery"
     ]
   },
   {
@@ -189,6 +203,11 @@
       "failure-categorization",
       "sanity-checking",
       "design-tradeoffs"
+    ],
+    "concepts": [
+      "Tools & Tool Discovery",
+      "Error Recovery",
+      "Evaluation & Learning Loops"
     ]
   },
   {
@@ -235,6 +254,10 @@
     },
     "tags": [
       "retry-strategy"
+    ],
+    "concepts": [
+      "Tools & Tool Discovery",
+      "Error Recovery"
     ]
   },
   {
@@ -283,6 +306,11 @@
     "tags": [
       "misleading-results",
       "failure-categorization"
+    ],
+    "concepts": [
+      "Tools & Tool Discovery",
+      "Error Recovery",
+      "Evaluation & Learning Loops"
     ]
   },
   {
@@ -329,6 +357,10 @@
     },
     "tags": [
       "fallback-strategy"
+    ],
+    "concepts": [
+      "Tools & Tool Discovery",
+      "Error Recovery"
     ]
   },
   {
@@ -375,6 +407,10 @@
     },
     "tags": [
       "failure-categorization"
+    ],
+    "concepts": [
+      "Tools & Tool Discovery",
+      "Error Recovery"
     ]
   },
   {
@@ -422,6 +458,11 @@
     "tags": [
       "sanity-checking",
       "misleading-results"
+    ],
+    "concepts": [
+      "Tools & Tool Discovery",
+      "Error Recovery",
+      "Evaluation & Learning Loops"
     ]
   }
 ]

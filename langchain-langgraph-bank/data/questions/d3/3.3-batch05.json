@@ -44,6 +44,10 @@
     "tags": [
       "fallback-strategy",
       "failure-anticipation"
+    ],
+    "concepts": [
+      "Tools & Tool Discovery",
+      "Error Recovery"
     ]
   },
   {
@@ -92,6 +96,11 @@
     "tags": [
       "failure-categorization",
       "misleading-results"
+    ],
+    "concepts": [
+      "Tools & Tool Discovery",
+      "Error Recovery",
+      "Evaluation & Learning Loops"
     ]
   },
   {
@@ -139,6 +148,10 @@
     "tags": [
       "retry-strategy",
       "fallback-strategy"
+    ],
+    "concepts": [
+      "Tools & Tool Discovery",
+      "Error Recovery"
     ]
   }
 ]

@@ -44,6 +44,11 @@
     "tags": [
       "working-memory",
       "context-window"
+    ],
+    "concepts": [
+      "State / State Management",
+      "Memory",
+      "Context Engineering"
     ]
   },
   {
@@ -91,6 +96,11 @@
     },
     "tags": [
       "long-term-memory"
+    ],
+    "concepts": [
+      "State / State Management",
+      "Memory",
+      "Context Engineering"
     ]
   },
   {
@@ -137,6 +147,11 @@
     },
     "tags": [
       "memory-persistence-policy"
+    ],
+    "concepts": [
+      "State / State Management",
+      "Memory",
+      "Context Engineering"
     ]
   },
   {
@@ -183,6 +198,11 @@
     },
     "tags": [
       "memory-architecture"
+    ],
+    "concepts": [
+      "State / State Management",
+      "Memory",
+      "Context Engineering"
     ]
   },
   {
@@ -230,6 +250,11 @@
     "tags": [
       "memory-retrieval",
       "long-term-memory"
+    ],
+    "concepts": [
+      "State / State Management",
+      "Memory",
+      "Context Engineering"
     ]
   },
   {
@@ -278,6 +303,11 @@
     "tags": [
       "working-memory",
       "long-term-memory"
+    ],
+    "concepts": [
+      "State / State Management",
+      "Memory",
+      "Context Engineering"
     ]
   },
   {
@@ -326,6 +356,11 @@
       "working-memory",
       "long-term-memory",
       "memory-architecture"
+    ],
+    "concepts": [
+      "State / State Management",
+      "Memory",
+      "Context Engineering"
     ]
   },
   {
@@ -372,6 +407,11 @@
     },
     "tags": [
       "memory-persistence-policy"
+    ],
+    "concepts": [
+      "State / State Management",
+      "Memory",
+      "Context Engineering"
     ]
   },
   {
@@ -420,6 +460,11 @@
     "tags": [
       "working-memory",
       "long-term-memory"
+    ],
+    "concepts": [
+      "State / State Management",
+      "Memory",
+      "Context Engineering"
     ]
   },
   {
@@ -468,6 +513,11 @@
     "tags": [
       "memory-architecture",
       "memory-persistence-policy"
+    ],
+    "concepts": [
+      "State / State Management",
+      "Memory",
+      "Context Engineering"
     ]
   }
 ]

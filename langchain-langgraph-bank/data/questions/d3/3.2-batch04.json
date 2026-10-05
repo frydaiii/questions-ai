@@ -45,6 +45,11 @@
       "parallel-invocation",
       "tool-dependency",
       "failure-modes"
+    ],
+    "concepts": [
+      "State / State Management",
+      "Tools & Tool Discovery",
+      "Orchestration"
     ]
   },
   {
@@ -92,6 +97,9 @@
     "tags": [
       "parameter-construction",
       "tool-call-validation"
+    ],
+    "concepts": [
+      "Tools & Tool Discovery"
     ]
   },
   {
@@ -138,6 +146,10 @@
     },
     "tags": [
       "tool-exposure-scoping"
+    ],
+    "concepts": [
+      "Tools & Tool Discovery",
+      "Context Engineering"
     ]
   }
 ]

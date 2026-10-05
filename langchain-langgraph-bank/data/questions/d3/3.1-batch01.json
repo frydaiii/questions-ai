@@ -44,6 +44,10 @@
     "tags": [
       "tool-necessity",
       "grounding"
+    ],
+    "concepts": [
+      "Environment",
+      "Tools & Tool Discovery"
     ]
   },
   {
@@ -91,6 +95,10 @@
     "tags": [
       "freshness",
       "stale-knowledge"
+    ],
+    "concepts": [
+      "Environment",
+      "Tools & Tool Discovery"
     ]
   },
   {
@@ -138,6 +146,10 @@
     "tags": [
       "action-tools",
       "tool-risk-tiers"
+    ],
+    "concepts": [
+      "Tools & Tool Discovery",
+      "Guardrails"
     ]
   }
 ]

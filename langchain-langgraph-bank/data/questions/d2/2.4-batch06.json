@@ -43,6 +43,9 @@
     },
     "tags": [
       "calibration"
+    ],
+    "concepts": [
+      "Error Recovery"
     ]
   },
   {
@@ -92,6 +95,10 @@
       "ambiguity-handling",
       "calibration",
       "uncertainty"
+    ],
+    "concepts": [
+      "Context Engineering",
+      "Error Recovery"
     ]
   },
   {
@@ -139,6 +146,9 @@
     "tags": [
       "error-detection",
       "error-compounding"
+    ],
+    "concepts": [
+      "Error Recovery"
     ]
   },
   {
@@ -186,6 +196,10 @@
     "tags": [
       "uncertainty",
       "evidence-strength"
+    ],
+    "concepts": [
+      "Context Engineering",
+      "Error Recovery"
     ]
   },
   {
@@ -233,6 +247,10 @@
     "tags": [
       "ambiguity-handling",
       "cost-benefit"
+    ],
+    "concepts": [
+      "Context Engineering",
+      "Error Recovery"
     ]
   },
   {
@@ -283,6 +301,10 @@
       "uncertainty",
       "error-detection",
       "calibration"
+    ],
+    "concepts": [
+      "Context Engineering",
+      "Error Recovery"
     ]
   }
 ]

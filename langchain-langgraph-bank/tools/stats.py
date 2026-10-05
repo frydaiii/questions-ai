@@ -148,6 +148,20 @@ def print_tag_frequency(questions: list[dict]) -> None:
     print()
 
 
+def print_concept_frequency(questions: list[dict], concepts: list[str]) -> None:
+    print("=" * 70)
+    print("CONCEPT FREQUENCY")
+    print("=" * 70)
+    counts: Counter = Counter(
+        concept
+        for q in questions
+        for concept in q.get("concepts", []) or []
+    )
+    for concept in concepts:
+        print(f"  {concept:<35} {counts.get(concept, 0)}")
+    print()
+
+
 def print_theory_library(theory_cards: list[dict]) -> None:
     print("=" * 70)
     print("THEORY CARD LIBRARY (grouped by domain / task statement)")
@@ -175,6 +189,7 @@ def main() -> int:
     blueprint = loader.load_blueprint()
     questions = _load_valid_questions()
     theory_cards = _load_valid_theory_cards()
+    concept_taxonomy = loader.load_schema("question")["properties"]["concepts"]["items"]["enum"]
 
     if "--theory" in sys.argv:
         print_theory_library(theory_cards)
@@ -186,6 +201,7 @@ def main() -> int:
     print_difficulty_breakdown(blueprint, questions)
     print_theory_usage_histogram(blueprint, theory_cards, questions)
     print_tag_frequency(questions)
+    print_concept_frequency(questions, concept_taxonomy)
 
     total_standalone = len([q for q in questions if q.get("case_study_id") is None])
     total_case_study = len([q for q in questions if q.get("case_study_id") is not None])

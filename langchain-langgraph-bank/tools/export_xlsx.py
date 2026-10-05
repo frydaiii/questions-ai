@@ -36,11 +36,12 @@ HEADERS = [
     "Rule of Thumb",
     "Theory References",
     "Tags",
+    "Concepts",
     "Source File",
     "Source Index",
 ]
 COLUMN_WIDTHS = [
-    16, 9, 16, 18, 12, 15, 14, 70, 70, 35, 70, 70, 55, 28, 30, 38, 14,
+    16, 9, 16, 18, 12, 15, 14, 70, 70, 35, 70, 70, 55, 28, 30, 34, 38, 14,
 ]
 
 
@@ -114,6 +115,7 @@ def question_row(record: loader.Record) -> list[str | int]:
         clean_cell_value(explanation.get("rule_of_thumb")),
         clean_cell_value(", ".join(question.get("theory_refs", []))),
         clean_cell_value(", ".join(question.get("tags", []))),
+        clean_cell_value(", ".join(question.get("concepts", []))),
         clean_cell_value(source_file),
         record.index,
     ]

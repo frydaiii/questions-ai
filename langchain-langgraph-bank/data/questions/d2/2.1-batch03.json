@@ -44,6 +44,9 @@
     "tags": [
       "react",
       "reasoning-action-loop"
+    ],
+    "concepts": [
+      "Reasoning Loop (ReAct)"
     ]
   },
   {
@@ -91,6 +94,10 @@
     "tags": [
       "grounding",
       "stale-knowledge"
+    ],
+    "concepts": [
+      "Tools & Tool Discovery",
+      "Reasoning Loop (ReAct)"
     ]
   },
   {
@@ -137,6 +144,9 @@
     },
     "tags": [
       "reasoning-action-balance"
+    ],
+    "concepts": [
+      "Reasoning Loop (ReAct)"
     ]
   },
   {
@@ -184,6 +194,9 @@
     "tags": [
       "react",
       "action-only-agents"
+    ],
+    "concepts": [
+      "Reasoning Loop (ReAct)"
     ]
   },
   {
@@ -231,6 +244,10 @@
     "tags": [
       "reasoning-action-balance",
       "failure-diagnosis"
+    ],
+    "concepts": [
+      "Reasoning Loop (ReAct)",
+      "Error Recovery"
     ]
   }
 ]

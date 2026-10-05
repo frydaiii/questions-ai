@@ -44,6 +44,10 @@
     "tags": [
       "agent-definition",
       "autonomy"
+    ],
+    "concepts": [
+      "Agent",
+      "Utility & Goal-Based Agents"
     ]
   },
   {
@@ -91,6 +95,9 @@
     "tags": [
       "agentic-spectrum",
       "prompt-chain"
+    ],
+    "concepts": [
+      "Agent"
     ]
   },
   {
@@ -138,6 +145,9 @@
     "tags": [
       "agent-components",
       "minimal-agent"
+    ],
+    "concepts": [
+      "Agent"
     ]
   },
   {
@@ -186,6 +196,10 @@
       "grounding",
       "limitations",
       "tool-use-motivation"
+    ],
+    "concepts": [
+      "Agent",
+      "Tools & Tool Discovery"
     ]
   },
   {
@@ -233,6 +247,9 @@
     "tags": [
       "workflow-vs-agent",
       "control-flow"
+    ],
+    "concepts": [
+      "Agent"
     ]
   },
   {
@@ -281,6 +298,12 @@
       "autonomy",
       "human-in-the-loop",
       "risk"
+    ],
+    "concepts": [
+      "Agent",
+      "Utility & Goal-Based Agents",
+      "Guardrails",
+      "Human-in-the-Loop (HITL)"
     ]
   },
   {
@@ -328,6 +351,10 @@
     "tags": [
       "agent-definition",
       "goal-directedness"
+    ],
+    "concepts": [
+      "Agent",
+      "Utility & Goal-Based Agents"
     ]
   },
   {
@@ -376,6 +403,10 @@
     "tags": [
       "hybrid-systems",
       "workflow-vs-agent"
+    ],
+    "concepts": [
+      "Agent",
+      "Tools & Tool Discovery"
     ]
   },
   {
@@ -424,6 +455,11 @@
       "self-critique",
       "limitations",
       "reflection"
+    ],
+    "concepts": [
+      "Agent",
+      "Tools & Tool Discovery",
+      "Evaluation & Learning Loops"
     ]
   },
   {
@@ -471,6 +507,10 @@
     "tags": [
       "agent-loop",
       "observation"
+    ],
+    "concepts": [
+      "Agent",
+      "Tools & Tool Discovery"
     ]
   }
 ]

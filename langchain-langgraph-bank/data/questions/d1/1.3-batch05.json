@@ -44,6 +44,10 @@
     "tags": [
       "reactive-agent",
       "condition-action-rules"
+    ],
+    "concepts": [
+      "Agent",
+      "Reflex Agents"
     ]
   },
   {
@@ -91,6 +95,10 @@
     "tags": [
       "deliberative-agent",
       "planning"
+    ],
+    "concepts": [
+      "Agent",
+      "Planning"
     ]
   },
   {
@@ -140,6 +148,10 @@
     "tags": [
       "agent-types",
       "architecture-comparison"
+    ],
+    "concepts": [
+      "Agent",
+      "Environment"
     ]
   },
   {
@@ -189,6 +201,11 @@
       "architecture-selection",
       "deliberative-agent",
       "task-fit"
+    ],
+    "concepts": [
+      "Agent",
+      "Environment",
+      "Planning"
     ]
   },
   {
@@ -236,6 +253,11 @@
     "tags": [
       "architecture-selection",
       "task-fit"
+    ],
+    "concepts": [
+      "Agent",
+      "Environment",
+      "Planning"
     ]
   }
 ]

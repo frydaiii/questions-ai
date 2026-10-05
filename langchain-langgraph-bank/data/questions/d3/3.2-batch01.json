@@ -5,17 +5,33 @@
     "task_statement": "3.2",
     "type": "single_choice",
     "difficulty": "medium",
-    "theory_refs": ["TH-D3-006"],
+    "theory_refs": [
+      "TH-D3-006"
+    ],
     "case_study_id": null,
     "stem": "An agent has access to both a 'web_search' tool and a 'internal_docs_search' tool with vague, nearly identical descriptions. What is the most likely consequence?",
     "select_count": 1,
     "options": [
-      { "key": "A", "text": "The agent is likely to correctly select the right tool every single time due to the model's inherent intelligence" },
-      { "key": "B", "text": "Increased risk of selecting the wrong tool for a given need, since the descriptions don't clearly distinguish their purposes" },
-      { "key": "C", "text": "The two tools will automatically merge into one" },
-      { "key": "D", "text": "No tool will ever be callable again" }
+      {
+        "key": "A",
+        "text": "The agent is likely to correctly select the right tool every single time due to the model's inherent intelligence"
+      },
+      {
+        "key": "B",
+        "text": "Increased risk of selecting the wrong tool for a given need, since the descriptions don't clearly distinguish their purposes"
+      },
+      {
+        "key": "C",
+        "text": "The two tools will automatically merge into one"
+      },
+      {
+        "key": "D",
+        "text": "No tool will ever be callable again"
+      }
     ],
-    "correct": ["B"],
+    "correct": [
+      "B"
+    ],
     "explanation": {
       "why_correct": "Since the agent can only reason about tool selection as well as the information it has about each tool, vague and nearly identical descriptions increase the risk of choosing the wrong one for a given actual need.",
       "why_incorrect": {
@@ -25,7 +41,14 @@
       },
       "rule_of_thumb": "Vague or overlapping tool descriptions directly increase the risk of incorrect tool selection, regardless of the underlying model's general capability."
     },
-    "tags": ["tool-selection", "tool-descriptions"]
+    "tags": [
+      "tool-selection",
+      "tool-descriptions"
+    ],
+    "concepts": [
+      "Tools & Tool Discovery",
+      "Context Engineering"
+    ]
   },
   {
     "id": "Q-D3-0030",
@@ -33,17 +56,33 @@
     "task_statement": "3.2",
     "type": "single_choice",
     "difficulty": "medium",
-    "theory_refs": ["TH-D3-007"],
+    "theory_refs": [
+      "TH-D3-007"
+    ],
     "case_study_id": null,
     "stem": "An agent correctly selects a 'get_weather' tool but passes a malformed date string that the tool cannot parse. What type of error is this?",
     "select_count": 1,
     "options": [
-      { "key": "A", "text": "A tool selection error" },
-      { "key": "B", "text": "A parameter construction error, distinct from tool selection" },
-      { "key": "C", "text": "Proof that the tool itself does not exist" },
-      { "key": "D", "text": "An error that cannot occur in any real system" }
+      {
+        "key": "A",
+        "text": "A tool selection error"
+      },
+      {
+        "key": "B",
+        "text": "A parameter construction error, distinct from tool selection"
+      },
+      {
+        "key": "C",
+        "text": "Proof that the tool itself does not exist"
+      },
+      {
+        "key": "D",
+        "text": "An error that cannot occur in any real system"
+      }
     ],
-    "correct": ["B"],
+    "correct": [
+      "B"
+    ],
     "explanation": {
       "why_correct": "The correct tool was selected; the problem is specifically that the call's parameter (the date string) was malformed -- this is a distinct parameter construction error, not a selection error.",
       "why_incorrect": {
@@ -53,7 +92,13 @@
       },
       "rule_of_thumb": "Correct tool selection with malformed parameters is a distinct failure mode (parameter construction error) from selecting the wrong tool entirely."
     },
-    "tags": ["parameter-construction", "tool-call-errors"]
+    "tags": [
+      "parameter-construction",
+      "tool-call-errors"
+    ],
+    "concepts": [
+      "Tools & Tool Discovery"
+    ]
   },
   {
     "id": "Q-D3-0031",
@@ -61,17 +106,33 @@
     "task_statement": "3.2",
     "type": "single_choice",
     "difficulty": "hard",
-    "theory_refs": ["TH-D3-008"],
+    "theory_refs": [
+      "TH-D3-008"
+    ],
     "case_study_id": null,
     "stem": "A task requires looking up the current prices of three unrelated products, where the price of one has no bearing on how to query the others. Which invocation strategy is most appropriate?",
     "select_count": 1,
     "options": [
-      { "key": "A", "text": "Sequential invocation, waiting for each price lookup to complete before starting the next" },
-      { "key": "B", "text": "Parallel invocation, since the three lookups are independent of each other's results" },
-      { "key": "C", "text": "No invocation at all, guessing all three prices from memory" },
-      { "key": "D", "text": "Invoking the tool exactly once for all three products combined into a single malformed query" }
+      {
+        "key": "A",
+        "text": "Sequential invocation, waiting for each price lookup to complete before starting the next"
+      },
+      {
+        "key": "B",
+        "text": "Parallel invocation, since the three lookups are independent of each other's results"
+      },
+      {
+        "key": "C",
+        "text": "No invocation at all, guessing all three prices from memory"
+      },
+      {
+        "key": "D",
+        "text": "Invoking the tool exactly once for all three products combined into a single malformed query"
+      }
     ],
-    "correct": ["B"],
+    "correct": [
+      "B"
+    ],
     "explanation": {
       "why_correct": "Since the three price lookups are genuinely independent -- none depends on another's result -- parallel invocation is appropriate and avoids unnecessary sequential waiting.",
       "why_incorrect": {
@@ -81,6 +142,14 @@
       },
       "rule_of_thumb": "Genuinely independent tool calls should be issued in parallel to avoid unnecessary sequential waiting."
     },
-    "tags": ["parallel-invocation", "tool-invocation-strategy"]
+    "tags": [
+      "parallel-invocation",
+      "tool-invocation-strategy"
+    ],
+    "concepts": [
+      "State / State Management",
+      "Tools & Tool Discovery",
+      "Orchestration"
+    ]
   }
 ]

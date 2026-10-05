@@ -44,6 +44,10 @@
     "tags": [
       "ambiguity-handling",
       "clarifying-questions"
+    ],
+    "concepts": [
+      "Context Engineering",
+      "Error Recovery"
     ]
   },
   {
@@ -92,6 +96,10 @@
       "calibration",
       "overconfidence",
       "excessive-hedging"
+    ],
+    "concepts": [
+      "Context Engineering",
+      "Error Recovery"
     ]
   },
   {
@@ -140,6 +148,11 @@
       "uncertainty",
       "false-confidence",
       "verification"
+    ],
+    "concepts": [
+      "Context Engineering",
+      "Error Recovery",
+      "Evaluation & Learning Loops"
     ]
   }
 ]

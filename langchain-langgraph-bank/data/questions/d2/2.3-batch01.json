@@ -44,6 +44,10 @@
     "tags": [
       "reflection",
       "self-critique"
+    ],
+    "concepts": [
+      "Context Engineering",
+      "Evaluation & Learning Loops"
     ]
   },
   {
@@ -91,6 +95,10 @@
     "tags": [
       "self-critique-loop",
       "diminishing-returns"
+    ],
+    "concepts": [
+      "Context Engineering",
+      "Evaluation & Learning Loops"
     ]
   },
   {
@@ -138,6 +146,9 @@
     "tags": [
       "self-reflection-limitations",
       "blind-spots"
+    ],
+    "concepts": [
+      "Evaluation & Learning Loops"
     ]
   }
 ]

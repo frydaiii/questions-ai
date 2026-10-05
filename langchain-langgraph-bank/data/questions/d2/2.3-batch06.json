@@ -44,6 +44,10 @@
     "tags": [
       "reflection",
       "evaluation-criteria"
+    ],
+    "concepts": [
+      "Context Engineering",
+      "Evaluation & Learning Loops"
     ]
   },
   {
@@ -91,6 +95,10 @@
     "tags": [
       "self-critique-loop",
       "critique-quality"
+    ],
+    "concepts": [
+      "Context Engineering",
+      "Evaluation & Learning Loops"
     ]
   },
   {
@@ -138,6 +146,9 @@
     "tags": [
       "self-reflection-limitations",
       "blind-spots"
+    ],
+    "concepts": [
+      "Evaluation & Learning Loops"
     ]
   },
   {
@@ -185,6 +196,10 @@
     "tags": [
       "self-critique-loop",
       "diminishing-returns"
+    ],
+    "concepts": [
+      "Context Engineering",
+      "Evaluation & Learning Loops"
     ]
   },
   {
@@ -235,6 +250,10 @@
       "reflection",
       "self-critique-loop",
       "design-best-practices"
+    ],
+    "concepts": [
+      "Context Engineering",
+      "Evaluation & Learning Loops"
     ]
   }
 ]

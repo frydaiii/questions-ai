@@ -5,17 +5,35 @@
     "task_statement": "1.3",
     "type": "multi_response",
     "difficulty": "medium",
-    "theory_refs": ["TH-D1-013", "TH-D1-014"],
+    "theory_refs": [
+      "TH-D1-013",
+      "TH-D1-014"
+    ],
     "case_study_id": null,
     "stem": "Which of the following are true characteristics of deliberative agents, as distinguished from reactive agents? (Select 2)",
     "select_count": 2,
     "options": [
-      { "key": "A", "text": "They maintain and reason over an internal model of the task or environment" },
-      { "key": "B", "text": "They consider the consequences of candidate actions before committing to one" },
-      { "key": "C", "text": "They always respond faster than reactive agents" },
-      { "key": "D", "text": "They cannot be implemented using large language models" }
+      {
+        "key": "A",
+        "text": "They maintain and reason over an internal model of the task or environment"
+      },
+      {
+        "key": "B",
+        "text": "They consider the consequences of candidate actions before committing to one"
+      },
+      {
+        "key": "C",
+        "text": "They always respond faster than reactive agents"
+      },
+      {
+        "key": "D",
+        "text": "They cannot be implemented using large language models"
+      }
     ],
-    "correct": ["A", "B"],
+    "correct": [
+      "A",
+      "B"
+    ],
     "explanation": {
       "why_correct": "Maintaining an internal model and weighing the consequences of candidate actions before acting are the two defining characteristics that separate deliberative agents from reactive, direct-mapping ones.",
       "why_incorrect": {
@@ -24,7 +42,14 @@
       },
       "rule_of_thumb": "Deliberative agents are defined by internal modeling and consequence-weighing before acting -- not by speed, which is actually a cost of this approach, not a benefit."
     },
-    "tags": ["deliberative-agent", "agent-types"]
+    "tags": [
+      "deliberative-agent",
+      "agent-types"
+    ],
+    "concepts": [
+      "Agent",
+      "Planning"
+    ]
   },
   {
     "id": "Q-D1-0057",
@@ -32,17 +57,34 @@
     "task_statement": "1.3",
     "type": "multi_response",
     "difficulty": "medium",
-    "theory_refs": ["TH-D1-016"],
+    "theory_refs": [
+      "TH-D1-016"
+    ],
     "case_study_id": null,
     "stem": "Which of the following environment/task properties would favor choosing a reactive agent architecture over a deliberative one? (Select 2)",
     "select_count": 2,
     "options": [
-      { "key": "A", "text": "Extremely tight real-time latency requirements" },
-      { "key": "B", "text": "Situations are mostly familiar and recurring, matching well-known patterns" },
-      { "key": "C", "text": "The task requires balancing many competing constraints to find an optimal multi-step plan" },
-      { "key": "D", "text": "The environment is highly novel and rarely repeats the same situation twice" }
+      {
+        "key": "A",
+        "text": "Extremely tight real-time latency requirements"
+      },
+      {
+        "key": "B",
+        "text": "Situations are mostly familiar and recurring, matching well-known patterns"
+      },
+      {
+        "key": "C",
+        "text": "The task requires balancing many competing constraints to find an optimal multi-step plan"
+      },
+      {
+        "key": "D",
+        "text": "The environment is highly novel and rarely repeats the same situation twice"
+      }
     ],
-    "correct": ["A", "B"],
+    "correct": [
+      "A",
+      "B"
+    ],
     "explanation": {
       "why_correct": "Tight latency requirements and mostly familiar, recurring situations are exactly the conditions where a reactive architecture's speed advantage pays off without sacrificing much robustness, since there's little need for costly deliberation.",
       "why_incorrect": {
@@ -51,7 +93,15 @@
       },
       "rule_of_thumb": "Reactive design fits fast, familiar, recurring situations; deliberative design fits novel, complex, constraint-heavy situations -- match the architecture to these task properties."
     },
-    "tags": ["architecture-selection", "task-fit"]
+    "tags": [
+      "architecture-selection",
+      "task-fit"
+    ],
+    "concepts": [
+      "Agent",
+      "Environment",
+      "Planning"
+    ]
   },
   {
     "id": "Q-D1-0058",
@@ -59,17 +109,34 @@
     "task_statement": "1.3",
     "type": "multi_response",
     "difficulty": "hard",
-    "theory_refs": ["TH-D1-015"],
+    "theory_refs": [
+      "TH-D1-015"
+    ],
     "case_study_id": null,
     "stem": "Which of the following correctly describe how a well-designed hybrid agent architecture typically operates? (Select 2)",
     "select_count": 2,
     "options": [
-      { "key": "A", "text": "It attempts a fast reactive-style response first, escalating to deliberation only when needed" },
-      { "key": "B", "text": "It runs the full deliberative process on every single decision, regardless of complexity" },
-      { "key": "C", "text": "It uses some signal (e.g. low confidence, detected novelty, high stakes) to decide when to escalate" },
-      { "key": "D", "text": "It requires exactly two different underlying language models, one for each layer" }
+      {
+        "key": "A",
+        "text": "It attempts a fast reactive-style response first, escalating to deliberation only when needed"
+      },
+      {
+        "key": "B",
+        "text": "It runs the full deliberative process on every single decision, regardless of complexity"
+      },
+      {
+        "key": "C",
+        "text": "It uses some signal (e.g. low confidence, detected novelty, high stakes) to decide when to escalate"
+      },
+      {
+        "key": "D",
+        "text": "It requires exactly two different underlying language models, one for each layer"
+      }
     ],
-    "correct": ["A", "C"],
+    "correct": [
+      "A",
+      "C"
+    ],
     "explanation": {
       "why_correct": "A hybrid architecture's value comes from trying the fast path first and using some escalation signal (low confidence, novelty, stakes) to decide when the slower deliberative path is actually needed, avoiding the cost of full deliberation on every decision.",
       "why_incorrect": {
@@ -78,7 +145,14 @@
       },
       "rule_of_thumb": "Hybrid architectures are defined by selective escalation based on some signal, not by running every decision through the expensive path or requiring separate models per layer."
     },
-    "tags": ["hybrid-agent", "escalation"]
+    "tags": [
+      "hybrid-agent",
+      "escalation"
+    ],
+    "concepts": [
+      "Agent",
+      "Environment"
+    ]
   },
   {
     "id": "Q-D1-0059",
@@ -86,17 +160,34 @@
     "task_statement": "1.3",
     "type": "multi_response",
     "difficulty": "easy",
-    "theory_refs": ["TH-D1-013"],
+    "theory_refs": [
+      "TH-D1-013"
+    ],
     "case_study_id": null,
     "stem": "Which of the following systems would be reasonably classified as reactive agents? (Select 2)",
     "select_count": 2,
     "options": [
-      { "key": "A", "text": "A thermostat that turns heating on below a set temperature and off above another" },
-      { "key": "B", "text": "A keyword-matching FAQ bot that returns a canned answer when it detects a known phrase" },
-      { "key": "C", "text": "A trip-planning system that evaluates dozens of candidate multi-city itineraries against budget constraints" },
-      { "key": "D", "text": "A research assistant that decomposes a complex question into sub-questions and plans how to answer each" }
+      {
+        "key": "A",
+        "text": "A thermostat that turns heating on below a set temperature and off above another"
+      },
+      {
+        "key": "B",
+        "text": "A keyword-matching FAQ bot that returns a canned answer when it detects a known phrase"
+      },
+      {
+        "key": "C",
+        "text": "A trip-planning system that evaluates dozens of candidate multi-city itineraries against budget constraints"
+      },
+      {
+        "key": "D",
+        "text": "A research assistant that decomposes a complex question into sub-questions and plans how to answer each"
+      }
     ],
-    "correct": ["A", "B"],
+    "correct": [
+      "A",
+      "B"
+    ],
     "explanation": {
       "why_correct": "Both the thermostat and the keyword-matching FAQ bot map current input directly to an action via fixed condition-action rules, with no internal planning or lookahead -- the defining trait of reactive agents.",
       "why_incorrect": {
@@ -105,6 +196,13 @@
       },
       "rule_of_thumb": "Direct input-to-action mappings with no internal modeling or lookahead are reactive; anything involving explicit planning or weighing of multiple candidate approaches is deliberative."
     },
-    "tags": ["reactive-agent", "agent-types"]
+    "tags": [
+      "reactive-agent",
+      "agent-types"
+    ],
+    "concepts": [
+      "Agent",
+      "Reflex Agents"
+    ]
   }
 ]

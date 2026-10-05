@@ -44,6 +44,10 @@
     "tags": [
       "deliberative-agent",
       "world-model"
+    ],
+    "concepts": [
+      "Agent",
+      "Planning"
     ]
   },
   {
@@ -91,6 +95,11 @@
     "tags": [
       "architecture-selection",
       "latency-constraints"
+    ],
+    "concepts": [
+      "Agent",
+      "Environment",
+      "Planning"
     ]
   },
   {
@@ -140,6 +149,10 @@
       "hybrid-agent",
       "escalation",
       "design-tradeoffs"
+    ],
+    "concepts": [
+      "Agent",
+      "Environment"
     ]
   },
   {
@@ -189,6 +202,11 @@
       "architecture-selection",
       "efficiency",
       "deliberative-agent"
+    ],
+    "concepts": [
+      "Agent",
+      "Environment",
+      "Planning"
     ]
   }
 ]

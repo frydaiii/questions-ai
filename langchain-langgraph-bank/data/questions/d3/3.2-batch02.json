@@ -5,17 +5,33 @@
     "task_statement": "3.2",
     "type": "single_choice",
     "difficulty": "medium",
-    "theory_refs": ["TH-D3-009"],
+    "theory_refs": [
+      "TH-D3-009"
+    ],
     "case_study_id": null,
     "stem": "A system exposes all 200 of its defined tools to the agent for every single request, regardless of task category. What is a likely downside of this approach?",
     "select_count": 1,
     "options": [
-      { "key": "A", "text": "Increased risk of incorrect tool selection and added reasoning overhead from the large, mostly irrelevant tool list" },
-      { "key": "B", "text": "Guaranteed perfect tool selection every time due to maximum coverage" },
-      { "key": "C", "text": "The complete elimination of all parameter construction errors" },
-      { "key": "D", "text": "No downside of any kind" }
+      {
+        "key": "A",
+        "text": "Increased risk of incorrect tool selection and added reasoning overhead from the large, mostly irrelevant tool list"
+      },
+      {
+        "key": "B",
+        "text": "Guaranteed perfect tool selection every time due to maximum coverage"
+      },
+      {
+        "key": "C",
+        "text": "The complete elimination of all parameter construction errors"
+      },
+      {
+        "key": "D",
+        "text": "No downside of any kind"
+      }
     ],
-    "correct": ["A"],
+    "correct": [
+      "A"
+    ],
     "explanation": {
       "why_correct": "Exposing a large number of mostly irrelevant tools for every request increases the risk of incorrect selection among overlapping or unrelated options, and adds unnecessary reasoning overhead compared to a context-scoped tool list.",
       "why_incorrect": {
@@ -25,7 +41,13 @@
       },
       "rule_of_thumb": "Exposing every available tool regardless of relevance increases selection risk and overhead -- scoping the tool list to the task context is generally preferable."
     },
-    "tags": ["tool-exposure-scoping"]
+    "tags": [
+      "tool-exposure-scoping"
+    ],
+    "concepts": [
+      "Tools & Tool Discovery",
+      "Context Engineering"
+    ]
   },
   {
     "id": "Q-D3-0033",
@@ -33,17 +55,33 @@
     "task_statement": "3.2",
     "type": "single_choice",
     "difficulty": "medium",
-    "theory_refs": ["TH-D3-008"],
+    "theory_refs": [
+      "TH-D3-008"
+    ],
     "case_study_id": null,
     "stem": "A task requires first looking up a user's account ID, and then using that specific ID as a parameter in a second tool call to fetch their order history. Which invocation strategy is required here?",
     "select_count": 1,
     "options": [
-      { "key": "A", "text": "Parallel invocation of both calls simultaneously" },
-      { "key": "B", "text": "Sequential invocation, since the second call's parameter depends on the first call's result" },
-      { "key": "C", "text": "Neither call should ever be made" },
-      { "key": "D", "text": "The order of the two calls does not matter at all" }
+      {
+        "key": "A",
+        "text": "Parallel invocation of both calls simultaneously"
+      },
+      {
+        "key": "B",
+        "text": "Sequential invocation, since the second call's parameter depends on the first call's result"
+      },
+      {
+        "key": "C",
+        "text": "Neither call should ever be made"
+      },
+      {
+        "key": "D",
+        "text": "The order of the two calls does not matter at all"
+      }
     ],
-    "correct": ["B"],
+    "correct": [
+      "B"
+    ],
     "explanation": {
       "why_correct": "Since the second call's required parameter (the account ID) only becomes available from the first call's result, the calls must be made sequentially -- the second cannot be meaningfully issued before the first completes.",
       "why_incorrect": {
@@ -53,7 +91,15 @@
       },
       "rule_of_thumb": "When a later call's parameters genuinely depend on an earlier call's result, the calls must be sequential, not parallel."
     },
-    "tags": ["sequential-invocation", "tool-dependency"]
+    "tags": [
+      "sequential-invocation",
+      "tool-dependency"
+    ],
+    "concepts": [
+      "State / State Management",
+      "Tools & Tool Discovery",
+      "Orchestration"
+    ]
   },
   {
     "id": "Q-D3-0034",
@@ -61,17 +107,33 @@
     "task_statement": "3.2",
     "type": "single_choice",
     "difficulty": "easy",
-    "theory_refs": ["TH-D3-006"],
+    "theory_refs": [
+      "TH-D3-006"
+    ],
     "case_study_id": null,
     "stem": "What should primarily drive which tool an agent selects for a given sub-task?",
     "select_count": 1,
     "options": [
-      { "key": "A", "text": "Matching the actual task need against each candidate tool's documented purpose and capabilities" },
-      { "key": "B", "text": "Always choosing whichever tool is listed first" },
-      { "key": "C", "text": "Always choosing the tool with the shortest name" },
-      { "key": "D", "text": "Always choosing the most recently added tool regardless of fit" }
+      {
+        "key": "A",
+        "text": "Matching the actual task need against each candidate tool's documented purpose and capabilities"
+      },
+      {
+        "key": "B",
+        "text": "Always choosing whichever tool is listed first"
+      },
+      {
+        "key": "C",
+        "text": "Always choosing the tool with the shortest name"
+      },
+      {
+        "key": "D",
+        "text": "Always choosing the most recently added tool regardless of fit"
+      }
     ],
-    "correct": ["A"],
+    "correct": [
+      "A"
+    ],
     "explanation": {
       "why_correct": "Correct tool selection depends on matching what the task actually needs against what each candidate tool is documented to do, rather than arbitrary surface factors like list position or name length.",
       "why_incorrect": {
@@ -81,6 +143,11 @@
       },
       "rule_of_thumb": "Select tools by matching actual task need to documented tool purpose and capability, not by arbitrary surface factors."
     },
-    "tags": ["tool-selection"]
+    "tags": [
+      "tool-selection"
+    ],
+    "concepts": [
+      "Tools & Tool Discovery"
+    ]
   }
 ]

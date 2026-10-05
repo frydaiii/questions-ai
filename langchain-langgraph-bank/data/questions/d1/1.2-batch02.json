@@ -5,17 +5,34 @@
     "task_statement": "1.2",
     "type": "multi_response",
     "difficulty": "medium",
-    "theory_refs": ["TH-D1-007"],
+    "theory_refs": [
+      "TH-D1-007"
+    ],
     "case_study_id": null,
     "stem": "Which of the following correctly describe the three phases of the perceive-reason-act cycle? (Select 2)",
     "select_count": 2,
     "options": [
-      { "key": "A", "text": "Perceive gathers current information relevant to the decision" },
-      { "key": "B", "text": "Act executes the chosen action and may produce external effects" },
-      { "key": "C", "text": "Reason is always skipped when the agent has sufficient memory" },
-      { "key": "D", "text": "Perceive only runs once, at the very start of the agent's entire lifetime" }
+      {
+        "key": "A",
+        "text": "Perceive gathers current information relevant to the decision"
+      },
+      {
+        "key": "B",
+        "text": "Act executes the chosen action and may produce external effects"
+      },
+      {
+        "key": "C",
+        "text": "Reason is always skipped when the agent has sufficient memory"
+      },
+      {
+        "key": "D",
+        "text": "Perceive only runs once, at the very start of the agent's entire lifetime"
+      }
     ],
-    "correct": ["A", "B"],
+    "correct": [
+      "A",
+      "B"
+    ],
     "explanation": {
       "why_correct": "Perceive is specifically about gathering current, relevant information, and act is specifically about executing the chosen action, which may have external effects -- these are accurate descriptions of their respective roles in the cycle.",
       "why_incorrect": {
@@ -24,7 +41,13 @@
       },
       "rule_of_thumb": "Perceive and act both run on every cycle, not just once; reason is never skipped regardless of memory capacity."
     },
-    "tags": ["perceive-reason-act"]
+    "tags": [
+      "perceive-reason-act"
+    ],
+    "concepts": [
+      "Agent",
+      "Reasoning Loop (ReAct)"
+    ]
   },
   {
     "id": "Q-D1-0037",
@@ -32,17 +55,34 @@
     "task_statement": "1.2",
     "type": "multi_response",
     "difficulty": "medium",
-    "theory_refs": ["TH-D1-012"],
+    "theory_refs": [
+      "TH-D1-012"
+    ],
     "case_study_id": null,
     "stem": "An agent produces a wrong final answer. Which two follow-up questions would correctly help diagnose WHICH phase of the loop is responsible? (Select 2)",
     "select_count": 2,
     "options": [
-      { "key": "A", "text": "Did the agent have all the correct, complete information it needed before deciding?" },
-      { "key": "B", "text": "Did the chosen action execute successfully, or did it fail at the tool/API level?" },
-      { "key": "C", "text": "Was the agent's token budget set to an even number?" },
-      { "key": "D", "text": "Did the user's original message contain more than 100 characters?" }
+      {
+        "key": "A",
+        "text": "Did the agent have all the correct, complete information it needed before deciding?"
+      },
+      {
+        "key": "B",
+        "text": "Did the chosen action execute successfully, or did it fail at the tool/API level?"
+      },
+      {
+        "key": "C",
+        "text": "Was the agent's token budget set to an even number?"
+      },
+      {
+        "key": "D",
+        "text": "Did the user's original message contain more than 100 characters?"
+      }
     ],
-    "correct": ["A", "B"],
+    "correct": [
+      "A",
+      "B"
+    ],
     "explanation": {
       "why_correct": "Checking whether the agent had correct/complete information (a perception question) and whether the chosen action executed successfully (an action question) are the two diagnostic checks that map directly onto distinguishing perception failures from action failures.",
       "why_incorrect": {
@@ -51,7 +91,16 @@
       },
       "rule_of_thumb": "Diagnosing a bad outcome means checking information completeness (perception) and execution success (action) as the two most informative starting questions, distinct from reasoning quality itself."
     },
-    "tags": ["failure-diagnosis", "debugging"]
+    "tags": [
+      "failure-diagnosis",
+      "debugging"
+    ],
+    "concepts": [
+      "Agent",
+      "Perception",
+      "Reasoning Loop (ReAct)",
+      "Error Recovery"
+    ]
   },
   {
     "id": "Q-D1-0038",
@@ -59,17 +108,34 @@
     "task_statement": "1.2",
     "type": "multi_response",
     "difficulty": "hard",
-    "theory_refs": ["TH-D1-010"],
+    "theory_refs": [
+      "TH-D1-010"
+    ],
     "case_study_id": null,
     "stem": "Which of the following actions would typically be classified as side-effecting rather than output-only? (Select 2)",
     "select_count": 2,
     "options": [
-      { "key": "A", "text": "Transferring funds between two bank accounts via a connected API" },
-      { "key": "B", "text": "Writing a new row into a production database" },
-      { "key": "C", "text": "Summarizing a document into three bullet points" },
-      { "key": "D", "text": "Translating a sentence from English to French for display to the user" }
+      {
+        "key": "A",
+        "text": "Transferring funds between two bank accounts via a connected API"
+      },
+      {
+        "key": "B",
+        "text": "Writing a new row into a production database"
+      },
+      {
+        "key": "C",
+        "text": "Summarizing a document into three bullet points"
+      },
+      {
+        "key": "D",
+        "text": "Translating a sentence from English to French for display to the user"
+      }
     ],
-    "correct": ["A", "B"],
+    "correct": [
+      "A",
+      "B"
+    ],
     "explanation": {
       "why_correct": "Transferring funds and writing to a production database both change state outside the conversation in ways that may be difficult to reverse -- the defining trait of side-effecting actions.",
       "why_incorrect": {
@@ -78,7 +144,14 @@
       },
       "rule_of_thumb": "If undoing the action would require a separate corrective real-world action (reversing a transfer, deleting a database row), it's side-effecting; if it only produces text/content, it's output-only."
     },
-    "tags": ["action-space", "side-effects"]
+    "tags": [
+      "action-space",
+      "side-effects"
+    ],
+    "concepts": [
+      "Agent",
+      "Reasoning Loop (ReAct)"
+    ]
   },
   {
     "id": "Q-D1-0039",
@@ -86,17 +159,34 @@
     "task_statement": "1.2",
     "type": "multi_response",
     "difficulty": "medium",
-    "theory_refs": ["TH-D1-011"],
+    "theory_refs": [
+      "TH-D1-011"
+    ],
     "case_study_id": null,
     "stem": "Which of the following scenarios demonstrate a properly closed feedback loop (as opposed to a broken one)? (Select 2)",
     "select_count": 2,
     "options": [
-      { "key": "A", "text": "An agent notices a tool call returned an error and retries with different parameters" },
-      { "key": "B", "text": "An agent refines its search query after noticing the first search returned irrelevant results" },
-      { "key": "C", "text": "An agent executes five hard-coded steps in sequence without examining any intermediate results" },
-      { "key": "D", "text": "An agent's tool error is silently swallowed and the agent proceeds as if nothing went wrong" }
+      {
+        "key": "A",
+        "text": "An agent notices a tool call returned an error and retries with different parameters"
+      },
+      {
+        "key": "B",
+        "text": "An agent refines its search query after noticing the first search returned irrelevant results"
+      },
+      {
+        "key": "C",
+        "text": "An agent executes five hard-coded steps in sequence without examining any intermediate results"
+      },
+      {
+        "key": "D",
+        "text": "An agent's tool error is silently swallowed and the agent proceeds as if nothing went wrong"
+      }
     ],
-    "correct": ["A", "B"],
+    "correct": [
+      "A",
+      "B"
+    ],
     "explanation": {
       "why_correct": "Both retrying with different parameters after an error and refining a query after noticing poor results are examples of the agent examining an action's actual outcome and adapting its next decision accordingly -- a properly closed feedback loop.",
       "why_incorrect": {
@@ -105,7 +195,15 @@
       },
       "rule_of_thumb": "A closed feedback loop is demonstrated by observable adaptation after an outcome -- retrying, refining, or changing course -- not merely by having multiple sequential steps."
     },
-    "tags": ["feedback-loop", "adaptive-behavior"]
+    "tags": [
+      "feedback-loop",
+      "adaptive-behavior"
+    ],
+    "concepts": [
+      "Agent",
+      "State / State Management",
+      "Reasoning Loop (ReAct)"
+    ]
   },
   {
     "id": "Q-D1-0040",
@@ -113,17 +211,34 @@
     "task_statement": "1.2",
     "type": "multi_response",
     "difficulty": "easy",
-    "theory_refs": ["TH-D1-008"],
+    "theory_refs": [
+      "TH-D1-008"
+    ],
     "case_study_id": null,
     "stem": "Which of the following would count as 'perception' inputs for a software-based AI agent? (Select 2)",
     "select_count": 2,
     "options": [
-      { "key": "A", "text": "The return value of a previously executed tool call" },
-      { "key": "B", "text": "A retrieved document relevant to the current task" },
-      { "key": "C", "text": "The agent's own source code, which it never actually reads" },
-      { "key": "D", "text": "A hypothetical future user request that has not yet been sent" }
+      {
+        "key": "A",
+        "text": "The return value of a previously executed tool call"
+      },
+      {
+        "key": "B",
+        "text": "A retrieved document relevant to the current task"
+      },
+      {
+        "key": "C",
+        "text": "The agent's own source code, which it never actually reads"
+      },
+      {
+        "key": "D",
+        "text": "A hypothetical future user request that has not yet been sent"
+      }
     ],
-    "correct": ["A", "B"],
+    "correct": [
+      "A",
+      "B"
+    ],
     "explanation": {
       "why_correct": "A prior tool call's return value and a retrieved relevant document are both concrete pieces of information actually available to and ingested by the agent, which is exactly what counts as perception.",
       "why_incorrect": {
@@ -132,6 +247,14 @@
       },
       "rule_of_thumb": "Perception requires information to actually reach the agent's current context -- information that exists but was never surfaced to the agent, or that doesn't exist yet, cannot be perceived."
     },
-    "tags": ["perception", "software-agent"]
+    "tags": [
+      "perception",
+      "software-agent"
+    ],
+    "concepts": [
+      "Agent",
+      "Perception",
+      "Reasoning Loop (ReAct)"
+    ]
   }
 ]

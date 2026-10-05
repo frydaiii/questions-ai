@@ -44,6 +44,10 @@
     "tags": [
       "grounding",
       "traceability"
+    ],
+    "concepts": [
+      "Environment",
+      "Tools & Tool Discovery"
     ]
   },
   {
@@ -91,6 +95,10 @@
     "tags": [
       "tool-necessity",
       "task-analysis"
+    ],
+    "concepts": [
+      "Environment",
+      "Tools & Tool Discovery"
     ]
   },
   {
@@ -138,6 +146,9 @@
     "tags": [
       "tool-use",
       "architecture"
+    ],
+    "concepts": [
+      "Tools & Tool Discovery"
     ]
   }
 ]

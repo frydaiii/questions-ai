@@ -43,6 +43,10 @@
     },
     "tags": [
       "ambiguity-handling"
+    ],
+    "concepts": [
+      "Context Engineering",
+      "Error Recovery"
     ]
   },
   {
@@ -90,6 +94,10 @@
     "tags": [
       "error-detection",
       "consistency-check"
+    ],
+    "concepts": [
+      "Error Recovery",
+      "Evaluation & Learning Loops"
     ]
   },
   {
@@ -138,6 +146,10 @@
     "tags": [
       "false-confidence",
       "calibration"
+    ],
+    "concepts": [
+      "Context Engineering",
+      "Error Recovery"
     ]
   }
 ]

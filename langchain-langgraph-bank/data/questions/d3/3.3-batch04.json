@@ -43,6 +43,10 @@
     },
     "tags": [
       "failure-categorization"
+    ],
+    "concepts": [
+      "Tools & Tool Discovery",
+      "Error Recovery"
     ]
   },
   {
@@ -90,6 +94,10 @@
     "tags": [
       "retry-strategy",
       "backoff"
+    ],
+    "concepts": [
+      "Tools & Tool Discovery",
+      "Error Recovery"
     ]
   },
   {
@@ -138,6 +146,12 @@
       "sanity-checking",
       "high-stakes",
       "misleading-results"
+    ],
+    "concepts": [
+      "Tools & Tool Discovery",
+      "Guardrails",
+      "Error Recovery",
+      "Evaluation & Learning Loops"
     ]
   }
 ]

@@ -5,17 +5,35 @@
     "task_statement": "3.1",
     "type": "multi_response",
     "difficulty": "medium",
-    "theory_refs": ["TH-D3-005"],
+    "theory_refs": [
+      "TH-D3-005"
+    ],
     "case_study_id": null,
     "stem": "Which of the following tasks most clearly signal that a tool is genuinely needed? (Select 3)",
     "select_count": 3,
     "options": [
-      { "key": "A", "text": "Checking a specific user's current private account balance" },
-      { "key": "B", "text": "Sending a real notification to a real external system" },
-      { "key": "C", "text": "Explaining a basic, stable mathematical definition that hasn't changed in centuries" },
-      { "key": "D", "text": "Looking up today's currency exchange rate" }
+      {
+        "key": "A",
+        "text": "Checking a specific user's current private account balance"
+      },
+      {
+        "key": "B",
+        "text": "Sending a real notification to a real external system"
+      },
+      {
+        "key": "C",
+        "text": "Explaining a basic, stable mathematical definition that hasn't changed in centuries"
+      },
+      {
+        "key": "D",
+        "text": "Looking up today's currency exchange rate"
+      }
     ],
-    "correct": ["A", "B", "D"],
+    "correct": [
+      "A",
+      "B",
+      "D"
+    ],
     "explanation": {
       "why_correct": "Private account data, real-world side-effecting actions, and rapidly changing data like exchange rates all require tool-based access the model cannot have natively or reliably from training alone.",
       "why_incorrect": {
@@ -23,7 +41,13 @@
       },
       "rule_of_thumb": "Private/system-specific data, real side effects, and fast-changing facts are the clearest signals that a tool is genuinely needed."
     },
-    "tags": ["tool-necessity"]
+    "tags": [
+      "tool-necessity"
+    ],
+    "concepts": [
+      "Environment",
+      "Tools & Tool Discovery"
+    ]
   },
   {
     "id": "Q-D3-0008",
@@ -31,22 +55,43 @@
     "task_statement": "3.1",
     "type": "ordering",
     "difficulty": "medium",
-    "theory_refs": ["TH-D3-001"],
+    "theory_refs": [
+      "TH-D3-001"
+    ],
     "case_study_id": null,
     "stem": "Place the following steps of a tool-use interaction in the correct order.",
     "select_count": 3,
     "options": [
-      { "key": "A", "text": "The model requests a specific action or piece of information via a tool call" },
-      { "key": "B", "text": "A separate execution layer performs the requested action or retrieval" },
-      { "key": "C", "text": "The result is returned to the model as an observation it can reason over" }
+      {
+        "key": "A",
+        "text": "The model requests a specific action or piece of information via a tool call"
+      },
+      {
+        "key": "B",
+        "text": "A separate execution layer performs the requested action or retrieval"
+      },
+      {
+        "key": "C",
+        "text": "The result is returned to the model as an observation it can reason over"
+      }
     ],
-    "correct": ["A", "B", "C"],
+    "correct": [
+      "A",
+      "B",
+      "C"
+    ],
     "explanation": {
       "why_correct": "A tool-use interaction always proceeds: the model requests an action, an external execution layer performs it, and the result returns to the model as an observation -- in that order.",
       "why_incorrect": {},
       "rule_of_thumb": "Tool use always follows: request, external execution, observation returned to the model."
     },
-    "tags": ["tool-use", "execution-order"]
+    "tags": [
+      "tool-use",
+      "execution-order"
+    ],
+    "concepts": [
+      "Tools & Tool Discovery"
+    ]
   },
   {
     "id": "Q-D3-0009",
@@ -54,28 +99,62 @@
     "task_statement": "3.1",
     "type": "matching",
     "difficulty": "medium",
-    "theory_refs": ["TH-D3-002", "TH-D3-003", "TH-D3-004"],
+    "theory_refs": [
+      "TH-D3-002",
+      "TH-D3-003",
+      "TH-D3-004"
+    ],
     "case_study_id": null,
     "stem": "Match each tool-use motivation on the left to the problem it addresses on the right.",
     "select_count": 3,
     "matching": {
       "left": [
-        { "key": "L1", "text": "Freshness" },
-        { "key": "L2", "text": "Real-world action capability" },
-        { "key": "L3", "text": "Grounding" }
+        {
+          "key": "L1",
+          "text": "Freshness"
+        },
+        {
+          "key": "L2",
+          "text": "Real-world action capability"
+        },
+        {
+          "key": "L3",
+          "text": "Grounding"
+        }
       ],
       "right": [
-        { "key": "R1", "text": "The model's training knowledge is fixed and cannot reflect information that changed afterward" },
-        { "key": "R2", "text": "The model has no native way to cause persistent external side effects" },
-        { "key": "R3", "text": "Ungrounded claims from internal knowledge alone have no traceable, checkable origin" }
+        {
+          "key": "R1",
+          "text": "The model's training knowledge is fixed and cannot reflect information that changed afterward"
+        },
+        {
+          "key": "R2",
+          "text": "The model has no native way to cause persistent external side effects"
+        },
+        {
+          "key": "R3",
+          "text": "Ungrounded claims from internal knowledge alone have no traceable, checkable origin"
+        }
       ]
     },
-    "correct_pairs": { "L1": "R1", "L2": "R2", "L3": "R3" },
+    "correct_pairs": {
+      "L1": "R1",
+      "L2": "R2",
+      "L3": "R3"
+    },
     "explanation": {
       "why_correct": "Freshness addresses the fixed-training-cutoff problem, real-world action capability addresses the lack of native side-effecting ability, and grounding addresses the lack of a traceable origin for claims.",
       "why_incorrect": {},
       "rule_of_thumb": "Freshness = stale knowledge; action capability = no native side effects; grounding = no traceable origin for claims."
     },
-    "tags": ["tool-necessity", "grounding", "freshness"]
+    "tags": [
+      "tool-necessity",
+      "grounding",
+      "freshness"
+    ],
+    "concepts": [
+      "Environment",
+      "Tools & Tool Discovery"
+    ]
   }
 ]

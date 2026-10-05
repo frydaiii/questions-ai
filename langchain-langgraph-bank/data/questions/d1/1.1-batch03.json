@@ -38,6 +38,9 @@
     "tags": [
       "agent-loop",
       "execution-order"
+    ],
+    "concepts": [
+      "Agent"
     ]
   },
   {
@@ -84,6 +87,10 @@
     "tags": [
       "agentic-spectrum",
       "control-flow"
+    ],
+    "concepts": [
+      "Agent",
+      "Tools & Tool Discovery"
     ]
   },
   {
@@ -142,6 +149,9 @@
       "workflow-vs-agent",
       "chatbot",
       "control-flow"
+    ],
+    "concepts": [
+      "Agent"
     ]
   },
   {
@@ -208,6 +218,9 @@
     "tags": [
       "agent-components",
       "minimal-agent"
+    ],
+    "concepts": [
+      "Agent"
     ]
   }
 ]

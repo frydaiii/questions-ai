@@ -44,6 +44,10 @@
     "tags": [
       "agent-definition",
       "reactive-agent"
+    ],
+    "concepts": [
+      "Agent",
+      "Environment"
     ]
   },
   {
@@ -91,6 +95,10 @@
     "tags": [
       "tool-use-motivation",
       "single-shot-sufficiency"
+    ],
+    "concepts": [
+      "Agent",
+      "Tools & Tool Discovery"
     ]
   },
   {
@@ -139,6 +147,11 @@
       "autonomy",
       "step-limit",
       "safety"
+    ],
+    "concepts": [
+      "Agent",
+      "Utility & Goal-Based Agents",
+      "Guardrails"
     ]
   },
   {
@@ -188,6 +201,11 @@
       "autonomy",
       "design-tradeoffs",
       "scoping"
+    ],
+    "concepts": [
+      "Agent",
+      "Tools & Tool Discovery",
+      "Utility & Goal-Based Agents"
     ]
   },
   {
@@ -235,6 +253,10 @@
     "tags": [
       "agentic-spectrum",
       "agent-definition"
+    ],
+    "concepts": [
+      "Agent",
+      "Utility & Goal-Based Agents"
     ]
   },
   {
@@ -284,6 +306,11 @@
       "agent-definition",
       "autonomy",
       "control-flow"
+    ],
+    "concepts": [
+      "Agent",
+      "Tools & Tool Discovery",
+      "Utility & Goal-Based Agents"
     ]
   }
 ]

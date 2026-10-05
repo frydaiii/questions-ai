@@ -15,7 +15,8 @@
     "stem",
     "select_count",
     "explanation",
-    "tags"
+    "tags",
+    "concepts"
   ],
   "properties": {
     "id": {
@@ -113,6 +114,38 @@
       "type": "array",
       "minItems": 1,
       "items": { "type": "string", "minLength": 2 }
+    },
+    "concepts": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "enum": [
+          "Agent",
+          "Environment",
+          "Perception",
+          "State / State Management",
+          "Memory",
+          "Tools & Tool Discovery",
+          "Model Context Protocol (MCP)",
+          "Reasoning Loop (ReAct)",
+          "Chain of Thought (CoT)",
+          "Planning",
+          "Reflex Agents",
+          "Utility & Goal-Based Agents",
+          "Context Engineering",
+          "Orchestration",
+          "Multi-Agent Systems",
+          "Sub-agents & Handoffs",
+          "Swarm Intelligence",
+          "Agent Debate",
+          "Guardrails",
+          "Human-in-the-Loop (HITL)",
+          "Error Recovery",
+          "Evaluation & Learning Loops"
+        ]
+      }
     }
   },
   "allOf": [

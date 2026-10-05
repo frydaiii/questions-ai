@@ -43,6 +43,10 @@
     },
     "tags": [
       "episodic-memory"
+    ],
+    "concepts": [
+      "Memory",
+      "Context Engineering"
     ]
   },
   {
@@ -90,6 +94,10 @@
     "tags": [
       "semantic-memory",
       "episodic-memory"
+    ],
+    "concepts": [
+      "Memory",
+      "Context Engineering"
     ]
   },
   {
@@ -136,6 +144,10 @@
     },
     "tags": [
       "procedural-memory"
+    ],
+    "concepts": [
+      "Memory",
+      "Context Engineering"
     ]
   }
 ]

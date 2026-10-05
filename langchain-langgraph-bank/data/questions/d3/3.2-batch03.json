@@ -5,17 +5,35 @@
     "task_statement": "3.2",
     "type": "multi_response",
     "difficulty": "medium",
-    "theory_refs": ["TH-D3-007"],
+    "theory_refs": [
+      "TH-D3-007"
+    ],
     "case_study_id": null,
     "stem": "Which of the following are common parameter construction errors in tool calls? (Select 3)",
     "select_count": 3,
     "options": [
-      { "key": "A", "text": "Passing a date in a format the tool does not expect" },
-      { "key": "B", "text": "Omitting a required argument the tool needs to function" },
-      { "key": "C", "text": "Passing an overly vague query that doesn't specify what's actually needed" },
-      { "key": "D", "text": "Selecting a tool whose documented purpose matches the task exactly" }
+      {
+        "key": "A",
+        "text": "Passing a date in a format the tool does not expect"
+      },
+      {
+        "key": "B",
+        "text": "Omitting a required argument the tool needs to function"
+      },
+      {
+        "key": "C",
+        "text": "Passing an overly vague query that doesn't specify what's actually needed"
+      },
+      {
+        "key": "D",
+        "text": "Selecting a tool whose documented purpose matches the task exactly"
+      }
     ],
-    "correct": ["A", "B", "C"],
+    "correct": [
+      "A",
+      "B",
+      "C"
+    ],
     "explanation": {
       "why_correct": "Wrong date formats, missing required arguments, and overly vague queries are all common, well-documented parameter construction errors that occur even when the correct tool has been selected.",
       "why_incorrect": {
@@ -23,7 +41,12 @@
       },
       "rule_of_thumb": "Parameter construction errors include wrong formats, missing required fields, and vague queries -- all distinct from tool selection itself."
     },
-    "tags": ["parameter-construction"]
+    "tags": [
+      "parameter-construction"
+    ],
+    "concepts": [
+      "Tools & Tool Discovery"
+    ]
   },
   {
     "id": "Q-D3-0036",
@@ -31,22 +54,47 @@
     "task_statement": "3.2",
     "type": "ordering",
     "difficulty": "medium",
-    "theory_refs": ["TH-D3-006", "TH-D3-007"],
+    "theory_refs": [
+      "TH-D3-006",
+      "TH-D3-007"
+    ],
     "case_study_id": null,
     "stem": "Place the following steps of correctly invoking a tool in order.",
     "select_count": 3,
     "options": [
-      { "key": "A", "text": "Identify the task's actual need and match it against candidate tools' documented purposes" },
-      { "key": "B", "text": "Select the tool that best matches that specific need" },
-      { "key": "C", "text": "Construct the call's parameters correctly, in the format the selected tool expects" }
+      {
+        "key": "A",
+        "text": "Identify the task's actual need and match it against candidate tools' documented purposes"
+      },
+      {
+        "key": "B",
+        "text": "Select the tool that best matches that specific need"
+      },
+      {
+        "key": "C",
+        "text": "Construct the call's parameters correctly, in the format the selected tool expects"
+      }
     ],
-    "correct": ["A", "B", "C"],
+    "correct": [
+      "A",
+      "B",
+      "C"
+    ],
     "explanation": {
       "why_correct": "Correct tool invocation first identifies the actual need and matches it against candidates, then selects the best-fitting tool, and finally constructs the parameters correctly for that specific tool -- in that order.",
       "why_incorrect": {},
       "rule_of_thumb": "Tool invocation proceeds: identify need and match candidates, select best fit, then construct correct parameters."
     },
-    "tags": ["tool-selection", "parameter-construction", "execution-order"]
+    "tags": [
+      "tool-selection",
+      "parameter-construction",
+      "execution-order"
+    ],
+    "concepts": [
+      "State / State Management",
+      "Tools & Tool Discovery",
+      "Orchestration"
+    ]
   },
   {
     "id": "Q-D3-0037",
@@ -54,28 +102,63 @@
     "task_statement": "3.2",
     "type": "matching",
     "difficulty": "medium",
-    "theory_refs": ["TH-D3-006", "TH-D3-007", "TH-D3-008"],
+    "theory_refs": [
+      "TH-D3-006",
+      "TH-D3-007",
+      "TH-D3-008"
+    ],
     "case_study_id": null,
     "stem": "Match each tool-invocation concept on the left to its correct description on the right.",
     "select_count": 3,
     "matching": {
       "left": [
-        { "key": "L1", "text": "Tool selection error" },
-        { "key": "L2", "text": "Parameter construction error" },
-        { "key": "L3", "text": "Incorrect parallelization" }
+        {
+          "key": "L1",
+          "text": "Tool selection error"
+        },
+        {
+          "key": "L2",
+          "text": "Parameter construction error"
+        },
+        {
+          "key": "L3",
+          "text": "Incorrect parallelization"
+        }
       ],
       "right": [
-        { "key": "R1", "text": "Choosing an unsuitable tool for the actual need" },
-        { "key": "R2", "text": "Choosing the right tool but supplying malformed or incomplete arguments" },
-        { "key": "R3", "text": "Issuing a dependent call before the earlier result it actually needs is available" }
+        {
+          "key": "R1",
+          "text": "Choosing an unsuitable tool for the actual need"
+        },
+        {
+          "key": "R2",
+          "text": "Choosing the right tool but supplying malformed or incomplete arguments"
+        },
+        {
+          "key": "R3",
+          "text": "Issuing a dependent call before the earlier result it actually needs is available"
+        }
       ]
     },
-    "correct_pairs": { "L1": "R1", "L2": "R2", "L3": "R3" },
+    "correct_pairs": {
+      "L1": "R1",
+      "L2": "R2",
+      "L3": "R3"
+    },
     "explanation": {
       "why_correct": "Each concept maps to a distinct failure type: wrong tool chosen, right tool with bad parameters, or a dependent call issued too early in parallel when it needed sequential ordering.",
       "why_incorrect": {},
       "rule_of_thumb": "Tool selection, parameter construction, and invocation ordering are three distinct, independently diagnosable sources of tool-use error."
     },
-    "tags": ["tool-selection", "parameter-construction", "parallel-invocation"]
+    "tags": [
+      "tool-selection",
+      "parameter-construction",
+      "parallel-invocation"
+    ],
+    "concepts": [
+      "State / State Management",
+      "Tools & Tool Discovery",
+      "Orchestration"
+    ]
   }
 ]

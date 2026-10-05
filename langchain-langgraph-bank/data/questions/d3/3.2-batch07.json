@@ -43,6 +43,9 @@
     },
     "tags": [
       "tool-selection"
+    ],
+    "concepts": [
+      "Tools & Tool Discovery"
     ]
   },
   {
@@ -90,6 +93,9 @@
     "tags": [
       "parameter-construction",
       "tool-call-validation"
+    ],
+    "concepts": [
+      "Tools & Tool Discovery"
     ]
   },
   {
@@ -137,6 +143,11 @@
     "tags": [
       "parallel-invocation",
       "dependency-analysis"
+    ],
+    "concepts": [
+      "State / State Management",
+      "Tools & Tool Discovery",
+      "Orchestration"
     ]
   },
   {
@@ -188,6 +199,9 @@
       "tool-selection",
       "parameter-construction",
       "tool-invocation-strategy"
+    ],
+    "concepts": [
+      "Tools & Tool Discovery"
     ]
   },
   {
@@ -234,6 +248,10 @@
     },
     "tags": [
       "tool-exposure-scoping"
+    ],
+    "concepts": [
+      "Tools & Tool Discovery",
+      "Context Engineering"
     ]
   },
   {
@@ -281,6 +299,9 @@
     "tags": [
       "parameter-construction",
       "tool-call-validation"
+    ],
+    "concepts": [
+      "Tools & Tool Discovery"
     ]
   },
   {
@@ -327,6 +348,11 @@
     },
     "tags": [
       "parallel-invocation"
+    ],
+    "concepts": [
+      "State / State Management",
+      "Tools & Tool Discovery",
+      "Orchestration"
     ]
   },
   {
@@ -375,6 +401,10 @@
     "tags": [
       "tool-selection",
       "tool-descriptions"
+    ],
+    "concepts": [
+      "Tools & Tool Discovery",
+      "Context Engineering"
     ]
   }
 ]

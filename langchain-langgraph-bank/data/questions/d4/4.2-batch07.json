@@ -43,6 +43,10 @@
     },
     "tags": [
       "episodic-memory"
+    ],
+    "concepts": [
+      "Memory",
+      "Context Engineering"
     ]
   },
   {
@@ -89,6 +93,10 @@
     },
     "tags": [
       "procedural-memory"
+    ],
+    "concepts": [
+      "Memory",
+      "Context Engineering"
     ]
   },
   {
@@ -136,6 +144,10 @@
     "tags": [
       "episodic-memory",
       "semantic-memory"
+    ],
+    "concepts": [
+      "Memory",
+      "Context Engineering"
     ]
   },
   {
@@ -182,6 +194,10 @@
     },
     "tags": [
       "semantic-memory"
+    ],
+    "concepts": [
+      "Memory",
+      "Context Engineering"
     ]
   },
   {
@@ -232,6 +248,10 @@
       "episodic-memory",
       "semantic-memory",
       "procedural-memory"
+    ],
+    "concepts": [
+      "Memory",
+      "Context Engineering"
     ]
   },
   {
@@ -280,6 +300,10 @@
       "memory-type-organization",
       "episodic-memory",
       "semantic-memory"
+    ],
+    "concepts": [
+      "Memory",
+      "Context Engineering"
     ]
   },
   {
@@ -326,6 +350,10 @@
     },
     "tags": [
       "procedural-memory"
+    ],
+    "concepts": [
+      "Memory",
+      "Context Engineering"
     ]
   },
   {
@@ -373,6 +401,10 @@
     },
     "tags": [
       "episodic-memory"
+    ],
+    "concepts": [
+      "Memory",
+      "Context Engineering"
     ]
   },
   {
@@ -421,6 +453,10 @@
     "tags": [
       "semantic-memory",
       "procedural-memory"
+    ],
+    "concepts": [
+      "Memory",
+      "Context Engineering"
     ]
   }
 ]

@@ -44,6 +44,9 @@
     "tags": [
       "tool-necessity",
       "design-heuristics"
+    ],
+    "concepts": [
+      "Tools & Tool Discovery"
     ]
   },
   {
@@ -92,6 +95,10 @@
     "tags": [
       "freshness",
       "stale-knowledge"
+    ],
+    "concepts": [
+      "Environment",
+      "Tools & Tool Discovery"
     ]
   },
   {
@@ -141,6 +148,10 @@
       "action-tools",
       "tool-risk-tiers",
       "design-tradeoffs"
+    ],
+    "concepts": [
+      "Tools & Tool Discovery",
+      "Guardrails"
     ]
   },
   {
@@ -188,6 +199,10 @@
     "tags": [
       "tool-use",
       "observation"
+    ],
+    "concepts": [
+      "Environment",
+      "Tools & Tool Discovery"
     ]
   },
   {
@@ -235,6 +250,10 @@
     "tags": [
       "grounding",
       "task-analysis"
+    ],
+    "concepts": [
+      "Environment",
+      "Tools & Tool Discovery"
     ]
   },
   {
@@ -286,6 +305,10 @@
       "tool-use",
       "grounding",
       "freshness"
+    ],
+    "concepts": [
+      "Environment",
+      "Tools & Tool Discovery"
     ]
   },
   {
@@ -333,6 +356,10 @@
     "tags": [
       "action-tools",
       "tool-risk-tiers"
+    ],
+    "concepts": [
+      "Tools & Tool Discovery",
+      "Guardrails"
     ]
   }
 ]

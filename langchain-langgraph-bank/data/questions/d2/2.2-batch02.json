@@ -45,6 +45,10 @@
       "plan-and-execute",
       "react",
       "architecture-comparison"
+    ],
+    "concepts": [
+      "State / State Management",
+      "Planning"
     ]
   },
   {
@@ -92,6 +96,10 @@
     "tags": [
       "tree-of-thought",
       "branch-pruning"
+    ],
+    "concepts": [
+      "Chain of Thought (CoT)",
+      "Planning"
     ]
   },
   {
@@ -139,6 +147,9 @@
     "tags": [
       "task-decomposition",
       "benefits"
+    ],
+    "concepts": [
+      "Planning"
     ]
   },
   {
@@ -186,6 +197,9 @@
     "tags": [
       "planning-strategy-selection",
       "task-structure"
+    ],
+    "concepts": [
+      "Planning"
     ]
   }
 ]

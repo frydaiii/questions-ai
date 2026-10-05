@@ -44,6 +44,10 @@
     "tags": [
       "episodic-memory",
       "memory-retrieval"
+    ],
+    "concepts": [
+      "Memory",
+      "Context Engineering"
     ]
   },
   {
@@ -90,6 +94,10 @@
     },
     "tags": [
       "semantic-memory"
+    ],
+    "concepts": [
+      "Memory",
+      "Context Engineering"
     ]
   },
   {
@@ -139,6 +147,10 @@
       "memory-type-organization",
       "procedural-memory",
       "episodic-memory"
+    ],
+    "concepts": [
+      "Memory",
+      "Context Engineering"
     ]
   }
 ]

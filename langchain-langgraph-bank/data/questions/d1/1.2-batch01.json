@@ -44,6 +44,12 @@
     "tags": [
       "perceive-reason-act",
       "perception"
+    ],
+    "concepts": [
+      "Agent",
+      "Environment",
+      "Perception",
+      "Reasoning Loop (ReAct)"
     ]
   },
   {
@@ -91,6 +97,12 @@
     "tags": [
       "perception",
       "failure-diagnosis"
+    ],
+    "concepts": [
+      "Agent",
+      "Perception",
+      "Reasoning Loop (ReAct)",
+      "Error Recovery"
     ]
   },
   {
@@ -139,6 +151,10 @@
       "reasoning-depth",
       "chain-of-thought",
       "efficiency"
+    ],
+    "concepts": [
+      "Agent",
+      "Reasoning Loop (ReAct)"
     ]
   },
   {
@@ -187,6 +203,11 @@
       "action-space",
       "side-effects",
       "risk"
+    ],
+    "concepts": [
+      "Agent",
+      "Reasoning Loop (ReAct)",
+      "Guardrails"
     ]
   },
   {
@@ -234,6 +255,11 @@
     "tags": [
       "feedback-loop",
       "adaptive-behavior"
+    ],
+    "concepts": [
+      "Agent",
+      "State / State Management",
+      "Reasoning Loop (ReAct)"
     ]
   },
   {
@@ -281,6 +307,12 @@
     "tags": [
       "failure-diagnosis",
       "action-failure"
+    ],
+    "concepts": [
+      "Agent",
+      "Perception",
+      "Reasoning Loop (ReAct)",
+      "Error Recovery"
     ]
   },
   {
@@ -328,6 +360,12 @@
     "tags": [
       "perceive-reason-act",
       "feedback-loop"
+    ],
+    "concepts": [
+      "Agent",
+      "Perception",
+      "State / State Management",
+      "Reasoning Loop (ReAct)"
     ]
   },
   {
@@ -375,6 +413,10 @@
     "tags": [
       "chain-of-thought",
       "debuggability"
+    ],
+    "concepts": [
+      "Agent",
+      "Reasoning Loop (ReAct)"
     ]
   },
   {
@@ -424,6 +466,12 @@
       "perception",
       "failure-diagnosis",
       "root-cause-analysis"
+    ],
+    "concepts": [
+      "Agent",
+      "Perception",
+      "Reasoning Loop (ReAct)",
+      "Error Recovery"
     ]
   },
   {
@@ -471,6 +519,10 @@
     "tags": [
       "action-space",
       "side-effects"
+    ],
+    "concepts": [
+      "Agent",
+      "Reasoning Loop (ReAct)"
     ]
   }
 ]

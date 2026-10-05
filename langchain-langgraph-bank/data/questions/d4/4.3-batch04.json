@@ -43,6 +43,11 @@
     },
     "tags": [
       "forgetting-mechanisms"
+    ],
+    "concepts": [
+      "Memory",
+      "Context Engineering",
+      "Evaluation & Learning Loops"
     ]
   },
   {
@@ -90,6 +95,10 @@
     "tags": [
       "relevance-based-retrieval",
       "memory-retrieval"
+    ],
+    "concepts": [
+      "Memory",
+      "Context Engineering"
     ]
   },
   {
@@ -139,6 +148,11 @@
       "recency",
       "forgetting-mechanisms",
       "relevance-based-retrieval"
+    ],
+    "concepts": [
+      "Memory",
+      "Context Engineering",
+      "Evaluation & Learning Loops"
     ]
   }
 ]
