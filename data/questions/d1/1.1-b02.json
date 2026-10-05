@@ -1,0 +1,624 @@
+[
+  {
+    "id": "Q-D1-0128",
+    "domain": 1, "task_statement": "1.1", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D1-002"], "case_study_id": null,
+    "stem": "A retailer has one year of daily sales data with no labels at all and wants an algorithm to reduce the data down to its most important underlying patterns for visualization, without predicting any specific target value. Which ML paradigm is this closest to?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Supervised learning" },
+      { "key": "B", "text": "Unsupervised learning" },
+      { "key": "C", "text": "Reinforcement learning" },
+      { "key": "D", "text": "Self-supervised learning" }
+    ],
+    "correct": ["B"],
+    "explanation": {
+      "why_correct": "Reducing unlabeled data to its most important underlying patterns, such as through dimensionality reduction, is a classic unsupervised learning task: there is no target label being predicted, only structure being discovered in the data itself.",
+      "why_incorrect": {
+        "A": "Supervised learning requires labeled data with a specific target to predict; this scenario has no labels and no target at all.",
+        "C": "Reinforcement learning requires an agent taking sequential actions to maximize a reward; there is no such interactive, reward-driven process here.",
+        "D": "Self-supervised learning generates its own labels to predict a specific target from the data's structure (like a masked word); this scenario has no such specific prediction target, only a general pattern-discovery goal."
+      },
+      "rule_of_thumb": "No labels at all, looking for structure -> unsupervised learning, which includes both clustering and dimensionality reduction."
+    },
+    "tags": ["unsupervised-learning", "dimensionality-reduction"]
+  },
+  {
+    "id": "Q-D1-0129",
+    "domain": 1, "task_statement": "1.1", "type": "single_choice", "difficulty": "easy",
+    "theory_refs": ["TH-D1-001"], "case_study_id": null,
+    "stem": "An insurance company builds a chatbot that generates a unique, freshly-written explanation of a claims decision for each customer, tailored to their specific policy details, rather than selecting from a fixed set of pre-written templates. Which category best describes this capability?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "A rules engine selecting from templates" },
+      { "key": "B", "text": "Generative AI" },
+      { "key": "C", "text": "Clustering" },
+      { "key": "D", "text": "Anomaly detection" }
+    ],
+    "correct": ["B"],
+    "explanation": {
+      "why_correct": "Generating a unique, freshly-written explanation tailored to specific details, rather than selecting from pre-written templates, is content creation — producing new text that did not exist before. This is the defining trait of generative AI.",
+      "why_incorrect": {
+        "A": "The scenario explicitly states the system does NOT select from a fixed set of pre-written templates, which rules out a simple rules engine or template-selection approach.",
+        "C": "Clustering groups similar items with no predefined categories; it does not generate freshly-written explanatory text.",
+        "D": "Anomaly detection flags unusual data points; it has no role in generating personalized written explanations."
+      },
+      "rule_of_thumb": "If the system produces brand-new content tailored to the specific input, rather than selecting from fixed pre-written options, it's generative AI."
+    },
+    "tags": ["generative-ai", "terminology"]
+  },
+  {
+    "id": "Q-D1-0130",
+    "domain": 1, "task_statement": "1.1", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D1-004"], "case_study_id": null,
+    "stem": "A data scientist decides to address a model's overfitting problem. Which of the following is a reasonable, directly appropriate remedy?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Add regularization or gather more diverse training data to reduce the model's tendency to memorize training-specific noise." },
+      { "key": "B", "text": "Train for many additional epochs on the exact same training data with no other changes." },
+      { "key": "C", "text": "Remove the validation set so training performance is the only signal reviewed." },
+      { "key": "D", "text": "Increase the model's complexity substantially with no other changes." }
+    ],
+    "correct": ["A"],
+    "explanation": {
+      "why_correct": "Regularization techniques and more diverse training data both directly counteract a model's tendency to memorize noise specific to the training set, which is the core mechanism behind overfitting. These are standard, well-documented remedies.",
+      "why_incorrect": {
+        "B": "Training for many more epochs on the same data with no other changes typically worsens overfitting rather than fixing it, since the model has more opportunity to memorize training-specific noise.",
+        "C": "Removing the validation set eliminates the tool needed to detect and monitor overfitting in the first place; it does nothing to address the underlying problem.",
+        "D": "Increasing model complexity with no other changes generally increases overfitting risk rather than reducing it, since a more complex model has more capacity to memorize noise."
+      },
+      "rule_of_thumb": "Overfitting remedies include more diverse training data, regularization, simplifying the model, or early stopping — not more epochs or more complexity on their own."
+    },
+    "tags": ["overfitting", "regularization", "bias-variance"]
+  },
+  {
+    "id": "Q-D1-0131",
+    "domain": 1, "task_statement": "1.1", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D1-003"], "case_study_id": null,
+    "stem": "A manufacturing plant wants a model that groups its 40 different production lines into a small number of clusters based on similarities in sensor readings, without being told in advance how many groups should exist or what defines a group. Which ML problem type is this?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Classification" },
+      { "key": "B", "text": "Regression" },
+      { "key": "C", "text": "Clustering" },
+      { "key": "D", "text": "Forecasting" }
+    ],
+    "correct": ["C"],
+    "explanation": {
+      "why_correct": "The plant wants the algorithm to discover natural groupings among production lines with no predefined categories or labels supplied in advance. This open-ended grouping task, based purely on similarity in the data, is the definition of clustering.",
+      "why_incorrect": {
+        "A": "Classification requires a fixed, predefined set of category labels to predict; this scenario explicitly has no predefined groups.",
+        "B": "Regression predicts a continuous numeric value; grouping production lines by similarity is not predicting a single numeric target.",
+        "D": "Forecasting predicts future numeric values over time; this scenario is about finding structure in a static set of sensor readings, not predicting future values."
+      },
+      "rule_of_thumb": "'Group similar things with no predefined labels' -> clustering, an unsupervised technique that discovers its own groupings."
+    },
+    "tags": ["clustering", "problem-types"]
+  },
+  {
+    "id": "Q-D1-0132",
+    "domain": 1, "task_statement": "1.1", "type": "single_choice", "difficulty": "hard",
+    "theory_refs": ["TH-D1-005"], "case_study_id": null,
+    "stem": "A research team wants a model that learns a compressed representation of handwritten digit images, and can then generate new plausible digit images by sampling from that compressed representation. Which architecture is most directly designed for this specific capability?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Variational autoencoder (VAE)" },
+      { "key": "B", "text": "Convolutional neural network (CNN) used only for classification" },
+      { "key": "C", "text": "Decision tree" },
+      { "key": "D", "text": "Linear regression" }
+    ],
+    "correct": ["A"],
+    "explanation": {
+      "why_correct": "Variational autoencoders learn a compressed latent representation of data specifically so that new samples can be generated by sampling from that latent space, which exactly matches the described capability of compressing and then generating new plausible digit images.",
+      "why_incorrect": {
+        "B": "A CNN used only for classification assigns existing images to categories; it has no built-in mechanism for compressing data into a latent space and generating new samples from it.",
+        "C": "A decision tree is a traditional ML technique for classification or regression on structured/tabular data; it has no capability to learn a compressed representation of image data or generate new images from it.",
+        "D": "Linear regression predicts a single continuous numeric value; it has no mechanism for learning a compressed representation or generating new image samples."
+      },
+      "rule_of_thumb": "Learning a compressed representation of data specifically to generate new samples from it is the hallmark of a variational autoencoder (VAE)."
+    },
+    "tags": ["vae", "generative-models", "latent-space"]
+  },
+  {
+    "id": "Q-D1-0133",
+    "domain": 1, "task_statement": "1.1", "type": "multi_response", "difficulty": "hard",
+    "theory_refs": ["TH-D1-004"], "case_study_id": null,
+    "stem": "A team is diagnosing whether their model is overfitting or underfitting. Which TWO of the following observations would specifically indicate overfitting rather than underfitting?",
+    "select_count": 2,
+    "options": [
+      { "key": "A", "text": "Training accuracy is 98% while validation accuracy is only 68%." },
+      { "key": "B", "text": "Training accuracy and validation accuracy are both around 60%, with neither improving despite more training." },
+      { "key": "C", "text": "The model performs noticeably worse on new production data than it did during training, despite a small train/validation gap during development." },
+      { "key": "D", "text": "Adding regularization noticeably closes the gap between training and validation accuracy." }
+    ],
+    "correct": ["A", "D"],
+    "explanation": {
+      "why_correct": "A large gap between very high training accuracy and much lower validation accuracy (A) is the classic overfitting signature. Regularization specifically targets and reduces overfitting, so observing that it closes the train/validation gap (D) confirms overfitting was present and is being addressed.",
+      "why_incorrect": {
+        "B": "Both scores being similarly low, with no improvement from more training, describes underfitting: the model hasn't learned enough of the underlying pattern, not that it has memorized training-specific noise.",
+        "C": "A small train/validation gap during development but worse performance later in production is more consistent with data or concept drift after deployment, not classic overfitting observed during initial model development."
+      },
+      "rule_of_thumb": "Overfitting shows up as a big gap between strong training performance and weaker validation performance, and is specifically reduced by remedies like regularization — not by observations of uniformly poor performance."
+    },
+    "tags": ["overfitting", "underfitting", "bias-variance", "diagnosis"]
+  },
+  {
+    "id": "Q-D1-0134",
+    "domain": 1, "task_statement": "1.1", "type": "single_choice", "difficulty": "easy",
+    "theory_refs": ["TH-D1-003"], "case_study_id": null,
+    "stem": "A hospital wants to predict the exact number of days a newly admitted patient is likely to stay, as a specific numeric value such as 4.2 days. Which ML problem type fits this goal?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Classification" },
+      { "key": "B", "text": "Clustering" },
+      { "key": "C", "text": "Recommendation" },
+      { "key": "D", "text": "Regression" }
+    ],
+    "correct": ["D"],
+    "explanation": {
+      "why_correct": "Predicting an exact numeric value, such as a specific number of days, is a continuous-value prediction task, which is precisely what regression is designed to handle.",
+      "why_incorrect": {
+        "A": "Classification predicts a discrete category from a fixed set of labels, such as 'short stay' vs. 'long stay,' not a specific continuous numeric value like 4.2 days.",
+        "B": "Clustering groups similar patients together with no specific numeric target predicted per patient; this scenario wants a specific number predicted for each patient.",
+        "C": "Recommendation predicts user-item affinity; it has no relevance to predicting a numeric length of stay."
+      },
+      "rule_of_thumb": "'How much' or 'what number' -> regression, even when the number has decimal precision like 4.2 days."
+    },
+    "tags": ["regression", "problem-types"]
+  },
+  {
+    "id": "Q-D1-0135",
+    "domain": 1, "task_statement": "1.1", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D1-022"], "case_study_id": null,
+    "stem": "A bank has a modest dataset of 5,000 structured loan records and needs a model whose individual decisions can be explained clearly to a regulator, feature by feature, for each denied application. Which type of model is generally easier to directly explain in this way?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "A large deep neural network with dozens of hidden layers" },
+      { "key": "B", "text": "A simple decision tree, whose logic can be read directly from its structure" },
+      { "key": "C", "text": "A large multimodal foundation model" },
+      { "key": "D", "text": "A diffusion model" }
+    ],
+    "correct": ["B"],
+    "explanation": {
+      "why_correct": "A simple decision tree's logic can be read directly from its structure, tracing exactly which feature thresholds led to a specific decision, making it inherently interpretable and well suited to explaining individual denied applications to a regulator.",
+      "why_incorrect": {
+        "A": "A large deep neural network with many hidden layers is typically much harder to interpret directly; understanding its individual decisions usually requires separate explainability techniques rather than simply reading its structure.",
+        "C": "A large multimodal foundation model is designed for tasks spanning multiple data types and is not the natural fit for a small structured tabular dataset needing straightforward per-decision explainability.",
+        "D": "A diffusion model is a generative architecture for content creation like images; it has no relevance to explaining structured loan-decision predictions."
+      },
+      "rule_of_thumb": "Structured/tabular data, need interpretability, limited data volume -> traditional ML like a decision tree, which is far more directly explainable than deep learning."
+    },
+    "tags": ["traditional-ml", "interpretability", "decision-tree"]
+  },
+  {
+    "id": "Q-D1-0136",
+    "domain": 1, "task_statement": "1.1", "type": "single_choice", "difficulty": "hard",
+    "theory_refs": ["TH-D1-002", "TH-D1-005"], "case_study_id": null,
+    "stem": "A company trains a large language model in two stages: first, self-supervised pre-training on a massive unlabeled text corpus to learn general language patterns; second, reinforcement learning from human feedback (RLHF) to align its responses with human preferences. Which statement about this two-stage process is accurate?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Both stages are examples of supervised learning, since both stages ultimately shape the model's output." },
+      { "key": "B", "text": "The first stage is self-supervised learning, generating its own training signal from raw text, while the second stage is reinforcement learning, using a reward signal derived from human preferences." },
+      { "key": "C", "text": "The first stage is reinforcement learning and the second stage is self-supervised learning." },
+      { "key": "D", "text": "Neither stage involves any form of machine learning, since the model already 'knows' language from its parameters." }
+    ],
+    "correct": ["B"],
+    "explanation": {
+      "why_correct": "Self-supervised pre-training generates its own training labels from the structure of the raw text itself (such as predicting the next word), matching the definition of self-supervised learning. RLHF then uses a reward signal derived from human preference comparisons to further train the model via reinforcement learning, matching that paradigm's definition precisely.",
+      "why_incorrect": {
+        "A": "Supervised learning requires human-provided labels for a specific target; neither stage described here relies on that kind of human-annotated labeled dataset in the way classic supervised learning does.",
+        "C": "This reverses the actual mapping: pre-training via next-word prediction is self-supervised, not reinforcement learning, and RLHF is reinforcement learning, not self-supervised learning.",
+        "D": "Both described stages are genuine machine learning processes; the model's parameters are shaped directly by these two training stages, not from some pre-existing hard-coded knowledge."
+      },
+      "rule_of_thumb": "Predicting a masked or next word from the data's own structure is self-supervised learning; using a human-preference-derived reward signal to further train a model is reinforcement learning (RLHF)."
+    },
+    "tags": ["self-supervised-learning", "reinforcement-learning", "rlhf", "llm-training"]
+  },
+  {
+    "id": "Q-D1-0137",
+    "domain": 1, "task_statement": "1.1", "type": "single_choice", "difficulty": "easy",
+    "theory_refs": ["TH-D1-001"], "case_study_id": null,
+    "stem": "Which of the following is the best example of deep learning that is NOT also generative AI?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "A convolutional neural network trained to classify X-ray images as 'normal' or 'abnormal'" },
+      { "key": "B", "text": "A foundation model that writes original marketing copy from a short brief" },
+      { "key": "C", "text": "A diffusion model that generates new product photos from text prompts" },
+      { "key": "D", "text": "A large language model that drafts an original email reply" }
+    ],
+    "correct": ["A"],
+    "explanation": {
+      "why_correct": "A CNN classifying X-ray images into predefined categories ('normal'/'abnormal') is a deep learning technique (multi-layer neural network) that only classifies existing images; it produces no new content, so it is deep learning without being generative AI.",
+      "why_incorrect": {
+        "B": "Writing original marketing copy from a brief is producing new text content, which makes this generative AI, not merely non-generative deep learning.",
+        "C": "Generating new product photos from text prompts is producing new visual content, which is generative AI.",
+        "D": "Drafting an original email reply is producing new written content, which is generative AI."
+      },
+      "rule_of_thumb": "If it uses many-layered neural networks on unstructured data but only classifies or predicts (no new content produced), it's deep learning without being generative AI."
+    },
+    "tags": ["deep-learning", "generative-ai", "classification"]
+  },
+  {
+    "id": "Q-D1-0138",
+    "domain": 1, "task_statement": "1.1", "type": "multi_response", "difficulty": "medium",
+    "theory_refs": ["TH-D1-002"], "case_study_id": null,
+    "stem": "A team is reviewing several training setups to decide which qualify as supervised learning specifically. Which TWO of the following setups are supervised learning?",
+    "select_count": 2,
+    "options": [
+      { "key": "A", "text": "Training a model on 10,000 X-ray images, each explicitly labeled by radiologists as 'disease present' or 'disease absent'" },
+      { "key": "B", "text": "Training a model on customer purchase histories with no labels, to discover natural customer segments" },
+      { "key": "C", "text": "Training a model to predict house prices using a dataset where each house's actual final sale price is recorded" },
+      { "key": "D", "text": "Training a robotic arm through trial and error, using a reward signal for successful grasps and a penalty for drops" }
+    ],
+    "correct": ["A", "C"],
+    "explanation": {
+      "why_correct": "Both scenarios use labeled data with a specific known target: radiologist-provided disease labels in one case, and actual recorded sale prices in the other. Training a model to predict a known, explicitly labeled target from data is the definition of supervised learning, whether the target is a category (classification) or a number (regression).",
+      "why_incorrect": {
+        "B": "This scenario uses no labels at all and aims to discover structure (customer segments), which is unsupervised learning, not supervised learning.",
+        "D": "This scenario uses a reward/penalty signal from trial and error over a sequence of actions, which is reinforcement learning, not supervised learning."
+      },
+      "rule_of_thumb": "Has labels for every example, predicting a known target -> supervised learning, regardless of whether the target is a category (classification) or a number (regression)."
+    },
+    "tags": ["supervised-learning", "ml-paradigms"]
+  },
+  {
+    "id": "Q-D1-0139",
+    "domain": 1, "task_statement": "1.1", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D1-003"], "case_study_id": null,
+    "stem": "An online marketplace wants to identify newly listed items whose price is drastically different from similar items, to flag potential listing errors, without a predefined list of 'error' examples to train on. Which ML problem type does this describe?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Classification" },
+      { "key": "B", "text": "Recommendation" },
+      { "key": "C", "text": "Forecasting" },
+      { "key": "D", "text": "Anomaly detection" }
+    ],
+    "correct": ["D"],
+    "explanation": {
+      "why_correct": "The marketplace wants to flag listings that deviate significantly from a learned norm (similar items' typical prices), without a predefined labeled set of 'error' examples. This is precisely the anomaly detection problem type: identifying rare or unusual data points relative to a learned baseline.",
+      "why_incorrect": {
+        "A": "Classification requires a predefined, labeled set of categories to train on; the scenario explicitly states there is no predefined list of 'error' examples.",
+        "B": "Recommendation predicts user-item affinity; it has no relevance to detecting pricing anomalies in listings.",
+        "C": "Forecasting predicts future values over time; this scenario is about detecting unusual current listings, not predicting a future numeric trend."
+      },
+      "rule_of_thumb": "'Is this unusual relative to a learned norm,' with no predefined labeled examples of the anomaly -> anomaly detection."
+    },
+    "tags": ["anomaly-detection", "problem-types"]
+  },
+  {
+    "id": "Q-D1-0140",
+    "domain": 1, "task_statement": "1.1", "type": "single_choice", "difficulty": "hard",
+    "theory_refs": ["TH-D1-004"], "case_study_id": null,
+    "stem": "A model shows 90% accuracy on training data and 87% accuracy on validation data, both reasonably high and reasonably close together, and both metrics are still improving slightly with additional training. What does this pattern most likely suggest?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "The model is significantly overfitting and training should stop immediately." },
+      { "key": "B", "text": "The model is significantly underfitting and needs a fundamentally different algorithm." },
+      { "key": "C", "text": "The model is reasonably well-fit, with a small, healthy gap between training and validation performance, and may benefit from a bit more training." },
+      { "key": "D", "text": "The validation set must be corrupted, since training and validation accuracy should never be this close." }
+    ],
+    "correct": ["C"],
+    "explanation": {
+      "why_correct": "A small gap between training and validation accuracy, with both metrics still reasonably high and both still improving, is a healthy pattern rather than a red flag: it suggests the model is generalizing well and may still have room to improve with continued training, rather than showing signs of overfitting or underfitting.",
+      "why_incorrect": {
+        "A": "Overfitting is characterized by a large, growing gap between training and validation performance, not a small, stable gap with both metrics still improving together.",
+        "B": "Underfitting is characterized by poor performance on both training and validation data; 90% and 87% are both reasonably strong scores, which does not match underfitting's signature.",
+        "D": "A small, healthy gap between training and validation accuracy is expected and normal; it is not evidence that the validation set is corrupted."
+      },
+      "rule_of_thumb": "A small, stable gap between training and validation performance, with both still improving, is a healthy sign — not every train/validation difference indicates a problem."
+    },
+    "tags": ["bias-variance", "model-evaluation", "overfitting", "underfitting"]
+  },
+  {
+    "id": "Q-D1-0141",
+    "domain": 1, "task_statement": "1.1", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D1-005"], "case_study_id": null,
+    "stem": "A weather agency wants to predict tomorrow's temperature using a sequence of the past 30 days of temperature readings, where the order of the readings matters. Which neural network family was historically designed specifically for this kind of sequential, order-dependent data?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Recurrent neural network (RNN)" },
+      { "key": "B", "text": "Convolutional neural network (CNN)" },
+      { "key": "C", "text": "Generative adversarial network (GAN)" },
+      { "key": "D", "text": "Variational autoencoder (VAE)" }
+    ],
+    "correct": ["A"],
+    "explanation": {
+      "why_correct": "RNNs, including LSTMs and GRUs, were historically designed specifically for sequential, order-dependent data like time series, processing one step at a time while retaining memory of prior steps, which fits a 30-day ordered temperature sequence well.",
+      "why_incorrect": {
+        "B": "CNNs are designed for spatial patterns in data like images, using convolutional filters, not specifically for order-dependent sequential time-series data.",
+        "C": "GANs pair a generator and discriminator to produce new synthetic data; they are not the standard architecture for sequential time-series prediction.",
+        "D": "VAEs learn a compressed representation to generate new samples; they are not the standard choice for straightforward sequential time-series prediction."
+      },
+      "rule_of_thumb": "Sequential/time-ordered data, older architecture -> RNN/LSTM, historically the standard choice before transformers became dominant for many sequence tasks."
+    },
+    "tags": ["rnn", "neural-networks", "time-series"]
+  },
+  {
+    "id": "Q-D1-0142",
+    "domain": 1, "task_statement": "1.1", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D1-003"], "case_study_id": null,
+    "stem": "A subscription box service wants to predict, from a list of five fixed subscription tiers, which single tier a new customer is most likely to choose. Which ML problem type is this?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Regression" },
+      { "key": "B", "text": "Clustering" },
+      { "key": "C", "text": "Multi-class classification" },
+      { "key": "D", "text": "Anomaly detection" }
+    ],
+    "correct": ["C"],
+    "explanation": {
+      "why_correct": "Predicting which single tier, out of a fixed set of five predefined categories, a customer will choose is a discrete category prediction with more than two possible outcomes, which is multi-class classification, a variant of classification.",
+      "why_incorrect": {
+        "A": "Regression predicts a continuous numeric value; predicting a discrete category from a fixed list of five tiers is not a numeric prediction.",
+        "B": "Clustering groups items with no predefined category labels; this scenario has five specific predefined tiers to predict from, which rules out clustering.",
+        "D": "Anomaly detection flags unusual data points relative to a norm; it does not predict which of several predefined categories a customer will choose."
+      },
+      "rule_of_thumb": "'Which category, from more than two predefined options' is still classification — specifically multi-class classification, not a different problem type."
+    },
+    "tags": ["classification", "multi-class", "problem-types"]
+  },
+  {
+    "id": "Q-D1-0143",
+    "domain": 1, "task_statement": "1.1", "type": "ordering", "difficulty": "medium",
+    "theory_refs": ["TH-D1-004"], "case_study_id": null,
+    "stem": "A team is diagnosing a model that shows a large gap between strong training accuracy and much weaker validation accuracy. Arrange the following actions in the order a disciplined team would typically perform them, from first to last.",
+    "select_count": 4,
+    "options": [
+      { "key": "A", "text": "Confirm the pattern by comparing training accuracy against validation accuracy across multiple training runs" },
+      { "key": "B", "text": "Apply a remedy such as regularization, simplifying the model, or gathering more diverse training data" },
+      { "key": "C", "text": "Recognize the pattern as a likely sign of overfitting rather than a data or labeling error" },
+      { "key": "D", "text": "Re-evaluate the model on the validation set to confirm the gap has narrowed" }
+    ],
+    "correct": ["A", "C", "B", "D"],
+    "explanation": {
+      "why_correct": "A disciplined approach first confirms the pattern is consistent across multiple runs (A), then correctly diagnoses it as overfitting rather than jumping to another explanation (C), then applies an appropriate remedy such as regularization (B), and finally re-evaluates on the validation set to confirm the remedy actually worked (D).",
+      "why_incorrect": {},
+      "rule_of_thumb": "Confirm the pattern, diagnose it correctly, apply a targeted remedy, then re-verify the fix worked — don't skip straight from noticing a symptom to applying a fix without confirming the diagnosis first."
+    },
+    "tags": ["overfitting", "bias-variance", "diagnosis", "ordering"]
+  },
+  {
+    "id": "Q-D1-0144",
+    "domain": 1, "task_statement": "1.1", "type": "single_choice", "difficulty": "easy",
+    "theory_refs": ["TH-D1-001"], "case_study_id": null,
+    "stem": "A photo app applies a fixed brightness-and-contrast filter to every uploaded image using a hard-coded formula, with no learning component of any kind. Which term correctly classifies this filter?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Machine learning, since it processes image data" },
+      { "key": "B", "text": "Not AI at all, since it is a simple, fixed, hard-coded transformation with no automated decision-making" },
+      { "key": "C", "text": "Deep learning, since images are unstructured data" },
+      { "key": "D", "text": "Generative AI, since it changes the appearance of the image" }
+    ],
+    "correct": ["B"],
+    "explanation": {
+      "why_correct": "A simple, fixed mathematical transformation with no automated decision-making resembling human judgment, and no learning component, does not meet even the broad definition of AI, which requires performing tasks that normally require human-like intelligence or judgment. This is best classified as ordinary deterministic software, not AI.",
+      "why_incorrect": {
+        "A": "Machine learning specifically requires learning patterns from data; a fixed hard-coded formula with no learning step does not qualify.",
+        "C": "Deep learning specifically means multi-layer neural networks; a simple brightness/contrast formula contains no neural network at all.",
+        "D": "Generative AI creates new content; adjusting brightness and contrast with a fixed formula does not create new content, it transforms existing pixel values with a deterministic formula."
+      },
+      "rule_of_thumb": "Not every automated data transformation is AI — a simple, fixed, hard-coded formula with no learning step and no human-like judgment involved may not even qualify as AI at all, let alone ML."
+    },
+    "tags": ["ai-vs-ml", "terminology"]
+  },
+  {
+    "id": "Q-D1-0145",
+    "domain": 1, "task_statement": "1.1", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D1-002"], "case_study_id": null,
+    "stem": "A cybersecurity vendor has a very large collection of network traffic logs, only a tiny fraction of which have been manually labeled as 'malicious' or 'benign' by analysts, since manual review is slow and expensive. The vendor wants to combine the small labeled set with the much larger unlabeled set to improve threat detection. What paradigm should the vendor use?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Reinforcement learning" },
+      { "key": "B", "text": "Unsupervised learning only" },
+      { "key": "C", "text": "Semi-supervised learning" },
+      { "key": "D", "text": "Supervised learning using only the labeled subset" }
+    ],
+    "correct": ["C"],
+    "explanation": {
+      "why_correct": "Semi-supervised learning is specifically designed to combine a small labeled dataset with a much larger unlabeled dataset, exactly matching this vendor's situation of limited analyst-labeled logs plus abundant unlabeled traffic data.",
+      "why_incorrect": {
+        "A": "Reinforcement learning requires an agent taking sequential actions to maximize a reward signal, which has no relevance to a static, labeled-plus-unlabeled log classification problem.",
+        "B": "Using unsupervised learning only would waste the valuable labeled examples the vendor already has, ignoring information about which specific logs are known to be malicious or benign.",
+        "D": "Using supervised learning with only the labeled subset ignores the much larger unlabeled dataset entirely, missing the opportunity semi-supervised learning is designed to capture."
+      },
+      "rule_of_thumb": "A little labeled data plus a lot of unlabeled data -> semi-supervised learning, letting you leverage both without the cost of fully labeling everything."
+    },
+    "tags": ["semi-supervised-learning", "ml-paradigms"]
+  },
+  {
+    "id": "Q-D1-0146",
+    "domain": 1, "task_statement": "1.1", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D1-003"], "case_study_id": null,
+    "stem": "An HR analytics team wants to predict a specific numeric score, from 0 to 100, representing how likely an employee is to be promoted within the next year. Which ML problem type is this?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Classification" },
+      { "key": "B", "text": "Clustering" },
+      { "key": "C", "text": "Anomaly detection" },
+      { "key": "D", "text": "Regression" }
+    ],
+    "correct": ["D"],
+    "explanation": {
+      "why_correct": "Predicting a specific numeric score along a continuous 0-100 scale is predicting a continuous numeric value, which is precisely what regression is designed to do, even though the score has business meaning attached to it.",
+      "why_incorrect": {
+        "A": "Classification predicts a discrete category from a fixed set of labels, such as 'likely to be promoted' vs. 'not likely.' A specific numeric score on a continuous scale is not a discrete category.",
+        "B": "Clustering groups similar employees together with no specific numeric target predicted per employee; this scenario wants one specific score predicted for each employee.",
+        "C": "Anomaly detection flags data points that deviate from a norm; it does not predict a specific promotion-likelihood score."
+      },
+      "rule_of_thumb": "'How much' or 'what number' -> regression, even when the number represents a score or likelihood rather than a dollar amount."
+    },
+    "tags": ["regression", "problem-types"]
+  },
+  {
+    "id": "Q-D1-0147",
+    "domain": 1, "task_statement": "1.1", "type": "single_choice", "difficulty": "hard",
+    "theory_refs": ["TH-D1-005"], "case_study_id": null,
+    "stem": "A team is comparing a CNN-based image classifier to a transformer-based text generator on the criterion of how they process their respective inputs. Which statement accurately contrasts the two?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "The CNN processes spatial patterns using learned filters, while the transformer processes an entire sequence in parallel using an attention mechanism." },
+      { "key": "B", "text": "Both architectures process their inputs strictly one element at a time, in sequence, with no parallelism." },
+      { "key": "C", "text": "The CNN uses an attention mechanism over image patches, while the transformer uses convolutional filters over text." },
+      { "key": "D", "text": "Neither architecture is capable of handling the described input type; both require a GAN wrapper to function." }
+    ],
+    "correct": ["A"],
+    "explanation": {
+      "why_correct": "CNNs are built around learned spatial filters (convolutions) suited to images, while transformers are built around an attention mechanism that lets the model weigh relevance across an entire sequence at once, rather than strictly step by step. This accurately contrasts the two architectures' core mechanisms.",
+      "why_incorrect": {
+        "B": "Transformers specifically process sequences in parallel using attention, not strictly one element at a time; this statement misdescribes the transformer's core advantage.",
+        "C": "This reverses the actual mechanisms: CNNs use convolutional filters (not attention), and transformers use attention (not convolutional filters) as their defining technique.",
+        "D": "Both CNNs and transformers are fully capable of handling their respective input types directly; neither requires a GAN wrapper to function."
+      },
+      "rule_of_thumb": "CNNs: learned spatial filters for images. Transformers: attention mechanism processing full sequences in parallel. These are the defining, contrasting mechanisms of each architecture."
+    },
+    "tags": ["cnn", "transformer", "architecture-comparison"]
+  },
+  {
+    "id": "Q-D1-0148",
+    "domain": 1, "task_statement": "1.1", "type": "single_choice", "difficulty": "easy",
+    "theory_refs": ["TH-D1-003"], "case_study_id": null,
+    "stem": "A utility company wants to predict tomorrow's total electricity demand across its service area, as a specific number of megawatt-hours, based on years of historical hourly demand data. Which ML problem type is most appropriate?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Classification" },
+      { "key": "B", "text": "Clustering" },
+      { "key": "C", "text": "Forecasting" },
+      { "key": "D", "text": "Recommendation" }
+    ],
+    "correct": ["C"],
+    "explanation": {
+      "why_correct": "Predicting a future numeric value (tomorrow's electricity demand) based on historical time-ordered data is precisely what forecasting is designed for.",
+      "why_incorrect": {
+        "A": "Classification predicts a discrete category, not a specific future numeric value along a time series.",
+        "B": "Clustering groups similar historical periods together; it does not directly produce a future numeric prediction.",
+        "D": "Recommendation predicts user-item affinity, which is unrelated to predicting aggregate future electricity demand."
+      },
+      "rule_of_thumb": "'What will this be next period' along a time-ordered series of historical data -> forecasting."
+    },
+    "tags": ["forecasting", "problem-types"]
+  },
+  {
+    "id": "Q-D1-0149",
+    "domain": 1, "task_statement": "1.1", "type": "matching", "difficulty": "hard",
+    "theory_refs": ["TH-D1-005"], "case_study_id": null,
+    "stem": "Match each neural network architecture on the left with the description on the right that most precisely characterizes it.",
+    "select_count": 4,
+    "matching": {
+      "left": [
+        { "key": "L1", "text": "Convolutional neural network (CNN)" },
+        { "key": "L2", "text": "Transformer" },
+        { "key": "L3", "text": "Generative adversarial network (GAN)" },
+        { "key": "L4", "text": "Diffusion model" }
+      ],
+      "right": [
+        { "key": "R1", "text": "Learns spatial filters well suited to image data" },
+        { "key": "R2", "text": "Uses an attention mechanism to process entire sequences in parallel" },
+        { "key": "R3", "text": "Pairs a generator and a discriminator competing against each other" },
+        { "key": "R4", "text": "Generates content by learning to reverse a gradual noising process" }
+      ]
+    },
+    "correct_pairs": { "L1": "R1", "L2": "R2", "L3": "R3", "L4": "R4" },
+    "explanation": {
+      "why_correct": "CNNs learn spatial filters for image data (R1). Transformers use attention to process sequences in parallel (R2), the backbone of modern LLMs. GANs pair a generator and discriminator in competition (R3). Diffusion models generate content by reversing a gradual noising process (R4), the dominant technique for modern text-to-image generation.",
+      "why_incorrect": {},
+      "rule_of_thumb": "Each architecture has one clearly distinguishing mechanism: CNN = spatial filters, transformer = parallel attention, GAN = adversarial competition, diffusion = noise reversal."
+    },
+    "tags": ["neural-networks", "cnn", "transformer", "gan", "diffusion-models"]
+  },
+  {
+    "id": "Q-D1-0150",
+    "domain": 1, "task_statement": "1.1", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D1-004"], "case_study_id": null,
+    "stem": "Which of the following is the most direct way to actually detect whether a model is overfitting during development, as opposed to merely guessing based on training performance alone?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Compare the model's performance on a held-out validation or test set it never trained on, against its performance on the training set." },
+      { "key": "B", "text": "Check only the training set accuracy; if it is above 95%, assume the model is not overfitting." },
+      { "key": "C", "text": "Ask the model itself to self-report whether it is overfitting." },
+      { "key": "D", "text": "Increase the learning rate and observe whether the loss value decreases faster." }
+    ],
+    "correct": ["A"],
+    "explanation": {
+      "why_correct": "Comparing performance on a held-out validation or test set (data the model never trained on) against training performance is the standard, direct way to detect overfitting: a large gap between the two is the classic signature, while training accuracy alone reveals nothing about generalization.",
+      "why_incorrect": {
+        "B": "High training accuracy alone tells you nothing about generalization to new data; extremely high training accuracy combined with much lower validation accuracy is actually a red flag for overfitting, not evidence against it.",
+        "C": "Models do not have genuine self-awareness of their own overfitting status; this is not a real or valid diagnostic technique.",
+        "D": "Learning rate affects how quickly training converges, but observing loss decrease speed does not directly reveal whether the model generalizes to unseen data, which is what overfitting is fundamentally about."
+      },
+      "rule_of_thumb": "A validation/test set (data the model never trained on) is how overfitting is actually detected — a large gap between training accuracy and validation accuracy is the classic signal."
+    },
+    "tags": ["overfitting", "model-evaluation", "validation"]
+  },
+  {
+    "id": "Q-D1-0151",
+    "domain": 1, "task_statement": "1.1", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D1-022"], "case_study_id": null,
+    "stem": "A startup with limited compute budget has a small, structured dataset of 3,000 customer records and needs to ship a working churn-prediction model within a week. Which approach is generally faster and cheaper to get to a working result?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "A traditional ML algorithm such as gradient boosting (e.g. XGBoost)" },
+      { "key": "B", "text": "Training a large deep neural network from scratch on this small dataset" },
+      { "key": "C", "text": "A diffusion model" },
+      { "key": "D", "text": "A large multimodal foundation model fine-tuned on this data" }
+    ],
+    "correct": ["A"],
+    "explanation": {
+      "why_correct": "For a small, structured dataset with tight time and budget constraints, traditional ML algorithms like gradient boosting are generally faster and cheaper to train and tune than deep learning, and often perform just as well or better on this kind of tabular data.",
+      "why_incorrect": {
+        "B": "Training a large deep neural network from scratch on a small dataset of only 3,000 records is likely to be both slower and more prone to overfitting than a traditional ML approach, given the limited data volume.",
+        "C": "Diffusion models are for generative image tasks; they have no relevance to a structured churn-prediction problem.",
+        "D": "A large multimodal foundation model is unnecessary complexity and cost for a small tabular dataset, and would not be the fastest, cheapest path to a working result under tight constraints."
+      },
+      "rule_of_thumb": "Structured/tabular data, limited data volume, tight budget/time constraints -> traditional ML, which is cheaper and faster to train than deep learning or a foundation model for this kind of problem."
+    },
+    "tags": ["traditional-ml", "deep-learning", "cost-tradeoffs"]
+  },
+  {
+    "id": "Q-D1-0152",
+    "domain": 1, "task_statement": "1.1", "type": "single_choice", "difficulty": "easy",
+    "theory_refs": ["TH-D1-001"], "case_study_id": null,
+    "stem": "Which of the following systems would be classified as machine learning?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "A tax calculator that applies a fixed, published tax formula written by accountants" },
+      { "key": "B", "text": "A spam filter trained on thousands of examples of spam and non-spam emails, which improves its accuracy as more labeled examples are added" },
+      { "key": "C", "text": "A currency converter that applies a manually updated fixed exchange rate table" },
+      { "key": "D", "text": "A unit converter that applies a fixed mathematical formula, such as miles to kilometers" }
+    ],
+    "correct": ["B"],
+    "explanation": {
+      "why_correct": "The spam filter learns patterns from labeled examples of spam and non-spam email, and its accuracy improves as more labeled data is added — this learning-from-data behavior is exactly what defines machine learning.",
+      "why_incorrect": {
+        "A": "A fixed tax formula written by accountants follows explicit rules with no learning component; it does not update itself based on new data.",
+        "C": "A fixed exchange rate table that is manually updated by a person is not learning from data; the values are supplied directly, not learned.",
+        "D": "A unit converter applying a fixed mathematical formula has no learning component at all; the formula is fixed and never changes based on data."
+      },
+      "rule_of_thumb": "Ask 'does it learn from data, or just follow rules a person wrote?' If it learns from data and improves with more examples, it's ML."
+    },
+    "tags": ["ai-vs-ml", "terminology"]
+  },
+  {
+    "id": "Q-D1-0153",
+    "domain": 1, "task_statement": "1.1", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D1-002"], "case_study_id": null,
+    "stem": "An e-commerce platform has millions of customer reviews with no star ratings or sentiment labels attached, and wants to organize them into natural topical groups (such as 'shipping issues' or 'product quality') without predefining what those groups should be. Which ML paradigm is most appropriate?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Supervised learning" },
+      { "key": "B", "text": "Reinforcement learning" },
+      { "key": "C", "text": "Unsupervised learning" },
+      { "key": "D", "text": "Self-supervised learning targeting a specific labeled outcome" }
+    ],
+    "correct": ["C"],
+    "explanation": {
+      "why_correct": "The platform has no labels and wants the algorithm to discover natural topical groupings on its own, without predefining categories in advance. This open-ended structure-discovery task is precisely what unsupervised learning, particularly clustering-style topic discovery, is designed for.",
+      "why_incorrect": {
+        "A": "Supervised learning requires labeled examples of a specific target; there are no sentiment or topic labels provided here.",
+        "B": "Reinforcement learning requires an agent taking sequential actions to maximize a reward signal, which has no relevance to a static text-grouping task.",
+        "D": "Self-supervised learning still targets a specific prediction task derived from the data's structure; this scenario is open-ended topic discovery with no such specific target, which fits unsupervised learning instead."
+      },
+      "rule_of_thumb": "No labels at all, looking for structure such as natural topical groupings -> unsupervised learning."
+    },
+    "tags": ["unsupervised-learning", "clustering"]
+  }
+]

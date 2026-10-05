@@ -1,0 +1,14 @@
+[
+  {
+    "id": "TH-D1-904",
+    "domain": 1,
+    "task_statements": ["1.1"],
+    "title": "Broken fixture: non-AWS reference URL",
+    "summary": "This card intentionally references a non-AWS domain to test the reference-domain gate.",
+    "key_points": ["a", "b"],
+    "rule_of_thumb": "n/a",
+    "common_confusions": [],
+    "aws_services": [],
+    "references": ["https://en.wikipedia.org/wiki/Machine_learning"]
+  }
+]

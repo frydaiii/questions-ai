@@ -1,0 +1,144 @@
+[
+  {
+    "id": "Q-D2-0033",
+    "domain": 2,
+    "task_statement": "2.2",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D2-006"
+    ],
+    "case_study_id": null,
+    "stem": "A research task requires gathering facts from three unrelated sources and then synthesizing a summary. Which approach best fits task decomposition principles?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Treat the entire task as one indivisible step with no intermediate verification"
+      },
+      {
+        "key": "B",
+        "text": "Decompose into three independent fact-gathering sub-tasks plus one synthesis sub-task, verifying each before combining"
+      },
+      {
+        "key": "C",
+        "text": "Decompose into exactly ten arbitrary sub-tasks regardless of the task's actual structure"
+      },
+      {
+        "key": "D",
+        "text": "Skip gathering facts and only perform synthesis"
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "explanation": {
+      "why_correct": "The three fact-gathering sub-tasks are naturally independent and separately verifiable, and the synthesis step naturally depends on their combined results -- decomposing along these natural boundaries fits the task's actual structure.",
+      "why_incorrect": {
+        "A": "Treating this as one indivisible step forfeits the ability to verify each source's facts independently before the final synthesis.",
+        "C": "An arbitrary fixed count of sub-tasks ignores the task's actual natural structure (three sources, one synthesis), which may not align with a count of ten.",
+        "D": "Skipping fact-gathering entirely would produce a synthesis with no actual grounded content to summarize."
+      },
+      "rule_of_thumb": "Effective decomposition follows the task's natural sub-problem boundaries, not an arbitrary split count."
+    },
+    "tags": [
+      "task-decomposition",
+      "planning"
+    ]
+  },
+  {
+    "id": "Q-D2-0034",
+    "domain": 2,
+    "task_statement": "2.2",
+    "type": "single_choice",
+    "difficulty": "hard",
+    "theory_refs": [
+      "TH-D2-009"
+    ],
+    "case_study_id": null,
+    "stem": "A task's sub-steps are so tightly interdependent that none can be meaningfully evaluated in isolation from the others. What does this suggest about decomposition for this specific task?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Decomposition is likely to work exceptionally well here"
+      },
+      {
+        "key": "B",
+        "text": "Forcing a decomposition may produce worse results than treating the task as a more unified whole, since the sub-tasks cannot be meaningfully separated"
+      },
+      {
+        "key": "C",
+        "text": "This task requires exactly five sub-tasks by definition"
+      },
+      {
+        "key": "D",
+        "text": "Tree-of-thought is mandatory for any interdependent task"
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "explanation": {
+      "why_correct": "Decomposition works best when sub-tasks can be meaningfully separated and independently evaluated; forcing a split on tightly interdependent steps that can't be evaluated in isolation can produce worse outcomes than handling the task as a more unified whole.",
+      "why_incorrect": {
+        "A": "Tight interdependence is precisely the condition under which decomposition is LESS likely to work well, not exceptionally well.",
+        "C": "There is no fixed required sub-task count implied by interdependence; the issue is whether sub-tasks can be meaningfully separated at all, not a specific number.",
+        "D": "Tree-of-thought addresses branching ambiguity in reasoning paths, not task interdependence specifically; it is not mandated by this scenario."
+      },
+      "rule_of_thumb": "When sub-steps are too tightly interdependent to evaluate independently, forcing decomposition can hurt rather than help."
+    },
+    "tags": [
+      "task-decomposition",
+      "task-structure",
+      "design-tradeoffs"
+    ]
+  },
+  {
+    "id": "Q-D2-0035",
+    "domain": 2,
+    "task_statement": "2.2",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D2-008"
+    ],
+    "case_study_id": null,
+    "stem": "What is a key requirement for tree-of-thought reasoning to actually produce better outcomes than a linear chain-of-thought?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "The complete absence of any branching ambiguity in the task"
+      },
+      {
+        "key": "B",
+        "text": "An unlimited computational budget with no practical constraints"
+      },
+      {
+        "key": "C",
+        "text": "A guarantee that every branch leads to the same final answer"
+      },
+      {
+        "key": "D",
+        "text": "A reasonably accurate mechanism for evaluating or scoring the promise of each candidate branch"
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "Since tree-of-thought relies on pruning weaker branches and pursuing stronger ones, having a reasonably accurate branch-evaluation mechanism is essential -- a poor evaluator could prune away the actually-best branch, undermining the whole approach.",
+      "why_incorrect": {
+        "B": "While tree-of-thought does cost more than a single chain, it does not require literally unlimited computation; practical implementations work within real budgets.",
+        "C": "If every branch led to the same answer, there would be no genuine ambiguity to resolve, making the branching exploration unnecessary in the first place.",
+        "A": "The complete absence of branching ambiguity is the opposite of the condition under which tree-of-thought is useful; it specifically targets situations where ambiguity exists."
+      },
+      "rule_of_thumb": "Tree-of-thought's success depends critically on having a reasonably accurate way to evaluate which branches are actually promising."
+    },
+    "tags": [
+      "tree-of-thought",
+      "branch-evaluation"
+    ]
+  }
+]

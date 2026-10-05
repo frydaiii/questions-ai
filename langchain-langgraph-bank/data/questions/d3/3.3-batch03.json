@@ -1,0 +1,81 @@
+[
+  {
+    "id": "Q-D3-0062",
+    "domain": 3,
+    "task_statement": "3.3",
+    "type": "multi_response",
+    "difficulty": "medium",
+    "theory_refs": ["TH-D3-010"],
+    "case_study_id": null,
+    "stem": "Which of the following are recognized broad categories of tool-use failure? (Select 3)",
+    "select_count": 3,
+    "options": [
+      { "key": "A", "text": "Tool unavailability (timeout, outage, unreachable)" },
+      { "key": "B", "text": "Explicit error responses (invalid input, permission denied, rate limited)" },
+      { "key": "C", "text": "Misleading-success results that look fine but are actually wrong or incomplete" },
+      { "key": "D", "text": "A tool call that is perfectly correct and fully successful in every respect" }
+    ],
+    "correct": ["A", "B", "C"],
+    "explanation": {
+      "why_correct": "Unavailability, explicit errors, and misleading-success results are the three broad categories of tool-use failure, each requiring a different response strategy.",
+      "why_incorrect": {
+        "D": "A fully correct, successful call is the absence of failure, not a failure category itself."
+      },
+      "rule_of_thumb": "Tool-use failures fall into unavailability, explicit errors, or misleading-success -- a fully correct call is simply success, not a failure type."
+    },
+    "tags": ["failure-categorization"]
+  },
+  {
+    "id": "Q-D3-0063",
+    "domain": 3,
+    "task_statement": "3.3",
+    "type": "ordering",
+    "difficulty": "medium",
+    "theory_refs": ["TH-D3-011"],
+    "case_study_id": null,
+    "stem": "Place the following steps of a well-designed retry strategy in the correct order.",
+    "select_count": 3,
+    "options": [
+      { "key": "A", "text": "Attempt the call and detect a plausibly transient failure" },
+      { "key": "B", "text": "Wait a backoff period, then retry, repeating up to a limited attempt count" },
+      { "key": "C", "text": "If attempts are exhausted with no success, switch to a fallback or report the failure" }
+    ],
+    "correct": ["A", "B", "C"],
+    "explanation": {
+      "why_correct": "A sound retry strategy first detects a plausibly transient failure, then retries with backoff up to a limited count, and finally falls back or reports failure once that limit is exhausted -- in that order.",
+      "why_incorrect": {},
+      "rule_of_thumb": "Retry strategies proceed: detect transient failure, retry with backoff up to a limit, then fallback or report if still unsuccessful."
+    },
+    "tags": ["retry-strategy", "execution-order"]
+  },
+  {
+    "id": "Q-D3-0064",
+    "domain": 3,
+    "task_statement": "3.3",
+    "type": "matching",
+    "difficulty": "medium",
+    "theory_refs": ["TH-D3-010", "TH-D3-011", "TH-D3-012", "TH-D3-013"],
+    "case_study_id": null,
+    "stem": "Match each tool-use failure scenario on the left to the most appropriate recovery concept on the right.",
+    "select_count": 3,
+    "matching": {
+      "left": [
+        { "key": "L1", "text": "A tool call times out due to a temporary network blip" },
+        { "key": "L2", "text": "A tool is permanently deprecated and will never work again" },
+        { "key": "L3", "text": "A search returns zero results that might actually reflect a flawed query" }
+      ],
+      "right": [
+        { "key": "R1", "text": "Retry with backoff, since the cause is plausibly transient" },
+        { "key": "R2", "text": "Switch to a pre-identified fallback alternative" },
+        { "key": "R3", "text": "Sanity-check the result rather than accepting it as a definitive true negative" }
+      ]
+    },
+    "correct_pairs": { "L1": "R1", "L2": "R2", "L3": "R3" },
+    "explanation": {
+      "why_correct": "A transient network blip fits retry-with-backoff, permanent deprecation fits a fallback switch, and a suspicious empty result fits active sanity-checking rather than blind acceptance.",
+      "why_incorrect": {},
+      "rule_of_thumb": "Match recovery strategy to failure cause: transient issues get retries, permanent issues get fallbacks, and misleading-success results get sanity-checking."
+    },
+    "tags": ["retry-strategy", "fallback-strategy", "sanity-checking"]
+  }
+]

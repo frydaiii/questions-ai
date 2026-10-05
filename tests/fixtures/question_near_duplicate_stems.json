@@ -1,0 +1,54 @@
+[
+  {
+    "id": "Q-D1-0909",
+    "domain": 1,
+    "task_statement": "1.1",
+    "type": "single_choice",
+    "difficulty": "easy",
+    "theory_refs": ["TH-D1-001"],
+    "case_study_id": null,
+    "stem": "A company wants to automatically generate a short written summary of a lengthy legal contract, producing entirely new sentences rather than extracting existing ones verbatim. Which category of AI capability is this?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Generative AI" },
+      { "key": "B", "text": "Classification" },
+      { "key": "C", "text": "Anomaly detection" }
+    ],
+    "correct": ["A"],
+    "explanation": {
+      "why_correct": "Producing new sentences that summarize a source document is a content-creation task, the defining characteristic of generative AI.",
+      "why_incorrect": {
+        "B": "Classification assigns an input to a predefined category; it does not produce new written content.",
+        "C": "Anomaly detection identifies unusual data points; it has no relationship to generating new text."
+      },
+      "rule_of_thumb": "If the system produces brand-new content rather than only labeling or scoring, it's generative AI."
+    },
+    "tags": ["fixture"]
+  },
+  {
+    "id": "Q-D1-0910",
+    "domain": 1,
+    "task_statement": "1.1",
+    "type": "single_choice",
+    "difficulty": "easy",
+    "theory_refs": ["TH-D1-001"],
+    "case_study_id": null,
+    "stem": "A business wants to automatically generate a short written summary of a lengthy legal contract, producing entirely new sentences rather than extracting existing ones verbatim. Which category of AI capability is this?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Generative AI" },
+      { "key": "B", "text": "Classification" },
+      { "key": "C", "text": "Anomaly detection" }
+    ],
+    "correct": ["A"],
+    "explanation": {
+      "why_correct": "Producing new sentences that summarize a source document is a content-creation task, the defining characteristic of generative AI.",
+      "why_incorrect": {
+        "B": "Classification assigns an input to a predefined category; it does not produce new written content.",
+        "C": "Anomaly detection identifies unusual data points; it has no relationship to generating new text."
+      },
+      "rule_of_thumb": "If the system produces brand-new content rather than only labeling or scoring, it's generative AI."
+    },
+    "tags": ["fixture"]
+  }
+]

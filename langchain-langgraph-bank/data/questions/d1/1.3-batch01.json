@@ -1,0 +1,288 @@
+[
+  {
+    "id": "Q-D1-0050",
+    "domain": 1,
+    "task_statement": "1.3",
+    "type": "single_choice",
+    "difficulty": "easy",
+    "theory_refs": [
+      "TH-D1-013"
+    ],
+    "case_study_id": null,
+    "stem": "A reactive agent is best described by which of the following behaviors?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "It maintains a detailed internal model of future states before acting"
+      },
+      {
+        "key": "B",
+        "text": "It maps its current perception directly to an action via fixed condition-action rules, with no lookahead"
+      },
+      {
+        "key": "C",
+        "text": "It always takes longer to respond than a deliberative agent"
+      },
+      {
+        "key": "D",
+        "text": "It requires a multi-agent system to function"
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "explanation": {
+      "why_correct": "A reactive agent's defining trait is a direct mapping from current perception to action using fixed condition-action rules, without building or reasoning over an internal model of future states.",
+      "why_incorrect": {
+        "A": "Maintaining and reasoning over an internal model of future states is the defining trait of a deliberative agent, not a reactive one.",
+        "C": "Reactive agents are typically FASTER than deliberative agents, since they skip the planning/lookahead step entirely.",
+        "D": "Reactive agents can operate as single, standalone agents; nothing about the reactive architecture requires a multi-agent setup."
+      },
+      "rule_of_thumb": "Reactive = direct perception-to-action mapping, no internal world model, no lookahead -- and typically fast as a result."
+    },
+    "tags": [
+      "reactive-agent",
+      "agent-types"
+    ]
+  },
+  {
+    "id": "Q-D1-0051",
+    "domain": 1,
+    "task_statement": "1.3",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D1-014"
+    ],
+    "case_study_id": null,
+    "stem": "An agent is asked to plan a multi-city trip itinerary that satisfies several budget and scheduling constraints, considering multiple candidate itineraries before choosing the best one. Which agent architecture does this best exemplify?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Hybrid, purely because more than one city is involved"
+      },
+      {
+        "key": "B",
+        "text": "Reactive, since the trip request is a single input"
+      },
+      {
+        "key": "C",
+        "text": "Neither, since trip planning cannot be done by any agent architecture"
+      },
+      {
+        "key": "D",
+        "text": "Deliberative, since it builds and reasons over an internal model of candidate plans and their consequences"
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "Evaluating multiple candidate itineraries against constraints before choosing the best one is precisely the planning-ahead, consequence-weighing behavior that characterizes a deliberative agent.",
+      "why_incorrect": {
+        "B": "Having a single input request does not make the underlying decision-making reactive; what matters is whether the agent plans ahead and weighs alternatives, which it clearly does here.",
+        "C": "Trip planning is a well-established example task for deliberative planning approaches; it is very much within the capability of deliberative agent architectures.",
+        "A": "The number of cities involved has no bearing on whether the architecture is hybrid; hybrid specifically means combining a fast reactive layer with a slower deliberative layer, which is not described here."
+      },
+      "rule_of_thumb": "Weighing multiple candidate plans against constraints before committing is a hallmark of deliberative reasoning, regardless of how many entities (cities, items) are involved."
+    },
+    "tags": [
+      "deliberative-agent",
+      "planning",
+      "agent-types"
+    ]
+  },
+  {
+    "id": "Q-D1-0052",
+    "domain": 1,
+    "task_statement": "1.3",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D1-015"
+    ],
+    "case_study_id": null,
+    "stem": "A customer support system first tries to match an incoming ticket against a list of common, well-known issues using fast pattern matching. If no confident match is found, it escalates the ticket to a more expensive, extended reasoning process. What type of architecture is this?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Purely reactive, since pattern matching is involved"
+      },
+      {
+        "key": "B",
+        "text": "Purely deliberative, since reasoning is eventually used"
+      },
+      {
+        "key": "C",
+        "text": "Hybrid, combining a fast reactive layer with a selectively-invoked deliberative layer"
+      },
+      {
+        "key": "D",
+        "text": "Multi-agent, since there are two separate processing stages"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "This design combines a fast reactive-style pattern-matching layer for common cases with a slower deliberative reasoning layer invoked only when the fast path is insufficient -- exactly the hybrid architecture pattern of selective escalation.",
+      "why_incorrect": {
+        "A": "The system is not purely reactive, since it has an escalation path to deliberative reasoning for cases that don't match confidently.",
+        "B": "The system is not purely deliberative either, since the common case is handled by fast pattern matching without full deliberation.",
+        "D": "Having two processing stages within one system does not make it a multi-agent system; multi-agent systems involve multiple distinct agents, which is a different architectural concept from layered single-agent processing."
+      },
+      "rule_of_thumb": "Fast-path-first with selective escalation to slower, more thorough reasoning is the defining signature of a hybrid architecture, not a multi-agent system or a purely single-mode design."
+    },
+    "tags": [
+      "hybrid-agent",
+      "escalation",
+      "agent-types"
+    ]
+  },
+  {
+    "id": "Q-D1-0053",
+    "domain": 1,
+    "task_statement": "1.3",
+    "type": "single_choice",
+    "difficulty": "hard",
+    "theory_refs": [
+      "TH-D1-016"
+    ],
+    "case_study_id": null,
+    "stem": "A team is building a system for real-time video game NPC behavior that must respond within milliseconds to player actions, where most situations are well-understood and recurring. Which architecture is most appropriate, and why?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Deliberative, because games always benefit from the most sophisticated architecture available"
+      },
+      {
+        "key": "B",
+        "text": "Reactive, because the task demands fast responses to mostly familiar, recurring situations"
+      },
+      {
+        "key": "C",
+        "text": "Hybrid, because all production systems must be hybrid"
+      },
+      {
+        "key": "D",
+        "text": "It is impossible to choose without knowing the game's graphics engine"
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "explanation": {
+      "why_correct": "A millisecond-level response requirement combined with mostly familiar, recurring situations is exactly the profile that favors a reactive architecture, since there is little time for and little benefit from deliberation in this context.",
+      "why_incorrect": {
+        "A": "Architecture choice should be driven by task and environment properties (speed needs, novelty), not a blanket preference for the most sophisticated-sounding option -- deliberation would likely be too slow here.",
+        "C": "Hybrid is not a universal requirement for production systems; the appropriate choice depends on the specific task's time-sensitivity and novelty profile, which here clearly favors pure reactivity.",
+        "D": "The graphics engine is unrelated to the agent-architecture decision, which depends on response-time requirements and situation familiarity, not rendering technology."
+      },
+      "rule_of_thumb": "Millisecond-level response requirements combined with mostly familiar situations point clearly toward a reactive architecture -- deliberation's extra robustness isn't worth its latency cost here."
+    },
+    "tags": [
+      "architecture-selection",
+      "reactive-agent",
+      "task-fit"
+    ]
+  },
+  {
+    "id": "Q-D1-0054",
+    "domain": 1,
+    "task_statement": "1.3",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D1-013",
+      "TH-D1-014"
+    ],
+    "case_study_id": null,
+    "stem": "What is the primary tradeoff between reactive and deliberative agent architectures?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Deliberative agents never make mistakes"
+      },
+      {
+        "key": "B",
+        "text": "Reactive agents can never be implemented using language models"
+      },
+      {
+        "key": "C",
+        "text": "Reactive agents are faster but less robust on novel situations; deliberative agents are more robust but slower and more computationally expensive"
+      },
+      {
+        "key": "D",
+        "text": "There is no meaningful tradeoff; one architecture is strictly better in all cases"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "The core tradeoff is speed/simplicity versus robustness/cost: reactive agents respond quickly but can struggle with novel situations outside their rule set, while deliberative agents handle novelty and multi-step problems better at the cost of more computation and latency per decision.",
+      "why_incorrect": {
+        "B": "Language models can readily implement reactive behavior (e.g. a quick, low-effort response with no planning); the reactive/deliberative distinction is about architecture, not about which underlying technology is used.",
+        "D": "There is a genuine, well-documented tradeoff between the two approaches; neither is strictly superior across all tasks and environments.",
+        "A": "Deliberative agents can still make mistakes, particularly if their internal model of the world is inaccurate or their planning process has flaws; deliberation improves robustness but is not an error-elimination guarantee."
+      },
+      "rule_of_thumb": "The reactive-vs-deliberative tradeoff is speed and simplicity versus robustness and cost -- the right choice depends on the task, not a universal ranking."
+    },
+    "tags": [
+      "agent-types",
+      "tradeoffs"
+    ]
+  },
+  {
+    "id": "Q-D1-0055",
+    "domain": 1,
+    "task_statement": "1.3",
+    "type": "single_choice",
+    "difficulty": "hard",
+    "theory_refs": [
+      "TH-D1-013"
+    ],
+    "case_study_id": null,
+    "stem": "A reactive agent built with a fixed set of condition-action rules encounters an input situation that does not clearly match any of its rules. What is the most likely outcome, given the architecture's inherent limitations?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "The agent will automatically invent a sound new rule through internal deliberation"
+      },
+      {
+        "key": "B",
+        "text": "The agent is likely to respond poorly or unpredictably, since it has no deeper reasoning process to fall back on for unmatched situations"
+      },
+      {
+        "key": "C",
+        "text": "The agent will seamlessly switch itself into a deliberative architecture"
+      },
+      {
+        "key": "D",
+        "text": "The agent will always correctly default to asking a clarifying question"
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "explanation": {
+      "why_correct": "Handling novel situations that fall outside the predefined rule set is a well-known limitation of reactive architectures, since by design there is no deeper deliberation process to reason through an unfamiliar case -- the typical outcome is a poor or unpredictable response.",
+      "why_incorrect": {
+        "A": "Inventing new rules through deliberation is a deliberative capability, not something a reactive architecture does by definition -- a purely reactive agent has no such reasoning process available.",
+        "C": "A reactive agent does not spontaneously become a different architecture; architecture is a design-time property, not something the system changes on its own at runtime.",
+        "D": "There is no guarantee a reactive agent defaults to asking a clarifying question for unmatched input -- its behavior in that case depends entirely on whatever fallback rule (if any) was predefined, which may or may not be a clarifying question."
+      },
+      "rule_of_thumb": "A reactive agent facing a situation outside its rule set has no deeper reasoning to fall back on -- this is the core limitation that distinguishes reactive from deliberative design."
+    },
+    "tags": [
+      "reactive-agent",
+      "limitations"
+    ]
+  }
+]

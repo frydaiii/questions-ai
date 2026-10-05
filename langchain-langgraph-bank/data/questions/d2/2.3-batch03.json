@@ -1,0 +1,82 @@
+[
+  {
+    "id": "Q-D2-0050",
+    "domain": 2,
+    "task_statement": "2.3",
+    "type": "multi_response",
+    "difficulty": "medium",
+    "theory_refs": ["TH-D2-010", "TH-D2-012"],
+    "case_study_id": null,
+    "stem": "Which of the following types of errors is reflection comparatively EFFECTIVE at catching? (Select 2)",
+    "select_count": 2,
+    "options": [
+      { "key": "A", "text": "A missed requirement that becomes apparent on a careful second read of the task" },
+      { "key": "B", "text": "An error rooted in a genuine, systematic knowledge gap shared by generation and critique" },
+      { "key": "C", "text": "A logical inconsistency between two parts of the generated output" },
+      { "key": "D", "text": "A fact that is simply unknown to the model and was never covered in training" }
+    ],
+    "correct": ["A", "C"],
+    "explanation": {
+      "why_correct": "Reflection is comparatively effective at catching missed requirements and internal logical inconsistencies, since these can become visible on a more careful, critical second pass even using the same model.",
+      "why_incorrect": {
+        "B": "A systematic knowledge gap is shared by both the generation and critique steps (same underlying model/knowledge), making it unlikely to be caught by self-reflection alone.",
+        "D": "A fact genuinely unknown to the model cannot be surfaced by reflection, since reflection does not introduce new information -- it only re-examines what the model already produced using the same underlying knowledge."
+      },
+      "rule_of_thumb": "Reflection excels at catching requirement gaps and internal inconsistencies, but not errors rooted in the model's own knowledge gaps."
+    },
+    "tags": ["reflection", "self-reflection-limitations"]
+  },
+  {
+    "id": "Q-D2-0051",
+    "domain": 2,
+    "task_statement": "2.3",
+    "type": "ordering",
+    "difficulty": "medium",
+    "theory_refs": ["TH-D2-011"],
+    "case_study_id": null,
+    "stem": "Place the following steps of a self-critique loop iteration in the correct order.",
+    "select_count": 3,
+    "options": [
+      { "key": "A", "text": "Generate or revise a candidate output" },
+      { "key": "B", "text": "Critique the candidate output against task requirements" },
+      { "key": "C", "text": "Decide whether to continue iterating or stop based on the critique's findings" }
+    ],
+    "correct": ["A", "B", "C"],
+    "explanation": {
+      "why_correct": "Each iteration of the self-critique loop generates or revises a candidate, critiques it, and then decides whether to continue based on what the critique found -- in that order.",
+      "why_incorrect": {},
+      "rule_of_thumb": "Self-critique loops always proceed: generate/revise, critique, then decide whether to continue -- in that sequence."
+    },
+    "tags": ["self-critique-loop", "execution-order"]
+  },
+  {
+    "id": "Q-D2-0052",
+    "domain": 2,
+    "task_statement": "2.3",
+    "type": "matching",
+    "difficulty": "medium",
+    "theory_refs": ["TH-D2-010", "TH-D2-011", "TH-D2-012"],
+    "case_study_id": null,
+    "stem": "Match each reflection-related concept on the left to its correct description on the right.",
+    "select_count": 3,
+    "matching": {
+      "left": [
+        { "key": "L1", "text": "Reflection" },
+        { "key": "L2", "text": "Self-critique loop" },
+        { "key": "L3", "text": "Self-reflection's fundamental limitation" }
+      ],
+      "right": [
+        { "key": "R1", "text": "A single pass reviewing a candidate output against task requirements" },
+        { "key": "R2", "text": "Multiple rounds of generate-critique-revise with a stopping condition" },
+        { "key": "R3", "text": "Shared blind spots between generation and critique for genuine knowledge gaps" }
+      ]
+    },
+    "correct_pairs": { "L1": "R1", "L2": "R2", "L3": "R3" },
+    "explanation": {
+      "why_correct": "Reflection is a single review pass, a self-critique loop extends this across multiple rounds with a stopping condition, and the key limitation is that generation and critique share the same underlying blind spots for genuine knowledge gaps.",
+      "why_incorrect": {},
+      "rule_of_thumb": "Reflection = one review pass; self-critique loop = multiple rounds; limitation = shared blind spots for knowledge-based errors."
+    },
+    "tags": ["reflection", "self-critique-loop", "limitations"]
+  }
+]

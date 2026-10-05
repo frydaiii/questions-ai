@@ -1,0 +1,142 @@
+[
+  {
+    "id": "Q-D3-0019",
+    "domain": 3,
+    "task_statement": "3.1",
+    "type": "multi_response",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D3-003"
+    ],
+    "case_study_id": null,
+    "stem": "Which of the following tool calls would be classified as action tools with real, persistent side effects? (Select 2)",
+    "select_count": 2,
+    "options": [
+      {
+        "key": "A",
+        "text": "A tool that cancels a real subscription"
+      },
+      {
+        "key": "B",
+        "text": "A tool that reads and returns the content of a public webpage"
+      },
+      {
+        "key": "C",
+        "text": "A tool that transfers funds between two accounts"
+      },
+      {
+        "key": "D",
+        "text": "A tool that returns the current server timestamp"
+      }
+    ],
+    "correct": [
+      "A",
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "Canceling a subscription and transferring funds both cause real, persistent changes to external systems -- the defining trait of action tools.",
+      "why_incorrect": {
+        "B": "Reading and returning webpage content is a read-only retrieval with no side effect on the webpage or any other system.",
+        "D": "Returning a timestamp is a pure information lookup with no side effect."
+      },
+      "rule_of_thumb": "Action tools change real external state (cancellations, transfers); information tools only read and return data without changing anything."
+    },
+    "tags": [
+      "action-tools",
+      "tool-categories"
+    ]
+  },
+  {
+    "id": "Q-D3-0020",
+    "domain": 3,
+    "task_statement": "3.1",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D3-005"
+    ],
+    "case_study_id": null,
+    "stem": "An agent needs to answer a question about a specific user's current private order status, which only exists in that company's internal system. Why can the model not reliably answer this from internal knowledge alone?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Order statuses are universal and identical for every user"
+      },
+      {
+        "key": "B",
+        "text": "This private, system-specific data could not have been part of the model's general training data"
+      },
+      {
+        "key": "C",
+        "text": "The model has memorized every company's private database by default"
+      },
+      {
+        "key": "D",
+        "text": "This type of question is always unanswerable regardless of tool access"
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "explanation": {
+      "why_correct": "A specific user's private, system-internal order status is exactly the kind of system-specific private data that a general-purpose model's training data could never have contained, making a tool-based lookup against that system necessary.",
+      "why_incorrect": {
+        "C": "Models are not trained on arbitrary companies' private internal databases; this data is inherently inaccessible to general training.",
+        "D": "With appropriate tool access to the relevant internal system, this type of question becomes readily answerable; it is not inherently unanswerable.",
+        "A": "Order statuses are specific to each individual order and user, not universal or identical across users."
+      },
+      "rule_of_thumb": "Private, system-specific data that was never part of general training data requires a tool-based lookup against the actual system that holds it."
+    },
+    "tags": [
+      "tool-necessity",
+      "private-data"
+    ]
+  },
+  {
+    "id": "Q-D3-0021",
+    "domain": 3,
+    "task_statement": "3.1",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D3-004"
+    ],
+    "case_study_id": null,
+    "stem": "Which scenario best illustrates grounding working as intended?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "An agent generates a plausible-sounding but entirely unverified claim"
+      },
+      {
+        "key": "B",
+        "text": "An agent states a fact with no reference to where the information came from"
+      },
+      {
+        "key": "C",
+        "text": "An agent refuses to answer any question involving facts"
+      },
+      {
+        "key": "D",
+        "text": "An agent states a current fact and cites the specific retrieved source it came from, allowing that source to be checked"
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "Citing the specific retrieved source behind a claim is exactly what grounding looks like in practice -- it gives the claim a traceable, checkable origin.",
+      "why_incorrect": {
+        "B": "Stating a fact with no reference to its origin is the definition of an ungrounded claim, the opposite of grounding working as intended.",
+        "C": "Refusing to answer any factual question entirely sidesteps the task rather than demonstrating grounding.",
+        "A": "An unverified, plausible-sounding claim with no traceable source is exactly the kind of ungrounded claim that risks hallucination."
+      },
+      "rule_of_thumb": "Grounding in practice means citing a specific, checkable source behind a claim -- not omitting sources or generating unverified assertions."
+    },
+    "tags": [
+      "grounding"
+    ]
+  }
+]

@@ -1,0 +1,143 @@
+[
+  {
+    "id": "Q-D3-0038",
+    "domain": 3,
+    "task_statement": "3.2",
+    "type": "single_choice",
+    "difficulty": "hard",
+    "theory_refs": [
+      "TH-D3-008"
+    ],
+    "case_study_id": null,
+    "stem": "A developer parallelizes two tool calls where the second call's query text actually needs to include a value only known from the first call's result. What is the most likely outcome?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "The system will automatically detect and fix the ordering issue with no further design needed"
+      },
+      {
+        "key": "B",
+        "text": "Both calls will always succeed perfectly regardless of the dependency"
+      },
+      {
+        "key": "C",
+        "text": "Parallelizing dependent calls always improves correctness"
+      },
+      {
+        "key": "D",
+        "text": "The second call is likely to be issued with missing or incorrect information, since the needed value isn't available yet when it's launched in parallel"
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "Since the second call actually needs a value from the first call's result, launching both in parallel means the second call is issued before that needed value exists, likely resulting in missing or incorrect information being used.",
+      "why_incorrect": {
+        "B": "The dependency violation described would likely cause the second call to be malformed or incomplete, not succeed perfectly.",
+        "C": "Parallelizing calls that are actually dependent on each other typically harms correctness, since the dependent call lacks information it needs.",
+        "A": "Such ordering issues are not automatically detected and fixed by default; this requires deliberate dependency-aware design in the invocation logic."
+      },
+      "rule_of_thumb": "Incorrectly parallelizing a dependent call risks it being issued with missing or wrong information, since the needed result isn't available yet."
+    },
+    "tags": [
+      "parallel-invocation",
+      "tool-dependency",
+      "failure-modes"
+    ]
+  },
+  {
+    "id": "Q-D3-0039",
+    "domain": 3,
+    "task_statement": "3.2",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D3-007"
+    ],
+    "case_study_id": null,
+    "stem": "What is the main advantage of a tool interface that validates parameters and rejects malformed calls early with a clear error message?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "It makes every subsequent tool call automatically parallel"
+      },
+      {
+        "key": "B",
+        "text": "It guarantees the agent will never make a parameter mistake again"
+      },
+      {
+        "key": "C",
+        "text": "It eliminates the need for the agent to ever select the correct tool"
+      },
+      {
+        "key": "D",
+        "text": "It surfaces the problem immediately and clearly, rather than failing silently or producing a misleading 'successful' but nonsensical result"
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "Early, clear validation errors make problems immediately visible and diagnosable, which is preferable to a call failing silently or returning a misleadingly 'successful' but actually nonsensical result.",
+      "why_incorrect": {
+        "B": "Validation catches malformed calls when they occur but does not prevent the agent from ever constructing one again in the future.",
+        "C": "Parameter validation addresses the construction of arguments for an already-selected tool; it says nothing about whether the right tool was selected in the first place.",
+        "A": "Validation and invocation ordering (parallel vs sequential) are unrelated design concerns."
+      },
+      "rule_of_thumb": "Clear, early validation errors are preferable to silent failures or misleadingly 'successful' nonsensical results."
+    },
+    "tags": [
+      "parameter-construction",
+      "tool-call-validation"
+    ]
+  },
+  {
+    "id": "Q-D3-0040",
+    "domain": 3,
+    "task_statement": "3.2",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D3-009"
+    ],
+    "case_study_id": null,
+    "stem": "A system scopes the exposed tool list to only those relevant to the current conversation's detected task category (e.g. only finance tools for a finance-related request). What benefit does this provide?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "The complete elimination of parameter construction errors"
+      },
+      {
+        "key": "B",
+        "text": "Guaranteed zero errors of any kind for the rest of the conversation"
+      },
+      {
+        "key": "C",
+        "text": "Reduced risk of incorrect selection and reduced reasoning overhead, compared to exposing every tool at all times"
+      },
+      {
+        "key": "D",
+        "text": "No benefit compared to exposing the full tool list"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "Scoping the tool list to the relevant category reduces the chance of selecting an unrelated or overlapping tool and reduces the reasoning overhead of considering a large, mostly irrelevant list.",
+      "why_incorrect": {
+        "B": "Scoping the tool list reduces selection risk specifically; it does not guarantee zero errors of every kind for the rest of the conversation.",
+        "D": "There is a real, documented benefit to scoping compared to exposing the full, unscoped tool list.",
+        "A": "Parameter construction errors are a separate concern from which tools are exposed; scoping the tool list does not directly address this distinct error type."
+      },
+      "rule_of_thumb": "Scoping exposed tools to the relevant task category reduces selection risk and reasoning overhead, though it doesn't address every possible error type."
+    },
+    "tags": [
+      "tool-exposure-scoping"
+    ]
+  }
+]

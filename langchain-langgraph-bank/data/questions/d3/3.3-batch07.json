@@ -1,0 +1,427 @@
+[
+  {
+    "id": "Q-D3-0074",
+    "domain": 3,
+    "task_statement": "3.3",
+    "type": "single_choice",
+    "difficulty": "easy",
+    "theory_refs": [
+      "TH-D3-012"
+    ],
+    "case_study_id": null,
+    "stem": "What is the core purpose of a fallback strategy in tool use?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "To provide an alternative path to still make progress when the primary tool or approach fails"
+      },
+      {
+        "key": "B",
+        "text": "To make the primary tool call run twice as fast"
+      },
+      {
+        "key": "C",
+        "text": "To guarantee the primary tool never fails"
+      },
+      {
+        "key": "D",
+        "text": "To eliminate the need for any tool at all"
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "explanation": {
+      "why_correct": "A fallback's core purpose is providing an alternative path so the task can still make progress when the primary tool or approach fails or is unavailable.",
+      "why_incorrect": {
+        "B": "Fallbacks are not about speeding up the primary tool; they're about providing an alternative when it fails.",
+        "C": "A fallback does not prevent the primary tool from failing; it provides a recovery option for when it does.",
+        "D": "A fallback is itself typically another tool or approach, not an elimination of tool use altogether."
+      },
+      "rule_of_thumb": "Fallbacks exist to provide an alternative path forward when the primary approach fails, not to prevent failure or speed anything up."
+    },
+    "tags": [
+      "fallback-strategy"
+    ]
+  },
+  {
+    "id": "Q-D3-0075",
+    "domain": 3,
+    "task_statement": "3.3",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D3-013"
+    ],
+    "case_study_id": null,
+    "stem": "A high-stakes legal research tool returns a single matching document for a broad legal question, and the agent treats this as the complete and final answer with no further scrutiny. What risk does this illustrate?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Evidence that the tool is permanently broken"
+      },
+      {
+        "key": "B",
+        "text": "No risk at all, since any returned document is automatically the complete and correct answer"
+      },
+      {
+        "key": "C",
+        "text": "Proof that legal research tools never work correctly"
+      },
+      {
+        "key": "D",
+        "text": "The risk of treating a technically successful but potentially incomplete result as a definitive, complete answer without sanity-checking its completeness"
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "Treating a single returned document as the complete and final answer to a broad question, with no scrutiny of whether it's actually comprehensive, illustrates the risk of accepting a technically successful result without checking whether it's actually sufficient for the stakes involved.",
+      "why_incorrect": {
+        "B": "A single result is not automatically the complete or correct answer, especially for a broad question that might reasonably have multiple relevant documents.",
+        "C": "This scenario doesn't demonstrate that legal research tools are generally unreliable; it demonstrates a risk in how a single result was uncritically accepted.",
+        "A": "The tool executed successfully and returned a real result; nothing indicates it's broken -- the issue is with how the result was used."
+      },
+      "rule_of_thumb": "A single, technically successful result for a broad or high-stakes question should prompt scrutiny of its completeness, not automatic acceptance as the final answer."
+    },
+    "tags": [
+      "sanity-checking",
+      "high-stakes"
+    ]
+  },
+  {
+    "id": "Q-D3-0076",
+    "domain": 3,
+    "task_statement": "3.3",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D3-011",
+      "TH-D3-012"
+    ],
+    "case_study_id": null,
+    "stem": "What distinguishes the appropriate use case for retrying from the appropriate use case for falling back?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Retrying suits plausibly transient causes; falling back suits causes that retrying realistically cannot fix"
+      },
+      {
+        "key": "B",
+        "text": "They are interchangeable and can always be used for exactly the same situations"
+      },
+      {
+        "key": "C",
+        "text": "Retrying should always be used instead of falling back, in every situation"
+      },
+      {
+        "key": "D",
+        "text": "Falling back should always be used instead of retrying, in every situation"
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "explanation": {
+      "why_correct": "The appropriate choice depends on the failure's cause: retrying makes sense for plausibly transient issues that might resolve on their own, while falling back is needed for causes that retrying cannot realistically fix, like permanent unavailability.",
+      "why_incorrect": {
+        "B": "They are not interchangeable -- retrying wastes time on persistent failures, and immediately falling back on a merely transient issue skips a potentially successful simple retry.",
+        "C": "Always retrying ignores cases where the cause is permanent and retrying can never succeed.",
+        "D": "Always falling back ignores cases where a simple retry would have worked fine for a transient issue, adding unnecessary complexity."
+      },
+      "rule_of_thumb": "Choose retry for transient causes and fallback for causes retrying cannot fix -- the right choice depends on diagnosing the actual cause."
+    },
+    "tags": [
+      "retry-strategy",
+      "fallback-strategy"
+    ]
+  },
+  {
+    "id": "Q-D3-0077",
+    "domain": 3,
+    "task_statement": "3.3",
+    "type": "single_choice",
+    "difficulty": "hard",
+    "theory_refs": [
+      "TH-D3-010",
+      "TH-D3-011",
+      "TH-D3-012",
+      "TH-D3-013"
+    ],
+    "case_study_id": null,
+    "stem": "An agent encounters a tool failure but has no information about whether the cause is transient or permanent, and no sanity-check mechanism to assess whether a 'successful' result is actually trustworthy. What foundational gap does this reveal in the agent's design?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Proof that tool use should never be attempted by any agent"
+      },
+      {
+        "key": "B",
+        "text": "No gap at all -- this is the ideal, fully robust design"
+      },
+      {
+        "key": "C",
+        "text": "A lack of failure diagnosis and result-verification capability, which is a prerequisite for choosing between retry, fallback, and sanity-checking appropriately"
+      },
+      {
+        "key": "D",
+        "text": "Evidence that the agent's underlying model needs to be replaced"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "Without the ability to diagnose whether a failure is transient or permanent, and without a way to sanity-check whether a 'successful' result is actually trustworthy, the agent lacks the foundational capability needed to choose appropriately between retrying, falling back, or scrutinizing results -- a significant design gap.",
+      "why_incorrect": {
+        "B": "This is explicitly described as a GAP, not an ideal design -- the agent lacks capabilities needed for sound failure recovery.",
+        "D": "The issue described is architectural (missing diagnosis/verification capability), not necessarily a limitation of the underlying model itself.",
+        "A": "This specific gap is a solvable design deficiency, not evidence that tool use in general should be abandoned."
+      },
+      "rule_of_thumb": "Effective tool-use recovery requires both failure-cause diagnosis and result sanity-checking -- missing either leaves the agent unable to choose the right recovery strategy."
+    },
+    "tags": [
+      "failure-categorization",
+      "sanity-checking",
+      "design-tradeoffs"
+    ]
+  },
+  {
+    "id": "Q-D3-0078",
+    "domain": 3,
+    "task_statement": "3.3",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D3-011"
+    ],
+    "case_study_id": null,
+    "stem": "Why is a fixed, sensible maximum retry count better than allowing unlimited retries?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "It makes the underlying tool permanently unusable afterward"
+      },
+      {
+        "key": "B",
+        "text": "It guarantees the call will succeed exactly on the final attempt"
+      },
+      {
+        "key": "C",
+        "text": "It has no actual benefit over unlimited retries"
+      },
+      {
+        "key": "D",
+        "text": "It prevents wasting unbounded time and resources on a call that may never succeed, especially if the cause turns out to be persistent"
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "A sensible maximum retry count caps how much time and resources can be wasted if the failure turns out to be persistent rather than transient, after which the agent can move to a fallback or report the failure.",
+      "why_incorrect": {
+        "B": "There is no guarantee the final attempt succeeds; the limit simply bounds how long the agent will keep trying before giving up on that approach.",
+        "C": "There is a real, meaningful benefit: bounding wasted effort when retries turn out not to help.",
+        "A": "A retry limit for one particular call sequence does not permanently disable the tool for future, unrelated calls."
+      },
+      "rule_of_thumb": "A sensible retry limit bounds wasted effort on failures that may be persistent, after which the agent should pursue a fallback or report failure."
+    },
+    "tags": [
+      "retry-strategy"
+    ]
+  },
+  {
+    "id": "Q-D3-0079",
+    "domain": 3,
+    "task_statement": "3.3",
+    "type": "multi_response",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D3-010",
+      "TH-D3-013"
+    ],
+    "case_study_id": null,
+    "stem": "Which of the following scenarios represent a misleading-success tool result, as opposed to an explicit error or unavailability? (Select 2)",
+    "select_count": 2,
+    "options": [
+      {
+        "key": "A",
+        "text": "A query returns a result set that appears complete but was actually silently truncated due to a pagination limit the agent didn't account for"
+      },
+      {
+        "key": "B",
+        "text": "A calculation tool returns a numerically plausible-looking but subtly incorrect result due to a parameter unit mismatch, with no error raised"
+      },
+      {
+        "key": "C",
+        "text": "The tool's server returns a clear 503 service unavailable response"
+      },
+      {
+        "key": "D",
+        "text": "The tool explicitly returns 'invalid API key' as its response"
+      }
+    ],
+    "correct": [
+      "A",
+      "B"
+    ],
+    "explanation": {
+      "why_correct": "Both scenarios involve a technically 'successful' call (no explicit error) that actually returns incomplete or subtly wrong information, which is exactly the misleading-success failure pattern.",
+      "why_incorrect": {
+        "C": "A 503 response is a clear, explicit signal of unavailability, not a misleading-success scenario.",
+        "D": "An explicit 'invalid API key' message is a clearly communicated error, not a misleading-success result."
+      },
+      "rule_of_thumb": "Misleading-success results are specifically calls that appear to work but actually return incomplete or subtly wrong data with no explicit error signal."
+    },
+    "tags": [
+      "misleading-results",
+      "failure-categorization"
+    ]
+  },
+  {
+    "id": "Q-D3-0080",
+    "domain": 3,
+    "task_statement": "3.3",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D3-012"
+    ],
+    "case_study_id": null,
+    "stem": "A fallback data source provides slightly less detailed information than the primary source but is still generally useful for the task. Should this fallback still be considered valuable?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Only if the fallback happens to be completely free of charge"
+      },
+      {
+        "key": "B",
+        "text": "No -- a fallback is only acceptable if it is functionally identical to the primary source in every way"
+      },
+      {
+        "key": "C",
+        "text": "No -- any fallback that isn't perfect should never be used under any circumstances"
+      },
+      {
+        "key": "D",
+        "text": "Yes -- a fallback doesn't need to be a perfect substitute; providing a reasonable, even partial, path to progress is still valuable when the primary fails"
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "A fallback remains valuable even if it's not a perfect substitute, as long as it provides a reasonable path to still make progress when the primary approach has failed.",
+      "why_incorrect": {
+        "B": "Requiring functional identity as a precondition would disqualify many genuinely useful fallbacks that are merely 'good enough,' not perfect substitutes.",
+        "C": "Refusing to use any imperfect fallback would often leave the agent with no recovery option at all when the primary approach fails.",
+        "A": "Cost is an unrelated consideration to whether a fallback provides a reasonable, useful path to progress."
+      },
+      "rule_of_thumb": "A fallback's value comes from providing a reasonable path to progress, not from being a perfect, identical substitute for the primary approach."
+    },
+    "tags": [
+      "fallback-strategy"
+    ]
+  },
+  {
+    "id": "Q-D3-0081",
+    "domain": 3,
+    "task_statement": "3.3",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D3-010"
+    ],
+    "case_study_id": null,
+    "stem": "Why is it important to distinguish between the three broad failure categories (unavailability, explicit error, misleading success) rather than treating all tool failures the same way?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Because only one of the three categories can ever actually occur in practice"
+      },
+      {
+        "key": "B",
+        "text": "Because the categories are purely cosmetic labels with no practical implications"
+      },
+      {
+        "key": "C",
+        "text": "Because each category calls for a different, appropriately matched response -- a single blanket strategy is unlikely to work well across all three"
+      },
+      {
+        "key": "D",
+        "text": "Because distinguishing them makes tool calls run faster automatically"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "Each failure category has a different underlying cause and calls for a correspondingly different response (retry/fallback for unavailability, correction/reporting for explicit errors, sanity-checking for misleading success) -- a single uniform strategy would handle some of these poorly.",
+      "why_incorrect": {
+        "B": "The categories have real practical implications for which recovery strategy is appropriate, not just cosmetic labeling.",
+        "D": "Categorizing failures affects which recovery strategy to apply; it has no direct effect on raw call execution speed.",
+        "A": "All three categories are well-documented, commonly occurring failure types in real tool-use systems."
+      },
+      "rule_of_thumb": "Distinguishing failure categories matters because each one calls for a different, appropriately matched recovery response."
+    },
+    "tags": [
+      "failure-categorization"
+    ]
+  },
+  {
+    "id": "Q-D3-0082",
+    "domain": 3,
+    "task_statement": "3.3",
+    "type": "single_choice",
+    "difficulty": "hard",
+    "theory_refs": [
+      "TH-D3-013"
+    ],
+    "case_study_id": null,
+    "stem": "An agent's sanity-checking logic flags a surprising zero-result lookup and triggers a review of the original query, discovering the query had an unintended typo. What does this outcome demonstrate?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Sanity-checking successfully caught a misleading-success result that would otherwise have been accepted as a true negative"
+      },
+      {
+        "key": "B",
+        "text": "The tool itself is permanently broken and must be removed"
+      },
+      {
+        "key": "C",
+        "text": "Sanity-checking is unnecessary busywork with no actual benefit"
+      },
+      {
+        "key": "D",
+        "text": "The agent should now distrust every tool it has access to, permanently"
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "explanation": {
+      "why_correct": "This is exactly sanity-checking working as intended: catching a misleading-success scenario (an empty result that would otherwise have been accepted at face value) and uncovering the actual cause -- a query typo -- before drawing a wrong conclusion.",
+      "why_incorrect": {
+        "B": "The tool functioned correctly for the (mistaken) query it was given; the issue was with the query's construction, not the tool itself.",
+        "C": "This scenario demonstrates sanity-checking providing clear, concrete value by catching an error that would otherwise have gone unnoticed.",
+        "D": "A single caught query error does not warrant permanently distrusting every tool; it demonstrates the value of continuing to apply sanity-checking, not abandoning tool use."
+      },
+      "rule_of_thumb": "Successfully catching a misleading-success result through sanity-checking demonstrates the practice working as intended, not evidence the tool itself is broken."
+    },
+    "tags": [
+      "sanity-checking",
+      "misleading-results"
+    ]
+  }
+]

@@ -1,0 +1,236 @@
+[
+  {
+    "id": "Q-D2-0012",
+    "domain": 2,
+    "task_statement": "2.1",
+    "type": "single_choice",
+    "difficulty": "easy",
+    "theory_refs": [
+      "TH-D2-001"
+    ],
+    "case_study_id": null,
+    "stem": "In an interleaved reasoning-action loop, what directly follows an action?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "A second, unrelated action with no observation"
+      },
+      {
+        "key": "B",
+        "text": "Immediate termination of the loop"
+      },
+      {
+        "key": "C",
+        "text": "An observation reflecting the result of that action"
+      },
+      {
+        "key": "D",
+        "text": "A switch to a different agent entirely"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "After taking an action, the agent receives an observation reflecting that action's result, which then feeds into the next thought.",
+      "why_incorrect": {
+        "B": "The loop does not automatically terminate after a single action; it continues until the task is resolved or a termination condition is met.",
+        "D": "Switching to a different agent is a multi-agent concept, unrelated to the single-agent thought-action-observation cycle.",
+        "A": "Taking a second action without first observing the result of the first breaks the interleaved pattern, which specifically requires observing before reasoning again."
+      },
+      "rule_of_thumb": "Every action in the loop is immediately followed by an observation of its result, which feeds the next thought."
+    },
+    "tags": [
+      "react",
+      "reasoning-action-loop"
+    ]
+  },
+  {
+    "id": "Q-D2-0013",
+    "domain": 2,
+    "task_statement": "2.1",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D2-002"
+    ],
+    "case_study_id": null,
+    "stem": "A model's internal knowledge about current stock prices is necessarily outdated. Which design choice best addresses this limitation within an interleaved reasoning-action agent?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Ignoring the limitation since the model usually guesses close enough"
+      },
+      {
+        "key": "B",
+        "text": "Calling a live data-fetching action to ground the reasoning in current, verified information"
+      },
+      {
+        "key": "C",
+        "text": "Reasoning longer so the model can recall a more accurate price from memory"
+      },
+      {
+        "key": "D",
+        "text": "Asking the user to not mention stock prices"
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "explanation": {
+      "why_correct": "Since the model's internal knowledge is inherently stale for fast-changing data like stock prices, grounding via a live data-fetching action replaces that unreliable internal knowledge with current, verified information.",
+      "why_incorrect": {
+        "A": "Guessing from outdated knowledge risks a confidently wrong answer, which grounding is specifically meant to avoid.",
+        "C": "No amount of additional internal reasoning can produce genuinely current data the model was never trained on; only an external action can supply current information.",
+        "D": "Avoiding the topic sidesteps the task rather than solving it; the point of grounding is to handle such requests correctly, not avoid them."
+      },
+      "rule_of_thumb": "For fast-changing, time-sensitive facts, ground reasoning with a live external lookup rather than relying on the model's inherently stale internal knowledge."
+    },
+    "tags": [
+      "grounding",
+      "stale-knowledge"
+    ]
+  },
+  {
+    "id": "Q-D2-0014",
+    "domain": 2,
+    "task_statement": "2.1",
+    "type": "single_choice",
+    "difficulty": "hard",
+    "theory_refs": [
+      "TH-D2-003"
+    ],
+    "case_study_id": null,
+    "stem": "Which signal should primarily drive an agent's decision to transition from reasoning to taking a concrete action?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Whether a fixed number of reasoning tokens has been generated"
+      },
+      {
+        "key": "B",
+        "text": "Whether the current reasoning has identified a concrete, well-justified next step"
+      },
+      {
+        "key": "C",
+        "text": "Whether the task has consumed more than one minute of wall-clock time"
+      },
+      {
+        "key": "D",
+        "text": "Whether the user has asked a question containing a question mark"
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "explanation": {
+      "why_correct": "The appropriate signal to act is having identified a concrete, well-justified next step through reasoning -- not an arbitrary token count, elapsed time, or surface features of the input.",
+      "why_incorrect": {
+        "C": "Elapsed wall-clock time is unrelated to whether the reasoning has produced a sufficiently justified next action.",
+        "D": "The presence of a question mark in user input has no bearing on whether the agent's internal reasoning has reached a point justifying an action.",
+        "A": "A fixed token count is an arbitrary, task-agnostic threshold that ignores whether sufficient justification for an action has actually been reached."
+      },
+      "rule_of_thumb": "Act when reasoning has produced a concrete, justified next step -- not based on arbitrary token counts, timers, or surface text features."
+    },
+    "tags": [
+      "reasoning-action-balance"
+    ]
+  },
+  {
+    "id": "Q-D2-0015",
+    "domain": 2,
+    "task_statement": "2.1",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D2-005"
+    ],
+    "case_study_id": null,
+    "stem": "Which statement accurately contrasts plain action-only agents with interleaved reasoning-action agents?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Action-only agents are always more accurate because they skip unnecessary reasoning"
+      },
+      {
+        "key": "B",
+        "text": "Action-only agents cannot be implemented with any kind of model"
+      },
+      {
+        "key": "C",
+        "text": "Interleaved agents keep an inspectable justification before each action, which action-only agents lack"
+      },
+      {
+        "key": "D",
+        "text": "There is no meaningful difference between the two approaches"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "A core distinguishing feature of interleaved reasoning-action agents is that each action is preceded by an explicit, inspectable thought justifying it, which plain action-only agents lack by definition.",
+      "why_incorrect": {
+        "A": "Skipping reasoning does not inherently make an agent more accurate; explicit reasoning often helps catch flawed plans before they turn into incorrect actions.",
+        "D": "There is a meaningful, well-documented difference: presence versus absence of an explicit, inspectable reasoning trace before each action.",
+        "B": "Action-only agents can be implemented with various underlying models; the distinction is architectural (absence of an explicit reasoning trace), not about model compatibility."
+      },
+      "rule_of_thumb": "The key differentiator between action-only and interleaved agents is the presence of an explicit, inspectable reasoning trace justifying each action."
+    },
+    "tags": [
+      "react",
+      "action-only-agents"
+    ]
+  },
+  {
+    "id": "Q-D2-0016",
+    "domain": 2,
+    "task_statement": "2.1",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D2-003"
+    ],
+    "case_study_id": null,
+    "stem": "An agent reasons extensively about a question for many steps, never calling any tool, even though the question requires a piece of information only available through a live lookup. What is the most likely consequence?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "The agent will eventually succeed purely through additional reasoning"
+      },
+      {
+        "key": "B",
+        "text": "The agent is likely to fail to obtain the needed information, since reasoning alone cannot access external systems"
+      },
+      {
+        "key": "C",
+        "text": "The extensive reasoning guarantees a correct final answer regardless of missing information"
+      },
+      {
+        "key": "D",
+        "text": "The agent's architecture will automatically switch to deliberative mode"
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "explanation": {
+      "why_correct": "If a task genuinely requires information only accessible via an external action, no amount of additional internal reasoning can substitute for actually taking that action -- the agent is likely to fail to obtain the needed information.",
+      "why_incorrect": {
+        "A": "Reasoning cannot conjure external information that was never provided or looked up; additional reasoning steps cannot substitute for an actual data retrieval action.",
+        "C": "Extensive reasoning without the needed external information does not guarantee correctness; the agent may produce a plausible-sounding but ungrounded (and possibly wrong) answer.",
+        "D": "Nothing about over-reasoning causes an automatic architectural switch; this is not how these systems behave."
+      },
+      "rule_of_thumb": "Reasoning cannot substitute for actions when a task genuinely requires externally sourced information -- over-reasoning without acting risks failing to ever obtain it."
+    },
+    "tags": [
+      "reasoning-action-balance",
+      "failure-diagnosis"
+    ]
+  }
+]

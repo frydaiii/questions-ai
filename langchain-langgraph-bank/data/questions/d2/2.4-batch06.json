@@ -1,0 +1,288 @@
+[
+  {
+    "id": "Q-D2-0081",
+    "domain": 2,
+    "task_statement": "2.4",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D2-016"
+    ],
+    "case_study_id": null,
+    "stem": "What is the underlying goal that balances the risks of overconfidence and excessive hedging?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Always defaulting to maximum confidence in every single response"
+      },
+      {
+        "key": "B",
+        "text": "Calibration -- matching expressed confidence to the actual strength of the underlying evidence, adjusted for task stakes"
+      },
+      {
+        "key": "C",
+        "text": "Always defaulting to maximum hedging in every single response"
+      },
+      {
+        "key": "D",
+        "text": "Flipping a coin to decide which extreme to use for each response"
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "explanation": {
+      "why_correct": "Calibration -- aligning expressed confidence with the actual evidentiary basis and the task's stakes -- is the principle that avoids both overconfidence and excessive hedging as fixed, context-independent defaults.",
+      "why_incorrect": {
+        "C": "Always defaulting to maximum hedging would produce excessive hedging even when evidence is actually strong, the other failure mode being balanced against.",
+        "D": "Randomly choosing between extremes has no relationship to the actual evidence or stakes, which is precisely what calibration is meant to track.",
+        "A": "Always defaulting to maximum confidence would produce overconfidence whenever the actual evidence is weak, one of the two failure modes being balanced against."
+      },
+      "rule_of_thumb": "Calibration is the balancing principle: match expressed confidence to actual evidence strength and task stakes, not a fixed extreme."
+    },
+    "tags": [
+      "calibration"
+    ]
+  },
+  {
+    "id": "Q-D2-0082",
+    "domain": 2,
+    "task_statement": "2.4",
+    "type": "single_choice",
+    "difficulty": "hard",
+    "theory_refs": [
+      "TH-D2-014",
+      "TH-D2-016"
+    ],
+    "case_study_id": null,
+    "stem": "An agent faces an ambiguous instruction AND the available evidence for any given interpretation is weak. Which combination of responses best addresses both issues together?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Address only the evidence-strength issue and ignore the ambiguity entirely"
+      },
+      {
+        "key": "B",
+        "text": "Pick an interpretation at random and present the result with maximum confidence"
+      },
+      {
+        "key": "C",
+        "text": "Address only the ambiguity and ignore the evidence-strength issue entirely"
+      },
+      {
+        "key": "D",
+        "text": "Explicitly flag both the ambiguity in the instruction and the weak evidentiary basis for the chosen interpretation, rather than silently resolving either"
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "Since both issues are present and distinct, the most robust approach addresses them both -- making the ambiguity visible (per good ambiguity-handling practice) and calibrating confidence to reflect the actual weak evidence (per good calibration practice).",
+      "why_incorrect": {
+        "B": "Picking randomly and presenting with maximum confidence compounds both problems: it hides the ambiguity AND overstates confidence despite weak evidence.",
+        "C": "Ignoring the evidence-strength issue risks overconfidence even if the ambiguity itself is handled well.",
+        "A": "Ignoring the ambiguity issue risks hiding a real decision point even if confidence is otherwise well-calibrated."
+      },
+      "rule_of_thumb": "When multiple uncertainty-related issues co-occur, address each on its own terms rather than letting one mask or substitute for handling the other."
+    },
+    "tags": [
+      "ambiguity-handling",
+      "calibration",
+      "uncertainty"
+    ]
+  },
+  {
+    "id": "Q-D2-0083",
+    "domain": 2,
+    "task_statement": "2.4",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D2-015"
+    ],
+    "case_study_id": null,
+    "stem": "Why is catching a reasoning error EARLY in a chain generally better than catching it only at the very end?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Because catching errors early is always impossible in practice"
+      },
+      {
+        "key": "B",
+        "text": "Because early detection makes the error disappear automatically with no further action"
+      },
+      {
+        "key": "C",
+        "text": "Because less subsequent reasoning has been built on top of the flawed step, reducing wasted work and compounding error risk"
+      },
+      {
+        "key": "D",
+        "text": "Because the timing of detection has no effect on the amount of work needed to fix it"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "The earlier an error is caught, the less downstream reasoning has had a chance to build on the flawed step, which both reduces wasted work and limits how far the error could have compounded.",
+      "why_incorrect": {
+        "B": "Detecting an error does not automatically fix it; the agent still needs to backtrack and re-reason from the point of the error.",
+        "D": "Timing matters significantly -- later detection generally means more downstream work has to be redone, since more steps may have depended on the flawed one.",
+        "A": "Early detection is achievable in practice via consistency checks, sanity checks, and grounding checks performed throughout the reasoning process, not only at the end."
+      },
+      "rule_of_thumb": "Earlier error detection means less wasted downstream work and less compounded error -- a core reason to check throughout a reasoning chain, not just at the end."
+    },
+    "tags": [
+      "error-detection",
+      "error-compounding"
+    ]
+  },
+  {
+    "id": "Q-D2-0084",
+    "domain": 2,
+    "task_statement": "2.4",
+    "type": "single_choice",
+    "difficulty": "easy",
+    "theory_refs": [
+      "TH-D2-013"
+    ],
+    "case_study_id": null,
+    "stem": "Which practice best helps distinguish cases warranting a confident answer from cases warranting hedging or clarification?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Judging confidence purely by how long the generated response is"
+      },
+      {
+        "key": "B",
+        "text": "Always answering every question with the exact same fixed level of confidence"
+      },
+      {
+        "key": "C",
+        "text": "Having an explicit mechanism to assess evidence strength, rather than relying on the model's default phrasing style"
+      },
+      {
+        "key": "D",
+        "text": "Assuming every question has equally strong supporting evidence by default"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "An explicit mechanism for assessing how strong the actual evidence is (rather than just trusting default phrasing) is what allows an agent to appropriately distinguish well-supported, confident-answer cases from cases warranting hedging or clarification.",
+      "why_incorrect": {
+        "B": "A fixed confidence level regardless of the actual situation ignores genuine differences in evidence strength across different questions.",
+        "D": "Assuming uniformly strong evidence by default ignores the reality that evidence strength varies meaningfully across different questions and topics.",
+        "A": "Response length has no established, reliable relationship to how well-supported a conclusion actually is."
+      },
+      "rule_of_thumb": "Use an explicit evidence-strength assessment mechanism, not default phrasing habits or surface features, to decide when confidence versus hedging is warranted."
+    },
+    "tags": [
+      "uncertainty",
+      "evidence-strength"
+    ]
+  },
+  {
+    "id": "Q-D2-0085",
+    "domain": 2,
+    "task_statement": "2.4",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D2-014"
+    ],
+    "case_study_id": null,
+    "stem": "Two possible interpretations of an ambiguous instruction would lead to very similar, low-consequence outcomes either way. What does this suggest about how much effort should go into resolving the ambiguity?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Relatively little extra effort is warranted, since the practical difference between the interpretations is small"
+      },
+      {
+        "key": "B",
+        "text": "A lengthy clarifying-question exchange is always mandatory regardless of how similar the outcomes are"
+      },
+      {
+        "key": "C",
+        "text": "The task must be refused outright due to the mere presence of any ambiguity"
+      },
+      {
+        "key": "D",
+        "text": "The agent should always assume the most complex possible interpretation by default"
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "explanation": {
+      "why_correct": "Since the two interpretations lead to very similar, low-consequence outcomes, the cost of guessing wrong is low, meaning relatively little extra effort (e.g. an extended clarification exchange) is warranted to resolve the ambiguity precisely.",
+      "why_incorrect": {
+        "B": "A lengthy clarifying exchange is excessive when the outcomes barely differ in consequence; the effort should scale with the actual cost of guessing wrong.",
+        "C": "Mere presence of ambiguity does not automatically require refusal, especially when the practical stakes of resolving it one way or the other are low.",
+        "D": "Defaulting to the most complex interpretation has no principled basis here; the appropriate choice should be the most likely interpretation, not necessarily the most complex one."
+      },
+      "rule_of_thumb": "Scale the effort spent resolving ambiguity to the actual cost of guessing wrong -- low-consequence ambiguity doesn't need the same resolution effort as high-stakes ambiguity."
+    },
+    "tags": [
+      "ambiguity-handling",
+      "cost-benefit"
+    ]
+  },
+  {
+    "id": "Q-D2-0086",
+    "domain": 2,
+    "task_statement": "2.4",
+    "type": "multi_response",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D2-013",
+      "TH-D2-015",
+      "TH-D2-016"
+    ],
+    "case_study_id": null,
+    "stem": "Which of the following statements accurately summarize good practice for handling uncertainty, ambiguity, and reasoning errors? (Select 2)",
+    "select_count": 2,
+    "options": [
+      {
+        "key": "A",
+        "text": "Detect and address issues (errors, weak evidence, ambiguity) explicitly rather than letting them pass silently"
+      },
+      {
+        "key": "B",
+        "text": "Treat every single response as equally confident regardless of context or evidence"
+      },
+      {
+        "key": "C",
+        "text": "Calibrate confidence and handling strategy to the actual stakes and evidence of the specific situation"
+      },
+      {
+        "key": "D",
+        "text": "Assume the first generated answer is always correct with no further scrutiny"
+      }
+    ],
+    "correct": [
+      "A",
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "Good practice means explicitly surfacing issues like errors, weak evidence, or ambiguity rather than letting them pass unnoticed, and calibrating the response strategy to the actual stakes and evidence present in each specific situation.",
+      "why_incorrect": {
+        "B": "Treating every response as equally confident regardless of context ignores real differences in evidence strength and stakes across situations.",
+        "D": "Assuming the first generated answer is always correct skips the scrutiny (error detection, evidence assessment) that this domain's principles are built around."
+      },
+      "rule_of_thumb": "Good practice surfaces uncertainty and errors explicitly and calibrates response strategy to actual context -- it does not treat every situation identically or assume first-pass correctness."
+    },
+    "tags": [
+      "uncertainty",
+      "error-detection",
+      "calibration"
+    ]
+  }
+]

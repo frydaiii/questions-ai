@@ -1,0 +1,85 @@
+[
+  {
+    "id": "Q-D2-0056",
+    "domain": 2,
+    "task_statement": "2.3",
+    "type": "multi_response",
+    "difficulty": "medium",
+    "theory_refs": ["TH-D2-010", "TH-D2-011"],
+    "case_study_id": null,
+    "stem": "Which of the following are true about the relationship between a single reflection pass and a multi-round self-critique loop? (Select 2)",
+    "select_count": 2,
+    "options": [
+      { "key": "A", "text": "A self-critique loop is essentially multiple reflection-and-revision rounds chained together" },
+      { "key": "B", "text": "A single reflection pass can only ever be used on the very first draft of an output" },
+      { "key": "C", "text": "Both approaches aim to catch issues in a candidate output before it's finalized" },
+      { "key": "D", "text": "A self-critique loop guarantees strictly better output than a single reflection pass on every task" }
+    ],
+    "correct": ["A", "C"],
+    "explanation": {
+      "why_correct": "A self-critique loop extends the basic idea of reflection into multiple chained rounds, and both approaches share the same underlying goal of catching and fixing issues before finalizing an output.",
+      "why_incorrect": {
+        "B": "A single reflection pass can be applied to any candidate output at any stage, not only a first draft.",
+        "D": "Due to diminishing returns, additional rounds don't guarantee strictly better results on every task; sometimes a single well-executed reflection pass is sufficient and additional rounds add cost with little gain."
+      },
+      "rule_of_thumb": "Self-critique loops generalize single-pass reflection into multiple rounds, but more rounds are not automatically guaranteed to be strictly better due to diminishing returns."
+    },
+    "tags": ["reflection", "self-critique-loop"]
+  },
+  {
+    "id": "Q-D2-0057",
+    "domain": 2,
+    "task_statement": "2.3",
+    "type": "single_choice",
+    "difficulty": "hard",
+    "theory_refs": ["TH-D2-010", "TH-D2-011"],
+    "case_study_id": null,
+    "stem": "A developer wants to add reflection to a system but is worried about added latency for every single request, including very simple ones. What is a reasonable design response to this concern?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Apply reflection selectively, e.g. for complex or high-stakes outputs, rather than unconditionally on every request" },
+      { "key": "B", "text": "Remove all reasoning from the system entirely" },
+      { "key": "C", "text": "Apply exactly 20 rounds of self-critique to every request without exception" },
+      { "key": "D", "text": "Ignore the latency concern since it is never a legitimate consideration" }
+    ],
+    "correct": ["A"],
+    "explanation": {
+      "why_correct": "Selectively applying reflection to complex or high-stakes outputs (where its benefit is more likely to outweigh its cost) while skipping it for simple, low-stakes requests is a reasonable way to balance quality against latency.",
+      "why_incorrect": {
+        "B": "Removing all reasoning is a drastic, unrelated overreaction that would harm quality broadly, not a targeted response to the latency concern about reflection specifically.",
+        "C": "Applying a large fixed number of critique rounds to every request, including simple ones, would make the latency problem worse, not better.",
+        "D": "Latency is a legitimate, practical engineering concern; dismissing it outright ignores real tradeoffs that matter for usability and cost."
+      },
+      "rule_of_thumb": "Reflection's cost-benefit tradeoff favors selective application to complex or high-stakes cases, rather than uniform application to every request regardless of need."
+    },
+    "tags": ["reflection", "design-tradeoffs", "latency"]
+  },
+  {
+    "id": "Q-D2-0058",
+    "domain": 2,
+    "task_statement": "2.3",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": ["TH-D2-012"],
+    "case_study_id": null,
+    "stem": "Which statement most accurately summarizes the value and limits of self-reflection together?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Self-reflection is useless and should never be used in any system" },
+      { "key": "B", "text": "Self-reflection meaningfully helps catch certain error types (slips, requirement gaps, inconsistencies) but shares blind spots with the original generation for genuine knowledge gaps" },
+      { "key": "C", "text": "Self-reflection is a complete substitute for all forms of external verification in every context" },
+      { "key": "D", "text": "Self-reflection only works if a different company's model is used for the critique step" }
+    ],
+    "correct": ["B"],
+    "explanation": {
+      "why_correct": "This captures the balanced, accurate picture: self-reflection has genuine value for certain error types, but it is not a cure-all, since it shares the same underlying knowledge-based blind spots as the original generation.",
+      "why_incorrect": {
+        "A": "Dismissing self-reflection as useless ignores its real, demonstrated value for catching slips, requirement gaps, and logical inconsistencies.",
+        "C": "Self-reflection cannot fully substitute for external verification precisely because of its shared blind-spot limitation for genuine knowledge gaps.",
+        "D": "Using a different company's model is not a stated requirement for reflection to provide value; the same model can serve both generation and critique roles, with the limitation being about shared knowledge, not company origin."
+      },
+      "rule_of_thumb": "Self-reflection is genuinely useful but not a complete solution -- it needs to be paired with external verification for the error types it cannot catch."
+    },
+    "tags": ["self-reflection-limitations", "reflection"]
+  }
+]

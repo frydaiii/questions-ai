@@ -1,0 +1,87 @@
+[
+  {
+    "id": "Q-D2-0001",
+    "domain": 2,
+    "task_statement": "2.3",
+    "type": "multi_response",
+    "difficulty": "medium",
+    "theory_refs": ["TH-D2-001"],
+    "case_study_id": null,
+    "stem": "A company wants to store embeddings generated from its product catalog so a generative AI application can perform semantic similarity search at query time. Which TWO AWS services natively support storing and querying vector embeddings for this purpose?",
+    "select_count": 2,
+    "options": [
+      { "key": "A", "text": "Amazon OpenSearch Service, using its k-nearest neighbor (k-NN) search capability" },
+      { "key": "B", "text": "Amazon Aurora PostgreSQL-Compatible Edition, using the pgvector extension" },
+      { "key": "C", "text": "AWS CloudTrail, using its event history search" },
+      { "key": "D", "text": "AWS Glue, using its data catalog" }
+    ],
+    "correct": ["A", "B"],
+    "explanation": {
+      "why_correct": "Amazon OpenSearch Service supports k-NN search designed specifically for vector similarity, and Aurora PostgreSQL-Compatible Edition supports the pgvector extension for storing and querying embeddings with SQL. Both are recognized AWS vector store options for generative AI applications.",
+      "why_incorrect": {
+        "C": "AWS CloudTrail records API call history for auditing and security; it has no concept of vector embeddings or similarity search.",
+        "D": "AWS Glue Data Catalog stores metadata (schemas) about datasets for ETL purposes. It does not store or query vector embeddings."
+      },
+      "rule_of_thumb": "AWS vector store options to remember: OpenSearch (k-NN), Aurora/RDS PostgreSQL (pgvector), Neptune/Neptune ML, MemoryDB, and DocumentDB. Anything outside that list is not a vector store, no matter how 'data-related' it sounds."
+    },
+    "tags": ["vector-database", "embeddings", "opensearch", "aurora", "pgvector"]
+  },
+  {
+    "id": "Q-D2-0002",
+    "domain": 2,
+    "task_statement": "2.1",
+    "type": "multi_response",
+    "difficulty": "hard",
+    "theory_refs": ["TH-D2-001"],
+    "case_study_id": null,
+    "stem": "A developer is tuning inference parameters for a foundation model on Amazon Bedrock and wants the model's responses to become noticeably more deterministic and less random. Which TWO parameter changes would move the output in that direction?",
+    "select_count": 2,
+    "options": [
+      { "key": "A", "text": "Lower the temperature setting" },
+      { "key": "B", "text": "Raise the temperature setting" },
+      { "key": "C", "text": "Lower the top-p value" },
+      { "key": "D", "text": "Increase the maximum context window size" }
+    ],
+    "correct": ["A", "C"],
+    "explanation": {
+      "why_correct": "Lowering temperature reduces randomness by making the probability distribution over next tokens more peaked toward the most likely choices. Lowering top-p narrows the pool of tokens considered to a smaller set of the most probable ones, which also reduces variability. Both changes push output toward more deterministic, predictable text.",
+      "why_incorrect": {
+        "B": "Raising temperature flattens the probability distribution, making less-likely tokens more competitive, which increases randomness and creativity rather than reducing it.",
+        "D": "Context window size controls how much input and output text a model can consider in one request; it has no effect on the randomness of token selection."
+      },
+      "rule_of_thumb": "Temperature and top-p both control randomness: lower values of either push toward safer, more predictable output; higher values push toward more diverse, creative output. Context window is a capacity limit, not a randomness control."
+    },
+    "tags": ["inference-parameters", "temperature", "top-p", "bedrock"]
+  },
+  {
+    "id": "Q-D2-0003",
+    "domain": 2,
+    "task_statement": "2.3",
+    "type": "matching",
+    "difficulty": "medium",
+    "theory_refs": ["TH-D2-001"],
+    "case_study_id": null,
+    "stem": "Match each AWS generative AI service on the left with the business use case it is best suited for on the right.",
+    "select_count": 3,
+    "matching": {
+      "left": [
+        { "key": "L1", "text": "Amazon Q Developer" },
+        { "key": "L2", "text": "Amazon Q Business" },
+        { "key": "L3", "text": "Amazon Bedrock Knowledge Bases" }
+      ],
+      "right": [
+        { "key": "R1", "text": "Answering employee questions using the company's internal SharePoint and S3 documents" },
+        { "key": "R2", "text": "Generating and explaining application code inside an IDE" },
+        { "key": "R3", "text": "Grounding a foundation model's answers in a private document collection via retrieval-augmented generation" },
+        { "key": "R4", "text": "Detecting statistical bias in a tabular classification model's predictions" }
+      ]
+    },
+    "correct_pairs": { "L1": "R2", "L2": "R1", "L3": "R3" },
+    "explanation": {
+      "why_correct": "Amazon Q Developer is the coding assistant, generating and explaining code in an IDE (R2). Amazon Q Business is the enterprise assistant that answers questions using connected internal data sources such as S3 and SharePoint (R1). Amazon Bedrock Knowledge Bases implements RAG, grounding a foundation model's responses in a private document collection (R3).",
+      "why_incorrect": {},
+      "rule_of_thumb": "Q Developer = code. Q Business = enterprise knowledge/data. Bedrock Knowledge Bases = RAG grounding for any Bedrock application, not just Q. Bias detection (R4) belongs to SageMaker Clarify, not any of these three."
+    },
+    "tags": ["amazon-q", "bedrock-knowledge-bases", "service-mapping"]
+  }
+]

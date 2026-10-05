@@ -1,0 +1,144 @@
+[
+  {
+    "id": "Q-D2-0036",
+    "domain": 2,
+    "task_statement": "2.2",
+    "type": "single_choice",
+    "difficulty": "easy",
+    "theory_refs": [
+      "TH-D2-007"
+    ],
+    "case_study_id": null,
+    "stem": "What is a potential drawback of generating a full plan upfront in a plan-and-execute pattern?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "It guarantees perfect accuracy for every subsequent step"
+      },
+      {
+        "key": "B",
+        "text": "It is always faster than any other planning strategy"
+      },
+      {
+        "key": "C",
+        "text": "It requires no coordination between steps whatsoever"
+      },
+      {
+        "key": "D",
+        "text": "An early step's actual result may invalidate assumptions the rest of the plan depends on"
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "Since the plan is committed to upfront based on assumptions made before execution begins, an early step's actual result can reveal those assumptions were wrong, requiring the rest of the plan to be revised.",
+      "why_incorrect": {
+        "B": "Plan-and-execute is not inherently faster than other strategies; its speed depends on the task and whether re-planning is needed.",
+        "C": "Plan-and-execute does require coordination -- specifically, tracking how each step's actual result relates to the rest of the plan.",
+        "A": "Nothing about generating a plan upfront guarantees that subsequent steps will be executed with perfect accuracy; errors remain possible at each step."
+      },
+      "rule_of_thumb": "Upfront plans risk being invalidated by real execution results, requiring a re-planning mechanism to stay useful."
+    },
+    "tags": [
+      "plan-and-execute",
+      "limitations"
+    ]
+  },
+  {
+    "id": "Q-D2-0037",
+    "domain": 2,
+    "task_statement": "2.2",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D2-009"
+    ],
+    "case_study_id": null,
+    "stem": "A task is simple, linear, and has essentially no ambiguity at any step. Which planning strategy is most appropriate?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Tree-of-thought exploration across many branches"
+      },
+      {
+        "key": "B",
+        "text": "No special decomposition or branching strategy -- a straightforward approach suffices"
+      },
+      {
+        "key": "C",
+        "text": "Mandatory multi-agent debate before any answer"
+      },
+      {
+        "key": "D",
+        "text": "A full plan-and-execute pipeline with multiple re-planning stages"
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "explanation": {
+      "why_correct": "For a simple, linear, unambiguous task, no special decomposition or branching strategy is needed -- a straightforward approach is sufficient and avoids unnecessary overhead.",
+      "why_incorrect": {
+        "A": "Tree-of-thought is justified by genuine branching ambiguity, which this task explicitly lacks, making the extra cost unwarranted.",
+        "C": "Mandatory multi-agent debate is a heavyweight mechanism unrelated to and unwarranted for a simple, unambiguous, linear task.",
+        "D": "A full plan-and-execute pipeline with re-planning stages adds overhead that provides little benefit for a task with no real complexity or ambiguity to plan around."
+      },
+      "rule_of_thumb": "Reserve decomposition, plan-and-execute, and tree-of-thought for tasks that actually have the complexity or ambiguity that justifies their overhead."
+    },
+    "tags": [
+      "planning-strategy-selection",
+      "task-fit"
+    ]
+  },
+  {
+    "id": "Q-D2-0038",
+    "domain": 2,
+    "task_statement": "2.2",
+    "type": "multi_response",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D2-007",
+      "TH-D2-008"
+    ],
+    "case_study_id": null,
+    "stem": "Which of the following statements accurately describe tradeoffs of more sophisticated planning strategies (plan-and-execute, tree-of-thought) compared to simpler approaches? (Select 2)",
+    "select_count": 2,
+    "options": [
+      {
+        "key": "A",
+        "text": "They generally add more computational cost or complexity than a simpler, direct approach"
+      },
+      {
+        "key": "B",
+        "text": "They are only usable when the underlying model has internet access"
+      },
+      {
+        "key": "C",
+        "text": "They can produce better outcomes specifically when the task has genuine structure (interdependence or ambiguity) that benefits from the added process"
+      },
+      {
+        "key": "D",
+        "text": "They eliminate all possibility of error in the final answer"
+      }
+    ],
+    "correct": [
+      "A",
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "Both plan-and-execute and tree-of-thought add real computational/complexity cost, and that cost is worthwhile specifically when the task's genuine structure (dependencies, ambiguity) benefits from the added process -- otherwise it's wasted overhead.",
+      "why_incorrect": {
+        "B": "Internet access is unrelated to whether these planning strategies can be used; they are reasoning/structuring techniques, not dependent on any particular tool access.",
+        "D": "Neither strategy eliminates all possibility of error; they can improve outcomes on well-matched tasks but provide no error-free guarantee."
+      },
+      "rule_of_thumb": "More sophisticated planning strategies trade added cost for better outcomes specifically on tasks with real structure to exploit -- not a universal error-elimination guarantee."
+    },
+    "tags": [
+      "planning-strategy-selection",
+      "tradeoffs"
+    ]
+  }
+]

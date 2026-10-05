@@ -1,0 +1,476 @@
+[
+  {
+    "id": "Q-D1-0001",
+    "domain": 1,
+    "task_statement": "1.1",
+    "type": "single_choice",
+    "difficulty": "easy",
+    "theory_refs": [
+      "TH-D1-001"
+    ],
+    "case_study_id": null,
+    "stem": "A system takes a user's question, sends it to an LLM in a single call, and returns the completion directly to the user with no further processing. Why is this NOT considered an agent?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "It responds too quickly to be an agent"
+      },
+      {
+        "key": "B",
+        "text": "It uses a language model, and language models can never be part of an agent"
+      },
+      {
+        "key": "C",
+        "text": "It does not use enough tokens to qualify as agentic"
+      },
+      {
+        "key": "D",
+        "text": "It has no autonomy over deciding its own next step -- there is only one fixed step"
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "Agency requires the system to decide what to do next across some number of steps; a single fixed prompt-to-completion call has no decision point about subsequent actions, so there is no autonomy being exercised.",
+      "why_incorrect": {
+        "B": "Language models are the typical reasoning core of agentic systems; the issue is the absence of a decision loop around the model, not the model's presence.",
+        "C": "Token count has no bearing on whether a system is agentic; agency is about decision-making structure, not response length.",
+        "A": "Response speed is unrelated to whether a system exhibits autonomous decision-making."
+      },
+      "rule_of_thumb": "A single fixed call with no loop or decision point about further action is not agentic, regardless of how sophisticated the model behind it is."
+    },
+    "tags": [
+      "agent-definition",
+      "autonomy"
+    ]
+  },
+  {
+    "id": "Q-D1-0002",
+    "domain": 1,
+    "task_statement": "1.1",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D1-002"
+    ],
+    "case_study_id": null,
+    "stem": "A system always executes exactly three LLM calls in a fixed order (summarize, translate, format) regardless of the input or intermediate results. Where does this system sit on the agentic spectrum?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Fully agentic, because it makes three decisions"
+      },
+      {
+        "key": "B",
+        "text": "Not agentic -- it is a fixed prompt chain with no runtime decision-making"
+      },
+      {
+        "key": "C",
+        "text": "More agentic than a router, because it has more steps"
+      },
+      {
+        "key": "D",
+        "text": "Impossible to classify without knowing which LLM is used"
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "explanation": {
+      "why_correct": "Because the sequence, count, and order of steps are fixed in advance and never change based on input or intermediate results, this is a fixed prompt chain -- a workflow, not an agent, despite using multiple LLM calls.",
+      "why_incorrect": {
+        "C": "Step count alone does not determine position on the agentic spectrum; a router that dynamically selects among branches exhibits more runtime decision-making than this fixed three-step chain, even with fewer total steps.",
+        "D": "The choice of underlying LLM has no bearing on whether the system's control flow is fixed or dynamic -- the architecture, not the model, determines agentic classification.",
+        "A": "Three LLM calls happening does not mean three autonomous decisions were made; the sequence was predetermined by the developer, not chosen by the model at runtime."
+      },
+      "rule_of_thumb": "A fixed sequence of LLM calls executed the same way regardless of input is a prompt chain (workflow), not an agent -- agentic classification depends on whether the control flow is decided at runtime, not on how many steps exist."
+    },
+    "tags": [
+      "agentic-spectrum",
+      "prompt-chain"
+    ]
+  },
+  {
+    "id": "Q-D1-0003",
+    "domain": 1,
+    "task_statement": "1.1",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D1-003"
+    ],
+    "case_study_id": null,
+    "stem": "Which of the following is NOT one of the minimum functional components typically required for a system to be considered a complete agent?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "A defined action space of things the agent can do"
+      },
+      {
+        "key": "B",
+        "text": "A reasoning core that decides what action to take"
+      },
+      {
+        "key": "C",
+        "text": "A long-term memory store that persists across sessions"
+      },
+      {
+        "key": "D",
+        "text": "A termination condition that determines when to stop"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "Long-term persistent memory is a common and valuable enhancement to agentic systems, but it is not one of the strictly minimal required components -- a reactive agent can loop through reasoning, action, and observation within a single task without any memory that persists beyond that task.",
+      "why_incorrect": {
+        "B": "A reasoning core that decides the next action is a minimum requirement -- without it, there is no decision-making loop at all.",
+        "D": "A termination condition is required to prevent the agent loop from running indefinitely; without one, the system has no way to know when the task is complete.",
+        "A": "A defined action space is required because the agent must have some set of possible actions to choose from; without one, there is nothing for the reasoning core to select."
+      },
+      "rule_of_thumb": "The minimal agent loop needs a decision-maker, an action space, observation/feedback, and a stopping condition -- memory and planning are valuable additions layered on top, not strict requirements."
+    },
+    "tags": [
+      "agent-components",
+      "minimal-agent"
+    ]
+  },
+  {
+    "id": "Q-D1-0004",
+    "domain": 1,
+    "task_statement": "1.1",
+    "type": "single_choice",
+    "difficulty": "easy",
+    "theory_refs": [
+      "TH-D1-004"
+    ],
+    "case_study_id": null,
+    "stem": "Why can a single LLM call struggle to answer a question about today's stock price, even for a very capable model?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Stock-related questions are filtered out by all language models for legal reasons"
+      },
+      {
+        "key": "B",
+        "text": "Stock prices are too mathematically complex for any language model to represent"
+      },
+      {
+        "key": "C",
+        "text": "Single LLM calls are physically incapable of outputting numbers"
+      },
+      {
+        "key": "D",
+        "text": "The model's knowledge is limited to its training data and prompt context, which does not include real-time external information"
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "A single LLM call can only draw on what it learned during training plus whatever is included in the prompt; it has no built-in mechanism to fetch live, current data such as today's stock price unless something external (like a tool call) supplies that information.",
+      "why_incorrect": {
+        "B": "Representing a number like a stock price is not a complexity problem for language models; the issue is lack of access to current data, not an inability to represent numeric values.",
+        "C": "Language models routinely output numeric text; there is no physical limitation preventing this.",
+        "A": "There is no general legal filtering of stock-price questions across language models; the limitation described is about knowledge access, not content policy."
+      },
+      "rule_of_thumb": "A single LLM call's knowledge is frozen at training time plus whatever is in the prompt -- anything requiring live or private data needs an external lookup, which is exactly the gap tool-using agents are designed to fill."
+    },
+    "tags": [
+      "grounding",
+      "limitations",
+      "tool-use-motivation"
+    ]
+  },
+  {
+    "id": "Q-D1-0005",
+    "domain": 1,
+    "task_statement": "1.1",
+    "type": "single_choice",
+    "difficulty": "hard",
+    "theory_refs": [
+      "TH-D1-005"
+    ],
+    "case_study_id": null,
+    "stem": "A product has many conditional branches: depending on the detected intent of a user message, it routes to one of ten different developer-authored response templates, each possibly calling an LLM. No branch is ever chosen by the model itself -- intent classification uses a separate fixed classifier. Is this system best described as an agent or a workflow?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "An agent, because an LLM is involved in generating the responses"
+      },
+      {
+        "key": "B",
+        "text": "An agent, because it has ten possible paths, which shows flexibility"
+      },
+      {
+        "key": "C",
+        "text": "A workflow, because all branches and the routing logic were authored in advance by a developer"
+      },
+      {
+        "key": "D",
+        "text": "Neither a workflow nor an agent, since it uses a classifier"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "Even with ten branches, the full set of possible execution paths was defined in advance by a developer, and no model is deciding at runtime which action to take or improvising beyond the predefined branches -- this is the defining characteristic of a workflow, not an agent.",
+      "why_incorrect": {
+        "B": "Having many branches does not make a system agentic; what matters is whether the branch is selected by model-driven runtime decision-making versus a fixed classifier mapping to a fixed branch set, which is the case here.",
+        "D": "The system fits clearly into the workflow category precisely because of its fixed, developer-authored branching structure -- the presence of a classifier does not disqualify it from being a workflow.",
+        "A": "Using an LLM to generate a response within a branch does not retroactively make the overall control flow agentic if the branch selection itself was not an autonomous, open-ended decision."
+      },
+      "rule_of_thumb": "The number of branches does not determine agentic classification -- what matters is whether the branch set and routing logic were fixed in advance (workflow) or decided dynamically by the model at runtime (agent)."
+    },
+    "tags": [
+      "workflow-vs-agent",
+      "control-flow"
+    ]
+  },
+  {
+    "id": "Q-D1-0006",
+    "domain": 1,
+    "task_statement": "1.1",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D1-006"
+    ],
+    "case_study_id": null,
+    "stem": "A team is building a system to help users draft emails. They are deciding whether to give it full autonomy to also SEND emails on the user's behalf without confirmation, or to require human approval before sending. Which consideration most directly supports requiring human approval?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Email drafting is too simple a task to need any agentic behavior at all"
+      },
+      {
+        "key": "B",
+        "text": "Language models cannot generate email text without supervision"
+      },
+      {
+        "key": "C",
+        "text": "Sending an email is a hard-to-reverse, potentially high-stakes action if the content or recipient is wrong"
+      },
+      {
+        "key": "D",
+        "text": "Human approval always makes a system faster"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "Actions that are difficult or impossible to reverse once taken, especially where a mistake (wrong recipient, wrong content, embarrassing error) carries real cost, are a textbook case for keeping a human-in-the-loop checkpoint rather than granting full unattended autonomy.",
+      "why_incorrect": {
+        "D": "Human approval steps typically add latency rather than speed, since they introduce a wait for human review; this is a cost of the safety tradeoff, not a benefit being claimed.",
+        "A": "The simplicity of drafting is not the relevant factor here -- the concern is specifically about the SENDING action's reversibility and stakes, not the complexity of the overall task.",
+        "B": "Language models are generally capable of drafting email text without supervision; the autonomy question here is about the irreversible SEND action, not the drafting capability."
+      },
+      "rule_of_thumb": "When deciding how much autonomy to grant, weigh the reversibility and stakes of the specific action in question -- hard-to-reverse, high-stakes actions are prime candidates for human-in-the-loop gating even within an otherwise agentic system."
+    },
+    "tags": [
+      "autonomy",
+      "human-in-the-loop",
+      "risk"
+    ]
+  },
+  {
+    "id": "Q-D1-0007",
+    "domain": 1,
+    "task_statement": "1.1",
+    "type": "single_choice",
+    "difficulty": "easy",
+    "theory_refs": [
+      "TH-D1-001"
+    ],
+    "case_study_id": null,
+    "stem": "Which best describes 'goal-directedness' as a property of agentic systems?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "The system has a single hard-coded goal that never changes across any task"
+      },
+      {
+        "key": "B",
+        "text": "The system always achieves its goal successfully"
+      },
+      {
+        "key": "C",
+        "text": "The system's actions are organized toward achieving an objective, not just producing one isolated response"
+      },
+      {
+        "key": "D",
+        "text": "The system can only have exactly one goal at a time, ever"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "Goal-directedness refers to actions being organized around pursuing an objective across potentially multiple steps, not a guarantee of success or a restriction on how goals are specified.",
+      "why_incorrect": {
+        "B": "Goal-directedness describes the organizing principle behind the agent's behavior, not a guarantee that the objective will actually be achieved -- agents can fail to reach their goals.",
+        "D": "Many agent designs can pursue sub-goals or multiple objectives in service of a larger task; goal-directedness does not restrict the system to exactly one goal.",
+        "A": "Goal-directed systems commonly receive different goals for different tasks or user requests; the property does not require a fixed, unchanging goal."
+      },
+      "rule_of_thumb": "Goal-directedness is about actions being organized around pursuing an objective across steps -- it says nothing about guaranteed success or a fixed single goal."
+    },
+    "tags": [
+      "agent-definition",
+      "goal-directedness"
+    ]
+  },
+  {
+    "id": "Q-D1-0008",
+    "domain": 1,
+    "task_statement": "1.1",
+    "type": "single_choice",
+    "difficulty": "hard",
+    "theory_refs": [
+      "TH-D1-002",
+      "TH-D1-005"
+    ],
+    "case_study_id": null,
+    "stem": "A customer support product classifies incoming tickets into one of five fixed categories using a classifier, then for the 'billing' category only, hands off to a sub-process where the model dynamically decides how many clarifying questions to ask and which internal billing tools to query before responding. How should this overall product be classified?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Not classifiable, since it mixes two different control-flow styles"
+      },
+      {
+        "key": "B",
+        "text": "Entirely a workflow, since classification is fixed"
+      },
+      {
+        "key": "C",
+        "text": "Entirely an agent, since one part of it is agentic"
+      },
+      {
+        "key": "D",
+        "text": "A hybrid system: a fixed workflow for routing, with an embedded agent for the billing sub-process"
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "The system combines a fixed, developer-authored routing workflow with a genuinely agentic sub-process (dynamic question count and tool choice decided by the model at runtime) embedded within one branch -- this kind of hybrid composition is common and should be described in terms of its parts rather than forced into a single label.",
+      "why_incorrect": {
+        "B": "Labeling the whole system a workflow ignores the embedded agentic decision-making happening inside the billing branch, where the model dynamically controls its own steps.",
+        "C": "Labeling the whole system an agent overstates the flexibility of the overall routing layer, which is a fixed, predetermined classification step with no runtime decision-making about which category to create or how to route.",
+        "A": "Mixed control-flow styles within one product are common and well-understood in practice; the correct response is to describe the hybrid composition, not declare it unclassifiable."
+      },
+      "rule_of_thumb": "Real systems often combine fixed workflow structure with embedded agentic sub-processes -- correctly describing such a system means identifying which parts are fixed and which parts involve genuine runtime decision-making, rather than forcing one label onto the whole."
+    },
+    "tags": [
+      "hybrid-systems",
+      "workflow-vs-agent"
+    ]
+  },
+  {
+    "id": "Q-D1-0009",
+    "domain": 1,
+    "task_statement": "1.1",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D1-004"
+    ],
+    "case_study_id": null,
+    "stem": "An agentic design adds a self-critique step: after generating a draft answer, the system asks the model to review its own draft for errors and revise if needed. What limitation of single-shot LLM calls does this address?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Self-critique eliminates the need for any grounding or external tools"
+      },
+      {
+        "key": "B",
+        "text": "Single-shot calls are always factually wrong"
+      },
+      {
+        "key": "C",
+        "text": "A single pass has no mechanism to verify or revise its own output before it is finalized"
+      },
+      {
+        "key": "D",
+        "text": "Self-critique makes the model permanently more accurate on all future tasks"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "A single-shot generation is produced and returned without any built-in opportunity to check it against the task requirements or catch mistakes; a self-critique step explicitly reintroduces that missing verification/revision capability by having the model review its own prior output.",
+      "why_incorrect": {
+        "B": "Single-shot calls are not always wrong -- many are correct; the issue addressed by self-critique is the LACK of a verification step, not a guarantee of error.",
+        "D": "Self-critique applied within one task does not persist as a permanent improvement to the underlying model's future performance on unrelated tasks; it is a per-task mechanism, not a training update.",
+        "A": "Self-critique addresses the verification/revision gap, not the knowledge-grounding gap -- a model can still lack access to external facts even while critiquing its own reasoning."
+      },
+      "rule_of_thumb": "Self-critique/reflection loops specifically address the lack of a verification-and-revision step inherent in single-shot generation -- they do not fix knowledge gaps (that's tool use) or permanently retrain the model."
+    },
+    "tags": [
+      "self-critique",
+      "limitations",
+      "reflection"
+    ]
+  },
+  {
+    "id": "Q-D1-0010",
+    "domain": 1,
+    "task_statement": "1.1",
+    "type": "single_choice",
+    "difficulty": "easy",
+    "theory_refs": [
+      "TH-D1-003"
+    ],
+    "case_study_id": null,
+    "stem": "In the minimal agent loop, what is the role of the 'observation' step?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Permanently storing all past actions in long-term memory"
+      },
+      {
+        "key": "B",
+        "text": "Feeding the results of a prior action back into the agent's context so it can decide its next step"
+      },
+      {
+        "key": "C",
+        "text": "Generating the final answer shown to the user"
+      },
+      {
+        "key": "D",
+        "text": "Selecting which LLM model to use for the task"
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "explanation": {
+      "why_correct": "The observation step closes the loop between acting and reasoning: whatever happened as a result of the agent's last action (e.g. a tool's return value) is fed back into the context so the reasoning core has up-to-date information to decide the next action.",
+      "why_incorrect": {
+        "C": "Generating the final answer is the job of the reasoning core once the termination condition is met, not the observation step, which happens after each individual action.",
+        "D": "Model selection is a design-time or configuration decision, not a runtime step within the agent's perceive-act loop.",
+        "A": "Permanent long-term storage is a memory-system concern, which is an optional enhancement layered on top of the minimal loop, not the core function of the observation step itself."
+      },
+      "rule_of_thumb": "Observation is specifically about feeding action results back into context for the next decision -- it's the 'perceive' half of the perceive-act loop, distinct from memory storage or final answer generation."
+    },
+    "tags": [
+      "agent-loop",
+      "observation"
+    ]
+  }
+]

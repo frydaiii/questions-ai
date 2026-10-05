@@ -1,0 +1,146 @@
+[
+  {
+    "id": "Q-D2-0356",
+    "domain": 2, "task_statement": "2.3", "type": "single_choice", "difficulty": "easy",
+    "theory_refs": ["TH-D2-011"], "case_study_id": null,
+    "stem": "Which of the following is a defining characteristic of Amazon Bedrock's pricing model for on-demand usage?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "A flat annual license fee with unlimited usage" },
+      { "key": "B", "text": "Pay-as-you-go billing based on the number of input and output tokens processed" },
+      { "key": "C", "text": "Billing based solely on the number of AWS accounts used" },
+      { "key": "D", "text": "No billing of any kind for any usage" }
+    ],
+    "correct": ["B"],
+    "explanation": {
+      "why_correct": "Bedrock's default on-demand pricing model bills pay-as-you-go based on the number of input and output tokens processed, which is the defining characteristic of this pricing tier.",
+      "why_incorrect": {
+        "A": "Bedrock does not use a flat annual license fee for on-demand usage; it uses token-based billing.",
+        "C": "Billing is not based on account count; it scales with actual token usage.",
+        "D": "Bedrock usage is billed; it is not free of any charges."
+      },
+      "rule_of_thumb": "Amazon Bedrock's default pricing model is on-demand, pay-as-you-go, billed per input token and per output token processed."
+    },
+    "tags": ["bedrock-pricing"]
+  },
+  {
+    "id": "Q-D2-0357",
+    "domain": 2, "task_statement": "2.3", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D2-017"], "case_study_id": null,
+    "stem": "A company wants to distinguish which Amazon Q product to use for a scenario involving reviewing pull requests and suggesting code fixes. Which product fits?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Amazon Q Business" },
+      { "key": "B", "text": "Amazon Q in Connect" },
+      { "key": "C", "text": "Amazon Q Developer" },
+      { "key": "D", "text": "Amazon Q in AWS Supply Chain" }
+    ],
+    "correct": ["C"],
+    "explanation": {
+      "why_correct": "Reviewing pull requests and suggesting code fixes is a coding-assistance task, exactly matching Amazon Q Developer's purpose as the coding assistant.",
+      "why_incorrect": {
+        "A": "Amazon Q Business is the enterprise knowledge assistant, not a coding-review tool.",
+        "B": "Amazon Q in Connect assists contact-center agents; it is unrelated to code review.",
+        "D": "Amazon Q in AWS Supply Chain focuses on supply chain insights; it is unrelated to code review."
+      },
+      "rule_of_thumb": "Coding tasks -> Q Developer."
+    },
+    "tags": ["amazon-q-developer"]
+  },
+  {
+    "id": "Q-D2-0358",
+    "domain": 2, "task_statement": "2.3", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D2-013"], "case_study_id": null,
+    "stem": "Which AWS storage service most commonly serves as the source document location for Amazon Bedrock Knowledge Bases ingestion?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Amazon S3" },
+      { "key": "B", "text": "Amazon EC2 instance store" },
+      { "key": "C", "text": "AWS Snowball" },
+      { "key": "D", "text": "Amazon Route 53" }
+    ],
+    "correct": ["A"],
+    "explanation": {
+      "why_correct": "Amazon S3 is the commonly used source document location for Bedrock Knowledge Bases ingestion, serving as the storage layer from which documents are chunked and embedded.",
+      "why_incorrect": {
+        "B": "EC2 instance store is ephemeral local storage tied to a specific instance; it is not the standard source for Knowledge Bases ingestion.",
+        "C": "AWS Snowball is a physical data transfer device for bulk migrations; it is not the ongoing source location for Knowledge Bases.",
+        "D": "Amazon Route 53 is a DNS service; it has no relevance to document storage for Knowledge Bases."
+      },
+      "rule_of_thumb": "Source documents commonly live in Amazon S3 for Bedrock Knowledge Bases ingestion."
+    },
+    "tags": ["bedrock-knowledge-bases", "s3"]
+  },
+  {
+    "id": "Q-D2-0359",
+    "domain": 2, "task_statement": "2.3", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D2-016"], "case_study_id": null,
+    "stem": "Which statement correctly describes RDS for PostgreSQL's role as a vector store option on AWS?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "It supports the pgvector extension, enabling storage and querying of embeddings using SQL." },
+      { "key": "B", "text": "It has no vector storage capability of any kind." },
+      { "key": "C", "text": "It exclusively supports graph-structured data with no relational capability." },
+      { "key": "D", "text": "It requires abandoning SQL entirely to use vector features." }
+    ],
+    "correct": ["A"],
+    "explanation": {
+      "why_correct": "Amazon RDS for PostgreSQL supports the pgvector extension, letting teams store and query embeddings using familiar SQL alongside their relational data, exactly as described.",
+      "why_incorrect": {
+        "B": "RDS for PostgreSQL does have vector storage capability via the pgvector extension, contrary to this statement.",
+        "C": "RDS for PostgreSQL is fundamentally a relational database; it is not a graph-structured-data-exclusive service.",
+        "D": "pgvector is designed to be queried using standard SQL, not requiring SQL to be abandoned."
+      },
+      "rule_of_thumb": "Amazon RDS for PostgreSQL supports the pgvector extension, enabling efficient storage of embeddings and similarity searches using SQL."
+    },
+    "tags": ["vector-database", "pgvector"]
+  },
+  {
+    "id": "Q-D2-0360",
+    "domain": 2, "task_statement": "2.3", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D2-015"], "case_study_id": null,
+    "stem": "Which of the following is a content filter category that Bedrock Guardrails can be configured to block?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Harmful content categories, such as hate speech or violence" },
+      { "key": "B", "text": "Valid AWS billing invoices" },
+      { "key": "C", "text": "Successfully completed API health checks" },
+      { "key": "D", "text": "Routine CloudWatch log entries" }
+    ],
+    "correct": ["A"],
+    "explanation": {
+      "why_correct": "Bedrock Guardrails can be configured with content filters to block categories of harmful content, such as hate speech or violence, directly matching this description.",
+      "why_incorrect": {
+        "B": "Billing invoices are unrelated to content-safety filtering; Guardrails does not filter this kind of administrative data.",
+        "C": "API health checks are operational signals, not content requiring safety filtering.",
+        "D": "Routine log entries are operational data, not the kind of harmful content Guardrails content filters are designed to block."
+      },
+      "rule_of_thumb": "Content filters block categories of harmful content as part of Bedrock Guardrails' configurable safety controls."
+    },
+    "tags": ["bedrock-guardrails"]
+  },
+  {
+    "id": "Q-D2-0361",
+    "domain": 2, "task_statement": "2.3", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D2-018"], "case_study_id": null,
+    "stem": "A team wants to fine-tune a JumpStart foundation model and needs to select which SageMaker instance type will run the training job. Which capability enables this level of control?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "SageMaker JumpStart's fine-tuning process, which runs within the self-managed SageMaker environment" },
+      { "key": "B", "text": "PartyRock, since it exposes identical instance-type configuration options" },
+      { "key": "C", "text": "Amazon Bedrock on-demand pricing" },
+      { "key": "D", "text": "Amazon Polly voice selection" }
+    ],
+    "correct": ["A"],
+    "explanation": {
+      "why_correct": "SageMaker JumpStart's fine-tuning process runs within the self-managed SageMaker environment, giving the team the ability to select specific training instance types, matching this exact control requirement.",
+      "why_incorrect": {
+        "B": "PartyRock is a no-code playground with no instance-type configuration exposed; it does not offer this level of infrastructure control.",
+        "C": "Bedrock on-demand pricing is a billing model for using existing foundation models via API; it does not expose instance-type selection for training.",
+        "D": "Amazon Polly voice selection is a text-to-speech configuration option, unrelated to training instance type selection."
+      },
+      "rule_of_thumb": "Need full control over fine-tuning a pre-trained model's training process, including instance type selection -> SageMaker JumpStart."
+    },
+    "tags": ["sagemaker-jumpstart", "fine-tuning"]
+  }
+]

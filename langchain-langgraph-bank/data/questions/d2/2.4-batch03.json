@@ -1,0 +1,81 @@
+[
+  {
+    "id": "Q-D2-0072",
+    "domain": 2,
+    "task_statement": "2.4",
+    "type": "multi_response",
+    "difficulty": "medium",
+    "theory_refs": ["TH-D2-015"],
+    "case_study_id": null,
+    "stem": "Which of the following are legitimate mechanisms for detecting reasoning errors mid-task? (Select 3)",
+    "select_count": 3,
+    "options": [
+      { "key": "A", "text": "Internal consistency checks between different parts of the reasoning" },
+      { "key": "B", "text": "Sanity checks against known plausible constraints or ranges" },
+      { "key": "C", "text": "Grounding checks against an external, verifiable source" },
+      { "key": "D", "text": "Simply trusting that errors never occur" }
+    ],
+    "correct": ["A", "B", "C"],
+    "explanation": {
+      "why_correct": "Consistency checks, sanity checks against known constraints, and grounding checks against external sources are all legitimate, distinct mechanisms for catching different classes of reasoning errors.",
+      "why_incorrect": {
+        "D": "Simply trusting that errors never occur is not a detection mechanism at all -- it's the absence of any error-checking, which leaves errors uncaught."
+      },
+      "rule_of_thumb": "Use consistency checks, sanity checks, and grounding checks together, since each catches different classes of reasoning errors."
+    },
+    "tags": ["error-detection"]
+  },
+  {
+    "id": "Q-D2-0073",
+    "domain": 2,
+    "task_statement": "2.4",
+    "type": "ordering",
+    "difficulty": "medium",
+    "theory_refs": ["TH-D2-015"],
+    "case_study_id": null,
+    "stem": "Place the following steps of reasoning-error recovery in the correct order.",
+    "select_count": 3,
+    "options": [
+      { "key": "A", "text": "Detect that a specific earlier reasoning step was flawed" },
+      { "key": "B", "text": "Backtrack to the point where the flawed step was introduced" },
+      { "key": "C", "text": "Re-reason forward from the corrected step through any dependent downstream steps" }
+    ],
+    "correct": ["A", "B", "C"],
+    "explanation": {
+      "why_correct": "Proper recovery first detects the flawed step, then backtracks to that exact point, and finally re-reasons forward through any downstream steps that depended on it -- in that order.",
+      "why_incorrect": {},
+      "rule_of_thumb": "Error recovery always proceeds: detect, backtrack to the origin, then re-reason forward through dependent steps."
+    },
+    "tags": ["error-detection", "backtracking", "execution-order"]
+  },
+  {
+    "id": "Q-D2-0074",
+    "domain": 2,
+    "task_statement": "2.4",
+    "type": "matching",
+    "difficulty": "medium",
+    "theory_refs": ["TH-D2-013", "TH-D2-014", "TH-D2-016"],
+    "case_study_id": null,
+    "stem": "Match each uncertainty-handling concept on the left to its correct description on the right.",
+    "select_count": 3,
+    "matching": {
+      "left": [
+        { "key": "L1", "text": "False confidence" },
+        { "key": "L2", "text": "Ambiguity handling via stated assumption" },
+        { "key": "L3", "text": "Calibration" }
+      ],
+      "right": [
+        { "key": "R1", "text": "A definitive-sounding answer produced despite a weak or absent underlying basis" },
+        { "key": "R2", "text": "Proceeding with the most likely interpretation while explicitly noting that choice" },
+        { "key": "R3", "text": "Matching expressed confidence to the actual strength of the underlying evidence" }
+      ]
+    },
+    "correct_pairs": { "L1": "R1", "L2": "R2", "L3": "R3" },
+    "explanation": {
+      "why_correct": "Each concept maps to its defining description: false confidence is unsupported certainty, stated-assumption handling makes an ambiguity-resolving choice visible, and calibration matches confidence to actual evidence strength.",
+      "why_incorrect": {},
+      "rule_of_thumb": "False confidence = unsupported certainty; stated assumption = visible ambiguity resolution; calibration = confidence matched to evidence."
+    },
+    "tags": ["uncertainty", "ambiguity-handling", "calibration"]
+  }
+]

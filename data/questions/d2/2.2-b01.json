@@ -1,0 +1,603 @@
+[
+  {
+    "id": "Q-D2-0201",
+    "domain": 2, "task_statement": "2.2", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D2-006"], "case_study_id": null,
+    "stem": "A generative model confidently states that a company's product launched in a specific year, but the date it provides is completely fabricated and does not appear anywhere in its training data or any provided context. What is this behavior called?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "A knowledge cutoff" },
+      { "key": "B", "text": "A hallucination" },
+      { "key": "C", "text": "Prompt injection" },
+      { "key": "D", "text": "Fine-tuning" }
+    ],
+    "correct": ["B"],
+    "explanation": {
+      "why_correct": "Confidently stating fabricated, incorrect information that sounds plausible but is not grounded in factual data is precisely the definition of a hallucination.",
+      "why_incorrect": {
+        "A": "A knowledge cutoff refers to the model having no awareness of events after its training data ends; this scenario describes fabricating information outright, not simply lacking recent knowledge.",
+        "C": "Prompt injection involves malicious instructions hidden in input data attempting to hijack model behavior; this scenario describes an unprompted factual fabrication, not an injection attack.",
+        "D": "Fine-tuning is a training technique; it is unrelated to this specific output-quality issue."
+      },
+      "rule_of_thumb": "Confident-sounding but wrong or fabricated output -> hallucination; mitigate primarily with RAG."
+    },
+    "tags": ["hallucination"]
+  },
+  {
+    "id": "Q-D2-0202",
+    "domain": 2, "task_statement": "2.2", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D2-006"], "case_study_id": null,
+    "stem": "A user asks a foundation model about an event that occurred one week ago, and the model responds that it has no knowledge of any such event, since its training data ends before that date. What is this limitation called?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Hallucination" },
+      { "key": "B", "text": "Knowledge cutoff" },
+      { "key": "C", "text": "Prompt injection" },
+      { "key": "D", "text": "Jailbreaking" }
+    ],
+    "correct": ["B"],
+    "explanation": {
+      "why_correct": "The model having no built-in awareness of events after its training data ends is precisely the definition of a knowledge cutoff, a structural limitation of how foundation models are trained.",
+      "why_incorrect": {
+        "A": "Hallucination refers to confidently stating fabricated information; here the model correctly acknowledges it lacks knowledge, rather than fabricating an answer, so this is a knowledge cutoff, not a hallucination.",
+        "C": "Prompt injection involves malicious instructions hidden in input data; it is unrelated to a model's inherent lack of knowledge about recent events.",
+        "D": "Jailbreaking involves prompts designed to bypass safety training; it is unrelated to a model's knowledge cutoff limitation."
+      },
+      "rule_of_thumb": "Model has no idea about a recent event -> knowledge cutoff; mitigate by supplying current information (e.g. via RAG) rather than expecting the model to 'know' it."
+    },
+    "tags": ["knowledge-cutoff"]
+  },
+  {
+    "id": "Q-D2-0203",
+    "domain": 2, "task_statement": "2.2", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D2-006"], "case_study_id": null,
+    "stem": "A company deploys a generative AI chatbot for internal legal research and wants to minimize the risk of the chatbot confidently stating incorrect legal precedents. Which mitigation is most directly effective for this specific risk?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Increasing the model's context window with no other changes" },
+      { "key": "B", "text": "Grounding responses in verified legal documents via Retrieval-Augmented Generation (RAG)" },
+      { "key": "C", "text": "Raising the temperature setting to increase creativity" },
+      { "key": "D", "text": "Removing all guardrails to allow unrestricted responses" }
+    ],
+    "correct": ["B"],
+    "explanation": {
+      "why_correct": "RAG mitigates hallucination on factual questions by retrieving relevant external, verified documents during generation, ensuring the model's response is grounded in accurate source material rather than relying solely on potentially fabricated recall.",
+      "why_incorrect": {
+        "A": "Simply increasing context window size does not ground responses in verified facts; it only increases how much text can be considered, unrelated to hallucination mitigation.",
+        "C": "Raising temperature increases randomness and creativity, which would likely make hallucination risk WORSE, not better, for a factual-accuracy use case like legal research.",
+        "D": "Removing guardrails increases risk rather than mitigating it; guardrails address content safety, and removing them does nothing to reduce hallucination specifically."
+      },
+      "rule_of_thumb": "RAG is the primary mitigation for hallucination on factual questions, since it grounds responses in retrieved, verifiable source documents."
+    },
+    "tags": ["hallucination", "rag"]
+  },
+  {
+    "id": "Q-D2-0204",
+    "domain": 2, "task_statement": "2.2", "type": "single_choice", "difficulty": "hard",
+    "theory_refs": ["TH-D2-006"], "case_study_id": null,
+    "stem": "A team implements RAG for their customer support chatbot, expecting this to fully eliminate hallucination. After launch, they still observe occasional confidently incorrect answers. What is the most accurate explanation?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "RAG substantially reduces but does not fully eliminate hallucination risk; retrieval quality issues or model deviation from retrieved content can still cause incorrect answers." },
+      { "key": "B", "text": "RAG has no effect whatsoever on hallucination; the team's implementation must be completely broken." },
+      { "key": "C", "text": "This proves RAG should never be used for any application." },
+      { "key": "D", "text": "This is expected only if the temperature setting was left at its absolute maximum with no other explanation possible." }
+    ],
+    "correct": ["A"],
+    "explanation": {
+      "why_correct": "RAG substantially reduces hallucination by grounding responses in retrieved documents, but it does not fully eliminate the risk — poor retrieval quality (fetching the wrong or irrelevant chunks) or the model still deviating from the retrieved content can both still produce incorrect answers.",
+      "why_incorrect": {
+        "B": "RAG does have a real, substantial positive effect on reducing hallucination; claiming it has 'no effect whatsoever' overstates the problem and ignores its well-documented benefits.",
+        "C": "RAG remains a valuable, widely used mitigation technique; occasional residual hallucination does not mean it should never be used.",
+        "D": "While a high temperature could contribute to variability, it is not the only possible explanation; retrieval quality issues are a distinct and common cause of residual hallucination even with RAG in place."
+      },
+      "rule_of_thumb": "Assuming RAG alone is a complete hallucination fix is a common mistake — RAG substantially reduces but does not eliminate hallucination risk, especially if retrieval quality is poor or the model still deviates from retrieved content."
+    },
+    "tags": ["hallucination", "rag"]
+  },
+  {
+    "id": "Q-D2-0205",
+    "domain": 2, "task_statement": "2.2", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D2-007"], "case_study_id": null,
+    "stem": "A publishing company wants to automatically condense lengthy research papers into concise executive summaries for busy readers. Which generative AI use case category does this represent?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Code generation" },
+      { "key": "B", "text": "Summarization" },
+      { "key": "C", "text": "Anomaly detection" },
+      { "key": "D", "text": "Time-series forecasting" }
+    ],
+    "correct": ["B"],
+    "explanation": {
+      "why_correct": "Condensing long-form content into a shorter, digestible version while preserving key meaning is precisely the definition of summarization, a core generative AI business use case.",
+      "why_incorrect": {
+        "A": "Code generation involves writing or explaining software code; it is unrelated to condensing research papers into summaries.",
+        "C": "Anomaly detection identifies unusual data points relative to a norm; it is unrelated to text summarization.",
+        "D": "Time-series forecasting predicts future numeric values; it is unrelated to summarizing existing text content."
+      },
+      "rule_of_thumb": "Summarization: condensing long-form content while preserving key meaning — a core generative AI business use case."
+    },
+    "tags": ["summarization", "business-use-cases"]
+  },
+  {
+    "id": "Q-D2-0206",
+    "domain": 2, "task_statement": "2.2", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D2-007"], "case_study_id": null,
+    "stem": "A software company wants an AI assistant integrated into its developers' IDEs to help write, explain, and review code, and perform security scanning. Which AWS-branded generative AI capability is the direct example of this use case?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Amazon Q Business" },
+      { "key": "B", "text": "Amazon Forecast" },
+      { "key": "C", "text": "Amazon Q Developer" },
+      { "key": "D", "text": "Amazon Personalize" }
+    ],
+    "correct": ["C"],
+    "explanation": {
+      "why_correct": "Amazon Q Developer is the AWS-branded generative AI coding assistant, helping write, explain, and review code, and performing security scanning, directly matching this exact use case description.",
+      "why_incorrect": {
+        "A": "Amazon Q Business is the enterprise knowledge assistant connected to internal data sources, not the coding assistant.",
+        "B": "Amazon Forecast predicts future numeric time-series values; it is unrelated to coding assistance.",
+        "D": "Amazon Personalize generates personalized recommendations; it is unrelated to coding assistance."
+      },
+      "rule_of_thumb": "Code generation: writing, explaining, or reviewing code — Amazon Q Developer is the AWS-branded example of this use case."
+    },
+    "tags": ["code-generation", "amazon-q-developer"]
+  },
+  {
+    "id": "Q-D2-0207",
+    "domain": 2, "task_statement": "2.2", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D2-008"], "case_study_id": null,
+    "stem": "Which of the following describes a genuine CAPABILITY of generative AI, as opposed to a limitation?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "The tendency to occasionally state incorrect facts confidently" },
+      { "key": "B", "text": "A fixed knowledge cutoff date" },
+      { "key": "C", "text": "Broad task generalization from a single pre-trained model, handling many previously-unseen tasks with little setup" },
+      { "key": "D", "text": "Sensitivity to prompt wording that can shift output quality" }
+    ],
+    "correct": ["C"],
+    "explanation": {
+      "why_correct": "Broad task generalization from a single pre-trained model, letting it handle many previously-unseen tasks with little or no task-specific setup, is a genuine, well-documented capability of generative AI.",
+      "why_incorrect": {
+        "A": "This describes hallucination, a limitation, not a capability.",
+        "B": "A fixed knowledge cutoff is a limitation, restricting the model's awareness of recent events, not a capability.",
+        "D": "Prompt sensitivity, where wording changes can shift output quality, is a limitation to manage, not a capability."
+      },
+      "rule_of_thumb": "If a scenario describes something the model does well across many tasks with little setup, that's a capability. If it describes something going wrong or being unreliable, that's a limitation."
+    },
+    "tags": ["genai-capabilities-limitations"]
+  },
+  {
+    "id": "Q-D2-0208",
+    "domain": 2, "task_statement": "2.2", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D2-008"], "case_study_id": null,
+    "stem": "A team assumes that switching to a newer, larger, more capable foundation model will completely eliminate all of generative AI's known limitations (hallucination, prompt sensitivity, non-determinism). Why is this assumption flawed?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "None of these limitations are eliminated purely by using a bigger or better model; they require deliberate mitigations like RAG, fine-tuning, guardrails, and human review." },
+      { "key": "B", "text": "The assumption is actually correct; larger models have zero limitations of any kind." },
+      { "key": "C", "text": "Only smaller models have limitations; larger models are fundamentally immune to all of them." },
+      { "key": "D", "text": "Model size has no relationship to any capability or limitation whatsoever." }
+    ],
+    "correct": ["A"],
+    "explanation": {
+      "why_correct": "These limitations (hallucination, prompt sensitivity, non-determinism) are structural properties of how generative models work; simply using a larger or more capable model reduces some of these to a degree but does not eliminate them, which is why deliberate mitigations remain necessary regardless of model size.",
+      "why_incorrect": {
+        "B": "This is the flawed assumption itself; larger models still exhibit these limitations to varying degrees, they are not eliminated entirely.",
+        "C": "This overstates model size's effect; even the largest, most capable foundation models still exhibit hallucination and other structural limitations.",
+        "D": "While model size and capability may influence the degree of some limitations, it is inaccurate to say there's no relationship at all; the key point is that these limitations still require deliberate mitigation regardless of size."
+      },
+      "rule_of_thumb": "None of generative AI's core limitations are eliminated purely by using a 'bigger' or 'better' model — they require deliberate mitigations (RAG, fine-tuning, guardrails, human review)."
+    },
+    "tags": ["genai-capabilities-limitations"]
+  },
+  {
+    "id": "Q-D2-0209",
+    "domain": 2, "task_statement": "2.2", "type": "single_choice", "difficulty": "hard",
+    "theory_refs": ["TH-D2-009"], "case_study_id": null,
+    "stem": "A regulated financial institution wants to use generative AI to make final, autonomous approval decisions on high-value loan applications with zero human review, and needs guaranteed, deterministic correctness on every single decision. Which assessment of this use case is most accurate?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Generative AI is always the correct solution for every financial decision-making use case, regardless of stakes or review tolerance." },
+      { "key": "B", "text": "This use case has zero relevance to feasibility analysis at all." },
+      { "key": "C", "text": "There is no way to ever use AI for any part of a loan approval process." },
+      { "key": "D", "text": "This is likely a poor fit for generative AI as designed, since it requires guaranteed deterministic correctness with no human review safety net, which generative AI's structural limitations make difficult to satisfy responsibly." }
+    ],
+    "correct": ["D"],
+    "explanation": {
+      "why_correct": "A use case requiring guaranteed, deterministic correctness on every decision, in a high-stakes regulated context, with no human review safety net, matches the classic poor-fit profile for generative AI, whose structural limitations (hallucination, non-determinism) make unconditional autonomous high-stakes decisions risky without additional safeguards.",
+      "why_incorrect": {
+        "A": "Generative AI is not automatically the right fit for every use case; high-stakes, zero-tolerance-for-error scenarios without human review are specifically flagged as poor fits.",
+        "B": "This is exactly the kind of scenario feasibility analysis is meant to evaluate; it is highly relevant, not irrelevant.",
+        "C": "AI (including traditional ML) can still play a role in loan approval processes, often as decision support with human review, or via traditional deterministic scoring models; the issue here is specifically about generative AI making FINAL AUTONOMOUS decisions with NO human review, not AI involvement altogether."
+      },
+      "rule_of_thumb": "High-stakes, needs-to-be-exactly-right-every-time, no human review possible -> generative AI is probably a poor fit for the autonomous decision itself."
+    },
+    "tags": ["feasibility", "responsible-ai"]
+  },
+  {
+    "id": "Q-D2-0210",
+    "domain": 2, "task_statement": "2.2", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D2-009"], "case_study_id": null,
+    "stem": "A marketing team wants to use generative AI to draft first-pass social media post copy, which a human marketer will always review and edit before publishing. How should this use case generally be assessed for feasibility?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "This is automatically a poor fit, since any use of generative AI in marketing is inherently too risky." },
+      { "key": "B", "text": "Feasibility cannot be assessed without first building the entire system." },
+      { "key": "C", "text": "This use case requires guaranteed deterministic correctness with zero tolerance for imperfection." },
+      { "key": "D", "text": "This is likely a strong fit, since it is content-heavy, language-centric, and includes human review before anything is published." }
+    ],
+    "correct": ["D"],
+    "explanation": {
+      "why_correct": "Drafting first-pass content with human review before publication is a textbook strong-fit scenario for generative AI: content-heavy, language-centric, and tolerant of occasional imperfection because a human reviews before anything goes live.",
+      "why_incorrect": {
+        "A": "This overstates the risk; drafting-with-review use cases are widely recognized as strong, low-risk fits for generative AI, not inherently too risky.",
+        "B": "Feasibility can and should be assessed based on the use case's characteristics (content type, review tolerance, stakes) before full-scale building, not only after building everything.",
+        "C": "The scenario explicitly includes human review before publication, which is the opposite of a zero-tolerance, fully autonomous, deterministic-correctness requirement."
+      },
+      "rule_of_thumb": "Content-heavy, language-centric, or review-tolerant use cases are likely strong fits for generative AI."
+    },
+    "tags": ["feasibility", "business-use-cases"]
+  },
+  {
+    "id": "Q-D2-0211",
+    "domain": 2, "task_statement": "2.2", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D2-010"], "case_study_id": null,
+    "stem": "A user searches an internal knowledge base for 'vehicle upkeep tips' but the most relevant document only contains the phrase 'car maintenance guidelines,' with no shared words. Which search approach would successfully surface this document?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Exact keyword matching" },
+      { "key": "B", "text": "Semantic search, using embeddings to match based on meaning rather than exact wording" },
+      { "key": "C", "text": "A search that only matches documents with an exact character-for-character match" },
+      { "key": "D", "text": "Sorting documents alphabetically by title" }
+    ],
+    "correct": ["B"],
+    "explanation": {
+      "why_correct": "Semantic search uses embeddings to represent meaning as vectors, finding documents that are conceptually similar even when exact wording differs, which is exactly what's needed to match 'vehicle upkeep tips' with 'car maintenance guidelines' despite no shared words.",
+      "why_incorrect": {
+        "A": "Exact keyword matching would fail here, since the query and document share no literal words in common.",
+        "C": "A character-for-character exact match search would also fail for the same reason as keyword matching.",
+        "D": "Alphabetical sorting by title has no relationship to matching queries based on meaning or relevance."
+      },
+      "rule_of_thumb": "Query and document just need to mean the same thing -> semantic search, powered by embeddings and a vector store."
+    },
+    "tags": ["semantic-search"]
+  },
+  {
+    "id": "Q-D2-0212",
+    "domain": 2, "task_statement": "2.2", "type": "single_choice", "difficulty": "hard",
+    "theory_refs": ["TH-D2-010"], "case_study_id": null,
+    "stem": "A team building a RAG application assumes that a traditional keyword index alone will be sufficient for retrieving relevant document chunks, since keyword search is simpler to implement. Why is this assumption typically problematic for RAG specifically?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "RAG generally depends on semantic search to retrieve conceptually relevant chunks even when a user's wording differs from the source document's wording, which keyword search alone cannot reliably do." },
+      { "key": "B", "text": "Keyword search is always faster and more accurate than semantic search in every possible scenario." },
+      { "key": "C", "text": "RAG never requires any form of search or retrieval at all." },
+      { "key": "D", "text": "Semantic search and keyword search produce identical results in all cases, so the choice doesn't matter." }
+    ],
+    "correct": ["A"],
+    "explanation": {
+      "why_correct": "RAG's effectiveness generally depends on retrieving conceptually relevant chunks regardless of exact user wording, which is precisely what semantic search (not keyword search alone) is designed to do; relying only on keyword matching risks missing relevant chunks whose wording differs from the query.",
+      "why_incorrect": {
+        "B": "Keyword search is not universally faster or more accurate; semantic search specifically excels at matching queries and documents with different wording but similar meaning, which keyword search cannot do.",
+        "C": "RAG's entire mechanism depends on a retrieval step to find relevant context; claiming it requires no search/retrieval at all misrepresents how RAG works.",
+        "D": "Semantic and keyword search use fundamentally different matching mechanisms (meaning-based vs. exact-term-based) and often produce different results, especially when wording differs."
+      },
+      "rule_of_thumb": "Assuming keyword search is sufficient for a RAG knowledge base is a common mistake — RAG generally depends on semantic search to retrieve conceptually relevant chunks even when wording differs."
+    },
+    "tags": ["semantic-search", "rag"]
+  },
+  {
+    "id": "Q-D2-0213",
+    "domain": 2, "task_statement": "2.2", "type": "multi_response", "difficulty": "medium",
+    "theory_refs": ["TH-D2-008"], "case_study_id": null,
+    "stem": "Which TWO of the following are recognized structural LIMITATIONS of generative AI as a category?",
+    "select_count": 2,
+    "options": [
+      { "key": "A", "text": "Hallucination: confidently stating incorrect information" },
+      { "key": "B", "text": "Broad task generalization from a single pre-trained model" },
+      { "key": "C", "text": "A fixed knowledge cutoff, limiting awareness of events after training data ends" },
+      { "key": "D", "text": "Natural-language interaction across many domains" }
+    ],
+    "correct": ["A", "C"],
+    "explanation": {
+      "why_correct": "Hallucination and a fixed knowledge cutoff are both well-documented structural limitations of generative AI, requiring specific mitigations to manage their impact.",
+      "why_incorrect": {
+        "B": "Broad task generalization is a capability, describing something generative AI does well, not a limitation.",
+        "D": "Natural-language interaction across domains is also a capability, not a limitation."
+      },
+      "rule_of_thumb": "Limitations: hallucination, knowledge cutoff, prompt sensitivity, potential bias/toxicity, non-determinism. Capabilities: broad task generalization, natural-language interaction, content creation."
+    },
+    "tags": ["genai-capabilities-limitations"]
+  },
+  {
+    "id": "Q-D2-0214",
+    "domain": 2, "task_statement": "2.2", "type": "multi_response", "difficulty": "medium",
+    "theory_refs": ["TH-D2-007"], "case_study_id": null,
+    "stem": "Which TWO of the following are legitimate, commonly cited business use cases for generative AI?",
+    "select_count": 2,
+    "options": [
+      { "key": "A", "text": "Drafting marketing copy from a short creative brief" },
+      { "key": "B", "text": "Guaranteeing zero-error financial calculations with mathematically perfect precision every time" },
+      { "key": "C", "text": "Powering a conversational customer support chatbot" },
+      { "key": "D", "text": "Replacing all human judgment in every regulated, high-stakes legal decision with zero oversight" }
+    ],
+    "correct": ["A", "C"],
+    "explanation": {
+      "why_correct": "Drafting marketing copy and powering conversational chatbots are both widely recognized, well-established generative AI business use cases, matching content creation and conversational assistance use case categories.",
+      "why_incorrect": {
+        "B": "Guaranteeing mathematically perfect precision every time is a poor fit for generative AI, which is inherently probabilistic and not designed for guaranteed deterministic correctness.",
+        "D": "Replacing all human judgment in high-stakes, regulated decisions with zero oversight is widely recognized as an inappropriate, poor-fit use case given generative AI's hallucination and reliability limitations."
+      },
+      "rule_of_thumb": "Content creation, summarization, conversational assistants, and code generation are strong-fit use cases; guaranteed-precision and zero-oversight high-stakes decisions are poor fits."
+    },
+    "tags": ["business-use-cases", "feasibility"]
+  },
+  {
+    "id": "Q-D2-0215",
+    "domain": 2, "task_statement": "2.2", "type": "multi_response", "difficulty": "hard",
+    "theory_refs": ["TH-D2-009"], "case_study_id": null,
+    "stem": "Which TWO of the following factors should be weighed when assessing the ROI and feasibility of a proposed generative AI use case?",
+    "select_count": 2,
+    "options": [
+      { "key": "A", "text": "The foundation model's token-based inference cost relative to the expected business value delivered" },
+      { "key": "B", "text": "Whether risk mitigations like RAG, guardrails, or human review are sufficient for the use case's risk tolerance" },
+      { "key": "C", "text": "Whether the marketing department has a favorite color scheme" },
+      { "key": "D", "text": "Whether the office has enough parking spaces" }
+    ],
+    "correct": ["A", "B"],
+    "explanation": {
+      "why_correct": "Token-based inference cost weighed against expected business value, and the sufficiency of risk mitigations for the use case's risk tolerance, are both genuine, directly relevant factors in assessing generative AI feasibility and ROI.",
+      "why_incorrect": {
+        "C": "Marketing color scheme preferences have no bearing on generative AI feasibility or ROI analysis.",
+        "D": "Office parking availability is entirely unrelated to evaluating a generative AI use case's feasibility or ROI."
+      },
+      "rule_of_thumb": "Cost/benefit analysis should include foundation model inference costs against expected value delivered, and whether available risk mitigations are sufficient for the use case's risk tolerance."
+    },
+    "tags": ["feasibility", "roi"]
+  },
+  {
+    "id": "Q-D2-0216",
+    "domain": 2, "task_statement": "2.2", "type": "matching", "difficulty": "medium",
+    "theory_refs": ["TH-D2-008"], "case_study_id": null,
+    "stem": "Match each described behavior on the left with the correct classification on the right: capability or limitation.",
+    "select_count": 4,
+    "matching": {
+      "left": [
+        { "key": "L1", "text": "The model successfully drafts a coherent essay on a topic it was never explicitly trained on" },
+        { "key": "L2", "text": "The model confidently states an incorrect statistic with no basis in fact" },
+        { "key": "L3", "text": "The model has no awareness of an event that occurred after its training data was collected" },
+        { "key": "L4", "text": "Small changes in prompt wording produce noticeably different quality responses" }
+      ],
+      "right": [
+        { "key": "R1", "text": "Capability: broad task generalization" },
+        { "key": "R2", "text": "Limitation: hallucination" },
+        { "key": "R3", "text": "Limitation: knowledge cutoff" },
+        { "key": "R4", "text": "Limitation: prompt sensitivity" }
+      ]
+    },
+    "correct_pairs": { "L1": "R1", "L2": "R2", "L3": "R3", "L4": "R4" },
+    "explanation": {
+      "why_correct": "Drafting on an unseen topic demonstrates broad task generalization, a capability (R1). Confidently stating incorrect facts is hallucination (R2). Lacking awareness of recent events is knowledge cutoff (R3). Wording-driven quality variation is prompt sensitivity (R4).",
+      "why_incorrect": {},
+      "rule_of_thumb": "If a scenario describes something the model does well with little setup, that's a capability. If it describes something going wrong or unreliable, that's a limitation."
+    },
+    "tags": ["genai-capabilities-limitations", "matching"]
+  },
+  {
+    "id": "Q-D2-0217",
+    "domain": 2, "task_statement": "2.2", "type": "matching", "difficulty": "medium",
+    "theory_refs": ["TH-D2-007"], "case_study_id": null,
+    "stem": "Match each business use case description on the left with the generative AI category on the right that it represents.",
+    "select_count": 4,
+    "matching": {
+      "left": [
+        { "key": "L1", "text": "Condensing a 50-page report into a one-page brief" },
+        { "key": "L2", "text": "Writing and explaining application code" },
+        { "key": "L3", "text": "Answering customer questions through a natural-language chat interface" },
+        { "key": "L4", "text": "Drafting an original product description from a short list of features" }
+      ],
+      "right": [
+        { "key": "R1", "text": "Summarization" },
+        { "key": "R2", "text": "Code generation" },
+        { "key": "R3", "text": "Conversational assistant / chatbot" },
+        { "key": "R4", "text": "Content creation" }
+      ]
+    },
+    "correct_pairs": { "L1": "R1", "L2": "R2", "L3": "R3", "L4": "R4" },
+    "explanation": {
+      "why_correct": "Condensing a report is summarization (R1). Writing/explaining code is code generation (R2). Natural-language customer Q&A is a conversational assistant (R3). Drafting original content from features is content creation (R4).",
+      "why_incorrect": {},
+      "rule_of_thumb": "Map business outcomes directly to the matching generative AI use case category: condense -> summarization, converse -> chatbot, write code -> code generation, draft new content -> content creation."
+    },
+    "tags": ["business-use-cases", "matching"]
+  },
+  {
+    "id": "Q-D2-0218",
+    "domain": 2, "task_statement": "2.2", "type": "ordering", "difficulty": "medium",
+    "theory_refs": ["TH-D2-009"], "case_study_id": null,
+    "stem": "A team is evaluating whether a proposed use case is a good fit for generative AI. Arrange the following evaluation steps in a logical order, from first to last.",
+    "select_count": 4,
+    "options": [
+      { "key": "A", "text": "Identify whether the task is content-heavy/language-centric or requires guaranteed deterministic precision" },
+      { "key": "B", "text": "Assess whether risk mitigations (RAG, guardrails, human review) are available and sufficient for the use case's risk tolerance" },
+      { "key": "C", "text": "Estimate the token-based inference cost against the expected business value" },
+      { "key": "D", "text": "Make a go/no-go feasibility decision based on the combined assessment" }
+    ],
+    "correct": ["A", "B", "C", "D"],
+    "explanation": {
+      "why_correct": "The evaluation logically starts by characterizing the nature of the task (A), then assessing whether adequate risk mitigations exist for that task's risk profile (B), then estimating the cost/value tradeoff (C), and finally making a combined go/no-go decision (D) based on all prior findings.",
+      "why_incorrect": {},
+      "rule_of_thumb": "Feasibility evaluation logically flows: characterize the task's nature and stakes, assess available risk mitigations, weigh cost against value, then decide."
+    },
+    "tags": ["feasibility", "ordering"]
+  },
+  {
+    "id": "Q-D2-0219",
+    "domain": 2, "task_statement": "2.2", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D2-007"], "case_study_id": null,
+    "stem": "A global company wants to translate customer support tickets between languages so agents can respond regardless of the customer's native language. Which generative AI use case category is this?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Anomaly detection" },
+      { "key": "B", "text": "Translation" },
+      { "key": "C", "text": "Time-series forecasting" },
+      { "key": "D", "text": "Image generation" }
+    ],
+    "correct": ["B"],
+    "explanation": {
+      "why_correct": "Converting text between languages to help agents communicate with customers is precisely a translation use case, one of the well-established generative AI business use cases.",
+      "why_incorrect": {
+        "A": "Anomaly detection flags unusual data points; it has no relevance to translating text between languages.",
+        "C": "Time-series forecasting predicts future numeric values; it is unrelated to language translation.",
+        "D": "Image generation produces new visual content; it is unrelated to translating text between languages."
+      },
+      "rule_of_thumb": "When a scenario names a business outcome (translate content across languages), map it directly to the matching generative AI use case category."
+    },
+    "tags": ["translation", "business-use-cases"]
+  },
+  {
+    "id": "Q-D2-0220",
+    "domain": 2, "task_statement": "2.2", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D2-006"], "case_study_id": null,
+    "stem": "Which of the following scenarios best illustrates a generative AI system correctly acknowledging its own knowledge cutoff, as opposed to hallucinating?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "The model confidently invents a specific but entirely fictional statistic about a recent event." },
+      { "key": "B", "text": "The model refuses to answer any question at all, regardless of topic or recency." },
+      { "key": "C", "text": "The model always says 'I don't know' to every single question, even ones well within its training data." },
+      { "key": "D", "text": "The model responds 'I don't have information about events after my training data, so I can't answer that with confidence,' when asked about a very recent event." }
+    ],
+    "correct": ["D"],
+    "explanation": {
+      "why_correct": "Correctly and explicitly acknowledging a lack of knowledge about events after the training cutoff, rather than inventing an answer, is the appropriate, non-hallucinating response to a knowledge-cutoff limitation.",
+      "why_incorrect": {
+        "A": "Confidently inventing a fictional statistic is precisely a hallucination, the opposite of correctly acknowledging the knowledge cutoff.",
+        "B": "Refusing to answer ANY question regardless of topic is an overly broad, unhelpful behavior, not specifically an accurate acknowledgment of a knowledge cutoff limitation.",
+        "C": "Always saying 'I don't know' even for well-covered topics is excessive and unhelpful, not a correct, targeted acknowledgment of a genuine knowledge gap."
+      },
+      "rule_of_thumb": "Instructing a model to explicitly say when it doesn't know an answer, rather than guessing, reduces confidently-wrong output — a good application-layer hallucination mitigation."
+    },
+    "tags": ["knowledge-cutoff", "hallucination"]
+  },
+  {
+    "id": "Q-D2-0221",
+    "domain": 2, "task_statement": "2.2", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D2-010"], "case_study_id": null,
+    "stem": "Which statement most accurately describes the infrastructure requirement for implementing semantic search, as opposed to simple keyword search?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Semantic search requires no infrastructure of any kind, unlike keyword search." },
+      { "key": "B", "text": "Keyword search and semantic search have identical infrastructure requirements." },
+      { "key": "C", "text": "Semantic search can only be implemented using a relational database with no other components." },
+      { "key": "D", "text": "Semantic search requires generating and storing embeddings in a vector database, additional infrastructure beyond a traditional keyword index." }
+    ],
+    "correct": ["D"],
+    "explanation": {
+      "why_correct": "Semantic search depends on generating embeddings for both queries and documents and storing/querying them efficiently in a vector database, which is additional infrastructure beyond what a simple keyword index requires.",
+      "why_incorrect": {
+        "A": "This is the opposite of reality; semantic search specifically requires MORE infrastructure (embedding generation, vector storage) than simpler keyword search, not none.",
+        "B": "The infrastructure requirements differ meaningfully: keyword search needs only a text index, while semantic search needs embedding generation and vector storage/querying capability.",
+        "C": "Semantic search is commonly implemented using purpose-built vector databases or vector-capable extensions (like pgvector), not exclusively a bare relational database with no other components."
+      },
+      "rule_of_thumb": "Believing semantic search requires no infrastructure is a common misconception — it depends on generating and storing embeddings in a vector database, additional infrastructure beyond a traditional keyword index."
+    },
+    "tags": ["semantic-search"]
+  },
+  {
+    "id": "Q-D2-0222",
+    "domain": 2, "task_statement": "2.2", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D2-007"], "case_study_id": null,
+    "stem": "A company wants an enterprise-wide tool that lets employees ask questions across the company's internal knowledge and get grounded answers, without exposing sensitive data outside the organization. Which category of generative AI use case best matches this?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Enterprise search / conversational knowledge assistant" },
+      { "key": "B", "text": "Image generation" },
+      { "key": "C", "text": "Time-series forecasting" },
+      { "key": "D", "text": "Fraud detection" }
+    ],
+    "correct": ["A"],
+    "explanation": {
+      "why_correct": "Letting employees ask natural-language questions across internal company knowledge and receive grounded answers is precisely an enterprise search / conversational knowledge assistant use case, matching services like Amazon Q Business.",
+      "why_incorrect": {
+        "B": "Image generation produces new visual content; it is unrelated to answering questions from internal knowledge.",
+        "C": "Time-series forecasting predicts future numeric values; it is unrelated to answering knowledge-base questions.",
+        "D": "Fraud detection identifies fraudulent activity; it is unrelated to internal enterprise knowledge search."
+      },
+      "rule_of_thumb": "Search a knowledge base/company documents in natural language, returning specific answers -> enterprise search / conversational knowledge assistant use case."
+    },
+    "tags": ["business-use-cases", "enterprise-search"]
+  },
+  {
+    "id": "Q-D2-0223",
+    "domain": 2, "task_statement": "2.2", "type": "single_choice", "difficulty": "hard",
+    "theory_refs": ["TH-D2-008", "TH-D2-006"], "case_study_id": null,
+    "stem": "A customer support chatbot occasionally gives inconsistent answers to the exact same question asked at different times. Which combination of factors most likely explains this?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Non-determinism, an inherent stochastic sampling property of generative models, especially if temperature is not set very low." },
+      { "key": "B", "text": "The chatbot's underlying infrastructure must be permanently broken." },
+      { "key": "C", "text": "This behavior is impossible and cannot actually occur with any generative AI system." },
+      { "key": "D", "text": "The chatbot secretly changes its own source code between requests." }
+    ],
+    "correct": ["A"],
+    "explanation": {
+      "why_correct": "Non-determinism is an inherent, well-documented property of generative models sampling from a probability distribution, meaning the same question can produce different phrasing or even different substantive answers across separate requests, especially without a low temperature setting.",
+      "why_incorrect": {
+        "B": "This behavior is expected, normal generative AI behavior, not evidence of broken infrastructure.",
+        "C": "This behavior is well documented and does occur with generative AI systems by default; claiming it's impossible is factually incorrect.",
+        "D": "Models do not modify their own source code between requests; the variability comes from stochastic sampling, not self-modification."
+      },
+      "rule_of_thumb": "Generative model output is inherently stochastic rather than deterministic by default — the same prompt can produce different outputs on different runs, especially at higher temperature settings."
+    },
+    "tags": ["genai-capabilities-limitations", "non-determinism"]
+  },
+  {
+    "id": "Q-D2-0224",
+    "domain": 2, "task_statement": "2.2", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D2-009"], "case_study_id": null,
+    "stem": "A company already has a simple, cheap, well-performing rules-based system that correctly validates whether a submitted form has all required fields filled in. A vendor proposes replacing this with a generative AI solution. What is the most appropriate assessment?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Generative AI should always replace any existing simpler solution, regardless of whether the existing solution already works well." },
+      { "key": "B", "text": "This scenario has no bearing on feasibility analysis at all." },
+      { "key": "C", "text": "Rules-based systems can never be used for form validation under any circumstances." },
+      { "key": "D", "text": "Generative AI is likely unnecessary here, since a simpler, cheaper, already-working deterministic approach already solves this exact problem well." }
+    ],
+    "correct": ["D"],
+    "explanation": {
+      "why_correct": "A simple, cheap, well-performing rules-based system that already correctly solves a well-defined problem (checking required fields) is a poor candidate for replacement by generative AI, which would add cost and complexity (and introduce hallucination/non-determinism risk) without clear benefit over the working deterministic solution.",
+      "why_incorrect": {
+        "A": "Generative AI should not automatically replace every simpler existing solution; the exam explicitly tests recognizing when a simpler, cheaper, already-working approach is the better fit.",
+        "B": "This scenario is directly relevant to feasibility analysis, illustrating exactly the kind of situation where generative AI is a poor fit.",
+        "C": "Rules-based systems are commonly and appropriately used for exactly this kind of well-defined, deterministic validation task; there's no reason they 'can never' be used here."
+      },
+      "rule_of_thumb": "Some scenarios intentionally test whether a simpler, more deterministic approach (a rules engine, traditional ML classifier, or AWS managed AI service) is actually the better fit than generative AI."
+    },
+    "tags": ["feasibility", "traditional-ml"]
+  },
+  {
+    "id": "Q-D2-0225",
+    "domain": 2, "task_statement": "2.2", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D2-007"], "case_study_id": null,
+    "stem": "A retail company wants to generate creative, on-brand product description copy for thousands of new SKUs quickly, based on a short list of product attributes for each. Which generative AI use case best matches this?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Anomaly detection" },
+      { "key": "B", "text": "Time-series forecasting" },
+      { "key": "C", "text": "Content creation" },
+      { "key": "D", "text": "Fraud detection" }
+    ],
+    "correct": ["C"],
+    "explanation": {
+      "why_correct": "Generating new, creative written copy from a short list of attributes is precisely a content creation use case, one of the core generative AI business applications.",
+      "why_incorrect": {
+        "A": "Anomaly detection flags unusual data points; it is unrelated to generating product descriptions.",
+        "B": "Time-series forecasting predicts future numeric values; it is unrelated to writing product descriptions.",
+        "D": "Fraud detection identifies fraudulent activity; it is unrelated to generating creative product copy."
+      },
+      "rule_of_thumb": "Content creation: drafting new text/marketing/creative content from a prompt — a core generative AI business use case."
+    },
+    "tags": ["content-creation", "business-use-cases"]
+  }
+]

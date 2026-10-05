@@ -1,0 +1,144 @@
+[
+  {
+    "id": "Q-D3-0044",
+    "domain": 3,
+    "task_statement": "3.2",
+    "type": "multi_response",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D3-006",
+      "TH-D3-009"
+    ],
+    "case_study_id": null,
+    "stem": "Which of the following reduce the risk of incorrect tool selection? (Select 2)",
+    "select_count": 2,
+    "options": [
+      {
+        "key": "A",
+        "text": "Writing clear, specific, non-overlapping tool descriptions"
+      },
+      {
+        "key": "B",
+        "text": "Scoping the exposed tool list to what's actually relevant to the current task"
+      },
+      {
+        "key": "C",
+        "text": "Giving every tool an identical, vague description"
+      },
+      {
+        "key": "D",
+        "text": "Exposing all tools ever defined, regardless of relevance, on every request"
+      }
+    ],
+    "correct": [
+      "A",
+      "B"
+    ],
+    "explanation": {
+      "why_correct": "Clear, distinguishing descriptions and scoping the exposed tool list to relevant options both directly reduce the chance of selecting an unsuitable or overlapping tool.",
+      "why_incorrect": {
+        "C": "Identical, vague descriptions remove the distinguishing information needed for correct selection, increasing risk rather than reducing it.",
+        "D": "Exposing every tool regardless of relevance increases the chance of selecting among overlapping or irrelevant options, increasing risk."
+      },
+      "rule_of_thumb": "Clear descriptions and context-scoped tool exposure both reduce selection risk; vague descriptions and unscoped full exposure both increase it."
+    },
+    "tags": [
+      "tool-selection",
+      "tool-exposure-scoping"
+    ]
+  },
+  {
+    "id": "Q-D3-0045",
+    "domain": 3,
+    "task_statement": "3.2",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D3-009"
+    ],
+    "case_study_id": null,
+    "stem": "A system has only two tools defined in total, and both are frequently needed across most tasks. Is scoping/filtering the tool list a meaningful concern for this system?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Less so -- with only two broadly relevant tools, the overload/overlap concerns that motivate scoping are much less significant than with a large tool library"
+      },
+      {
+        "key": "B",
+        "text": "Yes, scoping is always critical regardless of how many tools exist"
+      },
+      {
+        "key": "C",
+        "text": "No tool should ever be exposed under any circumstances"
+      },
+      {
+        "key": "D",
+        "text": "This system cannot function without at least 50 tools"
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "explanation": {
+      "why_correct": "The scoping concern specifically addresses the risk of a large, overlapping, or mostly-irrelevant tool list; with only two broadly relevant tools, that specific risk is much smaller, making scoping a comparatively minor concern here.",
+      "why_incorrect": {
+        "B": "The need for scoping scales with the size and overlap of the tool list; it is far less critical when there are only a couple of broadly relevant tools.",
+        "C": "The tools still need to be exposed for the agent to use them at all; the question is about scoping/filtering, not eliminating exposure entirely.",
+        "D": "There is no minimum tool count requirement; a system can function well with as few tools as its tasks actually require."
+      },
+      "rule_of_thumb": "The need for tool-list scoping scales with the size and overlap of the available tool library -- it matters far less when there are only a few broadly relevant tools."
+    },
+    "tags": [
+      "tool-exposure-scoping"
+    ]
+  },
+  {
+    "id": "Q-D3-0046",
+    "domain": 3,
+    "task_statement": "3.2",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D3-006",
+      "TH-D3-007"
+    ],
+    "case_study_id": null,
+    "stem": "Which statement correctly summarizes the relationship between tool selection and parameter construction as sources of error?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Tool selection errors can only happen if parameter construction was also wrong"
+      },
+      {
+        "key": "B",
+        "text": "They are the exact same thing with no meaningful distinction"
+      },
+      {
+        "key": "C",
+        "text": "Parameter construction errors can only happen if tool selection was also wrong"
+      },
+      {
+        "key": "D",
+        "text": "They are distinct, independently occurring error sources -- correct selection does not guarantee correct parameters, and vice versa"
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "Tool selection (choosing the right tool) and parameter construction (correctly formatting the call to that tool) are independent steps -- an agent can get one right while getting the other wrong, and vice versa.",
+      "why_incorrect": {
+        "B": "They are clearly distinct concerns: WHICH tool to use versus HOW to call it correctly.",
+        "C": "A correctly selected tool can still receive malformed parameters; selection correctness does not imply parameter correctness.",
+        "A": "An incorrectly selected tool could still, coincidentally, receive well-formatted parameters for that (wrong) tool; parameter correctness does not imply selection correctness."
+      },
+      "rule_of_thumb": "Tool selection and parameter construction are independent potential failure points -- diagnose and fix them separately."
+    },
+    "tags": [
+      "tool-selection",
+      "parameter-construction"
+    ]
+  }
+]

@@ -1,0 +1,143 @@
+[
+  {
+    "id": "Q-D3-0059",
+    "domain": 3,
+    "task_statement": "3.3",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D3-013"
+    ],
+    "case_study_id": null,
+    "stem": "Why is a misleading-success tool result considered more dangerous than an explicit error?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Because nothing on the surface signals a problem, so the agent may accept a wrong or incomplete result without any prompt to double-check it"
+      },
+      {
+        "key": "B",
+        "text": "Because explicit errors are always impossible to recover from"
+      },
+      {
+        "key": "C",
+        "text": "Because misleading-success results always crash the entire system"
+      },
+      {
+        "key": "D",
+        "text": "There is no meaningful difference in danger between the two"
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "explanation": {
+      "why_correct": "An explicit error at least signals that something went wrong, prompting a response; a misleading-success result gives no such signal, so a wrong or incomplete result can be accepted and acted upon without any trigger to double-check it.",
+      "why_incorrect": {
+        "B": "Explicit errors are often quite recoverable (e.g. correcting input and retrying); they are not inherently unrecoverable.",
+        "C": "Misleading-success results don't crash anything; the danger is specifically that execution continues normally on faulty information.",
+        "D": "There is a meaningful and important difference: one has a visible signal prompting a response, the other does not."
+      },
+      "rule_of_thumb": "Misleading-success results are more dangerous precisely because they provide no error signal to prompt scrutiny, unlike explicit errors."
+    },
+    "tags": [
+      "misleading-results",
+      "failure-categorization"
+    ]
+  },
+  {
+    "id": "Q-D3-0060",
+    "domain": 3,
+    "task_statement": "3.3",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D3-011"
+    ],
+    "case_study_id": null,
+    "stem": "What is the purpose of 'backoff' (waiting progressively longer between retry attempts) in a retry strategy?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "To guarantee the call will never fail again"
+      },
+      {
+        "key": "B",
+        "text": "To avoid overwhelming a struggling service with rapid repeated requests while still allowing a chance for a transient issue to resolve"
+      },
+      {
+        "key": "C",
+        "text": "To make the agent wait forever with no limit"
+      },
+      {
+        "key": "D",
+        "text": "To permanently disable the tool after one failure"
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "explanation": {
+      "why_correct": "Backoff spaces out retry attempts to avoid piling additional load onto a possibly struggling service, while still giving a genuinely transient issue time to resolve before the next attempt.",
+      "why_incorrect": {
+        "C": "Backoff still has a limited number of attempts with a stopping condition; it is not meant to continue indefinitely.",
+        "D": "Backoff is about spacing retries, not permanently disabling the tool after a single failure.",
+        "A": "Backoff does not guarantee future success; it simply manages the pacing of retry attempts for transient issues."
+      },
+      "rule_of_thumb": "Backoff spaces out retries to avoid overloading a struggling service while still allowing transient issues time to resolve, within a limited attempt budget."
+    },
+    "tags": [
+      "retry-strategy",
+      "backoff"
+    ]
+  },
+  {
+    "id": "Q-D3-0061",
+    "domain": 3,
+    "task_statement": "3.3",
+    "type": "single_choice",
+    "difficulty": "hard",
+    "theory_refs": [
+      "TH-D3-012"
+    ],
+    "case_study_id": null,
+    "stem": "A team designs an agent with only one single tool for retrieving pricing data, with no alternative source of any kind if that tool is ever unavailable. What risk does this design create?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "An automatic doubling of the tool's reliability"
+      },
+      {
+        "key": "B",
+        "text": "No risk at all, since a single tool is always more reliable than multiple"
+      },
+      {
+        "key": "C",
+        "text": "Guaranteed success on every single pricing request forever"
+      },
+      {
+        "key": "D",
+        "text": "A single point of failure, where the pricing task simply cannot proceed if that one tool fails or becomes unavailable"
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "With no fallback and only one tool for pricing data, any failure or unavailability of that single tool leaves the agent with no alternative path, making it a single point of failure for the entire pricing task.",
+      "why_incorrect": {
+        "B": "Having only one source does not inherently improve reliability; it removes the resilience that an alternative fallback path would provide.",
+        "C": "A single tool with no fallback does not guarantee success; it is, if anything, more exposed to failure with no alternative to fall back on.",
+        "A": "Using only one tool has no mechanism by which its reliability would double; this is not how redundancy or reliability works."
+      },
+      "rule_of_thumb": "Relying on a single tool with no fallback creates a single point of failure for whatever task depends on it."
+    },
+    "tags": [
+      "fallback-strategy",
+      "single-point-of-failure"
+    ]
+  }
+]

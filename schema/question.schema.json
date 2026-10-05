@@ -1,0 +1,169 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://questions-ai.local/schema/question.schema.json",
+  "title": "Question",
+  "description": "One AIF-C01 practice question in one of four formats: single_choice, multi_response, ordering, matching.",
+  "type": "object",
+  "required": [
+    "id",
+    "domain",
+    "task_statement",
+    "type",
+    "difficulty",
+    "theory_refs",
+    "case_study_id",
+    "stem",
+    "select_count",
+    "explanation",
+    "tags"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^Q-D[1-5]-[0-9]{4}$",
+      "description": "Q-D{domain}-{seq:04d}, e.g. Q-D3-0142"
+    },
+    "domain": { "type": "integer", "minimum": 1, "maximum": 5 },
+    "task_statement": { "type": "string", "pattern": "^[1-5]\\.[1-4]$" },
+    "type": {
+      "type": "string",
+      "enum": ["single_choice", "multi_response", "ordering", "matching"]
+    },
+    "difficulty": { "type": "string", "enum": ["easy", "medium", "hard"] },
+    "theory_refs": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string", "pattern": "^TH-D[1-5]-[0-9]{3}$" },
+      "uniqueItems": true
+    },
+    "case_study_id": {
+      "type": ["string", "null"],
+      "pattern": "^CS-[0-9]{2}$"
+    },
+    "stem": { "type": "string", "minLength": 20 },
+    "select_count": { "type": "integer", "minimum": 1 },
+    "options": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["key", "text"],
+        "properties": {
+          "key": { "type": "string", "pattern": "^[A-F]$" },
+          "text": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "matching": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["left", "right"],
+      "properties": {
+        "left": {
+          "type": "array",
+          "minItems": 3,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["key", "text"],
+            "properties": {
+              "key": { "type": "string", "pattern": "^L[1-6]$" },
+              "text": { "type": "string", "minLength": 1 }
+            }
+          }
+        },
+        "right": {
+          "type": "array",
+          "minItems": 3,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["key", "text"],
+            "properties": {
+              "key": { "type": "string", "pattern": "^R[1-6]$" },
+              "text": { "type": "string", "minLength": 1 }
+            }
+          }
+        }
+      }
+    },
+    "correct": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string" }
+    },
+    "correct_pairs": {
+      "type": "object",
+      "additionalProperties": { "type": "string", "pattern": "^R[1-6]$" }
+    },
+    "explanation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["why_correct", "why_incorrect", "rule_of_thumb"],
+      "properties": {
+        "why_correct": { "type": "string", "minLength": 20 },
+        "why_incorrect": {
+          "type": "object",
+          "additionalProperties": { "type": "string", "minLength": 10 }
+        },
+        "rule_of_thumb": { "type": "string", "minLength": 10 }
+      }
+    },
+    "tags": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string", "minLength": 2 }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": { "type": { "const": "single_choice" } }
+      },
+      "then": {
+        "required": ["options", "correct"],
+        "properties": {
+          "options": { "minItems": 3, "maxItems": 6 },
+          "select_count": { "const": 1 },
+          "correct": { "minItems": 1, "maxItems": 1 }
+        },
+        "not": { "required": ["matching", "correct_pairs"] }
+      }
+    },
+    {
+      "if": {
+        "properties": { "type": { "const": "multi_response" } }
+      },
+      "then": {
+        "required": ["options", "correct"],
+        "properties": {
+          "options": { "minItems": 4, "maxItems": 6 },
+          "select_count": { "minimum": 2, "maximum": 3 },
+          "correct": { "minItems": 2, "maxItems": 3 }
+        },
+        "not": { "required": ["matching", "correct_pairs"] }
+      }
+    },
+    {
+      "if": {
+        "properties": { "type": { "const": "ordering" } }
+      },
+      "then": {
+        "required": ["options", "correct"],
+        "properties": {
+          "options": { "minItems": 3, "maxItems": 6 }
+        },
+        "not": { "required": ["matching", "correct_pairs"] }
+      }
+    },
+    {
+      "if": {
+        "properties": { "type": { "const": "matching" } }
+      },
+      "then": {
+        "required": ["matching", "correct_pairs"],
+        "not": { "required": ["options"] }
+      }
+    }
+  ]
+}

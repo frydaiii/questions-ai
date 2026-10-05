@@ -1,0 +1,602 @@
+[
+  {
+    "id": "Q-D1-0301",
+    "domain": 1, "task_statement": "1.3", "type": "single_choice", "difficulty": "easy",
+    "theory_refs": ["TH-D1-011"], "case_study_id": null,
+    "stem": "A team is starting a brand-new ML project to reduce customer churn. Before collecting any data or choosing an algorithm, what should the team do first, according to the standard ML development lifecycle?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Engineer features from available customer data" },
+      { "key": "B", "text": "Deploy a baseline model to production" },
+      { "key": "C", "text": "Identify the business goal and define success criteria" },
+      { "key": "D", "text": "Set up SageMaker Model Monitor" }
+    ],
+    "correct": ["C"],
+    "explanation": {
+      "why_correct": "The ML development lifecycle begins with identifying the business goal and defining success criteria, which establishes what problem is being solved and how success will be measured before any data or modeling work begins.",
+      "why_incorrect": {
+        "A": "Feature engineering happens much later, after data has been collected and pre-processed, not as the very first step before the business goal is even defined.",
+        "B": "Deployment is one of the final stages of the lifecycle, occurring only after the model has been built, trained, and evaluated.",
+        "D": "Model monitoring is the very last lifecycle stage, occurring after deployment, not the first step of a new project."
+      },
+      "rule_of_thumb": "Business goal -> frame ML problem -> collect data -> pre-process data -> engineer features -> train/tune/evaluate -> deploy -> monitor. Business framing always comes first."
+    },
+    "tags": ["ml-lifecycle", "business-framing"]
+  },
+  {
+    "id": "Q-D1-0302",
+    "domain": 1, "task_statement": "1.3", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D1-011", "TH-D1-012"], "case_study_id": null,
+    "stem": "A team has just finished defining its ML problem and success criteria. According to the standard ML lifecycle, what is the next stage?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Deploy the model" },
+      { "key": "B", "text": "Collect data" },
+      { "key": "C", "text": "Monitor the model in production" },
+      { "key": "D", "text": "Tune hyperparameters" }
+    ],
+    "correct": ["B"],
+    "explanation": {
+      "why_correct": "After the business goal is identified and the ML problem is framed, the next stage in the lifecycle is collecting the data needed to train a model against that framed problem.",
+      "why_incorrect": {
+        "A": "Deployment occurs much later, after data collection, pre-processing, feature engineering, and training/evaluation are complete.",
+        "C": "Monitoring is the final stage, occurring only after deployment, not right after problem framing.",
+        "D": "Hyperparameter tuning happens during the training/tuning/evaluation stage, which comes after data has been collected and pre-processed, not immediately after problem framing."
+      },
+      "rule_of_thumb": "Business goal -> frame ML problem -> collect data -> pre-process data -> engineer features -> train/tune/evaluate -> deploy -> monitor. Data collection directly follows problem framing."
+    },
+    "tags": ["ml-lifecycle", "data-collection"]
+  },
+  {
+    "id": "Q-D1-0303",
+    "domain": 1, "task_statement": "1.3", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D1-012"], "case_study_id": null,
+    "stem": "A team needs to move raw transactional data from several different source systems into a clean, consistent format stored in Amazon S3, ready for further processing. Which AWS service is purpose-built for this ETL task?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Amazon SageMaker Model Monitor" },
+      { "key": "B", "text": "Amazon SageMaker Model Registry" },
+      { "key": "C", "text": "AWS CodePipeline" },
+      { "key": "D", "text": "AWS Glue" }
+    ],
+    "correct": ["D"],
+    "explanation": {
+      "why_correct": "AWS Glue provides serverless ETL (extract, transform, load) to move and transform data from various sources into a usable, S3-resident format, directly matching this need to consolidate raw transactional data from multiple systems.",
+      "why_incorrect": {
+        "A": "SageMaker Model Monitor detects drift in a deployed model's inputs/predictions; it has no role in ETL data movement.",
+        "B": "SageMaker Model Registry tracks and versions trained models; it has no data transformation capability.",
+        "C": "AWS CodePipeline orchestrates build/test/deploy processes for software/ML artifacts; it is not the ETL tool for moving and transforming raw data."
+      },
+      "rule_of_thumb": "How do you clean/transform raw data into shape? Glue, AWS's serverless ETL service."
+    },
+    "tags": ["glue", "etl", "data-collection"]
+  },
+  {
+    "id": "Q-D1-0304",
+    "domain": 1, "task_statement": "1.3", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D1-012"], "case_study_id": null,
+    "stem": "A retail analytics team wants to supplement its own sales data with a licensed third-party dataset of regional economic indicators to improve its demand-forecasting model. Which AWS service is designed for securely accessing this kind of external dataset?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "AWS Glue Data Catalog" },
+      { "key": "B", "text": "AWS Data Exchange" },
+      { "key": "C", "text": "Amazon SageMaker Ground Truth" },
+      { "key": "D", "text": "Amazon S3 Block Public Access" }
+    ],
+    "correct": ["B"],
+    "explanation": {
+      "why_correct": "AWS Data Exchange provides secure, governed access to third-party datasets, directly matching this need to license and access an external dataset of regional economic indicators.",
+      "why_incorrect": {
+        "A": "The Glue Data Catalog stores metadata/schema information about datasets you already have; it does not provide access to third-party licensed datasets.",
+        "C": "SageMaker Ground Truth is for generating labels via human annotators on your own unlabeled data; it does not provide access to external third-party datasets.",
+        "D": "S3 Block Public Access is a security control preventing accidental public exposure of your own S3 data; it has no role in acquiring external datasets."
+      },
+      "rule_of_thumb": "Need someone else's dataset? AWS Data Exchange, not Glue, Ground Truth, or S3 security controls."
+    },
+    "tags": ["data-exchange", "data-collection"]
+  },
+  {
+    "id": "Q-D1-0305",
+    "domain": 1, "task_statement": "1.3", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D1-013"], "case_study_id": null,
+    "stem": "A data analyst has just received a large raw customer dataset and, before doing any cleaning, wants to understand the distributions, missing values, and outliers present in the data. Which activity is this?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Feature engineering" },
+      { "key": "B", "text": "Exploratory data analysis (EDA)" },
+      { "key": "C", "text": "Model deployment" },
+      { "key": "D", "text": "Hyperparameter tuning" }
+    ],
+    "correct": ["B"],
+    "explanation": {
+      "why_correct": "Exploratory data analysis (EDA) is specifically the activity of understanding a dataset's distributions, missing values, and outliers before any cleaning or transformation is applied, matching exactly what the analyst is doing.",
+      "why_incorrect": {
+        "A": "Feature engineering shapes already-clean data into better model inputs; it happens after cleaning, not as the very first exploratory step on raw data.",
+        "C": "Model deployment occurs much later in the lifecycle, after training and evaluation are complete.",
+        "D": "Hyperparameter tuning configures the training process; it has no relevance to exploring raw data distributions before cleaning."
+      },
+      "rule_of_thumb": "Explore first, clean second, split last. EDA comes before cleaning to understand the data's shape, quality, and issues."
+    },
+    "tags": ["eda", "data-preprocessing"]
+  },
+  {
+    "id": "Q-D1-0306",
+    "domain": 1, "task_statement": "1.3", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D1-013"], "case_study_id": null,
+    "stem": "A data preparation team wants a visual, low-code interface to define and reuse cleaning steps, such as filling missing values and removing duplicates, as a reusable 'recipe' applied consistently across multiple datasets. Which AWS service directly supports this?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Amazon Macie" },
+      { "key": "B", "text": "AWS Glue DataBrew" },
+      { "key": "C", "text": "Amazon SageMaker Model Registry" },
+      { "key": "D", "text": "AWS Trusted Advisor" }
+    ],
+    "correct": ["B"],
+    "explanation": {
+      "why_correct": "AWS Glue DataBrew provides exactly this visual, low-code interface for defining and applying reusable cleaning 'recipes,' including built-in data-quality rules, directly matching the described need.",
+      "why_incorrect": {
+        "A": "Amazon Macie automatically discovers and classifies sensitive data like PII in S3; it does not provide a general visual data-cleaning recipe interface.",
+        "C": "SageMaker Model Registry tracks and versions trained models; it has no data-cleaning capability.",
+        "D": "AWS Trusted Advisor provides account-wide cost/performance/security recommendations; it does not provide a data-cleaning interface."
+      },
+      "rule_of_thumb": "Need a visual, no-code way to define and reuse cleaning steps -> Glue DataBrew."
+    },
+    "tags": ["databrew", "data-preprocessing"]
+  },
+  {
+    "id": "Q-D1-0307",
+    "domain": 1, "task_statement": "1.3", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D1-013"], "case_study_id": null,
+    "stem": "A compliance team wants to automatically scan a large collection of raw datasets stored in S3 to discover and classify any personally identifiable information (PII) present before that data is used for training. Which AWS service is purpose-built for this?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Amazon Comprehend" },
+      { "key": "B", "text": "AWS Glue DataBrew" },
+      { "key": "C", "text": "Amazon SageMaker Feature Store" },
+      { "key": "D", "text": "Amazon Macie" }
+    ],
+    "correct": ["D"],
+    "explanation": {
+      "why_correct": "Amazon Macie automatically discovers and classifies sensitive data, such as PII, stored in S3, at scale, directly matching this compliance team's need to scan raw datasets for PII before training.",
+      "why_incorrect": {
+        "A": "Amazon Comprehend can detect PII entities within text you feed it as part of NLP analysis, but Macie is the service purpose-built for scanning and classifying data at rest in S3 across a data lake.",
+        "B": "AWS Glue DataBrew is a visual data-cleaning tool; it is not purpose-built for automated PII discovery across an S3 data lake the way Macie is.",
+        "C": "Amazon SageMaker Feature Store centralizes engineered features; it has no PII-discovery capability."
+      },
+      "rule_of_thumb": "Need automated PII discovery and classification across data stored in S3 -> Macie."
+    },
+    "tags": ["macie", "pii", "data-preprocessing"]
+  },
+  {
+    "id": "Q-D1-0308",
+    "domain": 1, "task_statement": "1.3", "type": "single_choice", "difficulty": "hard",
+    "theory_refs": ["TH-D1-013"], "case_study_id": null,
+    "stem": "A team trains a model and evaluates it using the exact same data it was trained on, reporting 99% accuracy. What is the primary problem with this evaluation approach?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "The reported accuracy does not reflect how the model will perform on genuinely new, unseen data, since it was measured on data the model already memorized." },
+      { "key": "B", "text": "99% accuracy is always too low to be useful in any business context." },
+      { "key": "C", "text": "Evaluating on training data is required by AWS best practices and cannot be avoided." },
+      { "key": "D", "text": "There is no problem; evaluating on training data always gives the most reliable estimate of real-world performance." }
+    ],
+    "correct": ["A"],
+    "explanation": {
+      "why_correct": "Evaluating a model on the same data it trained on tells you nothing about how it generalizes to new, unseen data, since the model may have simply memorized patterns (including noise) specific to that training data. A separate validation/test split is needed to get a meaningful performance estimate.",
+      "why_incorrect": {
+        "B": "Whether 99% accuracy is 'too low' depends entirely on the business context; the actual problem here is that this number was measured on training data, not that the number itself is inherently too low.",
+        "C": "AWS best practices explicitly recommend splitting data into training, validation, and test sets rather than evaluating solely on training data; this is not a required or recommended approach.",
+        "D": "This is the opposite of the actual concern; evaluating on training data is widely recognized as an unreliable way to estimate real-world performance."
+      },
+      "rule_of_thumb": "A validation/test set (data the model never trained on) is how meaningful performance is actually measured — evaluating only on training data hides overfitting entirely."
+    },
+    "tags": ["train-test-split", "model-evaluation", "data-preprocessing"]
+  },
+  {
+    "id": "Q-D1-0309",
+    "domain": 1, "task_statement": "1.3", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D1-014"], "case_study_id": null,
+    "stem": "A data scientist takes a raw 'date of last purchase' field and derives a new feature called 'days since last purchase' to use as model input. Which stage of feature engineering does this activity represent?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Feature selection" },
+      { "key": "B", "text": "Feature creation" },
+      { "key": "C", "text": "Categorical encoding" },
+      { "key": "D", "text": "Feature transformation" }
+    ],
+    "correct": ["B"],
+    "explanation": {
+      "why_correct": "Deriving a new variable ('days since last purchase') from an existing one (the raw date field) is exactly what feature creation means: producing new, often more predictive, variables from raw fields.",
+      "why_incorrect": {
+        "A": "Feature selection identifies which EXISTING variables are most relevant; it does not involve deriving a brand-new variable from an existing field.",
+        "C": "Categorical encoding converts non-numeric categories into numeric form; deriving a numeric 'days since' value from a date is not a categorical encoding operation.",
+        "D": "Feature transformation applies mathematical operations like normalization to rescale existing numeric features; deriving a new feature from a date field is feature creation, not a rescaling transformation."
+      },
+      "rule_of_thumb": "Deriving a brand-new field from existing ones -> feature creation. Picking which existing fields matter -> selection. Rescaling values -> transformation."
+    },
+    "tags": ["feature-engineering", "feature-creation"]
+  },
+  {
+    "id": "Q-D1-0310",
+    "domain": 1, "task_statement": "1.3", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D1-014"], "case_study_id": null,
+    "stem": "A dataset includes a 'customer income' field ranging from $20,000 to $500,000 and an 'age' field ranging from 18 to 90. A data scientist applies normalization so both features contribute proportionally to a distance-based algorithm rather than income dominating due to its much larger numeric scale. Which feature engineering activity is this?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Feature selection" },
+      { "key": "B", "text": "Feature creation" },
+      { "key": "C", "text": "Feature transformation" },
+      { "key": "D", "text": "Data collection" }
+    ],
+    "correct": ["C"],
+    "explanation": {
+      "why_correct": "Applying normalization to rescale features so no single feature dominates due to differing scales is precisely what feature transformation means.",
+      "why_incorrect": {
+        "A": "Feature selection identifies which existing variables are most relevant; it does not involve rescaling values.",
+        "B": "Feature creation derives new variables from existing ones; normalization is rescaling an EXISTING feature's values, not creating a new variable.",
+        "D": "Data collection happens much earlier, before any feature engineering; this scenario is well past that stage already."
+      },
+      "rule_of_thumb": "Rescaling values so they contribute proportionally -> feature transformation (normalization/standardization)."
+    },
+    "tags": ["feature-engineering", "normalization"]
+  },
+  {
+    "id": "Q-D1-0311",
+    "domain": 1, "task_statement": "1.3", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D1-014"], "case_study_id": null,
+    "stem": "A team wants to ensure the exact same feature definitions and values are used consistently in both model training and real-time inference, avoiding any mismatch between how features were computed during training versus how they are computed live in production. Which AWS service directly addresses this consistency need?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Amazon SageMaker Model Monitor" },
+      { "key": "B", "text": "AWS Glue Data Catalog" },
+      { "key": "C", "text": "Amazon SageMaker Ground Truth" },
+      { "key": "D", "text": "Amazon SageMaker Feature Store" }
+    ],
+    "correct": ["D"],
+    "explanation": {
+      "why_correct": "Amazon SageMaker Feature Store centralizes engineered features specifically so they can be reused consistently across training and inference, directly addressing this exact training/serving consistency need and avoiding training/serving skew.",
+      "why_incorrect": {
+        "A": "SageMaker Model Monitor detects drift in a deployed model's inputs/predictions after deployment; it does not ensure consistent feature computation between training and inference.",
+        "B": "The Glue Data Catalog stores dataset metadata/schemas, not a live, queryable store of consistent feature values for training and inference.",
+        "C": "SageMaker Ground Truth generates labels via human annotators; it has no role in ensuring feature consistency between training and inference."
+      },
+      "rule_of_thumb": "Need consistency between training-time and serving-time features -> Feature Store, avoiding training/serving skew."
+    },
+    "tags": ["feature-store", "feature-engineering"]
+  },
+  {
+    "id": "Q-D1-0312",
+    "domain": 1, "task_statement": "1.3", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D1-015"], "case_study_id": null,
+    "stem": "A team notices that their model's training loss oscillates wildly and never converges to a stable value. After investigation, they suspect a specific hyperparameter is set too high. Which hyperparameter is most likely the culprit?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Number of epochs" },
+      { "key": "B", "text": "Learning rate" },
+      { "key": "C", "text": "Batch size" },
+      { "key": "D", "text": "Number of training examples" }
+    ],
+    "correct": ["B"],
+    "explanation": {
+      "why_correct": "A learning rate set too high causes the model to take overly large update steps, which can cause training loss to overshoot the optimal solution repeatedly and oscillate rather than converge smoothly, matching the described symptom.",
+      "why_incorrect": {
+        "A": "Too many epochs risks overfitting over time, but it does not typically cause wild oscillation in the loss value during training the way an excessive learning rate does.",
+        "C": "Batch size affects how frequently and how noisily parameters update, but an oscillating, non-converging loss is more classically associated with an excessive learning rate.",
+        "D": "The number of training examples affects how much data the model learns from, but it is not a hyperparameter typically associated with oscillating, non-converging training loss in the way learning rate is."
+      },
+      "rule_of_thumb": "Learning rate too high risks overshooting and oscillating; learning rate too low risks painfully slow or stalled training."
+    },
+    "tags": ["hyperparameters", "learning-rate"]
+  },
+  {
+    "id": "Q-D1-0313",
+    "domain": 1, "task_statement": "1.3", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D1-015"], "case_study_id": null,
+    "stem": "A team wants to automatically search for the best combination of learning rate, batch size, and number of layers for their model, against a chosen objective metric, without manually trying combinations one at a time. Which AWS capability is designed for this?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Amazon SageMaker Automatic Model Tuning" },
+      { "key": "B", "text": "Amazon SageMaker Model Monitor" },
+      { "key": "C", "text": "AWS Glue DataBrew" },
+      { "key": "D", "text": "Amazon SageMaker Ground Truth" }
+    ],
+    "correct": ["A"],
+    "explanation": {
+      "why_correct": "Amazon SageMaker Automatic Model Tuning (AMT) automates the search for good hyperparameter values against a chosen objective metric, directly matching this need to systematically find the best combination without manual trial and error.",
+      "why_incorrect": {
+        "B": "SageMaker Model Monitor detects drift in a deployed model; it has no role in searching for optimal hyperparameters during training.",
+        "C": "AWS Glue DataBrew is a data-cleaning tool; it has no hyperparameter-tuning capability.",
+        "D": "SageMaker Ground Truth generates labels via human annotators; it has no role in hyperparameter search."
+      },
+      "rule_of_thumb": "Automating the search for the best hyperparameter combination -> SageMaker Automatic Model Tuning."
+    },
+    "tags": ["automatic-model-tuning", "hyperparameters"]
+  },
+  {
+    "id": "Q-D1-0314",
+    "domain": 1, "task_statement": "1.3", "type": "single_choice", "difficulty": "hard",
+    "theory_refs": ["TH-D1-016"], "case_study_id": null,
+    "stem": "A bank builds a fraud-detection model where only 0.5% of transactions are actually fraudulent. The model achieves 99.4% accuracy by essentially predicting 'not fraud' for almost every transaction. What is the core problem with using accuracy as the primary metric here?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Accuracy is misleading on this highly imbalanced dataset, since a model that ignores the rare fraud cases entirely can still score very high accuracy while being practically useless." },
+      { "key": "B", "text": "Accuracy can never be calculated for classification problems." },
+      { "key": "C", "text": "The model's accuracy score is mathematically incorrect and should be recalculated." },
+      { "key": "D", "text": "There is no problem; 99.4% accuracy definitively proves the model is excellent at detecting fraud." }
+    ],
+    "correct": ["A"],
+    "explanation": {
+      "why_correct": "On a highly imbalanced dataset like this one, accuracy is dominated by the majority class (non-fraud), so a model that fails at the minority class (fraud) entirely can still achieve very high accuracy — precision, recall, or F1 would reveal the model's actual failure to catch fraud, which accuracy hides.",
+      "why_incorrect": {
+        "B": "Accuracy can absolutely be calculated for classification problems; the issue here is not a calculation limitation but a misleading metric choice for imbalanced data.",
+        "C": "There is no indication the accuracy calculation itself is mathematically wrong; the number is likely correct but misleading given the class imbalance.",
+        "D": "High accuracy here does NOT prove the model detects fraud well — it could reflect the model essentially ignoring the fraud class entirely, which is the core problem being described."
+      },
+      "rule_of_thumb": "Using accuracy as the primary metric on a highly imbalanced dataset is one of the most common exam traps — accuracy can look great while the model completely fails at the minority class that actually matters."
+    },
+    "tags": ["accuracy", "imbalanced-data", "classification-metrics"]
+  },
+  {
+    "id": "Q-D1-0315",
+    "domain": 1, "task_statement": "1.3", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D1-016"], "case_study_id": null,
+    "stem": "A spam filter's biggest business risk is blocking legitimate emails from reaching users (false positives), even at the cost of occasionally letting some spam through. Which classification metric should the team prioritize optimizing?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Recall" },
+      { "key": "B", "text": "Precision" },
+      { "key": "C", "text": "RMSE" },
+      { "key": "D", "text": "MAE" }
+    ],
+    "correct": ["B"],
+    "explanation": {
+      "why_correct": "Precision measures the fraction of positive predictions (flagged-as-spam emails) that were actually correct, directly minimizing false positives, which matches this team's priority of avoiding blocking legitimate emails.",
+      "why_incorrect": {
+        "A": "Recall focuses on minimizing false negatives (missed spam), which is the opposite priority from what this scenario emphasizes.",
+        "C": "RMSE is a regression metric for continuous numeric predictions; it does not apply to this binary classification (spam/not spam) scenario.",
+        "D": "MAE is also a regression metric; it is not applicable to a classification precision/recall tradeoff scenario."
+      },
+      "rule_of_thumb": "False positives expensive (e.g. blocking legitimate email) -> optimize precision."
+    },
+    "tags": ["precision", "classification-metrics"]
+  },
+  {
+    "id": "Q-D1-0316",
+    "domain": 1, "task_statement": "1.3", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D1-016"], "case_study_id": null,
+    "stem": "A medical screening model's biggest business risk is failing to flag patients who actually have a disease (false negatives), even at the cost of some healthy patients being flagged for unnecessary follow-up testing (false positives). Which classification metric should the team prioritize?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Precision" },
+      { "key": "B", "text": "Recall" },
+      { "key": "C", "text": "MSE" },
+      { "key": "D", "text": "MAE" }
+    ],
+    "correct": ["B"],
+    "explanation": {
+      "why_correct": "Recall measures the fraction of actual positives (patients who truly have the disease) that were correctly identified, directly minimizing false negatives, which matches this team's priority of not missing diagnoses.",
+      "why_incorrect": {
+        "A": "Precision focuses on minimizing false positives (unnecessary flags), which is the opposite priority from what this scenario emphasizes.",
+        "C": "MSE is a regression metric for continuous numeric predictions; it does not apply to this binary classification (disease/no disease) scenario.",
+        "D": "MAE is also a regression metric; it is not applicable to a classification precision/recall tradeoff scenario."
+      },
+      "rule_of_thumb": "False negatives expensive (e.g. missing a disease diagnosis) -> optimize recall."
+    },
+    "tags": ["recall", "classification-metrics"]
+  },
+  {
+    "id": "Q-D1-0317",
+    "domain": 1, "task_statement": "1.3", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D1-017"], "case_study_id": null,
+    "stem": "A team is evaluating a house-price prediction model and wants an error metric expressed in the same unit as the target variable (dollars), so business stakeholders can interpret it directly, while also penalizing large prediction errors more heavily than small ones. Which metric best fits this need?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "F1 score" },
+      { "key": "B", "text": "RMSE" },
+      { "key": "C", "text": "AUC-ROC" },
+      { "key": "D", "text": "Accuracy" }
+    ],
+    "correct": ["B"],
+    "explanation": {
+      "why_correct": "RMSE is the square root of MSE, expressing error in the same units as the original target variable (dollars), and because it derives from squared errors, it also penalizes large errors more heavily than small ones, matching both stated requirements.",
+      "why_incorrect": {
+        "A": "F1 score is a classification metric for balancing precision and recall; it is not applicable to a continuous numeric price-prediction task.",
+        "C": "AUC-ROC is a classification metric summarizing performance across thresholds; it is not applicable to a continuous numeric regression task.",
+        "D": "Accuracy is a classification metric measuring the fraction of correct predictions; it does not apply to predicting a continuous numeric value like house price."
+      },
+      "rule_of_thumb": "Want to interpret error in the original units and penalize large errors more? RMSE."
+    },
+    "tags": ["rmse", "regression-metrics"]
+  },
+  {
+    "id": "Q-D1-0318",
+    "domain": 1, "task_statement": "1.3", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D1-017"], "case_study_id": null,
+    "stem": "A team wants a regression error metric where every unit of prediction error counts equally, without disproportionately penalizing a few large outlier errors more than many small ones. Which metric best fits this requirement?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "MSE" },
+      { "key": "B", "text": "RMSE" },
+      { "key": "C", "text": "MAE" },
+      { "key": "D", "text": "AUC-ROC" }
+    ],
+    "correct": ["C"],
+    "explanation": {
+      "why_correct": "Mean Absolute Error (MAE) averages the absolute, unsquared differences between predicted and actual values, treating every unit of error equally regardless of magnitude, exactly matching this requirement.",
+      "why_incorrect": {
+        "A": "MSE squares errors before averaging, which disproportionately penalizes large errors more than small ones, the opposite of what this scenario wants.",
+        "B": "RMSE, being derived from MSE, also disproportionately penalizes large errors due to the underlying squaring, not the equal-weighting behavior requested here.",
+        "D": "AUC-ROC is a classification metric, not applicable to this regression error-weighting scenario."
+      },
+      "rule_of_thumb": "Want a metric where every error counts equally regardless of size? MAE, since it doesn't square errors the way MSE and RMSE do."
+    },
+    "tags": ["mae", "regression-metrics"]
+  },
+  {
+    "id": "Q-D1-0319",
+    "domain": 1, "task_statement": "1.3", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D1-018"], "case_study_id": null,
+    "stem": "A company needs to score a one-time batch of 2 million historical customer records overnight, with no requirement for a persistent live endpoint or immediate response times. Which SageMaker inference option is most cost-effective for this need?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Real-time inference" },
+      { "key": "B", "text": "Serverless inference" },
+      { "key": "C", "text": "Batch transform" },
+      { "key": "D", "text": "Asynchronous inference" }
+    ],
+    "correct": ["C"],
+    "explanation": {
+      "why_correct": "Batch transform processes a large dataset all at once asynchronously and is cost-effective for exactly this kind of infrequent, bulk scoring job with no need for a persistent live endpoint.",
+      "why_incorrect": {
+        "A": "Real-time inference requires a persistent, always-on endpoint billed for uptime regardless of request volume, which would waste money on this one-time overnight batch job.",
+        "B": "Serverless inference is optimized for intermittent, unpredictable live traffic patterns, not specifically for a single large bulk-scoring job.",
+        "D": "Asynchronous inference is suited to individual large-payload requests without immediate response needs, but batch transform is the more purpose-built, cost-effective choice for a large one-off bulk dataset like this."
+      },
+      "rule_of_thumb": "Large one-off bulk job, no live traffic -> batch transform, the most cost-effective choice for this exact pattern."
+    },
+    "tags": ["batch-transform", "sagemaker-inference"]
+  },
+  {
+    "id": "Q-D1-0320",
+    "domain": 1, "task_statement": "1.3", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D1-018"], "case_study_id": null,
+    "stem": "A startup's ML-powered feature receives highly unpredictable traffic, sometimes zero requests for hours and sometimes sudden spikes, and the team wants to avoid managing or paying for idle infrastructure during quiet periods. Which SageMaker inference option best fits this pattern?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Real-time inference with a fixed-size endpoint" },
+      { "key": "B", "text": "Batch transform" },
+      { "key": "C", "text": "Serverless inference" },
+      { "key": "D", "text": "A manually managed EC2 instance running continuously" }
+    ],
+    "correct": ["C"],
+    "explanation": {
+      "why_correct": "Serverless inference automatically provisions and scales compute with no infrastructure to manage, ideal for exactly this intermittent, unpredictable traffic pattern where paying for idle capacity during quiet periods would be wasteful.",
+      "why_incorrect": {
+        "A": "A fixed-size real-time endpoint is billed for uptime regardless of traffic, which wastes money during the long quiet periods this scenario describes.",
+        "B": "Batch transform is designed for large offline bulk jobs, not for responding to live, unpredictable request traffic.",
+        "D": "A continuously running EC2 instance incurs cost even during idle periods, which is exactly what this team wants to avoid."
+      },
+      "rule_of_thumb": "Unpredictable/intermittent traffic, don't want to manage or pay for idle infrastructure -> serverless inference."
+    },
+    "tags": ["serverless-inference", "sagemaker-inference"]
+  },
+  {
+    "id": "Q-D1-0321",
+    "domain": 1, "task_statement": "1.3", "type": "single_choice", "difficulty": "hard",
+    "theory_refs": ["TH-D1-019"], "case_study_id": null,
+    "stem": "A fraud-detection model deployed a year ago is now missing new fraud tactics that emerged after its training data was collected, because the underlying relationship between transaction patterns and actual fraud has genuinely changed. What is this phenomenon called?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Data drift" },
+      { "key": "B", "text": "Concept drift" },
+      { "key": "C", "text": "Overfitting" },
+      { "key": "D", "text": "Underfitting" }
+    ],
+    "correct": ["B"],
+    "explanation": {
+      "why_correct": "Concept drift occurs when the actual relationship between inputs and outputs changes over time, such as new fraud tactics the model was never trained to recognize, meaning the patterns the model originally learned no longer hold true.",
+      "why_incorrect": {
+        "A": "Data drift describes a change in the input data distribution while the input-output relationship stays the same; this scenario specifically describes the relationship itself (what counts as fraud) changing, which is concept drift.",
+        "C": "Overfitting is a training-time phenomenon where a model memorizes training-specific noise; it does not describe a post-deployment change in the real-world pattern the model relies on.",
+        "D": "Underfitting describes a model that never learned the pattern well in the first place, evident from poor performance even during initial training, not a post-deployment change in real-world patterns."
+      },
+      "rule_of_thumb": "Same relationship, different-looking inputs -> data drift. The relationship itself has changed -> concept drift, the more serious failure mode."
+    },
+    "tags": ["concept-drift", "model-monitoring"]
+  },
+  {
+    "id": "Q-D1-0322",
+    "domain": 1, "task_statement": "1.3", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D1-019"], "case_study_id": null,
+    "stem": "A team wants to continuously compare live production inference data against the training-time data baseline, and automatically send alerts to Amazon CloudWatch if a significant statistical shift is detected. Which AWS service is purpose-built for this?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Amazon SageMaker Model Monitor" },
+      { "key": "B", "text": "Amazon SageMaker Clarify" },
+      { "key": "C", "text": "AWS Glue DataBrew" },
+      { "key": "D", "text": "Amazon SageMaker Feature Store" }
+    ],
+    "correct": ["A"],
+    "explanation": {
+      "why_correct": "Amazon SageMaker Model Monitor continuously compares live inference data against a training-time baseline and can send results to CloudWatch to trigger alerts, directly matching this exact monitoring need.",
+      "why_incorrect": {
+        "B": "SageMaker Clarify detects bias and explains predictions, primarily at training/evaluation time, rather than continuously monitoring a deployed model's live data drift.",
+        "C": "AWS Glue DataBrew is a data-cleaning tool used before training; it has no live production drift-monitoring capability.",
+        "D": "SageMaker Feature Store centralizes feature values for consistency; it does not perform drift detection against a baseline."
+      },
+      "rule_of_thumb": "Detecting drift in a deployed model's inputs/predictions in an AWS-native way -> SageMaker Model Monitor, feeding CloudWatch."
+    },
+    "tags": ["model-monitor", "drift-detection"]
+  },
+  {
+    "id": "Q-D1-0323",
+    "domain": 1, "task_statement": "1.3", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D1-020"], "case_study_id": null,
+    "stem": "A team wants to define and automate its entire ML workflow — data preparation, training, evaluation, and deployment — as a repeatable, version-controlled pipeline, so the same process can be re-run consistently for future model updates. Which AWS service is purpose-built for this?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Amazon SageMaker Model Monitor" },
+      { "key": "B", "text": "Amazon SageMaker Pipelines" },
+      { "key": "C", "text": "AWS Trusted Advisor" },
+      { "key": "D", "text": "Amazon SageMaker Clarify" }
+    ],
+    "correct": ["B"],
+    "explanation": {
+      "why_correct": "Amazon SageMaker Pipelines defines and automates an end-to-end ML workflow as a repeatable, version-controlled pipeline, directly matching this need to standardize data prep, training, evaluation, and deployment.",
+      "why_incorrect": {
+        "A": "SageMaker Model Monitor observes an already-deployed model for drift; it does not automate the upstream workflow of building and deploying the model.",
+        "C": "AWS Trusted Advisor provides account-wide recommendations on cost/performance/security; it does not automate ML workflows.",
+        "D": "SageMaker Clarify detects bias and explains predictions; it does not automate the end-to-end ML pipeline."
+      },
+      "rule_of_thumb": "Automating the ML workflow steps themselves (prep -> train -> evaluate -> deploy) -> SageMaker Pipelines."
+    },
+    "tags": ["sagemaker-pipelines", "mlops"]
+  },
+  {
+    "id": "Q-D1-0324",
+    "domain": 1, "task_statement": "1.3", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D1-020"], "case_study_id": null,
+    "stem": "A team wants to track multiple trained versions of the same model, along with metadata about each, and require an approval step before any specific version is promoted to production. Which AWS service directly supports this?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Amazon SageMaker Pipelines" },
+      { "key": "B", "text": "Amazon SageMaker Model Registry" },
+      { "key": "C", "text": "Amazon SageMaker Model Monitor" },
+      { "key": "D", "text": "AWS Glue" }
+    ],
+    "correct": ["B"],
+    "explanation": {
+      "why_correct": "Amazon SageMaker Model Registry tracks and versions trained models along with their metadata and supports approval workflows before production promotion, directly matching this exact need.",
+      "why_incorrect": {
+        "A": "SageMaker Pipelines automates the workflow steps (prep, train, evaluate, deploy) themselves; it is not the version-tracking and approval-gate service for specific model artifacts.",
+        "C": "SageMaker Model Monitor observes an already-deployed model for drift; it does not track model versions or manage promotion approvals.",
+        "D": "AWS Glue is an ETL service for data transformation; it has no model-versioning or approval-workflow capability."
+      },
+      "rule_of_thumb": "Tracking and approving which model version is 'the' production model -> SageMaker Model Registry."
+    },
+    "tags": ["model-registry", "mlops"]
+  },
+  {
+    "id": "Q-D1-0325",
+    "domain": 1, "task_statement": "1.3", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D1-021"], "case_study_id": null,
+    "stem": "A team wants to reduce the cost of a long-running model training job by using spare, interruptible EC2 capacity at a steep discount, while relying on automatic checkpointing so training can resume if that spare capacity is reclaimed. Which AWS capability is designed for this?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "AWS Trusted Advisor" },
+      { "key": "B", "text": "SageMaker Managed Spot Training" },
+      { "key": "C", "text": "Amazon SageMaker Model Monitor" },
+      { "key": "D", "text": "Amazon SageMaker Clarify" }
+    ],
+    "correct": ["B"],
+    "explanation": {
+      "why_correct": "SageMaker Managed Spot Training uses spare, interruptible EC2 capacity at a steep discount, automatically checkpointing progress so training can resume if the underlying spot capacity is reclaimed, directly matching this exact cost-reduction need.",
+      "why_incorrect": {
+        "A": "AWS Trusted Advisor provides general cost/performance/security recommendations across the account; it is not itself the mechanism for running discounted, interruptible training jobs.",
+        "C": "SageMaker Model Monitor observes a deployed model's drift; it has no role in reducing training costs.",
+        "D": "SageMaker Clarify detects bias and explains predictions; it has no role in training cost optimization."
+      },
+      "rule_of_thumb": "Cheaper training via interruption-tolerant spare capacity -> Managed Spot Training, with automatic checkpointing to survive interruptions."
+    },
+    "tags": ["spot-training", "cost-optimization"]
+  }
+]

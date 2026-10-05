@@ -1,0 +1,144 @@
+[
+  {
+    "id": "Q-D3-0068",
+    "domain": 3,
+    "task_statement": "3.3",
+    "type": "single_choice",
+    "difficulty": "hard",
+    "theory_refs": [
+      "TH-D3-012"
+    ],
+    "case_study_id": null,
+    "stem": "Which of the following best describes a well-designed fallback, as opposed to an ad hoc one invented at the moment of failure?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "A fallback that must be functionally identical to the primary tool in every respect"
+      },
+      {
+        "key": "B",
+        "text": "Whatever the agent happens to improvise after the primary tool has already failed, with no prior thought"
+      },
+      {
+        "key": "C",
+        "text": "A fallback that was identified and prepared in advance based on anticipating plausible failure modes of the primary approach"
+      },
+      {
+        "key": "D",
+        "text": "A fallback that is never actually used under any circumstances"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "A well-designed fallback is identified and prepared in advance by anticipating plausible failure modes, which tends to be more reliable than an alternative improvised only after the primary approach has already failed.",
+      "why_incorrect": {
+        "B": "Ad hoc, in-the-moment improvisation with no prior preparation is explicitly described as less reliable than a deliberately designed fallback.",
+        "D": "A fallback that is never used provides no actual benefit when the primary approach fails; it needs to be actually invoked when needed.",
+        "A": "A fallback does not need to be functionally identical to the primary approach; a reasonable, even partial, alternative that lets the task still make progress is valuable."
+      },
+      "rule_of_thumb": "Well-designed fallbacks are prepared in advance by anticipating plausible failures, not improvised ad hoc after the fact."
+    },
+    "tags": [
+      "fallback-strategy",
+      "failure-anticipation"
+    ]
+  },
+  {
+    "id": "Q-D3-0069",
+    "domain": 3,
+    "task_statement": "3.3",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D3-010",
+      "TH-D3-013"
+    ],
+    "case_study_id": null,
+    "stem": "Which statement accurately contrasts an explicit tool error with a misleading-success result?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "An explicit error provides a visible signal prompting a response, while a misleading-success result provides no such signal despite being wrong or incomplete"
+      },
+      {
+        "key": "B",
+        "text": "Both are functionally identical with no meaningful distinction"
+      },
+      {
+        "key": "C",
+        "text": "Explicit errors never occur in real tool-use systems"
+      },
+      {
+        "key": "D",
+        "text": "Misleading-success results always include a clear error code identifying the problem"
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "explanation": {
+      "why_correct": "The key distinction is the presence or absence of a visible signal: explicit errors clearly flag that something went wrong, while misleading-success results appear fine on the surface despite being actually wrong or incomplete.",
+      "why_incorrect": {
+        "B": "These are meaningfully distinct categories specifically because of whether a visible failure signal is present or absent.",
+        "C": "Explicit errors are a common, well-documented occurrence in real tool-use systems (e.g. permission denials, invalid input errors).",
+        "D": "By definition, misleading-success results do NOT include a clear error code -- that's precisely what makes them dangerous and hard to detect."
+      },
+      "rule_of_thumb": "The core distinction between explicit errors and misleading-success results is whether a visible failure signal exists at all."
+    },
+    "tags": [
+      "failure-categorization",
+      "misleading-results"
+    ]
+  },
+  {
+    "id": "Q-D3-0070",
+    "domain": 3,
+    "task_statement": "3.3",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D3-011"
+    ],
+    "case_study_id": null,
+    "stem": "What should happen after a retry strategy exhausts its limited attempt count with no success?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Switch to an alternative approach (such as a fallback) or clearly report the failure, rather than continuing to retry indefinitely"
+      },
+      {
+        "key": "B",
+        "text": "Immediately double the attempt limit and continue retrying forever with no further consideration"
+      },
+      {
+        "key": "C",
+        "text": "Pretend the call succeeded and fabricate a plausible-looking result"
+      },
+      {
+        "key": "D",
+        "text": "Delete all logs of the failed attempts with no further action"
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "explanation": {
+      "why_correct": "Once the retry budget is exhausted with no success, the appropriate next step is to pursue an alternative (fallback) or clearly report the failure -- continuing to retry indefinitely wastes resources without a realistic chance of success.",
+      "why_incorrect": {
+        "B": "Simply doubling the limit and continuing forever ignores the point of having a stopping condition in the first place.",
+        "C": "Fabricating a result to mask the failure is actively harmful, since it presents false information as if it were a genuine, reliable outcome.",
+        "D": "Deleting logs removes diagnostic information that could help understand and fix the underlying issue, with no actual benefit."
+      },
+      "rule_of_thumb": "After exhausting a retry budget, switch to a fallback or report the failure clearly -- don't retry indefinitely or mask the failure."
+    },
+    "tags": [
+      "retry-strategy",
+      "fallback-strategy"
+    ]
+  }
+]

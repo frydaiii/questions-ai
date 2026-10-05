@@ -1,0 +1,338 @@
+[
+  {
+    "id": "Q-D3-0022",
+    "domain": 3,
+    "task_statement": "3.1",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D3-005"
+    ],
+    "case_study_id": null,
+    "stem": "Which of the following best describes a reasonable default heuristic for deciding whether to use a tool?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Use a tool only on days of the week that start with the letter 'T'"
+      },
+      {
+        "key": "B",
+        "text": "Always use a tool, with no exceptions, for every request"
+      },
+      {
+        "key": "C",
+        "text": "Never use a tool under any circumstances"
+      },
+      {
+        "key": "D",
+        "text": "Use a tool when the task needs current data, a real side effect, precise computation, or system-specific data; skip it for stable, self-contained tasks"
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "This correctly captures the task-driven heuristic: reach for a tool specifically when the task genuinely requires current data, a real action, precise computation, or system-specific data, and skip it when the task is stable and self-contained.",
+      "why_incorrect": {
+        "B": "Always using a tool wastes resources on tasks that are already well handled by the model's reliable internal knowledge.",
+        "C": "Never using a tool would make the agent unable to handle current, system-specific, or action-requiring tasks reliably.",
+        "A": "Day of the week has no logical connection to whether a task genuinely needs a tool."
+      },
+      "rule_of_thumb": "Decide tool use based on the task's actual information/action needs, not a blanket always/never policy or arbitrary surface factors."
+    },
+    "tags": [
+      "tool-necessity",
+      "design-heuristics"
+    ]
+  },
+  {
+    "id": "Q-D3-0023",
+    "domain": 3,
+    "task_statement": "3.1",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D3-002",
+      "TH-D3-005"
+    ],
+    "case_study_id": null,
+    "stem": "Why might even a model trained very recently still face a freshness problem in practice?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Time passes between training and actual deployment/use, during which fast-changing facts can become outdated"
+      },
+      {
+        "key": "B",
+        "text": "Recent training eliminates all possible freshness issues permanently"
+      },
+      {
+        "key": "C",
+        "text": "Freshness issues only ever apply to models trained long ago"
+      },
+      {
+        "key": "D",
+        "text": "There is no such thing as a freshness problem for any model"
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "explanation": {
+      "why_correct": "Even with a recent training cutoff, time continues to pass between training and actual use, during which fast-changing facts (prices, current events) can become outdated -- making freshness a persistent concern regardless of how recent training was.",
+      "why_incorrect": {
+        "B": "Recency of training reduces but does not eliminate freshness risk, since any gap at all between cutoff and use still exposes fast-changing facts to staleness.",
+        "C": "Freshness issues affect any model with a training cutoff, not only older ones -- the key factor is the gap between cutoff and current use, not training age in isolation.",
+        "D": "Freshness is a well-documented, real limitation that applies to any model with a fixed training cutoff used at some later point in time."
+      },
+      "rule_of_thumb": "Any gap between training cutoff and actual use -- however small -- still exposes fast-changing facts to a freshness problem."
+    },
+    "tags": [
+      "freshness",
+      "stale-knowledge"
+    ]
+  },
+  {
+    "id": "Q-D3-0024",
+    "domain": 3,
+    "task_statement": "3.1",
+    "type": "single_choice",
+    "difficulty": "hard",
+    "theory_refs": [
+      "TH-D3-003",
+      "TH-D3-005"
+    ],
+    "case_study_id": null,
+    "stem": "An agent is given access to a 'wipe all records' action tool with no safeguards and no distinction from its read-only tools in how confidently it's invoked. What is the most significant design risk here?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "The tool will refuse to run if misused, with no further design needed"
+      },
+      {
+        "key": "B",
+        "text": "There is no risk at all since all tools are equally safe by nature"
+      },
+      {
+        "key": "C",
+        "text": "A reasoning mistake could trigger an irreversible, highly consequential action with the same ease as a harmless information lookup"
+      },
+      {
+        "key": "D",
+        "text": "Read-only tools are actually more dangerous than this action tool"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "Without extra caution or safeguards specifically for high-consequence action tools, a reasoning mistake could trigger a 'wipe all records' action just as easily as a harmless lookup -- exactly the asymmetric risk that action tools are supposed to be treated with more caution to prevent.",
+      "why_incorrect": {
+        "B": "Tools are not all equally safe; a destructive, irreversible action tool carries categorically higher risk than a read-only lookup.",
+        "D": "This reverses the actual risk relationship -- the destructive action tool is clearly higher-risk than typical read-only information tools.",
+        "A": "Tools do not inherently self-protect against misuse; safeguards must be deliberately designed into the system, they don't happen automatically."
+      },
+      "rule_of_thumb": "High-consequence action tools need deliberately designed safeguards; without them, a simple reasoning mistake can trigger irreversible harm as easily as a harmless lookup."
+    },
+    "tags": [
+      "action-tools",
+      "tool-risk-tiers",
+      "design-tradeoffs"
+    ]
+  },
+  {
+    "id": "Q-D3-0025",
+    "domain": 3,
+    "task_statement": "3.1",
+    "type": "single_choice",
+    "difficulty": "easy",
+    "theory_refs": [
+      "TH-D3-001"
+    ],
+    "case_study_id": null,
+    "stem": "What is the role of an 'observation' in the context of tool use?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "The original user request, unchanged"
+      },
+      {
+        "key": "B",
+        "text": "A random piece of text with no connection to any tool call"
+      },
+      {
+        "key": "C",
+        "text": "The result of a tool call, fed back into the model's context so it can reason over it"
+      },
+      {
+        "key": "D",
+        "text": "A permanent, unchangeable part of the model's weights"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "An observation is the result returned by a tool call, fed back into the model's context so that it can incorporate that real information into its subsequent reasoning.",
+      "why_incorrect": {
+        "B": "An observation is specifically tied to and derived from a tool call's result, not an arbitrary unconnected piece of text.",
+        "D": "Observations are part of the model's current context/conversation, not something baked permanently into the model's weights.",
+        "A": "The original user request is a separate piece of context from an observation, which specifically refers to tool call results."
+      },
+      "rule_of_thumb": "An observation is a tool call's result, returned to the model's context for further reasoning -- distinct from the original request or the model's permanent weights."
+    },
+    "tags": [
+      "tool-use",
+      "observation"
+    ]
+  },
+  {
+    "id": "Q-D3-0026",
+    "domain": 3,
+    "task_statement": "3.1",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D3-004"
+    ],
+    "case_study_id": null,
+    "stem": "Which claim would benefit LEAST from explicit grounding against an external source?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "A basic, long-settled mathematical identity (e.g. the Pythagorean theorem) that has not changed in millennia"
+      },
+      {
+        "key": "B",
+        "text": "The current price of a specific stock"
+      },
+      {
+        "key": "C",
+        "text": "A specific user's current account balance"
+      },
+      {
+        "key": "D",
+        "text": "Today's weather in a specific city"
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "explanation": {
+      "why_correct": "A long-settled, unchanging mathematical identity carries essentially no risk from being drawn from internal knowledge, making explicit grounding of comparatively little benefit here versus the other options, which are all current or user-specific and benefit strongly from grounding.",
+      "why_incorrect": {
+        "B": "Current stock prices are highly time-sensitive and benefit strongly from being grounded in a live source.",
+        "C": "A specific user's account balance is private, current, system-specific data that strongly benefits from grounding against the actual system of record.",
+        "D": "Today's weather is current, rapidly changing information that strongly benefits from a live, grounded lookup."
+      },
+      "rule_of_thumb": "Grounding provides the most value for current, private, or rapidly changing claims; it provides little additional value for long-settled, stable facts."
+    },
+    "tags": [
+      "grounding",
+      "task-analysis"
+    ]
+  },
+  {
+    "id": "Q-D3-0027",
+    "domain": 3,
+    "task_statement": "3.1",
+    "type": "multi_response",
+    "difficulty": "hard",
+    "theory_refs": [
+      "TH-D3-001",
+      "TH-D3-002",
+      "TH-D3-003",
+      "TH-D3-004"
+    ],
+    "case_study_id": null,
+    "stem": "Which of the following accurately describe limitations of a tool-less language model that tool use specifically addresses? (Select 3)",
+    "select_count": 3,
+    "options": [
+      {
+        "key": "A",
+        "text": "Inability to access information that emerged after training"
+      },
+      {
+        "key": "B",
+        "text": "Inability to cause real, persistent side effects in external systems"
+      },
+      {
+        "key": "C",
+        "text": "Inability to provide a traceable origin for its claims"
+      },
+      {
+        "key": "D",
+        "text": "Inability to produce syntactically valid sentences"
+      }
+    ],
+    "correct": [
+      "A",
+      "B",
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "Tool use specifically addresses the inability to access post-training information, the inability to cause real side effects, and the lack of traceable claim origins -- all genuine limitations of a tool-less model.",
+      "why_incorrect": {
+        "D": "Producing syntactically valid sentences is a core native capability of language models and is not a limitation that tool use is meant to address."
+      },
+      "rule_of_thumb": "Tool use addresses information freshness, real-world action capability, and traceability -- not basic language generation, which models handle natively."
+    },
+    "tags": [
+      "tool-use",
+      "grounding",
+      "freshness"
+    ]
+  },
+  {
+    "id": "Q-D3-0028",
+    "domain": 3,
+    "task_statement": "3.1",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D3-003"
+    ],
+    "case_study_id": null,
+    "stem": "A notification-sending tool and a database-record-deleting tool are both classified as 'action tools.' Should they necessarily receive identical levels of caution and safeguards?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Yes, always, since both are technically 'action tools' with no further distinction needed"
+      },
+      {
+        "key": "B",
+        "text": "Not necessarily -- caution should scale with each specific action's actual consequence severity and reversibility, which can differ even within the action-tool category"
+      },
+      {
+        "key": "C",
+        "text": "No tool should ever receive any safeguards regardless of category"
+      },
+      {
+        "key": "D",
+        "text": "Every action tool must always require exactly the same fixed confirmation process with no variation"
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "explanation": {
+      "why_correct": "Even within the broad 'action tool' category, specific actions can differ significantly in consequence severity and reversibility (e.g. a notification is usually far less consequential than permanently deleting a database record), so caution should be scaled accordingly rather than applied uniformly just because both are 'action tools.'",
+      "why_incorrect": {
+        "C": "Some safeguards are clearly warranted for genuinely high-risk actions; a blanket no-safeguards policy ignores this.",
+        "D": "A fixed, one-size-fits-all confirmation process ignores that different actions carry meaningfully different risk levels even within the same broad category.",
+        "A": "Treating all action tools identically ignores real differences in actual risk between, for example, a low-stakes notification and a high-stakes permanent deletion."
+      },
+      "rule_of_thumb": "Scale caution and safeguards to each specific action's actual consequence severity and reversibility, not just its broad category label."
+    },
+    "tags": [
+      "action-tools",
+      "tool-risk-tiers"
+    ]
+  }
+]

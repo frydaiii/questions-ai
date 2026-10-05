@@ -1,0 +1,27 @@
+[
+  {
+    "id": "Q-D1-0902",
+    "domain": 1,
+    "task_statement": "1.1",
+    "type": "single_choice",
+    "difficulty": "easy",
+    "theory_refs": ["TH-D1-001"],
+    "case_study_id": null,
+    "stem": "Broken fixture: single_choice question with two correct keys, to test the answer-count gate.",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Option A text" },
+      { "key": "B", "text": "Option B text" },
+      { "key": "C", "text": "Option C text" }
+    ],
+    "correct": ["A", "B"],
+    "explanation": {
+      "why_correct": "This explanation is only present to satisfy the schema; the point of this fixture is the answer-count mismatch.",
+      "why_incorrect": {
+        "C": "Placeholder explanation for option C."
+      },
+      "rule_of_thumb": "Placeholder rule of thumb text for this fixture."
+    },
+    "tags": ["fixture"]
+  }
+]

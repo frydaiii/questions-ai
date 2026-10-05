@@ -1,0 +1,606 @@
+[
+  {
+    "id": "Q-D2-0301",
+    "domain": 2, "task_statement": "2.3", "type": "single_choice", "difficulty": "easy",
+    "theory_refs": ["TH-D2-011"], "case_study_id": null,
+    "stem": "A startup wants to quickly build a generative AI application by calling a foundation model's API, with no servers to provision, patch, or scale themselves. Which AWS service is purpose-built for this exact need?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Amazon SageMaker JumpStart" },
+      { "key": "B", "text": "Amazon Bedrock" },
+      { "key": "C", "text": "Amazon EC2" },
+      { "key": "D", "text": "AWS Lambda alone, with no other service" }
+    ],
+    "correct": ["B"],
+    "explanation": {
+      "why_correct": "Amazon Bedrock is a fully managed, serverless service providing API access to foundation models with no infrastructure to provision or manage, directly matching this exact requirement.",
+      "why_incorrect": {
+        "A": "SageMaker JumpStart requires deploying models to a self-managed SageMaker endpoint, which involves infrastructure management, unlike the fully serverless Bedrock.",
+        "C": "Amazon EC2 requires provisioning and managing virtual servers directly; it does not provide the serverless foundation model API access this scenario needs.",
+        "D": "AWS Lambda alone provides serverless compute for custom code, but it does not itself provide access to foundation models; Bedrock is the purpose-built service for that."
+      },
+      "rule_of_thumb": "Need managed, serverless access to a foundation model with no infrastructure to run yourself -> Amazon Bedrock."
+    },
+    "tags": ["bedrock"]
+  },
+  {
+    "id": "Q-D2-0302",
+    "domain": 2, "task_statement": "2.3", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D2-012"], "case_study_id": null,
+    "stem": "A machine learning team needs deep control over the serving infrastructure for a foundation model, including specific VPC networking configuration and integration with an existing SageMaker MLOps pipeline. Which approach is most appropriate?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Amazon Bedrock, since it is always the correct choice regardless of infrastructure control needs" },
+      { "key": "B", "text": "Amazon SageMaker JumpStart, deploying the model to a self-managed SageMaker endpoint with full infrastructure control" },
+      { "key": "C", "text": "Amazon Polly" },
+      { "key": "D", "text": "Amazon Translate" }
+    ],
+    "correct": ["B"],
+    "explanation": {
+      "why_correct": "SageMaker JumpStart deploys pre-trained models, including foundation models, to a self-managed SageMaker endpoint, giving the team the deep infrastructure control (VPC networking, MLOps pipeline integration) this scenario explicitly requires.",
+      "why_incorrect": {
+        "A": "Bedrock is serverless and abstracts away infrastructure control specifically because it does not expose the kind of deep networking/pipeline integration control this scenario needs; JumpStart is the better fit here.",
+        "C": "Amazon Polly is a text-to-speech service; it is unrelated to foundation model infrastructure deployment choices.",
+        "D": "Amazon Translate is a language translation service; it is unrelated to foundation model infrastructure deployment choices."
+      },
+      "rule_of_thumb": "Want to deploy a pre-trained model to your own controlled SageMaker endpoint, with deep infrastructure control -> JumpStart."
+    },
+    "tags": ["sagemaker-jumpstart", "bedrock"]
+  },
+  {
+    "id": "Q-D2-0303",
+    "domain": 2, "task_statement": "2.3", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D2-013"], "case_study_id": null,
+    "stem": "A law firm wants a foundation model's answers grounded in its private, frequently-updated case-law document library stored in S3, without fine-tuning a custom model. Which AWS capability is purpose-built for this?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Amazon Bedrock Knowledge Bases" },
+      { "key": "B", "text": "Amazon Bedrock Agents" },
+      { "key": "C", "text": "SageMaker Ground Truth" },
+      { "key": "D", "text": "Amazon Forecast" }
+    ],
+    "correct": ["A"],
+    "explanation": {
+      "why_correct": "Amazon Bedrock Knowledge Bases implements the full RAG workflow, grounding a foundation model's answers in private, frequently-updated documents (like a case-law library in S3) without any fine-tuning, exactly matching this need.",
+      "why_incorrect": {
+        "B": "Bedrock Agents orchestrate multi-step workflows and actions; grounding answers in a document library specifically is Knowledge Bases' role, though Agents can call a knowledge base as one step.",
+        "C": "SageMaker Ground Truth generates labels via human annotators for training data; it has no role in grounding live generative AI responses.",
+        "D": "Amazon Forecast predicts future numeric time-series values; it is unrelated to grounding responses in documents."
+      },
+      "rule_of_thumb": "A scenario needing an AWS-managed way to ground a foundation model's answers in private, frequently-changing documents, without training a custom model, points to Bedrock Knowledge Bases."
+    },
+    "tags": ["bedrock-knowledge-bases", "rag"]
+  },
+  {
+    "id": "Q-D2-0304",
+    "domain": 2, "task_statement": "2.3", "type": "single_choice", "difficulty": "hard",
+    "theory_refs": ["TH-D2-014"], "case_study_id": null,
+    "stem": "A customer service application needs to: look up an order's status, and if the order is delayed, automatically issue a partial refund and send a confirmation email, all in response to a single customer message. Which AWS capability is best suited to orchestrate this multi-step workflow?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Amazon Bedrock Knowledge Bases alone, with no other components" },
+      { "key": "B", "text": "Amazon Bedrock Agents, calling AWS Lambda functions to look up order status, issue the refund, and send the confirmation" },
+      { "key": "C", "text": "Amazon Polly alone" },
+      { "key": "D", "text": "Amazon Kendra alone" }
+    ],
+    "correct": ["B"],
+    "explanation": {
+      "why_correct": "This scenario requires planning and executing multiple real actions across systems (order lookup, refund processing, email confirmation) in response to a single request, which is precisely what Bedrock Agents are designed for, typically invoking AWS Lambda functions to perform each action.",
+      "why_incorrect": {
+        "A": "Knowledge Bases grounds responses in documents via RAG; it does not orchestrate multi-step actions like issuing a refund or sending an email.",
+        "C": "Amazon Polly converts text to speech; it has no workflow orchestration capability.",
+        "D": "Amazon Kendra is an enterprise search service; it has no capability to execute multi-step actions like processing refunds."
+      },
+      "rule_of_thumb": "A workflow needing multiple steps, external system calls, or real-world actions -> Bedrock Agents, typically invoking Lambda functions for each action."
+    },
+    "tags": ["bedrock-agents", "lambda"]
+  },
+  {
+    "id": "Q-D2-0305",
+    "domain": 2, "task_statement": "2.3", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D2-015"], "case_study_id": null,
+    "stem": "A company wants to prevent its Bedrock-powered chatbot from discussing competitor products and to automatically redact any credit card numbers customers might paste into the chat. Which AWS capability directly supports both requirements?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Amazon Bedrock Guardrails, using denied topics and PII redaction" },
+      { "key": "B", "text": "Amazon Bedrock Model Evaluation" },
+      { "key": "C", "text": "Amazon SageMaker Clarify" },
+      { "key": "D", "text": "AWS CloudTrail" }
+    ],
+    "correct": ["A"],
+    "explanation": {
+      "why_correct": "Bedrock Guardrails supports denied topics (blocking discussion of competitor products) and PII redaction (masking sensitive data like credit card numbers), directly addressing both stated requirements.",
+      "why_incorrect": {
+        "B": "Bedrock Model Evaluation compares candidate models for quality/safety before or during selection; it does not perform live content filtering on production chat traffic.",
+        "C": "SageMaker Clarify detects bias and explains predictions for classical ML models; it is not the content-filtering tool for generative AI chat applications.",
+        "D": "AWS CloudTrail records API call history for auditing; it has no content-filtering capability."
+      },
+      "rule_of_thumb": "Bedrock Guardrails is a generative-AI content-safety control: denied topics, harmful content filtering, and PII redaction, enforced at inference time."
+    },
+    "tags": ["bedrock-guardrails", "pii"]
+  },
+  {
+    "id": "Q-D2-0306",
+    "domain": 2, "task_statement": "2.3", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D2-015"], "case_study_id": null,
+    "stem": "Before committing to a specific foundation model for a customer support use case, a team wants to systematically compare three candidate models on accuracy, robustness, and toxicity scoring. Which AWS capability is purpose-built for this comparison?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Amazon Bedrock Model Evaluation" },
+      { "key": "B", "text": "Amazon Bedrock Guardrails" },
+      { "key": "C", "text": "Amazon Bedrock Agents" },
+      { "key": "D", "text": "Amazon Bedrock Knowledge Bases" }
+    ],
+    "correct": ["A"],
+    "explanation": {
+      "why_correct": "Amazon Bedrock Model Evaluation lets teams compare and select foundation models using automatic metrics like accuracy, robustness, and toxicity scoring, directly matching this pre-selection comparison need.",
+      "why_incorrect": {
+        "B": "Bedrock Guardrails filters live content at inference time; it is not the model-comparison/selection tool.",
+        "C": "Bedrock Agents orchestrate multi-step workflows; they are unrelated to comparing candidate foundation models.",
+        "D": "Bedrock Knowledge Bases grounds responses in documents via RAG; it is unrelated to comparing candidate foundation models."
+      },
+      "rule_of_thumb": "Comparing candidate models on quality/safety metrics to pick the best one -> Bedrock Model Evaluation."
+    },
+    "tags": ["bedrock-model-evaluation"]
+  },
+  {
+    "id": "Q-D2-0307",
+    "domain": 2, "task_statement": "2.3", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D2-016"], "case_study_id": null,
+    "stem": "A team already stores its structured customer data in Amazon Aurora PostgreSQL and wants to add vector similarity search for product embeddings directly alongside that existing relational data, using familiar SQL. Which vector store option best fits this need?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Amazon OpenSearch Service" },
+      { "key": "B", "text": "Aurora PostgreSQL with the pgvector extension" },
+      { "key": "C", "text": "Amazon Neptune ML" },
+      { "key": "D", "text": "Amazon MemoryDB" }
+    ],
+    "correct": ["B"],
+    "explanation": {
+      "why_correct": "Aurora PostgreSQL with the pgvector extension lets the team store and query embeddings using familiar SQL directly alongside their existing relational data, exactly matching this scenario's requirement.",
+      "why_incorrect": {
+        "A": "OpenSearch Service is a strong general-purpose vector store, but this scenario specifically calls for keeping vectors alongside EXISTING relational data using SQL, which pgvector directly supports without a separate system.",
+        "C": "Neptune ML is designed for graph-structured data and relationships; this scenario's data is relational, not graph-based.",
+        "D": "MemoryDB offers in-memory speed but does not integrate with existing relational SQL data the way pgvector does."
+      },
+      "rule_of_thumb": "Need vectors alongside existing relational/SQL data -> Aurora/RDS pgvector."
+    },
+    "tags": ["vector-database", "pgvector"]
+  },
+  {
+    "id": "Q-D2-0308",
+    "domain": 2, "task_statement": "2.3", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D2-016"], "case_study_id": null,
+    "stem": "A team needs the fastest possible in-memory vector similarity lookups for a real-time application handling tens of thousands of queries per second, with latency as the dominant requirement. Which vector store is purpose-built for this?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Amazon DocumentDB" },
+      { "key": "B", "text": "Amazon MemoryDB" },
+      { "key": "C", "text": "AWS Glue" },
+      { "key": "D", "text": "Amazon Comprehend" }
+    ],
+    "correct": ["B"],
+    "explanation": {
+      "why_correct": "Amazon MemoryDB offers high-speed, in-memory vector storage and retrieval with millisecond latency for the most performance-sensitive workloads, directly matching this scenario's dominant latency/throughput requirement.",
+      "why_incorrect": {
+        "A": "Amazon DocumentDB supports vector search in a document-oriented data model, but it is not specifically the highest-throughput, lowest-latency option; MemoryDB is purpose-built for that.",
+        "C": "AWS Glue is an ETL service; it has no vector storage or similarity search capability.",
+        "D": "Amazon Comprehend is a text-analysis NLP service; it has no vector storage capability."
+      },
+      "rule_of_thumb": "Need the fastest possible in-memory vector lookups -> MemoryDB."
+    },
+    "tags": ["vector-database", "memorydb"]
+  },
+  {
+    "id": "Q-D2-0309",
+    "domain": 2, "task_statement": "2.3", "type": "single_choice", "difficulty": "hard",
+    "theory_refs": ["TH-D2-016"], "case_study_id": null,
+    "stem": "A social network wants to power recommendations by combining vector similarity with rich graph relationships between users, posts, and interactions, using graph neural networks. Which AWS vector store option best fits this specific requirement?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Amazon MemoryDB" },
+      { "key": "B", "text": "Amazon Neptune ML" },
+      { "key": "C", "text": "AWS Data Exchange" },
+      { "key": "D", "text": "Amazon Transcribe" }
+    ],
+    "correct": ["B"],
+    "explanation": {
+      "why_correct": "Amazon Neptune ML applies Graph Neural Networks (GNNs) to make predictions from graph-structured data, directly matching this scenario's need to combine vector similarity with rich graph relationships between users, posts, and interactions.",
+      "why_incorrect": {
+        "A": "Amazon MemoryDB provides fast in-memory vector lookups but does not natively model graph relationships between entities the way Neptune ML does.",
+        "C": "AWS Data Exchange provides access to third-party datasets; it has no vector storage or graph modeling capability.",
+        "D": "Amazon Transcribe converts speech to text; it is unrelated to vector storage or graph modeling."
+      },
+      "rule_of_thumb": "Need graph relationships plus predictions -> Neptune ML, using Graph Neural Networks."
+    },
+    "tags": ["vector-database", "neptune-ml"]
+  },
+  {
+    "id": "Q-D2-0310",
+    "domain": 2, "task_statement": "2.3", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D2-017"], "case_study_id": null,
+    "stem": "A company wants a generative AI assistant embedded directly in its developers' IDEs to write and explain code and perform automated security scanning. Which Amazon Q variant is the correct fit?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Amazon Q Business" },
+      { "key": "B", "text": "Amazon Q Developer" },
+      { "key": "C", "text": "Amazon Q in QuickSight" },
+      { "key": "D", "text": "Amazon Q in Connect" }
+    ],
+    "correct": ["B"],
+    "explanation": {
+      "why_correct": "Amazon Q Developer is specifically the coding assistant that lives inside a developer's IDE, helping write, explain, and review code, and performing security scanning, directly matching this exact use case.",
+      "why_incorrect": {
+        "A": "Amazon Q Business is the enterprise/business knowledge assistant, not the coding-focused IDE assistant.",
+        "C": "Amazon Q in QuickSight enables natural-language BI querying within dashboards, unrelated to IDE-based code assistance.",
+        "D": "Amazon Q in Connect assists contact-center agents; it is unrelated to IDE-based code assistance."
+      },
+      "rule_of_thumb": "Coding tasks -> Q Developer."
+    },
+    "tags": ["amazon-q-developer"]
+  },
+  {
+    "id": "Q-D2-0311",
+    "domain": 2, "task_statement": "2.3", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D2-017"], "case_study_id": null,
+    "stem": "A business analyst wants to ask natural-language business-intelligence questions directly within their existing QuickSight dashboards, without writing SQL queries. Which Amazon Q variant supports this specific integration?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Amazon Q Developer" },
+      { "key": "B", "text": "Amazon Q Business" },
+      { "key": "C", "text": "Amazon Q in QuickSight" },
+      { "key": "D", "text": "Amazon Q in AWS Supply Chain" }
+    ],
+    "correct": ["C"],
+    "explanation": {
+      "why_correct": "Amazon Q in QuickSight specifically enables natural-language business-intelligence queries directly within QuickSight dashboards, exactly matching this analyst's need.",
+      "why_incorrect": {
+        "A": "Amazon Q Developer is the coding assistant; it is unrelated to BI queries within QuickSight dashboards.",
+        "B": "Amazon Q Business is the general enterprise knowledge assistant, not specifically integrated into QuickSight dashboards for BI queries.",
+        "D": "Amazon Q in AWS Supply Chain focuses on supply chain insights and forecasting, unrelated to QuickSight BI dashboards."
+      },
+      "rule_of_thumb": "Anything 'Q in <Service>' is that specific service's natural-language assistant layered on top of its existing domain — Q in QuickSight specifically for BI dashboards."
+    },
+    "tags": ["amazon-q-quicksight"]
+  },
+  {
+    "id": "Q-D2-0312",
+    "domain": 2, "task_statement": "2.3", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D2-017"], "case_study_id": null,
+    "stem": "A contact center wants an AI assistant to help live agents answer customer questions and automate routine responses during calls. Which Amazon Q variant is designed for this specific integration?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Amazon Q Developer" },
+      { "key": "B", "text": "Amazon Q in AWS Supply Chain" },
+      { "key": "C", "text": "Amazon Q in QuickSight" },
+      { "key": "D", "text": "Amazon Q in Connect" }
+    ],
+    "correct": ["D"],
+    "explanation": {
+      "why_correct": "Amazon Q in Connect specifically assists contact-center agents and automates customer responses, directly matching this exact use case.",
+      "why_incorrect": {
+        "A": "Amazon Q Developer is the coding assistant; it is unrelated to live contact-center agent assistance.",
+        "B": "Amazon Q in AWS Supply Chain focuses on supply chain data insights; it is unrelated to contact-center agent assistance.",
+        "C": "Amazon Q in QuickSight focuses on BI dashboard queries; it is unrelated to contact-center agent assistance."
+      },
+      "rule_of_thumb": "Anything 'Q in <Service>' is that specific service's natural-language assistant layered on top of its existing domain — Q in Connect specifically for contact-center agent assistance."
+    },
+    "tags": ["amazon-q-connect"]
+  },
+  {
+    "id": "Q-D2-0313",
+    "domain": 2, "task_statement": "2.3", "type": "single_choice", "difficulty": "hard",
+    "theory_refs": ["TH-D2-018"], "case_study_id": null,
+    "stem": "A team wants to fine-tune a pre-trained foundation model on their own labeled data, with full control over the specific SageMaker training instance types and hyperparameters used. Which AWS capability is purpose-built for this level of control?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "PartyRock" },
+      { "key": "B", "text": "SageMaker JumpStart fine-tuning" },
+      { "key": "C", "text": "Amazon Bedrock on-demand pricing alone" },
+      { "key": "D", "text": "Amazon Polly" }
+    ],
+    "correct": ["B"],
+    "explanation": {
+      "why_correct": "SageMaker JumpStart supports fine-tuning pre-trained models directly within the SageMaker environment, giving full control over training instance types and hyperparameters, exactly matching this level of control the team wants.",
+      "why_incorrect": {
+        "A": "PartyRock is a no-code, lightweight experimentation playground; it does not provide deep control over training instance types or hyperparameters for fine-tuning.",
+        "C": "Bedrock on-demand pricing is a billing model for using existing foundation models; it does not itself provide fine-tuning infrastructure control.",
+        "D": "Amazon Polly is a text-to-speech service; it is unrelated to fine-tuning foundation models."
+      },
+      "rule_of_thumb": "Need full control over fine-tuning a pre-trained model's training process -> SageMaker JumpStart."
+    },
+    "tags": ["sagemaker-jumpstart", "fine-tuning"]
+  },
+  {
+    "id": "Q-D2-0314",
+    "domain": 2, "task_statement": "2.3", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D2-018"], "case_study_id": null,
+    "stem": "A student wants to experiment with building a simple generative AI app for a class project, with no coding experience and no infrastructure to manage, purely for learning purposes. Which AWS-related tool is best suited?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "PartyRock" },
+      { "key": "B", "text": "SageMaker JumpStart fine-tuning" },
+      { "key": "C", "text": "Amazon SageMaker Pipelines" },
+      { "key": "D", "text": "AWS CodePipeline" }
+    ],
+    "correct": ["A"],
+    "explanation": {
+      "why_correct": "PartyRock is a hands-on, no-code generative AI playground built on Bedrock, letting users experiment with and build simple generative AI apps quickly with no infrastructure management, exactly matching this student's learning-focused, no-code need.",
+      "why_incorrect": {
+        "B": "SageMaker JumpStart fine-tuning requires configuring training jobs and infrastructure, which is more involved than what this no-code learning scenario calls for.",
+        "C": "SageMaker Pipelines automates ML workflows for production use cases; it is not a no-code learning playground.",
+        "D": "AWS CodePipeline orchestrates CI/CD workflows for software deployment; it is unrelated to a no-code generative AI learning tool."
+      },
+      "rule_of_thumb": "Want a no-code way to quickly prototype a simple generative AI app for learning/experimentation -> PartyRock."
+    },
+    "tags": ["partyrock"]
+  },
+  {
+    "id": "Q-D2-0315",
+    "domain": 2, "task_statement": "2.3", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D2-023"], "case_study_id": null,
+    "stem": "A company using an off-the-shelf Bedrock foundation model with variable, unpredictable traffic wants the simplest pricing model with no upfront commitment. Which Bedrock pricing option fits this need?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "On-demand, pay-as-you-go token-based pricing" },
+      { "key": "B", "text": "Provisioned Throughput, requiring a committed time period" },
+      { "key": "C", "text": "A flat monthly subscription regardless of usage" },
+      { "key": "D", "text": "Free unlimited usage with no billing of any kind" }
+    ],
+    "correct": ["A"],
+    "explanation": {
+      "why_correct": "On-demand, pay-as-you-go pricing, billed per input/output token, is Bedrock's default model, best suited for variable, unpredictable, or low-to-moderate volume workloads with no upfront commitment.",
+      "why_incorrect": {
+        "B": "Provisioned Throughput requires a committed time period and is generally used for consistent, high-throughput needs (often required for custom/fine-tuned models), not the simplest no-commitment option for variable traffic.",
+        "C": "Bedrock does not offer a flat monthly subscription regardless of usage as its standard pricing model; it uses token-based on-demand or Provisioned Throughput.",
+        "D": "Bedrock usage is billed based on tokens processed; it is not free or unlimited."
+      },
+      "rule_of_thumb": "Variable or unpredictable traffic, using an off-the-shelf model -> on-demand token pricing."
+    },
+    "tags": ["bedrock-pricing"]
+  },
+  {
+    "id": "Q-D2-0316",
+    "domain": 2, "task_statement": "2.3", "type": "single_choice", "difficulty": "hard",
+    "theory_refs": ["TH-D2-023"], "case_study_id": null,
+    "stem": "A company has fine-tuned a custom model on Bedrock and wants to deploy it at meaningful production volume with consistent, guaranteed throughput. Which pricing/capacity model is generally required for this?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Simple on-demand pricing with no reserved capacity" },
+      { "key": "B", "text": "Provisioned Throughput, reserving guaranteed capacity for a committed duration" },
+      { "key": "C", "text": "No pricing model is available for fine-tuned models on Bedrock" },
+      { "key": "D", "text": "Free-tier usage only, with no paid options" }
+    ],
+    "correct": ["B"],
+    "explanation": {
+      "why_correct": "Provisioned Throughput reserves guaranteed model capacity for a committed duration, providing consistent, predictable throughput and latency, and is typically required for custom or fine-tuned models at meaningful production volume on Bedrock.",
+      "why_incorrect": {
+        "A": "Simple on-demand pricing is generally not available/sufficient for custom or fine-tuned models at production scale; Provisioned Throughput is typically required instead.",
+        "C": "A pricing model does exist for fine-tuned models on Bedrock — specifically Provisioned Throughput; this statement is factually incorrect.",
+        "D": "Fine-tuned model deployment at production volume is a paid capability requiring Provisioned Throughput, not limited to free-tier usage."
+      },
+      "rule_of_thumb": "Custom/fine-tuned model at production volume, need guaranteed consistent throughput -> Provisioned Throughput."
+    },
+    "tags": ["bedrock-pricing", "provisioned-throughput"]
+  },
+  {
+    "id": "Q-D2-0317",
+    "domain": 2, "task_statement": "2.3", "type": "multi_response", "difficulty": "medium",
+    "theory_refs": ["TH-D2-011"], "case_study_id": null,
+    "stem": "Which TWO of the following are accurate characteristics of Amazon Bedrock?",
+    "select_count": 2,
+    "options": [
+      { "key": "A", "text": "It is a fully managed, serverless service providing API access to foundation models from multiple providers." },
+      { "key": "B", "text": "It bundles supporting capabilities like Knowledge Bases, Agents, Guardrails, and Model Evaluation into the platform." },
+      { "key": "C", "text": "It requires the customer to provision and patch EC2 instances manually before any model can be used." },
+      { "key": "D", "text": "It only supports Amazon's own Titan models, with no access to any third-party providers." }
+    ],
+    "correct": ["A", "B"],
+    "explanation": {
+      "why_correct": "Bedrock is indeed fully managed and serverless with multi-provider API access, and it does bundle Knowledge Bases, Agents, Guardrails, and Model Evaluation directly into the platform — both accurate characteristics.",
+      "why_incorrect": {
+        "C": "Bedrock's entire value proposition is that it is serverless; it does NOT require manual EC2 provisioning or patching to use foundation models.",
+        "D": "Bedrock provides access to multiple third-party model providers (Anthropic, AI21 Labs, Cohere, Meta, Mistral AI, Stability AI) in addition to Amazon's own Titan models, not exclusively Titan."
+      },
+      "rule_of_thumb": "Bedrock is serverless: no endpoints to provision or scale manually, with multiple model providers accessible through one unified API."
+    },
+    "tags": ["bedrock"]
+  },
+  {
+    "id": "Q-D2-0318",
+    "domain": 2, "task_statement": "2.3", "type": "multi_response", "difficulty": "hard",
+    "theory_refs": ["TH-D2-013", "TH-D2-014"], "case_study_id": null,
+    "stem": "Which TWO of the following statements correctly distinguish Amazon Bedrock Knowledge Bases from Amazon Bedrock Agents?",
+    "select_count": 2,
+    "options": [
+      { "key": "A", "text": "Knowledge Bases grounds a foundation model's answers in documents via RAG; it does not itself take real-world actions." },
+      { "key": "B", "text": "Agents can orchestrate multi-step workflows, including calling AWS Lambda functions to take real actions." },
+      { "key": "C", "text": "Knowledge Bases and Agents are functionally identical, with no meaningful distinction between them." },
+      { "key": "D", "text": "Agents can never call a knowledge base as part of a larger workflow." }
+    ],
+    "correct": ["A", "B"],
+    "explanation": {
+      "why_correct": "Knowledge Bases does specifically ground answers in documents via RAG without taking real-world actions itself, and Agents can indeed orchestrate multi-step workflows including calling Lambda functions for real actions — both accurate, distinguishing statements.",
+      "why_incorrect": {
+        "C": "These serve meaningfully different purposes (document grounding vs. multi-step action orchestration), not identical functions.",
+        "D": "Agents CAN call a knowledge base as one step within a larger workflow; this statement incorrectly claims they never can."
+      },
+      "rule_of_thumb": "A single question needing grounded facts from documents -> Knowledge Bases. A workflow needing multiple steps, external system calls, or real-world actions -> Bedrock Agents, which can also call a knowledge base as one step."
+    },
+    "tags": ["bedrock-knowledge-bases", "bedrock-agents"]
+  },
+  {
+    "id": "Q-D2-0319",
+    "domain": 2, "task_statement": "2.3", "type": "matching", "difficulty": "hard",
+    "theory_refs": ["TH-D2-016"], "case_study_id": null,
+    "stem": "Match each AWS vector store option on the left with the scenario on the right that it is best suited for.",
+    "select_count": 5,
+    "matching": {
+      "left": [
+        { "key": "L1", "text": "Amazon OpenSearch Service" },
+        { "key": "L2", "text": "Aurora PostgreSQL with pgvector" },
+        { "key": "L3", "text": "Amazon Neptune ML" },
+        { "key": "L4", "text": "Amazon MemoryDB" },
+        { "key": "L5", "text": "Amazon DocumentDB" }
+      ],
+      "right": [
+        { "key": "R1", "text": "A team needing general-purpose, scalable vector search combined with log analytics" },
+        { "key": "R2", "text": "A team wanting vectors stored alongside existing relational data, queried with SQL" },
+        { "key": "R3", "text": "A team needing predictions based on graph relationships between entities" },
+        { "key": "R4", "text": "A team needing the fastest possible in-memory vector lookups at very high throughput" },
+        { "key": "R5", "text": "A team with an existing MongoDB-compatible, document-oriented data model" }
+      ]
+    },
+    "correct_pairs": { "L1": "R1", "L2": "R2", "L3": "R3", "L4": "R4", "L5": "R5" },
+    "explanation": {
+      "why_correct": "OpenSearch fits general-purpose search plus vectors (R1). pgvector fits relational data with SQL (R2). Neptune ML fits graph relationships (R3). MemoryDB fits fastest in-memory lookups (R4). DocumentDB fits document-oriented data (R5).",
+      "why_incorrect": {},
+      "rule_of_thumb": "Match the vector store choice to the existing data shape and the dominant non-functional requirement, not brand familiarity."
+    },
+    "tags": ["vector-database", "matching"]
+  },
+  {
+    "id": "Q-D2-0320",
+    "domain": 2, "task_statement": "2.3", "type": "matching", "difficulty": "medium",
+    "theory_refs": ["TH-D2-017"], "case_study_id": null,
+    "stem": "Match each Amazon Q variant on the left with the specific integration or role on the right that it provides.",
+    "select_count": 4,
+    "matching": {
+      "left": [
+        { "key": "L1", "text": "Amazon Q Developer" },
+        { "key": "L2", "text": "Amazon Q Business" },
+        { "key": "L3", "text": "Amazon Q in QuickSight" },
+        { "key": "L4", "text": "Amazon Q in Connect" }
+      ],
+      "right": [
+        { "key": "R1", "text": "Coding assistance and security scanning inside a developer's IDE" },
+        { "key": "R2", "text": "Enterprise knowledge assistant connected to S3, SharePoint, and Salesforce" },
+        { "key": "R3", "text": "Natural-language business intelligence queries within dashboards" },
+        { "key": "R4", "text": "Assisting contact-center agents and automating customer responses" }
+      ]
+    },
+    "correct_pairs": { "L1": "R1", "L2": "R2", "L3": "R3", "L4": "R4" },
+    "explanation": {
+      "why_correct": "Q Developer provides IDE coding assistance (R1). Q Business provides enterprise data assistance (R2). Q in QuickSight provides BI dashboard queries (R3). Q in Connect assists contact-center agents (R4).",
+      "why_incorrect": {},
+      "rule_of_thumb": "Coding tasks -> Q Developer. Enterprise knowledge/data Q&A -> Q Business. Anything else 'Q in <Service>' is that service's natural-language assistant layered on top."
+    },
+    "tags": ["amazon-q", "matching"]
+  },
+  {
+    "id": "Q-D2-0321",
+    "domain": 2, "task_statement": "2.3", "type": "ordering", "difficulty": "medium",
+    "theory_refs": ["TH-D2-013"], "case_study_id": null,
+    "stem": "A team is setting up Amazon Bedrock Knowledge Bases for a RAG application grounded in internal documents. Arrange the following setup and usage steps in the order they typically occur, from first to last.",
+    "select_count": 4,
+    "options": [
+      { "key": "A", "text": "Upload source documents to Amazon S3" },
+      { "key": "B", "text": "Configure the knowledge base to ingest, chunk, and embed the documents into a supported vector store" },
+      { "key": "C", "text": "A user submits a natural-language query to the application" },
+      { "key": "D", "text": "The knowledge base retrieves the most relevant chunks and augments the foundation model's prompt before generating a grounded response" }
+    ],
+    "correct": ["A", "B", "C", "D"],
+    "explanation": {
+      "why_correct": "Setup begins by uploading source documents to S3 (A), then configuring the knowledge base to ingest/chunk/embed them into a vector store (B). At usage time, a user submits a query (C), and the knowledge base retrieves relevant chunks to augment the prompt before generating a grounded response (D).",
+      "why_incorrect": {},
+      "rule_of_thumb": "Knowledge Bases setup: upload to S3, configure ingestion/chunking/embedding, then at query time retrieve and augment before generating a grounded response."
+    },
+    "tags": ["bedrock-knowledge-bases", "ordering"]
+  },
+  {
+    "id": "Q-D2-0322",
+    "domain": 2, "task_statement": "2.3", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D2-012"], "case_study_id": null,
+    "stem": "A scenario describes a team wanting to build a generative AI feature 'as fast as possible with zero infrastructure to manage.' Which AWS service does this description point to?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Amazon SageMaker JumpStart" },
+      { "key": "B", "text": "Amazon Bedrock" },
+      { "key": "C", "text": "Amazon EC2 with a custom-built model" },
+      { "key": "D", "text": "An on-premises GPU cluster" }
+    ],
+    "correct": ["B"],
+    "explanation": {
+      "why_correct": "The description 'as fast as possible with zero infrastructure to manage' points directly to Amazon Bedrock's serverless, fully managed value proposition, which is the exact scenario this description is designed to test.",
+      "why_incorrect": {
+        "A": "JumpStart still requires deploying to and managing a SageMaker endpoint, contradicting the 'zero infrastructure to manage' requirement.",
+        "C": "EC2 with a custom-built model requires significant infrastructure management, the opposite of what this scenario describes.",
+        "D": "An on-premises GPU cluster requires the most infrastructure management of any option listed, the opposite of the stated requirement."
+      },
+      "rule_of_thumb": "Choosing JumpStart when the scenario emphasizes speed and no infrastructure management is a common exam trap — that description points to Bedrock, not JumpStart."
+    },
+    "tags": ["bedrock", "sagemaker-jumpstart"]
+  },
+  {
+    "id": "Q-D2-0323",
+    "domain": 2, "task_statement": "2.3", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D2-015"], "case_study_id": null,
+    "stem": "Which statement accurately describes the difference in WHEN Bedrock Guardrails and Bedrock Model Evaluation are typically used?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Guardrails act continuously in production on every live request; Model Evaluation is typically used during model selection or periodic re-assessment, not on every request." },
+      { "key": "B", "text": "Both tools are used exclusively at model-selection time, never during live production traffic." },
+      { "key": "C", "text": "Both tools are used exclusively during live production traffic, never at model-selection time." },
+      { "key": "D", "text": "There is no timing distinction between the two tools whatsoever." }
+    ],
+    "correct": ["A"],
+    "explanation": {
+      "why_correct": "Guardrails is applied continuously to every live request/response in production for content safety, while Model Evaluation is typically used during model selection or periodic re-assessment, not on every individual live request — a meaningful and accurate timing distinction.",
+      "why_incorrect": {
+        "B": "Guardrails specifically operates continuously on live production traffic, contradicting a claim that neither tool is used during production.",
+        "C": "Model Evaluation is specifically used at model-selection time (before or during deployment decisions), not exclusively on live production traffic.",
+        "D": "There is a genuine, well-documented timing distinction: Guardrails is continuous/live, Model Evaluation is periodic/selection-time."
+      },
+      "rule_of_thumb": "Both tools support responsible AI, but at different points: Model Evaluation before/during model selection, Guardrails during live inference."
+    },
+    "tags": ["bedrock-guardrails", "bedrock-model-evaluation"]
+  },
+  {
+    "id": "Q-D2-0324",
+    "domain": 2, "task_statement": "2.3", "type": "single_choice", "difficulty": "hard",
+    "theory_refs": ["TH-D2-015"], "case_study_id": null,
+    "stem": "A team wants to incorporate bias and explainability checks into their Bedrock Model Evaluation process for a foundation model being considered for a lending-adjacent use case. Which integration supports this specific need?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Integration with SageMaker Clarify and the open-source fmeval library" },
+      { "key": "B", "text": "Integration with Amazon Polly exclusively" },
+      { "key": "C", "text": "Integration with AWS Trusted Advisor exclusively" },
+      { "key": "D", "text": "No such integration exists for Bedrock Model Evaluation" }
+    ],
+    "correct": ["A"],
+    "explanation": {
+      "why_correct": "Bedrock Model Evaluation can integrate with SageMaker Clarify and the open-source fmeval library specifically to support bias and explainability checks, directly matching this need.",
+      "why_incorrect": {
+        "B": "Amazon Polly is a text-to-speech service; it has no relevance to bias/explainability evaluation.",
+        "C": "AWS Trusted Advisor provides general cost/performance/security recommendations; it has no bias/explainability evaluation capability.",
+        "D": "This integration does exist, specifically with SageMaker Clarify and fmeval; claiming no such integration exists is factually incorrect."
+      },
+      "rule_of_thumb": "Model Evaluation can incorporate bias/explainability checks via integration with SageMaker Clarify and the open-source fmeval library."
+    },
+    "tags": ["bedrock-model-evaluation", "sagemaker-clarify"]
+  },
+  {
+    "id": "Q-D2-0325",
+    "domain": 2, "task_statement": "2.3", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D2-011"], "case_study_id": null,
+    "stem": "Which of the following is an example of a first-party AWS foundation model available exclusively through Amazon Bedrock?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Amazon Titan" },
+      { "key": "B", "text": "A model developed entirely by a company with no AWS involvement" },
+      { "key": "C", "text": "A hand-written rules engine" },
+      { "key": "D", "text": "A traditional decision tree" }
+    ],
+    "correct": ["A"],
+    "explanation": {
+      "why_correct": "Amazon Titan models are AWS's own first-party foundation models, available exclusively through Amazon Bedrock, directly matching this description.",
+      "why_incorrect": {
+        "B": "A model developed entirely outside of AWS with no AWS involvement would not be a first-party AWS foundation model by definition.",
+        "C": "A rules engine is not any kind of foundation model at all; it follows fixed logic with no learning or pre-training.",
+        "D": "A decision tree is a traditional ML technique, not a foundation model, and is not an AWS-exclusive offering in the way Titan is."
+      },
+      "rule_of_thumb": "Amazon Titan models are AWS's own first-party foundation models, available exclusively through Bedrock."
+    },
+    "tags": ["bedrock", "amazon-titan"]
+  }
+]

@@ -1,0 +1,145 @@
+[
+  {
+    "id": "Q-D3-0016",
+    "domain": 3,
+    "task_statement": "3.1",
+    "type": "single_choice",
+    "difficulty": "easy",
+    "theory_refs": [
+      "TH-D3-003"
+    ],
+    "case_study_id": null,
+    "stem": "Which of the following is an example of an action tool, as opposed to an information-retrieval tool?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "A tool that retrieves the current date"
+      },
+      {
+        "key": "B",
+        "text": "A tool that looks up a word's dictionary definition"
+      },
+      {
+        "key": "C",
+        "text": "A tool that places a real purchase order"
+      },
+      {
+        "key": "D",
+        "text": "A tool that searches a knowledge base for relevant text passages"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "Placing a real purchase order causes a persistent, real-world side effect (money charged, an order created), which is the defining characteristic of an action tool.",
+      "why_incorrect": {
+        "B": "Looking up a dictionary definition only retrieves and returns information, with no real-world side effect -- a read-only information tool.",
+        "D": "Searching a knowledge base for text passages returns information without causing any external side effect, making it a read-only tool.",
+        "A": "Retrieving the current date is a pure information lookup with no side effect on any external system."
+      },
+      "rule_of_thumb": "Action tools cause real, persistent side effects (orders, payments, deletions); information tools only retrieve and return data with no side effect."
+    },
+    "tags": [
+      "action-tools",
+      "tool-categories"
+    ]
+  },
+  {
+    "id": "Q-D3-0017",
+    "domain": 3,
+    "task_statement": "3.1",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D3-002"
+    ],
+    "case_study_id": null,
+    "stem": "A model was trained with data up to a certain date. A user asks about an event that occurred one week after that date. What is the correct conclusion?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "The event cannot possibly be real since the model wasn't trained on it"
+      },
+      {
+        "key": "B",
+        "text": "The model will automatically know about the event because one week is a short time"
+      },
+      {
+        "key": "C",
+        "text": "The model cannot know about this event from training alone and would need a tool to retrieve current information to answer accurately"
+      },
+      {
+        "key": "D",
+        "text": "The model should simply guess with full confidence since the gap is small"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "Regardless of how short the gap is, any event occurring strictly after the training cutoff is, by definition, unknown to the model from training alone -- a tool-based lookup is needed to answer accurately.",
+      "why_incorrect": {
+        "B": "The length of the gap doesn't matter for this logical point -- even a very short gap still means the event occurred after the training cutoff and is therefore unknown to the model.",
+        "D": "Guessing with full confidence about something the model has no actual knowledge of is a recipe for false confidence and risks presenting an unfounded answer as fact.",
+        "A": "The event's real-world existence is entirely independent of whether the model was trained on information about it; many real events are simply unknown to a model with an earlier cutoff."
+      },
+      "rule_of_thumb": "Any event after a model's training cutoff is unknown to it from training alone, regardless of how small the time gap is -- a tool lookup is needed for accurate current information."
+    },
+    "tags": [
+      "freshness",
+      "stale-knowledge"
+    ]
+  },
+  {
+    "id": "Q-D3-0018",
+    "domain": 3,
+    "task_statement": "3.1",
+    "type": "single_choice",
+    "difficulty": "hard",
+    "theory_refs": [
+      "TH-D3-004",
+      "TH-D3-005"
+    ],
+    "case_study_id": null,
+    "stem": "A high-stakes financial report requires several facts, some stable (basic accounting definitions) and some current (today's specific exchange rate). What is the most appropriate approach?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Use a tool call for every single fact in the report, including the stable definitions"
+      },
+      {
+        "key": "B",
+        "text": "Use internal knowledge for the stable definitions and a grounded tool lookup for the current exchange rate"
+      },
+      {
+        "key": "C",
+        "text": "Use internal knowledge for everything, including the current exchange rate"
+      },
+      {
+        "key": "D",
+        "text": "Refuse to produce the report because it contains a mix of fact types"
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "explanation": {
+      "why_correct": "This matches the appropriate principle of selective tool use: stable, well-established facts can safely come from internal knowledge, while the current, rapidly changing exchange rate specifically benefits from a grounded tool lookup.",
+      "why_incorrect": {
+        "C": "Relying on internal knowledge for the current exchange rate risks a stale, possibly significantly wrong value in a high-stakes financial context.",
+        "D": "A mix of fact types doesn't require refusal; it simply requires applying the right approach (tool vs. internal knowledge) to each type of fact.",
+        "A": "Using a tool for every fact, including stable definitions that don't need it, adds unnecessary overhead without a corresponding benefit."
+      },
+      "rule_of_thumb": "Match the approach to each fact's actual nature -- internal knowledge for stable facts, grounded tool lookups for current or high-stakes changing facts."
+    },
+    "tags": [
+      "tool-necessity",
+      "grounding",
+      "high-stakes"
+    ]
+  }
+]

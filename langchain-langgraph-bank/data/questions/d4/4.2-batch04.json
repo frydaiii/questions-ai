@@ -1,0 +1,144 @@
+[
+  {
+    "id": "Q-D4-0038",
+    "domain": 4,
+    "task_statement": "4.2",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D4-005"
+    ],
+    "case_study_id": null,
+    "stem": "Why might retrieving relevant episodic memories require matching based on situational similarity rather than exact keyword overlap?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Because a relevant past event might be described using different words even though the underlying situation is similar to the current one"
+      },
+      {
+        "key": "B",
+        "text": "Because episodic memories never contain any text at all"
+      },
+      {
+        "key": "C",
+        "text": "Because exact keyword matching always works perfectly for every type of memory"
+      },
+      {
+        "key": "D",
+        "text": "Because situational similarity has no relationship to episodic memory retrieval"
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "explanation": {
+      "why_correct": "A past situation relevant to the current one might be described in different words, so matching based on underlying situational similarity (not just literal keyword overlap) is often necessary to find genuinely relevant episodic memories.",
+      "why_incorrect": {
+        "B": "Episodic memories typically do contain descriptive text or structured content about what happened; this claim is false.",
+        "C": "Exact keyword matching can miss relevant memories phrased differently, which is exactly why situational similarity matching is often preferred.",
+        "D": "Situational similarity is directly central to effective episodic memory retrieval, as described."
+      },
+      "rule_of_thumb": "Effective episodic retrieval often needs situational similarity matching, since relevant past events may be phrased very differently from the current query."
+    },
+    "tags": [
+      "episodic-memory",
+      "memory-retrieval"
+    ]
+  },
+  {
+    "id": "Q-D4-0039",
+    "domain": 4,
+    "task_statement": "4.2",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D4-006"
+    ],
+    "case_study_id": null,
+    "stem": "A piece of domain knowledge (e.g. a company's standard return policy) is useful to an agent regardless of which specific conversation it's needed in. What type of memory is this?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Semantic memory, since it's a general fact useful independent of any specific past event"
+      },
+      {
+        "key": "B",
+        "text": "Episodic memory, since it is tied to one specific past conversation"
+      },
+      {
+        "key": "C",
+        "text": "Procedural memory, since it describes a method for performing an action"
+      },
+      {
+        "key": "D",
+        "text": "No memory type applies to standing domain facts"
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "explanation": {
+      "why_correct": "A standing domain fact useful across any conversation, regardless of specific past events, is exactly what semantic memory represents.",
+      "why_incorrect": {
+        "B": "This fact isn't tied to any one specific past conversation; it's useful generally, which is the opposite of episodic memory's defining trait.",
+        "C": "A standing fact about policy is not a method or sequence of steps for performing a task, so it doesn't fit procedural memory.",
+        "D": "This is a clear, standard example of semantic memory -- a general, standing fact."
+      },
+      "rule_of_thumb": "General, standing facts useful across many situations, regardless of specific past events, are semantic memory."
+    },
+    "tags": [
+      "semantic-memory"
+    ]
+  },
+  {
+    "id": "Q-D4-0040",
+    "domain": 4,
+    "task_statement": "4.2",
+    "type": "single_choice",
+    "difficulty": "hard",
+    "theory_refs": [
+      "TH-D4-007",
+      "TH-D4-008"
+    ],
+    "case_study_id": null,
+    "stem": "An agent needs to know 'how should I approach this type of multi-step scheduling conflict,' and its memory system retrieves a specific anecdote about one past scheduling conflict rather than a generalized procedure. What design issue does this illustrate?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Evidence that episodic memory should never be stored"
+      },
+      {
+        "key": "B",
+        "text": "A perfectly matched retrieval with no issue at all"
+      },
+      {
+        "key": "C",
+        "text": "Proof that procedural memory does not exist as a concept"
+      },
+      {
+        "key": "D",
+        "text": "A retrieval mismatch -- the agent needed procedural guidance but was given an episodic anecdote instead"
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "The agent's actual need was for a general, reusable procedure (procedural memory), but the system surfaced a specific past anecdote (episodic memory) instead -- exactly the kind of mismatch that motivates distinguishing memory types in storage and retrieval.",
+      "why_incorrect": {
+        "B": "This is a mismatch, not a good match -- the type of memory retrieved didn't fit the actual need (a general procedure, not a specific anecdote).",
+        "C": "This scenario illustrates a retrieval design flaw; it says nothing about whether procedural memory exists as a valid, useful concept.",
+        "A": "Episodic memory remains valuable for other needs; the issue here is specifically about retrieval matching the wrong type to this particular need, not that episodic memory shouldn't be stored at all."
+      },
+      "rule_of_thumb": "Retrieving the wrong memory type for the actual need (e.g. an anecdote instead of a procedure) is a retrieval mismatch, motivating separate organization by memory type."
+    },
+    "tags": [
+      "memory-type-organization",
+      "procedural-memory",
+      "episodic-memory"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "id": "Q-D1-0901",
+    "domain": 1,
+    "task_statement": "1.1",
+    "type": "single_choice",
+    "difficulty": "easy",
+    "theory_refs": ["TH-D1-001"],
+    "case_study_id": null,
+    "stem": "Broken fixture: the correct key 'Z' does not exist among the options below, to test the unknown-option gate.",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Option A text" },
+      { "key": "B", "text": "Option B text" },
+      { "key": "C", "text": "Option C text" }
+    ],
+    "correct": ["Z"],
+    "explanation": {
+      "why_correct": "This explanation is only present to satisfy the schema; the point of this fixture is the unknown answer key.",
+      "why_incorrect": {
+        "A": "Placeholder explanation for option A.",
+        "B": "Placeholder explanation for option B.",
+        "C": "Placeholder explanation for option C."
+      },
+      "rule_of_thumb": "Placeholder rule of thumb text for this fixture."
+    },
+    "tags": ["fixture"]
+  }
+]

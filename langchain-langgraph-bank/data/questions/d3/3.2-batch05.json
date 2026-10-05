@@ -1,0 +1,145 @@
+[
+  {
+    "id": "Q-D3-0041",
+    "domain": 3,
+    "task_statement": "3.2",
+    "type": "single_choice",
+    "difficulty": "easy",
+    "theory_refs": [
+      "TH-D3-006"
+    ],
+    "case_study_id": null,
+    "stem": "Which of the following would most help an agent correctly select among several similar tools?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Randomizing the order tools are listed in on every request"
+      },
+      {
+        "key": "B",
+        "text": "Giving every tool the exact same generic description"
+      },
+      {
+        "key": "C",
+        "text": "Removing all documentation from every tool"
+      },
+      {
+        "key": "D",
+        "text": "Clear, specific descriptions of each tool's purpose, expected inputs, and return format"
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "Clear, specific tool descriptions that distinguish purpose, inputs, and outputs give the agent the information it needs to correctly match a tool to the actual task need.",
+      "why_incorrect": {
+        "B": "Identical generic descriptions provide no distinguishing information, making correct selection among similar tools harder, not easier.",
+        "C": "Removing documentation entirely would leave the agent with no basis at all for informed tool selection.",
+        "A": "Randomizing list order has no bearing on whether the agent has the information needed to choose correctly; it's an irrelevant factor."
+      },
+      "rule_of_thumb": "Clear, specific, distinguishing tool descriptions are the key enabler of correct tool selection among similar options."
+    },
+    "tags": [
+      "tool-selection",
+      "tool-descriptions"
+    ]
+  },
+  {
+    "id": "Q-D3-0042",
+    "domain": 3,
+    "task_statement": "3.2",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D3-007"
+    ],
+    "case_study_id": null,
+    "stem": "An agent calls a 'currency_convert' tool but passes the amount as a string with a currency symbol attached (e.g. '$100') when the tool strictly expects a plain number. What category of error is this?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "A tool selection error, since currency_convert was the wrong tool to call"
+      },
+      {
+        "key": "B",
+        "text": "A parameter type/format mismatch error"
+      },
+      {
+        "key": "C",
+        "text": "Evidence the tool itself is broken"
+      },
+      {
+        "key": "D",
+        "text": "An unavoidable error with no possible fix"
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "explanation": {
+      "why_correct": "Passing a value in the wrong type/format (a symbol-containing string instead of a plain number) when the tool strictly expects a plain numeric value is a parameter format mismatch error.",
+      "why_incorrect": {
+        "C": "The tool behaving as documented (expecting a plain number) is not evidence that it's broken; the caller simply didn't match that expectation.",
+        "D": "This is a fixable error -- correctly formatting the amount as a plain number before passing it would resolve the issue.",
+        "A": "The tool itself (currency_convert) was the appropriate choice for the task; the issue is specifically with how the parameter was formatted, not which tool was chosen."
+      },
+      "rule_of_thumb": "Passing a value in the wrong type or format is a parameter construction error distinct from choosing the wrong tool or the tool malfunctioning."
+    },
+    "tags": [
+      "parameter-construction",
+      "tool-call-errors"
+    ]
+  },
+  {
+    "id": "Q-D3-0043",
+    "domain": 3,
+    "task_statement": "3.2",
+    "type": "single_choice",
+    "difficulty": "hard",
+    "theory_refs": [
+      "TH-D3-008",
+      "TH-D3-009"
+    ],
+    "case_study_id": null,
+    "stem": "A task requires three tool calls: two are independent lookups, and the third depends on combining both results. What is the most efficient and correct invocation plan?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Run all three calls in parallel simultaneously"
+      },
+      {
+        "key": "B",
+        "text": "Run the two independent lookups in parallel, then run the dependent third call sequentially after both complete"
+      },
+      {
+        "key": "C",
+        "text": "Run all three calls strictly one after another with no parallelization at all"
+      },
+      {
+        "key": "D",
+        "text": "Skip the two independent lookups entirely and only run the third call"
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "explanation": {
+      "why_correct": "Since the two lookups are independent of each other, running them in parallel saves time; since the third call depends on both of their results, it must wait until both complete -- this plan correctly balances efficiency and correctness.",
+      "why_incorrect": {
+        "C": "Running the two independent lookups strictly sequentially wastes time unnecessarily, since neither depends on the other.",
+        "D": "Skipping the two lookups would leave the third call without the inputs it needs to combine, since it explicitly depends on their results.",
+        "A": "Running the dependent third call in parallel with the other two would mean it's issued before the results it needs actually exist."
+      },
+      "rule_of_thumb": "Parallelize what's independent, then sequence what's dependent on those results -- this combination is typically the most efficient correct plan for mixed-dependency tasks."
+    },
+    "tags": [
+      "parallel-invocation",
+      "sequential-invocation",
+      "tool-invocation-strategy"
+    ]
+  }
+]

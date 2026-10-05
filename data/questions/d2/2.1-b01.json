@@ -1,0 +1,602 @@
+[
+  {
+    "id": "Q-D2-0101",
+    "domain": 2, "task_statement": "2.1", "type": "single_choice", "difficulty": "easy",
+    "theory_refs": ["TH-D2-001"], "case_study_id": null,
+    "stem": "A developer notices that the word 'unbelievable' was broken into three separate pieces by a foundation model's tokenizer, rather than being counted as a single unit. What does this illustrate about tokens?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Tokens are always exactly equal to whole words." },
+      { "key": "B", "text": "Tokenization only applies to output text, never to input prompts." },
+      { "key": "C", "text": "Tokens are a deprecated concept no longer used by modern foundation models." },
+      { "key": "D", "text": "A single word can be split into multiple tokens, so token counts are often higher than word counts." }
+    ],
+    "correct": ["D"],
+    "explanation": {
+      "why_correct": "Tokens are often sub-word pieces rather than whole words, so a single word can be split into multiple tokens, which is exactly why token counts are usually higher than word counts, especially for uncommon or long words.",
+      "why_incorrect": {
+        "A": "This is the opposite of what the example shows; tokens are not always equal to whole words, as demonstrated by 'unbelievable' being split into three pieces.",
+        "B": "Tokenization applies to both the input prompt and the generated output; both are processed as token sequences.",
+        "C": "Tokens remain the fundamental input/output unit for essentially all modern foundation models, including for billing and context-window purposes."
+      },
+      "rule_of_thumb": "Believing 1 token equals 1 word is a common misconception — token counts are usually higher than word counts, especially for uncommon words."
+    },
+    "tags": ["tokens", "tokenization"]
+  },
+  {
+    "id": "Q-D2-0102",
+    "domain": 2, "task_statement": "2.1", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D2-001"], "case_study_id": null,
+    "stem": "A team increases a foundation model's context window from 4,000 tokens to 100,000 tokens. Which outcome is directly and reliably expected from this change alone?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "The model can now consider substantially more input text and conversation history in a single request." },
+      { "key": "B", "text": "The model will automatically become more factually accurate." },
+      { "key": "C", "text": "The model will no longer be capable of hallucinating." },
+      { "key": "D", "text": "The model's reasoning ability will improve proportionally to the increase in context window size." }
+    ],
+    "correct": ["A"],
+    "explanation": {
+      "why_correct": "Increasing the context window directly and reliably increases how much input text, conversation history, or reference material the model can consider in a single request — that is the literal definition of the context window.",
+      "why_incorrect": {
+        "B": "A larger context window does not by itself make the model more accurate; accuracy depends on the model's training, the quality of the input, and other factors, not context window size alone.",
+        "C": "Hallucination is a structural property of how generative models work; increasing the context window does not eliminate this risk.",
+        "D": "Reasoning ability is a property of the model's architecture and training, not something that improves proportionally, or at all, from a larger context window alone."
+      },
+      "rule_of_thumb": "A larger context window lets a model reference more conversation history or more retrieved documents in a single call, but does not by itself make the model more accurate or reduce hallucination."
+    },
+    "tags": ["context-window"]
+  },
+  {
+    "id": "Q-D2-0103",
+    "domain": 2, "task_statement": "2.1", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D2-001"], "case_study_id": null,
+    "stem": "A search application needs to determine whether the phrase 'automobile repair' and the phrase 'car maintenance' refer to conceptually similar topics, even though they share no words in common. Which technique enables this kind of similarity comparison?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Exact keyword string matching" },
+      { "key": "B", "text": "Embeddings, representing each phrase as a vector so semantic similarity can be measured mathematically" },
+      { "key": "C", "text": "Increasing the context window" },
+      { "key": "D", "text": "Reducing the temperature parameter to zero" }
+    ],
+    "correct": ["B"],
+    "explanation": {
+      "why_correct": "Embeddings convert text into numeric vectors that capture semantic meaning, so that phrases with similar meaning end up with vectors close together in vector space, enabling exactly this kind of conceptual similarity comparison even with no shared words.",
+      "why_incorrect": {
+        "A": "Exact keyword matching would fail here, since 'automobile repair' and 'car maintenance' share no literal words in common.",
+        "C": "Context window controls how much text a model can process in one request; it has no role in measuring semantic similarity between two phrases.",
+        "D": "Temperature controls the randomness of generated output; it has no role in measuring the semantic similarity of two given phrases."
+      },
+      "rule_of_thumb": "If it's about representing meaning numerically for search or comparison, think embeddings."
+    },
+    "tags": ["embeddings", "semantic-similarity"]
+  },
+  {
+    "id": "Q-D2-0104",
+    "domain": 2, "task_statement": "2.1", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D2-002"], "case_study_id": null,
+    "stem": "A company has a custom-trained SageMaker XGBoost model that predicts customer churn, built from scratch on the company's own labeled dataset for that one specific task. Which statement correctly classifies this model?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "It is a foundation model, since it was trained using AWS infrastructure." },
+      { "key": "B", "text": "It is a large language model, since it processes structured customer data." },
+      { "key": "C", "text": "It is a multimodal model, since it uses multiple input features." },
+      { "key": "D", "text": "It is a traditional ML model: narrow, trained from scratch for one specific task on a task-specific dataset." }
+    ],
+    "correct": ["D"],
+    "explanation": {
+      "why_correct": "This model was trained from scratch on a task-specific labeled dataset for exactly one narrow task (churn prediction), which is precisely the definition of a traditional ML model, as opposed to a foundation model broadly pre-trained for many downstream tasks.",
+      "why_incorrect": {
+        "A": "Using AWS infrastructure (like SageMaker) does not make a model a foundation model; the defining trait of a foundation model is broad pre-training enabling adaptation to many tasks, not where it was trained.",
+        "B": "LLMs are text-focused foundation models; this model processes structured tabular data for a narrow prediction task, unrelated to language understanding or generation.",
+        "C": "Multimodal specifically means handling more than one data type (e.g. text + images); using multiple structured features is not the same as multimodality."
+      },
+      "rule_of_thumb": "One model built from scratch for exactly one narrow task -> traditional ML model, not a foundation model, regardless of the AWS infrastructure used to train it."
+    },
+    "tags": ["foundation-models", "traditional-ml"]
+  },
+  {
+    "id": "Q-D2-0105",
+    "domain": 2, "task_statement": "2.1", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D2-002"], "case_study_id": null,
+    "stem": "A team wants to use a pre-trained model to handle a brand-new task it has never explicitly been trained for, relying only on a well-crafted prompt with no additional training. Which type of model makes this possible?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "A traditional ML model trained from scratch on a narrow labeled dataset" },
+      { "key": "B", "text": "A foundation model, which can often handle new tasks via prompting alone due to its broad pre-training" },
+      { "key": "C", "text": "A simple linear regression model" },
+      { "key": "D", "text": "A rules engine with hard-coded logic" }
+    ],
+    "correct": ["B"],
+    "explanation": {
+      "why_correct": "Foundation models are pre-trained on massive, broad datasets, giving them general-purpose capabilities that let them often handle brand-new tasks with just a well-crafted prompt, with no additional training required — exactly matching this scenario.",
+      "why_incorrect": {
+        "A": "A traditional ML model has no capability at all until it is explicitly trained on labeled examples for that specific task; it cannot handle a brand-new task via prompting alone.",
+        "C": "Linear regression is trained for one specific numeric prediction task; it has no prompting-based adaptability to new tasks.",
+        "D": "A rules engine follows fixed, human-written logic and has no ability to adapt to new tasks via a prompt at all."
+      },
+      "rule_of_thumb": "One model pre-trained broadly, then adapted to many tasks via prompting/RAG/fine-tuning -> foundation model."
+    },
+    "tags": ["foundation-models", "zero-shot"]
+  },
+  {
+    "id": "Q-D2-0106",
+    "domain": 2, "task_statement": "2.1", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D2-003"], "case_study_id": null,
+    "stem": "A company wants a single model that can accept a photo of a damaged product and a written description of the issue together, and generate a combined assessment referencing both the visual damage and the written details. Which type of model is required?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "A text-only large language model" },
+      { "key": "B", "text": "A multimodal model, capable of reasoning across both image and text inputs together" },
+      { "key": "C", "text": "A simple CNN classifier with no text input capability" },
+      { "key": "D", "text": "A traditional regression model" }
+    ],
+    "correct": ["B"],
+    "explanation": {
+      "why_correct": "This scenario requires the model to jointly reason across both an image and text simultaneously to produce a combined assessment, which is exactly what a multimodal model is designed for — handling more than one data type together.",
+      "why_incorrect": {
+        "A": "A text-only LLM cannot process the image input at all; it cannot reason about the visual damage shown in the photo.",
+        "C": "A simple CNN classifier with no text capability cannot incorporate the written description; it only handles the image portion.",
+        "D": "A traditional regression model is designed for structured numeric prediction, not for jointly reasoning across images and free text."
+      },
+      "rule_of_thumb": "If a scenario needs the model to reason across two or more different content types together, the answer involves a multimodal model."
+    },
+    "tags": ["multimodal-models"]
+  },
+  {
+    "id": "Q-D2-0107",
+    "domain": 2, "task_statement": "2.1", "type": "single_choice", "difficulty": "hard",
+    "theory_refs": ["TH-D2-004"], "case_study_id": null,
+    "stem": "A generative image model produces a coherent photo by starting from pure random noise and progressively removing that noise over many steps, guided by a text prompt, until a clear image emerges. Which architecture is being described?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "A transformer used in isolation with no other components" },
+      { "key": "B", "text": "A diffusion model, using reverse diffusion to iteratively denoise toward a coherent image" },
+      { "key": "C", "text": "A simple linear regression model" },
+      { "key": "D", "text": "A decision tree" }
+    ],
+    "correct": ["B"],
+    "explanation": {
+      "why_correct": "Starting from random noise and iteratively removing it, guided by a prompt, until a coherent image emerges is precisely the reverse diffusion process that defines diffusion models, the dominant technique behind modern text-to-image generation.",
+      "why_incorrect": {
+        "A": "A transformer alone processes sequences using attention; it is not the mechanism that performs the noise-removal process described here, though some systems combine diffusion with transformer components.",
+        "C": "Linear regression predicts a single continuous value; it has no mechanism for the iterative noise-removal process described.",
+        "D": "A decision tree is a traditional ML technique for structured data classification/regression; it has no relevance to image generation via noise removal."
+      },
+      "rule_of_thumb": "Text-to-image generation producing a photorealistic image from a prompt via iterative noise removal is most likely powered by a diffusion model."
+    },
+    "tags": ["diffusion-models"]
+  },
+  {
+    "id": "Q-D2-0108",
+    "domain": 2, "task_statement": "2.1", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D2-005"], "case_study_id": null,
+    "stem": "A user includes two worked examples directly within a single prompt to demonstrate the desired output format, and the model successfully follows that pattern for the rest of that same conversation, with no weight updates occurring. What is this capability called?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Fine-tuning" },
+      { "key": "B", "text": "Continued pre-training" },
+      { "key": "C", "text": "In-context learning" },
+      { "key": "D", "text": "Domain-adaptation fine-tuning" }
+    ],
+    "correct": ["C"],
+    "explanation": {
+      "why_correct": "Adapting behavior purely from information provided within the prompt itself, such as worked examples, without any weight updates, is exactly what in-context learning means — the mechanism underlying few-shot prompting.",
+      "why_incorrect": {
+        "A": "Fine-tuning involves an actual training process that updates the model's weights; this scenario explicitly states no weight updates occurred.",
+        "B": "Continued pre-training uses large volumes of unlabeled data in a training process that updates weights; it does not describe adapting behavior purely within a single prompt.",
+        "D": "Domain-adaptation fine-tuning is a specific weight-updating training technique; it does not match a scenario with no weight updates at all."
+      },
+      "rule_of_thumb": "If model behavior changes only because of what's written in the current prompt, with no weight updates, that's in-context learning — not fine-tuning."
+    },
+    "tags": ["in-context-learning", "few-shot"]
+  },
+  {
+    "id": "Q-D2-0109",
+    "domain": 2, "task_statement": "2.1", "type": "single_choice", "difficulty": "hard",
+    "theory_refs": ["TH-D2-019"], "case_study_id": null,
+    "stem": "An AI lab trains raters to compare pairs of model outputs for the same prompt and indicate which response they prefer. These preference comparisons are used to train a reward model, which then guides a reinforcement learning process to fine-tune the base model toward more helpful, less harmful outputs. What is this overall technique called?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Self-supervised pre-training" },
+      { "key": "B", "text": "Reinforcement Learning from Human Feedback (RLHF)" },
+      { "key": "C", "text": "Continued pre-training" },
+      { "key": "D", "text": "Zero-shot prompting" }
+    ],
+    "correct": ["B"],
+    "explanation": {
+      "why_correct": "Using human preference comparisons to train a reward model, and then using reinforcement learning guided by that reward model to align the base model's outputs with human preferences, is exactly the definition of RLHF.",
+      "why_incorrect": {
+        "A": "Self-supervised pre-training generates its own training signal from raw data structure (like predicting a masked word), not from human preference comparisons and a reward model.",
+        "C": "Continued pre-training uses large volumes of unlabeled text to broaden knowledge; it does not use human preference comparisons or reinforcement learning.",
+        "D": "Zero-shot prompting is an inference-time technique with no training involved at all; it is unrelated to this training-time alignment process."
+      },
+      "rule_of_thumb": "Using human preference rankings and a reward model within a reinforcement learning loop to align model behavior is RLHF, distinct from standard supervised fine-tuning."
+    },
+    "tags": ["rlhf", "alignment"]
+  },
+  {
+    "id": "Q-D2-0110",
+    "domain": 2, "task_statement": "2.1", "type": "single_choice", "difficulty": "hard",
+    "theory_refs": ["TH-D2-021"], "case_study_id": null,
+    "stem": "A researcher describes a model's ability to interpolate between two learned concepts smoothly, producing plausible intermediate variations, as evidence of an internal, compressed, non-human-readable representation the model built during training. What is this internal representation called?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Latent space" },
+      { "key": "B", "text": "Context window" },
+      { "key": "C", "text": "Stop sequence" },
+      { "key": "D", "text": "Prompt template" }
+    ],
+    "correct": ["A"],
+    "explanation": {
+      "why_correct": "Latent space refers to the internal, compressed representation a model builds during training that captures patterns and relationships in the data, and it is exactly what enables interpolating between learned concepts to produce plausible variations.",
+      "why_incorrect": {
+        "B": "Context window refers to how much text a model can process in a single request; it is unrelated to internal learned representations.",
+        "C": "A stop sequence is an inference parameter that halts generation at a specific string; it has no relevance to internal representations.",
+        "D": "A prompt template is a reusable, parameterized prompt structure; it is unrelated to a model's internal learned representation of concepts."
+      },
+      "rule_of_thumb": "If a question describes the internal, non-explicit way a model has 'encoded' its learned understanding of relationships in data, that's latent space."
+    },
+    "tags": ["latent-space"]
+  },
+  {
+    "id": "Q-D2-0111",
+    "domain": 2, "task_statement": "2.1", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D2-022"], "case_study_id": null,
+    "stem": "A compliance team is surprised that submitting the exact same prompt to a foundation model twice, with default settings, produced two differently worded (though similarly correct) responses. What best explains this behavior?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "The model is malfunctioning and should be reported as defective." },
+      { "key": "B", "text": "Generative models are stochastic by default, sampling from a probability distribution over possible outputs, so identical prompts can produce different results." },
+      { "key": "C", "text": "The model secretly retrained itself between the two requests." },
+      { "key": "D", "text": "This behavior only ever occurs due to a bug in the underlying infrastructure." }
+    ],
+    "correct": ["B"],
+    "explanation": {
+      "why_correct": "Generative models sample from a probability distribution over possible next tokens by default, making them stochastic rather than deterministic, so the exact same prompt can produce different (though often similarly valid) outputs across separate requests.",
+      "why_incorrect": {
+        "A": "This is expected, well-documented default behavior for generative models, not a malfunction.",
+        "C": "Models do not retrain themselves between separate inference requests; nothing about the model's weights changed between the two calls.",
+        "D": "This is a normal, well-understood property of stochastic sampling, not a bug in the underlying infrastructure."
+      },
+      "rule_of_thumb": "Generative model output is inherently stochastic rather than deterministic by default — the same prompt can produce different outputs on different runs, especially at higher temperature settings."
+    },
+    "tags": ["deterministic-vs-stochastic"]
+  },
+  {
+    "id": "Q-D2-0112",
+    "domain": 2, "task_statement": "2.1", "type": "single_choice", "difficulty": "hard",
+    "theory_refs": ["TH-D2-024"], "case_study_id": null,
+    "stem": "A candidate is asked why transformers can capture relationships between a pronoun late in a paragraph and the noun it refers to much earlier, more effectively than older recurrent architectures processing text strictly step by step. What is the correct explanation?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Transformers use an attention mechanism that lets the model weigh the relevance of all other tokens in the sequence when processing each token, capturing long-range relationships more directly." },
+      { "key": "B", "text": "Transformers can only process the five most recent words at any time, making long-range relationships irrelevant." },
+      { "key": "C", "text": "Transformers do not process text at all; they only process images." },
+      { "key": "D", "text": "Transformers require exactly the same number of tokens as an RNN to capture any relationship." }
+    ],
+    "correct": ["A"],
+    "explanation": {
+      "why_correct": "The attention mechanism lets a transformer weigh the relevance of every other token in a sequence when processing each token, rather than processing strictly step by step, which is exactly what allows it to capture long-range relationships like a distant pronoun-noun reference more effectively than older RNN-style architectures.",
+      "why_incorrect": {
+        "B": "This describes the opposite of how transformers work; attention specifically allows weighing relevance across the ENTIRE sequence, not just a fixed recent window.",
+        "C": "Transformers are the backbone of modern LLMs and process text extensively; they are not limited to images.",
+        "D": "Transformers and RNNs process sequences using fundamentally different mechanisms (parallel attention vs. sequential step-by-step); there is no such requirement of matching token counts."
+      },
+      "rule_of_thumb": "Attention specifically weighs relevance across the entire sequence, including distant tokens, not just recency — this is why transformers capture long-range dependencies better than older RNN architectures."
+    },
+    "tags": ["transformer", "attention"]
+  },
+  {
+    "id": "Q-D2-0113",
+    "domain": 2, "task_statement": "2.1", "type": "multi_response", "difficulty": "medium",
+    "theory_refs": ["TH-D2-001"], "case_study_id": null,
+    "stem": "Which TWO of the following statements about tokens and context windows are accurate?",
+    "select_count": 2,
+    "options": [
+      { "key": "A", "text": "The context window is a hard ceiling: prompt tokens plus expected output tokens must fit within it." },
+      { "key": "B", "text": "Embeddings and tokens are exactly the same concept with different names." },
+      { "key": "C", "text": "Both the input prompt and the generated response are consumed and produced as sequences of tokens." },
+      { "key": "D", "text": "Increasing the context window guarantees the model will hallucinate less." }
+    ],
+    "correct": ["A", "C"],
+    "explanation": {
+      "why_correct": "The context window is indeed a hard ceiling combining prompt and output tokens, and both the prompt and the generated response are indeed processed as token sequences — both statements are accurate.",
+      "why_incorrect": {
+        "B": "Tokens are the basic text units a model processes; embeddings are numeric vector representations capturing meaning. These are related but distinct concepts, not the same thing.",
+        "D": "Increasing the context window only increases how much text the model can consider; it does not guarantee reduced hallucination, which is a separate, structural limitation."
+      },
+      "rule_of_thumb": "Tokens are the input/output unit for billing and context window; embeddings are the semantic-vector concept — related but distinct."
+    },
+    "tags": ["tokens", "context-window"]
+  },
+  {
+    "id": "Q-D2-0114",
+    "domain": 2, "task_statement": "2.1", "type": "multi_response", "difficulty": "medium",
+    "theory_refs": ["TH-D2-002"], "case_study_id": null,
+    "stem": "Which TWO of the following are accurate distinctions between foundation models and traditional ML models?",
+    "select_count": 2,
+    "options": [
+      { "key": "A", "text": "Foundation models are pre-trained broadly and can often be adapted to new tasks via prompting alone." },
+      { "key": "B", "text": "Traditional ML models are typically trained from scratch for one narrow task on a task-specific dataset." },
+      { "key": "C", "text": "Foundation models can never be customized with an organization's own data." },
+      { "key": "D", "text": "Traditional ML models automatically generalize to any new task with no additional training." }
+    ],
+    "correct": ["A", "B"],
+    "explanation": {
+      "why_correct": "Foundation models are indeed broadly pre-trained and often adaptable via prompting alone, and traditional ML models are indeed typically trained from scratch for one narrow task — both accurate, foundational distinctions.",
+      "why_incorrect": {
+        "C": "Foundation models CAN be customized with an organization's own data, via techniques like RAG, fine-tuning, or continued pre-training; this statement is false.",
+        "D": "Traditional ML models specifically do NOT generalize to new tasks without additional training; they require explicit training on labeled examples for each specific task."
+      },
+      "rule_of_thumb": "One model pre-trained broadly, then adapted to many tasks -> foundation model. One model built from scratch for exactly one narrow task -> traditional ML model."
+    },
+    "tags": ["foundation-models", "traditional-ml"]
+  },
+  {
+    "id": "Q-D2-0115",
+    "domain": 2, "task_statement": "2.1", "type": "multi_response", "difficulty": "medium",
+    "theory_refs": ["TH-D2-003"], "case_study_id": null,
+    "stem": "Which TWO of the following are legitimate examples of multimodal AI use cases?",
+    "select_count": 2,
+    "options": [
+      { "key": "A", "text": "Generating a written caption that describes the content of an uploaded photo" },
+      { "key": "B", "text": "Classifying an email as spam or not spam using only its text content" },
+      { "key": "C", "text": "Generating an image from a written text description" },
+      { "key": "D", "text": "Predicting a numeric sales forecast from historical sales figures alone" }
+    ],
+    "correct": ["A", "C"],
+    "explanation": {
+      "why_correct": "Generating a caption from a photo requires jointly processing image and text (image understanding + text generation), and generating an image from text requires processing text to produce a different modality (image) — both are genuine multimodal use cases spanning more than one data type.",
+      "why_incorrect": {
+        "B": "Classifying an email using only its text content involves a single modality (text); it does not require handling more than one data type.",
+        "D": "Predicting a numeric forecast from historical sales figures alone involves a single data type (numeric time-series); it is not a multimodal use case."
+      },
+      "rule_of_thumb": "Multimodal specifically requires handling more than one input/output data type together — a single-modality task, even if AI-powered, is not multimodal."
+    },
+    "tags": ["multimodal-models"]
+  },
+  {
+    "id": "Q-D2-0116",
+    "domain": 2, "task_statement": "2.1", "type": "multi_response", "difficulty": "hard",
+    "theory_refs": ["TH-D2-004"], "case_study_id": null,
+    "stem": "Which TWO of the following statements accurately describe diffusion models?",
+    "select_count": 2,
+    "options": [
+      { "key": "A", "text": "Forward diffusion, used during training, progressively adds noise to training images so the model learns the noise-removal relationship." },
+      { "key": "B", "text": "Reverse diffusion, used at generation time, starts from random noise and iteratively denoises toward a coherent image." },
+      { "key": "C", "text": "Diffusion models require a discriminator network competing against a generator, exactly like a GAN." },
+      { "key": "D", "text": "Diffusion is now considered an obsolete, discontinued technique with no modern relevance." }
+    ],
+    "correct": ["A", "B"],
+    "explanation": {
+      "why_correct": "Forward diffusion (training time, adding noise) and reverse diffusion (generation time, removing noise) are both accurate, correctly-directioned descriptions of how diffusion models work.",
+      "why_incorrect": {
+        "C": "This describes a GAN's generator-discriminator structure, not a diffusion model's noise-removal mechanism; diffusion models do not require a discriminator network.",
+        "D": "Diffusion models are the dominant, actively used technique behind modern text-to-image generation systems, not an obsolete or discontinued approach."
+      },
+      "rule_of_thumb": "Forward diffusion (training) adds noise; reverse diffusion (generation) removes noise — diffusion models are the current dominant technique for text-to-image generation, distinct from GANs."
+    },
+    "tags": ["diffusion-models"]
+  },
+  {
+    "id": "Q-D2-0117",
+    "domain": 2, "task_statement": "2.1", "type": "matching", "difficulty": "medium",
+    "theory_refs": ["TH-D1-005"], "case_study_id": null,
+    "stem": "Match each generative AI architecture on the left with the mechanism on the right that most precisely defines it.",
+    "select_count": 4,
+    "matching": {
+      "left": [
+        { "key": "L1", "text": "Diffusion model" },
+        { "key": "L2", "text": "Generative adversarial network (GAN)" },
+        { "key": "L3", "text": "Variational autoencoder (VAE)" },
+        { "key": "L4", "text": "Transformer" }
+      ],
+      "right": [
+        { "key": "R1", "text": "Generates content by learning to reverse a gradual noising process" },
+        { "key": "R2", "text": "Pairs a generator and a discriminator competing against each other" },
+        { "key": "R3", "text": "Learns a compressed latent representation of data to generate new samples" },
+        { "key": "R4", "text": "Uses an attention mechanism to process entire sequences in parallel" }
+      ]
+    },
+    "correct_pairs": { "L1": "R1", "L2": "R2", "L3": "R3", "L4": "R4" },
+    "explanation": {
+      "why_correct": "Diffusion models reverse a noising process (R1). GANs pair a generator and discriminator (R2). VAEs learn a compressed latent representation for generation (R3). Transformers use parallel attention (R4).",
+      "why_incorrect": {},
+      "rule_of_thumb": "Each architecture has one clearly distinguishing mechanism: diffusion = noise reversal, GAN = adversarial competition, VAE = compressed latent generation, transformer = parallel attention."
+    },
+    "tags": ["generative-models", "matching"]
+  },
+  {
+    "id": "Q-D2-0118",
+    "domain": 2, "task_statement": "2.1", "type": "matching", "difficulty": "medium",
+    "theory_refs": ["TH-D2-001", "TH-D2-021"], "case_study_id": null,
+    "stem": "Match each generative AI concept on the left with the description on the right that most precisely defines it.",
+    "select_count": 4,
+    "matching": {
+      "left": [
+        { "key": "L1", "text": "Token" },
+        { "key": "L2", "text": "Embedding" },
+        { "key": "L3", "text": "Context window" },
+        { "key": "L4", "text": "Latent space" }
+      ],
+      "right": [
+        { "key": "R1", "text": "The basic unit of text a model processes, often a word or sub-word piece" },
+        { "key": "R2", "text": "A numeric vector representation of text capturing semantic meaning" },
+        { "key": "R3", "text": "The maximum number of tokens (input plus output) a model can consider in a single request" },
+        { "key": "R4", "text": "The internal, compressed representation a model builds during training to capture learned patterns" }
+      ]
+    },
+    "correct_pairs": { "L1": "R1", "L2": "R2", "L3": "R3", "L4": "R4" },
+    "explanation": {
+      "why_correct": "Token is the basic text unit (R1). Embedding is the semantic vector representation (R2). Context window is the input+output token ceiling (R3). Latent space is the internal learned representation (R4).",
+      "why_incorrect": {},
+      "rule_of_thumb": "Token = basic text unit. Embedding = semantic vector. Context window = the size ceiling. Latent space = internal learned representation."
+    },
+    "tags": ["tokens", "embeddings", "context-window", "latent-space", "matching"]
+  },
+  {
+    "id": "Q-D2-0119",
+    "domain": 2, "task_statement": "2.1", "type": "ordering", "difficulty": "hard",
+    "theory_refs": ["TH-D2-019"], "case_study_id": null,
+    "stem": "Arrange the following steps of Reinforcement Learning from Human Feedback (RLHF) in the order they typically occur, from first to last.",
+    "select_count": 4,
+    "options": [
+      { "key": "A", "text": "Pre-train the base foundation model using self-supervised learning on a large unlabeled text corpus" },
+      { "key": "B", "text": "Human raters compare pairs of model outputs for the same prompt and indicate their preference" },
+      { "key": "C", "text": "Train a reward model using the collected human preference data" },
+      { "key": "D", "text": "Use reinforcement learning, guided by the reward model, to further fine-tune the base model's behavior" }
+    ],
+    "correct": ["A", "B", "C", "D"],
+    "explanation": {
+      "why_correct": "RLHF begins with self-supervised pre-training of the base model (A), followed by collecting human preference comparisons on model outputs (B), then training a reward model from those preferences (C), and finally using reinforcement learning guided by that reward model to fine-tune the base model's behavior (D). Each step provides the necessary input for the one that follows.",
+      "why_incorrect": {},
+      "rule_of_thumb": "RLHF sequence: pre-train the base model, collect human preference comparisons, train a reward model from those preferences, then reinforcement-learn against that reward model."
+    },
+    "tags": ["rlhf", "ordering"]
+  },
+  {
+    "id": "Q-D2-0120",
+    "domain": 2, "task_statement": "2.1", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D2-001"], "case_study_id": null,
+    "stem": "A team wants to build a system that can quickly find product descriptions with similar meaning to a customer's search query, even when the exact wording differs, by storing numeric vector representations of every product description. Which foundational technique underpins this capability?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Fixed keyword indexing" },
+      { "key": "B", "text": "Embeddings stored in a vector database" },
+      { "key": "C", "text": "A stop sequence configuration" },
+      { "key": "D", "text": "Increasing the model's temperature setting" }
+    ],
+    "correct": ["B"],
+    "explanation": {
+      "why_correct": "Embeddings represent text as numeric vectors capturing semantic meaning, and storing them in a vector database enables fast similarity search, exactly matching this need to find semantically similar product descriptions regardless of exact wording.",
+      "why_incorrect": {
+        "A": "Fixed keyword indexing matches literal terms; it would fail to find matches when the exact wording differs, which this scenario explicitly needs to handle.",
+        "C": "A stop sequence controls when text generation halts; it has no role in similarity search.",
+        "D": "Temperature controls output randomness during generation; it has no role in similarity search or embeddings."
+      },
+      "rule_of_thumb": "Embeddings turn text into vectors so that semantic similarity can be computed mathematically, which underpins semantic search."
+    },
+    "tags": ["embeddings", "vector-database"]
+  },
+  {
+    "id": "Q-D2-0121",
+    "domain": 2, "task_statement": "2.1", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D2-002"], "case_study_id": null,
+    "stem": "Which of the following best distinguishes a large language model (LLM) from the broader category of foundation models?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "An LLM is specifically the text-focused subset of foundation models, while foundation models more broadly also include multimodal or non-text models." },
+      { "key": "B", "text": "LLMs and foundation models are unrelated, entirely separate categories." },
+      { "key": "C", "text": "Foundation models are always smaller than LLMs." },
+      { "key": "D", "text": "An LLM must always be trained using reinforcement learning exclusively." }
+    ],
+    "correct": ["A"],
+    "explanation": {
+      "why_correct": "LLMs are specifically the text-focused subset of the broader foundation model category, which also includes multimodal or non-text-focused foundation models (e.g. image-generation foundation models), correctly capturing the relationship between the two terms.",
+      "why_incorrect": {
+        "B": "LLMs are a specific subset of foundation models, not an unrelated category; the two terms are directly related.",
+        "C": "Size is not the distinguishing factor between LLMs and foundation models; the distinction is about modality focus (text-only vs. potentially multimodal), not relative size.",
+        "D": "LLMs are typically pre-trained via self-supervised learning, not necessarily exclusively via reinforcement learning; RLHF may be an additional later step but is not the sole or defining training method."
+      },
+      "rule_of_thumb": "LLM specifically means text-focused; foundation model is the broader category that also includes multimodal and non-text models."
+    },
+    "tags": ["foundation-models", "llm"]
+  },
+  {
+    "id": "Q-D2-0122",
+    "domain": 2, "task_statement": "2.1", "type": "single_choice", "difficulty": "easy",
+    "theory_refs": ["TH-D2-003"], "case_study_id": null,
+    "stem": "Which of the following is NOT an example of a multimodal AI capability?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Generating an image from a written text description" },
+      { "key": "B", "text": "Answering a question about the content of an uploaded image using natural language" },
+      { "key": "C", "text": "Summarizing a lengthy text document into a shorter text summary" },
+      { "key": "D", "text": "Describing the objects visible in a photo using generated text" }
+    ],
+    "correct": ["C"],
+    "explanation": {
+      "why_correct": "Summarizing a text document into a shorter text summary involves only a single modality (text in, text out); it does not combine or reason across two or more different data types, so it is not a multimodal use case.",
+      "why_incorrect": {
+        "A": "Generating an image from text requires processing one modality (text) to produce a different modality (image), a genuine multimodal capability.",
+        "B": "Answering a question about an image requires jointly processing image and text, a genuine multimodal capability.",
+        "D": "Describing objects in a photo requires processing an image to produce text, a genuine multimodal capability."
+      },
+      "rule_of_thumb": "Multimodal specifically requires handling more than one input/output data type together — a same-modality task like text-to-text summarization is not multimodal, even though it may still be generative AI."
+    },
+    "tags": ["multimodal-models"]
+  },
+  {
+    "id": "Q-D2-0123",
+    "domain": 2, "task_statement": "2.1", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D2-005"], "case_study_id": null,
+    "stem": "A user asks a foundation model to summarize a document with no examples provided and no special instructions beyond 'summarize this document.' The model successfully produces a reasonable summary based solely on its pre-trained knowledge. What is this prompting approach called?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Few-shot prompting" },
+      { "key": "B", "text": "Zero-shot prompting" },
+      { "key": "C", "text": "Fine-tuning" },
+      { "key": "D", "text": "Continued pre-training" }
+    ],
+    "correct": ["B"],
+    "explanation": {
+      "why_correct": "Asking the model to perform a task with instructions alone and no examples, relying entirely on its pre-trained knowledge, is exactly the definition of zero-shot prompting.",
+      "why_incorrect": {
+        "A": "Few-shot prompting specifically involves providing multiple worked examples in the prompt; this scenario states no examples were provided.",
+        "C": "Fine-tuning involves an actual training process updating the model's weights; this scenario involves no training at all, just a single prompt.",
+        "D": "Continued pre-training uses large volumes of unlabeled data in a training process; it is unrelated to a single zero-example prompt request."
+      },
+      "rule_of_thumb": "Zero-shot prompting: instructions only, no examples, relying entirely on the model's broad pre-training."
+    },
+    "tags": ["zero-shot", "prompting"]
+  },
+  {
+    "id": "Q-D2-0124",
+    "domain": 2, "task_statement": "2.1", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D2-022"], "case_study_id": null,
+    "stem": "A compliance-sensitive application needs its generative AI outputs to be as consistent and repeatable as possible across separate requests, given the same prompt. Which general approach helps push behavior toward more deterministic output, even though perfect bit-for-bit determinism is not always guaranteed?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Increasing the temperature setting to its maximum value" },
+      { "key": "B", "text": "Setting sampling parameters like temperature toward more deterministic (very low) values" },
+      { "key": "C", "text": "Increasing the context window as large as possible" },
+      { "key": "D", "text": "Switching to a completely different foundation model with no other configuration changes" }
+    ],
+    "correct": ["B"],
+    "explanation": {
+      "why_correct": "Setting sampling parameters like temperature toward very low, more deterministic values reduces output variability, pushing behavior toward more consistent, repeatable results, even though true bit-for-bit determinism isn't always guaranteed even at temperature zero.",
+      "why_incorrect": {
+        "A": "Increasing temperature to its maximum value increases randomness and variability, the opposite of what this compliance-sensitive application needs.",
+        "C": "Context window size controls how much text a model can process; it has no direct effect on output determinism or repeatability.",
+        "D": "Simply switching models with no other configuration change does not specifically address the determinism/repeatability need; the sampling parameters are the direct lever for that."
+      },
+      "rule_of_thumb": "Lower temperature/top-p pushes output toward more consistent, repeatable results but does not guarantee perfect determinism."
+    },
+    "tags": ["deterministic-vs-stochastic", "temperature"]
+  },
+  {
+    "id": "Q-D2-0125",
+    "domain": 2, "task_statement": "2.1", "type": "single_choice", "difficulty": "hard",
+    "theory_refs": ["TH-D2-002", "TH-D2-005"], "case_study_id": null,
+    "stem": "A company is deciding between building a custom traditional ML model from scratch versus using a foundation model with prompting for a new document classification task. Which factor most directly favors starting with a foundation model and prompting?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "The company has no existing labeled training data for this specific classification task, and wants to test feasibility quickly with minimal upfront investment." },
+      { "key": "B", "text": "The company requires the absolute lowest possible per-request inference cost at extremely high volume, with no tolerance for any experimentation." },
+      { "key": "C", "text": "The task requires deterministic, rule-based logic with zero tolerance for any variability." },
+      { "key": "D", "text": "The company has already built and validated a highly accurate traditional ML model for this exact task." }
+    ],
+    "correct": ["A"],
+    "explanation": {
+      "why_correct": "Because foundation models can often handle new tasks via prompting alone with no additional training required, they are well suited to quickly testing feasibility on a task with no existing labeled data, avoiding the upfront data-collection and training investment traditional ML would require.",
+      "why_incorrect": {
+        "B": "For extremely high-volume, cost-sensitive production workloads with no tolerance for experimentation, a well-optimized traditional ML model might actually be more cost-effective at scale than per-token foundation model pricing.",
+        "C": "A requirement for fully deterministic, rule-based logic with zero variability might be better served by a traditional rules-based or deterministic system, not a prompting-based foundation model approach, which is inherently more variable.",
+        "D": "If a traditional ML model already exists and is validated as highly accurate for this exact task, there's no strong pull toward starting over with a foundation model."
+      },
+      "rule_of_thumb": "Foundation models with prompting are especially useful for quickly testing feasibility on new tasks with no existing labeled data, avoiding upfront training investment."
+    },
+    "tags": ["foundation-models", "traditional-ml", "feasibility"]
+  }
+]

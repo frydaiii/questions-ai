@@ -1,0 +1,145 @@
+[
+  {
+    "id": "Q-D2-0075",
+    "domain": 2,
+    "task_statement": "2.4",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D2-014"
+    ],
+    "case_study_id": null,
+    "stem": "A user asks an interactive agent to 'send the report to the team,' but it's unclear whether 'the team' refers to the engineering team or the marketing team, and the consequences of guessing wrong (sending sensitive data to the wrong group) are significant. What is the most appropriate action?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Send the report to both teams without mentioning the ambiguity"
+      },
+      {
+        "key": "B",
+        "text": "Silently send the report to a randomly chosen team"
+      },
+      {
+        "key": "C",
+        "text": "Ask a clarifying question before proceeding, since the agent is interactive and the cost of a wrong guess is high"
+      },
+      {
+        "key": "D",
+        "text": "Refuse to engage with the request at all"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "In an interactive setting where a wrong guess carries significant consequences (sending sensitive data to the wrong team), asking a clarifying question before proceeding is the most appropriate way to resolve the genuine ambiguity.",
+      "why_incorrect": {
+        "B": "A random guess risks the exact high-cost error (wrong recipient) the scenario describes, when a clarifying question was readily available.",
+        "D": "Refusing entirely is overly drastic when a simple clarifying question could resolve the ambiguity and let the task proceed correctly.",
+        "A": "Sending to both teams without flagging the ambiguity could itself be a problematic action (e.g. unnecessarily broad data sharing) and ignores the deliberate choice the user should get to make."
+      },
+      "rule_of_thumb": "In interactive settings with high-cost ambiguity, asking a clarifying question is usually the most appropriate response."
+    },
+    "tags": [
+      "ambiguity-handling",
+      "clarifying-questions"
+    ]
+  },
+  {
+    "id": "Q-D2-0076",
+    "domain": 2,
+    "task_statement": "2.4",
+    "type": "single_choice",
+    "difficulty": "hard",
+    "theory_refs": [
+      "TH-D2-016"
+    ],
+    "case_study_id": null,
+    "stem": "In a low-stakes, casual recommendation context (e.g. suggesting a movie), which failure mode is likely to be more costly to over-correct toward: overconfidence or excessive hedging?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Both are equally costly in literally every single context with no variation"
+      },
+      {
+        "key": "B",
+        "text": "Overconfidence, since a wrong movie recommendation is catastrophic regardless of context"
+      },
+      {
+        "key": "C",
+        "text": "Neither matters at all in any context"
+      },
+      {
+        "key": "D",
+        "text": "Excessive hedging, since heavily qualifying a low-stakes casual recommendation is likely to frustrate the user more than a wrong movie suggestion would cost them"
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "In a low-stakes context like a movie suggestion, the cost of being wrong is minor, so heavily hedging every recommendation is likely to be more annoying and less useful to the user than the comparatively small risk of a sub-optimal suggestion.",
+      "why_incorrect": {
+        "B": "A wrong movie recommendation is a low-stakes error, not catastrophic; treating it as such misjudges the actual cost of overconfidence in this specific low-stakes context.",
+        "C": "Both failure modes do matter in general, even if their relative costs vary -- excessive hedging specifically has a real cost in this context, as explained.",
+        "A": "The relative cost of each failure mode varies meaningfully with context (stakes), which is exactly why calibration should depend on context rather than being fixed."
+      },
+      "rule_of_thumb": "The relative cost of overconfidence versus excessive hedging depends on the task's actual stakes -- low-stakes contexts tolerate more confidence, high-stakes contexts warrant more caution."
+    },
+    "tags": [
+      "calibration",
+      "overconfidence",
+      "excessive-hedging"
+    ]
+  },
+  {
+    "id": "Q-D2-0077",
+    "domain": 2,
+    "task_statement": "2.4",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D2-013"
+    ],
+    "case_study_id": null,
+    "stem": "Which mechanism would help an agent distinguish well-supported conclusions from under-supported ones, beyond relying on the model's own phrasing?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Trusting the model's self-reported confidence with no further check"
+      },
+      {
+        "key": "B",
+        "text": "Making all responses sound equally confident regardless of basis"
+      },
+      {
+        "key": "C",
+        "text": "Cross-checking the conclusion against an external source or evidence-strength signal"
+      },
+      {
+        "key": "D",
+        "text": "Ignoring the issue entirely since it cannot be addressed"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "Cross-checking a conclusion against an external source or some independent evidence-strength signal provides a basis for distinguishing well-supported from under-supported conclusions beyond just the model's own phrasing.",
+      "why_incorrect": {
+        "B": "Making all responses sound equally confident regardless of actual basis would make it even harder to distinguish well-supported from under-supported conclusions, not easier.",
+        "D": "This is an addressable issue -- mechanisms like external cross-checking and evidence-strength signals are concrete, practical ways to address it.",
+        "A": "A model's self-reported confidence can itself be unreliable (the same false-confidence problem), so trusting it with no further check does not solve the underlying issue."
+      },
+      "rule_of_thumb": "Use external cross-checks or evidence-strength signals, not just the model's own phrasing, to assess how well-supported a conclusion actually is."
+    },
+    "tags": [
+      "uncertainty",
+      "false-confidence",
+      "verification"
+    ]
+  }
+]

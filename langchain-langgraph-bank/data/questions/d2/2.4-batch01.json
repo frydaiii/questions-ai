@@ -1,0 +1,143 @@
+[
+  {
+    "id": "Q-D2-0066",
+    "domain": 2,
+    "task_statement": "2.4",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D2-013"
+    ],
+    "case_study_id": null,
+    "stem": "Why is the confident TONE of a model's answer not a reliable indicator of whether the answer is actually correct?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Because phrasing confidence and actual evidentiary support are independent properties of a response"
+      },
+      {
+        "key": "B",
+        "text": "Because models are physically incapable of producing confident-sounding text"
+      },
+      {
+        "key": "C",
+        "text": "Because confident tone always perfectly correlates with correctness"
+      },
+      {
+        "key": "D",
+        "text": "Because tone is determined solely by the length of the user's question"
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "explanation": {
+      "why_correct": "A model can produce a definitive, confident-sounding answer regardless of whether the underlying basis for that answer is actually strong, since phrasing style and evidentiary support are generated somewhat independently.",
+      "why_incorrect": {
+        "B": "Models readily produce confident-sounding text; the issue is precisely that they can do so even when the underlying basis is weak.",
+        "C": "This is the opposite of the actual risk being described -- confident tone does NOT reliably correlate with correctness, which is exactly the false-confidence problem.",
+        "D": "The length of the user's question has no established relationship to the model's expressed tone of confidence in its answer."
+      },
+      "rule_of_thumb": "Never treat a confident tone as evidence of correctness -- the two are independent, and false confidence is specifically dangerous because it looks identical to genuine confidence."
+    },
+    "tags": [
+      "false-confidence",
+      "uncertainty"
+    ]
+  },
+  {
+    "id": "Q-D2-0067",
+    "domain": 2,
+    "task_statement": "2.4",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D2-014"
+    ],
+    "case_study_id": null,
+    "stem": "An agent operating in a fully autonomous batch job (no human available to answer questions) encounters genuinely ambiguous instructions. Which strategy is most appropriate?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Pause indefinitely waiting for a clarifying answer that will never come"
+      },
+      {
+        "key": "B",
+        "text": "Proceed with the most likely interpretation and clearly record that assumption, since asking a clarifying question is not feasible here"
+      },
+      {
+        "key": "C",
+        "text": "Silently pick an interpretation with no record of the assumption made"
+      },
+      {
+        "key": "D",
+        "text": "Refuse to process the task at all under any circumstances"
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "explanation": {
+      "why_correct": "Since asking a clarifying question isn't feasible in a non-interactive batch setting, the most appropriate strategy is to proceed with the most likely interpretation while clearly recording that assumption, keeping the decision point visible even without pausing.",
+      "why_incorrect": {
+        "C": "Silently picking an interpretation with no record hides a real decision point, making it impossible for anyone reviewing the output later to know an assumption was made.",
+        "D": "Refusing to process entirely is an overly drastic response to ambiguity that could often be reasonably handled by stating an assumption and proceeding.",
+        "A": "Waiting indefinitely for an answer that cannot come in a non-interactive setting would stall the task with no path to resolution."
+      },
+      "rule_of_thumb": "In non-interactive settings, state your assumption clearly and proceed rather than waiting indefinitely or silently guessing with no record."
+    },
+    "tags": [
+      "ambiguity-handling",
+      "assumption-stating"
+    ]
+  },
+  {
+    "id": "Q-D2-0068",
+    "domain": 2,
+    "task_statement": "2.4",
+    "type": "single_choice",
+    "difficulty": "hard",
+    "theory_refs": [
+      "TH-D2-015"
+    ],
+    "case_study_id": null,
+    "stem": "An agent detects, three steps into a five-step reasoning chain, that step 2 contained a calculation error. What is the most appropriate recovery action?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Restart the entire five-step chain from step 1 even though step 1 was correct"
+      },
+      {
+        "key": "B",
+        "text": "Only edit the wording of the final step 5 output, leaving steps 2-4 as originally computed"
+      },
+      {
+        "key": "C",
+        "text": "Ignore the error since it was caught after the fact"
+      },
+      {
+        "key": "D",
+        "text": "Backtrack to step 2, correct the error, and re-reason through steps 3-5 since they may depend on the flawed result"
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "Since steps 3-5 may have been built on the flawed result from step 2, proper recovery requires backtracking to step 2, correcting it, and re-reasoning through the dependent downstream steps.",
+      "why_incorrect": {
+        "B": "Only patching the final output's wording would leave the underlying flawed calculation and any steps built on it uncorrected, likely producing an internally inconsistent or still-wrong result.",
+        "C": "Ignoring a detected error defeats the purpose of having detected it; the error should be addressed since it may affect the final answer's correctness.",
+        "A": "Restarting from step 1 unnecessarily discards the already-correct step 1 result; only the steps affected by the actual error need to be redone."
+      },
+      "rule_of_thumb": "Recovery from a detected reasoning error should backtrack to the error's origin and re-reason forward, not just patch final wording or over-restart from an unaffected earlier point."
+    },
+    "tags": [
+      "error-detection",
+      "backtracking"
+    ]
+  }
+]

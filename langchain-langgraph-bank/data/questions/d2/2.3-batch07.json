@@ -1,0 +1,97 @@
+[
+  {
+    "id": "Q-D2-0064",
+    "domain": 2,
+    "task_statement": "2.3",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D2-010"
+    ],
+    "case_study_id": null,
+    "stem": "An agent produces a draft response, then reflects and notices the response omits a constraint explicitly stated in the original task. What should it do next, according to the principles of effective reflection?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Ignore the missing constraint since it was only identified during reflection, not generation"
+      },
+      {
+        "key": "B",
+        "text": "Submit the original draft unchanged since reflection is purely informational"
+      },
+      {
+        "key": "C",
+        "text": "Discard the draft and generate a completely unrelated response"
+      },
+      {
+        "key": "D",
+        "text": "Revise the draft specifically to address the missing constraint, informed by the identified gap"
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "Effective reflection is only useful if its findings lead to a targeted revision -- having identified the specific missing constraint, the appropriate next step is to revise the draft to address exactly that gap.",
+      "why_incorrect": {
+        "B": "Submitting the draft unchanged after identifying a real gap defeats the entire purpose of performing reflection in the first place.",
+        "C": "Generating a completely unrelated response discards useful context from the current draft and does not use the specific, targeted information the reflection step identified.",
+        "A": "The fact that an issue was found during reflection rather than during initial generation does not make it any less real or important to address."
+      },
+      "rule_of_thumb": "Reflection's value is only realized when identified issues actually lead to a targeted revision addressing them."
+    },
+    "tags": [
+      "reflection",
+      "self-critique"
+    ]
+  },
+  {
+    "id": "Q-D2-0065",
+    "domain": 2,
+    "task_statement": "2.3",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D2-011",
+      "TH-D2-012"
+    ],
+    "case_study_id": null,
+    "stem": "Which combination of circumstances would most strongly justify investing in multiple rounds of self-critique rather than a single reflection pass?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "A simple, low-stakes task where the first draft is almost always already correct"
+      },
+      {
+        "key": "B",
+        "text": "A complex, high-stakes task where early rounds are likely to catch multiple distinct, significant issues"
+      },
+      {
+        "key": "C",
+        "text": "Any task at all, since more rounds are always strictly better with no exceptions"
+      },
+      {
+        "key": "D",
+        "text": "A task where the critique step is known to always approve without identifying any real issues"
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "explanation": {
+      "why_correct": "Multiple self-critique rounds are most justified when a task is complex and high-stakes enough that early rounds are likely to catch several distinct, significant issues, making the added cost worthwhile.",
+      "why_incorrect": {
+        "A": "For a simple, low-stakes task where the first draft is typically already correct, additional rounds would mostly just add cost with little expected benefit.",
+        "C": "More rounds are not universally better due to diminishing returns; this ignores the task-dependent tradeoff that actually determines whether more rounds help.",
+        "D": "If the critique step is known to always approve regardless of actual quality, additional rounds provide no real benefit, since no genuine evaluation is occurring."
+      },
+      "rule_of_thumb": "Invest in multiple self-critique rounds specifically when task complexity and stakes make catching multiple distinct issues likely to be worthwhile."
+    },
+    "tags": [
+      "self-critique-loop",
+      "design-tradeoffs"
+    ]
+  }
+]

@@ -1,0 +1,143 @@
+[
+  {
+    "id": "Q-D3-0004",
+    "domain": 3,
+    "task_statement": "3.1",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D3-004"
+    ],
+    "case_study_id": null,
+    "stem": "What specific benefit does grounding a claim in a tool-retrieved source provide, even if that source could itself turn out to be wrong?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "It gives the claim a traceable origin, making it possible to distinguish a wrong source from a model misrepresentation if an error is found"
+      },
+      {
+        "key": "B",
+        "text": "It makes the claim mathematically guaranteed to be correct"
+      },
+      {
+        "key": "C",
+        "text": "It eliminates the need for the source to ever be checked again"
+      },
+      {
+        "key": "D",
+        "text": "It has no benefit at all if the source could be wrong"
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "explanation": {
+      "why_correct": "Grounding provides traceability: if an error surfaces, it becomes possible to determine whether the retrieved source itself was wrong or whether the model misrepresented a correct source, which is more diagnosable than an ungrounded claim with no origin at all.",
+      "why_incorrect": {
+        "B": "Grounding does not guarantee correctness; the source itself could be outdated or wrong, so grounding provides traceability, not an absolute correctness guarantee.",
+        "C": "Grounding a claim does not mean the source is permanently beyond further scrutiny; sources can still be re-checked, especially if later found questionable.",
+        "D": "Grounding provides real value (traceability and auditability) even when the source could be wrong, which is a distinct benefit from pure correctness guarantees."
+      },
+      "rule_of_thumb": "Grounding's value is traceability and auditability, not an absolute guarantee that the retrieved information is correct."
+    },
+    "tags": [
+      "grounding",
+      "traceability"
+    ]
+  },
+  {
+    "id": "Q-D3-0005",
+    "domain": 3,
+    "task_statement": "3.1",
+    "type": "single_choice",
+    "difficulty": "hard",
+    "theory_refs": [
+      "TH-D3-005"
+    ],
+    "case_study_id": null,
+    "stem": "A task asks the model to explain, in general terms, why the sky appears blue -- a well-established, stable scientific fact. Should the agent invoke an external tool for this?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Likely not, since this is stable, well-established knowledge that doesn't require current data or a real-world action"
+      },
+      {
+        "key": "B",
+        "text": "Yes, every single response must always use at least one tool call regardless of content"
+      },
+      {
+        "key": "C",
+        "text": "Yes, because the sky's color could have changed since the model's training"
+      },
+      {
+        "key": "D",
+        "text": "It is impossible to answer this question without a tool"
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "explanation": {
+      "why_correct": "Since this is stable, well-established scientific knowledge with no dependency on current, changing data or any real-world action, a tool call is unnecessary and would add latency without a meaningful benefit.",
+      "why_incorrect": {
+        "B": "Mandating a tool call for every response regardless of content would waste resources on tasks that are already well within the model's reliable, stable knowledge.",
+        "C": "The physical phenomenon causing the sky's blue appearance (light scattering) is a stable, unchanging physical fact, not something that could have 'changed' since training.",
+        "D": "This well-established scientific explanation is well within what a model can reliably explain from training alone; a tool is not required to answer it."
+      },
+      "rule_of_thumb": "Stable, well-established facts with no current-data or action dependency generally don't need a tool call -- reserve tools for genuinely tool-requiring needs."
+    },
+    "tags": [
+      "tool-necessity",
+      "task-analysis"
+    ]
+  },
+  {
+    "id": "Q-D3-0006",
+    "domain": 3,
+    "task_statement": "3.1",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D3-001"
+    ],
+    "case_study_id": null,
+    "stem": "After a model requests a tool call, who or what actually performs the underlying action and returns a result?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "No execution ever actually occurs; it is purely symbolic"
+      },
+      {
+        "key": "B",
+        "text": "The model directly executes the action within its own text-generation process"
+      },
+      {
+        "key": "C",
+        "text": "A separate execution layer outside the model itself carries out the action and returns the result as an observation"
+      },
+      {
+        "key": "D",
+        "text": "The user must always manually perform the action themselves with no system involvement"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "The model only requests an action via a tool call; a separate execution layer (outside the model's own text generation) is what actually carries out the action and returns a result, which the model then incorporates as an observation.",
+      "why_incorrect": {
+        "B": "The model has no native mechanism to directly execute external actions as part of generating text; it can only request that an action be taken.",
+        "D": "Well-designed agentic systems automate tool execution; requiring manual user execution for every tool call would defeat much of the purpose of an autonomous agent.",
+        "A": "Real tool calls do trigger actual execution with real effects or data retrieval; it is not merely symbolic or inert."
+      },
+      "rule_of_thumb": "The model requests actions via tool calls; a separate execution layer performs them and returns results as observations back to the model."
+    },
+    "tags": [
+      "tool-use",
+      "architecture"
+    ]
+  }
+]

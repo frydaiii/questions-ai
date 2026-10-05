@@ -1,0 +1,144 @@
+[
+  {
+    "id": "Q-D4-0064",
+    "domain": 4,
+    "task_statement": "4.3",
+    "type": "single_choice",
+    "difficulty": "easy",
+    "theory_refs": [
+      "TH-D4-011"
+    ],
+    "case_study_id": null,
+    "stem": "Which of the following best describes a reasonable target for a deliberate forgetting policy?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Only information that was created on a Tuesday"
+      },
+      {
+        "key": "B",
+        "text": "Every single piece of information regardless of whether it's still useful"
+      },
+      {
+        "key": "C",
+        "text": "Information that has been explicitly superseded or has become reliably irrelevant"
+      },
+      {
+        "key": "D",
+        "text": "Nothing should ever be targeted for forgetting under any policy"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "A reasonable forgetting policy targets information that's been explicitly superseded (like an old address replaced by a new one) or has become reliably irrelevant, rather than discarding indiscriminately.",
+      "why_incorrect": {
+        "B": "Discarding everything regardless of usefulness is indiscriminate forgetting, which risks losing genuinely valuable information.",
+        "D": "Some deliberate forgetting of clearly outdated or superseded information is actually beneficial, as discussed.",
+        "A": "Day of creation has no principled relationship to whether information is actually outdated or irrelevant."
+      },
+      "rule_of_thumb": "Target deliberate forgetting at explicitly superseded or reliably irrelevant information, not at everything indiscriminately or based on arbitrary criteria."
+    },
+    "tags": [
+      "forgetting-mechanisms"
+    ]
+  },
+  {
+    "id": "Q-D4-0065",
+    "domain": 4,
+    "task_statement": "4.3",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D4-009"
+    ],
+    "case_study_id": null,
+    "stem": "A retrieval system uses only exact keyword matching to find relevant memories, missing a clearly relevant memory because it used different wording than the current query. What does this illustrate?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "A limitation of relying purely on literal text matching rather than a broader similarity measure for assessing relevance"
+      },
+      {
+        "key": "B",
+        "text": "Proof that memory retrieval should never be attempted"
+      },
+      {
+        "key": "C",
+        "text": "Evidence that the missed memory was not actually stored at all"
+      },
+      {
+        "key": "D",
+        "text": "A sign that recency is the only signal that ever matters"
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "explanation": {
+      "why_correct": "This scenario is a direct illustration of exact keyword matching's limitation: a genuinely relevant memory phrased differently can be missed, which is why broader similarity-based relevance measures are often preferable to literal text matching alone.",
+      "why_incorrect": {
+        "B": "This illustrates a limitation of one specific matching approach, not an argument against memory retrieval as a whole.",
+        "C": "The memory was described as actually relevant and presumably stored; the issue is that it wasn't surfaced due to differing wording, not that it didn't exist.",
+        "D": "This scenario is about relevance matching quality, not about recency being the only signal that matters."
+      },
+      "rule_of_thumb": "Exact keyword matching can miss genuinely relevant memories phrased differently -- broader similarity-based relevance assessment helps address this limitation."
+    },
+    "tags": [
+      "relevance-based-retrieval",
+      "memory-retrieval"
+    ]
+  },
+  {
+    "id": "Q-D4-0066",
+    "domain": 4,
+    "task_statement": "4.3",
+    "type": "single_choice",
+    "difficulty": "hard",
+    "theory_refs": [
+      "TH-D4-010",
+      "TH-D4-011"
+    ],
+    "case_study_id": null,
+    "stem": "A memory store retains an old, now-superseded fact alongside the new, correct one, with no indication of which is current, and the retrieval system ranks purely by topical relevance with no recency weighting. What is the likely consequence?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "The system might surface the outdated fact as if it were still current, since relevance alone doesn't distinguish which version is more recent or accurate now"
+      },
+      {
+        "key": "B",
+        "text": "The system will always automatically prefer the correct, current fact with no further design needed"
+      },
+      {
+        "key": "C",
+        "text": "This combination guarantees perfectly accurate retrieval in every case"
+      },
+      {
+        "key": "D",
+        "text": "This has no bearing on retrieval accuracy whatsoever"
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "explanation": {
+      "why_correct": "Without recency weighting or a forgetting mechanism to deprioritize the superseded fact, a purely relevance-based ranking has no way to distinguish the outdated version from the current one, risking the outdated fact being surfaced as if it were still accurate.",
+      "why_incorrect": {
+        "B": "Without recency as a signal (or forgetting to remove the stale version), there's no mechanism ensuring the correct, current fact is preferred over the outdated one.",
+        "C": "This combination of retaining stale facts and ranking by relevance alone is precisely the scenario that risks inaccurate retrieval, not guaranteed accuracy.",
+        "D": "This combination has a direct, meaningful negative bearing on retrieval accuracy, as described."
+      },
+      "rule_of_thumb": "Retaining superseded facts without recency weighting or forgetting risks outdated information being surfaced as if it were still current."
+    },
+    "tags": [
+      "recency",
+      "forgetting-mechanisms",
+      "relevance-based-retrieval"
+    ]
+  }
+]

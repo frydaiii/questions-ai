@@ -1,0 +1,142 @@
+[
+  {
+    "id": "Q-D4-0010",
+    "domain": 4,
+    "task_statement": "4.1",
+    "type": "single_choice",
+    "difficulty": "easy",
+    "theory_refs": [
+      "TH-D4-001"
+    ],
+    "case_study_id": null,
+    "stem": "Which of the following is an example of information in working memory, as opposed to long-term memory?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "A fact about the user's preferences from a conversation that ended three months ago"
+      },
+      {
+        "key": "B",
+        "text": "A message the user sent two turns ago in the current ongoing conversation"
+      },
+      {
+        "key": "C",
+        "text": "A record stored in a database the agent has never queried"
+      },
+      {
+        "key": "D",
+        "text": "Information that must be explicitly searched for before it can be used"
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "explanation": {
+      "why_correct": "A message from two turns ago in the current, ongoing conversation is directly present in the current context, usable without any separate retrieval step -- the definition of working memory.",
+      "why_incorrect": {
+        "C": "An unqueried database record is not in working memory; it exists in some external store and must be actively fetched.",
+        "D": "Information requiring explicit search before use is, by definition, long-term memory, not working memory.",
+        "A": "A fact from a conversation that ended three months ago is not part of the current context; it would need explicit retrieval from long-term storage."
+      },
+      "rule_of_thumb": "Working memory is whatever's directly present in the current context right now -- no search or retrieval step needed."
+    },
+    "tags": [
+      "working-memory"
+    ]
+  },
+  {
+    "id": "Q-D4-0011",
+    "domain": 4,
+    "task_statement": "4.1",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D4-004"
+    ],
+    "case_study_id": null,
+    "stem": "Which piece of information is MOST likely a good candidate for long-term persistence, based on likely future relevance?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "A one-off intermediate calculation result used only to answer the current specific question"
+      },
+      {
+        "key": "B",
+        "text": "A stated long-term dietary preference the user mentioned that would plausibly matter in many future interactions"
+      },
+      {
+        "key": "C",
+        "text": "A random typo the user made and immediately corrected in their own message"
+      },
+      {
+        "key": "D",
+        "text": "The exact timestamp of the current message, with no further significance"
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "explanation": {
+      "why_correct": "A stated long-term preference is likely to recur in relevance across many future interactions, making it a good candidate for persistence, unlike one-off, transient, or insignificant details.",
+      "why_incorrect": {
+        "A": "A one-off calculation result used only for the current question has little likely future relevance beyond resolving that specific request.",
+        "C": "A quickly self-corrected typo has essentially no future relevance and isn't meaningful information worth persisting.",
+        "D": "A timestamp with no further significance has no particular future relevance on its own."
+      },
+      "rule_of_thumb": "Good persistence candidates are information likely to recur in relevance across future interactions, not one-off or insignificant details."
+    },
+    "tags": [
+      "memory-persistence-policy"
+    ]
+  },
+  {
+    "id": "Q-D4-0012",
+    "domain": 4,
+    "task_statement": "4.1",
+    "type": "single_choice",
+    "difficulty": "hard",
+    "theory_refs": [
+      "TH-D4-003",
+      "TH-D4-004"
+    ],
+    "case_study_id": null,
+    "stem": "A customer-service agent needs to remember a customer's shipping address across many future interactions, but a one-off calculation assistant has no comparable need to persist most of what it computes. What does this contrast illustrate?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "The appropriate persistence policy should reflect the specific use case's actual needs, not a single universal rule for all agents"
+      },
+      {
+        "key": "B",
+        "text": "All agents must always use the exact same persistence policy regardless of use case"
+      },
+      {
+        "key": "C",
+        "text": "Calculation assistants should never be allowed to use any memory at all"
+      },
+      {
+        "key": "D",
+        "text": "Customer-service agents should never persist anything to avoid clutter"
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "explanation": {
+      "why_correct": "The two use cases have very different needs for persisted information (ongoing customer context vs. mostly one-off calculations), illustrating that the right persistence policy depends on the specific use case rather than being a one-size-fits-all rule.",
+      "why_incorrect": {
+        "B": "This contrast specifically demonstrates that a single universal policy does NOT fit every use case well.",
+        "C": "A calculation assistant could still have some legitimate reason to persist certain information; the point is that its needs differ from a customer-service agent's, not that it should have zero memory capability.",
+        "D": "A customer-service agent specifically benefits from persisting certain recurring information like shipping addresses; avoiding all persistence would undermine that use case's actual needs."
+      },
+      "rule_of_thumb": "Persistence policy should be tailored to the specific use case's actual recurring information needs, not applied as a single universal rule."
+    },
+    "tags": [
+      "memory-persistence-policy",
+      "memory-architecture"
+    ]
+  }
+]

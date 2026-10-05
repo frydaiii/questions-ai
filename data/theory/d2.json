@@ -1,0 +1,578 @@
+[
+  {
+    "id": "TH-D2-001",
+    "domain": 2,
+    "task_statements": ["2.1"],
+    "title": "Tokens, embeddings, and context windows in large language models",
+    "summary": "A token is the basic unit of text an LLM processes — often a word or a sub-word piece — and both the prompt and the generated response are consumed and produced as sequences of tokens. An embedding is a numeric vector representation of a token, word, or larger chunk of text that captures semantic meaning, so that text with similar meaning ends up with vectors that are close together in vector space. The context window is the maximum number of tokens (input plus output combined) a model can consider in a single request; content beyond that limit is truncated or dropped, which directly limits how much conversation history or reference material a prompt can include.",
+    "key_points": [
+      "Tokens are the input/output unit for billing and for the context window — not the same as words; a single word can be multiple tokens.",
+      "Embeddings turn text into vectors so that semantic similarity can be computed mathematically, which underpins semantic search and RAG retrieval.",
+      "The context window is a hard ceiling: prompt tokens + expected output tokens must fit within it, or the request fails or gets truncated.",
+      "A larger context window lets a model reference more conversation history or more retrieved documents in a single call, but does not by itself make the model more accurate.",
+      "Embeddings are typically stored and queried in a vector database to support fast similarity search at scale."
+    ],
+    "rule_of_thumb": "If a question is about how much text a model can 'see' in one request, think context window. If it's about representing meaning numerically for search or comparison, think embeddings.",
+    "common_confusions": [
+      "Believing 1 token equals 1 word — token counts are usually higher than word counts, especially for uncommon words or non-English text.",
+      "Assuming increasing the context window improves output quality or reduces hallucination — it only increases how much input/history the model can consider, not how well it reasons."
+    ],
+    "aws_services": ["Amazon Bedrock", "Amazon OpenSearch Service", "Amazon Titan"],
+    "references": [
+      "https://aws.amazon.com/what-is/embeddings-in-machine-learning/",
+      "https://aws.amazon.com/bedrock/faqs/"
+    ]
+  },
+  {
+    "id": "TH-D2-002",
+    "domain": 2,
+    "task_statements": ["2.1"],
+    "title": "Foundation models and large language models: what makes them different from traditional ML models",
+    "summary": "A foundation model (FM) is a very large model pre-trained on massive, broad datasets, giving it general-purpose capabilities that can be adapted to many downstream tasks without training from scratch each time. A large language model (LLM) is a foundation model specialized for text: understanding and generating human language. This differs fundamentally from traditional ML models, which are typically trained from scratch for one narrow task on a task-specific dataset. Because foundation models already encode broad general knowledge from pre-training, they can often perform new tasks with just a well-crafted prompt (zero-shot or few-shot), whereas a traditional ML model has no capability at all until it is explicitly trained on labeled examples for that specific task.",
+    "key_points": [
+      "Foundation models are pre-trained once on massive, broad data and then adapted (via prompting, RAG, or fine-tuning) to many different downstream tasks.",
+      "LLMs are the text-focused subset of foundation models; other foundation models are multimodal or focus on images, audio, or video.",
+      "Traditional ML models are typically narrow: trained from scratch on a specific labeled dataset for one specific task.",
+      "A foundation model can often handle a brand-new task via prompting alone, with no additional training required, unlike a traditional ML model.",
+      "Amazon Titan and Anthropic Claude (available via Bedrock) are examples of foundation models; a custom-trained SageMaker XGBoost churn model is an example of a traditional, narrow ML model."
+    ],
+    "rule_of_thumb": "One model pre-trained broadly, then adapted to many tasks via prompting/RAG/fine-tuning -> foundation model. One model built from scratch for exactly one narrow task -> traditional ML model.",
+    "common_confusions": [
+      "Assuming any large neural network is a 'foundation model' — the defining trait is broad pre-training enabling adaptation to many tasks, not simply model size.",
+      "Treating 'LLM' and 'foundation model' as perfect synonyms — LLM specifically means text-focused; foundation model is the broader category that also includes multimodal and non-text models."
+    ],
+    "aws_services": ["Amazon Bedrock", "Amazon Titan", "Amazon SageMaker JumpStart"],
+    "references": [
+      "https://aws.amazon.com/what-is/foundation-models/",
+      "https://aws.amazon.com/bedrock/titan/"
+    ]
+  },
+  {
+    "id": "TH-D2-003",
+    "domain": 2,
+    "task_statements": ["2.1"],
+    "title": "Multimodal models: combining text, image, and audio understanding",
+    "summary": "A multimodal model can process and/or generate more than one type of data (modality) — for example, accepting both text and images as input, or generating an image caption from a picture, or producing an image from a text description. Multimodal models work by mapping each modality into a shared representation space (often via embeddings) so that relationships across modalities (e.g. the word 'dog' and a photo of a dog) can be learned and reasoned about together. On AWS, Amazon Bedrock provides access to multimodal foundation models capable of tasks like image understanding, image generation from text prompts, and generating text descriptions of visual content.",
+    "key_points": [
+      "Multimodal = handling more than one data type (text + image, text + audio, etc.) within a single model.",
+      "A shared embedding/representation space is what allows the model to relate concepts across modalities.",
+      "Common multimodal use cases: image captioning, visual question answering, text-to-image generation, and document understanding that combines layout/visuals with text.",
+      "Amazon Bedrock provides access to multimodal foundation models for these use cases without needing to train or host models directly.",
+      "A model that only ever processes one modality (e.g. text-only) is not multimodal, even if it is otherwise a large, capable foundation model."
+    ],
+    "rule_of_thumb": "If a scenario needs the model to reason across two or more different content types together (e.g. 'describe what's in this image' or 'generate an image from this description'), the answer involves a multimodal model.",
+    "common_confusions": [
+      "Assuming any generative AI system is automatically multimodal — many capable foundation models are text-only; multimodal specifically requires handling more than one input/output data type.",
+      "Confusing 'multimodal' with simply 'large' — model size and modality support are independent properties; a small model could in principle be multimodal, and a huge model could be text-only."
+    ],
+    "aws_services": ["Amazon Bedrock", "Amazon Rekognition"],
+    "references": [
+      "https://aws.amazon.com/what-is/multimodal-ai/",
+      "https://aws.amazon.com/bedrock/"
+    ]
+  },
+  {
+    "id": "TH-D2-004",
+    "domain": 2,
+    "task_statements": ["2.1"],
+    "title": "Diffusion models and how text-to-image generation works",
+    "summary": "Diffusion models generate content by learning to reverse a gradual noising process: during training, the model learns how progressively noisier versions of an image relate to the clean original, and at generation time it starts from pure random noise and iteratively removes noise, guided by a text prompt, until a coherent image emerges. This 'reverse diffusion' process is the dominant technique behind modern text-to-image generators such as Stable Diffusion. Diffusion is distinct from GANs (which pit a generator against a discriminator) and from transformers (which use attention over sequences), though some systems combine diffusion with transformer components.",
+    "key_points": [
+      "Forward diffusion (training time): progressively adds noise to training images so the model learns the noise-removal relationship.",
+      "Reverse diffusion (generation time): starts from random noise and iteratively denoises toward a coherent image, guided by the prompt.",
+      "Diffusion models are the dominant architecture for high-quality text-to-image generation on AWS and elsewhere.",
+      "Diffusion is a different mechanism from GANs (adversarial generator/discriminator) and from purely transformer-based text generation.",
+      "Amazon Bedrock provides access to diffusion-based image-generation foundation models through the same unified API used for text models."
+    ],
+    "rule_of_thumb": "Text-to-image generation producing a photorealistic or artistic image from a prompt is most likely powered by a diffusion model, not a GAN or a plain transformer.",
+    "common_confusions": [
+      "Assuming image generation always uses GANs — GANs were an earlier dominant approach, but diffusion models are now the mainstream technique for high-quality, prompt-controllable image generation.",
+      "Believing forward diffusion (training) and reverse diffusion (generation) are the same process run in the same direction — forward diffusion adds noise for learning purposes; reverse diffusion removes noise to create new content."
+    ],
+    "aws_services": ["Amazon Bedrock"],
+    "references": [
+      "https://aws.amazon.com/what-is/generative-ai/",
+      "https://aws.amazon.com/bedrock/"
+    ]
+  },
+  {
+    "id": "TH-D2-005",
+    "domain": 2,
+    "task_statements": ["2.1"],
+    "title": "In-context learning and prompt-based adaptation without weight changes",
+    "summary": "In-context learning is the ability of a foundation model to adapt its behavior for a new task purely from information provided within the prompt itself — such as instructions or a handful of examples — without any update to the model's underlying weights. This is what makes zero-shot and few-shot prompting possible: the model uses patterns from its broad pre-training to generalize to the new task description or examples on the fly, for the duration of that single request only. Because no training occurs, in-context learning has zero ongoing infrastructure cost beyond the inference call itself, and its effects do not persist beyond that single conversation or request.",
+    "key_points": [
+      "In-context learning happens entirely within a single prompt/request — the model's weights are never modified.",
+      "It's the mechanism underlying zero-shot prompting (no examples) and few-shot prompting (a few examples included in the prompt).",
+      "Its effects are temporary: nothing learned in-context carries over to the next, separate request unless the same context is provided again.",
+      "It requires no training infrastructure or retraining cycle, making it the fastest and cheapest way to adapt model behavior.",
+      "In-context learning works because the model's broad pre-training already encoded the underlying patterns; the prompt just points the model at the right pattern to apply."
+    ],
+    "rule_of_thumb": "If model behavior changes only because of what's written in the current prompt, and reverts back to default on the next separate request, that's in-context learning — not fine-tuning.",
+    "common_confusions": [
+      "Believing in-context learning permanently changes the model — it does not; nothing persists past the single request unless the same prompt content is resent.",
+      "Confusing in-context learning with fine-tuning because both can 'teach' new behavior — in-context learning changes behavior via the prompt alone with no weight updates; fine-tuning changes the model's actual weights via a training process."
+    ],
+    "aws_services": ["Amazon Bedrock"],
+    "references": [
+      "https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-engineering-guidelines.html",
+      "https://aws.amazon.com/what-is/prompt-engineering/"
+    ]
+  },
+  {
+    "id": "TH-D2-006",
+    "domain": 2,
+    "task_statements": ["2.2"],
+    "title": "Hallucinations, knowledge cutoffs, and the stochastic nature of generative AI",
+    "summary": "A hallucination is when a generative model produces output that is factually incorrect or fabricated, but stated confidently and often in a plausible-sounding way. Hallucinations happen because generative models predict statistically likely continuations of text rather than looking up verified facts, so they can generate confident-sounding but ungrounded claims, especially about specifics like dates, citations, or niche facts. A knowledge cutoff is the point in time after which a model's pre-training data ends, meaning it has no inherent knowledge of events after that date unless that information is supplied to it (e.g. via RAG). Generative model output is also inherently stochastic (probabilistic) rather than deterministic by default, meaning the same prompt can produce different outputs on different runs, especially at higher temperature settings.",
+    "key_points": [
+      "Hallucinations are a fundamental limitation of generative AI, not a rare bug — always plan for output verification in factual/high-stakes use cases.",
+      "RAG is the primary mitigation for hallucination on factual questions, since it grounds responses in retrieved, verifiable source documents.",
+      "Fine-tuning on accurate, relevant data can also reduce hallucination for a specific narrow domain, though it doesn't eliminate the underlying tendency.",
+      "Human-in-the-loop review is a mitigation for low-confidence or high-stakes outputs before they are acted upon.",
+      "Knowledge cutoff means a model has zero built-in awareness of events after its training data ends, regardless of how confidently it answers."
+    ],
+    "rule_of_thumb": "Confident-sounding but wrong or fabricated output -> hallucination; mitigate primarily with RAG. Model has no idea about a recent event -> knowledge cutoff; mitigate by supplying current information (e.g. via RAG) rather than expecting the model to 'know' it.",
+    "common_confusions": [
+      "Assuming a more capable or larger model eliminates hallucination entirely — hallucination is a structural property of how generative models work, reduced but not eliminated by RAG, fine-tuning, or scale.",
+      "Believing RAG makes a model 'know' about events after its knowledge cutoff automatically — RAG only helps if the missing information is actually present in the retrieved documents; RAG does not expand the model's own trained knowledge."
+    ],
+    "aws_services": ["Amazon Bedrock", "Amazon Bedrock Knowledge Bases", "Amazon Augmented AI (A2I)"],
+    "references": [
+      "https://aws.amazon.com/what-is/retrieval-augmented-generation/",
+      "https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html"
+    ]
+  },
+  {
+    "id": "TH-D2-007",
+    "domain": 2,
+    "task_statements": ["2.2"],
+    "title": "Business use cases for generative AI: content creation, summarization, chatbots, code generation, search",
+    "summary": "Generative AI applies to a broad set of practical business problems. Content creation includes drafting marketing copy, product descriptions, or emails from a prompt. Summarization condenses long documents (contracts, reports, meeting transcripts) into shorter, digestible versions. Conversational assistants/chatbots handle customer support, internal help-desk questions, or general Q&A in natural language. Code generation and explanation accelerate software development (e.g. Amazon Q Developer). Semantic/enterprise search and translation apply generative and embedding-based techniques to help users find information or communicate across languages more naturally than keyword-based systems.",
+    "key_points": [
+      "Content creation: drafting new text/marketing/creative content from a prompt.",
+      "Summarization: condensing long-form content while preserving key meaning.",
+      "Conversational AI/chatbots: natural-language interaction for support or Q&A, often grounded via RAG for accuracy.",
+      "Code generation: writing, explaining, or reviewing code (Amazon Q Developer is the AWS-branded example).",
+      "Each use case maps to a different combination of AWS services — e.g. summarization and chatbots often pair a foundation model with RAG for grounding in company-specific content."
+    ],
+    "rule_of_thumb": "When a scenario names a business outcome (draft, condense, answer questions conversationally, write code, search naturally), map it directly to the matching generative AI use case before choosing a specific AWS service.",
+    "common_confusions": [
+      "Assuming every generative AI use case needs a fully custom-trained model — many business use cases (drafting, summarizing, chatting) are well served by an off-the-shelf foundation model on Bedrock with good prompting or light RAG, no fine-tuning required.",
+      "Overlooking that summarization/content-generation quality still needs evaluation (e.g. via ROUGE or human review) before being trusted in production, just like any other ML output."
+    ],
+    "aws_services": ["Amazon Bedrock", "Amazon Q Business", "Amazon Q Developer", "Amazon Kendra"],
+    "references": [
+      "https://aws.amazon.com/generative-ai/use-cases/",
+      "https://aws.amazon.com/bedrock/"
+    ]
+  },
+  {
+    "id": "TH-D2-008",
+    "domain": 2,
+    "task_statements": ["2.2"],
+    "title": "Capabilities and limitations of generative AI as a category",
+    "summary": "Generative AI's core capability is producing novel, coherent content (text, images, audio, code) conditioned on a prompt, drawing on broad patterns learned during pre-training, which lets it handle a wide range of previously-unseen tasks with little or no task-specific training. Its core limitations include hallucination (confidently stating incorrect information), a fixed knowledge cutoff, sensitivity to how a prompt is worded (small wording changes can shift output quality), lack of true reasoning or guaranteed factual grounding, potential for generating toxic or biased content reflecting biases present in training data, and non-determinism (the same prompt can yield different outputs across runs). Recognizing which category (capability vs. limitation) a described behavior falls into is directly tested on the exam.",
+    "key_points": [
+      "Capabilities: broad task generalization from a single pre-trained model, natural-language interaction, content creation across modalities.",
+      "Limitations: hallucination, knowledge cutoff, prompt sensitivity, potential bias/toxicity inherited from training data, non-determinism.",
+      "None of these limitations are eliminated purely by using a 'bigger' or 'better' model — they require deliberate mitigations (RAG, fine-tuning, guardrails, human review).",
+      "Business adoption decisions should explicitly weigh these limitations against the use case's tolerance for occasional errors.",
+      "The exam often frames a scenario ('the chatbot gave a wrong answer confidently') and asks you to identify which limitation is being described."
+    ],
+    "rule_of_thumb": "If a scenario describes something the model does well across many tasks with little setup, that's a capability. If it describes something going wrong or being unreliable (wrong facts, outdated info, inconsistent answers, biased tone), that's a limitation requiring a specific mitigation.",
+    "common_confusions": [
+      "Treating 'non-determinism' as a bug to be fixed rather than an inherent, adjustable property (via temperature/top-p) of how generative models sample output.",
+      "Assuming bias/toxicity issues are rare edge cases rather than a structural risk requiring ongoing mitigation (e.g. via Bedrock Guardrails and responsible AI practices)."
+    ],
+    "aws_services": ["Amazon Bedrock", "Amazon Bedrock Guardrails"],
+    "references": [
+      "https://aws.amazon.com/what-is/generative-ai/",
+      "https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html"
+    ]
+  },
+  {
+    "id": "TH-D2-009",
+    "domain": 2,
+    "task_statements": ["2.2"],
+    "title": "Determining ROI, feasibility, and appropriate business fit for a generative AI use case",
+    "summary": "Not every business problem is a good fit for generative AI. Good candidates typically involve unstructured content, language understanding/generation, or tasks with tolerance for occasional imperfect output combined with human review where stakes are high. Poor candidates include tasks requiring guaranteed, deterministic correctness every time (e.g. precise financial calculations), tasks where a much simpler and cheaper traditional approach already works well, or tasks where hallucination risk is unacceptable and cannot be sufficiently mitigated (e.g. certain regulated legal or medical determinations without robust human review). Evaluating fit means weighing the cost of building/running the solution (including foundation model inference costs) against the expected business value, and considering whether risk mitigations (RAG, guardrails, human review) are sufficient for the use case's risk tolerance.",
+    "key_points": [
+      "Good fits: drafting, summarizing, conversational assistance, code generation, content-heavy unstructured tasks with review tolerance.",
+      "Poor fits: tasks needing guaranteed deterministic precision, tasks a simple rules-based or traditional ML system already solves cheaply, high-stakes decisions with unacceptable hallucination risk and no review safety net.",
+      "Cost/benefit analysis should include foundation model inference costs (token-based pricing) against expected value delivered.",
+      "Risk mitigation availability (RAG for facts, fine-tuning for style, guardrails for safety, human review for high-stakes) shifts the feasibility calculus in favor of adoption.",
+      "The exam may present a scenario and ask whether generative AI is actually the appropriate solution, not just which AWS service to use."
+    ],
+    "rule_of_thumb": "High-stakes, needs-to-be-exactly-right-every-time, no human review possible -> generative AI is probably a poor fit. Content-heavy, language-centric, review-tolerant, or exploratory -> generative AI is likely a strong fit.",
+    "common_confusions": [
+      "Assuming generative AI is the default answer to every AI-related business question on the exam — some scenarios intentionally test whether a simpler, more deterministic approach (a rules engine, traditional ML classifier, or an AWS managed AI service) is actually the better fit.",
+      "Ignoring inference cost as a factor — token-based pricing means very high-volume, latency-sensitive use cases need explicit cost evaluation, not just a feasibility check on capability alone."
+    ],
+    "aws_services": ["Amazon Bedrock", "Amazon SageMaker"],
+    "references": [
+      "https://aws.amazon.com/generative-ai/use-cases/",
+      "https://aws.amazon.com/bedrock/pricing/"
+    ]
+  },
+  {
+    "id": "TH-D2-010",
+    "domain": 2,
+    "task_statements": ["2.2"],
+    "title": "Semantic search vs. keyword search",
+    "summary": "Keyword search matches literal terms in a query against literal terms in a document index, so it can miss relevant results that use different wording for the same concept (e.g. searching 'car' won't match a document that only says 'automobile'). Semantic search uses embeddings to represent the meaning of a query and of documents as vectors, then finds documents whose vectors are close in meaning even if the exact words differ. This makes semantic search far more effective for natural-language queries and for retrieval-augmented generation, where the goal is to find conceptually relevant context rather than exact string matches.",
+    "key_points": [
+      "Keyword search: exact/literal term matching, can miss semantically related but differently-worded content.",
+      "Semantic search: embedding-based similarity matching, captures meaning rather than exact wording.",
+      "Semantic search is the retrieval mechanism underpinning most RAG implementations, since it finds conceptually relevant chunks regardless of exact phrasing.",
+      "Vector databases (OpenSearch k-NN, pgvector, etc.) are what make large-scale semantic search practically fast.",
+      "Some enterprise search systems, like Amazon Kendra, blend keyword and semantic techniques to improve relevance."
+    ],
+    "rule_of_thumb": "Query and document must share the same exact words to match -> keyword search. Query and document just need to mean the same thing -> semantic search, powered by embeddings and a vector store.",
+    "common_confusions": [
+      "Assuming keyword search is sufficient for a RAG knowledge base -> RAG generally depends on semantic search to retrieve conceptually relevant chunks even when a user's wording differs from the source document's wording.",
+      "Believing semantic search requires no infrastructure — it depends on generating and storing embeddings in a vector database, which is additional infrastructure beyond a traditional keyword index."
+    ],
+    "aws_services": ["Amazon OpenSearch Service", "Amazon Kendra", "Amazon Bedrock Knowledge Bases"],
+    "references": [
+      "https://aws.amazon.com/what-is/semantic-search/",
+      "https://docs.aws.amazon.com/opensearch-service/latest/developerguide/knn.html"
+    ]
+  },
+  {
+    "id": "TH-D2-011",
+    "domain": 2,
+    "task_statements": ["2.3"],
+    "title": "Amazon Bedrock overview: managed, serverless access to foundation models",
+    "summary": "Amazon Bedrock is a fully managed, serverless service providing API access to foundation models from multiple providers (such as Anthropic, AI21 Labs, Cohere, Meta, Mistral AI, Stability AI, and Amazon's own Titan models) through a single, consistent API. Because it is serverless, there is no infrastructure to provision or manage, and pricing is primarily based on the number of input and output tokens processed (pay-as-you-go), with Provisioned Throughput available for guaranteed, consistent capacity, typically needed for custom or fine-tuned models at higher volume. Bedrock also bundles supporting capabilities directly into the platform: Knowledge Bases for RAG, Agents for multi-step task orchestration, Guardrails for content safety, and Model Evaluation for comparing model quality.",
+    "key_points": [
+      "Bedrock is serverless: no endpoints to provision or scale manually, unlike hosting a model yourself on SageMaker.",
+      "Multiple model providers accessible through one unified API, letting an application switch or compare foundation models with minimal code change.",
+      "On-demand (pay-per-token) pricing is the default; Provisioned Throughput is for guaranteed capacity, generally required for custom/fine-tuned models.",
+      "Amazon Titan models are AWS's own first-party foundation models, available exclusively through Bedrock.",
+      "Bedrock bundles Knowledge Bases (RAG), Agents (orchestration), Guardrails (safety), and Model Evaluation directly into the managed platform."
+    ],
+    "rule_of_thumb": "Need managed, serverless access to a foundation model with no infrastructure to run yourself -> Amazon Bedrock. Need to actually train/host/deeply customize your own model infrastructure -> SageMaker instead.",
+    "common_confusions": [
+      "Assuming Bedrock requires you to manage servers or endpoints like a traditional SageMaker deployment — Bedrock's entire value proposition is that it is serverless and fully managed.",
+      "Assuming on-demand pricing works for a fine-tuned/custom model at scale — custom or fine-tuned models on Bedrock typically require Provisioned Throughput for consistent performance, not simple pay-per-token on-demand pricing."
+    ],
+    "aws_services": ["Amazon Bedrock", "Amazon Titan"],
+    "references": [
+      "https://aws.amazon.com/bedrock/",
+      "https://aws.amazon.com/bedrock/pricing/"
+    ]
+  },
+  {
+    "id": "TH-D2-012",
+    "domain": 2,
+    "task_statements": ["2.3"],
+    "title": "Amazon Bedrock vs. Amazon SageMaker JumpStart: managed API access vs. self-managed deployment",
+    "summary": "Amazon Bedrock provides serverless, API-based access to foundation models with no infrastructure to manage, billed per token. Amazon SageMaker JumpStart provides a hub of pre-trained models (including many foundation models) that you deploy to your own SageMaker endpoint, giving you more control over the underlying infrastructure, networking, and customization, but requiring you to manage that endpoint (including scaling and uptime billing) yourself. The choice between them is a control-vs-convenience tradeoff: Bedrock optimizes for fast, managed adoption with minimal operational overhead; JumpStart optimizes for deep infrastructure control and customization at the cost of operational responsibility.",
+    "key_points": [
+      "Bedrock: no infrastructure, pay-per-token, unified multi-provider API, faster to start.",
+      "JumpStart: deploy to your own SageMaker endpoint, more infrastructure control, billed for endpoint uptime like any other SageMaker deployment.",
+      "JumpStart is a better fit when deep customization of the serving stack, specific networking/VPC control, or integration with existing SageMaker MLOps pipelines is required.",
+      "Bedrock is a better fit when the goal is to quickly build a generative AI application without operating model-serving infrastructure.",
+      "This exact distinction (Bedrock vs. JumpStart) is one of the most frequently tested distractor pairs on the exam."
+    ],
+    "rule_of_thumb": "Want a foundation model accessible via API with zero infrastructure management -> Bedrock. Want to deploy a pre-trained model to your own controlled SageMaker endpoint -> JumpStart.",
+    "common_confusions": [
+      "Choosing JumpStart when the scenario emphasizes speed and no infrastructure management — that description points to Bedrock, not JumpStart, which still requires deploying and managing an endpoint.",
+      "Assuming JumpStart and Bedrock offer identical model catalogs and identical operational models — they overlap in some model availability but differ fundamentally in deployment model (serverless API vs. self-managed endpoint)."
+    ],
+    "aws_services": ["Amazon Bedrock", "Amazon SageMaker JumpStart"],
+    "references": [
+      "https://docs.aws.amazon.com/sagemaker/latest/dg/studio-jumpstart.html",
+      "https://aws.amazon.com/bedrock/"
+    ]
+  },
+  {
+    "id": "TH-D2-013",
+    "domain": 2,
+    "task_statements": ["2.3"],
+    "title": "Amazon Bedrock Knowledge Bases: managed RAG",
+    "summary": "Amazon Bedrock Knowledge Bases implements the full Retrieval-Augmented Generation (RAG) workflow as a managed capability: it ingests source documents (commonly from Amazon S3), automatically chunks and embeds them, stores the embeddings in a supported vector store, and at query time retrieves the most relevant chunks and augments the foundation model's prompt with them before generating a response. This removes the need to build the ingestion, chunking, embedding, and retrieval pipeline manually, letting an application ground a foundation model's answers in an organization's private, proprietary, or frequently updated documents without any fine-tuning.",
+    "key_points": [
+      "Knowledge Bases handles ingestion, chunking, embedding generation, vector storage, and retrieval-time augmentation end-to-end.",
+      "Source documents commonly live in Amazon S3, and the knowledge base can be re-synced when source documents change, keeping answers current without retraining.",
+      "This is the AWS-managed implementation of RAG — it does not modify the foundation model's weights, unlike fine-tuning.",
+      "Choosing a vector store (e.g. OpenSearch Service, Aurora with pgvector) is part of the Knowledge Bases configuration.",
+      "Because it grounds responses in retrieved documents, Knowledge Bases directly mitigates hallucination on facts contained within those documents."
+    ],
+    "rule_of_thumb": "A scenario needing an AWS-managed way to ground a foundation model's answers in private, frequently-changing documents, without training a custom model, points to Bedrock Knowledge Bases.",
+    "common_confusions": [
+      "Assuming Knowledge Bases changes the foundation model itself — it does not; it only changes what context is included in the prompt at inference time via retrieval.",
+      "Confusing Knowledge Bases (RAG for grounding responses in documents) with Bedrock Agents (orchestrating multi-step actions/tool use) — they solve different problems and are often used together."
+    ],
+    "aws_services": ["Amazon Bedrock Knowledge Bases", "Amazon S3", "Amazon OpenSearch Service"],
+    "references": [
+      "https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base.html",
+      "https://aws.amazon.com/what-is/retrieval-augmented-generation/"
+    ]
+  },
+  {
+    "id": "TH-D2-014",
+    "domain": 2,
+    "task_statements": ["2.3"],
+    "title": "Amazon Bedrock Agents: multi-step task orchestration",
+    "summary": "Amazon Bedrock Agents extend a foundation model beyond single-turn question answering by letting it plan and execute multistep tasks: breaking a user's request into steps, calling external APIs or AWS Lambda functions, querying knowledge bases, and combining the results into a final action or response. This is useful for tasks that require taking real actions or gathering information from multiple systems (e.g. checking order status, then processing a refund, then sending a confirmation) rather than simply generating a single text response. Agents effectively let a foundation model act as an orchestrator over your existing systems and data sources.",
+    "key_points": [
+      "Agents plan and execute a sequence of steps/actions, not just generate a single response.",
+      "Common integrations: AWS Lambda functions (for taking real actions) and Knowledge Bases (for looking up information mid-task).",
+      "Agents are the right fit when a scenario describes a workflow (multiple systems, multiple steps, conditional logic) rather than a single Q&A turn.",
+      "Distinct from Knowledge Bases: Knowledge Bases grounds answers in documents; Agents orchestrate actions and multi-step logic (which can itself call a knowledge base as one step).",
+      "Agents reduce the need for custom orchestration code by handling the plan-execute loop within the managed Bedrock service."
+    ],
+    "rule_of_thumb": "A single question needing grounded facts from documents -> Knowledge Bases. A workflow needing multiple steps, external system calls, or real-world actions -> Bedrock Agents.",
+    "common_confusions": [
+      "Using Knowledge Bases alone for a scenario that requires taking an action (like processing a refund or updating a record) — that requires an Agent invoking a Lambda function or similar action, not just document retrieval.",
+      "Assuming Agents replace the need for a knowledge base in RAG scenarios — Agents can call a knowledge base as one step in a larger workflow; they don't replace RAG's role in grounding facts."
+    ],
+    "aws_services": ["Amazon Bedrock Agents", "AWS Lambda", "Amazon Bedrock Knowledge Bases"],
+    "references": [
+      "https://docs.aws.amazon.com/bedrock/latest/userguide/agents.html",
+      "https://aws.amazon.com/bedrock/agents/"
+    ]
+  },
+  {
+    "id": "TH-D2-015",
+    "domain": 2,
+    "task_statements": ["2.3"],
+    "title": "Amazon Bedrock Guardrails and Model Evaluation",
+    "summary": "Amazon Bedrock Guardrails apply configurable safety controls to a generative AI application: denied topics (blocking discussion of specified subjects), content filters (blocking categories of harmful content), word/phrase filters, and PII redaction/masking, enforced on both user input and model output at inference time. Amazon Bedrock Model Evaluation lets teams compare and select foundation models for a specific use case using either automatic metrics (such as accuracy, robustness, or toxicity scoring) or human evaluation workflows, and can integrate with tools like SageMaker Clarify and fmeval for bias and explainability checks. Together they support responsible, safe deployment: Guardrails prevents unsafe output in production, and Model Evaluation helps choose the right model before or during that deployment.",
+    "key_points": [
+      "Guardrails: real-time content-safety enforcement (denied topics, harmful content, PII) on every request/response passing through Bedrock.",
+      "Model Evaluation: comparing candidate foundation models against custom metrics or human judgment to choose the best fit for a use case.",
+      "Model Evaluation can incorporate bias/explainability checks via integration with SageMaker Clarify and the open-source fmeval library.",
+      "Guardrails act continuously in production; Model Evaluation is typically used during model selection or periodic re-assessment, not on every live request.",
+      "Both tools support responsible AI, but at different points: Model Evaluation before/during model selection, Guardrails during live inference."
+    ],
+    "rule_of_thumb": "Blocking or filtering unsafe live output/input -> Bedrock Guardrails. Comparing candidate models on quality/safety metrics to pick the best one -> Bedrock Model Evaluation.",
+    "common_confusions": [
+      "Confusing Bedrock Guardrails with SageMaker Clarify — Guardrails filters generative AI content at inference time; Clarify detects bias/explains predictions for classical ML models (and can feed into Model Evaluation for FMs), a different mechanism and target.",
+      "Assuming Model Evaluation is a one-time step with no ongoing relevance — teams may re-run evaluation periodically as new model versions become available or use cases evolve."
+    ],
+    "aws_services": ["Amazon Bedrock Guardrails", "Amazon Bedrock Model Evaluation", "Amazon SageMaker Clarify"],
+    "references": [
+      "https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails.html",
+      "https://docs.aws.amazon.com/bedrock/latest/userguide/model-evaluation.html"
+    ]
+  },
+  {
+    "id": "TH-D2-016",
+    "domain": 2,
+    "task_statements": ["2.3"],
+    "title": "AWS vector store options: OpenSearch, Aurora/RDS pgvector, Neptune ML, MemoryDB, DocumentDB",
+    "summary": "AWS offers multiple ways to store and query vector embeddings, each building on an existing data service. Amazon OpenSearch Service supports k-nearest neighbor (k-NN) search purpose-built for vector similarity at scale, commonly used for log analytics and search in addition to vector workloads. Amazon Aurora PostgreSQL-Compatible Edition and Amazon RDS for PostgreSQL support the pgvector extension, letting teams store and query embeddings using familiar SQL alongside their relational data. Amazon Neptune ML applies Graph Neural Networks (GNNs) to make predictions from graph-structured data, supporting vectorized representations within a graph database context. Amazon MemoryDB offers high-speed, in-memory vector storage and retrieval with millisecond latency for the most performance-sensitive workloads. Amazon DocumentDB supports vector search with MongoDB compatibility for document-oriented data.",
+    "key_points": [
+      "OpenSearch Service (k-NN): purpose-built vector similarity search, also a general search/log-analytics platform.",
+      "Aurora PostgreSQL / RDS PostgreSQL (pgvector): SQL-based access to vector similarity alongside relational data — good when embeddings need to live next to existing structured/relational data.",
+      "Neptune ML: graph-native predictions using GNNs, for use cases where relationships between entities matter as much as the vectors themselves.",
+      "MemoryDB: in-memory speed, sub-millisecond-class latency, best when raw query speed at high throughput is the top priority.",
+      "DocumentDB: vector search integrated into a MongoDB-compatible, document-oriented data model."
+    ],
+    "rule_of_thumb": "Need pure search/log-analytics-grade vector search -> OpenSearch. Need vectors alongside existing relational/SQL data -> Aurora/RDS pgvector. Need graph relationships plus predictions -> Neptune ML. Need the fastest possible in-memory vector lookups -> MemoryDB. Need vectors in a document/JSON data model -> DocumentDB.",
+    "common_confusions": [
+      "Assuming only OpenSearch supports vectors on AWS — pgvector (Aurora/RDS), Neptune ML, MemoryDB, and DocumentDB are all valid, exam-relevant AWS vector store options, each suited to a different existing data shape.",
+      "Picking a vector store based on brand familiarity rather than the underlying data model already in use — the right choice depends on whether the surrounding data is relational, graph, document, or pure search/log data."
+    ],
+    "aws_services": ["Amazon OpenSearch Service", "Amazon Aurora", "Amazon RDS", "Amazon Neptune ML", "Amazon MemoryDB", "Amazon DocumentDB"],
+    "references": [
+      "https://docs.aws.amazon.com/opensearch-service/latest/developerguide/knn.html",
+      "https://aws.amazon.com/blogs/database/leverage-pgvector-and-amazon-aurora-postgresql-for-natural-language-processing-chatbots-and-search/"
+    ]
+  },
+  {
+    "id": "TH-D2-017",
+    "domain": 2,
+    "task_statements": ["2.3"],
+    "title": "Amazon Q family: Developer, Business, and integrated variants",
+    "summary": "Amazon Q Developer is a generative AI coding assistant that helps write, explain, review, and debug code and can perform security scanning, operating primarily inside the developer's IDE and workflow. Amazon Q Business is a generative AI-powered enterprise assistant that answers employee questions, summarizes content, and automates tasks by connecting to an organization's internal data sources (such as Amazon S3, SharePoint, and Salesforce). Beyond these two core products, Amazon Q integrates into other AWS services for domain-specific assistance: Amazon Q in QuickSight enables natural-language business-intelligence queries, Amazon Q in Connect assists contact-center agents and automates customer responses, and Amazon Q in AWS Supply Chain generates insights and forecasts for supply chain operations.",
+    "key_points": [
+      "Q Developer: code generation, explanation, review, and security scanning, living inside the developer's IDE/workflow.",
+      "Q Business: enterprise knowledge assistant connected to internal data sources, for employee-facing Q&A and task automation.",
+      "Q in QuickSight: natural-language BI querying within QuickSight dashboards.",
+      "Q in Connect: contact-center agent assistance and customer-response automation.",
+      "Q in AWS Supply Chain: insight generation and forecasting for supply chain data."
+    ],
+    "rule_of_thumb": "Coding tasks -> Q Developer. General enterprise knowledge/data Q&A across the business -> Q Business. Anything else 'Q in <Service>' is that specific service's natural-language assistant layered on top of its existing domain.",
+    "common_confusions": [
+      "Confusing Q Developer and Q Business — Developer is for code; Business is for enterprise knowledge and data, not code, this is one of the most frequently tested Amazon Q distinctions on the exam.",
+      "Assuming Amazon Q is a single monolithic product — it is a family of related but distinct generative AI assistants, each targeting a specific role or AWS service integration."
+    ],
+    "aws_services": ["Amazon Q Developer", "Amazon Q Business", "Amazon QuickSight", "Amazon Connect"],
+    "references": [
+      "https://aws.amazon.com/q/developer/",
+      "https://aws.amazon.com/q/business/"
+    ]
+  },
+  {
+    "id": "TH-D2-018",
+    "domain": 2,
+    "task_statements": ["2.3"],
+    "title": "SageMaker JumpStart model fine-tuning and PartyRock",
+    "summary": "Amazon SageMaker JumpStart not only provides one-click deployment of pre-trained foundation models to a self-managed endpoint, but also supports fine-tuning those models on your own data directly within the SageMaker environment, giving fuller control over the training process, instance types, and hyperparameters than a fully managed alternative. PartyRock is a hands-on, no-code generative AI playground built on top of Amazon Bedrock, letting users experiment with and build simple generative AI apps quickly, without writing code or managing infrastructure, primarily as a learning and prototyping tool rather than a production deployment platform.",
+    "key_points": [
+      "JumpStart fine-tuning: full control over training configuration for a pre-trained model, deployed to a self-managed SageMaker endpoint.",
+      "PartyRock: a no-code, Bedrock-powered playground for quickly building and experimenting with simple generative AI apps.",
+      "PartyRock is oriented toward learning/prototyping, not toward production-grade, scalable application deployment.",
+      "JumpStart fine-tuning fits scenarios needing deep customization control that a managed service like Bedrock's fine-tuning doesn't expose.",
+      "Both tools lower the barrier to experimenting with foundation models, but at very different levels of control and production-readiness."
+    ],
+    "rule_of_thumb": "Need full control over fine-tuning a pre-trained model's training process -> SageMaker JumpStart. Want a no-code way to quickly prototype a simple generative AI app for learning/experimentation -> PartyRock.",
+    "common_confusions": [
+      "Assuming PartyRock is suitable for a production business application — it's explicitly a lightweight experimentation/learning playground, not a production deployment platform.",
+      "Assuming JumpStart fine-tuning and Bedrock's own customization features are identical — JumpStart fine-tuning happens within self-managed SageMaker infrastructure with deeper configuration control, while Bedrock's customization features are managed and more constrained but require no infrastructure."
+    ],
+    "aws_services": ["Amazon SageMaker JumpStart", "PartyRock", "Amazon Bedrock"],
+    "references": [
+      "https://docs.aws.amazon.com/sagemaker/latest/dg/studio-jumpstart-fine-tune.html",
+      "https://aws.amazon.com/bedrock/"
+    ]
+  },
+  {
+    "id": "TH-D2-019",
+    "domain": 2,
+    "task_statements": ["2.1", "2.3"],
+    "title": "RLHF (Reinforcement Learning from Human Feedback) in generative AI",
+    "summary": "Reinforcement Learning from Human Feedback (RLHF) is a technique used to align a foundation model's outputs with human preferences — for example, making responses more helpful, honest, and harmless. It works by having human raters compare or rank different model outputs for the same prompt, using those preferences to train a reward model, and then using reinforcement learning to fine-tune the foundation model to produce outputs the reward model scores highly. RLHF is a major reason modern conversational LLMs feel more natural, aligned, and less prone to producing unhelpful or unsafe responses compared to a raw pre-trained base model with no alignment step.",
+    "key_points": [
+      "RLHF uses human preference comparisons (not just labeled correct/incorrect answers) as its training signal.",
+      "A reward model is trained from those human preferences, then used to guide reinforcement learning fine-tuning of the base model.",
+      "RLHF is primarily an alignment technique: making outputs more helpful/safe/preferred, not primarily a way to teach new facts.",
+      "It is applied after initial pre-training (and often after supervised fine-tuning), as a further refinement stage.",
+      "RLHF is why many production conversational assistants behave more helpfully and safely than their raw pre-trained base model."
+    ],
+    "rule_of_thumb": "If a scenario is about making a model's responses better-aligned with human preferences (more helpful, less harmful) using human feedback as the training signal, that's RLHF — a reinforcement learning technique, not standard supervised fine-tuning.",
+    "common_confusions": [
+      "Confusing RLHF with standard instruction-based fine-tuning — instruction fine-tuning uses labeled input/output examples; RLHF uses human preference rankings and a reward model within a reinforcement learning loop.",
+      "Assuming RLHF's purpose is to add new factual knowledge — its purpose is aligning behavior/tone/helpfulness, not expanding the model's knowledge base (that's more the role of continued pre-training or RAG)."
+    ],
+    "aws_services": ["Amazon Bedrock", "Amazon SageMaker"],
+    "references": [
+      "https://aws.amazon.com/what-is/reinforcement-learning-from-human-feedback/",
+      "https://aws.amazon.com/what-is/generative-ai/"
+    ]
+  },
+  {
+    "id": "TH-D2-020",
+    "domain": 2,
+    "task_statements": ["2.2"],
+    "title": "Generative AI risks: toxicity, plagiarism, and prompt misuse",
+    "summary": "Beyond hallucination, generative AI introduces several other risk categories businesses must manage. Toxicity is the generation of harmful, offensive, or inappropriate content, which can occur even unintentionally if training data or prompts steer the model that way. Plagiarism and cheating concerns arise because generative models can reproduce content stylistically or substantively similar to existing copyrighted or proprietary work, raising intellectual property and academic-integrity questions. Prompt misuse includes prompt injection (an attacker embeds hidden instructions in input data to hijack the model's behavior) and jailbreaking (crafting prompts specifically designed to bypass a model's safety training or guardrails). Each risk category requires a distinct mitigation: content filtering (e.g. Guardrails) for toxicity, usage policy and output review for plagiarism concerns, and robust prompt/input validation plus guardrails for prompt misuse.",
+    "key_points": [
+      "Toxicity: harmful/offensive output, mitigated primarily via content filtering (Bedrock Guardrails) and careful prompt design.",
+      "Plagiarism/cheating: risk of reproducing existing copyrighted or proprietary content, relevant to both business IP risk and downstream user misuse.",
+      "Prompt injection: malicious instructions hidden in input data (e.g. a document being summarized) attempting to override the system's intended behavior.",
+      "Jailbreaking: prompts specifically engineered to bypass a model's built-in safety guardrails.",
+      "Guardrails and careful application design (e.g. treating retrieved/external content as untrusted data, not instructions) help mitigate prompt injection and jailbreaking."
+    ],
+    "rule_of_thumb": "Offensive/harmful output -> toxicity, mitigate with content filtering. Model reproduces someone else's protected content -> plagiarism/IP risk. Malicious instructions smuggled inside data being processed -> prompt injection. Deliberate attempt to bypass safety training -> jailbreaking.",
+    "common_confusions": [
+      "Treating prompt injection and jailbreaking as the same thing — prompt injection typically hides malicious instructions inside external data the model processes, while jailbreaking is a directly crafted user prompt trying to bypass the model's own safety behavior.",
+      "Assuming Guardrails alone fully solves prompt injection — Guardrails helps filter unsafe output, but application-level design (treating untrusted external content as data, not as instructions to follow) is also needed to reduce prompt injection risk."
+    ],
+    "aws_services": ["Amazon Bedrock Guardrails", "Amazon Bedrock"],
+    "references": [
+      "https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails.html",
+      "https://aws.amazon.com/what-is/generative-ai/"
+    ]
+  },
+  {
+    "id": "TH-D2-021",
+    "domain": 2,
+    "task_statements": ["2.1"],
+    "title": "Latent space and how models internally represent learned knowledge",
+    "summary": "Latent space refers to the internal, compressed representation a model builds during training that captures patterns, relationships, and structure in the data it learned from, without those patterns being directly human-readable. Embeddings are a practical, usable projection of positions within (or derived from) that latent space, letting relationships like semantic similarity be measured mathematically as distances between vectors. Conceptually, latent space is what lets a model do things like interpolate between concepts, generate variations of an idea, or recognize that two differently-worded pieces of text mean something similar. On the exam, latent space is a conceptual-understanding topic — recognizing that models encode learned structure internally, as distinct from an explicit rules database.",
+    "key_points": [
+      "Latent space is the internal, learned representation of patterns and relationships within a model — it is not directly readable by humans.",
+      "Embeddings are a concrete, usable numeric expression of positions related to latent space, used for tasks like similarity comparison.",
+      "Latent space is why generative models can produce novel combinations/variations rather than only regurgitating memorized examples.",
+      "This is a conceptual topic tested via recognition/definition-style questions rather than hands-on application.",
+      "Latent space concepts underpin both generative image models (interpolating between visual concepts) and language models (relating semantically similar text)."
+    ],
+    "rule_of_thumb": "If a question describes the internal, non-explicit way a model has 'encoded' its learned understanding of relationships in data, that's latent space; embeddings are the practical, measurable expression of it.",
+    "common_confusions": [
+      "Treating 'latent space' and 'embeddings' as unrelated concepts — embeddings are a practical, concrete way of representing and using positions related to a model's latent space for tasks like similarity search.",
+      "Assuming latent space is something explicitly designed/hand-coded by engineers — it emerges from training on data, not from manual specification."
+    ],
+    "aws_services": ["Amazon Bedrock", "Amazon SageMaker"],
+    "references": [
+      "https://aws.amazon.com/what-is/embeddings-in-machine-learning/",
+      "https://aws.amazon.com/what-is/generative-ai/"
+    ]
+  },
+  {
+    "id": "TH-D2-022",
+    "domain": 2,
+    "task_statements": ["2.1", "2.2"],
+    "title": "Deterministic vs. stochastic model behavior and its business implications",
+    "summary": "A deterministic system produces the exact same output every time given the exact same input, which is the behavior expected of traditional software and many classical ML systems in production. Generative models are stochastic by default: because they sample from a probability distribution over possible next tokens, the same prompt can produce different outputs across separate runs, and this variability is directly influenced by sampling parameters like temperature and top-p. This has real business implications — for use cases needing reproducible, auditable output (e.g. certain compliance-related text generation), teams may need to set sampling parameters toward more deterministic settings (very low temperature) or apply strict validation/guardrails on the output, since true bit-for-bit determinism is not guaranteed even at temperature zero on all systems.",
+    "key_points": [
+      "Deterministic: identical input always produces identical output — the traditional software/ML expectation.",
+      "Stochastic: generative models sample from a probability distribution, so identical prompts can yield different outputs across runs.",
+      "Lower temperature/top-p pushes output toward more consistent, repeatable results but does not guarantee perfect determinism.",
+      "Business use cases requiring strict reproducibility need this stochastic behavior explicitly accounted for in design (e.g. through validation, guardrails, or human review), not assumed away.",
+      "This nondeterminism is a normal, expected property of generative AI, not a defect to be engineered out entirely."
+    ],
+    "rule_of_thumb": "If the same prompt might reasonably produce different wording on different runs, that's expected stochastic behavior — reduce variability with lower temperature/top-p, but don't assume it can be eliminated entirely.",
+    "common_confusions": [
+      "Expecting a generative AI system to behave with the same output-for-output determinism as a traditional rules engine or classical ML classifier — by default it will not, and that's an inherent design property, not a bug.",
+      "Assuming setting temperature to its lowest value guarantees perfectly identical output every time across all systems — it substantially reduces variability but is not always a hard determinism guarantee."
+    ],
+    "aws_services": ["Amazon Bedrock"],
+    "references": [
+      "https://docs.aws.amazon.com/bedrock/latest/userguide/inference-parameters.html",
+      "https://aws.amazon.com/what-is/generative-ai/"
+    ]
+  },
+  {
+    "id": "TH-D2-023",
+    "domain": 2,
+    "task_statements": ["2.3"],
+    "title": "Bedrock pricing model: on-demand tokens vs. Provisioned Throughput",
+    "summary": "Amazon Bedrock's default pricing model is on-demand, pay-as-you-go, billed per input token and per output token processed, which fits variable, unpredictable, or low-to-moderate volume workloads well since there is no upfront commitment. Provisioned Throughput reserves guaranteed model capacity for a committed time period, providing consistent, predictable throughput and latency, and is typically required (not just optional) when using a custom or fine-tuned model at meaningful production volume, since those custom models generally are not available under simple on-demand pricing. Choosing between the two is a tradeoff between cost flexibility (on-demand) and guaranteed consistent capacity (Provisioned Throughput).",
+    "key_points": [
+      "On-demand: pay per input/output token, no commitment, best for variable or unpredictable workloads.",
+      "Provisioned Throughput: reserved capacity for a committed duration, consistent performance, generally required for custom/fine-tuned models at production scale.",
+      "Token-based billing means both prompt length and response length directly affect cost — long prompts or verbose outputs cost more.",
+      "The requirement for Provisioned Throughput with custom/fine-tuned models is a frequently tested exam detail.",
+      "Cost optimization for Bedrock-based applications often involves managing prompt/response length as much as choosing the right pricing model."
+    ],
+    "rule_of_thumb": "Variable or unpredictable traffic, using an off-the-shelf model -> on-demand token pricing. Custom/fine-tuned model at production volume, need guaranteed consistent throughput -> Provisioned Throughput.",
+    "common_confusions": [
+      "Assuming a fine-tuned Bedrock model can always run under simple on-demand pricing at any scale — production use of custom/fine-tuned models typically requires Provisioned Throughput.",
+      "Forgetting that both input AND output tokens count toward billing — a verbose response costs more than a terse one, even for the same input prompt."
+    ],
+    "aws_services": ["Amazon Bedrock"],
+    "references": [
+      "https://aws.amazon.com/bedrock/pricing/",
+      "https://docs.aws.amazon.com/bedrock/latest/userguide/prov-throughput.html"
+    ]
+  },
+  {
+    "id": "TH-D2-024",
+    "domain": 2,
+    "task_statements": ["2.1"],
+    "title": "Transformer attention mechanism at a conceptual level",
+    "summary": "The transformer architecture, which underlies virtually all modern large language models, relies on an attention mechanism that lets the model weigh the relevance of every other token in a sequence when processing each token, rather than processing tokens strictly one at a time in order like older recurrent architectures. This allows transformers to capture long-range relationships in text efficiently (e.g. connecting a pronoun late in a paragraph back to the noun it refers to much earlier) and to process entire sequences in parallel during training, which is a major reason transformers scale so well to very large models and datasets. Candidates are expected to recognize attention/transformers as the architectural foundation of modern LLMs at a conceptual level, not to derive the underlying mathematics.",
+    "key_points": [
+      "Attention lets the model weigh the relevance of all other tokens when processing each token, rather than only nearby tokens in sequence.",
+      "This captures long-range dependencies in text more effectively than earlier RNN/LSTM architectures processing strictly step-by-step.",
+      "Parallel processing of full sequences during training (enabled by attention, rather than a strictly sequential RNN-style pass) is a major reason transformers scale efficiently to huge datasets and model sizes.",
+      "Transformers are the architecture behind virtually all modern LLMs (GPT-family, BERT, Claude, Titan text models).",
+      "The exam tests conceptual recognition of this architecture's role, not mathematical derivation of attention scores."
+    ],
+    "rule_of_thumb": "If a question asks what architecture underlies modern LLMs and why they can capture long-range context effectively, the answer is the transformer architecture and its attention mechanism.",
+    "common_confusions": [
+      "Assuming modern LLMs are built on RNNs/LSTMs — those were the dominant sequence architecture before transformers, and are now largely superseded by attention-based transformers for language tasks.",
+      "Believing attention just means 'focusing on the most recent words' — attention specifically weighs relevance across the entire sequence, including distant tokens, not just recency."
+    ],
+    "aws_services": ["Amazon Bedrock", "Amazon Titan"],
+    "references": [
+      "https://aws.amazon.com/what-is/foundation-models/",
+      "https://aws.amazon.com/what-is/large-language-model/"
+    ]
+  }
+]

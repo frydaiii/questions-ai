@@ -1,0 +1,81 @@
+[
+  {
+    "id": "Q-D4-0061",
+    "domain": 4,
+    "task_statement": "4.3",
+    "type": "multi_response",
+    "difficulty": "medium",
+    "theory_refs": ["TH-D4-009", "TH-D4-010"],
+    "case_study_id": null,
+    "stem": "Which of the following are legitimate signals for ranking or selecting which stored memories to retrieve? (Select 3)",
+    "select_count": 3,
+    "options": [
+      { "key": "A", "text": "Relevance to the current situation" },
+      { "key": "B", "text": "Recency of when the memory was formed or last used" },
+      { "key": "C", "text": "Frequency of how often a similar fact or pattern has recurred" },
+      { "key": "D", "text": "The exact number of characters in the memory's stored text" }
+    ],
+    "correct": ["A", "B", "C"],
+    "explanation": {
+      "why_correct": "Relevance, recency, and frequency are all legitimate, commonly used signals for ranking and selecting which stored memories to surface for the current situation.",
+      "why_incorrect": {
+        "D": "Character count has no principled connection to whether a memory is actually useful or relevant to the current need."
+      },
+      "rule_of_thumb": "Relevance, recency, and frequency are the key legitimate signals for memory retrieval ranking -- not arbitrary surface statistics like text length."
+    },
+    "tags": ["relevance-based-retrieval", "recency", "frequency"]
+  },
+  {
+    "id": "Q-D4-0062",
+    "domain": 4,
+    "task_statement": "4.3",
+    "type": "ordering",
+    "difficulty": "medium",
+    "theory_refs": ["TH-D4-012"],
+    "case_study_id": null,
+    "stem": "Place the following steps of handling a contradiction between stored and new information in the correct order, for a high-stakes case.",
+    "select_count": 3,
+    "options": [
+      { "key": "A", "text": "Detect that newly observed information contradicts an existing stored memory" },
+      { "key": "B", "text": "Assess the stakes involved in resolving the contradiction incorrectly" },
+      { "key": "C", "text": "If stakes are high, perform a clarifying check rather than silently resolving the contradiction by default" }
+    ],
+    "correct": ["A", "B", "C"],
+    "explanation": {
+      "why_correct": "Handling a contradiction properly requires first detecting it, then assessing the stakes of getting the resolution wrong, and finally choosing an appropriate response (a clarifying check for high-stakes cases) -- in that order.",
+      "why_incorrect": {},
+      "rule_of_thumb": "Contradiction handling proceeds: detect, assess stakes, then choose an appropriately cautious resolution for high-stakes cases."
+    },
+    "tags": ["contradiction-resolution", "execution-order"]
+  },
+  {
+    "id": "Q-D4-0063",
+    "domain": 4,
+    "task_statement": "4.3",
+    "type": "matching",
+    "difficulty": "medium",
+    "theory_refs": ["TH-D4-009", "TH-D4-010", "TH-D4-011"],
+    "case_study_id": null,
+    "stem": "Match each memory retrieval/maintenance concept on the left to its correct description on the right.",
+    "select_count": 3,
+    "matching": {
+      "left": [
+        { "key": "L1", "text": "Relevance-based retrieval" },
+        { "key": "L2", "text": "Recency as a retrieval signal" },
+        { "key": "L3", "text": "Deliberate forgetting" }
+      ],
+      "right": [
+        { "key": "R1", "text": "Surfacing memories based on how pertinent they are to the current situation" },
+        { "key": "R2", "text": "Favoring more recently formed or updated information, which better reflects current reality" },
+        { "key": "R3", "text": "Actively removing or deprioritizing outdated or superseded stored information" }
+      ]
+    },
+    "correct_pairs": { "L1": "R1", "L2": "R2", "L3": "R3" },
+    "explanation": {
+      "why_correct": "Relevance-based retrieval surfaces memories based on how pertinent they are to the current situation, recency favors more recently formed or updated information that better reflects current reality, and deliberate forgetting actively removes or deprioritizes outdated or superseded stored content -- each concept maps cleanly to its distinct maintenance function.",
+      "why_incorrect": {},
+      "rule_of_thumb": "Relevance = pertinence; recency = favoring current information; forgetting = removing outdated/superseded content."
+    },
+    "tags": ["relevance-based-retrieval", "recency", "forgetting-mechanisms"]
+  }
+]

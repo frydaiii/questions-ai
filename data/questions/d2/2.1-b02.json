@@ -1,0 +1,478 @@
+[
+  {
+    "id": "Q-D2-0126",
+    "domain": 2, "task_statement": "2.1", "type": "single_choice", "difficulty": "easy",
+    "theory_refs": ["TH-D2-002"], "case_study_id": null,
+    "stem": "Which of the following is the best example of a foundation model as opposed to a traditional, narrow ML model?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "A custom decision tree trained only to predict whether a specific factory sensor reading is anomalous" },
+      { "key": "B", "text": "A linear regression model predicting house prices from square footage" },
+      { "key": "C", "text": "A rules engine that flags orders over $10,000 for review" },
+      { "key": "D", "text": "Amazon Titan, pre-trained broadly and adaptable to many different downstream tasks via prompting" }
+    ],
+    "correct": ["D"],
+    "explanation": {
+      "why_correct": "Amazon Titan is a foundation model pre-trained broadly on massive data, giving it general-purpose capabilities adaptable to many downstream tasks via prompting alone, which is precisely the definition of a foundation model.",
+      "why_incorrect": {
+        "A": "A decision tree trained for one specific anomaly-detection task is a narrow, traditional ML model, not a foundation model.",
+        "B": "A linear regression model for one specific numeric prediction task is a traditional ML model, not broadly pre-trained or adaptable to many tasks.",
+        "C": "A rules engine follows fixed logic with no learning or broad pre-training at all; it does not qualify as any kind of ML model, let alone a foundation model."
+      },
+      "rule_of_thumb": "One model pre-trained broadly, then adapted to many tasks via prompting/RAG/fine-tuning -> foundation model."
+    },
+    "tags": ["foundation-models"]
+  },
+  {
+    "id": "Q-D2-0127",
+    "domain": 2, "task_statement": "2.1", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D2-001"], "case_study_id": null,
+    "stem": "A developer needs to estimate the cost of a Bedrock API call before sending it, knowing that pricing is based on the number of tokens processed. Which factor directly affects this token count?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Both the length of the input prompt and the length of the expected output response" },
+      { "key": "B", "text": "Only the number of API calls made per month, regardless of content length" },
+      { "key": "C", "text": "Only the model's context window size, regardless of the actual prompt content" },
+      { "key": "D", "text": "Only the temperature setting used for the request" }
+    ],
+    "correct": ["A"],
+    "explanation": {
+      "why_correct": "Token-based pricing is driven by both the input prompt's token count and the generated output's token count; both contribute directly to the total tokens processed and therefore the cost.",
+      "why_incorrect": {
+        "B": "Pricing is driven by token counts per request, not simply the number of API calls with no regard to content length.",
+        "C": "Context window size is the maximum capacity, not the actual number of tokens used in a specific request; actual usage depends on the real prompt and response content.",
+        "D": "Temperature controls output randomness/creativity; it does not directly determine the number of tokens processed or the resulting cost."
+      },
+      "rule_of_thumb": "Both input AND output tokens count toward billing — a verbose response costs more than a terse one, even for the same input prompt."
+    },
+    "tags": ["tokens", "bedrock-pricing"]
+  },
+  {
+    "id": "Q-D2-0128",
+    "domain": 2, "task_statement": "2.1", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D2-003"], "case_study_id": null,
+    "stem": "An insurance company wants a system that can review a submitted claim photo alongside a written claim description and flag inconsistencies between what the photo shows and what the description states. Which capability is essential to this system?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "A purely text-based sentiment analysis tool" },
+      { "key": "B", "text": "Multimodal reasoning across both the image and the text simultaneously" },
+      { "key": "C", "text": "A basic keyword search over the claim description only" },
+      { "key": "D", "text": "A time-series forecasting model" }
+    ],
+    "correct": ["B"],
+    "explanation": {
+      "why_correct": "Detecting inconsistencies between an image's content and a written description requires jointly reasoning across both modalities at once, which is exactly what multimodal capability provides.",
+      "why_incorrect": {
+        "A": "A purely text-based sentiment tool cannot analyze the photo's visual content at all, so it cannot detect image-text inconsistencies.",
+        "C": "Keyword search over the description alone ignores the photo entirely, missing the core requirement of cross-referencing image and text.",
+        "D": "Time-series forecasting predicts future numeric values; it has no relevance to comparing an image against a text description."
+      },
+      "rule_of_thumb": "If a scenario needs the model to reason across two or more different content types together, the answer involves a multimodal model."
+    },
+    "tags": ["multimodal-models"]
+  },
+  {
+    "id": "Q-D2-0129",
+    "domain": 2, "task_statement": "2.1", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D2-005"], "case_study_id": null,
+    "stem": "A prompt includes three worked examples showing how to format extracted invoice data as JSON, followed by a new, unformatted invoice for the model to process the same way. What prompting technique is this?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Zero-shot prompting" },
+      { "key": "B", "text": "Few-shot prompting" },
+      { "key": "C", "text": "Continued pre-training" },
+      { "key": "D", "text": "Domain-adaptation fine-tuning" }
+    ],
+    "correct": ["B"],
+    "explanation": {
+      "why_correct": "Providing multiple (in this case three) worked examples within the prompt to demonstrate a desired output format is exactly the definition of few-shot prompting.",
+      "why_incorrect": {
+        "A": "Zero-shot prompting provides no examples at all; this scenario explicitly includes three worked examples.",
+        "C": "Continued pre-training is a training-time process using unlabeled data; it does not describe examples included within a single prompt.",
+        "D": "Domain-adaptation fine-tuning is a training-time process updating model weights; it does not describe examples included within a single prompt with no training involved."
+      },
+      "rule_of_thumb": "Few-shot: multiple examples included directly in the prompt, generally the most reliable for tasks needing a specific output format or style."
+    },
+    "tags": ["few-shot", "prompting"]
+  },
+  {
+    "id": "Q-D2-0130",
+    "domain": 2, "task_statement": "2.1", "type": "single_choice", "difficulty": "hard",
+    "theory_refs": ["TH-D2-002", "TH-D1-005"], "case_study_id": null,
+    "stem": "A candidate is asked to explain why a single foundation model like a large language model can perform sentiment analysis, translation, and summarization without being separately trained for each task, unlike three separate traditional ML classifiers would need to be. What is the best explanation?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "The foundation model's broad pre-training on massive, diverse data gives it general-purpose language understanding that can be directed toward many different tasks via prompting alone." },
+      { "key": "B", "text": "Foundation models are simply much smaller than traditional ML models, making them faster to retrain for each task." },
+      { "key": "C", "text": "Traditional ML classifiers are actually capable of handling all three tasks equally well without any additional training." },
+      { "key": "D", "text": "Foundation models can only perform one task at a time and must be fully retrained between each task." }
+    ],
+    "correct": ["A"],
+    "explanation": {
+      "why_correct": "A foundation model's broad pre-training gives it general-purpose language understanding and capability that can be steered toward many different tasks purely through prompting, without needing separate training for each task — the core reason it differs from narrow traditional ML classifiers.",
+      "why_incorrect": {
+        "B": "Foundation models are typically much LARGER than traditional ML models, not smaller, and their multi-task versatility comes from broad pre-training, not smaller size.",
+        "C": "Traditional ML classifiers are narrow by design and would each require separate training for sentiment analysis, translation, and summarization; they cannot handle all three without dedicated training for each.",
+        "D": "This describes the opposite of a foundation model's key advantage; a well-prompted foundation model can shift between many tasks without retraining."
+      },
+      "rule_of_thumb": "One model pre-trained broadly, then adapted to many tasks via prompting/RAG/fine-tuning -> foundation model — this multi-task versatility via prompting is its defining advantage over narrow traditional ML."
+    },
+    "tags": ["foundation-models", "multi-task"]
+  },
+  {
+    "id": "Q-D2-0131",
+    "domain": 2, "task_statement": "2.1", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D2-004"], "case_study_id": null,
+    "stem": "Which of the following best distinguishes a diffusion model's approach to image generation from a GAN's approach?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "A diffusion model iteratively removes noise from a starting point of pure noise, guided by a prompt, while a GAN uses a generator competing against a discriminator." },
+      { "key": "B", "text": "Diffusion models and GANs are exactly the same technique with different names." },
+      { "key": "C", "text": "A diffusion model requires a discriminator network, exactly like a GAN." },
+      { "key": "D", "text": "GANs generate images by removing noise from a starting point of pure noise, while diffusion models use two competing networks." }
+    ],
+    "correct": ["A"],
+    "explanation": {
+      "why_correct": "This correctly distinguishes the two approaches: diffusion models use an iterative noise-removal process guided by a prompt, while GANs use a fundamentally different adversarial generator-versus-discriminator training structure.",
+      "why_incorrect": {
+        "B": "These are distinct techniques with different underlying mechanisms (noise-removal vs. adversarial competition), not the same technique under different names.",
+        "C": "Diffusion models do not require a discriminator network; that is specifically a GAN component, not shared by diffusion models.",
+        "D": "This reverses the actual mechanisms — GANs use competing networks, not noise removal; diffusion models use noise removal, not competing networks."
+      },
+      "rule_of_thumb": "Two networks competing to produce realistic fakes -> GAN. A noise-removal process to generate content -> diffusion. These are distinct, non-overlapping mechanisms."
+    },
+    "tags": ["diffusion-models", "gan"]
+  },
+  {
+    "id": "Q-D2-0132",
+    "domain": 2, "task_statement": "2.1", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D2-021"], "case_study_id": null,
+    "stem": "Which of the following best distinguishes 'latent space' from 'embeddings,' given that both relate to how a model represents learned meaning internally?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Latent space is the broader internal representation of learned patterns; embeddings are a practical, concrete numeric expression related to positions in that space, used for tasks like similarity comparison." },
+      { "key": "B", "text": "Latent space and embeddings are entirely unrelated concepts with no connection." },
+      { "key": "C", "text": "Embeddings are the broader concept, and latent space is a narrow, specific application of embeddings used only for image generation." },
+      { "key": "D", "text": "Latent space only applies to text models, while embeddings only apply to image models." }
+    ],
+    "correct": ["A"],
+    "explanation": {
+      "why_correct": "Latent space is the broader concept of a model's internal, learned representation of patterns and relationships, while embeddings are a practical, usable, concrete numeric expression related to that space, commonly used for measurable tasks like similarity search.",
+      "why_incorrect": {
+        "B": "These concepts are directly related; embeddings are essentially a practical expression connected to a model's latent space, not unrelated.",
+        "C": "This reverses the actual relationship; latent space is the broader internal-representation concept, and embeddings are the more concrete, practical numeric expression of related positions, not the other way around.",
+        "D": "Neither latent space nor embeddings are restricted to only one modality; both concepts apply across text, image, and other data types."
+      },
+      "rule_of_thumb": "Embeddings are a practical, usable projection of positions within (or derived from) a model's broader latent space, letting relationships be measured mathematically."
+    },
+    "tags": ["latent-space", "embeddings"]
+  },
+  {
+    "id": "Q-D2-0133",
+    "domain": 2, "task_statement": "2.1", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D2-024"], "case_study_id": null,
+    "stem": "Which statement accurately describes a key advantage of the transformer architecture's parallel processing during model training, compared to a strictly sequential RNN-style architecture?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Processing full sequences in parallel, rather than strictly step by step, is a major reason transformers scale efficiently to very large models and datasets." },
+      { "key": "B", "text": "Parallel processing makes transformers incapable of handling any sequential data at all." },
+      { "key": "C", "text": "Parallel processing has no effect on training efficiency or scalability." },
+      { "key": "D", "text": "RNNs process sequences faster than transformers in every case, due to their step-by-step design." }
+    ],
+    "correct": ["A"],
+    "explanation": {
+      "why_correct": "Transformers' ability to process entire sequences in parallel during training, enabled by the attention mechanism, is indeed a major reason they scale efficiently to very large models and datasets, unlike RNNs' strictly sequential step-by-step processing.",
+      "why_incorrect": {
+        "B": "Transformers absolutely handle sequential data (like text); parallel processing is how they process that sequential data efficiently, not evidence they can't handle it.",
+        "C": "Parallel processing has a significant, well-documented positive effect on training efficiency and scalability, contrary to this statement.",
+        "D": "RNNs' step-by-step design is generally a scalability disadvantage, not an advantage, for training on very large datasets, compared to transformers' parallel processing."
+      },
+      "rule_of_thumb": "Parallel processing of full sequences during training (enabled by attention) is a major reason transformers scale efficiently to huge datasets and model sizes."
+    },
+    "tags": ["transformer", "attention", "scalability"]
+  },
+  {
+    "id": "Q-D2-0134",
+    "domain": 2, "task_statement": "2.1", "type": "multi_response", "difficulty": "medium",
+    "theory_refs": ["TH-D2-005"], "case_study_id": null,
+    "stem": "Which TWO of the following are accurate statements about in-context learning?",
+    "select_count": 2,
+    "options": [
+      { "key": "A", "text": "In-context learning happens entirely within a single prompt/request, with no update to the model's weights." },
+      { "key": "B", "text": "In-context learning permanently changes the model for all future, unrelated requests." },
+      { "key": "C", "text": "In-context learning has zero ongoing infrastructure cost beyond the inference call itself, since no training occurs." },
+      { "key": "D", "text": "In-context learning always requires at least 100 examples to work at all." }
+    ],
+    "correct": ["A", "C"],
+    "explanation": {
+      "why_correct": "In-context learning does happen entirely within a single request with no weight updates, and because no training occurs, it has zero ongoing infrastructure cost beyond the inference call — both accurate.",
+      "why_incorrect": {
+        "B": "In-context learning's effects are temporary and do not persist beyond the single request/conversation; it does not permanently change the model for unrelated future requests.",
+        "D": "In-context learning can work with zero examples (zero-shot) or just one or a few examples (one-shot/few-shot); there is no requirement for 100 examples."
+      },
+      "rule_of_thumb": "In-context learning happens entirely within a single prompt/request — the model's weights are never modified, and its effects are temporary."
+    },
+    "tags": ["in-context-learning"]
+  },
+  {
+    "id": "Q-D2-0135",
+    "domain": 2, "task_statement": "2.1", "type": "multi_response", "difficulty": "hard",
+    "theory_refs": ["TH-D2-022"], "case_study_id": null,
+    "stem": "Which TWO of the following statements accurately describe deterministic versus stochastic behavior in generative AI?",
+    "select_count": 2,
+    "options": [
+      { "key": "A", "text": "Generative models are stochastic by default, sampling from a probability distribution over possible outputs." },
+      { "key": "B", "text": "Traditional software and many classical ML systems are typically expected to be deterministic: identical input always produces identical output." },
+      { "key": "C", "text": "Lowering temperature and top-p guarantees perfectly identical output on every single run, on every system, with no exceptions." },
+      { "key": "D", "text": "Stochastic behavior in generative AI is always a defect that must be engineered out entirely before any production use." }
+    ],
+    "correct": ["A", "B"],
+    "explanation": {
+      "why_correct": "Generative models are indeed stochastic by default via probability-based sampling, and traditional deterministic software/classical ML systems are indeed generally expected to produce identical output for identical input — both accurate contrasts.",
+      "why_incorrect": {
+        "C": "Lowering temperature/top-p substantially reduces variability but does not always guarantee perfect bit-for-bit determinism across every system; this overstates the guarantee.",
+        "D": "Stochastic behavior is a normal, expected design property of generative AI, not inherently a defect requiring complete elimination before any production use; it can be managed and accounted for instead."
+      },
+      "rule_of_thumb": "Deterministic: identical input always produces identical output (traditional software expectation). Stochastic: generative models sample from a distribution, so identical prompts can yield different outputs — this is expected behavior, not a bug."
+    },
+    "tags": ["deterministic-vs-stochastic"]
+  },
+  {
+    "id": "Q-D2-0136",
+    "domain": 2, "task_statement": "2.1", "type": "multi_response", "difficulty": "medium",
+    "theory_refs": ["TH-D2-001", "TH-D2-021"], "case_study_id": null,
+    "stem": "Which TWO of the following are appropriate uses of embeddings in a generative AI application?",
+    "select_count": 2,
+    "options": [
+      { "key": "A", "text": "Powering semantic search by comparing the vector representation of a query against the vector representations of stored documents" },
+      { "key": "B", "text": "Retrieving the most relevant chunks of text for a RAG application based on semantic similarity" },
+      { "key": "C", "text": "Directly controlling how many tokens a generated response will contain" },
+      { "key": "D", "text": "Replacing the need for any vector database entirely" }
+    ],
+    "correct": ["A", "B"],
+    "explanation": {
+      "why_correct": "Embeddings underpin semantic search by enabling vector similarity comparison between queries and documents, and they are the retrieval mechanism behind RAG applications finding the most semantically relevant chunks — both accurate, common uses.",
+      "why_incorrect": {
+        "C": "Response length is controlled by parameters like max tokens/response length, not by embeddings, which represent semantic meaning, not output length.",
+        "D": "Embeddings are typically stored and queried WITHIN a vector database to support fast similarity search at scale; they do not replace the need for one."
+      },
+      "rule_of_thumb": "Embeddings turn text into vectors so that semantic similarity can be computed mathematically, which underpins semantic search and RAG retrieval — typically stored in a vector database, not replacing the need for one."
+    },
+    "tags": ["embeddings", "semantic-search", "rag"]
+  },
+  {
+    "id": "Q-D2-0137",
+    "domain": 2, "task_statement": "2.1", "type": "matching", "difficulty": "hard",
+    "theory_refs": ["TH-D2-005"], "case_study_id": null,
+    "stem": "Match each prompting/training technique on the left with the description on the right that most precisely characterizes it.",
+    "select_count": 4,
+    "matching": {
+      "left": [
+        { "key": "L1", "text": "Zero-shot prompting" },
+        { "key": "L2", "text": "Few-shot prompting" },
+        { "key": "L3", "text": "In-context learning" },
+        { "key": "L4", "text": "Fine-tuning" }
+      ],
+      "right": [
+        { "key": "R1", "text": "Providing instructions with no examples, relying entirely on the model's pre-trained knowledge" },
+        { "key": "R2", "text": "Providing multiple worked examples within a single prompt to demonstrate a desired pattern" },
+        { "key": "R3", "text": "The general mechanism enabling a model to adapt behavior from prompt content alone, with no weight updates" },
+        { "key": "R4", "text": "A training process that updates the model's weights using labeled examples" }
+      ]
+    },
+    "correct_pairs": { "L1": "R1", "L2": "R2", "L3": "R3", "L4": "R4" },
+    "explanation": {
+      "why_correct": "Zero-shot uses instructions with no examples (R1). Few-shot uses multiple examples in the prompt (R2). In-context learning is the general no-weight-update adaptation mechanism (R3). Fine-tuning is a training process updating weights (R4).",
+      "why_incorrect": {},
+      "rule_of_thumb": "Zero-shot and few-shot are specific applications of in-context learning; fine-tuning is fundamentally different since it actually updates weights via training."
+    },
+    "tags": ["prompting", "fine-tuning", "matching"]
+  },
+  {
+    "id": "Q-D2-0138",
+    "domain": 2, "task_statement": "2.1", "type": "ordering", "difficulty": "medium",
+    "theory_refs": ["TH-D2-004"], "case_study_id": null,
+    "stem": "Arrange the following steps of how a diffusion model generates a new image from a text prompt, from first to last.",
+    "select_count": 3,
+    "options": [
+      { "key": "A", "text": "Start from a canvas of pure random noise" },
+      { "key": "B", "text": "Iteratively remove noise over many steps, guided by the text prompt" },
+      { "key": "C", "text": "Arrive at a coherent, prompt-aligned final image" }
+    ],
+    "correct": ["A", "B", "C"],
+    "explanation": {
+      "why_correct": "Reverse diffusion (image generation) begins with pure random noise (A), then iteratively removes that noise over many steps guided by the prompt (B), ultimately arriving at a coherent final image matching the prompt (C). Each step builds directly on the previous one.",
+      "why_incorrect": {},
+      "rule_of_thumb": "Reverse diffusion (generation time): starts from random noise and iteratively denoises toward a coherent image, guided by the prompt."
+    },
+    "tags": ["diffusion-models", "ordering"]
+  },
+  {
+    "id": "Q-D2-0139",
+    "domain": 2, "task_statement": "2.1", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D2-001"], "case_study_id": null,
+    "stem": "A team is troubleshooting why their Bedrock API request failed with a context-length-related error, even though the prompt itself seemed reasonably short. What is the most likely explanation?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "The temperature setting was too low." },
+      { "key": "B", "text": "The model's embeddings were corrupted." },
+      { "key": "C", "text": "The request used the wrong AWS Region." },
+      { "key": "D", "text": "The combined total of prompt tokens plus the requested maximum output tokens exceeded the model's context window." }
+    ],
+    "correct": ["D"],
+    "explanation": {
+      "why_correct": "The context window is a hard ceiling on prompt tokens plus expected output tokens combined; even a short-looking prompt combined with a large requested max-output-token setting can exceed this ceiling and trigger a context-length error.",
+      "why_incorrect": {
+        "A": "Temperature controls output randomness, not context length limits; it would not cause a context-length-related error.",
+        "B": "Embeddings are unrelated to context window limits on a single inference request; 'corrupted embeddings' is not a standard cause of this kind of error.",
+        "C": "AWS Region selection affects where infrastructure is located, not the token-count ceiling for a specific model's context window."
+      },
+      "rule_of_thumb": "The context window is a hard ceiling: prompt tokens + expected output tokens must fit within it, or the request fails or gets truncated."
+    },
+    "tags": ["context-window", "troubleshooting"]
+  },
+  {
+    "id": "Q-D2-0140",
+    "domain": 2, "task_statement": "2.1", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D2-002"], "case_study_id": null,
+    "stem": "A company wants to quickly prototype three different generative use cases (summarization, translation, and a customer support chatbot) using the same underlying foundation model, adapting each with a different prompt rather than training three separate models. What foundation model property makes this feasible?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Its broad pre-training enables adaptation to many different downstream tasks purely through prompting." },
+      { "key": "B", "text": "Foundation models are legally required to be used for only one task at a time." },
+      { "key": "C", "text": "Prompting always requires retraining the entire model from scratch for each new use case." },
+      { "key": "D", "text": "Foundation models cannot be used for more than one use case within the same organization." }
+    ],
+    "correct": ["A"],
+    "explanation": {
+      "why_correct": "A foundation model's broad pre-training gives it general-purpose capabilities that can be directed toward many different tasks (summarization, translation, chatbot) purely by changing the prompt, without needing separate training for each use case.",
+      "why_incorrect": {
+        "B": "There is no such legal requirement; foundation models are explicitly designed to be adaptable to many tasks and use cases.",
+        "C": "Prompting specifically does NOT require retraining the model; that is the entire point of foundation models being adaptable via prompting alone.",
+        "D": "Foundation models are commonly used for multiple use cases within the same organization; there is no such restriction."
+      },
+      "rule_of_thumb": "One model pre-trained broadly, then adapted to many tasks via prompting/RAG/fine-tuning -> foundation model, enabling exactly this kind of rapid multi-use-case prototyping."
+    },
+    "tags": ["foundation-models", "multi-task"]
+  },
+  {
+    "id": "Q-D2-0141",
+    "domain": 2, "task_statement": "2.1", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D2-003"], "case_study_id": null,
+    "stem": "Which of the following statements about multimodal models is accurate?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "A very large, capable model that only ever processes text is not multimodal, regardless of its scale." },
+      { "key": "B", "text": "Any generative AI model is automatically multimodal by definition." },
+      { "key": "C", "text": "Multimodal models can only process images, never text." },
+      { "key": "D", "text": "Model size is the only factor that determines whether a model is multimodal." }
+    ],
+    "correct": ["A"],
+    "explanation": {
+      "why_correct": "Multimodal specifically requires handling more than one data type; a large, text-only model, no matter how capable, does not meet this definition and is therefore not multimodal.",
+      "why_incorrect": {
+        "B": "Many capable generative AI models are text-only; multimodality is not an automatic or universal property of all generative AI.",
+        "C": "Multimodal models can process combinations of text, images, audio, and other data types together, not only images.",
+        "D": "Model size and modality support are independent properties; size alone does not determine whether a model is multimodal."
+      },
+      "rule_of_thumb": "A model that only ever processes one modality (e.g. text-only) is not multimodal, even if it is otherwise a large, capable foundation model."
+    },
+    "tags": ["multimodal-models"]
+  },
+  {
+    "id": "Q-D2-0142",
+    "domain": 2, "task_statement": "2.1", "type": "single_choice", "difficulty": "hard",
+    "theory_refs": ["TH-D2-019", "TH-D1-002"], "case_study_id": null,
+    "stem": "Which statement correctly distinguishes RLHF from standard supervised instruction fine-tuning?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "RLHF uses human preference comparisons and a reward model within a reinforcement learning loop; instruction fine-tuning uses labeled input/output examples in a standard supervised training process." },
+      { "key": "B", "text": "RLHF and instruction fine-tuning are identical processes with different names." },
+      { "key": "C", "text": "Instruction fine-tuning uses human preference comparisons, while RLHF uses labeled input/output pairs." },
+      { "key": "D", "text": "Neither RLHF nor instruction fine-tuning ever updates a model's weights." }
+    ],
+    "correct": ["A"],
+    "explanation": {
+      "why_correct": "RLHF specifically uses human preference rankings between output pairs to train a reward model, then reinforcement learning to align the base model, while instruction fine-tuning uses standard labeled input/output example pairs in a supervised training process — a real, meaningful distinction.",
+      "why_incorrect": {
+        "B": "These are distinct techniques using different training signals (preference comparisons + RL vs. labeled examples + supervised learning), not identical processes.",
+        "C": "This reverses the actual mapping; RLHF uses preference comparisons, and instruction fine-tuning uses labeled input/output pairs, not the other way around.",
+        "D": "Both RLHF and instruction fine-tuning are training processes that DO update the model's weights, unlike prompting techniques which do not."
+      },
+      "rule_of_thumb": "Confusing RLHF with standard instruction fine-tuning is common — instruction fine-tuning uses labeled input/output examples; RLHF uses human preference rankings and a reward model within a reinforcement learning loop."
+    },
+    "tags": ["rlhf", "fine-tuning"]
+  },
+  {
+    "id": "Q-D2-0143",
+    "domain": 2, "task_statement": "2.1", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D2-024"], "case_study_id": null,
+    "stem": "A candidate is asked to identify the architectural foundation of nearly all modern large language models, including GPT-family models, Claude, and Amazon Titan text models. What is the correct answer?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "The transformer architecture, using an attention mechanism" },
+      { "key": "B", "text": "Traditional decision tree ensembles" },
+      { "key": "C", "text": "Simple linear regression" },
+      { "key": "D", "text": "Basic if/then rule engines" }
+    ],
+    "correct": ["A"],
+    "explanation": {
+      "why_correct": "The transformer architecture, relying on its attention mechanism, is the architectural foundation of essentially all modern large language models, including the examples named in the question.",
+      "why_incorrect": {
+        "B": "Decision tree ensembles are a traditional ML technique for structured data; they are not the architecture underlying modern LLMs.",
+        "C": "Linear regression predicts a single continuous value from features; it is not the architecture underlying modern LLMs.",
+        "D": "Rule engines follow fixed human-written logic with no learning at all; they are entirely unrelated to how modern LLMs are built."
+      },
+      "rule_of_thumb": "If a question asks what architecture underlies modern LLMs, the answer is the transformer architecture and its attention mechanism."
+    },
+    "tags": ["transformer"]
+  },
+  {
+    "id": "Q-D2-0144",
+    "domain": 2, "task_statement": "2.1", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D2-005"], "case_study_id": null,
+    "stem": "A user provides exactly one worked example within a prompt to guide the model's response format, rather than zero examples or several examples. What is this specific prompting technique called?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Zero-shot prompting" },
+      { "key": "B", "text": "One-shot prompting" },
+      { "key": "C", "text": "Continued pre-training" },
+      { "key": "D", "text": "RLHF" }
+    ],
+    "correct": ["B"],
+    "explanation": {
+      "why_correct": "Providing exactly one worked example within the prompt is the specific definition of one-shot prompting, a middle ground between zero-shot (no examples) and few-shot (multiple examples).",
+      "why_incorrect": {
+        "A": "Zero-shot prompting provides no examples at all; this scenario explicitly provides one example.",
+        "C": "Continued pre-training is a training-time process on unlabeled data; it is unrelated to providing an example within a single prompt.",
+        "D": "RLHF is a training-time alignment technique using human preference comparisons; it is unrelated to providing an example within a single prompt."
+      },
+      "rule_of_thumb": "One-shot: exactly one example, a middle ground between zero-shot and few-shot prompting."
+    },
+    "tags": ["one-shot", "prompting"]
+  },
+  {
+    "id": "Q-D2-0145",
+    "domain": 2, "task_statement": "2.1", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D2-021", "TH-D2-004"], "case_study_id": null,
+    "stem": "A researcher demonstrates that smoothly blending the latent-space representations of a photo of a cat and a photo of a dog produces a plausible intermediate image with features of both. What does this demonstrate about latent space?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Latent space captures meaningful, continuous relationships between concepts, allowing smooth interpolation between them." },
+      { "key": "B", "text": "Latent space is a purely random, meaningless set of numbers with no structure." },
+      { "key": "C", "text": "This demonstrates that the model has simply memorized and stored the exact pixels of both training images." },
+      { "key": "D", "text": "Latent space only exists for text models, not image models." }
+    ],
+    "correct": ["A"],
+    "explanation": {
+      "why_correct": "The ability to smoothly interpolate between two concepts in latent space and get a plausible, meaningful intermediate result demonstrates that latent space captures continuous, meaningful relationships between concepts, not just arbitrary values.",
+      "why_incorrect": {
+        "B": "This demonstration is the opposite of 'purely random and meaningless' — the smooth, plausible interpolation shows meaningful structure exists in latent space.",
+        "C": "Producing a genuinely novel intermediate blend, rather than reproducing exact stored pixels, demonstrates generalized learned structure, not simple memorization of training examples.",
+        "D": "Latent space concepts apply broadly across model types, including both image-generation models (as in this example) and language models."
+      },
+      "rule_of_thumb": "Latent space is why generative models can produce novel combinations/variations rather than only regurgitating memorized examples."
+    },
+    "tags": ["latent-space"]
+  }
+]

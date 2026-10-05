@@ -1,0 +1,476 @@
+[
+  {
+    "id": "Q-D1-0026",
+    "domain": 1,
+    "task_statement": "1.2",
+    "type": "single_choice",
+    "difficulty": "easy",
+    "theory_refs": [
+      "TH-D1-007"
+    ],
+    "case_study_id": null,
+    "stem": "In the perceive-reason-act cycle, which phase is responsible for gathering the user's request, prior tool results, and other current information?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Terminate"
+      },
+      {
+        "key": "B",
+        "text": "Reason"
+      },
+      {
+        "key": "C",
+        "text": "Act"
+      },
+      {
+        "key": "D",
+        "text": "Perceive"
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "The perceive phase is specifically about gathering current information -- the user's request, prior tool outputs, and environmental signals -- before any decision-making happens.",
+      "why_incorrect": {
+        "B": "Reason is the phase that processes already-gathered information into a decision; it does not itself gather the information.",
+        "C": "Act is the phase that executes a chosen action; it happens after perception and reasoning, not during information gathering.",
+        "A": "Termination is not one of the three core phases; it is a condition that determines when the overall loop stops, independent of any single cycle's phases."
+      },
+      "rule_of_thumb": "Perceive = gather information; reason = decide; act = execute -- each phase has one clear, distinct responsibility."
+    },
+    "tags": [
+      "perceive-reason-act",
+      "perception"
+    ]
+  },
+  {
+    "id": "Q-D1-0027",
+    "domain": 1,
+    "task_statement": "1.2",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D1-008"
+    ],
+    "case_study_id": null,
+    "stem": "An agent is asked to schedule a meeting 'next Tuesday' but has no information about the current date anywhere in its context. What kind of failure does this represent?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "A reasoning failure, since the model should know the date from training"
+      },
+      {
+        "key": "B",
+        "text": "A perception failure, since the agent was never given information it needed"
+      },
+      {
+        "key": "C",
+        "text": "An action failure, since scheduling tools always need a date parameter"
+      },
+      {
+        "key": "D",
+        "text": "Not a failure at all, since agents never need date information"
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "explanation": {
+      "why_correct": "The current date is exactly the kind of implicit contextual information an agent needs to perceive before it can reason correctly about a relative date like 'next Tuesday' -- if it was never supplied, this is a gap in what the agent perceived, not a flaw in its reasoning process.",
+      "why_incorrect": {
+        "C": "This describes a missing input to reasoning, which occurs before any tool call is even attempted -- it is not a tool execution failure.",
+        "D": "Agents frequently need accurate date/time information for relative date calculations; this is a common and well-documented perception requirement, not something that can be dismissed as unnecessary.",
+        "A": "A model's training data has a fixed cutoff and cannot reflect the actual current date at inference time; expecting the model to simply 'know' today's date from training is a misunderstanding of how perception/context works, not a reasoning deficiency."
+      },
+      "rule_of_thumb": "Missing implicit context like the current date, when needed for correct reasoning, is a perception failure -- the fix is to explicitly supply that information, not to blame or retrain the model."
+    },
+    "tags": [
+      "perception",
+      "failure-diagnosis"
+    ]
+  },
+  {
+    "id": "Q-D1-0028",
+    "domain": 1,
+    "task_statement": "1.2",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D1-009"
+    ],
+    "case_study_id": null,
+    "stem": "An agent handling a simple, well-pattern-matched request ('what is 2+2') is forced to produce an extensive, multi-paragraph chain-of-thought before answering. What is the most likely consequence?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "The agent will stop being able to perceive new information"
+      },
+      {
+        "key": "B",
+        "text": "The answer will definitely become incorrect"
+      },
+      {
+        "key": "C",
+        "text": "Added latency and token cost with little to no improvement in answer quality for this trivial task"
+      },
+      {
+        "key": "D",
+        "text": "The action space will automatically expand"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "Reasoning depth should be matched to task complexity; forcing extensive deliberation on a trivial, already-easy-to-pattern-match task mainly adds latency and token cost without materially improving an already-correct answer.",
+      "why_incorrect": {
+        "B": "Extra reasoning does not inherently make a simple correct answer wrong; the main cost here is efficiency, not correctness.",
+        "D": "The agent's available action space is a separate design-time configuration; verbosity of reasoning does not expand or shrink it.",
+        "A": "Chain-of-thought reasoning depth has no bearing on the agent's ability to perceive new information in subsequent cycles."
+      },
+      "rule_of_thumb": "Excessive reasoning depth on a trivial task is primarily a cost/latency problem, not a correctness problem -- match deliberation effort to actual task difficulty."
+    },
+    "tags": [
+      "reasoning-depth",
+      "chain-of-thought",
+      "efficiency"
+    ]
+  },
+  {
+    "id": "Q-D1-0029",
+    "domain": 1,
+    "task_statement": "1.2",
+    "type": "single_choice",
+    "difficulty": "hard",
+    "theory_refs": [
+      "TH-D1-010"
+    ],
+    "case_study_id": null,
+    "stem": "An agent's action space includes both 'draft a reply' (output-only) and 'delete customer record' (side-effecting). Why do these two actions warrant different levels of scrutiny in the system's design, even though both are technically just 'actions'?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Output-only actions are not part of the action space at all"
+      },
+      {
+        "key": "B",
+        "text": "Drafting text is always more computationally expensive than deleting a record"
+      },
+      {
+        "key": "C",
+        "text": "Only side-effecting actions can be performed by language models"
+      },
+      {
+        "key": "D",
+        "text": "The side-effecting action changes external state and may be irreversible, while the output-only action does not directly alter anything outside the conversation"
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "The key distinction is that side-effecting actions change state outside the conversation and may not be reversible, which justifies extra scrutiny (confirmation, narrower permissions, logging) that a low-risk, output-only action like drafting text typically does not need.",
+      "why_incorrect": {
+        "B": "Computational cost is unrelated to the risk-based reasoning for differentiated scrutiny; a cheap-to-compute action can still be high-risk (e.g. deleting a record is likely computationally trivial but high-stakes).",
+        "C": "Both output generation and side-effecting operations (typically via tool calls) can be initiated by a language-model-driven agent; this is not a capability restriction specific to one type.",
+        "A": "Output-only actions like drafting a reply are very much part of the action space -- they are simply lower-risk than side-effecting ones, not excluded from it."
+      },
+      "rule_of_thumb": "Risk-based scrutiny differences come from reversibility and external impact, not computational cost or category membership in the action space."
+    },
+    "tags": [
+      "action-space",
+      "side-effects",
+      "risk"
+    ]
+  },
+  {
+    "id": "Q-D1-0030",
+    "domain": 1,
+    "task_statement": "1.2",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D1-011"
+    ],
+    "case_study_id": null,
+    "stem": "An agent calls a search tool, gets back zero relevant results, but proceeds to the next hard-coded step in its script without ever checking whether the search succeeded. What does this indicate about the system?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "This proves the agent has too much autonomy"
+      },
+      {
+        "key": "B",
+        "text": "The system is behaving as a textbook example of a well-closed agent loop"
+      },
+      {
+        "key": "C",
+        "text": "The search tool itself must be broken"
+      },
+      {
+        "key": "D",
+        "text": "The feedback loop is broken -- the action's actual outcome is not being examined before proceeding"
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "A defining feature of a genuine agent loop is that each action's actual outcome is examined and allowed to influence the next decision; proceeding to a fixed next step regardless of whether the search succeeded means the outcome was never actually inspected, breaking the feedback loop.",
+      "why_incorrect": {
+        "B": "A well-closed loop would notice the zero-result outcome and adapt (e.g. refine the query or try a different approach); blindly continuing is the opposite of a well-closed loop.",
+        "C": "The search tool returning zero relevant results is a normal possible outcome, not evidence the tool itself is malfunctioning -- the problem described is in how the agent handles that outcome, not the tool.",
+        "A": "This scenario shows a lack of adaptiveness (ignoring feedback), which is unrelated to and not evidence of excessive autonomy."
+      },
+      "rule_of_thumb": "A loop is only genuinely closed if action outcomes are inspected and allowed to change subsequent behavior -- proceeding on a fixed path regardless of outcome means the loop isn't really closing."
+    },
+    "tags": [
+      "feedback-loop",
+      "adaptive-behavior"
+    ]
+  },
+  {
+    "id": "Q-D1-0031",
+    "domain": 1,
+    "task_statement": "1.2",
+    "type": "single_choice",
+    "difficulty": "hard",
+    "theory_refs": [
+      "TH-D1-012"
+    ],
+    "case_study_id": null,
+    "stem": "An agent chooses the correct tool for a task, but the tool call times out due to a network issue, causing the overall task to fail. Which category of failure is this, and what is the appropriate fix?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "A reasoning failure; the fix is to improve the agent's prompt"
+      },
+      {
+        "key": "B",
+        "text": "An action failure; the fix belongs in the execution layer (e.g. retries, timeout handling), not in reasoning or prompting"
+      },
+      {
+        "key": "C",
+        "text": "A perception failure; the fix is to give the agent more context"
+      },
+      {
+        "key": "D",
+        "text": "No real failure occurred since the correct tool was chosen"
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "explanation": {
+      "why_correct": "The decision itself (which tool to use) was correct, but execution failed due to an external network issue -- this is an action failure, and the appropriate remedy is in the execution/infrastructure layer (retries, timeout handling, error recovery), not in the reasoning or perception layers.",
+      "why_incorrect": {
+        "C": "No information was missing or malformed going into the decision; the problem arose entirely at execution time, after a correct decision had already been made.",
+        "D": "The task still failed to complete due to the timeout, which is a real failure with real consequences, even though the agent's decision-making was not at fault.",
+        "A": "The reasoning that selected the tool was sound; prompting changes would not fix a network timeout, which is unrelated to how the decision was made."
+      },
+      "rule_of_thumb": "A correct decision followed by a failed execution (timeout, API error) is an action failure requiring an execution-layer fix -- not a reasoning or perception fix, which would address the wrong part of the system."
+    },
+    "tags": [
+      "failure-diagnosis",
+      "action-failure"
+    ]
+  },
+  {
+    "id": "Q-D1-0032",
+    "domain": 1,
+    "task_statement": "1.2",
+    "type": "single_choice",
+    "difficulty": "easy",
+    "theory_refs": [
+      "TH-D1-007"
+    ],
+    "case_study_id": null,
+    "stem": "After an agent executes an action, what happens to the result in a properly functioning perceive-reason-act loop?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "It is sent directly to the termination condition without being reasoned about"
+      },
+      {
+        "key": "B",
+        "text": "It is discarded immediately after the action completes"
+      },
+      {
+        "key": "C",
+        "text": "It becomes a new perception that feeds into the next reasoning step"
+      },
+      {
+        "key": "D",
+        "text": "It replaces the original user request entirely"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "The cyclical nature of the loop means an action's outcome becomes a new perception, which is then available to inform the next reasoning step -- this is what allows the agent to adapt based on what actually happened.",
+      "why_incorrect": {
+        "B": "Discarding the result would break the loop's adaptiveness; the whole point of closing the loop is to retain and use that information going forward.",
+        "D": "An action's result supplements the agent's context; it does not erase or replace the original user request, which typically remains relevant throughout the task.",
+        "A": "The result is reasoned about as part of deciding the next action (or whether to terminate); it does not bypass reasoning to go straight to a termination check."
+      },
+      "rule_of_thumb": "Every action's outcome is folded back in as a new perception -- this feedback is precisely what makes perceive-reason-act a loop rather than a one-way sequence."
+    },
+    "tags": [
+      "perceive-reason-act",
+      "feedback-loop"
+    ]
+  },
+  {
+    "id": "Q-D1-0033",
+    "domain": 1,
+    "task_statement": "1.2",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D1-009"
+    ],
+    "case_study_id": null,
+    "stem": "What is one practical benefit of an agent producing an explicit, written-out chain of thought during the reasoning step, beyond the decision quality itself?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "It allows the agent to skip the perceive step entirely on the next cycle"
+      },
+      {
+        "key": "B",
+        "text": "It guarantees the final decision will be correct"
+      },
+      {
+        "key": "C",
+        "text": "It eliminates the need for a termination condition"
+      },
+      {
+        "key": "D",
+        "text": "The reasoning process becomes inspectable and debuggable by developers reviewing the agent's behavior"
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "An explicit, written chain of thought exposes the agent's intermediate reasoning, which developers can inspect to understand WHY a particular decision was made -- a benefit that implicit, non-verbalized reasoning does not provide.",
+      "why_incorrect": {
+        "B": "Explicit reasoning improves inspectability, not a guarantee of correctness; a visible-but-flawed chain of thought can still lead to a wrong decision.",
+        "C": "The need for a termination condition is independent of how reasoning is expressed; even an agent with fully explicit chain-of-thought still needs some way to know when to stop.",
+        "A": "Nothing about explicit reasoning removes the need to perceive new information on subsequent cycles; perception remains necessary regardless of reasoning style."
+      },
+      "rule_of_thumb": "A major practical benefit of explicit reasoning traces is debuggability/inspectability for developers, separate from and in addition to any effect on decision quality itself."
+    },
+    "tags": [
+      "chain-of-thought",
+      "debuggability"
+    ]
+  },
+  {
+    "id": "Q-D1-0034",
+    "domain": 1,
+    "task_statement": "1.2",
+    "type": "single_choice",
+    "difficulty": "hard",
+    "theory_refs": [
+      "TH-D1-008",
+      "TH-D1-012"
+    ],
+    "case_study_id": null,
+    "stem": "An agent is given a tool that returns truncated search results due to a bug (only the first 50 characters of each result are returned), but the agent is not told the results are truncated. The agent proceeds to reason confidently based on the incomplete snippets and gives a wrong answer. What is the root cause of this failure?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "No failure -- the agent behaved exactly as it should have"
+      },
+      {
+        "key": "B",
+        "text": "A reasoning failure -- the agent should have recognized the results were truncated from pure logic alone"
+      },
+      {
+        "key": "C",
+        "text": "An action failure -- calling the search tool was itself the wrong decision"
+      },
+      {
+        "key": "D",
+        "text": "A perception failure -- the agent received malformed/incomplete information and had no way to know it was incomplete"
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "The agent reasoned on the information it was given, but that information was malformed/incomplete (truncated) and nothing signaled this to the agent -- this is a textbook perception failure, since the problem lies in what reached the agent's context, not in how it processed that information.",
+      "why_incorrect": {
+        "B": "Without any signal indicating truncation, there is no logical basis for the agent to infer incompleteness from a 50-character snippet alone; faulting the reasoning step misdiagnoses where the actual problem lies.",
+        "C": "Calling a search tool to find relevant information was a reasonable decision; the failure occurred in what that tool actually returned (truncated data), not in the decision to call it.",
+        "A": "The agent gave a wrong answer due to acting on faulty information it had no way to detect as faulty -- this is a real failure that should be fixed by addressing the data quality/perception layer (e.g. fixing the truncation bug or surfacing a truncation warning)."
+      },
+      "rule_of_thumb": "When bad or incomplete data silently reaches an agent with no signal of its incompleteness, that is a perception failure to fix at the data/tool layer -- not a reasoning deficiency to fix by changing the prompt."
+    },
+    "tags": [
+      "perception",
+      "failure-diagnosis",
+      "root-cause-analysis"
+    ]
+  },
+  {
+    "id": "Q-D1-0035",
+    "domain": 1,
+    "task_statement": "1.2",
+    "type": "single_choice",
+    "difficulty": "easy",
+    "theory_refs": [
+      "TH-D1-010"
+    ],
+    "case_study_id": null,
+    "stem": "Which of the following is an example of a side-effecting action, as opposed to an output-only action?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Generating a draft summary of a document for the user to review"
+      },
+      {
+        "key": "B",
+        "text": "Producing a bulleted list of suggestions"
+      },
+      {
+        "key": "C",
+        "text": "Returning a formatted answer to a factual question"
+      },
+      {
+        "key": "D",
+        "text": "Submitting a purchase order through a connected API"
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "Submitting a purchase order changes real-world state outside the conversation (money moves, inventory changes) and is typically difficult to reverse -- the defining characteristics of a side-effecting action.",
+      "why_incorrect": {
+        "C": "Returning a formatted answer is purely informational output with no direct external side effect.",
+        "A": "Generating a draft for review is output-only; nothing external changes until the user takes a separate action on that draft.",
+        "B": "Producing a list of suggestions is output-only content; it does not itself alter any external system or state."
+      },
+      "rule_of_thumb": "Side-effecting actions change state in the world outside the conversation (money, data, physical systems); output-only actions merely convey information."
+    },
+    "tags": [
+      "action-space",
+      "side-effects"
+    ]
+  }
+]

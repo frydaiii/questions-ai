@@ -1,0 +1,241 @@
+[
+  {
+    "id": "Q-D2-0039",
+    "domain": 2,
+    "task_statement": "2.2",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D2-006"
+    ],
+    "case_study_id": null,
+    "stem": "After decomposing a task into sub-tasks, one sub-task's output is found to be incorrect while the other three are correct. What is the main practical advantage this decomposition provides at this point?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "The entire task must be restarted from scratch regardless of decomposition"
+      },
+      {
+        "key": "B",
+        "text": "The agent can retry or fix just the single failing sub-task without discarding the three correct ones"
+      },
+      {
+        "key": "C",
+        "text": "Decomposition guarantees the failing sub-task will fix itself automatically"
+      },
+      {
+        "key": "D",
+        "text": "The three correct sub-tasks become invalid as soon as one sub-task fails"
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "explanation": {
+      "why_correct": "This is exactly the practical benefit decomposition provides: since the sub-task results are tracked separately, only the failing one needs to be retried or fixed, preserving the already-correct work from the others.",
+      "why_incorrect": {
+        "C": "Decomposition does not cause automatic self-correction; a failing sub-task still needs to be explicitly retried or fixed by the agent or process.",
+        "D": "The correct sub-tasks' results remain valid; one sub-task's failure does not retroactively invalidate the others' already-correct outputs.",
+        "A": "Needing a full restart regardless of decomposition would defeat the whole point of decomposing in the first place -- isolating and preserving correct partial work is the key benefit."
+      },
+      "rule_of_thumb": "Decomposition's practical payoff shows up exactly in this kind of partial-failure scenario: fix only what's broken, keep what already works."
+    },
+    "tags": [
+      "task-decomposition",
+      "failure-recovery"
+    ]
+  },
+  {
+    "id": "Q-D2-0040",
+    "domain": 2,
+    "task_statement": "2.2",
+    "type": "single_choice",
+    "difficulty": "hard",
+    "theory_refs": [
+      "TH-D2-008",
+      "TH-D2-009"
+    ],
+    "case_study_id": null,
+    "stem": "A team applies tree-of-thought exploration to a task with no genuine branching ambiguity (every step has one clearly correct next move). What is the most likely outcome?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Dramatically improved accuracy that could not be achieved any other way"
+      },
+      {
+        "key": "B",
+        "text": "Wasted computation exploring and evaluating branches that provide no real benefit, since there was no genuine ambiguity to resolve"
+      },
+      {
+        "key": "C",
+        "text": "The task becomes unsolvable"
+      },
+      {
+        "key": "D",
+        "text": "The approach automatically converts itself into plain chain-of-thought"
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "explanation": {
+      "why_correct": "Without genuine branching ambiguity, there's nothing meaningful for tree-of-thought's extra exploration to resolve -- the computation spent generating and evaluating alternative branches provides no real benefit over simply following the one correct path.",
+      "why_incorrect": {
+        "A": "Without genuine ambiguity, there's no accuracy gain to be had from exploring branches that all converge on the same obvious correct step.",
+        "C": "The task remains solvable; the inefficiency is in wasted computation, not in making the problem impossible.",
+        "D": "There's no mechanism by which tree-of-thought automatically reconfigures itself into a different reasoning pattern; the mismatch simply results in inefficiency."
+      },
+      "rule_of_thumb": "Applying tree-of-thought to a task with no genuine branching ambiguity wastes computation without a corresponding accuracy benefit."
+    },
+    "tags": [
+      "tree-of-thought",
+      "task-fit",
+      "overhead"
+    ]
+  },
+  {
+    "id": "Q-D2-0041",
+    "domain": 2,
+    "task_statement": "2.2",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D2-007"
+    ],
+    "case_study_id": null,
+    "stem": "Which practical combination best describes how coarse upfront planning and fine-grained interleaved reasoning-action can be used together, rather than as mutually exclusive opposites?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Plan at a coarse level upfront, then interleave finer-grained reasoning and action within the execution of each planned step"
+      },
+      {
+        "key": "B",
+        "text": "Only one of the two patterns can ever be used in a single system"
+      },
+      {
+        "key": "C",
+        "text": "Interleaving must completely replace all upfront planning in every system"
+      },
+      {
+        "key": "D",
+        "text": "Upfront planning must always ignore any results obtained during execution"
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "explanation": {
+      "why_correct": "A common practical combination is coarse upfront planning for overall structure, with finer-grained interleaved reasoning and action used to handle the details of executing each individual planned step.",
+      "why_incorrect": {
+        "B": "The two patterns are not mutually exclusive; many practical systems combine them at different levels of granularity.",
+        "C": "Interleaving does not need to fully replace upfront planning -- they can coexist, each handling a different level of the overall process.",
+        "D": "Ignoring execution results would defeat the purpose of re-planning; well-designed upfront planning does incorporate execution feedback when needed."
+      },
+      "rule_of_thumb": "Coarse upfront planning and fine-grained interleaving are complementary, not mutually exclusive -- many systems combine both at different levels."
+    },
+    "tags": [
+      "plan-and-execute",
+      "react",
+      "architecture-combination"
+    ]
+  },
+  {
+    "id": "Q-D2-0042",
+    "domain": 2,
+    "task_statement": "2.2",
+    "type": "multi_response",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D2-006",
+      "TH-D2-009"
+    ],
+    "case_study_id": null,
+    "stem": "Which of the following are reasonable criteria for deciding WHERE to split a complex task during decomposition? (Select 2)",
+    "select_count": 2,
+    "options": [
+      {
+        "key": "A",
+        "text": "Natural sub-problem boundaries where parts of the task can be meaningfully separated and independently verified"
+      },
+      {
+        "key": "B",
+        "text": "An arbitrary fixed number of pieces chosen without reference to the task's actual structure"
+      },
+      {
+        "key": "C",
+        "text": "Points where sub-results can be checked for correctness before being combined"
+      },
+      {
+        "key": "D",
+        "text": "Splitting purely to make the total response as long as possible"
+      }
+    ],
+    "correct": [
+      "A",
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "Good decomposition splits along natural, meaningfully-separable sub-problem boundaries and at points where intermediate correctness can actually be checked, both of which produce genuinely useful sub-tasks.",
+      "why_incorrect": {
+        "B": "An arbitrary fixed split count that ignores the task's actual structure can produce poorly separated, hard-to-verify sub-tasks rather than genuinely useful ones.",
+        "D": "Maximizing response length is not a meaningful decomposition criterion and has no bearing on whether the split improves verifiability or error recovery."
+      },
+      "rule_of_thumb": "Split tasks along natural, independently verifiable sub-problem boundaries -- not by arbitrary counts or to inflate length."
+    },
+    "tags": [
+      "task-decomposition",
+      "planning"
+    ]
+  },
+  {
+    "id": "Q-D2-0043",
+    "domain": 2,
+    "task_statement": "2.2",
+    "type": "single_choice",
+    "difficulty": "easy",
+    "theory_refs": [
+      "TH-D2-009"
+    ],
+    "case_study_id": null,
+    "stem": "Which task characteristic most strongly favors using plan-and-execute with decomposition over a single, non-decomposed approach?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "The task has no verifiable intermediate results of any kind"
+      },
+      {
+        "key": "B",
+        "text": "The task is trivially simple with a single obvious step"
+      },
+      {
+        "key": "C",
+        "text": "The task has several clearly separable, mostly independent sub-goals"
+      },
+      {
+        "key": "D",
+        "text": "The task must be completed in under one second"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "Having several clearly separable, mostly independent sub-goals is exactly the structural property that makes decomposition and planning worthwhile, since each sub-goal can be meaningfully handled and verified on its own.",
+      "why_incorrect": {
+        "B": "A trivially simple, single-step task has nothing meaningful to decompose, making decomposition unnecessary overhead rather than a benefit.",
+        "D": "An extremely tight time budget would generally argue AGAINST the added planning/coordination overhead of decomposition, favoring a faster, more direct approach instead.",
+        "A": "If there are no verifiable intermediate results at all, one of decomposition's key benefits (independent verification) cannot be realized."
+      },
+      "rule_of_thumb": "Separable, mostly independent sub-goals are the clearest signal that decomposition and planning will pay off."
+    },
+    "tags": [
+      "task-decomposition",
+      "planning-strategy-selection"
+    ]
+  }
+]

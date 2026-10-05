@@ -1,0 +1,575 @@
+[
+  {
+    "id": "Q-D1-0326",
+    "domain": 1, "task_statement": "1.3", "type": "multi_response", "difficulty": "medium",
+    "theory_refs": ["TH-D1-011"], "case_study_id": null,
+    "stem": "Which TWO of the following activities belong to the data preparation portion of the ML development lifecycle (collecting and pre-processing data), as opposed to earlier or later stages?",
+    "select_count": 2,
+    "options": [
+      { "key": "A", "text": "Removing duplicate records and filling missing values in a raw dataset" },
+      { "key": "B", "text": "Defining the business success criteria for the project" },
+      { "key": "C", "text": "Ingesting raw data from source systems into Amazon S3" },
+      { "key": "D", "text": "Setting up CloudWatch alarms for a deployed model's latency" }
+    ],
+    "correct": ["A", "C"],
+    "explanation": {
+      "why_correct": "Removing duplicates and filling missing values is data pre-processing/cleaning, and ingesting raw data into S3 is data collection — both fall within the data preparation portion of the lifecycle.",
+      "why_incorrect": {
+        "B": "Defining business success criteria happens at the very start of the lifecycle, before data collection even begins, not during data preparation itself.",
+        "D": "Setting up CloudWatch alarms for a deployed model is part of the monitoring stage, which occurs at the very end of the lifecycle, well after data preparation."
+      },
+      "rule_of_thumb": "Business goal -> frame ML problem -> collect data -> pre-process data -> engineer features -> train/tune/evaluate -> deploy -> monitor. Data collection and cleaning both fall within the data preparation phase, distinct from business framing (before) and monitoring (after)."
+    },
+    "tags": ["ml-lifecycle", "data-preparation"]
+  },
+  {
+    "id": "Q-D1-0327",
+    "domain": 1, "task_statement": "1.3", "type": "multi_response", "difficulty": "medium",
+    "theory_refs": ["TH-D1-016"], "case_study_id": null,
+    "stem": "A team is choosing evaluation metrics for a binary classification model. Which TWO of the following are valid classification evaluation metrics?",
+    "select_count": 2,
+    "options": [
+      { "key": "A", "text": "F1 score" },
+      { "key": "B", "text": "RMSE" },
+      { "key": "C", "text": "AUC-ROC" },
+      { "key": "D", "text": "MAE" }
+    ],
+    "correct": ["A", "C"],
+    "explanation": {
+      "why_correct": "F1 score (the harmonic mean of precision and recall) and AUC-ROC (summarizing performance across classification thresholds) are both valid classification metrics for evaluating a binary classifier's performance.",
+      "why_incorrect": {
+        "B": "RMSE is a regression metric for continuous numeric predictions; it is not used to evaluate classification models.",
+        "D": "MAE is also a regression metric for continuous numeric predictions; it is not applicable to classification evaluation."
+      },
+      "rule_of_thumb": "Classification metrics: accuracy, precision, recall, F1, AUC-ROC. Regression metrics: MSE, RMSE, MAE. Don't mix the two categories."
+    },
+    "tags": ["classification-metrics", "f1-score", "auc-roc"]
+  },
+  {
+    "id": "Q-D1-0328",
+    "domain": 1, "task_statement": "1.3", "type": "multi_response", "difficulty": "medium",
+    "theory_refs": ["TH-D1-017"], "case_study_id": null,
+    "stem": "A team is choosing evaluation metrics for a house-price regression model. Which TWO of the following are valid regression evaluation metrics?",
+    "select_count": 2,
+    "options": [
+      { "key": "A", "text": "RMSE" },
+      { "key": "B", "text": "Precision" },
+      { "key": "C", "text": "MAE" },
+      { "key": "D", "text": "F1 score" }
+    ],
+    "correct": ["A", "C"],
+    "explanation": {
+      "why_correct": "RMSE and MAE are both valid regression metrics, measuring how far a model's continuous numeric predictions are from actual values, appropriate for a house-price prediction task.",
+      "why_incorrect": {
+        "B": "Precision is a classification metric measuring the correctness of positive predictions; it does not apply to a continuous numeric regression task.",
+        "D": "F1 score balances precision and recall for classification tasks; it is not applicable to a continuous numeric regression task."
+      },
+      "rule_of_thumb": "Regression metrics: MSE, RMSE, MAE. Classification metrics: accuracy, precision, recall, F1, AUC-ROC. Don't mix the two categories."
+    },
+    "tags": ["regression-metrics", "rmse", "mae"]
+  },
+  {
+    "id": "Q-D1-0329",
+    "domain": 1, "task_statement": "1.3", "type": "multi_response", "difficulty": "hard",
+    "theory_refs": ["TH-D1-018"], "case_study_id": null,
+    "stem": "A team is choosing the right SageMaker inference deployment pattern for two different workloads: (1) a live, customer-facing recommendation widget needing consistent low latency, and (2) a monthly batch job scoring 10 million archived records with no live traffic. Which TWO of the following statements correctly match a workload to its most cost-effective inference pattern?",
+    "select_count": 2,
+    "options": [
+      { "key": "A", "text": "The live recommendation widget is best served by real-time inference, since it needs a persistent, low-latency endpoint." },
+      { "key": "B", "text": "The monthly batch job is best served by real-time inference, since real-time endpoints are always the cheapest option." },
+      { "key": "C", "text": "The monthly batch job is best served by batch transform, since it processes a large dataset without needing a persistent live endpoint." },
+      { "key": "D", "text": "The live recommendation widget is best served by batch transform, since batch transform provides the lowest possible latency." }
+    ],
+    "correct": ["A", "C"],
+    "explanation": {
+      "why_correct": "Real-time inference correctly matches the live, latency-sensitive recommendation widget, since it needs a persistent, low-latency endpoint for immediate responses. Batch transform correctly matches the monthly batch job, since it efficiently processes a large one-off dataset without needing a persistent live endpoint.",
+      "why_incorrect": {
+        "B": "Real-time endpoints are billed for uptime regardless of request volume, making them a poor, wasteful cost fit for an infrequent monthly batch job rather than 'always the cheapest.'",
+        "D": "Batch transform is designed for offline bulk jobs, not for providing the low, consistent latency a live customer-facing widget needs; real-time inference is the correct fit for that use case, not batch transform."
+      },
+      "rule_of_thumb": "Steady, low-latency traffic -> real-time. Large one-off bulk job, no live traffic -> batch transform. Match each workload to its most cost-effective pattern, not just any pattern."
+    },
+    "tags": ["sagemaker-inference", "real-time-inference", "batch-transform"]
+  },
+  {
+    "id": "Q-D1-0330",
+    "domain": 1, "task_statement": "1.3", "type": "multi_response", "difficulty": "hard",
+    "theory_refs": ["TH-D1-019"], "case_study_id": null,
+    "stem": "A deployed model's production performance has degraded. Which TWO of the following observations would specifically indicate concept drift, as opposed to a different problem?",
+    "select_count": 2,
+    "options": [
+      { "key": "A", "text": "A new, previously unseen fraud pattern has emerged that the model was never trained to recognize, causing it to systematically miss these new cases." },
+      { "key": "B", "text": "The demographic mix of users has shifted, but the model's learned relationship between features and outcomes remains valid and accurate for the new demographic." },
+      { "key": "C", "text": "The relationship between customer behavior and churn has fundamentally changed due to a new competitor entering the market, invalidating patterns the model learned previously." },
+      { "key": "D", "text": "The training set and validation set showed a large accuracy gap during initial model development, before deployment." }
+    ],
+    "correct": ["A", "C"],
+    "explanation": {
+      "why_correct": "Both scenarios describe the underlying relationship between inputs and outputs actually changing over time (new fraud patterns invalidating old detection logic; new competitive dynamics invalidating churn patterns), which is precisely what concept drift means.",
+      "why_incorrect": {
+        "B": "This describes data drift, not concept drift: the input distribution (demographics) has shifted, but the model's learned relationship between inputs and outputs remains valid — a defining feature of data drift, not concept drift.",
+        "D": "A large train/validation accuracy gap during initial development is a sign of overfitting, a training-time phenomenon, not a post-deployment concept-drift symptom."
+      },
+      "rule_of_thumb": "Same relationship, different-looking inputs -> data drift. The relationship itself has changed -> concept drift. Training-time train/validation gaps are overfitting, not drift at all."
+    },
+    "tags": ["concept-drift", "data-drift", "model-monitoring"]
+  },
+  {
+    "id": "Q-D1-0331",
+    "domain": 1, "task_statement": "1.3", "type": "multi_response", "difficulty": "medium",
+    "theory_refs": ["TH-D1-020"], "case_study_id": null,
+    "stem": "Which TWO of the following are core goals of MLOps practices such as SageMaker Pipelines and Model Registry?",
+    "select_count": 2,
+    "options": [
+      { "key": "A", "text": "Making the ML workflow reproducible and auditable through automation and versioning" },
+      { "key": "B", "text": "Eliminating the need for any evaluation step before deploying a new model version" },
+      { "key": "C", "text": "Enabling safe, controlled promotion of new model versions with the ability to roll back if needed" },
+      { "key": "D", "text": "Guaranteeing a model will never need to be retrained again once MLOps practices are adopted" }
+    ],
+    "correct": ["A", "C"],
+    "explanation": {
+      "why_correct": "MLOps practices aim to make the ML workflow reproducible and auditable via automation and versioning, and to enable safe, controlled promotion of model versions with rollback capability if a new version underperforms — both core, accurately stated MLOps goals.",
+      "why_incorrect": {
+        "B": "MLOps does not eliminate evaluation steps; if anything, it makes evaluation a more consistent, automated, and reliable part of the repeatable pipeline, not something to skip.",
+        "D": "MLOps does not eliminate the need for retraining; models still require ongoing retraining as data or patterns change, but MLOps makes that retraining process more repeatable and manageable."
+      },
+      "rule_of_thumb": "MLOps goals: reproducibility, auditability, automated retraining, and safe, controlled promotion of new model versions — not the elimination of evaluation or retraining altogether."
+    },
+    "tags": ["mlops", "sagemaker-pipelines", "model-registry"]
+  },
+  {
+    "id": "Q-D1-0332",
+    "domain": 1, "task_statement": "1.3", "type": "multi_response", "difficulty": "medium",
+    "theory_refs": ["TH-D1-021"], "case_study_id": null,
+    "stem": "A team is looking for ways to reduce ML training and infrastructure costs without sacrificing correctness. Which TWO of the following are legitimate, AWS-supported cost-optimization approaches?",
+    "select_count": 2,
+    "options": [
+      { "key": "A", "text": "Using SageMaker Managed Spot Training to take advantage of discounted, interruptible spare capacity with automatic checkpointing" },
+      { "key": "B", "text": "Right-sizing instance types and counts to match actual workload requirements rather than over-provisioning" },
+      { "key": "C", "text": "Always selecting the largest available GPU instance for every workload regardless of actual requirements" },
+      { "key": "D", "text": "Disabling all monitoring to reduce CloudWatch costs" }
+    ],
+    "correct": ["A", "B"],
+    "explanation": {
+      "why_correct": "Managed Spot Training legitimately reduces training costs via discounted spare capacity with checkpointing, and right-sizing instances to match actual workload needs avoids wasteful over-provisioning — both are legitimate, AWS-recommended cost-optimization approaches.",
+      "why_incorrect": {
+        "C": "Always selecting the largest GPU instance regardless of actual need is the opposite of cost optimization; it leads to unnecessary over-provisioning and wasted spend.",
+        "D": "Disabling monitoring to save minor CloudWatch costs removes visibility needed to detect drift, performance issues, or cost anomalies, which is a poor tradeoff that undermines responsible operation rather than a sound cost-optimization strategy."
+      },
+      "rule_of_thumb": "Cheaper training via interruption-tolerant spare capacity -> Managed Spot Training. Match instance size/count to actual need -> right-sizing. Neither over-provisioning nor disabling monitoring are legitimate cost strategies."
+    },
+    "tags": ["cost-optimization", "spot-training", "right-sizing"]
+  },
+  {
+    "id": "Q-D1-0333",
+    "domain": 1, "task_statement": "1.3", "type": "matching", "difficulty": "medium",
+    "theory_refs": ["TH-D1-011"], "case_study_id": null,
+    "stem": "Match each stage of the ML development lifecycle on the left with the specific activity on the right that belongs to it.",
+    "select_count": 5,
+    "matching": {
+      "left": [
+        { "key": "L1", "text": "Frame the ML problem" },
+        { "key": "L2", "text": "Pre-process data" },
+        { "key": "L3", "text": "Engineer features" },
+        { "key": "L4", "text": "Train, tune, and evaluate" },
+        { "key": "L5", "text": "Monitor" }
+      ],
+      "right": [
+        { "key": "R1", "text": "Deciding the project is a classification problem and defining the target label and evaluation metric" },
+        { "key": "R2", "text": "Removing duplicate records and anonymizing PII in the raw dataset" },
+        { "key": "R3", "text": "Applying one-hot encoding to a categorical variable" },
+        { "key": "R4", "text": "Running SageMaker Automatic Model Tuning to find the best hyperparameters" },
+        { "key": "R5", "text": "Reviewing SageMaker Model Monitor alerts for data drift in production" }
+      ]
+    },
+    "correct_pairs": { "L1": "R1", "L2": "R2", "L3": "R3", "L4": "R4", "L5": "R5" },
+    "explanation": {
+      "why_correct": "Framing the ML problem means deciding the problem type and target/metric (R1). Pre-processing includes cleaning and PII handling (R2). Feature engineering includes encoding categorical variables (R3). Training/tuning/evaluation includes hyperparameter search (R4). Monitoring includes reviewing drift alerts (R5).",
+      "why_incorrect": {},
+      "rule_of_thumb": "Business goal -> frame ML problem -> collect data -> pre-process data -> engineer features -> train/tune/evaluate -> deploy -> monitor. Match each activity to the correct stage in this fixed order."
+    },
+    "tags": ["ml-lifecycle", "matching"]
+  },
+  {
+    "id": "Q-D1-0334",
+    "domain": 1, "task_statement": "1.3", "type": "matching", "difficulty": "medium",
+    "theory_refs": ["TH-D1-016", "TH-D1-017"], "case_study_id": null,
+    "stem": "Match each evaluation metric on the left with the description on the right that best characterizes it.",
+    "select_count": 5,
+    "matching": {
+      "left": [
+        { "key": "L1", "text": "Precision" },
+        { "key": "L2", "text": "Recall" },
+        { "key": "L3", "text": "F1 score" },
+        { "key": "L4", "text": "RMSE" },
+        { "key": "L5", "text": "MAE" }
+      ],
+      "right": [
+        { "key": "R1", "text": "Minimizes false positives; the fraction of positive predictions that were actually correct" },
+        { "key": "R2", "text": "Minimizes false negatives; the fraction of actual positives that were correctly identified" },
+        { "key": "R3", "text": "The harmonic mean of precision and recall, balancing both concerns into one number" },
+        { "key": "R4", "text": "A regression metric expressed in the target variable's original units, penalizing large errors more heavily" },
+        { "key": "R5", "text": "A regression metric where every unit of error counts equally, regardless of magnitude" }
+      ]
+    },
+    "correct_pairs": { "L1": "R1", "L2": "R2", "L3": "R3", "L4": "R4", "L5": "R5" },
+    "explanation": {
+      "why_correct": "Precision minimizes false positives (R1). Recall minimizes false negatives (R2). F1 balances both (R3). RMSE is in original units and penalizes large errors more (R4). MAE weighs every error equally (R5).",
+      "why_incorrect": {},
+      "rule_of_thumb": "Precision = false-positive focus. Recall = false-negative focus. F1 = balance of both. RMSE = original units, penalizes large errors. MAE = every error weighted equally."
+    },
+    "tags": ["classification-metrics", "regression-metrics", "matching"]
+  },
+  {
+    "id": "Q-D1-0335",
+    "domain": 1, "task_statement": "1.3", "type": "ordering", "difficulty": "medium",
+    "theory_refs": ["TH-D1-013"], "case_study_id": null,
+    "stem": "A team is preparing a raw dataset for model training. Arrange the following data preparation steps in the order they would typically be performed, from first to last.",
+    "select_count": 4,
+    "options": [
+      { "key": "A", "text": "Perform exploratory data analysis to understand distributions and missing values" },
+      { "key": "B", "text": "Clean the data by removing duplicates and anonymizing PII" },
+      { "key": "C", "text": "Split the cleaned data into training, validation, and test sets" },
+      { "key": "D", "text": "Engineer features from the split, cleaned data" }
+    ],
+    "correct": ["A", "B", "C", "D"],
+    "explanation": {
+      "why_correct": "Data preparation begins with exploratory analysis to understand the raw data (A), then cleaning based on what was learned during exploration (B), then splitting the now-clean data into train/validation/test sets (C), and finally engineering features from that properly split data (D). Each step logically depends on the one before it.",
+      "why_incorrect": {},
+      "rule_of_thumb": "Explore first, clean second, split third, engineer features last — each stage builds directly on the previous one's output."
+    },
+    "tags": ["data-preprocessing", "ordering"]
+  },
+  {
+    "id": "Q-D1-0336",
+    "domain": 1, "task_statement": "1.3", "type": "ordering", "difficulty": "hard",
+    "theory_refs": ["TH-D1-019", "TH-D1-020"], "case_study_id": null,
+    "stem": "A team's SageMaker Model Monitor detects significant data drift in a deployed model. Arrange the following response steps in the order a disciplined MLOps team would typically follow, from first to last.",
+    "select_count": 4,
+    "options": [
+      { "key": "A", "text": "Investigate the drift alert to confirm it reflects a genuine, significant shift rather than noise" },
+      { "key": "B", "text": "Retrain the model using a SageMaker Pipeline with updated, more representative data" },
+      { "key": "C", "text": "Register and evaluate the newly retrained model version in SageMaker Model Registry before promoting it" },
+      { "key": "D", "text": "Promote the approved new model version to production and resume monitoring" }
+    ],
+    "correct": ["A", "B", "C", "D"],
+    "explanation": {
+      "why_correct": "The team first confirms the drift alert is genuine (A), then retrains the model with updated data using an automated pipeline (B), then registers and evaluates the new version before it goes live, supporting a controlled approval gate (C), and finally promotes the approved version to production, closing the loop by resuming monitoring (D).",
+      "why_incorrect": {},
+      "rule_of_thumb": "Drift response: confirm the signal, retrain with a repeatable pipeline, register/evaluate before promotion, then promote and resume monitoring — never skip the confirmation or evaluation/approval steps."
+    },
+    "tags": ["model-monitor", "sagemaker-pipelines", "model-registry", "ordering"]
+  },
+  {
+    "id": "Q-D1-0337",
+    "domain": 1, "task_statement": "1.3", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D1-011"], "case_study_id": null,
+    "stem": "A team has deployed a model and set up ongoing monitoring. Monitoring reveals a significant performance drop. According to the ML lifecycle's iterative nature, what should typically happen next?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "The lifecycle loops back to an earlier stage, such as collecting more data or re-engineering features, to address the detected issue." },
+      { "key": "B", "text": "The project is permanently terminated, since the lifecycle is strictly linear and cannot revisit earlier stages." },
+      { "key": "C", "text": "The model is left in production unchanged, since monitoring is purely informational with no actionable follow-up." },
+      { "key": "D", "text": "The team skips directly to deploying a brand-new, completely unrelated model with no connection to the original problem." }
+    ],
+    "correct": ["A"],
+    "explanation": {
+      "why_correct": "The ML lifecycle is iterative, not strictly linear: monitoring results (like a detected performance drop) typically feed back into earlier stages, such as collecting more data or re-engineering features, to address the identified issue and improve the model.",
+      "why_incorrect": {
+        "B": "The lifecycle is explicitly iterative, not strictly linear; looping back to earlier stages in response to monitoring findings is a normal, expected part of the process.",
+        "C": "Monitoring findings are meant to be actionable, driving retraining or other remediation, not merely informational with no follow-up.",
+        "D": "There is no reason to abandon the original problem and deploy an unrelated model; the appropriate response is to address the specific issue found, typically by revisiting earlier lifecycle stages for the same problem."
+      },
+      "rule_of_thumb": "Monitoring closes the loop, feeding drift/performance signals back into earlier stages for retraining — the lifecycle is iterative, not a one-way path."
+    },
+    "tags": ["ml-lifecycle", "iterative-process"]
+  },
+  {
+    "id": "Q-D1-0338",
+    "domain": 1, "task_statement": "1.3", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D1-012"], "case_study_id": null,
+    "stem": "A team wants a central repository to look up what schema and format a specific dataset in their data lake has, without needing to load or query the actual underlying data itself. Which AWS capability directly provides this?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "AWS Glue Data Catalog" },
+      { "key": "B", "text": "Amazon S3 object storage" },
+      { "key": "C", "text": "Amazon SageMaker Ground Truth" },
+      { "key": "D", "text": "AWS Data Exchange" }
+    ],
+    "correct": ["A"],
+    "explanation": {
+      "why_correct": "The AWS Glue Data Catalog stores dataset metadata and schema information, letting a team look up a dataset's structure without loading or querying the underlying data itself, exactly matching this need.",
+      "why_incorrect": {
+        "B": "Amazon S3 is where the actual data is stored; it is not itself a metadata/schema lookup service, which is the Data Catalog's specific role.",
+        "C": "SageMaker Ground Truth generates labels via human annotators; it has no role in dataset schema/metadata cataloging.",
+        "D": "AWS Data Exchange provides access to third-party datasets; it does not catalog metadata for your own existing datasets."
+      },
+      "rule_of_thumb": "The Glue Data Catalog stores metadata/schema information about datasets, not the data itself — that distinction is a frequently tested exam trap."
+    },
+    "tags": ["glue-data-catalog", "metadata"]
+  },
+  {
+    "id": "Q-D1-0339",
+    "domain": 1, "task_statement": "1.3", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D1-015"], "case_study_id": null,
+    "stem": "A team increases the batch size used during model training significantly. Which of the following is a direct, expected consequence of this change?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Each parameter update becomes more stable, but requires more memory and compute per training step." },
+      { "key": "B", "text": "The model automatically achieves perfect accuracy regardless of any other factors." },
+      { "key": "C", "text": "The number of training epochs required becomes zero." },
+      { "key": "D", "text": "The learning rate is automatically set to an optimal value with no further tuning needed." }
+    ],
+    "correct": ["A"],
+    "explanation": {
+      "why_correct": "Larger batch sizes process more examples before each parameter update, generally producing more stable, less noisy updates, but requiring more memory and compute resources per training step — a well-documented, direct tradeoff of increasing batch size.",
+      "why_incorrect": {
+        "B": "Batch size alone has no guaranteed relationship to achieving perfect accuracy; many other factors (data quality, model architecture, other hyperparameters) matter as well.",
+        "C": "Batch size does not eliminate the need for multiple epochs; epochs and batch size are independent hyperparameters.",
+        "D": "Batch size and learning rate are independent hyperparameters; changing batch size does not automatically optimize the learning rate."
+      },
+      "rule_of_thumb": "Batch size: number of examples per parameter update. Smaller = more frequent, noisier updates; larger = more stable, more resource-intensive updates."
+    },
+    "tags": ["hyperparameters", "batch-size"]
+  },
+  {
+    "id": "Q-D1-0340",
+    "domain": 1, "task_statement": "1.3", "type": "single_choice", "difficulty": "easy",
+    "theory_refs": ["TH-D1-014"], "case_study_id": null,
+    "stem": "A dataset includes a categorical 'payment method' field with values like 'credit card,' 'debit card,' and 'bank transfer.' A data scientist converts this into several binary (0/1) columns, one per payment method, so the model can consume it numerically. Which feature engineering technique is this?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "One-hot encoding" },
+      { "key": "B", "text": "Normalization" },
+      { "key": "C", "text": "Feature selection" },
+      { "key": "D", "text": "Dimensionality reduction" }
+    ],
+    "correct": ["A"],
+    "explanation": {
+      "why_correct": "Converting a categorical variable into several binary columns, one per category, is exactly what one-hot encoding does, turning non-numeric categories into a numeric form models can consume.",
+      "why_incorrect": {
+        "B": "Normalization rescales existing numeric values to a common scale; it does not convert categorical values into binary columns.",
+        "C": "Feature selection identifies which existing variables are most relevant; it does not transform a categorical variable's representation.",
+        "D": "Dimensionality reduction reduces the number of features while retaining important information; one-hot encoding as described here typically increases the number of columns rather than reducing them."
+      },
+      "rule_of_thumb": "Turning categories into numbers -> encoding (such as one-hot encoding), a distinct feature engineering activity from selection or transformation."
+    },
+    "tags": ["one-hot-encoding", "feature-engineering"]
+  },
+  {
+    "id": "Q-D1-0341",
+    "domain": 1, "task_statement": "1.3", "type": "single_choice", "difficulty": "hard",
+    "theory_refs": ["TH-D1-016"], "case_study_id": null,
+    "stem": "A team wants a single classification metric that remains meaningful across all possible decision thresholds, rather than being tied to one specific fixed cutoff. Which metric is designed for this?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Accuracy at a fixed 0.5 threshold" },
+      { "key": "B", "text": "AUC-ROC" },
+      { "key": "C", "text": "MAE" },
+      { "key": "D", "text": "RMSE" }
+    ],
+    "correct": ["B"],
+    "explanation": {
+      "why_correct": "AUC-ROC plots true positive rate against false positive rate across all classification thresholds, summarizing overall discriminative performance into a single value that doesn't depend on any one fixed cutoff.",
+      "why_incorrect": {
+        "A": "Accuracy at a fixed threshold is tied specifically to that one cutoff and does not summarize performance across the full range of possible thresholds.",
+        "C": "MAE is a regression metric, not a classification threshold-independent metric.",
+        "D": "RMSE is also a regression metric, not applicable to this classification threshold-independence requirement."
+      },
+      "rule_of_thumb": "Need a threshold-independent overall classification score -> AUC-ROC."
+    },
+    "tags": ["auc-roc", "classification-metrics"]
+  },
+  {
+    "id": "Q-D1-0342",
+    "domain": 1, "task_statement": "1.3", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D1-018"], "case_study_id": null,
+    "stem": "A team has a workload involving very large individual payloads (such as multi-page document analysis requests) where an immediate response is not required, but the request should still be processed without needing to build a full batch pipeline for a single request. Which SageMaker inference option best fits this?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Real-time inference" },
+      { "key": "B", "text": "Batch transform" },
+      { "key": "C", "text": "Asynchronous inference" },
+      { "key": "D", "text": "No inference option is suitable for large payloads" }
+    ],
+    "correct": ["C"],
+    "explanation": {
+      "why_correct": "Asynchronous inference queues requests and processes them without requiring an immediate response, specifically suited to large payloads or longer-running individual inference requests where near-real-time latency isn't required — exactly matching this scenario.",
+      "why_incorrect": {
+        "A": "Real-time inference is designed for low-latency, immediate responses, which is not the priority described in this scenario, and it can also be less suited to very large payloads.",
+        "B": "Batch transform is designed for large offline datasets processed together, not for handling individual very large payload requests one at a time as they arrive.",
+        "D": "Asynchronous inference is specifically designed to handle this exact large-payload, non-immediate-response pattern, so a suitable option does exist."
+      },
+      "rule_of_thumb": "Big payloads or longer processing, no need for instant response -> asynchronous inference."
+    },
+    "tags": ["asynchronous-inference", "sagemaker-inference"]
+  },
+  {
+    "id": "Q-D1-0343",
+    "domain": 1, "task_statement": "1.3", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D1-021"], "case_study_id": null,
+    "stem": "A finance team notices its ML infrastructure spend has grown significantly and wants a general, account-wide review of cost, performance, security, and fault-tolerance recommendations across all its AWS resources, not just ML-specific ones. Which AWS service is best suited for this broader review?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Amazon SageMaker Profiler" },
+      { "key": "B", "text": "AWS Trusted Advisor" },
+      { "key": "C", "text": "SageMaker Managed Spot Training" },
+      { "key": "D", "text": "Amazon SageMaker Model Monitor" }
+    ],
+    "correct": ["B"],
+    "explanation": {
+      "why_correct": "AWS Trusted Advisor provides ongoing, account-wide recommendations across cost, performance, security, and fault tolerance for all AWS resources, not just ML-specific ones, directly matching this need for a broader review.",
+      "why_incorrect": {
+        "A": "SageMaker Profiler identifies resource inefficiencies specifically within individual training jobs, not a general account-wide review across all services.",
+        "C": "SageMaker Managed Spot Training reduces training costs specifically through spot capacity; it is not a general account-wide advisory service.",
+        "D": "SageMaker Model Monitor detects drift in deployed models; it has no role in general account-wide cost/performance/security recommendations."
+      },
+      "rule_of_thumb": "General account-wide cost/performance/security recommendations -> Trusted Advisor, not an ML-specific tool."
+    },
+    "tags": ["trusted-advisor", "cost-optimization"]
+  },
+  {
+    "id": "Q-D1-0344",
+    "domain": 1, "task_statement": "1.3", "type": "single_choice", "difficulty": "hard",
+    "theory_refs": ["TH-D1-021"], "case_study_id": null,
+    "stem": "A team suspects a specific SageMaker training job is running slower and costing more than expected, possibly due to the GPU sitting idle while waiting for data to load. Which AWS capability is purpose-built to diagnose this specific kind of resource inefficiency within a training job?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "AWS Trusted Advisor" },
+      { "key": "B", "text": "Amazon SageMaker Profiler" },
+      { "key": "C", "text": "Amazon SageMaker Ground Truth" },
+      { "key": "D", "text": "AWS Data Exchange" }
+    ],
+    "correct": ["B"],
+    "explanation": {
+      "why_correct": "Amazon SageMaker Profiler helps identify inefficient resource utilization during training jobs specifically, such as GPU underutilization while waiting on data loading, directly matching this diagnostic need.",
+      "why_incorrect": {
+        "A": "AWS Trusted Advisor provides general, account-wide recommendations, not a detailed diagnostic of resource inefficiency within one specific training job.",
+        "C": "SageMaker Ground Truth generates labels via human annotators; it has no role in diagnosing training job resource inefficiency.",
+        "D": "AWS Data Exchange provides access to third-party datasets; it has no relevance to training job performance diagnostics."
+      },
+      "rule_of_thumb": "Diagnosing why a specific training job is inefficient -> SageMaker Profiler, distinct from Trusted Advisor's broader account-wide recommendations."
+    },
+    "tags": ["sagemaker-profiler", "cost-optimization"]
+  },
+  {
+    "id": "Q-D1-0345",
+    "domain": 1, "task_statement": "1.3", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D1-011"], "case_study_id": null,
+    "stem": "During which stage of the ML development lifecycle would a team typically decide whether a business problem should be framed as a classification, regression, or forecasting problem?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Frame the ML problem" },
+      { "key": "B", "text": "Deploy the model" },
+      { "key": "C", "text": "Monitor the model" },
+      { "key": "D", "text": "Engineer features" }
+    ],
+    "correct": ["A"],
+    "explanation": {
+      "why_correct": "Framing the ML problem is specifically the stage where the problem type (classification, regression, forecasting, etc.), inputs, outputs, and success metrics are defined, directly matching this decision point.",
+      "why_incorrect": {
+        "B": "Deployment happens much later, after the model has already been built and evaluated based on a problem type decided far earlier.",
+        "C": "Monitoring is the final stage, occurring well after the problem type has already been determined and the model deployed.",
+        "D": "Feature engineering happens after data collection and pre-processing, and assumes the ML problem type has already been framed."
+      },
+      "rule_of_thumb": "Business goal -> frame ML problem (choose problem type, define inputs/outputs/metrics) -> collect data -> ... Problem-type decisions happen at the framing stage, early in the lifecycle."
+    },
+    "tags": ["ml-lifecycle", "problem-framing"]
+  },
+  {
+    "id": "Q-D1-0346",
+    "domain": 1, "task_statement": "1.3", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D1-013"], "case_study_id": null,
+    "stem": "A team splits its cleaned dataset into 80% training, 10% validation, and 10% test sets. What is the primary purpose of keeping the test set completely separate and untouched until the very final evaluation?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "To provide one final, unbiased estimate of how the model will perform on genuinely new data, uninfluenced by any tuning decisions made using the validation set." },
+      { "key": "B", "text": "To reduce the total amount of data needed for training." },
+      { "key": "C", "text": "To make the training process run faster." },
+      { "key": "D", "text": "There is no meaningful reason; the test set could be merged into the training set with no downside." }
+    ],
+    "correct": ["A"],
+    "explanation": {
+      "why_correct": "Keeping the test set completely separate and untouched until final evaluation ensures it provides an unbiased estimate of real-world performance, since it was never used to influence any decisions (including hyperparameter tuning done using the validation set), unlike data the model has seen during development.",
+      "why_incorrect": {
+        "B": "Reducing training data volume is a side effect of the split, not its primary purpose; the actual goal is providing an unbiased final performance check.",
+        "C": "The test set's separation has no direct effect on training speed; training speed depends on factors like batch size, hardware, and model complexity.",
+        "D": "Merging the test set into training would eliminate the only unbiased final check on the model's real-world performance, undermining the entire purpose of the split."
+      },
+      "rule_of_thumb": "A validation/test set (data the model never trained on) is how overfitting and generalization are genuinely measured — the test set specifically stays untouched until the final, most unbiased check."
+    },
+    "tags": ["train-test-split", "model-evaluation"]
+  },
+  {
+    "id": "Q-D1-0347",
+    "domain": 1, "task_statement": "1.3", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D1-015"], "case_study_id": null,
+    "stem": "Which of the following correctly distinguishes a model's hyperparameters from its learned parameters (weights)?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Hyperparameters are set before training and configure how learning happens; learned parameters (weights) are determined during training from the data itself." },
+      { "key": "B", "text": "Hyperparameters and learned parameters are exactly the same thing, just described with different terminology." },
+      { "key": "C", "text": "Learned parameters are set before training; hyperparameters are determined during training from the data." },
+      { "key": "D", "text": "Neither hyperparameters nor learned parameters have any effect on the final trained model." }
+    ],
+    "correct": ["A"],
+    "explanation": {
+      "why_correct": "Hyperparameters (like learning rate, batch size, epochs) are configuration settings chosen before training begins, controlling HOW the model learns, while learned parameters (weights) are the values the model actually determines FROM the data during the training process itself.",
+      "why_incorrect": {
+        "B": "These are fundamentally different concepts: hyperparameters configure the learning process; learned parameters are the actual outcome of that learning process. They are not the same thing.",
+        "C": "This reverses the actual relationship; hyperparameters are set BEFORE training (not learned parameters), and learned parameters are determined DURING training (not hyperparameters).",
+        "D": "Both hyperparameters and learned parameters directly and significantly affect the final trained model's behavior and performance."
+      },
+      "rule_of_thumb": "Confusing hyperparameters (set before training) with model parameters/weights (learned during training) is a common mistake — these are fundamentally different things even though both affect the final model."
+    },
+    "tags": ["hyperparameters", "model-parameters"]
+  },
+  {
+    "id": "Q-D1-0348",
+    "domain": 1, "task_statement": "1.3", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D1-012"], "case_study_id": null,
+    "stem": "A team wants ambiguous or subjective images — where automated labeling rules would likely be inconsistent — labeled by human annotators as part of building a new training dataset. Which AWS service is purpose-built for this?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Amazon SageMaker Ground Truth" },
+      { "key": "B", "text": "AWS Glue" },
+      { "key": "C", "text": "Amazon S3" },
+      { "key": "D", "text": "AWS Data Exchange" }
+    ],
+    "correct": ["A"],
+    "explanation": {
+      "why_correct": "Amazon SageMaker Ground Truth provides human labeling workflows, particularly well suited to ambiguous or subjective labeling tasks where automated rules would be inconsistent, directly matching this exact need.",
+      "why_incorrect": {
+        "B": "AWS Glue performs ETL/data transformation; it does not provide human labeling workflows.",
+        "C": "Amazon S3 is a storage service; it has no labeling capability of its own.",
+        "D": "AWS Data Exchange provides access to third-party datasets; it does not provide human labeling of your own raw data."
+      },
+      "rule_of_thumb": "Need humans to label your own unlabeled data, especially for ambiguous or subjective cases -> SageMaker Ground Truth."
+    },
+    "tags": ["ground-truth", "data-labeling"]
+  },
+  {
+    "id": "Q-D1-0349",
+    "domain": 1, "task_statement": "1.3", "type": "single_choice", "difficulty": "hard",
+    "theory_refs": ["TH-D1-019", "TH-D1-011"], "case_study_id": null,
+    "stem": "A production model shows increasing error rates over several months. Investigation reveals input feature distributions have shifted meaningfully from the training baseline, though the fundamental relationship between features and the correct output remains unchanged. Which lifecycle-stage response is most appropriate?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Loop back to data collection/pre-processing to gather more representative recent data, then retrain, since this is data drift rather than a change in the underlying relationship." },
+      { "key": "B", "text": "Conclude no action is needed, since a shift in input distribution never affects model performance." },
+      { "key": "C", "text": "Immediately discard the model and start an entirely unrelated project, since data drift cannot be addressed within the existing lifecycle." },
+      { "key": "D", "text": "Adjust only the inference deployment pattern (e.g. switch from real-time to batch), since deployment pattern changes fix data drift." }
+    ],
+    "correct": ["A"],
+    "explanation": {
+      "why_correct": "This describes data drift (input distribution shifted, relationship unchanged), and the standard, appropriate lifecycle response is to loop back to data collection/pre-processing for more representative recent data, then retrain — exactly matching the iterative nature of the ML lifecycle.",
+      "why_incorrect": {
+        "B": "A shift in input distribution absolutely can and does affect model performance over time, which is exactly the increasing error rate this scenario describes; concluding 'no action needed' contradicts the evidence.",
+        "C": "Discarding the model and starting an unrelated project is unnecessary and wasteful; data drift is a normal, addressable lifecycle event that calls for retraining, not project abandonment.",
+        "D": "Changing the inference deployment pattern (e.g. real-time vs. batch) affects operational characteristics like latency and cost, not the underlying data-drift problem, which requires retraining on updated data instead."
+      },
+      "rule_of_thumb": "Monitoring closes the loop, feeding drift signals back into earlier lifecycle stages for retraining — data drift specifically calls for updated, representative training data, not a deployment-pattern change or project abandonment."
+    },
+    "tags": ["data-drift", "ml-lifecycle", "model-monitoring"]
+  }
+]

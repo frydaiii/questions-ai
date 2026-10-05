@@ -1,0 +1,289 @@
+[
+  {
+    "id": "Q-D1-0020",
+    "domain": 1,
+    "task_statement": "1.1",
+    "type": "single_choice",
+    "difficulty": "easy",
+    "theory_refs": [
+      "TH-D1-001"
+    ],
+    "case_study_id": null,
+    "stem": "A simple thermostat turns on heating when the temperature drops below a set point and turns it off when it rises above another set point, with no learning or language model involved. Can this be considered a (non-LLM) agent in the general sense used in AI theory?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "No -- agents must use multiple tools to qualify"
+      },
+      {
+        "key": "B",
+        "text": "No -- only systems built on large language models can be considered agents"
+      },
+      {
+        "key": "C",
+        "text": "Yes -- it perceives its environment (temperature) and acts on it (heating) toward a goal (maintaining temperature range), even without an LLM"
+      },
+      {
+        "key": "D",
+        "text": "Yes, but only if it logs its temperature readings to a database"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "The general AI-theory definition of an agent -- perceiving an environment and acting on it toward a goal -- does not require a language model; a thermostat exhibits a simple, reactive form of exactly this perceive-act loop.",
+      "why_incorrect": {
+        "B": "Agency as a concept predates and is broader than LLM-based systems; LLMs are simply one modern way to implement the reasoning core of an agent.",
+        "D": "Logging is unrelated to whether the system qualifies as an agent; the defining factors are perception and goal-directed action, not data logging.",
+        "A": "There is no requirement for multiple tools; a thermostat has a minimal action space (heat on/off) and still qualifies as a simple reactive agent."
+      },
+      "rule_of_thumb": "Agency, in the general AI sense, is about perceiving and acting toward a goal -- it applies to simple reactive systems like thermostats just as much as to LLM-based systems, which are a more recent and more flexible implementation."
+    },
+    "tags": [
+      "agent-definition",
+      "reactive-agent"
+    ]
+  },
+  {
+    "id": "Q-D1-0021",
+    "domain": 1,
+    "task_statement": "1.1",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D1-004"
+    ],
+    "case_study_id": null,
+    "stem": "A question requires looking up a company's current stock price AND performing a calculation on it (e.g. percent change from last week). Why might a single-shot LLM call be insufficient even if the model is told the current price directly in the prompt?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "The model would need to browse the internet even if the data was already provided"
+      },
+      {
+        "key": "B",
+        "text": "Single-shot calls can never perform arithmetic under any circumstances"
+      },
+      {
+        "key": "C",
+        "text": "Calculations always require a dedicated calculator tool regardless of context"
+      },
+      {
+        "key": "D",
+        "text": "It may not be insufficient at all -- if all needed data is supplied in the prompt, a single call can often perform the calculation correctly"
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "If the current price is already supplied directly in the prompt, the knowledge-access gap that motivates tool use is already closed, and a single-shot call can frequently perform the subsequent calculation correctly within that one pass -- the scenario is a reminder that whether agentic machinery is needed depends on what's actually missing, not an automatic requirement.",
+      "why_incorrect": {
+        "B": "Language models can and often do perform basic arithmetic correctly within a single pass, especially for simple calculations with the needed numbers already present.",
+        "C": "Whether a dedicated calculator tool is needed depends on the complexity of the calculation and the model's reliability at that specific type of math -- it is not an absolute requirement for all arithmetic.",
+        "A": "There is nothing to browse for if the needed data was already provided directly in the prompt; browsing is only relevant when data is missing."
+      },
+      "rule_of_thumb": "Agentic tool use is justified by a GENUINE gap (missing data, needed verification, needed real-world action) -- when the prompt already supplies everything needed, a single call may well suffice."
+    },
+    "tags": [
+      "tool-use-motivation",
+      "single-shot-sufficiency"
+    ]
+  },
+  {
+    "id": "Q-D1-0022",
+    "domain": 1,
+    "task_statement": "1.1",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D1-006"
+    ],
+    "case_study_id": null,
+    "stem": "A team imposes a maximum of 10 reasoning/action steps on their agent before it is forced to return its best current answer. What is the primary purpose of this kind of limit?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Required by all LLM providers' terms of service"
+      },
+      {
+        "key": "B",
+        "text": "Making the agent's answers more creative"
+      },
+      {
+        "key": "C",
+        "text": "Guaranteeing the agent always reaches the correct answer within 10 steps"
+      },
+      {
+        "key": "D",
+        "text": "Bounding worst-case cost and run time in case the agent gets stuck in an unproductive loop"
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "A maximum step count is a common safety and cost-control mechanism: without it, an agent that gets stuck in a non-productive loop (e.g. repeatedly trying a failing action) could run indefinitely, consuming unbounded time and API cost.",
+      "why_incorrect": {
+        "B": "A step limit has no direct relationship to the creativity of the agent's outputs; it is a control-flow safeguard, not a quality or style lever.",
+        "C": "A step cap bounds the worst case but provides no guarantee of correctness -- the agent might still be wrong even within the limit, or might need more steps than allowed for a genuinely hard task.",
+        "A": "Step limits are an application-level design choice made by developers, not a universal requirement imposed by LLM providers."
+      },
+      "rule_of_thumb": "Maximum step/iteration limits exist to bound worst-case cost and runtime, protecting against unproductive loops -- they are a safety net, not a correctness guarantee."
+    },
+    "tags": [
+      "autonomy",
+      "step-limit",
+      "safety"
+    ]
+  },
+  {
+    "id": "Q-D1-0023",
+    "domain": 1,
+    "task_statement": "1.1",
+    "type": "single_choice",
+    "difficulty": "hard",
+    "theory_refs": [
+      "TH-D1-002",
+      "TH-D1-006"
+    ],
+    "case_study_id": null,
+    "stem": "A team is choosing between a fully open-ended agent (unbounded tool choice, no step limit) and a constrained agent (fixed small tool set, 5-step limit) for an internal data-lookup assistant used by employees. The task is well-scoped: answer questions by querying one of three internal databases. Which design is more appropriate, and why?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "The fully open-ended agent, because more autonomy is always strictly better engineering"
+      },
+      {
+        "key": "B",
+        "text": "The fully open-ended agent, because it will always be cheaper to run"
+      },
+      {
+        "key": "C",
+        "text": "Neither -- a single LLM call with no tools is always sufficient for database lookups"
+      },
+      {
+        "key": "D",
+        "text": "The constrained agent, because the task is narrow and well-scoped, so bounding tool choice and steps reduces risk without sacrificing much capability"
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "For a narrow, well-scoped task like querying one of three known databases, a constrained agent (small tool set, bounded steps) covers the real need while minimizing unpredictable behavior and runaway cost -- exactly the kind of situation where full autonomy's extra flexibility isn't worth its extra risk.",
+      "why_incorrect": {
+        "C": "A single LLM call cannot query a live internal database on its own; some tool-calling capability is still needed to retrieve current data, even if the overall autonomy is kept low.",
+        "A": "Full autonomy is not universally better engineering; it trades predictability and cost control for flexibility that may not be needed for a narrow, well-understood task.",
+        "B": "An open-ended agent with no step limit typically risks HIGHER cost in the worst case (unbounded steps), not lower cost, compared to a constrained design."
+      },
+      "rule_of_thumb": "Match the autonomy level to the task's actual open-endedness -- narrow, well-understood tasks are well served by constrained agents; only genuinely open-ended problems justify the risk and cost of full autonomy."
+    },
+    "tags": [
+      "autonomy",
+      "design-tradeoffs",
+      "scoping"
+    ]
+  },
+  {
+    "id": "Q-D1-0024",
+    "domain": 1,
+    "task_statement": "1.1",
+    "type": "single_choice",
+    "difficulty": "easy",
+    "theory_refs": [
+      "TH-D1-005"
+    ],
+    "case_study_id": null,
+    "stem": "Which statement best captures why 'is this an agent?' is sometimes a matter of degree rather than a strict yes/no question?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Because only systems with memory can be agents, and memory itself is binary"
+      },
+      {
+        "key": "B",
+        "text": "Because the word 'agent' is undefined in AI research"
+      },
+      {
+        "key": "C",
+        "text": "Systems can exhibit partial autonomy -- e.g. a router with several fixed branches is more flexible than a single call but less autonomous than an open-ended loop"
+      },
+      {
+        "key": "D",
+        "text": "Because agency depends entirely on the size of the underlying model"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "Real systems fall along a spectrum of how much runtime decision-making they exhibit -- from none (single call) to bounded choice (router) to fully open-ended (unconstrained agent loop) -- which is why classifying borderline systems often requires describing their degree of autonomy rather than applying a strict binary label.",
+      "why_incorrect": {
+        "B": "The term has reasonably well-established characterizing properties (autonomy, goal-directedness) even though edge cases exist; it is not simply undefined.",
+        "D": "Model size has no direct bearing on whether a system's control flow is agentic; a small model inside an open-ended loop can still be more agentic than a huge model used in one fixed call.",
+        "A": "Memory is an optional enhancement, not a binary gate for agency, and plenty of memoryless systems still exhibit meaningful autonomous decision-making."
+      },
+      "rule_of_thumb": "Think of agency as a spectrum of runtime decision-making autonomy, not a binary label -- many real systems sit in a middle ground worth describing explicitly rather than forcing into 'agent' or 'not agent.'"
+    },
+    "tags": [
+      "agentic-spectrum",
+      "agent-definition"
+    ]
+  },
+  {
+    "id": "Q-D1-0025",
+    "domain": 1,
+    "task_statement": "1.1",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D1-001",
+      "TH-D1-003"
+    ],
+    "case_study_id": null,
+    "stem": "A system is given a user's request, decides to call a search tool, receives search results, decides to call a calculator tool on part of those results, and then produces a final answer, stopping once it determines the answer is complete. Which property of this system most directly demonstrates agency?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "The system used a search tool specifically"
+      },
+      {
+        "key": "B",
+        "text": "The system used exactly two tools"
+      },
+      {
+        "key": "C",
+        "text": "The system produced a final answer at all"
+      },
+      {
+        "key": "D",
+        "text": "The system itself chose which tools to call, in what order, and when to stop, based on evolving context"
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "The defining agentic property here is that the sequence of actions (which tools, in what order) and the stopping point were all decided by the system itself based on the evolving task context, rather than being fixed in advance -- this is autonomy over control flow in action.",
+      "why_incorrect": {
+        "B": "The specific count of two tools is incidental; the same scenario with three or one tool would be equally agentic if the choices were still made dynamically by the system.",
+        "C": "Producing a final answer is the outcome of any system, agentic or not -- even a single fixed LLM call produces a final answer; it does not by itself demonstrate agency.",
+        "A": "The particular choice of a search tool is incidental detail; what matters for agency is that the CHOICE of tool and sequencing was made dynamically, not which specific tool happened to be chosen."
+      },
+      "rule_of_thumb": "Agency is demonstrated by the system itself making the decisions about which actions, in what order, and when to stop -- not by any particular tool, tool count, or the mere existence of a final answer."
+    },
+    "tags": [
+      "agent-definition",
+      "autonomy",
+      "control-flow"
+    ]
+  }
+]

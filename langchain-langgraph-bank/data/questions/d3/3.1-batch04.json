@@ -1,0 +1,143 @@
+[
+  {
+    "id": "Q-D3-0010",
+    "domain": 3,
+    "task_statement": "3.1",
+    "type": "single_choice",
+    "difficulty": "easy",
+    "theory_refs": [
+      "TH-D3-002"
+    ],
+    "case_study_id": null,
+    "stem": "Which type of fact is MOST at risk of being wrong if answered purely from a model's training data with no tool lookup?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Current stock market prices"
+      },
+      {
+        "key": "B",
+        "text": "The boiling point of water at sea level under standard conditions"
+      },
+      {
+        "key": "C",
+        "text": "The definition of a basic geometric shape"
+      },
+      {
+        "key": "D",
+        "text": "A historical event that occurred centuries ago"
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "explanation": {
+      "why_correct": "Stock prices change constantly and could be meaningfully different between training cutoff and the actual moment of use, making them highly at risk of being wrong without a live lookup.",
+      "why_incorrect": {
+        "B": "The boiling point of water under standard conditions is a stable physical constant that does not change over time.",
+        "C": "Basic geometric definitions are stable, well-established knowledge unlikely to change.",
+        "D": "A centuries-old historical event is fixed and not subject to change after the fact, making it low-risk from a freshness perspective."
+      },
+      "rule_of_thumb": "Rapidly changing facts like market prices carry the highest freshness risk; stable facts and well-established definitions carry very little."
+    },
+    "tags": [
+      "freshness",
+      "stale-knowledge"
+    ]
+  },
+  {
+    "id": "Q-D3-0011",
+    "domain": 3,
+    "task_statement": "3.1",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D3-003"
+    ],
+    "case_study_id": null,
+    "stem": "An agent is deciding whether a 'delete customer record' tool call warrants a confirmation step before executing. Which factor is most relevant to that decision?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "The current time of day"
+      },
+      {
+        "key": "B",
+        "text": "How consequential and reversible the action actually is"
+      },
+      {
+        "key": "C",
+        "text": "The number of words in the tool's name"
+      },
+      {
+        "key": "D",
+        "text": "Whether the tool was the first one defined in the system"
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "explanation": {
+      "why_correct": "The appropriate level of caution (such as requiring confirmation) should scale with how consequential and how reversible the specific action is -- a 'delete customer record' action is both consequential and likely hard to reverse, warranting real caution.",
+      "why_incorrect": {
+        "C": "The length of a tool's name is an arbitrary, meaningless criterion for assessing actual risk.",
+        "D": "The order in which a tool was defined in the system has no relationship to the real-world consequence or reversibility of invoking it.",
+        "A": "Time of day has no bearing on whether a destructive action warrants a confirmation step."
+      },
+      "rule_of_thumb": "Confirmation requirements and other safeguards should scale with an action's actual consequence severity and reversibility, not arbitrary surface factors."
+    },
+    "tags": [
+      "action-tools",
+      "tool-risk-tiers"
+    ]
+  },
+  {
+    "id": "Q-D3-0012",
+    "domain": 3,
+    "task_statement": "3.1",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D3-004"
+    ],
+    "case_study_id": null,
+    "stem": "A model answers a factual question entirely from internal knowledge with no tool call, and the answer turns out wrong. Why is this error harder to diagnose than an error in a grounded, tool-sourced claim?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "There is no actual difference in diagnosability between grounded and ungrounded errors"
+      },
+      {
+        "key": "B",
+        "text": "Ungrounded errors are always impossible to ever discover"
+      },
+      {
+        "key": "C",
+        "text": "Ungrounded claims are technically incapable of ever being wrong"
+      },
+      {
+        "key": "D",
+        "text": "There is no traceable external source to check -- it's unclear whether the issue is a training-data gap, a misremembering, or something else"
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "Without a traceable, external source behind the claim, there's no straightforward way to pinpoint exactly where the error originated (versus a grounded claim, where you can at least check the retrieved source itself).",
+      "why_incorrect": {
+        "B": "Ungrounded errors can certainly be discovered (e.g. by a user noticing it's wrong); the issue is that diagnosing WHY it's wrong is harder without a traceable source.",
+        "C": "Ungrounded claims can absolutely be wrong; this is precisely the scenario being discussed.",
+        "A": "There is a meaningful, real difference: grounded claims have a traceable origin to check, while ungrounded claims do not."
+      },
+      "rule_of_thumb": "Grounded claims are easier to diagnose when wrong, because there's a traceable source to inspect; ungrounded claims lack this diagnostic path."
+    },
+    "tags": [
+      "grounding",
+      "traceability"
+    ]
+  }
+]

@@ -1,0 +1,287 @@
+[
+  {
+    "id": "Q-D2-0001",
+    "domain": 2,
+    "task_statement": "2.1",
+    "type": "single_choice",
+    "difficulty": "easy",
+    "theory_refs": [
+      "TH-D2-001"
+    ],
+    "case_study_id": null,
+    "stem": "What is the defining pattern of an interleaved reasoning-and-action (ReAct-style) agent loop?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Generating all reasoning upfront, then taking a single action with no further reasoning"
+      },
+      {
+        "key": "B",
+        "text": "Alternating between an explicit thought, an action, and an observation, repeating until the task is resolved"
+      },
+      {
+        "key": "C",
+        "text": "Taking actions with no reasoning trace of any kind"
+      },
+      {
+        "key": "D",
+        "text": "Reasoning only after all actions have already been completed"
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "explanation": {
+      "why_correct": "The defining trait of this pattern is the repeated alternation of thought, action, and observation, with each observation feeding into the next thought, continuing until the task is resolved.",
+      "why_incorrect": {
+        "A": "Generating all reasoning upfront with a single subsequent action describes a plan-then-execute pattern without interleaving, not the thought-action-observation alternation that defines this pattern.",
+        "C": "Taking actions with no reasoning trace describes an action-only agent, which lacks the explicit 'thought' step that is central to this pattern.",
+        "D": "Reasoning only after all actions are completed reverses the actual order; the interleaved pattern reasons BEFORE each action, not only afterward."
+      },
+      "rule_of_thumb": "Look for the repeating thought -> action -> observation -> thought cycle as the signature of an interleaved reasoning-action agent."
+    },
+    "tags": [
+      "react",
+      "reasoning-action-loop"
+    ]
+  },
+  {
+    "id": "Q-D2-0002",
+    "domain": 2,
+    "task_statement": "2.1",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D2-002"
+    ],
+    "case_study_id": null,
+    "stem": "Why does grounding reasoning in real observations throughout a reasoning chain reduce the risk of a confidently wrong final answer?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Because it makes the model generate longer responses"
+      },
+      {
+        "key": "B",
+        "text": "Because incorrect assumptions can be caught and corrected early, before later reasoning steps build further on top of them"
+      },
+      {
+        "key": "C",
+        "text": "Because grounding actions always run faster than reasoning steps"
+      },
+      {
+        "key": "D",
+        "text": "Because grounding eliminates the need for any reasoning at all"
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "explanation": {
+      "why_correct": "Checking assumptions against real observations throughout the process (not just at the end) allows errors to be caught early, before subsequent reasoning compounds on top of a flawed premise.",
+      "why_incorrect": {
+        "A": "Response length has no inherent bearing on whether grounding reduces compounding errors; the mechanism is about catching flawed assumptions early, not verbosity.",
+        "C": "Relative speed between grounding actions and reasoning steps is unrelated to why grounding reduces compounding error risk.",
+        "D": "Grounding supplements reasoning with verified external information; it does not eliminate the need to reason about what that information means for the task."
+      },
+      "rule_of_thumb": "Grounding throughout a reasoning chain catches flawed assumptions early, limiting how far an error can compound before being corrected."
+    },
+    "tags": [
+      "grounding",
+      "error-compounding"
+    ]
+  },
+  {
+    "id": "Q-D2-0003",
+    "domain": 2,
+    "task_statement": "2.1",
+    "type": "single_choice",
+    "difficulty": "hard",
+    "theory_refs": [
+      "TH-D2-003"
+    ],
+    "case_study_id": null,
+    "stem": "An agent's design forces it to always take exactly one action after exactly one reasoning step, regardless of task complexity. What is the most likely drawback of this fixed schedule?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "No drawback; a fixed schedule is always optimal"
+      },
+      {
+        "key": "B",
+        "text": "The schedule may force premature or unjustified actions on complex tasks, or waste reasoning capacity on trivial ones"
+      },
+      {
+        "key": "C",
+        "text": "Fixed schedules make agents immune to all failure modes"
+      },
+      {
+        "key": "D",
+        "text": "Fixed schedules eliminate the need for observations entirely"
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "explanation": {
+      "why_correct": "A rigid one-thought-then-one-action schedule ignores that the right amount of reasoning before acting depends on task complexity -- it can force an action before sufficient justification on hard tasks, or waste effort reasoning on trivially simple ones.",
+      "why_incorrect": {
+        "A": "A fixed schedule disregards task-specific needs, which is precisely the drawback being asked about -- it is not universally optimal.",
+        "C": "A fixed action schedule does not protect against failure modes like looping, ignoring observations, or premature conclusions; those are independent concerns.",
+        "D": "Fixed schedules still involve taking actions, which still produce observations; the schedule itself does not remove the need for or use of observations."
+      },
+      "rule_of_thumb": "The appropriate point to transition from thought to action should depend on task complexity and confidence, not a rigid fixed schedule."
+    },
+    "tags": [
+      "reasoning-action-balance",
+      "design-tradeoffs"
+    ]
+  },
+  {
+    "id": "Q-D2-0004",
+    "domain": 2,
+    "task_statement": "2.1",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D2-004"
+    ],
+    "case_study_id": null,
+    "stem": "An agent repeatedly calls the same search tool with nearly identical queries, cycling through similar thoughts each time without making progress toward an answer. Which failure pattern is this?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Premature conclusion"
+      },
+      {
+        "key": "B",
+        "text": "Ignoring observations"
+      },
+      {
+        "key": "C",
+        "text": "Looping"
+      },
+      {
+        "key": "D",
+        "text": "Successful convergence"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "Repeating a similar thought-action-observation cycle without converging on an answer is the defining signature of the looping failure pattern.",
+      "why_incorrect": {
+        "A": "Premature conclusion means stopping and answering before the evidence justifies it; this agent isn't concluding at all, it's stuck repeating actions.",
+        "B": "Ignoring observations means the next thought disregards the latest action's result; the scenario describes repeated near-identical queries, which is a looping symptom, not necessarily evidence that observations are being ignored.",
+        "D": "The scenario explicitly states the agent is not making progress, which rules out successful convergence."
+      },
+      "rule_of_thumb": "Repeated, near-identical thought-action cycles with no forward progress is the looping failure pattern -- a signal for step limits or novelty checks."
+    },
+    "tags": [
+      "react",
+      "failure-diagnosis",
+      "looping"
+    ]
+  },
+  {
+    "id": "Q-D2-0005",
+    "domain": 2,
+    "task_statement": "2.1",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D2-005"
+    ],
+    "case_study_id": null,
+    "stem": "A task is a self-contained logic puzzle where all needed information is already provided in the prompt. Which approach is most likely sufficient, without needing an interleaved reasoning-action pattern?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "An architecture that forces at least ten tool calls regardless of need"
+      },
+      {
+        "key": "B",
+        "text": "A multi-agent debate system"
+      },
+      {
+        "key": "C",
+        "text": "A tool that queries a live, constantly-changing external database"
+      },
+      {
+        "key": "D",
+        "text": "Plain chain-of-thought reasoning, since no external information needs to be gathered"
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "Since the puzzle is self-contained with no need for external, dynamic information, plain chain-of-thought reasoning is sufficient -- there is nothing to ground against that isn't already in the prompt.",
+      "why_incorrect": {
+        "B": "A multi-agent debate system adds substantial complexity and overhead that is not warranted when a single reasoning pass over fully provided information suffices.",
+        "C": "A live external database query is unnecessary and irrelevant when all needed information is already contained in the prompt itself.",
+        "A": "Forcing a fixed number of tool calls regardless of actual need introduces pointless overhead for a task that requires no external actions at all."
+      },
+      "rule_of_thumb": "When a task is fully self-contained with no need for external or dynamic information, plain reasoning without action-taking is often sufficient and more efficient."
+    },
+    "tags": [
+      "chain-of-thought",
+      "react",
+      "task-fit"
+    ]
+  },
+  {
+    "id": "Q-D2-0006",
+    "domain": 2,
+    "task_statement": "2.1",
+    "type": "single_choice",
+    "difficulty": "hard",
+    "theory_refs": [
+      "TH-D2-004"
+    ],
+    "case_study_id": null,
+    "stem": "After a tool call returns a result that contradicts the agent's prior assumption, the agent's next thought proceeds exactly as if the tool had never been called, repeating its original flawed assumption. Which failure pattern does this best illustrate?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Looping"
+      },
+      {
+        "key": "B",
+        "text": "Premature conclusion"
+      },
+      {
+        "key": "C",
+        "text": "Successful grounding"
+      },
+      {
+        "key": "D",
+        "text": "Ignoring observations"
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "The next reasoning step disregarding the contradicting tool result and proceeding as if the action never happened is exactly the ignoring-observations failure pattern.",
+      "why_incorrect": {
+        "A": "Looping specifically refers to repeating similar thought-action-observation cycles without progress; this scenario is about disregarding one specific observation's content, a distinct issue.",
+        "B": "Premature conclusion means finalizing an answer before sufficient evidence; this scenario describes continued (flawed) reasoning, not a premature final answer.",
+        "C": "Successful grounding would mean the contradicting observation DID influence the next thought; the scenario describes the opposite -- the observation being disregarded."
+      },
+      "rule_of_thumb": "When a new observation contradicts a prior assumption but the next reasoning step ignores that contradiction, that's the ignoring-observations failure pattern, distinct from looping or premature conclusion."
+    },
+    "tags": [
+      "react",
+      "failure-diagnosis",
+      "ignoring-observations"
+    ]
+  }
+]

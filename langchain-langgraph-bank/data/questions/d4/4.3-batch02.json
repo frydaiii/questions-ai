@@ -1,0 +1,86 @@
+[
+  {
+    "id": "Q-D4-0058",
+    "domain": 4,
+    "task_statement": "4.3",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": ["TH-D4-012"],
+    "case_study_id": null,
+    "stem": "A user previously stated they live in City A, but now states they live in City B. What is a reasonable default way for the agent to handle this contradiction, for a routine, low-stakes case?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Treat City B as superseding City A, since the newer statement more likely reflects the user's current situation" },
+      { "key": "B", "text": "Store both cities as equally and permanently valid with no resolution of any kind" },
+      { "key": "C", "text": "Ignore the new statement entirely and keep using City A forever" },
+      { "key": "D", "text": "Delete all stored information about the user's location permanently with no replacement" }
+    ],
+    "correct": ["A"],
+    "explanation": {
+      "why_correct": "For a routine, low-stakes contradiction like this, treating the newer statement as superseding the older one is a reasonable default, since it's more likely to reflect the user's current reality.",
+      "why_incorrect": {
+        "B": "Storing both as equally valid with no resolution leaves the agent without a clear answer for which city is actually current, risking confusion later.",
+        "C": "Ignoring the new, presumably more current statement and sticking with outdated information defeats the purpose of updating memory with new observations.",
+        "D": "Deleting the information entirely with no replacement discards a usable fact (the new city) in favor of having no location information at all."
+      },
+      "rule_of_thumb": "For routine, low-stakes contradictions, treating newer information as superseding older information is a reasonable default resolution policy."
+    },
+    "tags": ["contradiction-resolution", "memory-updates"]
+  },
+  {
+    "id": "Q-D4-0059",
+    "domain": 4,
+    "task_statement": "4.3",
+    "type": "single_choice",
+    "difficulty": "hard",
+    "theory_refs": ["TH-D4-012"],
+    "case_study_id": null,
+    "stem": "A high-stakes medical record shows a contradiction between an old allergy note and a new statement that seems to contradict it. Should the agent automatically assume the newer statement is simply correct and silently override the old one?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Not necessarily -- given the high stakes, a clarifying check is more appropriate than silently resolving the contradiction by default" },
+      { "key": "B", "text": "Yes, always, with absolutely no exception for any level of stakes" },
+      { "key": "C", "text": "The agent should delete both pieces of information immediately with no further action" },
+      { "key": "D", "text": "The agent should ignore both pieces of information and guess randomly" }
+    ],
+    "correct": ["A"],
+    "explanation": {
+      "why_correct": "Given the high stakes of a medical allergy record, a clarifying check (rather than silently assuming the newer statement is simply correct) is the more appropriate response, since acting on the wrong version could have serious consequences.",
+      "why_incorrect": {
+        "B": "Blanket always-silently-resolve policies ignore the fact that higher-stakes contradictions warrant more caution, as explicitly discussed.",
+        "C": "Deleting both pieces of information discards potentially critical safety information with no resolution at all.",
+        "D": "Guessing randomly on a safety-critical allergy contradiction is a clearly worse approach than seeking clarification."
+      },
+      "rule_of_thumb": "High-stakes contradictions warrant a clarifying check rather than silently assuming the newer information is simply correct."
+    },
+    "tags": ["contradiction-resolution", "high-stakes"]
+  },
+  {
+    "id": "Q-D4-0060",
+    "domain": 4,
+    "task_statement": "4.3",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": ["TH-D4-010"],
+    "case_study_id": null,
+    "stem": "A fact has been independently observed and confirmed across many separate past interactions, each time consistently. What does this high frequency suggest about the fact's reliability as a generalizable pattern?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "It suggests the fact is more likely to be a stable, generalizable pattern rather than a one-off anomaly" },
+      { "key": "B", "text": "It guarantees the fact is completely and permanently immune to ever changing" },
+      { "key": "C", "text": "It suggests the fact should be immediately discarded as noise" },
+      { "key": "D", "text": "Frequency has no bearing on reliability whatsoever" }
+    ],
+    "correct": ["A"],
+    "explanation": {
+      "why_correct": "A fact repeatedly observed and confirmed across many separate occasions is more likely to represent a stable, generalizable pattern, as opposed to a one-off anomaly observed just once.",
+      "why_incorrect": {
+        "B": "High frequency increases confidence in current reliability but doesn't guarantee the fact can never change in the future; circumstances can still evolve.",
+        "C": "High, consistent frequency is a signal of reliability, not a reason to treat the fact as noise.",
+        "D": "Frequency is specifically discussed as a meaningful signal of reliability, directly relevant to how much weight a pattern should be given."
+      },
+      "rule_of_thumb": "High, consistent frequency of observation is a signal that a fact likely represents a stable pattern, not a one-off anomaly."
+    },
+    "tags": ["frequency", "retrieval-signals"]
+  }
+]

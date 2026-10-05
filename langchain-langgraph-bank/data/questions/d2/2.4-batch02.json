@@ -1,0 +1,143 @@
+[
+  {
+    "id": "Q-D2-0069",
+    "domain": 2,
+    "task_statement": "2.4",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D2-016"
+    ],
+    "case_study_id": null,
+    "stem": "A medical information agent hedges so heavily on every statement that the user cannot tell what the agent is actually recommending. What failure mode is this?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Overconfidence"
+      },
+      {
+        "key": "B",
+        "text": "Excessive hedging that fails to actually help the user make a decision"
+      },
+      {
+        "key": "C",
+        "text": "Perfect calibration"
+      },
+      {
+        "key": "D",
+        "text": "A desirable, risk-free outcome with no downside"
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "explanation": {
+      "why_correct": "Qualifying every statement so heavily that the user cannot extract a usable recommendation is precisely the excessive-hedging failure mode, which wastes the interaction's value even though it avoids overconfidence.",
+      "why_incorrect": {
+        "A": "Overconfidence would mean presenting an uncertain conclusion as definitely correct; this scenario describes the opposite extreme.",
+        "C": "Perfect calibration means confidence tracks actual evidence strength in a way that remains USEFUL; failing to communicate anything actionable is not well-calibrated, it's a failure in the other direction.",
+        "D": "Excessive hedging has a real cost -- the user is left without the guidance they needed, which is a genuine downside, not a risk-free outcome."
+      },
+      "rule_of_thumb": "Excessive hedging is a real failure mode, not a safe default -- it can fail the user just as much as overconfidence, in the opposite direction."
+    },
+    "tags": [
+      "calibration",
+      "excessive-hedging"
+    ]
+  },
+  {
+    "id": "Q-D2-0070",
+    "domain": 2,
+    "task_statement": "2.4",
+    "type": "single_choice",
+    "difficulty": "easy",
+    "theory_refs": [
+      "TH-D2-013"
+    ],
+    "case_study_id": null,
+    "stem": "What is 'genuine uncertainty' as distinct from false confidence?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "A situation that never occurs in practice"
+      },
+      {
+        "key": "B",
+        "text": "A situation where the model simply refuses to answer anything"
+      },
+      {
+        "key": "C",
+        "text": "A situation where available information is actually insufficient to confidently determine a single correct answer"
+      },
+      {
+        "key": "D",
+        "text": "A deliberate choice to sound unconfident regardless of the actual evidence"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "Genuine uncertainty specifically refers to cases where the available evidence truly is insufficient to confidently pin down a single correct answer, which is a real property of the situation, not just a tone choice.",
+      "why_incorrect": {
+        "B": "Genuine uncertainty does not require refusing to answer entirely; it can be communicated through appropriate hedging or by flagging the uncertainty rather than refusing outright.",
+        "D": "Genuine uncertainty is about the actual state of the evidence, not a deliberate stylistic choice to sound unconfident irrespective of the evidence.",
+        "A": "Genuine uncertainty occurs regularly in practice whenever available information genuinely falls short of determining a confident answer."
+      },
+      "rule_of_thumb": "Genuine uncertainty reflects an actual evidentiary gap, not a stylistic choice or a refusal to engage."
+    },
+    "tags": [
+      "uncertainty",
+      "false-confidence"
+    ]
+  },
+  {
+    "id": "Q-D2-0071",
+    "domain": 2,
+    "task_statement": "2.4",
+    "type": "single_choice",
+    "difficulty": "hard",
+    "theory_refs": [
+      "TH-D2-015"
+    ],
+    "case_study_id": null,
+    "stem": "An agent's reasoning chain produces a final numeric answer that, when sanity-checked, falls far outside any physically plausible range for the quantity being calculated. What kind of detection mechanism caught this?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "An internal consistency check comparing two unrelated parts of the output"
+      },
+      {
+        "key": "B",
+        "text": "A grounding check against a live external database"
+      },
+      {
+        "key": "C",
+        "text": "A sanity check against a known plausible range for the quantity"
+      },
+      {
+        "key": "D",
+        "text": "No detection mechanism was actually used in this scenario"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "Checking whether a computed value falls within a known plausible range for that type of quantity is exactly what a sanity check against known constraints does.",
+      "why_incorrect": {
+        "A": "An internal consistency check compares different parts of the SAME output against each other for contradictions, not a single value against an external plausibility range.",
+        "B": "A grounding check specifically involves comparing against an external, verifiable data source, which is not what's described -- this scenario is about plausibility bounds, not fetched reference data.",
+        "D": "A detection mechanism clearly was used -- the scenario explicitly describes catching the error via a plausibility check."
+      },
+      "rule_of_thumb": "Comparing a result against a known plausible range for that type of value is a sanity check, distinct from consistency checks (within-output contradictions) and grounding checks (external verified data)."
+    },
+    "tags": [
+      "error-detection",
+      "sanity-check"
+    ]
+  }
+]

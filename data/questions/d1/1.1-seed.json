@@ -1,0 +1,55 @@
+[
+  {
+    "id": "Q-D1-0001",
+    "domain": 1,
+    "task_statement": "1.1",
+    "type": "single_choice",
+    "difficulty": "easy",
+    "theory_refs": ["TH-D1-001"],
+    "case_study_id": null,
+    "stem": "A retail company built a simple rules engine years ago that recommends products using a fixed set of if/then rules written by a merchandising team. No part of the system learns from new sales data. Which term correctly describes this system?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "It is both AI and machine learning, because it makes automated recommendations." },
+      { "key": "B", "text": "It is AI, but not machine learning, because it never learns patterns from data." },
+      { "key": "C", "text": "It is machine learning, but not AI, because it only uses simple rules." },
+      { "key": "D", "text": "It is deep learning, because it operates on product catalog data." }
+    ],
+    "correct": ["B"],
+    "explanation": {
+      "why_correct": "A system that automates a task normally requiring human judgment is AI by definition, regardless of the technique used. Because this system only follows rules a person wrote and never updates itself from data, it is not machine learning.",
+      "why_incorrect": {
+        "A": "Machine learning requires the system to learn patterns from data. This system's rules are fixed by humans and never learn from data, so it fails the ML definition even though it is AI.",
+        "C": "AI is the broader category that includes any human-like automated decision-making, including rule-based systems. This system fully qualifies as AI, so this option is backwards.",
+        "D": "Deep learning specifically means multi-layer neural networks. A fixed if/then rules engine contains no neural network and no learning step at all."
+      },
+      "rule_of_thumb": "Ask 'does it learn from data, or just follow rules a person wrote?' If it learns from data, it's ML. If it also produces novel content, it's generative AI."
+    },
+    "tags": ["ai-vs-ml", "terminology", "rules-engine"]
+  },
+  {
+    "id": "Q-D1-0003",
+    "domain": 1,
+    "task_statement": "1.3",
+    "type": "ordering",
+    "difficulty": "medium",
+    "theory_refs": ["TH-D1-001"],
+    "case_study_id": null,
+    "stem": "A team is following the standard machine learning development lifecycle to build a churn-prediction model. Arrange the following stages in the correct order, from the very first activity to the very last.",
+    "select_count": 5,
+    "options": [
+      { "key": "A", "text": "Collect and label the training data" },
+      { "key": "B", "text": "Identify the business goal and success criteria" },
+      { "key": "C", "text": "Deploy the trained model to a production endpoint" },
+      { "key": "D", "text": "Engineer and select features from the prepared data" },
+      { "key": "E", "text": "Monitor the deployed model for data and concept drift" }
+    ],
+    "correct": ["B", "A", "D", "C", "E"],
+    "explanation": {
+      "why_correct": "The ML lifecycle starts by defining what business problem is being solved and how success will be measured (B), then collects the data needed to train against that goal (A), then engineers features from that data (D), then deploys the resulting trained model (C), and finally monitors it in production for drift (E). Each stage depends on the output of the one before it.",
+      "why_incorrect": {},
+      "rule_of_thumb": "The 8-stage ML lifecycle runs: identify business goal -> frame ML problem -> collect data -> pre-process data -> engineer features -> train/tune/evaluate -> deploy -> monitor. Business framing always comes first; monitoring always comes last."
+    },
+    "tags": ["ml-lifecycle", "ordering", "mlops"]
+  }
+]

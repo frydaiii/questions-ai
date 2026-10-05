@@ -1,0 +1,141 @@
+[
+  {
+    "id": "Q-D4-0067",
+    "domain": 4,
+    "task_statement": "4.3",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D4-012"
+    ],
+    "case_study_id": null,
+    "stem": "A single, unusual observation seems to contradict a long-established, frequently confirmed pattern. Should the agent necessarily treat the new, single observation as automatically superseding the well-established pattern?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Yes, always, since anything newer is automatically and unconditionally correct in every case"
+      },
+      {
+        "key": "B",
+        "text": "Not necessarily -- a single contradicting observation might reflect noise or a special-case exception rather than a genuine update to a well-established, frequently confirmed pattern"
+      },
+      {
+        "key": "C",
+        "text": "The agent should immediately delete the well-established pattern with no further consideration"
+      },
+      {
+        "key": "D",
+        "text": "Frequency of past confirmation is always completely irrelevant to this decision"
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "explanation": {
+      "why_correct": "A single contradicting observation against a well-established, frequently confirmed pattern might just as easily be noise or a special-case exception, so it shouldn't automatically be treated as superseding without further consideration.",
+      "why_incorrect": {
+        "C": "Deleting a well-established pattern based on a single contradicting observation, with no further judgment, risks discarding a genuinely reliable fact based on noise.",
+        "D": "Frequency of past confirmation is directly relevant here -- it's exactly the kind of signal that should inform how much weight to give the new, single contradicting observation.",
+        "A": "Treating anything newer as automatically correct ignores the real possibility that a single new observation could be noise or an exception rather than a genuine, representative update."
+      },
+      "rule_of_thumb": "A single new observation contradicting a well-established, frequently confirmed pattern warrants scrutiny, not automatic supersession -- it could be noise or an exception."
+    },
+    "tags": [
+      "contradiction-resolution",
+      "frequency"
+    ]
+  },
+  {
+    "id": "Q-D4-0068",
+    "domain": 4,
+    "task_statement": "4.3",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D4-009"
+    ],
+    "case_study_id": null,
+    "stem": "What is the practical consequence of poor relevance assessment that surfaces superficially similar but actually unhelpful memories for the current need?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "This guarantees the correct answer will still be found despite the irrelevant content"
+      },
+      {
+        "key": "B",
+        "text": "The agent's reasoning automatically improves regardless of the retrieved content's actual usefulness"
+      },
+      {
+        "key": "C",
+        "text": "This has no effect on the agent's subsequent behavior at all"
+      },
+      {
+        "key": "D",
+        "text": "The agent's reasoning may be distracted or misled by content that seems related but doesn't actually address the current need"
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "Surfacing superficially similar but actually unhelpful content risks distracting or misleading the agent's subsequent reasoning, since it appears related without actually addressing the real current need.",
+      "why_incorrect": {
+        "B": "Irrelevant or unhelpful retrieved content does not automatically improve reasoning; it can actively hinder it by introducing distracting or misleading material.",
+        "C": "The content fed into an agent's reasoning context has a real, direct effect on its subsequent behavior and outputs.",
+        "A": "There's no such guarantee; irrelevant content can genuinely mislead reasoning away from the correct answer."
+      },
+      "rule_of_thumb": "Superficially similar but unhelpful retrieved content can distract or mislead an agent's reasoning, which is why relevance assessment quality matters."
+    },
+    "tags": [
+      "relevance-based-retrieval"
+    ]
+  },
+  {
+    "id": "Q-D4-0069",
+    "domain": 4,
+    "task_statement": "4.3",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D4-011"
+    ],
+    "case_study_id": null,
+    "stem": "Which of the following best describes the difference between 'targeted forgetting' and 'indiscriminate forgetting'?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Indiscriminate forgetting is always strictly safer than targeted forgetting"
+      },
+      {
+        "key": "B",
+        "text": "They are exactly the same thing with different names"
+      },
+      {
+        "key": "C",
+        "text": "Targeted forgetting always removes more information than indiscriminate forgetting"
+      },
+      {
+        "key": "D",
+        "text": "Targeted forgetting removes specifically outdated/superseded/irrelevant content with judgment; indiscriminate forgetting discards content without that judgment, risking loss of useful information"
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "Targeted forgetting applies judgment to remove specifically outdated, superseded, or genuinely irrelevant content, while indiscriminate forgetting discards content without such judgment, risking the loss of genuinely useful information.",
+      "why_incorrect": {
+        "B": "These are meaningfully distinct approaches with different risk profiles, not interchangeable synonyms.",
+        "C": "The relative amount removed isn't the key distinguishing factor; the distinguishing factor is whether judgment is applied to what's removed.",
+        "A": "Indiscriminate forgetting is actually riskier, since it can discard genuinely valuable information without any judgment about what's actually safe to remove."
+      },
+      "rule_of_thumb": "Targeted forgetting applies judgment about what's actually safe to remove; indiscriminate forgetting does not, risking loss of valuable information."
+    },
+    "tags": [
+      "forgetting-mechanisms"
+    ]
+  }
+]

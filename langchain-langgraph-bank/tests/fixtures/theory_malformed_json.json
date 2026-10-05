@@ -1,0 +1,14 @@
+[
+  {
+    "id": "TH-D1-901",
+    "domain": 1,
+    "task_statements": ["1.1"],
+    "title": "Broken fixture: malformed JSON (trailing comma)",
+    "summary": "This file is intentionally invalid JSON to test the parse-error gate.",
+    "key_points": ["a", "b"],
+    "rule_of_thumb": "n/a",
+    "common_confusions": [],
+    "related_tech": [],
+    "references": ["https://arxiv.org/abs/0000.00001"],
+  }
+]

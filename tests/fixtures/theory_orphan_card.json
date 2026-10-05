@@ -1,0 +1,14 @@
+[
+  {
+    "id": "TH-D1-908",
+    "domain": 1,
+    "task_statements": ["1.1"],
+    "title": "Broken fixture: orphan theory card referenced by no question",
+    "summary": "This card intentionally has no question referencing it, to test the orphan-card detection gate.",
+    "key_points": ["a", "b"],
+    "rule_of_thumb": "n/a",
+    "common_confusions": [],
+    "aws_services": [],
+    "references": ["https://docs.aws.amazon.com/x"]
+  }
+]

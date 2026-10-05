@@ -1,0 +1,370 @@
+[
+  {
+    "id": "TH-D1-001",
+    "domain": 1,
+    "task_statements": ["1.1"],
+    "title": "Defining an agent: autonomy, goal-directedness, and environment interaction",
+    "summary": "An AI agent is a system that perceives its environment, makes decisions toward a goal, and takes actions that affect that environment, typically with some degree of autonomy over multiple steps. A single LLM call that takes a prompt and returns a completion is not, by itself, an agent -- it is a stateless function. A system becomes agentic when it is given the ability to decide what to do next (not just what to say), often by choosing among actions such as calling tools, querying memory, or invoking itself again, and when it can continue operating across multiple steps without a human manually re-invoking it after every single step.",
+    "key_points": [
+      "Autonomy means the system decides its own next step rather than a human manually sequencing every call.",
+      "Goal-directedness means the system's actions are organized around achieving an objective, not just producing one isolated response.",
+      "Environment interaction means the agent's actions have effects outside of just generating text -- e.g. calling an API, writing a file, or querying a database.",
+      "A chatbot that only maps one user message to one reply, with no internal decision-making about intermediate steps, is not agentic even if it uses an LLM.",
+      "Agency is a matter of degree, not a binary label -- a system with a fixed, hard-coded three-step pipeline is less agentic than one that dynamically decides how many steps to take and which tools to use."
+    ],
+    "rule_of_thumb": "Ask: does the system decide WHAT to do next, or does a human/fixed script decide that and the model just fills in text? If the model (or a loop around it) is choosing its own next action, it's exhibiting agency.",
+    "common_confusions": [
+      "Assuming any system that uses an LLM is automatically an agent -- a single prompt-completion call, however sophisticated the prompt, is not agentic without some loop or decision layer around it.",
+      "Equating 'agent' with 'has memory' -- memory is a common agent component, but a system can be agentic (make its own decisions about actions) without persistent memory across sessions."
+    ],
+    "related_tech": ["autonomous agents", "goal-directed behavior", "agent-environment loop"],
+    "references": [
+      "https://arxiv.org/abs/2308.11432"
+    ]
+  },
+  {
+    "id": "TH-D1-002",
+    "domain": 1,
+    "task_statements": ["1.1"],
+    "title": "The spectrum from prompt-completion to fully autonomous agent",
+    "summary": "Agentic systems exist on a spectrum rather than a sharp binary. At one end is a single prompt-completion call: fixed input, one model call, fixed output. Moving along the spectrum: a prompt chain executes a FIXED sequence of LLM calls (no runtime decision-making about order or count). A step further, a router/classifier picks ONE path among several predefined options based on the input, but still cannot deviate from predefined branches. True agentic behavior appears when the system can decide, at runtime, an arbitrary number of steps, which tools to invoke, and when to stop -- commonly implemented as a loop that keeps calling the model with updated context until the model itself signals it is done.",
+    "key_points": [
+      "Fixed prompt chains execute a predetermined sequence of steps regardless of intermediate results -- not agentic, even though they use multiple LLM calls.",
+      "A router that classifies input into one of N predefined branches is more flexible than a fixed chain, but still cannot improvise new sequences of action -- limited agency.",
+      "An agent loop lets the model decide the NUMBER of steps and the CHOICE of action at each step, continuing until a stopping condition (e.g. the model outputs a final answer) is met.",
+      "The more a system's control flow is determined at runtime by the model's own output rather than hard-coded in advance, the further right it sits on the agentic spectrum.",
+      "Many production systems are deliberately only partially agentic (e.g. a bounded router) because full autonomy trades predictability and cost control for flexibility."
+    ],
+    "rule_of_thumb": "To place a system on the agentic spectrum, ask who decides the NEXT step and HOW MANY steps there will be: a human/fixed script (not agentic), a predefined branch set (semi-agentic), or the model itself at runtime with no fixed step count (fully agentic).",
+    "common_confusions": [
+      "Treating 'multi-step' as synonymous with 'agentic' -- a fixed 5-step pipeline that always runs the same 5 calls in the same order is multi-step but not agentic.",
+      "Assuming full autonomy is always the goal -- bounded, less-agentic designs are often preferred in production for predictability, cost, and safety reasons."
+    ],
+    "related_tech": ["prompt chaining", "agent loop", "control flow"],
+    "references": [
+      "https://arxiv.org/abs/2309.07864"
+    ]
+  },
+  {
+    "id": "TH-D1-003",
+    "domain": 1,
+    "task_statements": ["1.1"],
+    "title": "The minimum components of an agentic system",
+    "summary": "While implementations vary widely, most agentic systems share a small set of functional components. A reasoning/decision core (usually an LLM) decides what action to take given the current context. An action space defines the set of things the agent CAN do (e.g. call a specific tool, respond to the user, ask a clarifying question). A perception/observation mechanism feeds the results of actions (and any external events) back into the agent's context so it can decide its next step. A termination condition determines when the agent stops looping and returns a final result instead of taking another action. Many agents also add memory (to retain information across steps or sessions) and a planning layer (to decide on a sequence of actions before executing them), but these are enhancements layered on top of the minimal loop, not strictly required to call a system agentic.",
+    "key_points": [
+      "Reasoning core: typically an LLM that, given context, outputs either an action to take or a final answer.",
+      "Action space: the finite or open-ended set of operations the agent is permitted to perform.",
+      "Observation/feedback: results of actions must be fed back into the agent's context, closing the loop between acting and perceiving.",
+      "Termination condition: without one, an agent loop would run forever; common conditions include the model emitting a 'final answer' signal, a maximum step count, or an explicit stop tool.",
+      "Memory and planning are common but optional enhancements -- a minimal reactive agent can function with just a reasoning core, action space, observation, and termination condition."
+    ],
+    "rule_of_thumb": "To check whether a described system is a complete agent (not just a tool-calling LLM), verify it has all four minimum parts: something that decides actions, a defined set of possible actions, a way to observe action results, and a way to know when to stop.",
+    "common_confusions": [
+      "Believing memory is a required component for something to count as an agent -- a stateless-between-sessions agent that still loops, acts, observes, and terminates within one task is still agentic.",
+      "Conflating the action space with the tool list specifically -- 'respond directly to the user' or 'ask a clarifying question' are also actions in the action space, not just external tool calls."
+    ],
+    "related_tech": ["agent loop", "observation-action cycle", "termination condition"],
+    "references": [
+      "https://arxiv.org/abs/2308.11432"
+    ]
+  },
+  {
+    "id": "TH-D1-004",
+    "domain": 1,
+    "task_statements": ["1.1"],
+    "title": "Why agents emerged: limitations of single-shot LLM calls",
+    "summary": "A single LLM call is limited to producing output based only on its training data and whatever context fits in one prompt, in one pass, with no ability to verify its own answer, fetch new information, or take corrective action if it made a mistake. Agentic designs emerged to address exactly these limitations: tool use lets the model fetch current or external information instead of relying solely on parametric knowledge; multi-step reasoning lets the model break a hard problem into smaller pieces solved incrementally rather than in one pass; self-correction (e.g. critiquing its own draft answer and revising) catches errors a single pass would miss; and persistent action lets the system actually DO something in the world (send an email, modify a file, query a database) rather than only describe what should be done.",
+    "key_points": [
+      "A single LLM call cannot access information outside its training data and prompt context, cannot verify its own correctness, and cannot take real-world action -- it can only produce text.",
+      "Tool use directly addresses the knowledge-staleness and grounding problem by letting the model query live, external, or private data sources.",
+      "Breaking a complex task into multiple reasoning/action steps often yields better results than demanding the full answer in one shot, especially for tasks requiring calculation, lookup, or multi-step logic.",
+      "Agent loops that allow re-attempts or self-critique can catch and correct errors that a single, un-revisable generation would simply ship as-is.",
+      "The jump from 'describe an action' to 'actually perform the action via a tool call' is what turns a text generator into something that can affect the external world."
+    ],
+    "rule_of_thumb": "When evaluating whether an agentic design is justified for a given task, ask whether a single LLM call would fail due to stale/missing knowledge, task complexity requiring multiple steps, or the need to actually perform an external action -- if none apply, a single call may be sufficient and simpler.",
+    "common_confusions": [
+      "Assuming agentic designs are strictly 'better' than single-shot calls -- added steps add latency, cost, and failure surface, so agentic complexity should be justified by an actual limitation of the single-call approach.",
+      "Believing tool use alone makes something an agent -- a single LLM call augmented with one fixed tool call (e.g. always doing exactly one search before answering) is closer to a fixed pipeline than a true agent unless the decision to use the tool, and which tool, is made dynamically."
+    ],
+    "related_tech": ["grounding", "tool augmentation", "multi-step reasoning"],
+    "references": [
+      "https://arxiv.org/abs/2302.04761"
+    ]
+  },
+  {
+    "id": "TH-D1-005",
+    "domain": 1,
+    "task_statements": ["1.1"],
+    "title": "Agents vs. chatbots vs. workflows: a comparison",
+    "summary": "These three terms are often used loosely, but they describe meaningfully different systems. A chatbot is primarily a conversational interface: its core job is turn-by-turn dialogue, and even if an LLM powers it, its control flow is typically just 'take the latest message plus history, produce a reply.' A workflow (or pipeline) executes a predetermined sequence of steps -- possibly including LLM calls -- where the sequence and branching logic are authored in advance by a developer, not decided by the model at runtime. An agent, by contrast, is characterized by the model itself deciding, step by step, what action to take next, including whether and which tools to call, based on the evolving state of the task -- the developer defines the available actions and the stopping criteria, but not the exact sequence.",
+    "key_points": [
+      "Chatbots center on conversational turn-taking; their primary unit of interaction is a dialogue turn, not a multi-step task.",
+      "Workflows have developer-authored control flow -- the sequence of steps is fixed in code, even if individual steps call an LLM.",
+      "Agents have model-authored control flow -- the model decides the sequence of actions at runtime within a space of possibilities the developer defines.",
+      "A system can combine these: e.g. a chatbot interface that, upon detecting a complex request, hands off to an agentic sub-process to complete a multi-step task before replying.",
+      "The distinction matters practically: workflows are more predictable and easier to test exhaustively; agents are more flexible but harder to fully predict or exhaustively test."
+    ],
+    "rule_of_thumb": "If you can draw the system's entire possible execution path as a fixed flowchart ahead of time, it's a workflow. If the model's own output determines which branch of an open-ended decision tree gets taken at runtime, it's an agent.",
+    "common_confusions": [
+      "Calling any LLM-powered conversational product an 'agent' purely as marketing language, when its actual control flow is a fixed chatbot turn-taking loop with no autonomous multi-step decision-making.",
+      "Assuming a workflow with many branches is 'basically an agent' -- no matter how many branches a workflow has, if they were all authored in advance by a developer rather than decided dynamically by the model, it remains a workflow, not an agent."
+    ],
+    "related_tech": ["workflow automation", "conversational AI", "control flow"],
+    "references": [
+      "https://arxiv.org/abs/2309.07864"
+    ]
+  },
+  {
+    "id": "TH-D1-006",
+    "domain": 1,
+    "task_statements": ["1.1"],
+    "title": "Degrees of autonomy and when less agency is the better design choice",
+    "summary": "More agentic autonomy is not automatically better engineering. Full autonomy -- where the model decides every step, every tool call, and when to stop, with no fixed structure -- maximizes flexibility but also maximizes unpredictability, cost (since the number of steps/calls is unbounded), and safety risk (since the system might take unintended actions). Many well-designed production systems deliberately choose a point partway along the autonomy spectrum: a workflow with a few agentic decision points, or an agent constrained to a small, carefully scoped action space and a hard step limit. The right level of autonomy depends on the cost of errors (how bad is a wrong action?), the predictability requirements (does this need to be testable/auditable?), and the complexity of the task (does it genuinely require open-ended problem solving, or is the space of valid solutions small and enumerable?).",
+    "key_points": [
+      "Full autonomy trades predictability and cost-boundedness for flexibility -- appropriate for genuinely open-ended tasks where the solution path cannot be known in advance.",
+      "Constraining the action space (limiting which tools/actions are available) reduces risk surface without necessarily removing autonomy over WHEN to use them.",
+      "A hard maximum step/iteration count is a common safety and cost-control measure that bounds worst-case autonomous behavior without eliminating agency.",
+      "High-stakes or hard-to-reverse actions (e.g. sending money, deleting data) are commonly kept OUT of a fully autonomous agent's action space, or gated behind human confirmation, even when the rest of the task is agentic.",
+      "The appropriate autonomy level is a design decision driven by error cost, auditability needs, and task open-endedness -- not a universal best practice to maximize."
+    ],
+    "rule_of_thumb": "Before granting an agent more autonomy, ask: what's the worst thing it could do with that autonomy, and is that an acceptable risk for the value gained? If the worst case is unacceptable, constrain the action space or add human-in-the-loop checkpoints rather than removing structure elsewhere.",
+    "common_confusions": [
+      "Treating maximum autonomy as the gold-standard design goal -- in production, bounded and partially-agentic systems are often the correct and more responsible choice.",
+      "Assuming a smaller action space necessarily means less useful agency -- a tightly scoped agent that reliably handles its narrow task well is often more valuable than a broad, unreliable one."
+    ],
+    "related_tech": ["autonomy constraints", "human-in-the-loop", "action space design"],
+    "references": [
+      "https://arxiv.org/abs/2308.11432"
+    ]
+  },
+  {
+    "id": "TH-D1-007",
+    "domain": 1,
+    "task_statements": ["1.2"],
+    "title": "The perceive-reason-act cycle: the canonical agent control loop",
+    "summary": "The perceive-reason-act cycle (sometimes called sense-think-act) is the canonical description of how an agent operates over time. Perceive: the agent gathers information about its current state -- the user's request, prior tool results, environmental signals. Reason: the agent processes that information to decide what to do next, which may involve weighing options, decomposing the problem, or simply pattern-matching to a known response. Act: the agent carries out the chosen action, whether that is calling a tool, producing output, or modifying its environment. The cycle then repeats, with the consequences of the action becoming new perceptions for the next iteration, continuing until a termination condition is met.",
+    "key_points": [
+      "Perceive = gather current information (user input, tool outputs, environment state).",
+      "Reason = process that information into a decision about the next action.",
+      "Act = execute the chosen action, producing effects and/or output.",
+      "The cycle is iterative: each action's consequences become the next cycle's perceptions, forming a closed loop.",
+      "Different agent architectures vary enormously in how much work happens in the 'reason' step -- from near-instant pattern matching to extended multi-step deliberation."
+    ],
+    "rule_of_thumb": "When analyzing any agent's behavior, map what it's doing onto perceive/reason/act -- confusion about agent behavior often resolves once you identify which of the three phases is actually causing an observed problem.",
+    "common_confusions": [
+      "Assuming 'reason' always means an explicit, verbose chain-of-thought -- a reactive agent's reasoning step can be a near-instantaneous lookup or pattern match with no explicit deliberation shown.",
+      "Treating perceive-reason-act as three cleanly separated phases in all implementations -- some architectures blend them (e.g. a single LLM call that implicitly perceives context and reasons to produce an action in one pass)."
+    ],
+    "related_tech": ["agent control loop", "sense-think-act", "perception"],
+    "references": [
+      "https://arxiv.org/abs/2308.11432"
+    ]
+  },
+  {
+    "id": "TH-D1-008",
+    "domain": 1,
+    "task_statements": ["1.2"],
+    "title": "What counts as 'perception' for a software agent",
+    "summary": "For a software-based AI agent (as opposed to a robot with cameras and sensors), perception means ingesting any information relevant to the current decision: the original user request, the results of previously executed tool calls, retrieved memory or documents, system state (e.g. the current date, or application state), and sometimes signals from other agents in a multi-agent system. Unlike a robot, a software agent's 'environment' is often entirely informational -- APIs, databases, files, and other software -- but the perceive step still serves the identical function of updating the agent's situational awareness before it reasons about what to do next.",
+    "key_points": [
+      "Perception for a software agent is informational: text, structured data, API responses, retrieved documents -- not necessarily physical sensor data.",
+      "Every tool call's return value is a perception event for the next reasoning step, since it changes what the agent knows.",
+      "Perception can include implicit context like the current date/time or system configuration, which agents often need for correct reasoning (e.g. relative date calculations).",
+      "In a multi-agent system, messages or outputs from other agents are also perception inputs to a given agent's next reasoning step.",
+      "Poor perception (e.g. a tool returning truncated or malformed data) directly degrades reasoning quality downstream, even if the reasoning step itself is sound."
+    ],
+    "rule_of_thumb": "If a software agent is behaving as though it 'doesn't know' something it should, check what's actually being fed into its context at the perceive step before assuming a reasoning failure.",
+    "common_confusions": [
+      "Assuming perception failures always look like missing information -- malformed, truncated, or stale information fed into context is also a perception problem, even though something was technically perceived.",
+      "Overlooking implicit perception needs like current date/time -- many apparent reasoning errors (e.g. wrong relative date calculations) actually stem from the agent never having been given that contextual information to perceive in the first place."
+    ],
+    "related_tech": ["perception", "context", "situational awareness"],
+    "references": [
+      "https://arxiv.org/abs/2302.04761"
+    ]
+  },
+  {
+    "id": "TH-D1-009",
+    "domain": 1,
+    "task_statements": ["1.2"],
+    "title": "The 'reason' step: from fast pattern-matching to deliberate multi-step thought",
+    "summary": "The reasoning step is where the agent converts its current perceptions into a decision about the next action, and the amount of deliberation involved varies widely by design. At the fast end, a reactive agent reasons via near-instant pattern matching -- condition X observed, response Y triggered, with little to no explicit intermediate reasoning. At the deliberate end, an agent may generate an explicit chain of thought, weigh multiple candidate actions, simulate likely outcomes, or decompose the problem into sub-goals before committing to an action. Techniques like chain-of-thought prompting, ReAct-style reasoning traces, and explicit self-questioning are all ways of making the reasoning step more thorough, generally at the cost of additional latency and token usage.",
+    "key_points": [
+      "Reasoning can range from near-instant reactive pattern matching to extended, explicit multi-step deliberation.",
+      "More thorough reasoning generally improves decision quality on complex tasks but increases latency and cost.",
+      "Techniques that make reasoning explicit (chain-of-thought, written-out reasoning traces) can also make the agent's decision process inspectable/debuggable, which implicit pattern-matching reasoning does not offer.",
+      "The appropriate amount of reasoning depth is task-dependent -- a simple lookup needs little deliberation, while a multi-constraint planning problem benefits from explicit decomposition.",
+      "Reasoning quality is bounded by the quality of perception feeding into it -- excellent reasoning over incomplete or wrong information still produces a bad decision."
+    ],
+    "rule_of_thumb": "Match reasoning depth to task complexity: trivial, well-pattern-matched decisions don't need expensive deliberation, while genuinely difficult multi-step problems benefit from explicit, inspectable reasoning even at higher cost.",
+    "common_confusions": [
+      "Assuming more reasoning steps always produce a better decision -- excessive deliberation on a simple task wastes latency and cost without improving the outcome.",
+      "Treating 'reasoning' as something that only happens via explicit chain-of-thought text -- a model can also reason implicitly within a single forward pass, without producing visible intermediate text."
+    ],
+    "related_tech": ["chain-of-thought", "ReAct", "deliberation"],
+    "references": [
+      "https://arxiv.org/abs/2201.11903"
+    ]
+  },
+  {
+    "id": "TH-D1-010",
+    "domain": 1,
+    "task_statements": ["1.2"],
+    "title": "The 'act' step: output generation vs. real-world side effects",
+    "summary": "The act step is where a decision becomes a concrete action, and these actions fall into two broad categories with very different risk profiles. Output-only actions produce text, images, or other content returned to a user or another system component, with no direct external side effect beyond the information conveyed. Side-effecting actions change state in the world outside the conversation -- calling an API that sends an email, writes to a database, moves money, or controls a physical device. Side-effecting actions are inherently higher-risk because, once executed, they may not be undoable, which is why many agent designs apply extra scrutiny (confirmation steps, narrower permissions, logging) specifically to this category of action rather than to output-only responses.",
+    "key_points": [
+      "Output-only actions (generating a reply, a summary, a draft) carry low direct risk, since they do not change external state by themselves.",
+      "Side-effecting actions (sending, deleting, purchasing, controlling) change state outside the conversation and may be difficult or impossible to reverse.",
+      "The irreversibility and real-world impact of an action -- not just its technical complexity -- determines how much scrutiny or confirmation it warrants.",
+      "An agent architecture can grant broad autonomy for output-only actions while still gating side-effecting actions behind additional checks (e.g. human confirmation), without contradiction.",
+      "Logging every side-effecting action (what was done, when, with what parameters) is a common mitigation that does not prevent mistakes but makes them auditable and recoverable after the fact."
+    ],
+    "rule_of_thumb": "When evaluating the risk of an agent's action space, separate 'produces information' from 'changes something in the world' -- the second category deserves materially more caution regardless of how routine it might seem.",
+    "common_confusions": [
+      "Treating all tool calls as equally risky -- a read-only lookup tool (e.g. search) carries far less risk than a write/mutate tool (e.g. send email), even though both are 'tool calls' in the action space.",
+      "Assuming output-only actions are entirely risk-free -- generated text can still cause harm (e.g. misinformation, offensive content) even without a direct external side effect, so 'low direct risk' does not mean 'no risk at all.'"
+    ],
+    "related_tech": ["action space", "side effects", "irreversibility"],
+    "references": [
+      "https://arxiv.org/abs/2308.11432"
+    ]
+  },
+  {
+    "id": "TH-D1-011",
+    "domain": 1,
+    "task_statements": ["1.2"],
+    "title": "Closing the loop: how action outcomes become the next perception",
+    "summary": "What makes perceive-reason-act a LOOP rather than a one-way pipeline is that the outcome of an action is fed back in as a new perception, enabling the agent to adapt based on what actually happened rather than only what it predicted would happen. This feedback is what allows an agent to notice a tool call failed and try something different, discover that a search returned irrelevant results and refine its query, or recognize that a sub-task is complete and move to the next one. Without this feedback connection, a system could still take sequential actions, but it would be executing a fixed plan blindly rather than genuinely adapting -- closer to a workflow than an agent, even if it appeared to be 'looping.'",
+    "key_points": [
+      "The defining feature of a loop (vs. a one-way sequence) is that outcomes feed back into future decisions.",
+      "Feedback enables error recovery: a failed tool call becomes a perception that can trigger a different action on the next cycle.",
+      "Feedback enables refinement: an unsatisfactory intermediate result (e.g. irrelevant search results) can prompt the agent to adjust its approach rather than blindly continuing.",
+      "A system that executes several steps in sequence WITHOUT examining each step's actual outcome before proceeding is not really closing the loop, even if it looks superficially similar to an agent.",
+      "The quality of an agent's adaptive behavior is bounded by how well action outcomes are surfaced back into its context -- a poorly surfaced outcome (e.g. an error swallowed silently) breaks the feedback loop even if the underlying architecture supports it."
+    ],
+    "rule_of_thumb": "To tell a true agent loop apart from a blind fixed sequence, check whether each action's actual outcome is examined and allowed to influence the next decision -- if outcomes are ignored, it's not really closing the loop.",
+    "common_confusions": [
+      "Assuming any system that takes multiple sequential actions is 'closing the loop' -- a fixed sequence that never inspects intermediate outcomes before proceeding is not adaptive, regardless of how many steps it has.",
+      "Overlooking silent failure as a loop-breaking problem -- if an action's error or failure is swallowed and not surfaced as a perception, the agent cannot adapt to it even though the architecture nominally supports feedback."
+    ],
+    "related_tech": ["feedback loop", "error recovery", "adaptive behavior"],
+    "references": [
+      "https://arxiv.org/abs/2303.11366"
+    ]
+  },
+  {
+    "id": "TH-D1-012",
+    "domain": 1,
+    "task_statements": ["1.2"],
+    "title": "Common failure patterns within the perceive-reason-act loop",
+    "summary": "Each phase of the loop has characteristic failure modes. Perception failures occur when the agent is missing needed information, receives malformed/truncated data, or is given stale information it treats as current. Reasoning failures occur when the agent has adequate information but draws an incorrect conclusion -- misapplies logic, hallucinates a fact, or misjudges which action is appropriate. Action failures occur when the correct decision was made but its execution fails -- a tool call errors out, times out, or an API rejects the request. Crucially, these failure types require different fixes: a perception failure is fixed by improving what information reaches the agent, a reasoning failure is fixed by improving the model/prompt/reasoning strategy, and an action failure is fixed by improving the execution layer (retries, error handling, better tool interfaces) -- misdiagnosing which phase failed leads to applying the wrong fix.",
+    "key_points": [
+      "Perception failures: missing, malformed, truncated, or stale information reaching the agent.",
+      "Reasoning failures: adequate information available, but an incorrect decision is drawn from it.",
+      "Action failures: a correct decision was made, but its execution did not succeed (tool error, timeout, rejected request).",
+      "Diagnosing agent misbehavior requires identifying WHICH phase failed before attempting a fix, since the three failure types have different remedies.",
+      "A single observed bad outcome can sometimes stem from a chain of failures across phases (e.g. a perception gap leading to a flawed-but-locally-reasonable decision), requiring root-cause analysis rather than fixing only the most visible symptom."
+    ],
+    "rule_of_thumb": "When an agent misbehaves, trace the failure to perceive, reason, or act before fixing anything -- a reasoning fix (e.g. prompt tweaking) will not resolve a perception problem (e.g. missing context), and vice versa.",
+    "common_confusions": [
+      "Defaulting to 'the model needs a better prompt' for every failure, when the actual root cause may be missing/bad information reaching the model (a perception failure) or a tool execution error (an action failure) rather than a reasoning deficiency.",
+      "Assuming a tool error is always a reasoning failure (the agent 'chose the wrong tool') when it may simply be that the right tool was chosen but its execution failed for an unrelated reason (e.g. a transient network error)."
+    ],
+    "related_tech": ["failure diagnosis", "root-cause analysis", "agent debugging"],
+    "references": [
+      "https://arxiv.org/abs/2308.11432"
+    ]
+  },
+  {
+    "id": "TH-D1-013",
+    "domain": 1,
+    "task_statements": ["1.3"],
+    "title": "Reactive agents: stimulus-response with no internal world model",
+    "summary": "A reactive agent selects its next action based directly on its current perception, using a fixed mapping from situations to responses (often called condition-action rules), with no internal model of the world beyond what it currently perceives and no explicit planning ahead. Reactive agents are fast and simple to reason about, since behavior is a direct function of current input, but they struggle with tasks that require considering future consequences, remembering context from several steps ago that isn't currently visible, or handling situations that don't match any of their predefined condition-action rules well.",
+    "key_points": [
+      "A reactive agent maps current perception directly to an action via condition-action rules, with no internal world model.",
+      "Reactive agents do not plan ahead -- they do not simulate or consider the future consequences of an action before taking it.",
+      "Reactive agents are typically fast and computationally cheap, since there is no deliberation step beyond matching the current situation to a rule.",
+      "A classic limitation is handling novel situations that don't cleanly match any predefined rule, since there is no deeper reasoning to fall back on.",
+      "Reactive design is well suited to environments requiring fast responses to well-understood, recurring situations (e.g. a simple customer-service FAQ bot matching keywords to canned answers)."
+    ],
+    "rule_of_thumb": "If a system's action is a direct, fast function of only its current input with no internal model of the broader task state and no lookahead, it is behaving reactively.",
+    "common_confusions": [
+      "Assuming reactive agents cannot use an LLM -- an LLM-based agent that always responds based only on the immediate message with no broader context tracking is still architecturally reactive, regardless of the sophistication of the underlying model.",
+      "Confusing 'reactive' with 'fast and simple-minded in general' -- a reactive agent can still implement fairly sophisticated condition-action mappings, as long as the decision is a direct function of current perception without planning ahead."
+    ],
+    "related_tech": ["reactive agents", "condition-action rules", "stimulus-response"],
+    "references": [
+      "https://arxiv.org/abs/2308.11432"
+    ]
+  },
+  {
+    "id": "TH-D1-014",
+    "domain": 1,
+    "task_statements": ["1.3"],
+    "title": "Deliberative agents: internal world models and planning ahead",
+    "summary": "A deliberative agent maintains an internal representation (a 'world model') of its task, environment, or goal state, and uses that model to plan a sequence of actions before executing them, often considering multiple candidate plans and their likely consequences before committing. This planning-ahead capability lets deliberative agents handle novel situations and multi-step problems more robustly than purely reactive agents, since they can reason about consequences rather than only matching current input to a fixed rule -- but this comes at the cost of significantly more computation and latency per decision, since planning requires exploring possibilities rather than directly reacting.",
+    "key_points": [
+      "A deliberative agent maintains and reasons over an internal model of the task/goal state, not just the immediately current perception.",
+      "Planning ahead means considering a sequence of future actions and their likely consequences before committing to the first one.",
+      "Deliberative agents generally handle novel or complex multi-step situations better than reactive agents, since they're not limited to matching predefined condition-action rules.",
+      "The cost of deliberation is higher latency and computation per decision, since the agent must explore and evaluate possibilities rather than directly react.",
+      "Explicit planning techniques (e.g. generating a multi-step plan before executing any of it) are a hallmark of deliberative agent design."
+    ],
+    "rule_of_thumb": "If a system builds and reasons over an internal model of the task before acting, and considers consequences of candidate action sequences, it is behaving deliberatively -- at the cost of more computation than a direct reactive response.",
+    "common_confusions": [
+      "Assuming deliberative agents are always 'better' than reactive ones -- the added planning cost is only worthwhile when the task genuinely benefits from lookahead; for simple, well-understood tasks, the extra computation is often wasted.",
+      "Equating deliberation with simply generating a longer response -- deliberation specifically means reasoning over an internal model and considering consequences of future actions, not merely producing more verbose output."
+    ],
+    "related_tech": ["deliberative agents", "world model", "planning"],
+    "references": [
+      "https://arxiv.org/abs/2305.04091"
+    ]
+  },
+  {
+    "id": "TH-D1-015",
+    "domain": 1,
+    "task_statements": ["1.3"],
+    "title": "Hybrid agent architectures: combining reactive and deliberative layers",
+    "summary": "Hybrid architectures combine a fast reactive layer for handling common, well-understood situations with a slower deliberative layer invoked for novel, complex, or high-stakes decisions, aiming to get the speed benefits of reactive behavior where it suffices and the robustness of deliberation where it's actually needed. A typical hybrid design might first attempt a fast reactive match; if no rule confidently applies, or if the situation is flagged as high-stakes or unfamiliar, control is escalated to a deliberative planning process. This layered approach mirrors how many practical systems are built: cheap pattern-matching or classification handles the bulk of routine cases, while a more expensive LLM-based reasoning process is reserved for cases that genuinely need it.",
+    "key_points": [
+      "Hybrid architectures layer a fast reactive component with a slower deliberative component, routing decisions to the appropriate layer based on situation familiarity or stakes.",
+      "The reactive layer handles the common case efficiently; the deliberative layer is invoked selectively, which controls average latency/cost while preserving robustness for hard cases.",
+      "A common real-world pattern: fast classification/pattern-matching attempts first, escalating to expensive deliberate reasoning only when the fast path is insufficient or uncertain.",
+      "Hybrid design is a practical response to the tradeoff between reactive agents (fast but brittle on novel cases) and deliberative agents (robust but slow/expensive on every decision).",
+      "The decision of WHEN to escalate from reactive to deliberative processing is itself a design choice, often based on confidence thresholds, novelty detection, or explicit stakes classification."
+    ],
+    "rule_of_thumb": "When a system seems to answer most things quickly but occasionally takes much longer on harder or unusual inputs, that's a signature of a hybrid architecture escalating from a reactive to a deliberative layer.",
+    "common_confusions": [
+      "Assuming hybrid means 'deliberative all the time, just with some extra rules' -- the point of hybrid design is to AVOID invoking the expensive deliberative layer for the common/easy cases, not to always run both.",
+      "Believing the reactive and deliberative layers must be two different models -- the same underlying LLM could serve both roles (a quick low-effort pass vs. an extended reasoning pass), as long as the architecture distinguishes when to invoke which mode."
+    ],
+    "related_tech": ["hybrid agent architecture", "layered control", "escalation"],
+    "references": [
+      "https://arxiv.org/abs/2308.11432"
+    ]
+  },
+  {
+    "id": "TH-D1-016",
+    "domain": 1,
+    "task_statements": ["1.3"],
+    "title": "Choosing an agent architecture based on task and environment properties",
+    "summary": "The choice between reactive, deliberative, and hybrid architectures should be driven by properties of the task and environment, not by a general preference for sophistication. Environments that are highly dynamic, time-sensitive, and dominated by familiar, recurring situations favor reactive designs, since there is little time or benefit to deliberate before responding. Environments requiring multi-step problem solving, planning around constraints, or handling genuinely novel situations favor deliberative designs, since the extra computation buys real robustness. Environments with a mix -- mostly routine with occasional hard cases -- favor hybrid designs, which avoid paying the deliberation cost on every single decision. Latency and cost budgets are also a practical constraint: even a task that would theoretically benefit from deliberation may need a faster reactive approximation if real-time response is required.",
+    "key_points": [
+      "Highly dynamic, time-sensitive environments with mostly familiar situations favor reactive architectures for speed.",
+      "Tasks requiring multi-step planning or handling novel situations favor deliberative architectures for robustness, despite higher cost.",
+      "Mixed environments (mostly routine, occasionally hard) favor hybrid architectures, which selectively invoke deliberation only when needed.",
+      "Latency and cost budgets are practical constraints that can force a faster (more reactive) approach even for tasks that would theoretically benefit from more deliberation.",
+      "There is no universally 'best' architecture -- the right choice depends on the specific task's novelty, time-sensitivity, and the acceptable cost of being wrong."
+    ],
+    "rule_of_thumb": "Match architecture to task shape: fast and familiar favors reactive, complex and novel favors deliberative, and a mix of both favors a hybrid design that escalates selectively.",
+    "common_confusions": [
+      "Assuming deliberative is always the 'more advanced' and therefore correct choice -- for genuinely fast, familiar, repetitive tasks, a reactive design is often the more appropriate engineering choice, not an inferior fallback.",
+      "Ignoring latency/cost budgets when selecting an architecture -- a theoretically ideal deliberative approach may be impractical if the task has a hard real-time response requirement."
+    ],
+    "related_tech": ["architecture selection", "task-environment fit"],
+    "references": [
+      "https://arxiv.org/abs/2308.11432"
+    ]
+  }
+]

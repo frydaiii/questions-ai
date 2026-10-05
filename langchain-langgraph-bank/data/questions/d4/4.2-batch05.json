@@ -1,0 +1,142 @@
+[
+  {
+    "id": "Q-D4-0041",
+    "domain": 4,
+    "task_statement": "4.2",
+    "type": "single_choice",
+    "difficulty": "easy",
+    "theory_refs": [
+      "TH-D4-007"
+    ],
+    "case_study_id": null,
+    "stem": "What question does procedural memory primarily answer?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "How to do this type of task"
+      },
+      {
+        "key": "B",
+        "text": "What happened at a specific past moment"
+      },
+      {
+        "key": "C",
+        "text": "What is generally true about the world"
+      },
+      {
+        "key": "D",
+        "text": "What is the current time of day"
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "explanation": {
+      "why_correct": "Procedural memory is specifically about method or process -- how to accomplish a type of task -- which is its defining, distinguishing question.",
+      "why_incorrect": {
+        "B": "What happened at a specific past moment is the defining question of episodic memory, not procedural.",
+        "C": "What's generally true about the world is the defining question of semantic memory, not procedural.",
+        "D": "Current time of day is an unrelated, situational detail with no particular connection to any of these three memory types specifically."
+      },
+      "rule_of_thumb": "Procedural memory answers 'how to do this' -- distinct from episodic ('what happened') and semantic ('what's generally true')."
+    },
+    "tags": [
+      "procedural-memory"
+    ]
+  },
+  {
+    "id": "Q-D4-0042",
+    "domain": 4,
+    "task_statement": "4.2",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D4-005",
+      "TH-D4-007"
+    ],
+    "case_study_id": null,
+    "stem": "An agent recalls that 'last time I handled a similar refund dispute, I escalated it to a supervisor and it was resolved successfully.' Is this episodic or procedural memory?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Episodic, since it describes one specific past instance and its outcome"
+      },
+      {
+        "key": "B",
+        "text": "Procedural, since it is already a fully generalized, reusable method applicable to all future cases"
+      },
+      {
+        "key": "C",
+        "text": "Neither type applies to this statement at all"
+      },
+      {
+        "key": "D",
+        "text": "Semantic, since it is a general fact about the world"
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "explanation": {
+      "why_correct": "This statement describes one specific past instance (a particular refund dispute) and its specific outcome, which is exactly what episodic memory captures -- it hasn't yet been generalized into a reusable procedure.",
+      "why_incorrect": {
+        "B": "This is a reference to one specific past case, not yet a generalized, reusable procedure for all similar future cases -- that generalization would be a separate, subsequent step.",
+        "C": "This statement is a clear and direct instance of episodic memory.",
+        "D": "This isn't a general, event-independent fact about the world; it's tied to one specific recalled instance."
+      },
+      "rule_of_thumb": "A reference to one specific past instance and its outcome is episodic memory, even if it could later be generalized into a procedure."
+    },
+    "tags": [
+      "episodic-memory",
+      "procedural-memory"
+    ]
+  },
+  {
+    "id": "Q-D4-0043",
+    "domain": 4,
+    "task_statement": "4.2",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D4-008"
+    ],
+    "case_study_id": null,
+    "stem": "Which design practice best supports giving an agent targeted access to the specific TYPE of memory it actually needs for a given reasoning step?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Deleting all memory types except episodic memory"
+      },
+      {
+        "key": "B",
+        "text": "Storing all memories with no type information whatsoever"
+      },
+      {
+        "key": "C",
+        "text": "Organizing or tagging stored memories by type (episodic, semantic, procedural) so retrieval can be targeted to the actual need"
+      },
+      {
+        "key": "D",
+        "text": "Randomly assigning a memory type label with no relationship to actual content"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "Organizing or tagging memories by type allows retrieval to be targeted specifically to the kind of memory actually needed for a given reasoning step, reducing the risk of retrieval mismatches.",
+      "why_incorrect": {
+        "B": "Storing with no type information makes it harder to target retrieval to the specific need, increasing the risk of mismatches.",
+        "D": "Randomly assigned labels with no relationship to actual content would be worse than no labels at all, since they'd actively mislead retrieval.",
+        "A": "Eliminating semantic and procedural memory would remove valuable capabilities (general facts, reusable methods) that episodic memory alone cannot provide."
+      },
+      "rule_of_thumb": "Tagging or organizing memories by type supports targeted retrieval matched to the actual current need."
+    },
+    "tags": [
+      "memory-type-organization"
+    ]
+  }
+]

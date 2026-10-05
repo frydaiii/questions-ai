@@ -1,0 +1,14 @@
+[
+  {
+    "id": "TH-D1-904",
+    "domain": 1,
+    "task_statements": ["1.1"],
+    "title": "Broken fixture: non-allowed reference URL",
+    "summary": "This card intentionally references a domain outside the allowed reference list to test the reference-domain gate.",
+    "key_points": ["a", "b"],
+    "rule_of_thumb": "n/a",
+    "common_confusions": [],
+    "related_tech": [],
+    "references": ["https://en.wikipedia.org/wiki/LangChain"]
+  }
+]

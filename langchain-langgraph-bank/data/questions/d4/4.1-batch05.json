@@ -1,0 +1,144 @@
+[
+  {
+    "id": "Q-D4-0013",
+    "domain": 4,
+    "task_statement": "4.1",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D4-002"
+    ],
+    "case_study_id": null,
+    "stem": "A system has a well-populated long-term memory store but its retrieval mechanism almost never surfaces relevant entries for the current situation. What is the practical consequence?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "This guarantees improved performance regardless of retrieval quality"
+      },
+      {
+        "key": "B",
+        "text": "The information automatically becomes part of working memory regardless of retrieval quality"
+      },
+      {
+        "key": "C",
+        "text": "This has no effect on the agent's actual behavior"
+      },
+      {
+        "key": "D",
+        "text": "The stored information provides little practical benefit, since it's rarely actually retrieved when it would be useful"
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "Since long-term memory's value depends on effective retrieval, a store that's rarely retrieved despite being well-populated provides little practical benefit to the agent's actual behavior.",
+      "why_incorrect": {
+        "B": "Information does not automatically enter working memory; it specifically requires a successful retrieval step, which is exactly what's failing in this scenario.",
+        "C": "Poor retrieval directly affects the agent's actual behavior, since relevant stored information isn't being used when it should be.",
+        "A": "Performance is NOT guaranteed to improve if retrieval quality is poor; in fact, this scenario describes retrieval failing to deliver the expected benefit."
+      },
+      "rule_of_thumb": "A well-populated long-term memory store with poor retrieval provides little practical benefit -- storage and retrieval quality are both necessary."
+    },
+    "tags": [
+      "memory-retrieval",
+      "long-term-memory"
+    ]
+  },
+  {
+    "id": "Q-D4-0014",
+    "domain": 4,
+    "task_statement": "4.1",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D4-001",
+      "TH-D4-003"
+    ],
+    "case_study_id": null,
+    "stem": "In a very long single-session conversation that never ends, what happens to the earliest messages as the context window fills with new content, assuming no long-term memory system is in place?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "They are eventually displaced from the working context and may become unavailable to the agent going forward"
+      },
+      {
+        "key": "B",
+        "text": "They are automatically transferred into a long-term memory system with no further design needed"
+      },
+      {
+        "key": "C",
+        "text": "They remain fully accessible forever regardless of context window size"
+      },
+      {
+        "key": "D",
+        "text": "The conversation becomes permanently impossible to continue at all"
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "explanation": {
+      "why_correct": "Without a long-term memory system in place, the earliest messages are simply displaced from working memory as the window fills with newer content, potentially becoming unavailable to the agent going forward.",
+      "why_incorrect": {
+        "B": "Without an actual long-term memory system in place, there's no automatic transfer -- that requires deliberate design and implementation, which is explicitly absent in this scenario.",
+        "C": "The context window's finite size means older content cannot remain fully accessible indefinitely without being displaced.",
+        "D": "The conversation can typically continue; it's the earlier content specifically that becomes unavailable, not the conversation as a whole."
+      },
+      "rule_of_thumb": "Without a long-term memory system, older content in a growing conversation is simply displaced and lost from working memory, not automatically preserved elsewhere."
+    },
+    "tags": [
+      "working-memory",
+      "context-window"
+    ]
+  },
+  {
+    "id": "Q-D4-0015",
+    "domain": 4,
+    "task_statement": "4.1",
+    "type": "single_choice",
+    "difficulty": "easy",
+    "theory_refs": [
+      "TH-D4-002"
+    ],
+    "case_study_id": null,
+    "stem": "Which capability does long-term memory provide that working memory alone, by definition, cannot?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Continuity of relevant information across separate sessions"
+      },
+      {
+        "key": "B",
+        "text": "The ability to process the current message at all"
+      },
+      {
+        "key": "C",
+        "text": "The ability to generate any text whatsoever"
+      },
+      {
+        "key": "D",
+        "text": "Immediate access with zero retrieval step"
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "explanation": {
+      "why_correct": "Long-term memory specifically enables continuity across separate sessions, which working memory -- tied to the current context -- cannot provide once that session or context ends.",
+      "why_incorrect": {
+        "B": "Processing the current message is a basic function unrelated to the specific working-memory-vs-long-term-memory distinction.",
+        "C": "Text generation is a core model capability unrelated to this specific memory distinction.",
+        "D": "Immediate access with no retrieval step is actually a property of WORKING memory, not long-term memory -- this reverses the actual distinction."
+      },
+      "rule_of_thumb": "Long-term memory's unique value is persistence and continuity across sessions, which working memory alone cannot provide."
+    },
+    "tags": [
+      "long-term-memory",
+      "working-memory"
+    ]
+  }
+]

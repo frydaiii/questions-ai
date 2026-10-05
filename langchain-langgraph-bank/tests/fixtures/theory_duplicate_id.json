@@ -1,0 +1,26 @@
+[
+  {
+    "id": "TH-D1-903",
+    "domain": 1,
+    "task_statements": ["1.1"],
+    "title": "Broken fixture: duplicate id, first occurrence",
+    "summary": "This card intentionally shares its id with another card below to test the uniqueness gate.",
+    "key_points": ["a", "b"],
+    "rule_of_thumb": "n/a",
+    "common_confusions": [],
+    "related_tech": [],
+    "references": ["https://arxiv.org/abs/0000.00001"]
+  },
+  {
+    "id": "TH-D1-903",
+    "domain": 1,
+    "task_statements": ["1.2"],
+    "title": "Broken fixture: duplicate id, second occurrence",
+    "summary": "This card intentionally shares its id with the card above to test the uniqueness gate.",
+    "key_points": ["c", "d"],
+    "rule_of_thumb": "n/a",
+    "common_confusions": [],
+    "related_tech": [],
+    "references": ["https://arxiv.org/abs/0000.00002"]
+  }
+]

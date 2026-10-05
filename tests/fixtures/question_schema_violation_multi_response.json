@@ -1,0 +1,30 @@
+[
+  {
+    "id": "Q-D1-0907",
+    "domain": 1,
+    "task_statement": "1.1",
+    "type": "multi_response",
+    "difficulty": "easy",
+    "theory_refs": ["TH-D1-001"],
+    "case_study_id": null,
+    "stem": "Broken fixture: multi_response question with only one correct key, which violates the schema's minItems:2 for correct.",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Option A text" },
+      { "key": "B", "text": "Option B text" },
+      { "key": "C", "text": "Option C text" },
+      { "key": "D", "text": "Option D text" }
+    ],
+    "correct": ["A"],
+    "explanation": {
+      "why_correct": "This explanation is only present to satisfy the schema; the point of this fixture is the schema-level minItems violation on correct.",
+      "why_incorrect": {
+        "B": "Placeholder explanation for option B.",
+        "C": "Placeholder explanation for option C.",
+        "D": "Placeholder explanation for option D."
+      },
+      "rule_of_thumb": "Placeholder rule of thumb text for this fixture."
+    },
+    "tags": ["fixture"]
+  }
+]

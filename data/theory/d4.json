@@ -1,0 +1,337 @@
+[
+  {
+    "id": "TH-D4-001",
+    "domain": 4,
+    "task_statements": ["4.2"],
+    "title": "SageMaker Clarify vs Amazon Bedrock Guardrails: two different responsible-AI tools",
+    "summary": "Both tools support responsible AI, but they solve different problems for different kinds of models. Amazon SageMaker Clarify detects statistical bias in training data and model predictions for classical ML models, and produces explainability reports (such as feature attribution) so stakeholders can understand why a model made a decision. Amazon Bedrock Guardrails is a generative-AI content-safety control: it filters foundation model inputs and outputs for denied topics, harmful content, and personally identifiable information (PII), and can enforce custom word/topic policies for a chatbot or generative application.",
+    "key_points": [
+      "SageMaker Clarify: bias detection + explainability, targeted at classical/tabular ML models and their training data.",
+      "Bedrock Guardrails: content filtering for generative AI outputs — denied topics, harmful content categories, PII redaction, custom blocklists.",
+      "Clarify runs largely at training/evaluation time; Guardrails runs at inference time on every request/response passing through Bedrock.",
+      "Choosing between them depends on the failure mode in the scenario: statistical/data bias in predictions points to Clarify; unsafe or off-topic generative output points to Guardrails."
+    ],
+    "rule_of_thumb": "Bias in a prediction or an unexplainable classical ML model -> SageMaker Clarify. Inappropriate, unsafe, or off-policy generative text/PII in a chatbot response -> Bedrock Guardrails.",
+    "common_confusions": [
+      "Recommending Clarify for a generative AI chatbot's content-safety problem — Clarify does not filter generative model output; Guardrails does.",
+      "Recommending Guardrails to explain why a classical ML model produced a certain prediction — explainability for tabular/classical models is Clarify's job."
+    ],
+    "aws_services": ["Amazon SageMaker Clarify", "Amazon Bedrock Guardrails"],
+    "references": [
+      "https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-model-explainability.html",
+      "https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails.html"
+    ]
+  },
+  {
+    "id": "TH-D4-002",
+    "domain": 4,
+    "task_statements": ["4.1"],
+    "title": "Core dimensions of responsible AI",
+    "summary": "AWS frames responsible AI around a set of core dimensions that should be considered throughout the ML lifecycle, not just at deployment. Fairness means the system should not produce systematically prejudiced outcomes against particular groups. Explainability and transparency mean stakeholders can understand why a system produced a given output and what its intended use and limitations are. Robustness/safety means the system behaves reliably and predictably, including under adversarial or unusual conditions. Privacy means personal or sensitive data is protected throughout collection, processing, and use. Veracity/truthfulness means the system's outputs should be accurate and not misleading. Governance means clear accountability, policies, and oversight exist for how the system is built and used.",
+    "key_points": [
+      "Fairness: avoiding systematically biased outcomes against protected or vulnerable groups.",
+      "Explainability/transparency: being able to understand and communicate why a system produced a given result, and its known limitations.",
+      "Robustness/safety: reliable, predictable behavior, including resilience to edge cases and adversarial inputs.",
+      "Privacy: protecting personal/sensitive data throughout the system's lifecycle.",
+      "Veracity: outputs should be accurate and not misleading, directly relevant to generative AI's hallucination risk.",
+      "Governance: accountability, policy, and oversight structures spanning the whole AI lifecycle, not just the deployment moment."
+    ],
+    "rule_of_thumb": "These dimensions apply across the ENTIRE ML lifecycle (data collection through monitoring), not just as a final review gate before launch — responsible AI is a continuous practice, not a one-time checklist item at the end.",
+    "common_confusions": [
+      "Treating responsible AI purely as a philosophical or legal topic with no concrete technical answer — AWS ties each dimension to specific tools and practices (e.g. Clarify for fairness/explainability, Guardrails for safety in generative contexts).",
+      "Assuming responsible AI only applies at the deployment/production stage — bias and fairness issues that originate in data collection or feature engineering can't be fully fixed by deployment-stage controls alone."
+    ],
+    "aws_services": ["Amazon SageMaker Clarify", "Amazon Bedrock Guardrails", "AWS AI Service Cards"],
+    "references": [
+      "https://aws.amazon.com/machine-learning/responsible-ai/",
+      "https://aws.amazon.com/machine-learning/responsible-machine-learning/"
+    ]
+  },
+  {
+    "id": "TH-D4-003",
+    "domain": 4,
+    "task_statements": ["4.1"],
+    "title": "Sources of bias in ML systems and mitigation strategies",
+    "summary": "Bias can enter an ML system at multiple stages. Sampling bias occurs when the training data doesn't represent the population the model will actually serve (e.g. a facial recognition dataset skewed toward certain demographics). Label bias occurs when the labels used for supervised training themselves reflect human prejudice or inconsistent judgment. Measurement bias occurs when the way data is collected systematically favors or disfavors certain outcomes. Historical bias occurs when past decisions embedded in training data reflect discriminatory practices that the model then learns to replicate. Mitigations include using diverse, representative training data, applying fairness constraints or reweighting during training, running SageMaker Clarify bias analysis before and after training, and maintaining human oversight for high-stakes decisions.",
+    "key_points": [
+      "Sampling bias: training data doesn't represent the real-world population the model will serve.",
+      "Label bias: the ground-truth labels themselves are inconsistent or reflect human prejudice.",
+      "Measurement bias: the data collection process itself systematically favors certain outcomes.",
+      "Historical bias: past discriminatory patterns embedded in historical data get learned and replicated by the model.",
+      "SageMaker Clarify can detect statistical bias both in training data (pre-training bias metrics) and in model predictions (post-training bias metrics)."
+    ],
+    "rule_of_thumb": "SageMaker Clarify can check for bias both BEFORE training (in the dataset itself) and AFTER training (in the model's predictions) — bias mitigation isn't a single checkpoint, it spans the whole pipeline.",
+    "common_confusions": [
+      "Assuming bias can only come from the model's algorithm itself — most real-world bias originates in the data (sampling, labeling, historical patterns), not the algorithm.",
+      "Treating a single Clarify bias check as sufficient — different bias sources (sampling vs. label vs. historical) may require different mitigations at different pipeline stages, not one universal fix."
+    ],
+    "aws_services": ["Amazon SageMaker Clarify", "Amazon SageMaker Ground Truth"],
+    "references": [
+      "https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-fairness-and-explainability.html",
+      "https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-measure-data-bias.html"
+    ]
+  },
+  {
+    "id": "TH-D4-004",
+    "domain": 4,
+    "task_statements": ["4.1"],
+    "title": "Diverse and representative training data as a responsible AI foundation",
+    "summary": "A model can only be as fair and generalizable as the data it learns from. Training data that underrepresents certain groups, scenarios, or edge cases will produce a model that performs worse for those underrepresented cases, even if the algorithm itself is unbiased in a technical sense. Ensuring diverse, representative training data means actively checking that the data's demographic, geographic, and situational diversity matches (or intentionally oversamples where needed) the population the model will actually serve in production, not just whatever data happened to be conveniently available. This is a data-collection and data-preparation responsibility that precedes and enables downstream bias mitigation techniques like reweighting or fairness constraints.",
+    "key_points": [
+      "A technically unbiased algorithm can still produce biased outcomes if trained on unrepresentative data — the data itself is often the root cause.",
+      "Representativeness should be checked against the ACTUAL population the model will serve in production, not just whatever data was conveniently available.",
+      "Intentional oversampling of underrepresented groups/scenarios during data collection is a common proactive mitigation.",
+      "This concern connects directly to the 'collect data' stage of the ML lifecycle — fixing representativeness after training is far more costly than addressing it during data collection.",
+      "SageMaker Clarify's pre-training bias metrics specifically help detect representativeness gaps before a model is even trained."
+    ],
+    "rule_of_thumb": "If a scenario describes a model performing poorly for a specific group or edge case, first ask whether the training data adequately represented that group/case — this is often the root cause, addressed earliest at the data-collection stage.",
+    "common_confusions": [
+      "Assuming poor performance for an underrepresented group is purely an algorithmic fairness problem to fix after training — often the more fundamental fix is ensuring adequate representation in the training data itself.",
+      "Treating data diversity as a 'nice to have' rather than a core responsible AI requirement with direct fairness and business-risk implications."
+    ],
+    "aws_services": ["Amazon SageMaker Clarify", "Amazon SageMaker Ground Truth"],
+    "references": [
+      "https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-measure-data-bias.html",
+      "https://aws.amazon.com/machine-learning/responsible-ai/"
+    ]
+  },
+  {
+    "id": "TH-D4-005",
+    "domain": 4,
+    "task_statements": ["4.1"],
+    "title": "Human-in-the-loop and human oversight patterns",
+    "summary": "Human oversight is a key responsible AI control, applied at different points in the ML lifecycle for different purposes. During data preparation, human review labels ambiguous or subjective training examples (SageMaker Ground Truth, potentially via Mechanical Turk). During inference, human review of low-confidence or high-stakes predictions before they're acted upon provides a safety net (Amazon Augmented AI, A2I). At a governance level, human oversight also means having clearly accountable people responsible for reviewing model behavior, investigating complaints, and approving significant model changes before they reach production (often formalized via SageMaker Model Registry approval workflows). The right pattern depends on whether the need is building better training data, catching risky live predictions, or governance accountability.",
+    "key_points": [
+      "Ground Truth/MTurk: human-in-the-loop for building/labeling training data, pre-training.",
+      "A2I: human-in-the-loop for reviewing live, low-confidence, or high-stakes predictions, at inference time.",
+      "Model Registry approval workflows: human-in-the-loop for governance — approving a specific model version before production promotion.",
+      "Each pattern addresses a different stage and purpose; recognizing which stage a scenario describes determines the right AWS tool.",
+      "Human oversight is a recurring, cross-cutting responsible AI theme spanning data, inference, and governance stages."
+    ],
+    "rule_of_thumb": "Humans labeling data before training -> Ground Truth/MTurk. Humans reviewing individual live predictions -> A2I. Humans approving a model version before production -> Model Registry approval workflow.",
+    "common_confusions": [
+      "Assuming human-in-the-loop is a single undifferentiated concept — AWS provides distinct tools for distinct human-oversight needs at distinct pipeline stages, and picking the right one depends on which stage the scenario describes.",
+      "Treating human oversight purely as an inference-time concern — it also matters during data preparation (labeling quality) and governance (approving model changes)."
+    ],
+    "aws_services": ["Amazon Augmented AI (A2I)", "Amazon SageMaker Ground Truth", "Amazon SageMaker Model Registry"],
+    "references": [
+      "https://aws.amazon.com/augmented-ai/",
+      "https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry.html"
+    ]
+  },
+  {
+    "id": "TH-D4-006",
+    "domain": 4,
+    "task_statements": ["4.1"],
+    "title": "Legal and ethical considerations in AI deployment",
+    "summary": "Deploying AI systems raises legal and ethical questions beyond pure technical performance. Intellectual property concerns arise around training data provenance (was the data legally allowed to be used) and generated output (could it infringe on existing copyrighted work). Accountability concerns ask who is responsible when an AI system causes harm or makes a costly error — the deploying organization generally cannot fully offload this responsibility onto the underlying model provider. Informed use concerns require that end users understand they are interacting with an AI system and understand its limitations, particularly in sensitive contexts like healthcare or finance. Regulatory considerations vary by industry and jurisdiction and may impose specific obligations on top of general ethical best practice.",
+    "key_points": [
+      "IP concerns span both training data provenance and the risk of generated output resembling protected work.",
+      "Accountability for AI-driven decisions and errors generally remains with the deploying organization, not solely the model provider.",
+      "Users should be informed they are interacting with an AI system, especially in sensitive or high-stakes contexts.",
+      "Regulatory obligations vary significantly by industry (healthcare, finance) and jurisdiction, and layer on top of general ethical practice.",
+      "These considerations connect directly to Domain 5's governance/compliance content — Domain 4 covers the 'why it matters ethically,' Domain 5 covers 'how AWS supports compliance with it.'"
+    ],
+    "rule_of_thumb": "Legal/ethical AI deployment questions generally reduce to: where did the data/model come from (IP), who is accountable if something goes wrong (accountability), and does the user know they're dealing with AI (informed use) — plus whatever industry-specific regulation applies.",
+    "common_confusions": [
+      "Assuming using a third-party foundation model provider fully transfers legal/ethical accountability away from the deploying organization — accountability for how the model is used in your application generally still sits with you.",
+      "Treating 'the model provider handles compliance' as sufficient — organizations deploying AI typically still have their own compliance obligations regardless of which foundation model or provider they build on."
+    ],
+    "aws_services": ["AWS AI Service Cards", "AWS Artifact"],
+    "references": [
+      "https://aws.amazon.com/machine-learning/responsible-ai/",
+      "https://aws.amazon.com/artifact/"
+    ]
+  },
+  {
+    "id": "TH-D4-007",
+    "domain": 4,
+    "task_statements": ["4.2"],
+    "title": "Interpretability vs. explainability",
+    "summary": "Interpretability refers to how directly a human can understand a model's internal logic simply by inspecting it — a small decision tree or a linear regression model is highly interpretable because you can trace exactly how inputs lead to a specific output just by reading the model's structure. Explainability refers to techniques that produce an after-the-fact explanation of a model's behavior or a specific prediction, especially useful for models (like deep neural networks or ensemble methods) that are not directly interpretable by inspection alone. In practice, highly complex models (like large neural networks) sacrifice inherent interpretability for predictive power, and rely on explainability tools (such as feature attribution from SageMaker Clarify) to provide after-the-fact insight into their behavior.",
+    "key_points": [
+      "Interpretability: understanding a model's logic directly by inspecting its structure (e.g. reading a decision tree's rules).",
+      "Explainability: generating an after-the-fact explanation for a model's behavior/prediction, often needed precisely because the model is NOT inherently interpretable.",
+      "Simple models (decision trees, linear regression) tend to be highly interpretable but sometimes less predictively powerful.",
+      "Complex models (deep neural networks, large ensembles) tend to be less interpretable but more predictively powerful, relying on explainability techniques to provide insight.",
+      "SageMaker Clarify's feature attribution reports are an explainability tool, used precisely because many production models aren't simple enough to be interpreted by direct inspection."
+    ],
+    "rule_of_thumb": "Can you understand the model just by looking at its structure? That's interpretability. Do you need a separate technique to explain a black-box model's behavior after the fact? That's explainability.",
+    "common_confusions": [
+      "Treating interpretability and explainability as synonyms — interpretability is an inherent property of simple models; explainability is a technique applied (often to complex models) to produce understanding despite the model not being directly interpretable.",
+      "Assuming a highly accurate model is automatically also interpretable — accuracy and interpretability often trade off against each other, which is exactly why explainability tools exist for complex, high-accuracy models."
+    ],
+    "aws_services": ["Amazon SageMaker Clarify", "Amazon SageMaker Model Cards"],
+    "references": [
+      "https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-model-explainability.html",
+      "https://aws.amazon.com/machine-learning/responsible-ai/"
+    ]
+  },
+  {
+    "id": "TH-D4-008",
+    "domain": 4,
+    "task_statements": ["4.2"],
+    "title": "SageMaker Clarify feature attribution and partial dependence plots",
+    "summary": "SageMaker Clarify offers specific explainability techniques for classical ML models. Feature attribution assigns a contribution score to each input feature for a specific prediction, showing which factors pushed the prediction toward its outcome and by how much — directly answering 'why did the model make THIS decision for THIS individual case.' Partial dependence plots (PDPs) show how a model's predicted outcome changes as one specific feature varies while holding other features constant, revealing the model's general learned relationship between that feature and the outcome across many cases, rather than explaining one individual prediction. Feature attribution answers an individual-case question; PDPs answer a general-relationship question about the model as a whole.",
+    "key_points": [
+      "Feature attribution: explains ONE specific prediction — which features drove this particular individual outcome, and by how much.",
+      "Partial dependence plots (PDPs): show the GENERAL relationship the model learned between one feature and the outcome, across many cases.",
+      "Both are SageMaker Clarify capabilities but answer different questions: 'why this one case' vs. 'what pattern did the model learn overall.'",
+      "A regulator asking about a single denied loan application wants feature attribution; a team wanting to understand overall model behavior for a feature wants a PDP.",
+      "Both techniques apply primarily to classical/tabular ML models, which is Clarify's target, distinct from Bedrock's generative-AI-focused tools."
+    ],
+    "rule_of_thumb": "Explaining one specific individual decision -> feature attribution. Understanding the model's general learned pattern for one feature across many cases -> partial dependence plot.",
+    "common_confusions": [
+      "Confusing feature attribution (individual-case explanation) with partial dependence plots (general model-behavior visualization) — they answer different scopes of question even though both come from SageMaker Clarify.",
+      "Assuming these techniques apply to generative foundation models the same way they apply to classical ML — Clarify's explainability techniques are designed for classical/tabular models; generative model evaluation uses different tools (Bedrock Model Evaluation)."
+    ],
+    "aws_services": ["Amazon SageMaker Clarify"],
+    "references": [
+      "https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-model-explainability.html"
+    ]
+  },
+  {
+    "id": "TH-D4-009",
+    "domain": 4,
+    "task_statements": ["4.2"],
+    "title": "AWS AI Service Cards and SageMaker Model Cards",
+    "summary": "AWS AI Service Cards provide transparency documentation for AWS's own pre-built AI services (like Rekognition or Comprehend), describing intended use cases, known limitations, and responsible AI design considerations for that specific managed service, published by AWS. Amazon SageMaker Model Cards let a team document their OWN trained models — capturing intended use, training data description, evaluation results, known limitations, and risk considerations — creating a standardized, shareable record of a specific model's characteristics for internal governance, audits, and stakeholder communication. Both serve the same broad transparency goal but target different things: AI Service Cards document an AWS-provided service; Model Cards document a team's own custom-trained model.",
+    "key_points": [
+      "AWS AI Service Cards: AWS-published transparency documentation for AWS's own managed AI services.",
+      "SageMaker Model Cards: transparency documentation a team creates for THEIR OWN trained models.",
+      "Both cover similar categories of information (intended use, limitations, performance, responsible AI considerations) but for different subjects (AWS's service vs. your custom model).",
+      "Model Cards support internal governance, auditability, and consistent documentation practice across an organization's model portfolio.",
+      "This is a naming-similarity trap: 'Service Card' and 'Model Card' sound similar but document fundamentally different things (a vendor's managed service vs. your own trained artifact)."
+    ],
+    "rule_of_thumb": "Documenting AWS's own pre-built service (like Rekognition) -> AI Service Card, published by AWS. Documenting a model YOUR team trained -> SageMaker Model Card, created by your team.",
+    "common_confusions": [
+      "Confusing AI Service Cards (AWS documents its own managed services) with Model Cards (you document your own custom-trained models) — the naming similarity is intentionally a common exam distractor.",
+      "Assuming Model Cards are optional documentation with no governance value — they are a structured artifact supporting audits, stakeholder review, and consistent transparency practice across an organization's models."
+    ],
+    "aws_services": ["AWS AI Service Cards", "Amazon SageMaker Model Cards"],
+    "references": [
+      "https://aws.amazon.com/machine-learning/responsible-ai/resources/",
+      "https://docs.aws.amazon.com/sagemaker/latest/dg/model-cards.html"
+    ]
+  },
+  {
+    "id": "TH-D4-010",
+    "domain": 4,
+    "task_statements": ["4.2"],
+    "title": "Human-centered design (HCD) for explainable AI",
+    "summary": "Human-centered design for explainable AI means designing explanations around the needs, background, and decision context of the actual human who will receive them, rather than exposing raw technical output (like a table of feature attribution scores) to someone who cannot meaningfully act on it. A loan officer, a customer, and a data scientist may all need very different explanations for the same model decision: the data scientist may want detailed feature attribution values, while the customer may need a plain-language summary of the main factors behind a decision. Effective explainability isn't just generating a technically correct explanation — it's presenting the RIGHT explanation, at the right level of detail, to the specific audience that needs to understand and act on it.",
+    "key_points": [
+      "The same underlying explanation data (e.g. feature attribution scores) may need to be presented completely differently depending on the audience.",
+      "A technically accurate but inaccessible explanation (e.g. raw numeric attribution scores shown to an end customer) fails the actual goal of explainability.",
+      "HCD applies UX/design thinking to the explainability problem itself, not just to the AI system's primary interface.",
+      "This connects explainability (a technical capability) to real business/regulatory value (a stakeholder can actually understand and act on the explanation).",
+      "The exam may test recognition that 'technically explainable' and 'usefully explained to this audience' are not automatically the same thing."
+    ],
+    "rule_of_thumb": "An explanation is only as good as its usefulness to the specific person receiving it — tailor the explanation's format and detail level to the audience (data scientist vs. business stakeholder vs. end customer), not just to what the tool outputs by default.",
+    "common_confusions": [
+      "Assuming that generating a technically correct explanation (e.g. via SageMaker Clarify) automatically satisfies explainability requirements — if the intended audience can't understand or act on that explanation, the responsible AI goal isn't actually met.",
+      "Treating explainability as a purely backend/technical concern with no design or communication dimension."
+    ],
+    "aws_services": ["Amazon SageMaker Clarify", "Amazon SageMaker Model Cards"],
+    "references": [
+      "https://aws.amazon.com/machine-learning/responsible-ai/",
+      "https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-model-explainability.html"
+    ]
+  },
+  {
+    "id": "TH-D4-011",
+    "domain": 4,
+    "task_statements": ["4.2"],
+    "title": "Transparency and explainability requirements vary by risk level and audience",
+    "summary": "Not every AI system needs the same depth of explanation. A low-stakes internal tool (like a marketing content draft generator) may need minimal explainability, since a wrong or awkward output has low real-world cost and is easily caught by a human reviewer. A high-stakes system (like a loan approval or medical triage recommendation) demands much deeper explainability and transparency, because incorrect or unfair decisions carry significant real-world harm and often legal/regulatory scrutiny. Calibrating the depth of transparency and explainability effort to the actual risk and impact of a system's decisions is itself a responsible AI design practice, avoiding both under-investment in high-risk systems and wasted effort over-engineering explainability for genuinely low-stakes ones.",
+    "key_points": [
+      "Explainability investment should scale with the real-world stakes and risk of the system's decisions, not be applied uniformly regardless of context.",
+      "High-stakes domains (lending, healthcare, criminal justice, hiring) typically demand the deepest explainability and audit trails.",
+      "Low-stakes, easily-reviewed use cases can reasonably use lighter-weight explainability approaches.",
+      "This risk-based calibration is itself a recognized responsible AI practice, not a shortcut or compromise.",
+      "The exam may present two scenarios with different stakes and ask which one has a stronger explainability/transparency requirement."
+    ],
+    "rule_of_thumb": "Higher real-world stakes and harder-to-reverse consequences of a wrong decision -> deeper explainability and transparency investment required. Low-stakes, easily human-reviewed output -> lighter-weight explainability is reasonable.",
+    "common_confusions": [
+      "Assuming every AI system requires the exact same, maximal level of explainability regardless of context — the responsible, resource-efficient approach calibrates explainability depth to actual risk and impact.",
+      "Underestimating the explainability requirements of a system just because it 'seems' automated and routine — automation itself doesn't reduce the real-world stakes of a decision like a loan denial or medical recommendation."
+    ],
+    "aws_services": ["Amazon SageMaker Clarify", "AWS AI Service Cards"],
+    "references": [
+      "https://aws.amazon.com/machine-learning/responsible-ai/",
+      "https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-model-explainability.html"
+    ]
+  },
+  {
+    "id": "TH-D4-012",
+    "domain": 4,
+    "task_statements": ["4.1", "4.2"],
+    "title": "Generative AI-specific responsible AI challenges: toxicity, hallucination, plagiarism recap in a responsible AI framing",
+    "summary": "While hallucination, toxicity, and plagiarism risk were introduced as generative AI limitations in Domain 2, Domain 4 frames them specifically as responsible AI challenges requiring deliberate organizational mitigation and governance, not just technical curiosities. From a responsible AI lens: hallucination threatens veracity (outputs must be accurate/non-misleading), toxicity threatens safety (outputs must not cause harm), and plagiarism/IP risk threatens both legal compliance and ethical use of others' work. Mitigating these at an organizational level typically combines technical controls (Bedrock Guardrails for content filtering, RAG for grounding facts) with governance controls (usage policies, human review workflows, and clear escalation paths when problems are detected in production).",
+    "key_points": [
+      "Hallucination maps to the veracity dimension of responsible AI — outputs must be accurate and not misleading.",
+      "Toxicity maps to the safety dimension — outputs must not cause harm to users or third parties.",
+      "Plagiarism/IP risk maps to both legal compliance and ethical considerations around respecting others' intellectual property.",
+      "Effective mitigation combines technical controls (Guardrails, RAG) with organizational governance controls (policy, human review, escalation paths).",
+      "This is intentionally the same underlying risks as Domain 2, but tested here through a responsible AI governance and mitigation-strategy lens rather than a pure capability/limitation framing."
+    ],
+    "rule_of_thumb": "When a question frames hallucination/toxicity/plagiarism as a responsible AI governance problem (not just 'what is it'), think about which responsible AI dimension it violates (veracity, safety, legal/ethical) and which combined technical + governance controls address it.",
+    "common_confusions": [
+      "Treating Domain 2's coverage of hallucination/toxicity (capabilities and limitations) as unrelated to Domain 4's coverage of the same risks (responsible AI governance) — they are the same underlying phenomena, viewed through different lenses (technical limitation vs. governance/mitigation responsibility).",
+      "Assuming a single technical control (like Guardrails) is sufficient without any organizational governance/policy layer — robust mitigation of these risks typically requires both."
+    ],
+    "aws_services": ["Amazon Bedrock Guardrails", "Amazon Bedrock Knowledge Bases", "AWS AI Service Cards"],
+    "references": [
+      "https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails.html",
+      "https://aws.amazon.com/machine-learning/responsible-ai/"
+    ]
+  },
+  {
+    "id": "TH-D4-013",
+    "domain": 4,
+    "task_statements": ["4.1"],
+    "title": "Fairness metrics and pre-training vs. post-training bias checks",
+    "summary": "Fairness can be checked at two distinct points using SageMaker Clarify. Pre-training bias metrics examine the training dataset itself, before any model is trained, checking things like whether a sensitive attribute group is underrepresented or whether outcome labels are distributed unevenly across groups in ways that could bake in unfairness. Post-training bias metrics examine the trained model's actual predictions, checking things like whether the model's positive prediction rate, error rate, or other outcome differs meaningfully across groups after training is complete. Checking both is important because a dataset can look reasonably balanced yet still produce a biased model (due to how the model learns from subtle patterns), and conversely a model can show bias in its predictions that traces back to a data issue invisible without a pre-training check.",
+    "key_points": [
+      "Pre-training bias metrics: examine the dataset itself, before training — representation and label distribution across groups.",
+      "Post-training bias metrics: examine the trained model's actual predictions — whether outcomes differ meaningfully across groups.",
+      "Both checks matter because dataset issues and model-behavior issues are related but distinct, and one check alone can miss what the other would catch.",
+      "SageMaker Clarify supports both categories of bias metric, spanning before and after the training step.",
+      "This two-checkpoint approach reflects that bias can be introduced or amplified at multiple pipeline stages, not just one."
+    ],
+    "rule_of_thumb": "Checking the training data itself for representation/label issues before any model exists -> pre-training bias metrics. Checking the trained model's actual prediction outcomes across groups -> post-training bias metrics. Both are Clarify capabilities, applied at different pipeline stages.",
+    "common_confusions": [
+      "Assuming a clean pre-training bias check guarantees a fair model — subtle patterns learned during training can still introduce bias even from data that passed pre-training checks, which is why post-training checks matter too.",
+      "Running only a post-training check and skipping pre-training checks — this misses the opportunity to catch and fix representation/label issues at the source, before investing in training a model on flawed data."
+    ],
+    "aws_services": ["Amazon SageMaker Clarify"],
+    "references": [
+      "https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-measure-data-bias.html",
+      "https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-model-explainability.html"
+    ]
+  },
+  {
+    "id": "TH-D4-014",
+    "domain": 4,
+    "task_statements": ["4.1"],
+    "title": "Responsible AI investigation workflow: from complaint to remediation",
+    "summary": "When a fairness or responsible AI complaint arises about a deployed model (for example, a claim that a loan or hiring model is denying one group at a disproportionate rate), a disciplined investigation follows a repeatable sequence. First, review existing documentation (Model Cards, AI Service Cards) for known limitations and intended use, to understand whether the complaint falls within already-documented risk. Next, run a systematic statistical bias check (SageMaker Clarify pre- and post-training metrics) across the relevant protected attributes to quantify whether a real disparity exists. Then, drill into individual affected cases using feature attribution to understand what specifically drove those particular decisions. Finally, implement a mitigation (such as reweighting data, adjusting features, or applying a fairness constraint), and re-run the bias checks to confirm the mitigation actually worked before considering the issue resolved.",
+    "key_points": [
+      "Step 1: review existing documentation (Model Cards/AI Service Cards) for already-known limitations relevant to the complaint.",
+      "Step 2: run systematic statistical bias checks (Clarify) to quantify whether a real disparity exists, not just anecdotal impression.",
+      "Step 3: use feature attribution to understand individual affected cases in more depth.",
+      "Step 4: implement a mitigation, then re-run bias checks to confirm the fix actually worked — closing the loop rather than assuming a fix succeeded.",
+      "This ordered workflow (documentation review -> systematic check -> individual drill-down -> mitigate -> re-verify) is a repeatable pattern the exam may test via ordering-style questions."
+    ],
+    "rule_of_thumb": "Responsible AI investigations follow: check existing documentation first, then run systematic statistical bias detection, then drill into individual cases with explainability tools, then mitigate and re-verify — don't skip straight to a fix without first confirming and understanding the actual problem.",
+    "common_confusions": [
+      "Jumping straight to 'fix' a fairness complaint without first running a systematic statistical check to confirm a real, quantifiable disparity exists (as opposed to an isolated anecdote).",
+      "Treating a mitigation as complete without re-running the bias check afterward to confirm the fix actually resolved the disparity — an unverified mitigation might not have worked, or could have introduced a new issue."
+    ],
+    "aws_services": ["Amazon SageMaker Clarify", "Amazon SageMaker Model Cards"],
+    "references": [
+      "https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-measure-data-bias.html",
+      "https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-model-explainability.html"
+    ]
+  }
+]

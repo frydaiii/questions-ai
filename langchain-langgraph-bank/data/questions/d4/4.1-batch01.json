@@ -1,0 +1,144 @@
+[
+  {
+    "id": "Q-D4-0001",
+    "domain": 4,
+    "task_statement": "4.1",
+    "type": "single_choice",
+    "difficulty": "easy",
+    "theory_refs": [
+      "TH-D4-001"
+    ],
+    "case_study_id": null,
+    "stem": "What distinguishes working memory from long-term memory in an agent context?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Working memory requires a special password to access"
+      },
+      {
+        "key": "B",
+        "text": "Working memory is immediately available in the current context with no retrieval step, unlike long-term memory"
+      },
+      {
+        "key": "C",
+        "text": "Working memory is always larger than long-term memory"
+      },
+      {
+        "key": "D",
+        "text": "There is no actual difference between the two"
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "explanation": {
+      "why_correct": "The defining distinction is that working memory is directly present in the current context and usable without any retrieval step, while long-term memory requires a deliberate retrieval step before it becomes usable.",
+      "why_incorrect": {
+        "A": "Access to memory is not gated by anything resembling a password; this is an irrelevant distractor.",
+        "C": "Long-term memory can typically store far more than working memory, which is bounded by the context window -- the opposite of this claim.",
+        "D": "There is a clear, meaningful, and well-documented difference between the two memory types."
+      },
+      "rule_of_thumb": "Working memory needs no retrieval step; long-term memory does -- this is the core distinguishing trait."
+    },
+    "tags": [
+      "working-memory",
+      "long-term-memory"
+    ]
+  },
+  {
+    "id": "Q-D4-0002",
+    "domain": 4,
+    "task_statement": "4.1",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D4-002"
+    ],
+    "case_study_id": null,
+    "stem": "Why is simply storing information in long-term memory not sufficient on its own to benefit an agent's future behavior?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Long-term memory can only ever store exactly one fact at a time"
+      },
+      {
+        "key": "B",
+        "text": "Long-term memory storage is purely decorative and serves no function"
+      },
+      {
+        "key": "C",
+        "text": "Information in long-term memory automatically appears in every future conversation with no retrieval needed"
+      },
+      {
+        "key": "D",
+        "text": "Stored information must still be actively retrieved into working memory at the right moment to actually influence reasoning"
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "Information sitting in long-term storage provides no benefit until a retrieval mechanism actually brings it back into working memory at a relevant moment -- storage alone, without effective retrieval, doesn't influence behavior.",
+      "why_incorrect": {
+        "B": "Long-term memory storage does serve a real function -- it just requires effective retrieval to realize that function's benefit.",
+        "C": "Long-term memory does NOT automatically appear in every future conversation; it specifically requires an explicit retrieval step, which is exactly the point being made.",
+        "A": "Long-term memory can store many facts; there's no such severe one-fact-at-a-time limitation."
+      },
+      "rule_of_thumb": "Long-term memory's value is realized only through effective retrieval -- storage without retrieval provides no actual behavioral benefit."
+    },
+    "tags": [
+      "long-term-memory",
+      "memory-retrieval"
+    ]
+  },
+  {
+    "id": "Q-D4-0003",
+    "domain": 4,
+    "task_statement": "4.1",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D4-003"
+    ],
+    "case_study_id": null,
+    "stem": "A team designs an agent that relies exclusively on an ever-growing context window with no long-term memory system at all, intending to simply never truncate anything. What problem does this design eventually face?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Even a very large context window is still finite, so the design will eventually hit a limit as the conversation grows indefinitely"
+      },
+      {
+        "key": "B",
+        "text": "No problem at all, since context windows have no upper bound in practice"
+      },
+      {
+        "key": "C",
+        "text": "The agent will gain the ability to remember things across completely separate sessions automatically"
+      },
+      {
+        "key": "D",
+        "text": "This design is strictly superior to any system that uses long-term memory"
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "explanation": {
+      "why_correct": "Any context window, however large, is still finite -- a design that assumes unlimited growth will eventually hit that limit as the conversation or task continues to grow indefinitely.",
+      "why_incorrect": {
+        "B": "All context windows have some finite upper bound in practice, even if large; assuming otherwise is the exact flaw being described.",
+        "C": "A large context window within a single session does not provide cross-session persistence; that specifically requires long-term memory, which this design lacks.",
+        "D": "This design has a real limitation (eventual context exhaustion and no cross-session persistence) that a combined working/long-term memory design would not have."
+      },
+      "rule_of_thumb": "Even very large context windows are finite -- relying solely on an ever-growing window is not a scalable substitute for a proper long-term memory system."
+    },
+    "tags": [
+      "working-memory",
+      "long-term-memory",
+      "memory-architecture"
+    ]
+  }
+]

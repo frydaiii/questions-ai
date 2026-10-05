@@ -1,0 +1,378 @@
+[
+  {
+    "id": "Q-D4-0073",
+    "domain": 4,
+    "task_statement": "4.3",
+    "type": "single_choice",
+    "difficulty": "easy",
+    "theory_refs": [
+      "TH-D4-009"
+    ],
+    "case_study_id": null,
+    "stem": "What does 'relevance-based retrieval' primarily aim to achieve?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Surfacing the stored memories most pertinent to the current situation, rather than everything stored"
+      },
+      {
+        "key": "B",
+        "text": "Deleting all memory immediately upon creation"
+      },
+      {
+        "key": "C",
+        "text": "Storing information with no retrieval capability at all"
+      },
+      {
+        "key": "D",
+        "text": "Making every stored memory exactly the same length"
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "explanation": {
+      "why_correct": "Relevance-based retrieval aims to surface the memories most pertinent to the current situation, as opposed to retrieving everything stored or something unrelated to actual pertinence.",
+      "why_incorrect": {
+        "B": "Deleting all memory immediately would eliminate the possibility of ever retrieving anything useful; this is the opposite of effective retrieval.",
+        "C": "Storage with no retrieval capability defeats the entire purpose of having long-term memory in the first place.",
+        "D": "Uniform memory length has no relationship to whether retrieval surfaces pertinent content for the current need."
+      },
+      "rule_of_thumb": "Relevance-based retrieval's goal is surfacing the most pertinent stored memories for the current situation, not retrieving everything or nothing."
+    },
+    "tags": [
+      "relevance-based-retrieval"
+    ]
+  },
+  {
+    "id": "Q-D4-0074",
+    "domain": 4,
+    "task_statement": "4.3",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D4-010"
+    ],
+    "case_study_id": null,
+    "stem": "Why might relying on relevance alone, with no recency consideration, be risky for information that changes over time, such as a user's job title?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "A highly relevant but outdated memory about the old job title might be surfaced as if it still reflects the user's current situation"
+      },
+      {
+        "key": "B",
+        "text": "Job titles never change once recorded, so this is never actually a risk"
+      },
+      {
+        "key": "C",
+        "text": "Relevance and recency are always identical signals with no distinction"
+      },
+      {
+        "key": "D",
+        "text": "This risk only applies to information that never changes"
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "explanation": {
+      "why_correct": "A memory about an old job title remains topically relevant to questions about the user's job, but without recency weighting, it could be surfaced as if it reflects the current situation even though the title has since changed.",
+      "why_incorrect": {
+        "B": "Job titles commonly do change over time, which is exactly the kind of changeable information this risk applies to.",
+        "C": "Relevance (topical pertinence) and recency (how current the information is) are distinct signals, which is precisely why combining them matters.",
+        "D": "This risk specifically applies to information that CAN change over time, like job titles, not information that never changes."
+      },
+      "rule_of_thumb": "For information that can change over time, relevance alone risks surfacing an outdated-but-topically-relevant memory as if it reflects the current state."
+    },
+    "tags": [
+      "recency",
+      "relevance-based-retrieval"
+    ]
+  },
+  {
+    "id": "Q-D4-0075",
+    "domain": 4,
+    "task_statement": "4.3",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D4-011"
+    ],
+    "case_study_id": null,
+    "stem": "Which framing of forgetting is more accurate, based on the discussion of deliberate forgetting as a maintenance mechanism?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Forgetting never serves any useful purpose under any circumstances"
+      },
+      {
+        "key": "B",
+        "text": "Forgetting is always purely bad and should be eliminated entirely in every system"
+      },
+      {
+        "key": "C",
+        "text": "Forgetting can be a deliberate, useful maintenance mechanism, not purely an unfortunate limitation to be minimized at all costs"
+      },
+      {
+        "key": "D",
+        "text": "Forgetting and remembering are the exact same operation with no distinction"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "Deliberate forgetting of outdated or superseded information serves a useful maintenance function, keeping a memory store effective -- it should be understood as a useful mechanism, not purely a limitation to avoid.",
+      "why_incorrect": {
+        "B": "Eliminating forgetting entirely leads to indefinite accumulation of outdated clutter, which has real downsides, as discussed.",
+        "D": "Forgetting (removing/deprioritizing) and remembering (retaining) are clearly distinct, opposite operations.",
+        "A": "Deliberate, targeted forgetting serves the real, useful purpose of keeping a memory store accurate and uncluttered."
+      },
+      "rule_of_thumb": "Deliberate forgetting is a useful maintenance mechanism for keeping memory stores accurate and uncluttered, not purely a limitation to minimize."
+    },
+    "tags": [
+      "forgetting-mechanisms"
+    ]
+  },
+  {
+    "id": "Q-D4-0076",
+    "domain": 4,
+    "task_statement": "4.3",
+    "type": "single_choice",
+    "difficulty": "hard",
+    "theory_refs": [
+      "TH-D4-009",
+      "TH-D4-010",
+      "TH-D4-011"
+    ],
+    "case_study_id": null,
+    "stem": "An agent's memory system has excellent relevance ranking but no recency weighting and no forgetting mechanism. Over several years of use, what is the most likely cumulative effect?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "An increasing risk of surfacing outdated, superseded information as if it were current, since nothing in the system accounts for staleness or removes clearly outdated content"
+      },
+      {
+        "key": "B",
+        "text": "A guaranteed permanent improvement in retrieval accuracy with no downside"
+      },
+      {
+        "key": "C",
+        "text": "No change at all over time regardless of how much content accumulates"
+      },
+      {
+        "key": "D",
+        "text": "An automatic self-correcting mechanism that fixes all staleness issues without any design effort"
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "explanation": {
+      "why_correct": "Without recency weighting or a forgetting mechanism, accumulated years of content -- including now-outdated facts -- have no mechanism to be deprioritized or removed, increasingly risking outdated information being surfaced as current purely based on topical relevance.",
+      "why_incorrect": {
+        "B": "Excellent relevance ranking alone, without recency or forgetting, does not guarantee improving accuracy over time; it specifically risks degrading accuracy as stale content accumulates.",
+        "C": "Accumulating years of content, including outdated facts with no mitigation, is very likely to have a real, growing effect on retrieval quality over time.",
+        "D": "There is no such automatic self-correcting mechanism; recency weighting and forgetting must be deliberately designed and implemented, not assumed to happen automatically."
+      },
+      "rule_of_thumb": "Excellent relevance ranking alone, without recency or forgetting, still risks accumulating staleness over time -- all three mechanisms are needed together."
+    },
+    "tags": [
+      "relevance-based-retrieval",
+      "recency",
+      "forgetting-mechanisms"
+    ]
+  },
+  {
+    "id": "Q-D4-0077",
+    "domain": 4,
+    "task_statement": "4.3",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D4-012"
+    ],
+    "case_study_id": null,
+    "stem": "Which scenario best illustrates a contradiction that likely reflects noise or a one-off exception, rather than a genuine update?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "A user who has consistently stated a preference for email over many interactions mentions, just once, in an unusual context, that they'd prefer a phone call for this one specific urgent matter"
+      },
+      {
+        "key": "B",
+        "text": "A user explicitly states, clearly and directly, that they have permanently moved to a new address"
+      },
+      {
+        "key": "C",
+        "text": "A user explicitly and clearly states a permanent change to their name"
+      },
+      {
+        "key": "D",
+        "text": "A user explicitly cancels their account permanently"
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "explanation": {
+      "why_correct": "A single, context-specific request for a phone call for one urgent matter, against a long and consistent pattern of preferring email, looks like a one-off exception tied to that specific situation, not a genuine permanent change to the overall preference.",
+      "why_incorrect": {
+        "B": "An explicit, clear statement of a permanent address change is a strong signal of a genuine, intentional update, not noise.",
+        "C": "An explicit, clear statement of a permanent name change is a strong signal of a genuine update, not a one-off exception.",
+        "D": "An explicit account cancellation is a clear, deliberate action, not an ambiguous one-off exception."
+      },
+      "rule_of_thumb": "A single, context-specific deviation from a long-established, consistent pattern is more likely a one-off exception than a genuine permanent update."
+    },
+    "tags": [
+      "contradiction-resolution",
+      "frequency"
+    ]
+  },
+  {
+    "id": "Q-D4-0078",
+    "domain": 4,
+    "task_statement": "4.3",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D4-009"
+    ],
+    "case_study_id": null,
+    "stem": "Which design choice best supports surfacing the 'most pertinent few' memories rather than everything that loosely matches a query?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Ranking candidates by a similarity/relevance score and returning only the top few results"
+      },
+      {
+        "key": "B",
+        "text": "Returning every single stored memory regardless of score"
+      },
+      {
+        "key": "C",
+        "text": "Returning results in a completely random order with no ranking at all"
+      },
+      {
+        "key": "D",
+        "text": "Returning results sorted purely alphabetically by their first letter"
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "explanation": {
+      "why_correct": "Scoring candidates by similarity/relevance and returning only the top few directly implements the goal of surfacing the most pertinent memories, rather than everything or an arbitrarily ordered subset.",
+      "why_incorrect": {
+        "B": "Returning everything regardless of score is exactly the undifferentiated approach that relevance-based retrieval aims to avoid.",
+        "C": "Random ordering with no ranking provides no assurance that the most pertinent memories are actually surfaced.",
+        "D": "Alphabetical ordering by first letter has no relationship to actual pertinence or usefulness for the current need."
+      },
+      "rule_of_thumb": "Ranking by a relevance/similarity score and returning only the top few results is how relevance-based retrieval surfaces the most pertinent content."
+    },
+    "tags": [
+      "relevance-based-retrieval"
+    ]
+  },
+  {
+    "id": "Q-D4-0079",
+    "domain": 4,
+    "task_statement": "4.3",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D4-010",
+      "TH-D4-011"
+    ],
+    "case_study_id": null,
+    "stem": "How are recency and forgetting related as mechanisms for keeping a memory system accurate over time?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Recency helps prioritize more current information at retrieval time, while forgetting actively removes or deprioritizes outdated content from the store itself -- both address staleness from different angles"
+      },
+      {
+        "key": "B",
+        "text": "They are the exact same mechanism with no distinction whatsoever"
+      },
+      {
+        "key": "C",
+        "text": "Recency and forgetting work against each other and can never be used together"
+      },
+      {
+        "key": "D",
+        "text": "Neither mechanism has anything to do with addressing outdated information"
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "explanation": {
+      "why_correct": "Recency helps retrieval favor more current information when ranking candidates, while forgetting addresses staleness more directly by removing or deprioritizing outdated content in the store itself -- both are complementary approaches to the same underlying staleness problem.",
+      "why_incorrect": {
+        "B": "They operate at different points (retrieval-time ranking vs. store maintenance) and are not literally the same mechanism.",
+        "C": "They are complementary, not opposing -- a system can use both recency weighting at retrieval time and forgetting for store maintenance together.",
+        "D": "Both mechanisms are specifically about addressing the risk of outdated information remaining influential, directly relevant to this concern."
+      },
+      "rule_of_thumb": "Recency and forgetting are complementary mechanisms addressing staleness from different angles -- retrieval-time ranking versus store maintenance."
+    },
+    "tags": [
+      "recency",
+      "forgetting-mechanisms"
+    ]
+  },
+  {
+    "id": "Q-D4-0080",
+    "domain": 4,
+    "task_statement": "4.3",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D4-012"
+    ],
+    "case_study_id": null,
+    "stem": "What is the main risk of a memory system that has NO policy at all for handling contradictions, simply storing every version of a fact with no reconciliation?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "The agent may have no clear basis for deciding which version of the fact to actually use, risking inconsistent or confusing behavior"
+      },
+      {
+        "key": "B",
+        "text": "This guarantees the agent will always use the correct version automatically"
+      },
+      {
+        "key": "C",
+        "text": "This approach has no downside of any kind"
+      },
+      {
+        "key": "D",
+        "text": "This eliminates the need for any retrieval mechanism"
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "explanation": {
+      "why_correct": "With no policy to reconcile contradictory stored versions, the agent lacks a clear basis for deciding which version actually reflects reality, risking inconsistent behavior (e.g. sometimes using the old fact, sometimes the new one, with no principled reason).",
+      "why_incorrect": {
+        "B": "With no reconciliation policy, there's no mechanism ensuring the correct version is reliably chosen; the choice becomes essentially arbitrary or inconsistent.",
+        "C": "This approach has a real, meaningful downside: inconsistent or confusing agent behavior from unresolved contradictions.",
+        "D": "A retrieval mechanism is still needed to surface whichever (possibly contradictory) versions are stored; this issue doesn't eliminate that need."
+      },
+      "rule_of_thumb": "A memory system with no contradiction-resolution policy risks inconsistent behavior, since there's no principled basis for choosing which stored version reflects reality."
+    },
+    "tags": [
+      "contradiction-resolution"
+    ]
+  }
+]

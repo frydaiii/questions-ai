@@ -1,0 +1,135 @@
+{
+  "exam": {
+    "code": "AI-AGENT-THEORY",
+    "name": "AI Agent Theory Practice Bank",
+    "note": "This is NOT an official certification exam blueprint. There is no public standardized exam for AI agent theory. Domains, task statements, and weights below are an original curriculum design covering framework-agnostic conceptual knowledge about AI agents -- architectures, reasoning/planning, tool use, memory, multi-agent systems, and evaluation/safety -- independent of any specific library or vendor (e.g. not LangChain/LangGraph API mechanics). Intended for self-study and interview preparation. All questions, explanations, and theory cards are original content."
+  },
+  "total_questions": 500,
+  "case_study_clusters": 5,
+  "domains": [
+    {
+      "id": 1,
+      "name": "Agent Architectures & Foundations",
+      "weight_pct": 15,
+      "total_questions": 75,
+      "standalone_questions": 72,
+      "case_study_questions": 3,
+      "theory_cards_target": 17,
+      "task_statements": [
+        { "id": "1.1", "title": "What makes a system an agent (vs. a plain LLM call or chatbot)", "standalone_questions": 25 },
+        { "id": "1.2", "title": "The perceive-reason-act loop and agent control flow", "standalone_questions": 24 },
+        { "id": "1.3", "title": "Agent types: reactive, deliberative, and hybrid architectures", "standalone_questions": 23 }
+      ],
+      "format_mix": { "single_choice": 50, "multi_response": 13, "ordering": 4, "matching": 5 },
+      "difficulty_mix_pct": { "easy": 25, "medium": 55, "hard": 20 }
+    },
+    {
+      "id": 2,
+      "name": "Reasoning & Planning",
+      "weight_pct": 18,
+      "total_questions": 90,
+      "standalone_questions": 86,
+      "case_study_questions": 4,
+      "theory_cards_target": 21,
+      "task_statements": [
+        { "id": "2.1", "title": "ReAct and interleaving reasoning with action", "standalone_questions": 21 },
+        { "id": "2.2", "title": "Task decomposition and planning (plan-and-execute, tree-of-thought)", "standalone_questions": 22 },
+        { "id": "2.3", "title": "Reflection and self-critique loops", "standalone_questions": 22 },
+        { "id": "2.4", "title": "Handling uncertainty, ambiguity, and reasoning errors", "standalone_questions": 21 }
+      ],
+      "format_mix": { "single_choice": 59, "multi_response": 16, "ordering": 6, "matching": 5 },
+      "difficulty_mix_pct": { "easy": 25, "medium": 55, "hard": 20 }
+    },
+    {
+      "id": 3,
+      "name": "Tool Use & Grounding",
+      "weight_pct": 17,
+      "total_questions": 85,
+      "standalone_questions": 82,
+      "case_study_questions": 3,
+      "theory_cards_target": 20,
+      "task_statements": [
+        { "id": "3.1", "title": "Why agents need tools: grounding, fresh information, and real-world actions", "standalone_questions": 28 },
+        { "id": "3.2", "title": "Tool selection and invocation strategies", "standalone_questions": 27 },
+        { "id": "3.3", "title": "Tool-use failure modes and recovery strategies", "standalone_questions": 27 }
+      ],
+      "format_mix": { "single_choice": 56, "multi_response": 15, "ordering": 6, "matching": 5 },
+      "difficulty_mix_pct": { "easy": 20, "medium": 55, "hard": 25 }
+    },
+    {
+      "id": 4,
+      "name": "Memory Systems",
+      "weight_pct": 17,
+      "total_questions": 85,
+      "standalone_questions": 82,
+      "case_study_questions": 3,
+      "theory_cards_target": 20,
+      "task_statements": [
+        { "id": "4.1", "title": "Short-term/working memory vs. long-term memory", "standalone_questions": 28 },
+        { "id": "4.2", "title": "Episodic, semantic, and procedural memory for agents", "standalone_questions": 27 },
+        { "id": "4.3", "title": "Memory retrieval, relevance, and forgetting", "standalone_questions": 27 }
+      ],
+      "format_mix": { "single_choice": 56, "multi_response": 15, "ordering": 6, "matching": 5 },
+      "difficulty_mix_pct": { "easy": 20, "medium": 55, "hard": 25 }
+    },
+    {
+      "id": 5,
+      "name": "Multi-Agent Systems",
+      "weight_pct": 18,
+      "total_questions": 90,
+      "standalone_questions": 86,
+      "case_study_questions": 4,
+      "theory_cards_target": 21,
+      "task_statements": [
+        { "id": "5.1", "title": "Why and when to decompose into multiple agents", "standalone_questions": 22 },
+        { "id": "5.2", "title": "Coordination patterns: orchestrator-worker, debate, hierarchical", "standalone_questions": 21 },
+        { "id": "5.3", "title": "Communication protocols and shared state between agents", "standalone_questions": 22 },
+        { "id": "5.4", "title": "Emergent behavior and failure modes in multi-agent systems", "standalone_questions": 21 }
+      ],
+      "format_mix": { "single_choice": 59, "multi_response": 16, "ordering": 6, "matching": 5 },
+      "difficulty_mix_pct": { "easy": 15, "medium": 55, "hard": 30 }
+    },
+    {
+      "id": 6,
+      "name": "Evaluation, Safety & Alignment",
+      "weight_pct": 15,
+      "total_questions": 75,
+      "standalone_questions": 72,
+      "case_study_questions": 3,
+      "theory_cards_target": 17,
+      "task_statements": [
+        { "id": "6.1", "title": "Evaluating agent performance: task success, efficiency, robustness", "standalone_questions": 25 },
+        { "id": "6.2", "title": "Safety risks specific to autonomous agents (tool misuse, goal misgeneralization)", "standalone_questions": 24 },
+        { "id": "6.3", "title": "Guardrails, human oversight, and alignment techniques", "standalone_questions": 23 }
+      ],
+      "format_mix": { "single_choice": 50, "multi_response": 15, "ordering": 2, "matching": 5 },
+      "difficulty_mix_pct": { "easy": 25, "medium": 55, "hard": 20 }
+    }
+  ],
+  "format_totals": { "single_choice": 330, "multi_response": 90, "ordering": 30, "matching": 30 },
+  "theory_cards_total_target": 116,
+  "tolerances": {
+    "difficulty_pct_points": 3,
+    "answer_position_uniformity_pct_points": 15,
+    "near_duplicate_similarity_threshold": 0.90,
+    "theory_card_min_refs": 3,
+    "theory_card_max_refs": 12
+  },
+  "id_conventions": {
+    "theory": "TH-D{domain}-{seq:03d}",
+    "question": "Q-D{domain}-{seq:04d}",
+    "case_study": "CS-{seq:02d}"
+  },
+  "domain_range": { "min": 1, "max": 6 },
+  "allowed_reference_domains": [
+    "arxiv.org",
+    "www.anthropic.com",
+    "openai.com",
+    "deepmind.google",
+    "research.google",
+    "www.microsoft.com",
+    "aclanthology.org",
+    "proceedings.neurips.cc",
+    "proceedings.mlr.press"
+  ]
+}

@@ -1,0 +1,28 @@
+[
+  {
+    "id": "Q-D1-0906",
+    "domain": 1,
+    "task_statement": "1.1",
+    "type": "single_choice",
+    "difficulty": "easy",
+    "theory_refs": ["TH-D1-001"],
+    "case_study_id": null,
+    "stem": "Broken fixture: explanation is far too short in total word count, to test the explanation-length gate.",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Option A text" },
+      { "key": "B", "text": "Option B text" },
+      { "key": "C", "text": "Option C text" }
+    ],
+    "correct": ["A"],
+    "explanation": {
+      "why_correct": "Correct because A.",
+      "why_incorrect": {
+        "B": "Wrong.",
+        "C": "Wrong."
+      },
+      "rule_of_thumb": "Too short."
+    },
+    "tags": ["fixture"]
+  }
+]

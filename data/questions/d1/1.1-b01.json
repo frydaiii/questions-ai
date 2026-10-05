@@ -1,0 +1,652 @@
+[
+  {
+    "id": "Q-D1-0101",
+    "domain": 1, "task_statement": "1.1", "type": "single_choice", "difficulty": "easy",
+    "theory_refs": ["TH-D1-001"], "case_study_id": null,
+    "stem": "A retailer uses a spreadsheet macro that automatically flags any order over $10,000 for manager review, based on a fixed rule written by the finance team years ago. The macro has never been updated and does not learn from new order data. How should this system be classified?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "It is machine learning, since it processes numeric order data." },
+      { "key": "B", "text": "It is deep learning, since it operates on structured business data." },
+      { "key": "C", "text": "It is generative AI, since it generates a review flag as output." },
+      { "key": "D", "text": "It is AI, since it automates a decision, but it is not machine learning because it never learns from data." }
+    ],
+    "correct": ["D"],
+    "explanation": {
+      "why_correct": "The macro automates a task (flagging orders) that would otherwise need human judgment, which qualifies it as AI in the broad sense. Because the rule is fixed and never updates itself based on new data, it fails the definition of machine learning, which requires learning patterns from data.",
+      "why_incorrect": {
+        "A": "Machine learning requires the system to learn from data over time. A fixed rule written once by a person, with no learning step, does not meet this bar even though it processes numeric data.",
+        "B": "Deep learning specifically means multi-layer neural networks. A spreadsheet macro contains no neural network of any kind.",
+        "C": "Generative AI creates new content such as text, images, or audio. Flagging an order for review is a simple rule-based decision, not content generation."
+      },
+      "rule_of_thumb": "Ask 'does it learn from data, or just follow rules a person wrote?' A fixed rule with no learning step is AI but not ML, no matter how automated it feels."
+    },
+    "tags": ["ai-vs-ml", "terminology", "rules-engine"]
+  },
+  {
+    "id": "Q-D1-0102",
+    "domain": 1, "task_statement": "1.1", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D1-001"], "case_study_id": null,
+    "stem": "A media company trains a large model on millions of articles so that it can later write entirely new news summaries in the company's house style, given only a short list of facts. Which single term most precisely describes this model's core capability?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Rules engine" },
+      { "key": "B", "text": "Anomaly detection" },
+      { "key": "C", "text": "Expert system" },
+      { "key": "D", "text": "Generative AI" }
+    ],
+    "correct": ["D"],
+    "explanation": {
+      "why_correct": "The model produces brand-new written content (news summaries it was never shown verbatim) from a short list of facts. Producing novel content rather than only classifying or scoring existing data is the defining trait of generative AI.",
+      "why_incorrect": {
+        "A": "A rules engine follows explicit, human-written if/then logic. This model instead learned patterns from millions of articles and generates new text, which a rules engine cannot do.",
+        "B": "Anomaly detection identifies unusual data points relative to a learned norm. Writing a new summary is a content-creation task, unrelated to flagging outliers.",
+        "C": "An expert system encodes explicit human expert knowledge as rules, similar to a rules engine. It does not learn from data or generate novel content the way this model does."
+      },
+      "rule_of_thumb": "If the system produces brand-new content (text, images, audio, code) rather than only labeling, scoring, or predicting a value from existing data, it's generative AI."
+    },
+    "tags": ["generative-ai", "terminology"]
+  },
+  {
+    "id": "Q-D1-0103",
+    "domain": 1, "task_statement": "1.1", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D1-002"], "case_study_id": null,
+    "stem": "A robotics team is training a warehouse robot to pick items more efficiently. The robot tries different picking strategies, receives a small reward each time it successfully picks an item without dropping it, and gradually adjusts its behavior over thousands of attempts to maximize its cumulative reward. Which ML paradigm does this describe?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Reinforcement learning" },
+      { "key": "B", "text": "Supervised learning" },
+      { "key": "C", "text": "Semi-supervised learning" },
+      { "key": "D", "text": "Unsupervised learning" }
+    ],
+    "correct": ["A"],
+    "explanation": {
+      "why_correct": "The robot learns through trial and error, taking actions in an environment and adjusting its behavior to maximize a cumulative reward signal over many attempts. This is the defining structure of reinforcement learning.",
+      "why_incorrect": {
+        "B": "Supervised learning requires labeled input-output pairs provided up front. This scenario has no pre-labeled 'correct picking strategy' dataset; the robot discovers strategies itself via reward feedback.",
+        "C": "Semi-supervised learning combines a small labeled dataset with a larger unlabeled one. There is no labeled dataset at all in this scenario, just a reward signal from trial and error.",
+        "D": "Unsupervised learning finds structure in static unlabeled data with no reward signal or sequence of actions; it does not describe an agent interacting with an environment over time."
+      },
+      "rule_of_thumb": "Learning via trial-and-error reward signals over a sequence of actions is reinforcement learning, common in robotics, games, and AWS DeepRacer."
+    },
+    "tags": ["reinforcement-learning", "ml-paradigms"]
+  },
+  {
+    "id": "Q-D1-0104",
+    "domain": 1, "task_statement": "1.1", "type": "single_choice", "difficulty": "hard",
+    "theory_refs": ["TH-D1-002"], "case_study_id": null,
+    "stem": "A team pre-trains a large language model by having it repeatedly predict a masked word from the surrounding sentence, using billions of unlabeled sentences scraped from the web. No human ever manually labeled which word belongs in each blank. Which ML paradigm best describes this pre-training process?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Supervised learning" },
+      { "key": "B", "text": "Reinforcement learning" },
+      { "key": "C", "text": "Self-supervised learning" },
+      { "key": "D", "text": "Unsupervised clustering" }
+    ],
+    "correct": ["C"],
+    "explanation": {
+      "why_correct": "The training labels (the masked word) come directly from the structure of the data itself, with no human annotation involved. Generating its own training signal from the data's own structure is exactly what defines self-supervised learning, which is how most large language models are pre-trained.",
+      "why_incorrect": {
+        "A": "Supervised learning requires labels created by human annotators or some external labeling process. Here, the 'label' is simply the word that was masked, derived automatically from the raw text, not from human annotation.",
+        "B": "Reinforcement learning requires an agent taking actions in an environment to maximize a reward signal. There is no reward signal or sequence of actions here, only a next/masked-word prediction task.",
+        "D": "Unsupervised clustering groups data into structures with no target output being predicted. This task explicitly predicts a specific target (the masked word), which clustering does not do."
+      },
+      "rule_of_thumb": "If a model creates its own training signal from the data's own structure (like predicting a masked or next word), rather than from human-provided labels, that's self-supervised learning."
+    },
+    "tags": ["self-supervised-learning", "llm-pretraining"]
+  },
+  {
+    "id": "Q-D1-0105",
+    "domain": 1, "task_statement": "1.1", "type": "single_choice", "difficulty": "easy",
+    "theory_refs": ["TH-D1-002"], "case_study_id": null,
+    "stem": "A grocery chain has years of customer purchase data with no predefined labels and wants to discover natural groupings of shoppers with similar buying habits, without specifying in advance what those groups should be. Which ML paradigm fits this goal?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Supervised learning" },
+      { "key": "B", "text": "Reinforcement learning" },
+      { "key": "C", "text": "Unsupervised learning" },
+      { "key": "D", "text": "Self-supervised learning" }
+    ],
+    "correct": ["C"],
+    "explanation": {
+      "why_correct": "The chain has no labels and no predefined categories, and simply wants the algorithm to discover natural structure (groupings) in the data on its own. This is precisely what unsupervised learning, particularly clustering, is designed for.",
+      "why_incorrect": {
+        "A": "Supervised learning requires labeled examples of the target output. There are no predefined customer-segment labels here for the model to learn from.",
+        "B": "Reinforcement learning requires an agent taking sequential actions to maximize a reward. There is no reward signal or action sequence in this static customer-segmentation scenario.",
+        "D": "Self-supervised learning generates its own labels from the data's structure to predict a specific target (like a masked word). This scenario has no such specific prediction target; it is purely about discovering groupings."
+      },
+      "rule_of_thumb": "No labels at all, looking for structure such as natural groupings -> unsupervised learning (e.g. clustering)."
+    },
+    "tags": ["unsupervised-learning", "clustering"]
+  },
+  {
+    "id": "Q-D1-0106",
+    "domain": 1, "task_statement": "1.1", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D1-002"], "case_study_id": null,
+    "stem": "A hospital has 500 labeled X-ray images confirming disease presence or absence, plus 50,000 additional unlabeled X-ray images it would like to also use to improve a diagnostic model, since fully labeling all 50,000 images by radiologists would be far too costly. Which ML paradigm is designed for exactly this situation?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Reinforcement learning" },
+      { "key": "B", "text": "Semi-supervised learning" },
+      { "key": "C", "text": "Unsupervised learning" },
+      { "key": "D", "text": "Supervised learning only" }
+    ],
+    "correct": ["B"],
+    "explanation": {
+      "why_correct": "Semi-supervised learning is specifically designed to combine a small labeled dataset with a much larger unlabeled dataset, which matches this hospital's exact situation: 500 labeled images plus 50,000 unlabeled ones it wants to leverage without full manual labeling.",
+      "why_incorrect": {
+        "A": "Reinforcement learning requires an agent taking sequential actions to maximize a reward signal, which has no relevance to a static image dataset with partial labels.",
+        "C": "Unsupervised learning uses no labels at all. This scenario explicitly has 500 labeled images it wants to use alongside the unlabeled ones, so a purely label-free approach would waste that labeled data.",
+        "D": "Using supervised learning with only the 500 labeled images ignores the 50,000 unlabeled images entirely, which is exactly the limitation semi-supervised learning is designed to overcome."
+      },
+      "rule_of_thumb": "A little labeled data plus a lot of unlabeled data -> semi-supervised learning, letting you leverage both without the cost of fully labeling everything."
+    },
+    "tags": ["semi-supervised-learning", "ml-paradigms"]
+  },
+  {
+    "id": "Q-D1-0107",
+    "domain": 1, "task_statement": "1.1", "type": "single_choice", "difficulty": "easy",
+    "theory_refs": ["TH-D1-003"], "case_study_id": null,
+    "stem": "A telecommunications company wants to predict, for each customer, whether they will cancel their subscription in the next 30 days: yes or no. Which ML problem type does this describe?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Forecasting" },
+      { "key": "B", "text": "Regression" },
+      { "key": "C", "text": "Classification" },
+      { "key": "D", "text": "Clustering" }
+    ],
+    "correct": ["C"],
+    "explanation": {
+      "why_correct": "The company wants to predict a discrete category — churn (yes) or no churn (no) — for each customer. Predicting a discrete category from a fixed set of possible outcomes is the definition of classification.",
+      "why_incorrect": {
+        "A": "Forecasting predicts future values along a time-ordered series, typically numeric, such as next month's revenue. A binary yes/no churn prediction for each customer is not a time-series forecast.",
+        "B": "Regression predicts a continuous numeric value, such as a dollar amount, not a yes/no category.",
+        "D": "Clustering groups similar items together with no predefined labels. This scenario has a specific predefined target (churn: yes/no) to predict, unlike clustering's open-ended grouping."
+      },
+      "rule_of_thumb": "'Yes/no' or 'which category' -> classification. Predicting churn as a binary outcome is a textbook classification problem."
+    },
+    "tags": ["classification", "problem-types", "churn"]
+  },
+  {
+    "id": "Q-D1-0108",
+    "domain": 1, "task_statement": "1.1", "type": "single_choice", "difficulty": "easy",
+    "theory_refs": ["TH-D1-003"], "case_study_id": null,
+    "stem": "A real estate firm wants to predict the exact sale price, in dollars, of a house based on its square footage, location, and number of bedrooms. Which ML problem type is this?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Regression" },
+      { "key": "B", "text": "Classification" },
+      { "key": "C", "text": "Clustering" },
+      { "key": "D", "text": "Anomaly detection" }
+    ],
+    "correct": ["A"],
+    "explanation": {
+      "why_correct": "Predicting an exact dollar amount is predicting a continuous numeric value, which is precisely what regression is designed to do.",
+      "why_incorrect": {
+        "B": "Classification predicts a discrete category from a fixed set of labels, such as 'expensive' vs. 'affordable.' Predicting an exact dollar figure is a continuous numeric output, not a category.",
+        "C": "Clustering groups similar houses together with no specific numeric target being predicted. This scenario explicitly wants one predicted number (the sale price) per house.",
+        "D": "Anomaly detection flags data points that deviate from a learned norm, such as an unusually priced listing. It does not predict a specific expected price for every house."
+      },
+      "rule_of_thumb": "'How much' or 'what number' -> regression. An exact price prediction is a classic regression problem."
+    },
+    "tags": ["regression", "problem-types"]
+  },
+  {
+    "id": "Q-D1-0109",
+    "domain": 1, "task_statement": "1.1", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D1-003"], "case_study_id": null,
+    "stem": "A credit card company wants a model to flag transactions that deviate significantly from a cardholder's normal spending pattern, without being told in advance what fraud actually looks like for every possible case. Which ML problem type best matches this goal?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Anomaly detection" },
+      { "key": "B", "text": "Recommendation" },
+      { "key": "C", "text": "Classification with a fixed rule set" },
+      { "key": "D", "text": "Regression" }
+    ],
+    "correct": ["A"],
+    "explanation": {
+      "why_correct": "The goal is to flag transactions that deviate from a learned normal pattern, without pre-defining every fraud scenario in advance. Identifying rare or unusual data points relative to a learned baseline is exactly what anomaly detection is designed for.",
+      "why_incorrect": {
+        "B": "Recommendation predicts which items a user is likely to want based on behavior or similarity to other users; it has no relevance to detecting deviations from normal spending.",
+        "C": "A fixed rule set written by humans is not machine learning at all, since it never learns a baseline pattern from the cardholder's actual data — this scenario specifically wants the model to learn what 'normal' looks like.",
+        "D": "Regression predicts a continuous numeric value, such as an expected transaction amount, not a flag for unusual behavior relative to a baseline."
+      },
+      "rule_of_thumb": "'Is this unusual relative to a learned norm' -> anomaly detection, commonly used for fraud and equipment-failure detection."
+    },
+    "tags": ["anomaly-detection", "fraud", "problem-types"]
+  },
+  {
+    "id": "Q-D1-0110",
+    "domain": 1, "task_statement": "1.1", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D1-003"], "case_study_id": null,
+    "stem": "A streaming service wants to suggest which three movies a specific user is most likely to enjoy next, based on that user's viewing history and the viewing patterns of similar users. Which ML problem type is this?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Forecasting" },
+      { "key": "B", "text": "Recommendation" },
+      { "key": "C", "text": "Clustering" },
+      { "key": "D", "text": "Anomaly detection" }
+    ],
+    "correct": ["B"],
+    "explanation": {
+      "why_correct": "The service wants to predict which specific items a specific user is likely to want, based on that user's own behavior and similarity to other users' behavior. Predicting user-item affinity is the definition of a recommendation problem.",
+      "why_incorrect": {
+        "A": "Forecasting predicts future values of a time-ordered series, such as next month's demand, not which specific items an individual user would prefer.",
+        "C": "Clustering would group similar users or similar movies together, but it does not directly produce a ranked, personalized list of recommended movies for one specific user the way a recommendation system does.",
+        "D": "Anomaly detection identifies unusual data points relative to a norm; it has no role in suggesting content a user is likely to enjoy."
+      },
+      "rule_of_thumb": "'What will they want next' -> recommendation, matching users to items based on behavior and similarity."
+    },
+    "tags": ["recommendation", "problem-types"]
+  },
+  {
+    "id": "Q-D1-0111",
+    "domain": 1, "task_statement": "1.1", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D1-003"], "case_study_id": null,
+    "stem": "A logistics company wants to predict how many packages it will need to deliver in each of the next 12 weeks, based on several years of historical weekly delivery volumes. Which ML problem type best fits this need?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Forecasting" },
+      { "key": "B", "text": "Classification" },
+      { "key": "C", "text": "Recommendation" },
+      { "key": "D", "text": "Clustering" }
+    ],
+    "correct": ["A"],
+    "explanation": {
+      "why_correct": "The company wants to predict future numeric values (package volumes) along a time-ordered series (weekly, for the next 12 weeks), based on historical time-series data. This is precisely what forecasting is designed for.",
+      "why_incorrect": {
+        "B": "Classification predicts a discrete category, not a sequence of future numeric values over time.",
+        "C": "Recommendation predicts user-item affinity, which has no relevance to predicting aggregate future delivery volumes.",
+        "D": "Clustering groups similar historical weeks together, but it does not directly produce a prediction of future numeric values for upcoming weeks."
+      },
+      "rule_of_thumb": "'What will this be next month/week' along a time-ordered series -> forecasting, distinct from a one-off regression prediction."
+    },
+    "tags": ["forecasting", "problem-types"]
+  },
+  {
+    "id": "Q-D1-0112",
+    "domain": 1, "task_statement": "1.1", "type": "multi_response", "difficulty": "medium",
+    "theory_refs": ["TH-D1-003"], "case_study_id": null,
+    "stem": "A data science team is reviewing several business problems to identify which ones are classification problems specifically. Which TWO of the following scenarios are classification problems?",
+    "select_count": 2,
+    "options": [
+      { "key": "A", "text": "Predicting whether an email is spam or not spam" },
+      { "key": "B", "text": "Predicting the exact number of units of a product that will sell next month" },
+      { "key": "C", "text": "Sorting loan applications into 'approve,' 'deny,' or 'refer for manual review'" },
+      { "key": "D", "text": "Grouping customers into segments with no predefined category names" }
+    ],
+    "correct": ["A", "C"],
+    "explanation": {
+      "why_correct": "Both scenarios predict a discrete category from a fixed, predefined set of possible labels: spam/not spam in one case, and approve/deny/refer in the other. Multi-class classification (more than two categories) is still classification, as shown by the three-category loan scenario.",
+      "why_incorrect": {
+        "B": "Predicting an exact numeric unit count is a continuous numeric prediction, which is regression, not classification.",
+        "D": "Grouping customers with no predefined category names is clustering, an unsupervised technique, not classification, which requires predefined labels to predict."
+      },
+      "rule_of_thumb": "Classification always predicts from a fixed, predefined set of category labels, whether there are two categories (binary) or more (multi-class) — no predefined categories means it's not classification."
+    },
+    "tags": ["classification", "problem-types", "multi-class"]
+  },
+  {
+    "id": "Q-D1-0113",
+    "domain": 1, "task_statement": "1.1", "type": "single_choice", "difficulty": "hard",
+    "theory_refs": ["TH-D1-004"], "case_study_id": null,
+    "stem": "A team trains a fraud-detection model and observes 99.7% accuracy on the training set but only 81% accuracy on a held-out validation set the model never saw during training. What does this large gap between training and validation performance most likely indicate?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "The model is underfitting: it has not learned enough from the training data." },
+      { "key": "B", "text": "The model is experiencing concept drift in production." },
+      { "key": "C", "text": "The model is overfitting: it has memorized patterns specific to the training data rather than learning generalizable patterns." },
+      { "key": "D", "text": "The validation set was mislabeled and should be discarded." }
+    ],
+    "correct": ["C"],
+    "explanation": {
+      "why_correct": "A large gap between very high training performance and meaningfully lower validation performance is the classic signature of overfitting: the model has learned the training data too specifically, including its noise, rather than learning patterns that generalize to new, unseen data.",
+      "why_incorrect": {
+        "A": "Underfitting produces poor performance on BOTH the training and validation sets, since the model hasn't learned the underlying pattern well at all. Here, training performance is extremely high, which rules out underfitting.",
+        "B": "Concept drift is a post-deployment phenomenon where the relationship between inputs and outputs changes over time in production. This scenario is about training-time evaluation on a static validation set, not a production drift issue.",
+        "D": "There's no evidence the validation set is mislabeled; a large train/validation gap is the well-documented general symptom of overfitting, not typically a sign of a labeling error."
+      },
+      "rule_of_thumb": "Big gap between training performance and validation/test performance -> overfitting. The model memorized noise from training rather than learning transferable patterns."
+    },
+    "tags": ["overfitting", "bias-variance", "model-evaluation"]
+  },
+  {
+    "id": "Q-D1-0114",
+    "domain": 1, "task_statement": "1.1", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D1-004"], "case_study_id": null,
+    "stem": "A model performs poorly on both the training data and the validation data, achieving only 55% accuracy on each. What is the most likely explanation, and what is a reasonable first remedy?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "The model is underfitting; try training longer, adding more relevant features, or using a more complex model." },
+      { "key": "B", "text": "The model is experiencing data drift; retrain immediately using only the most recent data." },
+      { "key": "C", "text": "The validation set is too small to be meaningful and should be ignored." },
+      { "key": "D", "text": "The model is overfitting; try simplifying the model or gathering more diverse training data." }
+    ],
+    "correct": ["A"],
+    "explanation": {
+      "why_correct": "Poor performance on BOTH the training set and the validation set indicates the model has not learned the underlying pattern well enough, which is the definition of underfitting. Reasonable remedies include training longer, adding more relevant features, or using a more complex model capable of capturing the pattern.",
+      "why_incorrect": {
+        "B": "Data drift is a post-deployment phenomenon describing production input distributions shifting from training data; it does not apply to comparing training and validation performance during initial model development.",
+        "C": "The scenario gives no information suggesting the validation set's size is the problem; the described symptom (uniformly poor performance everywhere) is a well-known signature of underfitting, not sample size.",
+        "D": "Overfitting shows a large gap between strong training performance and weaker validation performance. Here, both scores are low and similar, which points to underfitting instead."
+      },
+      "rule_of_thumb": "Poor performance everywhere, even on training data, is underfitting — the fix is generally more training, more relevant features, or a more capable model."
+    },
+    "tags": ["underfitting", "bias-variance", "model-evaluation"]
+  },
+  {
+    "id": "Q-D1-0115",
+    "domain": 1, "task_statement": "1.1", "type": "single_choice", "difficulty": "easy",
+    "theory_refs": ["TH-D1-005"], "case_study_id": null,
+    "stem": "A team is building a system to classify photos of manufacturing defects into 'pass' and 'fail' categories. Which neural network architecture is best suited to this image-based task?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Convolutional neural network (CNN)" },
+      { "key": "B", "text": "Generative adversarial network (GAN)" },
+      { "key": "C", "text": "Variational autoencoder (VAE)" },
+      { "key": "D", "text": "Recurrent neural network (RNN)" }
+    ],
+    "correct": ["A"],
+    "explanation": {
+      "why_correct": "Convolutional neural networks are specifically designed to learn spatial filters over image data, making them the standard architecture for image classification tasks like detecting manufacturing defects.",
+      "why_incorrect": {
+        "B": "GANs pair a generator and discriminator to produce new, realistic synthetic data. This task is classification of existing images, not generation of new ones, so a GAN is not the fit.",
+        "C": "VAEs learn a compressed representation of data to generate new samples. This task requires classifying existing images into categories, not generating new images.",
+        "D": "RNNs are designed for sequential, time-ordered data such as text or time series, processed step by step. They are not the standard choice for spatial image classification."
+      },
+      "rule_of_thumb": "Images and spatial patterns -> CNN. This is one of the most directly-testable architecture-to-task mappings on the exam."
+    },
+    "tags": ["cnn", "neural-networks", "computer-vision"]
+  },
+  {
+    "id": "Q-D1-0116",
+    "domain": 1, "task_statement": "1.1", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D1-005"], "case_study_id": null,
+    "stem": "Which neural network architecture uses an attention mechanism to process entire sequences in parallel, and underlies virtually all modern large language models such as GPT-family models and Amazon Titan?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Convolutional neural network (CNN)" },
+      { "key": "B", "text": "Recurrent neural network (RNN)" },
+      { "key": "C", "text": "Transformer" },
+      { "key": "D", "text": "Generative adversarial network (GAN)" }
+    ],
+    "correct": ["C"],
+    "explanation": {
+      "why_correct": "The transformer architecture uses an attention mechanism to weigh the relevance of all tokens in a sequence simultaneously, processing sequences in parallel rather than step by step. This is the backbone architecture of essentially all modern large language models.",
+      "why_incorrect": {
+        "A": "CNNs are designed for spatial data like images, using convolutional filters, not attention mechanisms over sequences.",
+        "B": "RNNs process sequences step by step, retaining memory of prior steps, but they do not use an attention mechanism to process the full sequence in parallel, and have largely been superseded by transformers for language modeling.",
+        "D": "GANs use a generator and discriminator competing against each other, an entirely different mechanism from attention-based sequence processing."
+      },
+      "rule_of_thumb": "Modern large language models -> transformer, built on the attention mechanism that lets the model weigh relevance across an entire sequence at once."
+    },
+    "tags": ["transformer", "attention", "llm-architecture"]
+  },
+  {
+    "id": "Q-D1-0117",
+    "domain": 1, "task_statement": "1.1", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D1-005"], "case_study_id": null,
+    "stem": "A generative model produces highly realistic synthetic product photos by training a generator network to fool a discriminator network into believing the generated images are real, with both networks improving through this competition. What architecture does this describe?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Generative adversarial network (GAN)" },
+      { "key": "B", "text": "Convolutional neural network (CNN) used alone" },
+      { "key": "C", "text": "Recurrent neural network (RNN)" },
+      { "key": "D", "text": "Diffusion model" }
+    ],
+    "correct": ["A"],
+    "explanation": {
+      "why_correct": "A generator competing against a discriminator, with both improving through this adversarial competition, is exactly how a generative adversarial network (GAN) works, and is a well-known technique for producing realistic synthetic images.",
+      "why_incorrect": {
+        "B": "A CNN used alone for classification has no generator/discriminator competition; it simply classifies inputs. GANs may use CNN components internally, but the adversarial training structure described here is specifically a GAN, not a bare CNN classifier.",
+        "C": "RNNs process sequential data step by step; they have no generator/discriminator adversarial structure at all.",
+        "D": "Diffusion models generate content by learning to reverse a gradual noising process, not by pitting a generator against a discriminator in competition."
+      },
+      "rule_of_thumb": "Two networks competing to produce realistic fakes -> GAN. A noise-removal process to generate content -> diffusion, a different mechanism entirely."
+    },
+    "tags": ["gan", "generative-models"]
+  },
+  {
+    "id": "Q-D1-0118",
+    "domain": 1, "task_statement": "1.1", "type": "single_choice", "difficulty": "hard",
+    "theory_refs": ["TH-D1-005"], "case_study_id": null,
+    "stem": "A team is deciding on the underlying technique for a new text-to-image generator meant to produce photorealistic images from written descriptions, similar in behavior to Stable Diffusion. Which architecture is this class of image generator most likely built on?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Diffusion model" },
+      { "key": "B", "text": "Linear regression" },
+      { "key": "C", "text": "Decision tree ensemble" },
+      { "key": "D", "text": "Recurrent neural network (RNN)" }
+    ],
+    "correct": ["A"],
+    "explanation": {
+      "why_correct": "Diffusion models, which generate content by learning to reverse a gradual noising process, are the dominant architecture behind modern photorealistic text-to-image generators such as Stable Diffusion.",
+      "why_incorrect": {
+        "B": "Linear regression predicts a single continuous numeric value from input features; it has no mechanism for generating a complex, high-dimensional image from a text description.",
+        "C": "A decision tree ensemble is a traditional ML technique for classification/regression on structured data, with no capability to generate photorealistic images from text.",
+        "D": "RNNs are designed for sequential data processed step by step, and are not the mainstream architecture for high-quality photorealistic image generation from text prompts."
+      },
+      "rule_of_thumb": "Photorealistic image generation via a noise-removal process, guided by a text prompt, is a diffusion model — the dominant technique for this exact use case."
+    },
+    "tags": ["diffusion-models", "image-generation"]
+  },
+  {
+    "id": "Q-D1-0119",
+    "domain": 1, "task_statement": "1.1", "type": "multi_response", "difficulty": "medium",
+    "theory_refs": ["TH-D1-005"], "case_study_id": null,
+    "stem": "Which TWO of the following statements about neural network architectures are accurate?",
+    "select_count": 2,
+    "options": [
+      { "key": "A", "text": "Convolutional neural networks (CNNs) are well suited to spatial patterns in image data." },
+      { "key": "B", "text": "Transformers process an entire sequence in parallel using an attention mechanism, rather than strictly one step at a time." },
+      { "key": "C", "text": "Generative adversarial networks (GANs) require labeled input-output pairs collected by human annotators before any training can begin." },
+      { "key": "D", "text": "Recurrent neural networks (RNNs) are the dominant architecture behind virtually all modern large language models." }
+    ],
+    "correct": ["A", "B"],
+    "explanation": {
+      "why_correct": "CNNs are indeed specialized for spatial image patterns via learned filters, and transformers do process full sequences in parallel using attention, rather than strictly sequentially like older architectures. Both statements are accurate descriptions of these architectures.",
+      "why_incorrect": {
+        "C": "GANs are trained through a generator-discriminator competition and do not fundamentally require labeled input-output pairs from human annotators the way supervised classification does; the discriminator's feedback substitutes for that kind of explicit labeling.",
+        "D": "Transformers, not RNNs, are the dominant architecture behind virtually all modern large language models. RNNs were an earlier, largely superseded approach for sequence modeling."
+      },
+      "rule_of_thumb": "CNNs for spatial/image patterns, transformers (attention-based, parallel) for modern LLMs — RNNs are the older, largely superseded sequential architecture, not the modern LLM standard."
+    },
+    "tags": ["neural-networks", "cnn", "transformer", "architecture-comparison"]
+  },
+  {
+    "id": "Q-D1-0120",
+    "domain": 1, "task_statement": "1.1", "type": "single_choice", "difficulty": "easy",
+    "theory_refs": ["TH-D1-022"], "case_study_id": null,
+    "stem": "A small finance team has a modest, well-structured spreadsheet of 2,000 historical loan applications with a handful of numeric and categorical fields, and needs a model that regulators can easily audit and explain. Which general approach is most appropriate?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "A traditional ML algorithm, such as a decision tree or logistic regression" },
+      { "key": "B", "text": "A diffusion model" },
+      { "key": "C", "text": "A large multimodal foundation model" },
+      { "key": "D", "text": "A large, multi-layer deep learning model trained from scratch" }
+    ],
+    "correct": ["A"],
+    "explanation": {
+      "why_correct": "This scenario has small, structured, tabular data and an explicit need for auditability and explainability, which is exactly where traditional ML algorithms like decision trees or logistic regression excel: they are cheaper to train and generally far more directly interpretable than deep learning.",
+      "why_incorrect": {
+        "B": "Diffusion models are used for generative tasks like image creation; they are irrelevant to a structured tabular loan-approval prediction task.",
+        "C": "A large multimodal foundation model is designed for tasks spanning multiple data types like text and images; it is unnecessary complexity and cost for a small, purely tabular dataset with explainability requirements.",
+        "D": "A large deep learning model trained from scratch is generally overkill for a small, structured dataset, and would be more expensive to train and harder to explain to regulators than a simpler traditional ML model."
+      },
+      "rule_of_thumb": "Structured/tabular data, need interpretability, limited data volume -> traditional ML, not deep learning or a foundation model."
+    },
+    "tags": ["traditional-ml", "deep-learning", "interpretability"]
+  },
+  {
+    "id": "Q-D1-0121",
+    "domain": 1, "task_statement": "1.1", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D1-022"], "case_study_id": null,
+    "stem": "A media company has millions of unstructured video clips and wants a model to automatically identify complex visual patterns across frames, a task that would be extremely labor-intensive to hand-engineer features for. Which general approach best fits this need?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "A simple linear regression model on a handful of manually engineered features" },
+      { "key": "B", "text": "A decision tree using only metadata fields like file size and upload date" },
+      { "key": "C", "text": "A rules engine with hand-written pattern-matching logic" },
+      { "key": "D", "text": "Deep learning, which can automatically learn relevant features from raw unstructured data at scale" }
+    ],
+    "correct": ["D"],
+    "explanation": {
+      "why_correct": "Large volumes of unstructured video data with complex visual patterns are exactly the scenario where deep learning excels, because it can automatically learn relevant features directly from raw data at scale, removing the need for extensive manual feature engineering.",
+      "why_incorrect": {
+        "A": "Linear regression on a handful of manually engineered features would require exactly the labor-intensive manual feature engineering the scenario says should be avoided, and would likely fail to capture complex visual patterns anyway.",
+        "B": "Using only metadata fields like file size and upload date ignores the actual visual content of the video entirely, missing the complex visual patterns the company wants to detect.",
+        "C": "A hand-written rules engine cannot learn complex visual patterns from data at all; it only follows explicit logic a person wrote in advance."
+      },
+      "rule_of_thumb": "Unstructured data (images/audio/video/text) at large scale, complex patterns -> deep learning, which learns features automatically rather than requiring manual engineering."
+    },
+    "tags": ["deep-learning", "unstructured-data", "traditional-ml"]
+  },
+  {
+    "id": "Q-D1-0122",
+    "domain": 1, "task_statement": "1.1", "type": "matching", "difficulty": "medium",
+    "theory_refs": ["TH-D1-002"], "case_study_id": null,
+    "stem": "Match each machine learning paradigm on the left with the scenario on the right that best exemplifies it.",
+    "select_count": 4,
+    "matching": {
+      "left": [
+        { "key": "L1", "text": "Supervised learning" },
+        { "key": "L2", "text": "Unsupervised learning" },
+        { "key": "L3", "text": "Reinforcement learning" },
+        { "key": "L4", "text": "Self-supervised learning" }
+      ],
+      "right": [
+        { "key": "R1", "text": "Training a model on thousands of labeled emails marked 'spam' or 'not spam' to predict the label for new emails" },
+        { "key": "R2", "text": "Discovering natural clusters of similar products in a catalog with no predefined category labels" },
+        { "key": "R3", "text": "Training a game-playing agent that improves its strategy by receiving points for winning moves over many played games" },
+        { "key": "R4", "text": "Pre-training a language model by having it predict the next word in billions of unlabeled sentences" }
+      ]
+    },
+    "correct_pairs": { "L1": "R1", "L2": "R2", "L3": "R3", "L4": "R4" },
+    "explanation": {
+      "why_correct": "Supervised learning matches the labeled spam/not-spam training scenario (R1), since it learns from predefined labels. Unsupervised learning matches discovering clusters with no predefined labels (R2). Reinforcement learning matches the reward-driven game agent (R3), learning via trial and error. Self-supervised learning matches the next-word-prediction pre-training scenario (R4), where labels come from the data's own structure rather than human annotation.",
+      "why_incorrect": {},
+      "rule_of_thumb": "Labeled examples predicting a known target -> supervised. No labels, finding structure -> unsupervised. Reward signal over sequential actions -> reinforcement. Labels generated automatically from data's own structure -> self-supervised."
+    },
+    "tags": ["ml-paradigms", "supervised-learning", "unsupervised-learning", "reinforcement-learning", "self-supervised-learning"]
+  },
+  {
+    "id": "Q-D1-0123",
+    "domain": 1, "task_statement": "1.1", "type": "matching", "difficulty": "medium",
+    "theory_refs": ["TH-D1-003"], "case_study_id": null,
+    "stem": "Match each ML problem type on the left with the business scenario on the right that best matches it.",
+    "select_count": 4,
+    "matching": {
+      "left": [
+        { "key": "L1", "text": "Classification" },
+        { "key": "L2", "text": "Regression" },
+        { "key": "L3", "text": "Anomaly detection" },
+        { "key": "L4", "text": "Forecasting" }
+      ],
+      "right": [
+        { "key": "R1", "text": "Predicting whether an incoming transaction is fraudulent or legitimate" },
+        { "key": "R2", "text": "Predicting the exact dollar value of next month's total revenue" },
+        { "key": "R3", "text": "Flagging a factory sensor reading that deviates sharply from its normal operating range" },
+        { "key": "R4", "text": "Predicting weekly product demand for each of the next 8 weeks based on historical sales" }
+      ]
+    },
+    "correct_pairs": { "L1": "R1", "L2": "R2", "L3": "R3", "L4": "R4" },
+    "explanation": {
+      "why_correct": "Fraud vs. legitimate is a discrete category prediction, matching classification (R1). Predicting an exact dollar revenue figure is a continuous numeric prediction, matching regression (R2). Flagging a sensor reading that deviates from normal is anomaly detection (R3). Predicting future weekly demand over a time-ordered series is forecasting (R4).",
+      "why_incorrect": {},
+      "rule_of_thumb": "Discrete category -> classification. Continuous single-value number -> regression. Deviation from a learned norm -> anomaly detection. Future values over a time series -> forecasting."
+    },
+    "tags": ["problem-types", "classification", "regression", "anomaly-detection", "forecasting"]
+  },
+  {
+    "id": "Q-D1-0124",
+    "domain": 1, "task_statement": "1.1", "type": "ordering", "difficulty": "hard",
+    "theory_refs": ["TH-D1-001"], "case_study_id": null,
+    "stem": "Arrange the following terms from the BROADEST concept to the NARROWEST, reflecting how each is a subset of the one before it.",
+    "select_count": 4,
+    "options": [
+      { "key": "A", "text": "Artificial intelligence" },
+      { "key": "B", "text": "Machine learning" },
+      { "key": "C", "text": "Deep learning" },
+      { "key": "D", "text": "Generative AI" }
+    ],
+    "correct": ["A", "B", "C", "D"],
+    "explanation": {
+      "why_correct": "Artificial intelligence is the broadest field, encompassing any system performing tasks that normally require human intelligence. Machine learning is a subset of AI where systems learn from data. Deep learning is a subset of ML using multi-layer neural networks. Generative AI is a further subset of deep learning, typically built on foundation models, that creates new content. Each term nests inside the one before it.",
+      "why_incorrect": {},
+      "rule_of_thumb": "AI is the outer set; ML, DL, and generative AI are each progressively narrower subsets inside it, in that exact order."
+    },
+    "tags": ["ai-vs-ml", "terminology", "ordering", "taxonomy"]
+  },
+  {
+    "id": "Q-D1-0125",
+    "domain": 1, "task_statement": "1.1", "type": "single_choice", "difficulty": "hard",
+    "theory_refs": ["TH-D1-004"], "case_study_id": null,
+    "stem": "A team notices their model's training accuracy keeps climbing each epoch, but validation accuracy peaked several epochs ago and has since started slowly declining, even as training accuracy is now near-perfect. What is the most appropriate immediate action?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Continue training for many more epochs, since higher training accuracy always eventually improves validation accuracy too." },
+      { "key": "B", "text": "Conclude the model is underfitting and switch to a much simpler model." },
+      { "key": "C", "text": "Apply early stopping, halting training around the epoch where validation accuracy peaked, since continued training is now overfitting." },
+      { "key": "D", "text": "Discard the validation set entirely and evaluate only on training data going forward." }
+    ],
+    "correct": ["C"],
+    "explanation": {
+      "why_correct": "Training accuracy continuing to rise while validation accuracy declines is the textbook overfitting pattern: the model is increasingly memorizing training-specific noise rather than learning generalizable patterns. Early stopping around the point where validation performance peaked is a standard, appropriate remedy.",
+      "why_incorrect": {
+        "A": "Training accuracy climbing toward near-perfect while validation accuracy declines is precisely the sign that continued training is now hurting generalization, not helping it — more epochs would likely worsen overfitting further.",
+        "B": "Near-perfect training accuracy is the opposite of underfitting's signature (poor performance everywhere); switching to a simpler model isn't indicated by this specific overfitting pattern, though it can be one of several overfitting remedies.",
+        "D": "Discarding the validation set removes the only tool that revealed the overfitting problem in the first place; evaluating only on training data would hide the very issue that needs to be fixed."
+      },
+      "rule_of_thumb": "When validation performance peaks and then declines while training performance keeps improving, that's overfitting in action — early stopping at the validation peak is a standard, direct remedy."
+    },
+    "tags": ["overfitting", "early-stopping", "model-training"]
+  },
+  {
+    "id": "Q-D1-0126",
+    "domain": 1, "task_statement": "1.1", "type": "single_choice", "difficulty": "easy",
+    "theory_refs": ["TH-D1-001"], "case_study_id": null,
+    "stem": "Which of the following best describes the relationship between artificial intelligence (AI) and machine learning (ML)?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "AI is a subset of ML; every AI system is ML, but not every ML system is AI." },
+      { "key": "B", "text": "ML is a subset of AI; every ML system is AI, but not every AI system is ML." },
+      { "key": "C", "text": "AI and ML are exact synonyms with no meaningful distinction." },
+      { "key": "D", "text": "AI and ML are unrelated, entirely separate fields." }
+    ],
+    "correct": ["B"],
+    "explanation": {
+      "why_correct": "Machine learning is specifically a subset of the broader field of artificial intelligence: ML systems learn from data, which automatically makes them AI systems (since AI is the broader category of systems performing human-like tasks), but not every AI system uses machine learning — a hand-written rules engine is AI without being ML.",
+      "why_incorrect": {
+        "A": "This reverses the actual relationship; AI is the broader category, and ML is the narrower subset within it, not the other way around.",
+        "C": "AI and ML are not synonyms; AI is a broad category that includes systems (like rule-based expert systems) that are not machine learning at all.",
+        "D": "AI and ML are directly related, with ML being one specific approach within the broader AI field, not unrelated fields."
+      },
+      "rule_of_thumb": "AI is the outer set; ML, DL, and generative AI are each progressively narrower subsets inside it."
+    },
+    "tags": ["ai-vs-ml", "terminology"]
+  },
+  {
+    "id": "Q-D1-0127",
+    "domain": 1, "task_statement": "1.1", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D1-002"], "case_study_id": null,
+    "stem": "A team wants to train an autonomous drone to navigate a warehouse more efficiently over time, where the drone receives a penalty for collisions and a reward for reaching delivery points quickly, with no dataset of 'correct' navigation paths provided in advance. Which paradigm should the team use?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Reinforcement learning" },
+      { "key": "B", "text": "Unsupervised learning" },
+      { "key": "C", "text": "Semi-supervised learning" },
+      { "key": "D", "text": "Supervised learning" }
+    ],
+    "correct": ["A"],
+    "explanation": {
+      "why_correct": "The drone learns through trial and error, receiving reward and penalty signals as it takes actions over time, with no predefined dataset of correct navigation paths. This exactly matches the structure of reinforcement learning: an agent taking sequential actions to maximize cumulative reward.",
+      "why_incorrect": {
+        "B": "Unsupervised learning finds structure in static, unlabeled data with no reward signal or sequential decision-making, which does not match this reward/penalty-driven navigation scenario.",
+        "C": "Semi-supervised learning combines labeled and unlabeled data for a static prediction task; it does not involve sequential actions and reward signals the way this drone-navigation scenario does.",
+        "D": "Supervised learning requires a labeled dataset of correct input-output examples up front. The scenario explicitly states no such dataset of 'correct' paths is provided."
+      },
+      "rule_of_thumb": "Learning via trial-and-error reward/penalty signals over a sequence of actions, with no predefined correct-answer dataset, is reinforcement learning."
+    },
+    "tags": ["reinforcement-learning", "ml-paradigms"]
+  }
+]

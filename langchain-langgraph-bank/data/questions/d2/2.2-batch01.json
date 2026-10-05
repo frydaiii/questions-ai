@@ -1,0 +1,191 @@
+[
+  {
+    "id": "Q-D2-0022",
+    "domain": 2,
+    "task_statement": "2.2",
+    "type": "single_choice",
+    "difficulty": "easy",
+    "theory_refs": [
+      "TH-D2-006"
+    ],
+    "case_study_id": null,
+    "stem": "What is the primary purpose of task decomposition in agent planning?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "To make the final response longer regardless of content"
+      },
+      {
+        "key": "B",
+        "text": "To break a complex goal into smaller, more individually verifiable and fixable sub-tasks"
+      },
+      {
+        "key": "C",
+        "text": "To guarantee that no sub-task can ever fail"
+      },
+      {
+        "key": "D",
+        "text": "To eliminate the need for any verification of results"
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "explanation": {
+      "why_correct": "Task decomposition's main value is splitting a complex goal into smaller, more manageable sub-tasks that are easier to individually verify and, if needed, retry or fix.",
+      "why_incorrect": {
+        "A": "Decomposition is not about response length; it's about structuring the problem-solving process into verifiable pieces.",
+        "C": "Decomposition makes failures easier to localize and fix, but it does not guarantee that sub-tasks cannot fail.",
+        "D": "Decomposition specifically enables MORE granular verification of sub-task results, not less; it does not eliminate verification."
+      },
+      "rule_of_thumb": "Decomposition's value is making errors easier to localize and fix by breaking a complex goal into smaller, independently verifiable pieces."
+    },
+    "tags": [
+      "task-decomposition",
+      "planning"
+    ]
+  },
+  {
+    "id": "Q-D2-0023",
+    "domain": 2,
+    "task_statement": "2.2",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D2-007"
+    ],
+    "case_study_id": null,
+    "stem": "A plan-and-execute agent generates a 5-step plan, but step 2's actual result reveals an assumption baked into steps 3-5 is wrong. What should a well-designed agent do?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Abandon the task entirely with no further attempt"
+      },
+      {
+        "key": "B",
+        "text": "Blindly execute steps 3-5 exactly as originally planned"
+      },
+      {
+        "key": "C",
+        "text": "Revise or regenerate the remaining plan based on the new information from step 2's result"
+      },
+      {
+        "key": "D",
+        "text": "Restart the plan from step 1 even though step 1 and 2 succeeded correctly"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "A well-designed plan-and-execute agent includes a re-planning mechanism specifically for this situation: when execution reveals the original plan's assumptions no longer hold, the remaining plan should be revised accordingly.",
+      "why_incorrect": {
+        "A": "Abandoning the task is unnecessarily drastic when the issue is isolated to specific downstream steps that can be re-planned.",
+        "B": "Blindly executing a plan now known to rest on a false assumption risks producing an incorrect or nonsensical result.",
+        "D": "Restarting from step 1 wastes the already-successful work from steps 1-2; only the invalidated downstream steps need revision."
+      },
+      "rule_of_thumb": "When execution reveals a plan's assumptions no longer hold, revise the remaining plan rather than blindly continuing or restarting unnecessarily."
+    },
+    "tags": [
+      "plan-and-execute",
+      "re-planning"
+    ]
+  },
+  {
+    "id": "Q-D2-0024",
+    "domain": 2,
+    "task_statement": "2.2",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D2-008"
+    ],
+    "case_study_id": null,
+    "stem": "Which scenario would benefit most from a tree-of-thought-style approach that explores multiple reasoning branches?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "A problem where only one sensible next step exists at every point"
+      },
+      {
+        "key": "B",
+        "text": "A puzzle where an early move could plausibly go several different directions, and a wrong early choice would be very hard to recover from"
+      },
+      {
+        "key": "C",
+        "text": "A task with no decision points at all"
+      },
+      {
+        "key": "D",
+        "text": "A task where speed is the only priority and any correct-ish answer is acceptable"
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "explanation": {
+      "why_correct": "Tree-of-thought's value is realized specifically when early steps are genuinely ambiguous and a wrong early commitment in a linear chain would be hard to recover from -- exploring multiple branches avoids being stuck with a bad early choice.",
+      "why_incorrect": {
+        "A": "If there's only one sensible next step at every point, there's no genuine branching ambiguity to benefit from exploring, making the extra cost of tree-of-thought wasted.",
+        "C": "A task with no decision points has nothing to branch on, making tree-of-thought irrelevant.",
+        "D": "If speed is the only priority and precision doesn't matter much, the extra computational cost of exploring multiple branches is unlikely to be worthwhile."
+      },
+      "rule_of_thumb": "Tree-of-thought earns its extra cost specifically on problems with genuine early-step ambiguity where a wrong commitment is hard to recover from."
+    },
+    "tags": [
+      "tree-of-thought",
+      "task-fit"
+    ]
+  },
+  {
+    "id": "Q-D2-0025",
+    "domain": 2,
+    "task_statement": "2.2",
+    "type": "single_choice",
+    "difficulty": "hard",
+    "theory_refs": [
+      "TH-D2-009"
+    ],
+    "case_study_id": null,
+    "stem": "A developer decomposes a simple, single-step task ('convert this one temperature value from Celsius to Fahrenheit') into five artificial sub-tasks with a coordination step between each. What is the most likely outcome?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Improved accuracy with zero added cost"
+      },
+      {
+        "key": "B",
+        "text": "The task becomes impossible to complete"
+      },
+      {
+        "key": "C",
+        "text": "Unnecessary overhead from planning and coordinating sub-tasks that provide no real benefit for such a simple, already-tractable task"
+      },
+      {
+        "key": "D",
+        "text": "The decomposition guarantees a tree-of-thought search occurs automatically"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "For a trivially simple, single-step task, artificially decomposing it into multiple sub-tasks adds planning and coordination overhead without providing a meaningful accuracy or verification benefit, since there was little complexity to decompose in the first place.",
+      "why_incorrect": {
+        "A": "Decomposition overhead is not free; splitting a trivial task adds coordination cost without a corresponding accuracy benefit here.",
+        "D": "Decomposing into sub-tasks does not automatically invoke tree-of-thought-style branch exploration; these are distinct techniques.",
+        "B": "The task remains entirely completable; it is simply handled less efficiently than necessary."
+      },
+      "rule_of_thumb": "Decomposition is not free -- applying it to a trivially simple task adds overhead without a meaningful benefit."
+    },
+    "tags": [
+      "task-decomposition",
+      "overhead",
+      "design-tradeoffs"
+    ]
+  }
+]

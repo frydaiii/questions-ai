@@ -1,0 +1,922 @@
+[
+  {
+    "id": "Q-D1-0921",
+    "domain": 1,
+    "task_statement": "1.1",
+    "type": "single_choice",
+    "difficulty": "easy",
+    "theory_refs": [
+      "TH-D1-001"
+    ],
+    "case_study_id": null,
+    "stem": "Fixture skew question 1: which option is always correct in this synthetic skew-detection test, where every question in this batch has the same correct position?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Correct placeholder answer text variant 1"
+      },
+      {
+        "key": "B",
+        "text": "Incorrect placeholder answer text variant 1"
+      },
+      {
+        "key": "C",
+        "text": "Incorrect placeholder answer text variant 1"
+      },
+      {
+        "key": "D",
+        "text": "Incorrect placeholder answer text variant 1"
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "explanation": {
+      "why_correct": "This explanation is only present to satisfy the schema; the point of this fixture batch is that every correct answer is key A, to test the answer-position-skew gate.",
+      "why_incorrect": {
+        "B": "Placeholder explanation for option B, long enough to pass the minimum length check on its own merits.",
+        "C": "Placeholder explanation for option C, long enough to pass the minimum length check on its own merits.",
+        "D": "Placeholder explanation for option D, long enough to pass the minimum length check on its own merits."
+      },
+      "rule_of_thumb": "Placeholder rule of thumb text for this fixture, long enough on its own to not trip the length gate."
+    },
+    "tags": [
+      "fixture"
+    ]
+  },
+  {
+    "id": "Q-D1-0922",
+    "domain": 1,
+    "task_statement": "1.1",
+    "type": "single_choice",
+    "difficulty": "easy",
+    "theory_refs": [
+      "TH-D1-001"
+    ],
+    "case_study_id": null,
+    "stem": "Fixture skew question 2: which option is always correct in this synthetic skew-detection test, where every question in this batch has the same correct position?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Correct placeholder answer text variant 2"
+      },
+      {
+        "key": "B",
+        "text": "Incorrect placeholder answer text variant 2"
+      },
+      {
+        "key": "C",
+        "text": "Incorrect placeholder answer text variant 2"
+      },
+      {
+        "key": "D",
+        "text": "Incorrect placeholder answer text variant 2"
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "explanation": {
+      "why_correct": "This explanation is only present to satisfy the schema; the point of this fixture batch is that every correct answer is key A, to test the answer-position-skew gate.",
+      "why_incorrect": {
+        "B": "Placeholder explanation for option B, long enough to pass the minimum length check on its own merits.",
+        "C": "Placeholder explanation for option C, long enough to pass the minimum length check on its own merits.",
+        "D": "Placeholder explanation for option D, long enough to pass the minimum length check on its own merits."
+      },
+      "rule_of_thumb": "Placeholder rule of thumb text for this fixture, long enough on its own to not trip the length gate."
+    },
+    "tags": [
+      "fixture"
+    ]
+  },
+  {
+    "id": "Q-D1-0923",
+    "domain": 1,
+    "task_statement": "1.1",
+    "type": "single_choice",
+    "difficulty": "easy",
+    "theory_refs": [
+      "TH-D1-001"
+    ],
+    "case_study_id": null,
+    "stem": "Fixture skew question 3: which option is always correct in this synthetic skew-detection test, where every question in this batch has the same correct position?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Correct placeholder answer text variant 3"
+      },
+      {
+        "key": "B",
+        "text": "Incorrect placeholder answer text variant 3"
+      },
+      {
+        "key": "C",
+        "text": "Incorrect placeholder answer text variant 3"
+      },
+      {
+        "key": "D",
+        "text": "Incorrect placeholder answer text variant 3"
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "explanation": {
+      "why_correct": "This explanation is only present to satisfy the schema; the point of this fixture batch is that every correct answer is key A, to test the answer-position-skew gate.",
+      "why_incorrect": {
+        "B": "Placeholder explanation for option B, long enough to pass the minimum length check on its own merits.",
+        "C": "Placeholder explanation for option C, long enough to pass the minimum length check on its own merits.",
+        "D": "Placeholder explanation for option D, long enough to pass the minimum length check on its own merits."
+      },
+      "rule_of_thumb": "Placeholder rule of thumb text for this fixture, long enough on its own to not trip the length gate."
+    },
+    "tags": [
+      "fixture"
+    ]
+  },
+  {
+    "id": "Q-D1-0924",
+    "domain": 1,
+    "task_statement": "1.1",
+    "type": "single_choice",
+    "difficulty": "easy",
+    "theory_refs": [
+      "TH-D1-001"
+    ],
+    "case_study_id": null,
+    "stem": "Fixture skew question 4: which option is always correct in this synthetic skew-detection test, where every question in this batch has the same correct position?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Correct placeholder answer text variant 4"
+      },
+      {
+        "key": "B",
+        "text": "Incorrect placeholder answer text variant 4"
+      },
+      {
+        "key": "C",
+        "text": "Incorrect placeholder answer text variant 4"
+      },
+      {
+        "key": "D",
+        "text": "Incorrect placeholder answer text variant 4"
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "explanation": {
+      "why_correct": "This explanation is only present to satisfy the schema; the point of this fixture batch is that every correct answer is key A, to test the answer-position-skew gate.",
+      "why_incorrect": {
+        "B": "Placeholder explanation for option B, long enough to pass the minimum length check on its own merits.",
+        "C": "Placeholder explanation for option C, long enough to pass the minimum length check on its own merits.",
+        "D": "Placeholder explanation for option D, long enough to pass the minimum length check on its own merits."
+      },
+      "rule_of_thumb": "Placeholder rule of thumb text for this fixture, long enough on its own to not trip the length gate."
+    },
+    "tags": [
+      "fixture"
+    ]
+  },
+  {
+    "id": "Q-D1-0925",
+    "domain": 1,
+    "task_statement": "1.1",
+    "type": "single_choice",
+    "difficulty": "easy",
+    "theory_refs": [
+      "TH-D1-001"
+    ],
+    "case_study_id": null,
+    "stem": "Fixture skew question 5: which option is always correct in this synthetic skew-detection test, where every question in this batch has the same correct position?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Correct placeholder answer text variant 5"
+      },
+      {
+        "key": "B",
+        "text": "Incorrect placeholder answer text variant 5"
+      },
+      {
+        "key": "C",
+        "text": "Incorrect placeholder answer text variant 5"
+      },
+      {
+        "key": "D",
+        "text": "Incorrect placeholder answer text variant 5"
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "explanation": {
+      "why_correct": "This explanation is only present to satisfy the schema; the point of this fixture batch is that every correct answer is key A, to test the answer-position-skew gate.",
+      "why_incorrect": {
+        "B": "Placeholder explanation for option B, long enough to pass the minimum length check on its own merits.",
+        "C": "Placeholder explanation for option C, long enough to pass the minimum length check on its own merits.",
+        "D": "Placeholder explanation for option D, long enough to pass the minimum length check on its own merits."
+      },
+      "rule_of_thumb": "Placeholder rule of thumb text for this fixture, long enough on its own to not trip the length gate."
+    },
+    "tags": [
+      "fixture"
+    ]
+  },
+  {
+    "id": "Q-D1-0926",
+    "domain": 1,
+    "task_statement": "1.1",
+    "type": "single_choice",
+    "difficulty": "easy",
+    "theory_refs": [
+      "TH-D1-001"
+    ],
+    "case_study_id": null,
+    "stem": "Fixture skew question 6: which option is always correct in this synthetic skew-detection test, where every question in this batch has the same correct position?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Correct placeholder answer text variant 6"
+      },
+      {
+        "key": "B",
+        "text": "Incorrect placeholder answer text variant 6"
+      },
+      {
+        "key": "C",
+        "text": "Incorrect placeholder answer text variant 6"
+      },
+      {
+        "key": "D",
+        "text": "Incorrect placeholder answer text variant 6"
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "explanation": {
+      "why_correct": "This explanation is only present to satisfy the schema; the point of this fixture batch is that every correct answer is key A, to test the answer-position-skew gate.",
+      "why_incorrect": {
+        "B": "Placeholder explanation for option B, long enough to pass the minimum length check on its own merits.",
+        "C": "Placeholder explanation for option C, long enough to pass the minimum length check on its own merits.",
+        "D": "Placeholder explanation for option D, long enough to pass the minimum length check on its own merits."
+      },
+      "rule_of_thumb": "Placeholder rule of thumb text for this fixture, long enough on its own to not trip the length gate."
+    },
+    "tags": [
+      "fixture"
+    ]
+  },
+  {
+    "id": "Q-D1-0927",
+    "domain": 1,
+    "task_statement": "1.1",
+    "type": "single_choice",
+    "difficulty": "easy",
+    "theory_refs": [
+      "TH-D1-001"
+    ],
+    "case_study_id": null,
+    "stem": "Fixture skew question 7: which option is always correct in this synthetic skew-detection test, where every question in this batch has the same correct position?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Correct placeholder answer text variant 7"
+      },
+      {
+        "key": "B",
+        "text": "Incorrect placeholder answer text variant 7"
+      },
+      {
+        "key": "C",
+        "text": "Incorrect placeholder answer text variant 7"
+      },
+      {
+        "key": "D",
+        "text": "Incorrect placeholder answer text variant 7"
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "explanation": {
+      "why_correct": "This explanation is only present to satisfy the schema; the point of this fixture batch is that every correct answer is key A, to test the answer-position-skew gate.",
+      "why_incorrect": {
+        "B": "Placeholder explanation for option B, long enough to pass the minimum length check on its own merits.",
+        "C": "Placeholder explanation for option C, long enough to pass the minimum length check on its own merits.",
+        "D": "Placeholder explanation for option D, long enough to pass the minimum length check on its own merits."
+      },
+      "rule_of_thumb": "Placeholder rule of thumb text for this fixture, long enough on its own to not trip the length gate."
+    },
+    "tags": [
+      "fixture"
+    ]
+  },
+  {
+    "id": "Q-D1-0928",
+    "domain": 1,
+    "task_statement": "1.1",
+    "type": "single_choice",
+    "difficulty": "easy",
+    "theory_refs": [
+      "TH-D1-001"
+    ],
+    "case_study_id": null,
+    "stem": "Fixture skew question 8: which option is always correct in this synthetic skew-detection test, where every question in this batch has the same correct position?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Correct placeholder answer text variant 8"
+      },
+      {
+        "key": "B",
+        "text": "Incorrect placeholder answer text variant 8"
+      },
+      {
+        "key": "C",
+        "text": "Incorrect placeholder answer text variant 8"
+      },
+      {
+        "key": "D",
+        "text": "Incorrect placeholder answer text variant 8"
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "explanation": {
+      "why_correct": "This explanation is only present to satisfy the schema; the point of this fixture batch is that every correct answer is key A, to test the answer-position-skew gate.",
+      "why_incorrect": {
+        "B": "Placeholder explanation for option B, long enough to pass the minimum length check on its own merits.",
+        "C": "Placeholder explanation for option C, long enough to pass the minimum length check on its own merits.",
+        "D": "Placeholder explanation for option D, long enough to pass the minimum length check on its own merits."
+      },
+      "rule_of_thumb": "Placeholder rule of thumb text for this fixture, long enough on its own to not trip the length gate."
+    },
+    "tags": [
+      "fixture"
+    ]
+  },
+  {
+    "id": "Q-D1-0929",
+    "domain": 1,
+    "task_statement": "1.1",
+    "type": "single_choice",
+    "difficulty": "easy",
+    "theory_refs": [
+      "TH-D1-001"
+    ],
+    "case_study_id": null,
+    "stem": "Fixture skew question 9: which option is always correct in this synthetic skew-detection test, where every question in this batch has the same correct position?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Correct placeholder answer text variant 9"
+      },
+      {
+        "key": "B",
+        "text": "Incorrect placeholder answer text variant 9"
+      },
+      {
+        "key": "C",
+        "text": "Incorrect placeholder answer text variant 9"
+      },
+      {
+        "key": "D",
+        "text": "Incorrect placeholder answer text variant 9"
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "explanation": {
+      "why_correct": "This explanation is only present to satisfy the schema; the point of this fixture batch is that every correct answer is key A, to test the answer-position-skew gate.",
+      "why_incorrect": {
+        "B": "Placeholder explanation for option B, long enough to pass the minimum length check on its own merits.",
+        "C": "Placeholder explanation for option C, long enough to pass the minimum length check on its own merits.",
+        "D": "Placeholder explanation for option D, long enough to pass the minimum length check on its own merits."
+      },
+      "rule_of_thumb": "Placeholder rule of thumb text for this fixture, long enough on its own to not trip the length gate."
+    },
+    "tags": [
+      "fixture"
+    ]
+  },
+  {
+    "id": "Q-D1-0930",
+    "domain": 1,
+    "task_statement": "1.1",
+    "type": "single_choice",
+    "difficulty": "easy",
+    "theory_refs": [
+      "TH-D1-001"
+    ],
+    "case_study_id": null,
+    "stem": "Fixture skew question 10: which option is always correct in this synthetic skew-detection test, where every question in this batch has the same correct position?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Correct placeholder answer text variant 10"
+      },
+      {
+        "key": "B",
+        "text": "Incorrect placeholder answer text variant 10"
+      },
+      {
+        "key": "C",
+        "text": "Incorrect placeholder answer text variant 10"
+      },
+      {
+        "key": "D",
+        "text": "Incorrect placeholder answer text variant 10"
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "explanation": {
+      "why_correct": "This explanation is only present to satisfy the schema; the point of this fixture batch is that every correct answer is key A, to test the answer-position-skew gate.",
+      "why_incorrect": {
+        "B": "Placeholder explanation for option B, long enough to pass the minimum length check on its own merits.",
+        "C": "Placeholder explanation for option C, long enough to pass the minimum length check on its own merits.",
+        "D": "Placeholder explanation for option D, long enough to pass the minimum length check on its own merits."
+      },
+      "rule_of_thumb": "Placeholder rule of thumb text for this fixture, long enough on its own to not trip the length gate."
+    },
+    "tags": [
+      "fixture"
+    ]
+  },
+  {
+    "id": "Q-D1-0931",
+    "domain": 1,
+    "task_statement": "1.1",
+    "type": "single_choice",
+    "difficulty": "easy",
+    "theory_refs": [
+      "TH-D1-001"
+    ],
+    "case_study_id": null,
+    "stem": "Fixture skew question 11: which option is always correct in this synthetic skew-detection test, where every question in this batch has the same correct position?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Correct placeholder answer text variant 11"
+      },
+      {
+        "key": "B",
+        "text": "Incorrect placeholder answer text variant 11"
+      },
+      {
+        "key": "C",
+        "text": "Incorrect placeholder answer text variant 11"
+      },
+      {
+        "key": "D",
+        "text": "Incorrect placeholder answer text variant 11"
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "explanation": {
+      "why_correct": "This explanation is only present to satisfy the schema; the point of this fixture batch is that every correct answer is key A, to test the answer-position-skew gate.",
+      "why_incorrect": {
+        "B": "Placeholder explanation for option B, long enough to pass the minimum length check on its own merits.",
+        "C": "Placeholder explanation for option C, long enough to pass the minimum length check on its own merits.",
+        "D": "Placeholder explanation for option D, long enough to pass the minimum length check on its own merits."
+      },
+      "rule_of_thumb": "Placeholder rule of thumb text for this fixture, long enough on its own to not trip the length gate."
+    },
+    "tags": [
+      "fixture"
+    ]
+  },
+  {
+    "id": "Q-D1-0932",
+    "domain": 1,
+    "task_statement": "1.1",
+    "type": "single_choice",
+    "difficulty": "easy",
+    "theory_refs": [
+      "TH-D1-001"
+    ],
+    "case_study_id": null,
+    "stem": "Fixture skew question 12: which option is always correct in this synthetic skew-detection test, where every question in this batch has the same correct position?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Correct placeholder answer text variant 12"
+      },
+      {
+        "key": "B",
+        "text": "Incorrect placeholder answer text variant 12"
+      },
+      {
+        "key": "C",
+        "text": "Incorrect placeholder answer text variant 12"
+      },
+      {
+        "key": "D",
+        "text": "Incorrect placeholder answer text variant 12"
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "explanation": {
+      "why_correct": "This explanation is only present to satisfy the schema; the point of this fixture batch is that every correct answer is key A, to test the answer-position-skew gate.",
+      "why_incorrect": {
+        "B": "Placeholder explanation for option B, long enough to pass the minimum length check on its own merits.",
+        "C": "Placeholder explanation for option C, long enough to pass the minimum length check on its own merits.",
+        "D": "Placeholder explanation for option D, long enough to pass the minimum length check on its own merits."
+      },
+      "rule_of_thumb": "Placeholder rule of thumb text for this fixture, long enough on its own to not trip the length gate."
+    },
+    "tags": [
+      "fixture"
+    ]
+  },
+  {
+    "id": "Q-D1-0933",
+    "domain": 1,
+    "task_statement": "1.1",
+    "type": "single_choice",
+    "difficulty": "easy",
+    "theory_refs": [
+      "TH-D1-001"
+    ],
+    "case_study_id": null,
+    "stem": "Fixture skew question 13: which option is always correct in this synthetic skew-detection test, where every question in this batch has the same correct position?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Correct placeholder answer text variant 13"
+      },
+      {
+        "key": "B",
+        "text": "Incorrect placeholder answer text variant 13"
+      },
+      {
+        "key": "C",
+        "text": "Incorrect placeholder answer text variant 13"
+      },
+      {
+        "key": "D",
+        "text": "Incorrect placeholder answer text variant 13"
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "explanation": {
+      "why_correct": "This explanation is only present to satisfy the schema; the point of this fixture batch is that every correct answer is key A, to test the answer-position-skew gate.",
+      "why_incorrect": {
+        "B": "Placeholder explanation for option B, long enough to pass the minimum length check on its own merits.",
+        "C": "Placeholder explanation for option C, long enough to pass the minimum length check on its own merits.",
+        "D": "Placeholder explanation for option D, long enough to pass the minimum length check on its own merits."
+      },
+      "rule_of_thumb": "Placeholder rule of thumb text for this fixture, long enough on its own to not trip the length gate."
+    },
+    "tags": [
+      "fixture"
+    ]
+  },
+  {
+    "id": "Q-D1-0934",
+    "domain": 1,
+    "task_statement": "1.1",
+    "type": "single_choice",
+    "difficulty": "easy",
+    "theory_refs": [
+      "TH-D1-001"
+    ],
+    "case_study_id": null,
+    "stem": "Fixture skew question 14: which option is always correct in this synthetic skew-detection test, where every question in this batch has the same correct position?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Correct placeholder answer text variant 14"
+      },
+      {
+        "key": "B",
+        "text": "Incorrect placeholder answer text variant 14"
+      },
+      {
+        "key": "C",
+        "text": "Incorrect placeholder answer text variant 14"
+      },
+      {
+        "key": "D",
+        "text": "Incorrect placeholder answer text variant 14"
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "explanation": {
+      "why_correct": "This explanation is only present to satisfy the schema; the point of this fixture batch is that every correct answer is key A, to test the answer-position-skew gate.",
+      "why_incorrect": {
+        "B": "Placeholder explanation for option B, long enough to pass the minimum length check on its own merits.",
+        "C": "Placeholder explanation for option C, long enough to pass the minimum length check on its own merits.",
+        "D": "Placeholder explanation for option D, long enough to pass the minimum length check on its own merits."
+      },
+      "rule_of_thumb": "Placeholder rule of thumb text for this fixture, long enough on its own to not trip the length gate."
+    },
+    "tags": [
+      "fixture"
+    ]
+  },
+  {
+    "id": "Q-D1-0935",
+    "domain": 1,
+    "task_statement": "1.1",
+    "type": "single_choice",
+    "difficulty": "easy",
+    "theory_refs": [
+      "TH-D1-001"
+    ],
+    "case_study_id": null,
+    "stem": "Fixture skew question 15: which option is always correct in this synthetic skew-detection test, where every question in this batch has the same correct position?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Correct placeholder answer text variant 15"
+      },
+      {
+        "key": "B",
+        "text": "Incorrect placeholder answer text variant 15"
+      },
+      {
+        "key": "C",
+        "text": "Incorrect placeholder answer text variant 15"
+      },
+      {
+        "key": "D",
+        "text": "Incorrect placeholder answer text variant 15"
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "explanation": {
+      "why_correct": "This explanation is only present to satisfy the schema; the point of this fixture batch is that every correct answer is key A, to test the answer-position-skew gate.",
+      "why_incorrect": {
+        "B": "Placeholder explanation for option B, long enough to pass the minimum length check on its own merits.",
+        "C": "Placeholder explanation for option C, long enough to pass the minimum length check on its own merits.",
+        "D": "Placeholder explanation for option D, long enough to pass the minimum length check on its own merits."
+      },
+      "rule_of_thumb": "Placeholder rule of thumb text for this fixture, long enough on its own to not trip the length gate."
+    },
+    "tags": [
+      "fixture"
+    ]
+  },
+  {
+    "id": "Q-D1-0936",
+    "domain": 1,
+    "task_statement": "1.1",
+    "type": "single_choice",
+    "difficulty": "easy",
+    "theory_refs": [
+      "TH-D1-001"
+    ],
+    "case_study_id": null,
+    "stem": "Fixture skew question 16: which option is always correct in this synthetic skew-detection test, where every question in this batch has the same correct position?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Correct placeholder answer text variant 16"
+      },
+      {
+        "key": "B",
+        "text": "Incorrect placeholder answer text variant 16"
+      },
+      {
+        "key": "C",
+        "text": "Incorrect placeholder answer text variant 16"
+      },
+      {
+        "key": "D",
+        "text": "Incorrect placeholder answer text variant 16"
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "explanation": {
+      "why_correct": "This explanation is only present to satisfy the schema; the point of this fixture batch is that every correct answer is key A, to test the answer-position-skew gate.",
+      "why_incorrect": {
+        "B": "Placeholder explanation for option B, long enough to pass the minimum length check on its own merits.",
+        "C": "Placeholder explanation for option C, long enough to pass the minimum length check on its own merits.",
+        "D": "Placeholder explanation for option D, long enough to pass the minimum length check on its own merits."
+      },
+      "rule_of_thumb": "Placeholder rule of thumb text for this fixture, long enough on its own to not trip the length gate."
+    },
+    "tags": [
+      "fixture"
+    ]
+  },
+  {
+    "id": "Q-D1-0937",
+    "domain": 1,
+    "task_statement": "1.1",
+    "type": "single_choice",
+    "difficulty": "easy",
+    "theory_refs": [
+      "TH-D1-001"
+    ],
+    "case_study_id": null,
+    "stem": "Fixture skew question 17: which option is always correct in this synthetic skew-detection test, where every question in this batch has the same correct position?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Correct placeholder answer text variant 17"
+      },
+      {
+        "key": "B",
+        "text": "Incorrect placeholder answer text variant 17"
+      },
+      {
+        "key": "C",
+        "text": "Incorrect placeholder answer text variant 17"
+      },
+      {
+        "key": "D",
+        "text": "Incorrect placeholder answer text variant 17"
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "explanation": {
+      "why_correct": "This explanation is only present to satisfy the schema; the point of this fixture batch is that every correct answer is key A, to test the answer-position-skew gate.",
+      "why_incorrect": {
+        "B": "Placeholder explanation for option B, long enough to pass the minimum length check on its own merits.",
+        "C": "Placeholder explanation for option C, long enough to pass the minimum length check on its own merits.",
+        "D": "Placeholder explanation for option D, long enough to pass the minimum length check on its own merits."
+      },
+      "rule_of_thumb": "Placeholder rule of thumb text for this fixture, long enough on its own to not trip the length gate."
+    },
+    "tags": [
+      "fixture"
+    ]
+  },
+  {
+    "id": "Q-D1-0938",
+    "domain": 1,
+    "task_statement": "1.1",
+    "type": "single_choice",
+    "difficulty": "easy",
+    "theory_refs": [
+      "TH-D1-001"
+    ],
+    "case_study_id": null,
+    "stem": "Fixture skew question 18: which option is always correct in this synthetic skew-detection test, where every question in this batch has the same correct position?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Correct placeholder answer text variant 18"
+      },
+      {
+        "key": "B",
+        "text": "Incorrect placeholder answer text variant 18"
+      },
+      {
+        "key": "C",
+        "text": "Incorrect placeholder answer text variant 18"
+      },
+      {
+        "key": "D",
+        "text": "Incorrect placeholder answer text variant 18"
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "explanation": {
+      "why_correct": "This explanation is only present to satisfy the schema; the point of this fixture batch is that every correct answer is key A, to test the answer-position-skew gate.",
+      "why_incorrect": {
+        "B": "Placeholder explanation for option B, long enough to pass the minimum length check on its own merits.",
+        "C": "Placeholder explanation for option C, long enough to pass the minimum length check on its own merits.",
+        "D": "Placeholder explanation for option D, long enough to pass the minimum length check on its own merits."
+      },
+      "rule_of_thumb": "Placeholder rule of thumb text for this fixture, long enough on its own to not trip the length gate."
+    },
+    "tags": [
+      "fixture"
+    ]
+  },
+  {
+    "id": "Q-D1-0939",
+    "domain": 1,
+    "task_statement": "1.1",
+    "type": "single_choice",
+    "difficulty": "easy",
+    "theory_refs": [
+      "TH-D1-001"
+    ],
+    "case_study_id": null,
+    "stem": "Fixture skew question 19: which option is always correct in this synthetic skew-detection test, where every question in this batch has the same correct position?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Correct placeholder answer text variant 19"
+      },
+      {
+        "key": "B",
+        "text": "Incorrect placeholder answer text variant 19"
+      },
+      {
+        "key": "C",
+        "text": "Incorrect placeholder answer text variant 19"
+      },
+      {
+        "key": "D",
+        "text": "Incorrect placeholder answer text variant 19"
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "explanation": {
+      "why_correct": "This explanation is only present to satisfy the schema; the point of this fixture batch is that every correct answer is key A, to test the answer-position-skew gate.",
+      "why_incorrect": {
+        "B": "Placeholder explanation for option B, long enough to pass the minimum length check on its own merits.",
+        "C": "Placeholder explanation for option C, long enough to pass the minimum length check on its own merits.",
+        "D": "Placeholder explanation for option D, long enough to pass the minimum length check on its own merits."
+      },
+      "rule_of_thumb": "Placeholder rule of thumb text for this fixture, long enough on its own to not trip the length gate."
+    },
+    "tags": [
+      "fixture"
+    ]
+  },
+  {
+    "id": "Q-D1-0940",
+    "domain": 1,
+    "task_statement": "1.1",
+    "type": "single_choice",
+    "difficulty": "easy",
+    "theory_refs": [
+      "TH-D1-001"
+    ],
+    "case_study_id": null,
+    "stem": "Fixture skew question 20: which option is always correct in this synthetic skew-detection test, where every question in this batch has the same correct position?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Correct placeholder answer text variant 20"
+      },
+      {
+        "key": "B",
+        "text": "Incorrect placeholder answer text variant 20"
+      },
+      {
+        "key": "C",
+        "text": "Incorrect placeholder answer text variant 20"
+      },
+      {
+        "key": "D",
+        "text": "Incorrect placeholder answer text variant 20"
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "explanation": {
+      "why_correct": "This explanation is only present to satisfy the schema; the point of this fixture batch is that every correct answer is key A, to test the answer-position-skew gate.",
+      "why_incorrect": {
+        "B": "Placeholder explanation for option B, long enough to pass the minimum length check on its own merits.",
+        "C": "Placeholder explanation for option C, long enough to pass the minimum length check on its own merits.",
+        "D": "Placeholder explanation for option D, long enough to pass the minimum length check on its own merits."
+      },
+      "rule_of_thumb": "Placeholder rule of thumb text for this fixture, long enough on its own to not trip the length gate."
+    },
+    "tags": [
+      "fixture"
+    ]
+  }
+]

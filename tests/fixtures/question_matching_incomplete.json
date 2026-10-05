@@ -1,0 +1,32 @@
+[
+  {
+    "id": "Q-D1-0904",
+    "domain": 1,
+    "task_statement": "1.2",
+    "type": "matching",
+    "difficulty": "medium",
+    "theory_refs": ["TH-D1-001"],
+    "case_study_id": null,
+    "stem": "Broken fixture: matching question whose correct_pairs is missing an entry for L3, to test the matching-completeness gate.",
+    "select_count": 3,
+    "matching": {
+      "left": [
+        { "key": "L1", "text": "Left item 1" },
+        { "key": "L2", "text": "Left item 2" },
+        { "key": "L3", "text": "Left item 3" }
+      ],
+      "right": [
+        { "key": "R1", "text": "Right item 1" },
+        { "key": "R2", "text": "Right item 2" },
+        { "key": "R3", "text": "Right item 3" }
+      ]
+    },
+    "correct_pairs": { "L1": "R1", "L2": "R2" },
+    "explanation": {
+      "why_correct": "This explanation is only present to satisfy the schema; the point of this fixture is the incomplete correct_pairs map.",
+      "why_incorrect": {},
+      "rule_of_thumb": "Placeholder rule of thumb text for this fixture."
+    },
+    "tags": ["fixture"]
+  }
+]

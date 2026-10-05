@@ -1,0 +1,50 @@
+[
+  {
+    "id": "Q-D3-0055",
+    "domain": 3,
+    "task_statement": "3.2",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D3-006",
+      "TH-D3-007"
+    ],
+    "case_study_id": null,
+    "stem": "An agent correctly identifies that a 'send_email' tool is needed, but then omits the required 'recipient' field when constructing the call. What is the most accurate characterization of this failure?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Neither tool selection nor parameter construction is relevant to this scenario"
+      },
+      {
+        "key": "B",
+        "text": "Both tool selection and parameter construction failed"
+      },
+      {
+        "key": "C",
+        "text": "Tool selection succeeded, but parameter construction failed due to a missing required field"
+      },
+      {
+        "key": "D",
+        "text": "This proves the send_email tool does not actually exist"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "The correct tool was identified and chosen (send_email was indeed appropriate), but the call itself was malformed due to a missing required field -- a parameter construction failure distinct from tool selection.",
+      "why_incorrect": {
+        "B": "Tool selection was correct here; only the parameter construction step failed, not both.",
+        "D": "The tool clearly exists and was correctly identified as needed; the problem is specifically with the incomplete call, not the tool's existence.",
+        "A": "Both concepts are directly relevant: selection succeeded, construction failed -- this is exactly the kind of scenario these concepts are meant to distinguish."
+      },
+      "rule_of_thumb": "Correct tool selection with a missing required parameter is a parameter construction failure, not a selection failure or evidence the tool doesn't exist."
+    },
+    "tags": [
+      "tool-selection",
+      "parameter-construction"
+    ]
+  }
+]

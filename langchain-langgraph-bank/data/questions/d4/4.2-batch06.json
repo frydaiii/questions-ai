@@ -1,0 +1,57 @@
+[
+  {
+    "id": "Q-D4-0044",
+    "domain": 4,
+    "task_statement": "4.2",
+    "type": "multi_response",
+    "difficulty": "medium",
+    "theory_refs": ["TH-D4-005", "TH-D4-006"],
+    "case_study_id": null,
+    "stem": "Which of the following would most likely be stored as semantic memory rather than episodic memory? (Select 2)",
+    "select_count": 2,
+    "options": [
+      { "key": "A", "text": "A general rule stating that a certain product line always ships from a specific warehouse" },
+      { "key": "B", "text": "A note that a specific order placed on a specific date was delayed due to a specific storm" },
+      { "key": "C", "text": "A standing fact about a company's general refund window across all orders" },
+      { "key": "D", "text": "A record describing exactly what happened during one particular customer call last Thursday" }
+    ],
+    "correct": ["A", "C"],
+    "explanation": {
+      "why_correct": "A general shipping rule and a standing refund-window policy are both facts that hold true independent of any one specific event, making them semantic memory.",
+      "why_incorrect": {
+        "B": "This is tied to one specific order and one specific storm event, making it episodic, not semantic.",
+        "D": "This describes exactly what happened during one specific call, which is a defining trait of episodic memory, not semantic."
+      },
+      "rule_of_thumb": "General, standing facts independent of any specific occurrence are semantic; records tied to a specific event are episodic."
+    },
+    "tags": ["semantic-memory", "episodic-memory"]
+  },
+  {
+    "id": "Q-D4-0045",
+    "domain": 4,
+    "task_statement": "4.2",
+    "type": "single_choice",
+    "difficulty": "hard",
+    "theory_refs": ["TH-D4-006", "TH-D4-008"],
+    "case_study_id": null,
+    "stem": "Why might a reasoning step that needs 'the general refund policy' retrieve poorly if the memory system only ever retrieves based on situational similarity to specific past events?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Because situational similarity matching is tuned for finding comparable past episodes, not for surfacing a general, event-independent fact" },
+      { "key": "B", "text": "Because general facts can never be stored in any memory system" },
+      { "key": "C", "text": "Because situational similarity matching always works equally well for every type of memory need" },
+      { "key": "D", "text": "Because refund policies are never relevant to any reasoning step" }
+    ],
+    "correct": ["A"],
+    "explanation": {
+      "why_correct": "Situational similarity matching is well suited to finding comparable past episodes, but a general fact like a refund policy isn't tied to any particular situation -- it needs retrieval tuned to topical/conceptual relevance instead, which situational-episode matching doesn't provide.",
+      "why_incorrect": {
+        "B": "General facts are routinely stored as semantic memory; this claim is false.",
+        "C": "This is precisely the point being made as false -- situational similarity matching, suited to episodic retrieval, doesn't work equally well for semantic fact retrieval.",
+        "D": "Refund policy is a clearly relevant, commonly needed piece of information for many reasoning steps in a customer-service context."
+      },
+      "rule_of_thumb": "Retrieval methods tuned for one memory type (situational similarity for episodic) may not work well for a different type's actual need (topical relevance for semantic facts)."
+    },
+    "tags": ["semantic-memory", "memory-retrieval", "memory-type-organization"]
+  }
+]

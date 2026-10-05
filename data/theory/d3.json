@@ -1,0 +1,669 @@
+[
+  {
+    "id": "TH-D3-001",
+    "domain": 3,
+    "task_statements": ["3.1", "3.3"],
+    "title": "Foundation model customization ladder: prompt engineering vs RAG vs fine-tuning vs continued pre-training",
+    "summary": "AWS expects candidates to pick the least-effort customization technique that solves the business problem, in increasing order of cost and complexity. Prompt engineering (including in-context learning with examples) changes only the input, not the model, and is the cheapest and fastest option. Retrieval-Augmented Generation (RAG) grounds responses in external documents retrieved at inference time, ideal when facts change frequently or come from proprietary data. Fine-tuning adjusts the model's weights using a labeled dataset to change task behavior, tone, or output format, and requires retraining whenever the target behavior changes. Continued pre-training further trains the model on large volumes of unlabeled, domain-specific text to expand its general knowledge without teaching it a specific task.",
+    "key_points": [
+      "Prompt engineering: no weight changes, fastest and cheapest, best first thing to try.",
+      "RAG: best when the model needs access to current or proprietary facts that change often — updating the knowledge base doesn't require retraining.",
+      "Fine-tuning: best when the desired change is in style, tone, format, or a narrow task — needs labeled examples and retraining for each change.",
+      "Continued pre-training: best for injecting broad domain vocabulary/knowledge from large unlabeled corpora — the heaviest and most expensive option.",
+      "Fine-tuning too narrowly on one task risks catastrophic forgetting, where the model loses some of its general-purpose capability."
+    ],
+    "rule_of_thumb": "Facts that change often -> RAG. Style, tone, or task behavior that must change -> fine-tuning. Broad new domain vocabulary from unlabeled text -> continued pre-training. Anything that can be solved by better instructions alone -> prompt engineering first.",
+    "common_confusions": [
+      "Choosing fine-tuning when the real requirement is fresh or proprietary facts — that is RAG's job, not fine-tuning's.",
+      "Confusing continued pre-training (unlabeled data, broadens knowledge) with fine-tuning (labeled data, changes task behavior) — they use different data and solve different problems."
+    ],
+    "aws_services": ["Amazon Bedrock", "Amazon Bedrock Knowledge Bases", "Amazon SageMaker JumpStart"],
+    "references": [
+      "https://aws.amazon.com/what-is/retrieval-augmented-generation/",
+      "https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models.html"
+    ]
+  },
+  {
+    "id": "TH-D3-002",
+    "domain": 3,
+    "task_statements": ["3.1"],
+    "title": "Design considerations for foundation model applications: latency, cost, and model size tradeoffs",
+    "summary": "When designing an application around a foundation model, three interrelated factors must be balanced: latency (how fast a response is needed), cost (token pricing scales with prompt and response length, and larger/more capable models generally cost more per token), and accuracy/capability (larger models tend to perform better on complex reasoning but cost more and respond slower). A common design pattern is model tiering: using a smaller, faster, cheaper model for simple sub-tasks (e.g. classification or routing) and reserving a larger, more capable model for the sub-tasks that truly need its reasoning ability. Prompt length itself is also a design lever, since shorter, well-structured prompts reduce both cost and latency without necessarily sacrificing quality.",
+    "key_points": [
+      "Latency, cost, and capability trade off against each other; the largest, most capable model is not automatically the correct choice for every sub-task.",
+      "Model tiering (using different-sized models for different sub-tasks in a pipeline) is a standard cost/latency optimization pattern.",
+      "Prompt length directly affects both cost (token billing) and latency (more tokens to process), so concise, well-structured prompts are a design lever, not just a style preference.",
+      "Response length limits (max tokens, stop sequences) also directly control cost and latency.",
+      "Design decisions should be driven by the specific sub-task's actual complexity requirements, not a blanket 'always use the biggest model' policy."
+    ],
+    "rule_of_thumb": "Simple, high-volume sub-task (classification, routing, short extraction) -> smaller/cheaper/faster model. Complex reasoning, nuanced generation -> larger/more capable model, accepted at higher cost/latency.",
+    "common_confusions": [
+      "Assuming a single foundation model must handle every step of a multi-step application uniformly — many production systems intentionally mix model sizes across steps for cost/latency efficiency.",
+      "Overlooking that longer prompts and longer expected outputs both increase cost and latency, independent of which model is chosen."
+    ],
+    "aws_services": ["Amazon Bedrock", "Amazon SageMaker"],
+    "references": [
+      "https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization.html",
+      "https://aws.amazon.com/bedrock/pricing/"
+    ]
+  },
+  {
+    "id": "TH-D3-003",
+    "domain": 3,
+    "task_statements": ["3.1"],
+    "title": "Choosing between off-the-shelf, RAG-augmented, and fully custom foundation model solutions",
+    "summary": "Off-the-shelf use of a foundation model (with only prompt engineering) suits use cases needing general knowledge and reasoning without organization-specific facts. RAG-augmented use suits use cases needing organization-specific, frequently-changing facts grounded from documents, without touching the model's weights. Fully custom (fine-tuned or continued-pretrained) use suits use cases needing a specific behavior, tone, narrow task specialization, or deep domain vocabulary that prompting and RAG alone cannot reliably achieve. Each successive tier trades increasing cost, effort, and operational complexity for increasing control over the model's behavior or knowledge.",
+    "key_points": [
+      "Off-the-shelf + prompting: general-purpose knowledge/reasoning tasks, fastest to deploy.",
+      "RAG-augmented: proprietary or frequently-changing facts, no weight changes, moderate additional infrastructure (ingestion, vector store).",
+      "Fine-tuned/custom: specific behavior, tone, or narrow task specialization not achievable through prompting/RAG alone, highest cost and operational complexity.",
+      "The decision should follow directly from the customization-ladder framework: start at the cheapest tier that could plausibly solve the problem, and only escalate if it doesn't.",
+      "Combining tiers is common in practice — e.g. a fine-tuned model that is also RAG-augmented for facts."
+    ],
+    "rule_of_thumb": "Start at the cheapest tier (prompting) that could plausibly solve the problem and escalate only if testing shows it's insufficient — don't default to the most complex/custom option first.",
+    "common_confusions": [
+      "Jumping straight to fine-tuning for a problem that RAG or better prompting could solve just as well at lower cost and effort.",
+      "Assuming RAG and fine-tuning are mutually exclusive — a production system can combine a fine-tuned model (for behavior/tone) with RAG (for facts) when both needs exist simultaneously."
+    ],
+    "aws_services": ["Amazon Bedrock", "Amazon Bedrock Knowledge Bases", "Amazon SageMaker"],
+    "references": [
+      "https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models.html",
+      "https://aws.amazon.com/what-is/retrieval-augmented-generation/"
+    ]
+  },
+  {
+    "id": "TH-D3-004",
+    "domain": 3,
+    "task_statements": ["3.1"],
+    "title": "RAG architecture: chunking, embedding, retrieval, and augmentation steps",
+    "summary": "Retrieval-Augmented Generation follows a consistent pipeline. First, source documents are split into smaller chunks (chunking), sized to balance context relevance against staying within the model's context window. Each chunk is converted into an embedding vector and stored in a vector database. At query time, the user's query is itself embedded, and the vector database returns the most semantically similar chunks (retrieval). Those retrieved chunks are inserted into the foundation model's prompt alongside the original query (augmentation), so the model generates its response grounded in that retrieved context rather than relying solely on its pre-trained knowledge.",
+    "key_points": [
+      "Chunking strategy (chunk size, overlap) affects retrieval quality — too large loses precision, too small loses context.",
+      "Embeddings convert both document chunks and the user query into comparable vector representations.",
+      "Retrieval finds the most semantically relevant chunks via vector similarity search, not exact keyword matching.",
+      "Augmentation inserts retrieved chunks into the prompt so the model's response is grounded in that specific context.",
+      "None of these steps modify the foundation model's weights — RAG is entirely a retrieval-and-prompting technique."
+    ],
+    "rule_of_thumb": "Remember the order: chunk the documents, embed the chunks, retrieve the most relevant chunks for a query, augment the prompt with them, then generate. All of this happens without ever touching the model's weights.",
+    "common_confusions": [
+      "Assuming RAG trains or updates the model — RAG only changes what's included in the prompt at inference time; the model itself is unchanged.",
+      "Ignoring chunking strategy as a design detail — poor chunking (too large or too small) directly degrades retrieval quality and therefore answer quality, independent of which model or vector store is used."
+    ],
+    "aws_services": ["Amazon Bedrock Knowledge Bases", "Amazon OpenSearch Service", "Amazon S3"],
+    "references": [
+      "https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-ingest.html",
+      "https://aws.amazon.com/what-is/retrieval-augmented-generation/"
+    ]
+  },
+  {
+    "id": "TH-D3-005",
+    "domain": 3,
+    "task_statements": ["3.1"],
+    "title": "Choosing a vector store for a RAG application",
+    "summary": "The right vector store for a RAG application depends on the surrounding data model and performance requirements, not brand preference. If the application already stores related content in Amazon S3 and needs a dedicated, scalable search/vector engine, Amazon OpenSearch Service's k-NN capability is a strong default. If embeddings need to live alongside existing relational data queried via SQL, Aurora PostgreSQL or RDS PostgreSQL with pgvector is a natural fit. If the use case involves graph relationships between entities in addition to similarity search, Neptune ML is worth considering. If sub-millisecond retrieval latency at very high query throughput is the top priority, MemoryDB is designed for that. If the existing data model is document/JSON-oriented, DocumentDB's vector search fits naturally.",
+    "key_points": [
+      "OpenSearch Service: general-purpose, scalable vector + search engine, a common default for RAG.",
+      "Aurora/RDS + pgvector: best when embeddings should coexist with relational data under SQL.",
+      "Neptune ML: best when graph relationships between entities are also part of the retrieval logic.",
+      "MemoryDB: best when raw latency/throughput is the dominant requirement.",
+      "DocumentDB: best when the existing data model is already document/JSON-oriented (MongoDB-compatible)."
+    ],
+    "rule_of_thumb": "Match the vector store choice to the existing data shape and the dominant non-functional requirement (search-centric, relational, graph, latency, or document-oriented), not to which service sounds most 'AI-native.'",
+    "common_confusions": [
+      "Assuming there is only one 'correct' AWS vector store for every RAG scenario — the exam expects you to match the store to the scenario's data model and performance constraints, and several of the five options can be legitimately correct depending on context.",
+      "Choosing a vector store based on raw popularity rather than the stated requirement in the scenario (e.g. picking OpenSearch when the scenario explicitly describes existing relational data and SQL-based access patterns, where pgvector fits better)."
+    ],
+    "aws_services": ["Amazon OpenSearch Service", "Amazon Aurora", "Amazon Neptune ML", "Amazon MemoryDB", "Amazon DocumentDB"],
+    "references": [
+      "https://docs.aws.amazon.com/opensearch-service/latest/developerguide/knn.html",
+      "https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-supported.html"
+    ]
+  },
+  {
+    "id": "TH-D3-006",
+    "domain": 3,
+    "task_statements": ["3.1"],
+    "title": "Chunking strategy tradeoffs in RAG",
+    "summary": "Chunk size is a key tunable parameter in a RAG pipeline. Small chunks improve retrieval precision (each chunk is narrowly focused, so a match is more likely to be genuinely relevant) but can lose surrounding context needed to fully answer a question, and require retrieving more chunks to cover a topic. Large chunks preserve more context per chunk but reduce retrieval precision (a large chunk might be only partially relevant, diluting the similarity signal) and consume more of the model's context window per retrieved chunk. Overlapping chunks (where consecutive chunks share some text) help avoid losing information that falls exactly at a chunk boundary, at the cost of some storage/retrieval redundancy.",
+    "key_points": [
+      "Smaller chunks: higher retrieval precision, but risk losing broader context and may require retrieving more chunks per query.",
+      "Larger chunks: more context preserved per chunk, but lower retrieval precision and higher context-window consumption per retrieved chunk.",
+      "Chunk overlap mitigates information loss at chunk boundaries at the cost of some redundancy.",
+      "There is no single universally correct chunk size — it should be tuned based on document structure and typical query style.",
+      "Chunking strategy is a design decision independent of which vector store or foundation model is used."
+    ],
+    "rule_of_thumb": "Need pinpoint-precise retrieval of narrow facts -> smaller chunks. Need broader context preserved per retrieved item -> larger chunks (accepting some precision tradeoff). Worried about losing information at chunk boundaries -> add overlap.",
+    "common_confusions": [
+      "Assuming bigger chunks are always better because they 'contain more information' — larger chunks dilute the similarity signal used for retrieval, which can reduce the relevance of what gets retrieved.",
+      "Treating chunk size as a fixed, one-size-fits-all setting rather than a tunable parameter that should match the document type and query patterns of the specific application."
+    ],
+    "aws_services": ["Amazon Bedrock Knowledge Bases"],
+    "references": [
+      "https://docs.aws.amazon.com/bedrock/latest/userguide/kb-chunking.html",
+      "https://aws.amazon.com/what-is/retrieval-augmented-generation/"
+    ]
+  },
+  {
+    "id": "TH-D3-007",
+    "domain": 3,
+    "task_statements": ["3.2"],
+    "title": "Zero-shot, one-shot, and few-shot prompting",
+    "summary": "Zero-shot prompting asks the model to perform a task with instructions alone and no examples, relying entirely on knowledge from pre-training to generalize to the task. One-shot prompting provides exactly one worked example alongside the instructions, giving the model a single concrete pattern to follow. Few-shot prompting provides multiple (typically 2-5+) worked examples, giving the model a stronger pattern to imitate, generally improving performance on tasks with a specific desired format or style, at the cost of a longer, more token-expensive prompt. As the number of examples increases, output tends to become more consistent with the demonstrated pattern, but with diminishing returns and increasing prompt cost/length.",
+    "key_points": [
+      "Zero-shot: instructions only, no examples, cheapest and shortest prompt, relies on the model's broad pre-training.",
+      "One-shot: exactly one example, a middle ground between zero-shot and few-shot.",
+      "Few-shot: multiple examples, generally the most reliable for tasks needing a specific output format or style, at higher token cost.",
+      "More examples generally improve consistency with the desired pattern, with diminishing returns beyond a handful of well-chosen examples.",
+      "This is a form of in-context learning: the model adapts its behavior for the current request based on the examples given, without any weight changes."
+    ],
+    "rule_of_thumb": "Simple task, well within the model's default capability -> zero-shot. Need to demonstrate a specific format/style -> few-shot with 2-5 well-chosen examples. Budget-constrained but still want a concrete pattern shown -> one-shot as a middle ground.",
+    "common_confusions": [
+      "Assuming more examples are always strictly better with no downside — beyond a handful of well-chosen examples, additional examples increase prompt cost/length with diminishing quality improvement.",
+      "Confusing few-shot prompting (examples within a single prompt, no training) with fine-tuning (a training process using potentially many more labeled examples that updates the model's weights)."
+    ],
+    "aws_services": ["Amazon Bedrock"],
+    "references": [
+      "https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-engineering-guidelines.html",
+      "https://aws.amazon.com/what-is/prompt-engineering/"
+    ]
+  },
+  {
+    "id": "TH-D3-008",
+    "domain": 3,
+    "task_statements": ["3.2"],
+    "title": "Chain-of-thought prompting and structured reasoning",
+    "summary": "Chain-of-thought (CoT) prompting explicitly instructs a model to work through a problem step by step before giving a final answer, rather than jumping directly to a conclusion. This technique noticeably improves performance on multi-step reasoning tasks (arithmetic, logic puzzles, multi-step analysis) because it gives the model 'room' to reason through intermediate steps, similarly to how a person might show their work, rather than requiring the correct answer in a single leap. Chain-of-thought is often combined with few-shot prompting, where the worked examples themselves demonstrate the step-by-step reasoning pattern the model should imitate for the actual task.",
+    "key_points": [
+      "CoT prompting explicitly asks for intermediate reasoning steps before the final answer, rather than a direct answer only.",
+      "It meaningfully improves accuracy on multi-step reasoning tasks compared to asking for a direct answer.",
+      "CoT is frequently combined with few-shot examples that themselves demonstrate step-by-step reasoning, reinforcing the desired pattern.",
+      "It works by giving the model the opportunity to build toward the correct answer incrementally, rather than requiring a single-step leap to the right conclusion.",
+      "CoT is a prompting technique (no weight changes) and can be used with any foundation model that supports sufficiently long, coherent generation."
+    ],
+    "rule_of_thumb": "Multi-step math, logic, or analytical reasoning task where the model tends to jump to a wrong direct answer -> add an explicit 'think step by step' instruction (chain-of-thought), optionally paired with few-shot examples showing that reasoning pattern.",
+    "common_confusions": [
+      "Assuming chain-of-thought is only useful for math problems — it applies broadly to any task requiring multi-step reasoning, including complex business logic, multi-part comparisons, or structured analysis.",
+      "Believing chain-of-thought changes the model itself — it is purely a prompting technique that changes how the model is instructed to respond within a single request."
+    ],
+    "aws_services": ["Amazon Bedrock"],
+    "references": [
+      "https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-engineering-guidelines.html",
+      "https://aws.amazon.com/what-is/prompt-engineering/"
+    ]
+  },
+  {
+    "id": "TH-D3-009",
+    "domain": 3,
+    "task_statements": ["3.2"],
+    "title": "System prompts, instruction prompts, and prompt templates",
+    "summary": "A system prompt establishes the model's role, persona, and behavioral constraints for an entire conversation or application (e.g. 'you are a helpful customer support assistant for Company X; never discuss competitor products'), typically set once and applied consistently across many user turns. An instruction prompt is the specific task-level directive for a given request (e.g. 'summarize the following text in three bullet points'). A prompt template is a reusable, parameterized prompt structure with placeholders that get filled in programmatically for each specific request, ensuring consistency across many similar requests (e.g. a template for generating product descriptions that takes product name, features, and tone as variables).",
+    "key_points": [
+      "System prompt: sets persistent role/behavior/constraints for the whole application or conversation.",
+      "Instruction prompt: the specific, per-request task directive layered on top of the system prompt's context.",
+      "Prompt template: a reusable, parameterized structure that standardizes prompt construction across many similar requests.",
+      "Using templates improves consistency and reduces prompt-engineering rework when the same type of request recurs at scale.",
+      "System prompts are a primary lever for enforcing consistent behavior and guardrail-like constraints across an entire application, complementing (not replacing) Bedrock Guardrails."
+    ],
+    "rule_of_thumb": "Setting persistent role/behavior for the whole app -> system prompt. The specific task for this one request -> instruction prompt. Need to standardize and reuse a prompt structure across many similar requests programmatically -> prompt template.",
+    "common_confusions": [
+      "Confusing a system prompt with Bedrock Guardrails — a system prompt is a prompting-level behavioral instruction that a sufficiently motivated adversarial prompt might bypass; Guardrails is a separate, enforced content-safety control layer that applies regardless of what the prompt says.",
+      "Treating prompt templates as only a convenience feature — they are also a consistency and quality-control mechanism, ensuring every similar request is structured the same well-tested way."
+    ],
+    "aws_services": ["Amazon Bedrock"],
+    "references": [
+      "https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-engineering-guidelines.html",
+      "https://aws.amazon.com/what-is/prompt-engineering/"
+    ]
+  },
+  {
+    "id": "TH-D3-010",
+    "domain": 3,
+    "task_statements": ["3.2"],
+    "title": "Negative prompting and prompt chaining",
+    "summary": "Negative prompting explicitly tells a model what NOT to do or include (e.g. 'do not mention pricing' or 'do not use technical jargon'), which can help avoid specific unwanted content or tone, though positive instructions describing the desired behavior are generally more reliable than negative instructions alone, since models sometimes struggle to reliably avoid a concept when it must first process that concept to know what to avoid. Prompt chaining breaks a complex task into a sequence of smaller prompts, where the output of one prompt becomes part of the input to the next, letting each step focus on a narrower, more reliable sub-task rather than asking a single prompt to do everything at once.",
+    "key_points": [
+      "Negative prompting: explicit 'do not' instructions, useful but generally less reliable alone than clear positive instructions about desired behavior.",
+      "Best practice often combines negative prompting with a clear positive alternative ('do not discuss pricing; instead, direct pricing questions to our sales team').",
+      "Prompt chaining: decomposing a complex task into a sequence of simpler prompts, each step's output feeding the next step's input.",
+      "Chaining improves reliability on complex, multi-part tasks by letting each sub-task be validated/handled independently rather than in one large, error-prone prompt.",
+      "Chaining is conceptually related to Bedrock Agents' multi-step orchestration, though prompt chaining can be done manually in application code without necessarily using Agents."
+    ],
+    "rule_of_thumb": "Want to explicitly forbid certain content/tone -> negative prompting, ideally paired with a positive alternative. Complex task naturally splits into sequential sub-steps -> prompt chaining, where each step's output feeds the next.",
+    "common_confusions": [
+      "Relying solely on negative prompting ('never mention X') as the only instruction, when pairing it with a clear positive alternative is generally more reliable.",
+      "Confusing prompt chaining (a sequence of prompts/sub-tasks, potentially manually orchestrated) with Bedrock Agents (a managed service specifically for planning and executing multi-step workflows with tool/API integration) — chaining is the general technique; Agents is one AWS-managed way to implement more complex versions of it."
+    ],
+    "aws_services": ["Amazon Bedrock", "Amazon Bedrock Agents"],
+    "references": [
+      "https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-engineering-guidelines.html",
+      "https://aws.amazon.com/what-is/prompt-engineering/"
+    ]
+  },
+  {
+    "id": "TH-D3-011",
+    "domain": 3,
+    "task_statements": ["3.2"],
+    "title": "Inference parameters: temperature, top-p, and top-k",
+    "summary": "Temperature, top-p, and top-k all control the randomness/diversity of a foundation model's token selection during generation, but in different ways. Temperature scales the probability distribution over possible next tokens: higher temperature flattens the distribution (more randomness, more creative/varied output), lower temperature sharpens it toward the most likely tokens (more deterministic, more predictable output). Top-k restricts token selection to only the k most probable next tokens, with smaller k producing safer, more predictable choices; AWS guidance notes top-k is generally less useful in practice than temperature or top-p. Top-p (nucleus sampling) selects from the smallest set of tokens whose cumulative probability reaches p, adapting the size of the candidate pool based on the actual probability distribution rather than a fixed count, so higher top-p (closer to 1) allows more diversity and lower top-p restricts to only the most probable tokens.",
+    "key_points": [
+      "Temperature: scales the whole probability distribution — higher = more random/creative, lower = more deterministic/predictable.",
+      "Top-k: hard cutoff at a fixed number of most-probable tokens; simple but AWS notes it is generally less useful than the alternatives.",
+      "Top-p: cumulative-probability cutoff (nucleus sampling) — adapts the candidate pool size dynamically based on the distribution shape, generally preferred over top-k.",
+      "Lower temperature and lower top-p both reduce randomness, but through different mechanisms (distribution scaling vs. candidate pool size).",
+      "These parameters do not affect factual accuracy or context window size — they only affect how the model samples among plausible next tokens."
+    ],
+    "rule_of_thumb": "Want more consistent, predictable output -> lower temperature and/or lower top-p. Want more varied, creative output -> higher temperature and/or higher top-p. Top-k exists but is the least commonly recommended lever of the three.",
+    "common_confusions": [
+      "Getting the direction of temperature backwards — higher temperature means MORE randomness/creativity, not less; this exact direction is a very common exam trap.",
+      "Assuming these parameters affect what the model 'knows' or its factual accuracy — they only affect sampling randomness among already-plausible next tokens, not the model's underlying knowledge or context window."
+    ],
+    "aws_services": ["Amazon Bedrock"],
+    "references": [
+      "https://docs.aws.amazon.com/bedrock/latest/userguide/inference-parameters.html",
+      "https://aws.amazon.com/what-is/prompt-engineering/"
+    ]
+  },
+  {
+    "id": "TH-D3-012",
+    "domain": 3,
+    "task_statements": ["3.2"],
+    "title": "Inference parameters: max tokens/response length, stop sequences, and repetition penalties",
+    "summary": "Beyond randomness controls, foundation models expose parameters that shape the length and structure of output. Maximum token count (response length) caps how many tokens the model may generate, directly bounding both output length and cost, and can cause a response to be cut off mid-thought if set too low for the task. Stop sequences are specific strings that, when generated, immediately halt further generation — useful for enforcing a precise output format (e.g. stopping generation right after a closing tag or delimiter). Repetition/frequency penalties discourage the model from repeating the same tokens or phrases too often, encouraging more varied wording across a longer response.",
+    "key_points": [
+      "Max tokens/response length: a hard ceiling on output length, directly affecting cost and the risk of truncated/incomplete responses.",
+      "Stop sequences: exact strings that immediately end generation once produced, useful for precise format control (e.g. stopping right after a JSON closing brace).",
+      "Repetition penalties: reduce repeated phrasing, improving variety in longer outputs.",
+      "Setting max tokens too low is a common cause of truncated, seemingly 'cut off' responses — this is a configuration issue, not a model capability issue.",
+      "These parameters work alongside temperature/top-p/top-k but control different aspects (length/format/repetition) rather than randomness itself."
+    ],
+    "rule_of_thumb": "Response cutting off mid-sentence -> check if max tokens/response length is set too low. Need output to stop exactly at a specific marker -> use a stop sequence. Output feels repetitive over a long response -> apply a repetition penalty.",
+    "common_confusions": [
+      "Misdiagnosing a truncated response as a model capability limitation rather than a max-tokens configuration setting that is simply too low for the task.",
+      "Confusing stop sequences (exact string triggers that end generation) with content filtering/Guardrails (which blocks or redacts based on content policy, not a literal string match)."
+    ],
+    "aws_services": ["Amazon Bedrock"],
+    "references": [
+      "https://docs.aws.amazon.com/bedrock/latest/userguide/inference-parameters.html"
+    ]
+  },
+  {
+    "id": "TH-D3-013",
+    "domain": 3,
+    "task_statements": ["3.3"],
+    "title": "Fine-tuning variants: instruction-based vs. domain-adaptation fine-tuning",
+    "summary": "Instruction-based fine-tuning trains a model on labeled examples of a specific task (input plus the desired output), improving its performance on that particular task or output format — for example, providing many examples of documents and their correct summaries to make the model consistently better at summarization in a specific style. Domain-adaptation fine-tuning tailors a pre-trained model to a specific domain (such as legal, medical, or financial) using domain-specific text, generally to improve the model's fluency and accuracy with that domain's vocabulary and conventions, often with less need for a strict input/output task pairing than instruction-based fine-tuning. Both are supervised approaches requiring curated training data and a retraining cycle, and both modify the model's weights, unlike prompting or RAG.",
+    "key_points": [
+      "Instruction-based fine-tuning: labeled task examples (input/output pairs) to improve performance on a specific task or format.",
+      "Domain-adaptation fine-tuning: domain-specific text to improve fluency/accuracy with that domain's vocabulary and conventions.",
+      "Both require curated training data and a retraining cycle, and both change the model's weights.",
+      "Instruction-based fine-tuning is generally the better fit when the goal is a specific task behavior/format; domain-adaptation is the better fit when the goal is fluency in specialized vocabulary/context.",
+      "Both differ from continued pre-training, which uses large volumes of unlabeled text to broaden general knowledge rather than targeting a specific task or narrow domain fluency goal."
+    ],
+    "rule_of_thumb": "Need the model to reliably perform one specific task/format -> instruction-based fine-tuning. Need the model to be fluent and accurate with a specialized domain's vocabulary/conventions -> domain-adaptation fine-tuning.",
+    "common_confusions": [
+      "Treating domain-adaptation fine-tuning and continued pre-training as identical — domain-adaptation fine-tuning is typically a more targeted, smaller-scale supervised step; continued pre-training uses much larger volumes of unlabeled data for broader knowledge expansion.",
+      "Assuming any fine-tuning automatically also makes the model more knowledgeable about current events or new facts — fine-tuning changes behavior/style/domain fluency, but doesn't function as a substitute for RAG when the need is fresh, specific facts."
+    ],
+    "aws_services": ["Amazon Bedrock", "Amazon SageMaker JumpStart"],
+    "references": [
+      "https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models.html",
+      "https://docs.aws.amazon.com/sagemaker/latest/dg/studio-jumpstart-fine-tune.html"
+    ]
+  },
+  {
+    "id": "TH-D3-014",
+    "domain": 3,
+    "task_statements": ["3.3"],
+    "title": "Continued pre-training and transfer learning",
+    "summary": "Continued pre-training further trains an already pre-trained foundation model on large volumes of unlabeled, domain-specific text, expanding the model's general knowledge and vocabulary in that domain without targeting any single specific task — it is the heaviest-weight customization option, more expensive than fine-tuning, and still leaves the model's knowledge frozen at the time that additional training data was processed. Transfer learning is the broader concept underlying all of this: taking a model that has already learned general features from one context and applying/adapting it to a new but related problem, which speeds up training and improves results compared to training a model completely from scratch, since the model doesn't need to relearn fundamental patterns it already knows.",
+    "key_points": [
+      "Continued pre-training: unlabeled domain-specific text, broadens general knowledge/vocabulary, the most expensive customization tier.",
+      "Transfer learning: the general principle that a model with existing learned features can be adapted to a new related task faster than training from scratch.",
+      "Fine-tuning, domain-adaptation fine-tuning, and continued pre-training are all specific applications of the transfer-learning principle.",
+      "Continued pre-training still results in knowledge frozen at training time — it does not make a model 'live' or continuously updated; that requires RAG for current facts.",
+      "This tier is generally reserved for cases where fine-tuning's smaller-scale supervised approach isn't sufficient to shift the model's baseline domain fluency."
+    ],
+    "rule_of_thumb": "Transfer learning is the umbrella concept ('reuse what's already learned'); continued pre-training is one specific, heavyweight application of it using large unlabeled domain corpora.",
+    "common_confusions": [
+      "Treating transfer learning as a synonym for fine-tuning specifically — transfer learning is the broader principle; fine-tuning, domain-adaptation, and continued pre-training are all specific techniques that apply it.",
+      "Assuming continued pre-training solves the 'need current facts' problem — it only expands general domain knowledge as of the training data's cutoff; it does not provide live, continuously updated information the way RAG does."
+    ],
+    "aws_services": ["Amazon Bedrock", "Amazon SageMaker"],
+    "references": [
+      "https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models.html",
+      "https://aws.amazon.com/what-is/foundation-models/"
+    ]
+  },
+  {
+    "id": "TH-D3-015",
+    "domain": 3,
+    "task_statements": ["3.3"],
+    "title": "Catastrophic forgetting and mitigation strategies",
+    "summary": "Catastrophic forgetting occurs when fine-tuning a model too narrowly on a single task causes it to lose previously-general capabilities that were not reinforced during that fine-tuning process, because the weight updates optimized for the new narrow task can overwrite representations useful for other, unrelated tasks. Mitigation strategies include using a diverse, representative fine-tuning dataset that doesn't crowd out general capability, using smaller learning rates during fine-tuning to make more conservative weight updates, mixing in some general-purpose training examples alongside the task-specific ones, and evaluating the fine-tuned model on a broad set of tasks (not just the target task) before deploying it, to catch any regression in general capability.",
+    "key_points": [
+      "Catastrophic forgetting is a training-time risk specific to fine-tuning too narrowly, not a property of prompting or RAG (which never change weights).",
+      "It manifests as the model becoming worse at tasks it previously handled well, after being fine-tuned intensively on a different, narrow task.",
+      "Mitigation: diverse training data, conservative learning rates, mixing general-purpose examples, and broad post-fine-tuning evaluation.",
+      "This is why fine-tuning decisions should weigh the tradeoff between gaining narrow task performance and risking broader capability loss.",
+      "Continued pre-training on broad unlabeled data is a different risk profile than narrow fine-tuning, since it is not targeting one specific narrow task output."
+    ],
+    "rule_of_thumb": "A model fine-tuned intensively on one narrow task that becomes noticeably worse at unrelated tasks it previously handled well has experienced catastrophic forgetting — mitigate with diverse data, conservative learning rates, and broad evaluation.",
+    "common_confusions": [
+      "Confusing catastrophic forgetting (a fine-tuning-time risk from narrow training) with data drift or concept drift (post-deployment phenomena caused by changes in production data, unrelated to the fine-tuning process itself).",
+      "Assuming catastrophic forgetting only matters for very large models — it can occur any time fine-tuning is narrow and intensive relative to the model's general capability, regardless of scale."
+    ],
+    "aws_services": ["Amazon Bedrock", "Amazon SageMaker"],
+    "references": [
+      "https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models.html",
+      "https://aws.amazon.com/what-is/foundation-models/"
+    ]
+  },
+  {
+    "id": "TH-D3-016",
+    "domain": 3,
+    "task_statements": ["3.3"],
+    "title": "Data preparation requirements for fine-tuning",
+    "summary": "Preparing data for fine-tuning a foundation model has specific requirements beyond general ML data preparation. Training examples typically need to be formatted as structured input/output pairs matching the target task (e.g. a prompt and its ideal completion), consistent in format across the dataset. Data quality matters more than sheer volume in many fine-tuning scenarios — a smaller set of high-quality, representative, correctly-labeled examples generally outperforms a larger set of noisy or inconsistent examples. Data must also be representative of the full range of inputs the model will see in production, to avoid the fine-tuned model performing well only on patterns similar to a narrow training set. PII and sensitive data in fine-tuning datasets require the same handling/anonymization discipline as any other ML training data.",
+    "key_points": [
+      "Fine-tuning data is typically formatted as consistent input/output (prompt/completion) pairs matching the target task.",
+      "Quality and representativeness generally matter more than raw volume — noisy or narrow data produces a fine-tuned model that generalizes poorly.",
+      "The training data should reflect the diversity of real production inputs, not just a narrow slice of easy examples.",
+      "PII/sensitive data handling requirements apply to fine-tuning datasets exactly as they do to any other ML training data.",
+      "Poorly prepared fine-tuning data is a common root cause of both weak task performance and unintended catastrophic forgetting."
+    ],
+    "rule_of_thumb": "For fine-tuning, prioritize a smaller set of clean, consistent, representative input/output examples over a larger but noisy or narrow dataset.",
+    "common_confusions": [
+      "Assuming more fine-tuning examples is always better regardless of quality — a large but noisy or unrepresentative dataset can produce worse results than a smaller, carefully curated one.",
+      "Overlooking that fine-tuning data still requires the same PII/data-governance discipline as any other training data, simply because it 'feels' like a lighter-weight process than full model training."
+    ],
+    "aws_services": ["Amazon Bedrock", "Amazon SageMaker", "Amazon Macie"],
+    "references": [
+      "https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models.html",
+      "https://docs.aws.amazon.com/sagemaker/latest/dg/data-wrangler.html"
+    ]
+  },
+  {
+    "id": "TH-D3-017",
+    "domain": 3,
+    "task_statements": ["3.4"],
+    "title": "Generative text evaluation metrics: ROUGE, BLEU, BERTScore, perplexity",
+    "summary": "Different generative tasks call for different automatic evaluation metrics. ROUGE (Recall-Oriented Understudy for Gisting Evaluation) measures overlap between generated text and a reference text, and is the standard metric family for evaluating summarization quality. BLEU (Bilingual Evaluation Understudy) compares n-gram overlap between generated output and reference translations, and is the standard metric for evaluating machine translation quality. BERTScore uses contextual embeddings to measure semantic similarity between generated and reference text, capturing meaning-level similarity even when exact wording differs, making it useful when surface-level overlap metrics like ROUGE/BLEU are too strict. Perplexity measures how well a language model predicts a sequence of tokens; lower perplexity indicates the model assigns higher probability to (is 'less surprised' by) the actual next tokens, and is commonly used to evaluate general language modeling quality rather than a specific downstream task.",
+    "key_points": [
+      "ROUGE: summarization quality, overlap-based (recall-oriented).",
+      "BLEU: translation quality, n-gram precision-oriented overlap with reference translations.",
+      "BERTScore: semantic similarity via embeddings, more tolerant of paraphrasing/wording differences than ROUGE/BLEU.",
+      "Perplexity: general language-modeling quality — lower is better, reflects how well the model predicts token sequences overall.",
+      "Choosing the wrong metric for the task (e.g. BLEU for summarization) is a frequently tested exam trap."
+    ],
+    "rule_of_thumb": "Summarization task -> ROUGE. Translation task -> BLEU. Need semantic (meaning-level) similarity, tolerant of different wording -> BERTScore. General language-modeling quality, not tied to a specific reference-comparison task -> perplexity.",
+    "common_confusions": [
+      "Using BLEU to evaluate a summarization task, or ROUGE to evaluate a translation task — each metric was designed for and validated against its specific task type; swapping them produces a mismatched or less meaningful evaluation.",
+      "Treating perplexity as a general-purpose 'quality score' comparable to ROUGE/BLEU — perplexity measures the model's own predictive confidence on a sequence, not similarity to a specific reference output, so it answers a different underlying question."
+    ],
+    "aws_services": ["Amazon Bedrock Model Evaluation"],
+    "references": [
+      "https://docs.aws.amazon.com/bedrock/latest/userguide/model-evaluation.html",
+      "https://aws.amazon.com/what-is/foundation-models/"
+    ]
+  },
+  {
+    "id": "TH-D3-018",
+    "domain": 3,
+    "task_statements": ["3.4"],
+    "title": "Benchmark suites: GLUE, MMLU, HELM, BIG-bench",
+    "summary": "Beyond task-specific metrics, standardized benchmark suites evaluate foundation models across many tasks at once, useful when comparing overall model capability rather than performance on one narrow task. GLUE (General Language Understanding Evaluation) assesses performance across multiple natural language understanding tasks (e.g. sentiment, similarity, inference). MMLU (Massive Multitask Language Understanding) tests a model's knowledge across a very wide range of academic and professional subject domains. HELM (Holistic Evaluation of Language Models) provides a broad, multi-dimensional, task-and-metric evaluation framework spanning many scenarios and quality dimensions (not just accuracy). BIG-bench evaluates models on especially difficult or creative tasks intentionally chosen to be challenging and not well covered by more standard benchmarks.",
+    "key_points": [
+      "GLUE: multi-task natural language understanding benchmark (older, foundational benchmark family).",
+      "MMLU: broad academic/professional knowledge-domain testing across many subjects.",
+      "HELM: holistic, multi-dimensional evaluation across many scenarios and quality axes, not just one accuracy number.",
+      "BIG-bench: intentionally difficult/creative tasks designed to stress-test capabilities beyond standard benchmarks.",
+      "These benchmark suites are used primarily for comparing overall model capability (e.g. choosing which foundation model to build on), rather than evaluating one specific application's output."
+    ],
+    "rule_of_thumb": "Comparing general knowledge/understanding across multiple tasks/domains at once (not evaluating one specific generated output against a reference) points to a benchmark suite like GLUE, MMLU, HELM, or BIG-bench rather than a task-specific metric like ROUGE or BLEU.",
+    "common_confusions": [
+      "Confusing task-specific evaluation metrics (ROUGE, BLEU, BERTScore, perplexity — evaluate one generated output against a reference) with broad benchmark suites (GLUE, MMLU, HELM, BIG-bench — evaluate general model capability across many tasks).",
+      "Assuming these benchmark names are interchangeable — each has a distinct focus (general language understanding vs. broad subject-matter knowledge vs. holistic multi-dimensional evaluation vs. deliberately hard/creative tasks)."
+    ],
+    "aws_services": ["Amazon Bedrock Model Evaluation"],
+    "references": [
+      "https://docs.aws.amazon.com/bedrock/latest/userguide/model-evaluation.html",
+      "https://aws.amazon.com/what-is/foundation-models/"
+    ]
+  },
+  {
+    "id": "TH-D3-019",
+    "domain": 3,
+    "task_statements": ["3.4"],
+    "title": "Human evaluation of generative AI output",
+    "summary": "Automatic metrics like ROUGE, BLEU, and perplexity are useful proxies but cannot fully capture qualities like coherence, tone appropriateness, factual correctness in context, or genuine usefulness to an end user. Human evaluation involves people directly reviewing and scoring or comparing model outputs against defined criteria (e.g. helpfulness, correctness, safety, style), and is often used both to validate automatic metrics and to catch failure modes automatic metrics miss entirely. Amazon Bedrock Model Evaluation supports human evaluation workflows alongside automatic metrics, letting teams combine both approaches: automatic metrics for scale and consistency, human evaluation for nuanced judgment on qualities that are hard to quantify automatically.",
+    "key_points": [
+      "Human evaluation captures nuanced qualities (tone, usefulness, contextual correctness) that automatic metrics often miss or approximate poorly.",
+      "It is commonly used to validate whether automatic metric scores actually correlate with real quality for a given use case.",
+      "Bedrock Model Evaluation explicitly supports combining automatic metrics with human evaluation workflows.",
+      "Human evaluation is more expensive and slower per-sample than automatic metrics, so it is typically applied to a representative sample rather than every single output.",
+      "For high-stakes or highly subjective use cases, relying on automatic metrics alone can miss critical quality issues that only a human reviewer would catch."
+    ],
+    "rule_of_thumb": "When quality depends on nuanced, subjective, or contextual judgment that a formula can't easily capture, human evaluation is the right complement (not replacement) for automatic metrics.",
+    "common_confusions": [
+      "Assuming automatic metrics alone are always sufficient for evaluating generative AI quality — for many real business use cases, human evaluation catches issues (tone mismatches, subtly wrong context, awkward phrasing) that automatic metrics do not detect.",
+      "Treating human evaluation as mutually exclusive with automatic metrics — in practice, robust evaluation typically combines both, using automatic metrics for scale and human evaluation for depth/nuance."
+    ],
+    "aws_services": ["Amazon Bedrock Model Evaluation", "Amazon Augmented AI (A2I)"],
+    "references": [
+      "https://docs.aws.amazon.com/bedrock/latest/userguide/model-evaluation.html"
+    ]
+  },
+  {
+    "id": "TH-D3-020",
+    "domain": 3,
+    "task_statements": ["3.4"],
+    "title": "Business metric alignment: connecting evaluation to real outcomes",
+    "summary": "Technical evaluation metrics (ROUGE, BLEU, accuracy, latency) are useful proxies, but ultimately a generative AI application should be evaluated against the actual business outcome it's meant to drive — such as reduced customer support handling time, increased self-service resolution rate, higher content-creation throughput, or improved customer satisfaction scores. A model can score well on a technical metric while still failing to deliver business value if that metric doesn't actually correlate with what matters to the business, or a model can score modestly on a technical metric while still delivering strong business value if it's 'good enough' for the task at acceptable cost. Establishing this business-metric linkage during the initial problem-framing stage (see the ML lifecycle) is what makes later evaluation meaningful rather than purely academic.",
+    "key_points": [
+      "Technical metrics are proxies, not the actual goal — always connect them back to the real business outcome the application is meant to improve.",
+      "A model can 'win' on a technical metric while still not moving the needle on the actual business objective, if the metric and objective are poorly aligned.",
+      "Business metric alignment should be defined early (during business-goal framing) so evaluation later has a clear target to check against.",
+      "Cost and latency are also business metrics in their own right, not purely technical concerns, since they directly affect operating margin and user experience.",
+      "This connects directly back to the ML lifecycle's first stage: identifying the business goal and success criteria before building anything."
+    ],
+    "rule_of_thumb": "Always ask 'does improving this technical metric actually move the business outcome we care about?' before treating a technical evaluation result as success.",
+    "common_confusions": [
+      "Treating a high ROUGE/BLEU/accuracy score as automatically meaning the business problem is solved — technical metric improvement and business outcome improvement are related but not guaranteed to move together.",
+      "Skipping the definition of business success criteria until after a model is built — this makes later evaluation results hard to interpret meaningfully against the original business goal."
+    ],
+    "aws_services": ["Amazon Bedrock Model Evaluation", "Amazon SageMaker"],
+    "references": [
+      "https://docs.aws.amazon.com/bedrock/latest/userguide/model-evaluation.html",
+      "https://aws.amazon.com/what-is/machine-learning/"
+    ]
+  },
+  {
+    "id": "TH-D3-021",
+    "domain": 3,
+    "task_statements": ["3.1", "3.2"],
+    "title": "Prompt engineering vs. hyperparameter tuning: two different levers",
+    "summary": "Prompt engineering and hyperparameter tuning are frequently confused because both are 'adjustments' that affect model output, but they operate at entirely different layers. Prompt engineering (instructions, examples, chain-of-thought, inference parameters like temperature/top-p) changes what is sent to an already-trained model at inference time, with zero training cost and instant effect, reversible on the next request. Hyperparameter tuning (epochs, batch size, learning rate) is a training-time configuration that affects how a model learns during a training job, requiring an actual training run to take effect, and producing a genuinely different set of model weights as output.",
+    "key_points": [
+      "Prompt engineering: inference-time, no training involved, instant and reversible, changes only the current request's behavior.",
+      "Hyperparameter tuning: training-time, requires an actual training job, produces new model weights, effects persist across all future inference until retrained again.",
+      "Temperature/top-p/top-k are inference parameters (prompt-engineering-adjacent), not training hyperparameters — a common point of confusion since both are called 'parameters.'",
+      "Epochs, batch size, and learning rate are training hyperparameters, set before a training job and never touched during inference.",
+      "Recognizing which layer a described 'tuning' activity operates at (inference vs. training) is directly tested on the exam."
+    ],
+    "rule_of_thumb": "If the 'tuning' happens by changing what's in the prompt or the sampling settings for a single request, that's prompt engineering / inference parameters. If it happens by configuring and running an actual training job that updates the model's weights, that's hyperparameter tuning.",
+    "common_confusions": [
+      "Calling temperature/top-p/top-k 'hyperparameters' in the training sense — they are inference-time sampling controls, not training-time hyperparameters like learning rate or batch size, even though both use the word 'parameter.'",
+      "Assuming any prompt adjustment requires a training job — prompt engineering by definition requires no training at all; only fine-tuning/continued pre-training require an actual training run."
+    ],
+    "aws_services": ["Amazon Bedrock", "Amazon SageMaker"],
+    "references": [
+      "https://docs.aws.amazon.com/bedrock/latest/userguide/inference-parameters.html",
+      "https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning.html"
+    ]
+  },
+  {
+    "id": "TH-D3-022",
+    "domain": 3,
+    "task_statements": ["3.1"],
+    "title": "Latency-sensitive vs. throughput-sensitive foundation model application design",
+    "summary": "Latency-sensitive applications (such as a live customer-facing chatbot) prioritize fast individual response times, often favoring smaller/faster models, shorter prompts, lower max-token limits, and real-time-oriented infrastructure choices even at some cost to depth of reasoning. Throughput-sensitive applications (such as batch-summarizing thousands of documents overnight) prioritize processing the largest volume of work within a time/cost budget, and can tolerate higher per-request latency in exchange for better cost efficiency at scale, often favoring batch-oriented processing patterns and potentially larger models if the extra latency per item doesn't matter for an offline job. Recognizing which priority a scenario emphasizes should directly drive model size, prompt design, and processing pattern choices.",
+    "key_points": [
+      "Latency-sensitive: live/interactive user-facing scenarios, favors fast, smaller models and concise prompts/outputs.",
+      "Throughput-sensitive: large-volume, often offline/batch scenarios, favors cost-efficient processing at scale over individual response speed.",
+      "The same foundation model choice might be right for one profile and wrong for the other, even for a conceptually similar task.",
+      "Scenario language like 'real-time,' 'live chat,' or 'immediate response' signals latency-sensitivity; language like 'nightly batch,' 'process all documents,' or 'not time-critical' signals throughput-sensitivity.",
+      "This distinction connects directly to SageMaker's four inference deployment modes (real-time vs. batch/async/serverless) discussed in Domain 1."
+    ],
+    "rule_of_thumb": "Scenario emphasizes immediate, per-request response speed for an interactive user -> optimize for latency. Scenario emphasizes processing a large volume within a cost/time budget, without needing instant per-item response -> optimize for throughput/cost.",
+    "common_confusions": [
+      "Defaulting to the most latency-optimized design even when the scenario is actually describing a large offline batch job, where throughput/cost efficiency should be the dominant design consideration instead.",
+      "Assuming a single 'best' model or configuration applies regardless of whether the application is interactive/live or batch/offline — the right choice depends heavily on this distinction."
+    ],
+    "aws_services": ["Amazon Bedrock", "Amazon SageMaker"],
+    "references": [
+      "https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization.html",
+      "https://docs.aws.amazon.com/sagemaker/latest/dg/deploy-model.html"
+    ]
+  },
+  {
+    "id": "TH-D3-023",
+    "domain": 3,
+    "task_statements": ["3.2"],
+    "title": "Prompt performance optimization and prompt latency considerations",
+    "summary": "Prompt performance optimization is the practice of refining a prompt not just for correctness of output but for efficiency: reducing unnecessary length, ambiguity, and redundant instructions so the model produces the desired result reliably with the fewest tokens and lowest latency possible. Prompt latency is influenced by both input length (more tokens to process before generating a response) and expected output length (more tokens to generate). Well-structured prompts — clear task statement, necessary context only, explicit output format instructions — tend to produce more consistent results with less need for retries or follow-up clarification prompts, which itself reduces overall latency and cost in a production application.",
+    "key_points": [
+      "Shorter, clearer prompts generally reduce both cost and latency, without necessarily reducing quality if they remain sufficiently specific.",
+      "Both input length and expected output length contribute to overall latency, not just one or the other.",
+      "Ambiguous or poorly structured prompts often require retries or follow-up clarification, which compounds cost and latency in production.",
+      "Explicitly specifying the desired output format (e.g. 'respond only in valid JSON with these fields') reduces the need for post-processing and retries.",
+      "Prompt optimization is an ongoing production concern, not a one-time setup task, especially as usage patterns and models change over time."
+    ],
+    "rule_of_thumb": "A prompt that is unnecessarily long, vague about output format, or requires frequent retries is both a cost and a latency problem — tightening prompt structure and specificity addresses both simultaneously.",
+    "common_confusions": [
+      "Assuming only output length affects response latency — input prompt length also contributes meaningfully to total processing time.",
+      "Treating prompt optimization purely as a quality concern rather than also a cost/latency concern — a vague prompt that produces correct-but-verbose output, or that requires retries, has real cost and latency consequences in production."
+    ],
+    "aws_services": ["Amazon Bedrock"],
+    "references": [
+      "https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-engineering-guidelines.html"
+    ]
+  },
+  {
+    "id": "TH-D3-024",
+    "domain": 3,
+    "task_statements": ["3.1"],
+    "title": "Bedrock Agents and tool use for retrieving live, dynamic information",
+    "summary": "When an application needs current, dynamic information that neither the foundation model's pre-training nor a static RAG knowledge base can provide (such as a live order status, current inventory level, or real-time API response from an external system), Bedrock Agents can be configured to call external tools — typically via AWS Lambda functions — as part of a multi-step workflow, incorporating live data directly into the response. This differs from RAG, which retrieves from a relatively static, pre-indexed document collection; tool use retrieves live, on-demand data at the moment of the request, and can also take real actions (such as submitting a request or updating a record), not just retrieve information.",
+    "key_points": [
+      "Tool use (via Bedrock Agents and Lambda) fetches live, dynamic data at request time, unlike RAG's static, pre-indexed document retrieval.",
+      "Agents can both retrieve live information and take real actions (e.g. submitting a support ticket, processing an order), extending beyond pure information retrieval.",
+      "A scenario needing 'live' or 'current, real-time' data (not just facts that change quarterly) is a strong signal for tool use/Agents rather than a standard RAG knowledge base.",
+      "Agents can combine both patterns: calling a knowledge base (for static grounding) and calling a Lambda-backed tool (for live data or actions) within the same multi-step workflow.",
+      "This is distinct from continued pre-training or fine-tuning, neither of which can provide truly live, request-time data."
+    ],
+    "rule_of_thumb": "Need to answer from a relatively static (even if periodically updated) document collection -> RAG/Knowledge Bases. Need truly live, request-time data or to take a real action -> Bedrock Agents with tool use (Lambda).",
+    "common_confusions": [
+      "Assuming RAG alone can supply truly live data (e.g. 'what is this customer's order status right now') — RAG retrieves from a document index that is only as fresh as its last sync; live, transactional data typically needs a tool-use/Agent pattern instead.",
+      "Assuming Agents are only for retrieving information — they can also perform real actions via Lambda, such as submitting or updating records, which is a distinct capability from any retrieval-only pattern."
+    ],
+    "aws_services": ["Amazon Bedrock Agents", "AWS Lambda", "Amazon Bedrock Knowledge Bases"],
+    "references": [
+      "https://docs.aws.amazon.com/bedrock/latest/userguide/agents.html"
+    ]
+  },
+  {
+    "id": "TH-D3-025",
+    "domain": 3,
+    "task_statements": ["3.3"],
+    "title": "Choosing when NOT to fine-tune: risk, cost, and maintenance considerations",
+    "summary": "Fine-tuning carries ongoing costs beyond the initial training job: Provisioned Throughput is typically required to serve a fine-tuned model at production scale, the fine-tuned model must be re-trained whenever the desired behavior needs to change, and there is real risk of catastrophic forgetting if not carefully managed. For many business scenarios, the underlying need can be met by RAG (for facts) or improved prompting (for format/behavior) at a fraction of the cost, effort, and ongoing maintenance burden. The exam sometimes deliberately presents a scenario that sounds like it needs fine-tuning but is actually better and more cheaply solved by RAG or prompt engineering — recognizing this is itself a tested skill, not just knowing fine-tuning's mechanics.",
+    "key_points": [
+      "Fine-tuned models generally require Provisioned Throughput for production-scale serving, an ongoing cost not required for on-demand use of an off-the-shelf model.",
+      "Any future behavior change requires a new retraining cycle — an ongoing maintenance burden compared to simply updating a prompt or a RAG knowledge base.",
+      "Many scenarios that superficially sound like a 'customization' problem are actually well solved by RAG (facts) or better prompting (behavior/format) at much lower cost.",
+      "The exam tests judgment about when fine-tuning is genuinely necessary versus over-engineering a simpler problem.",
+      "A good diagnostic question: 'could this be solved by changing the prompt, or by grounding with retrieved documents?' before assuming fine-tuning is required."
+    ],
+    "rule_of_thumb": "Before recommending fine-tuning, explicitly rule out whether better prompting or RAG could solve the stated problem at lower cost and lower ongoing maintenance burden.",
+    "common_confusions": [
+      "Defaulting to fine-tuning as the 'more sophisticated' or 'more thorough' answer on the exam — the exam often rewards recognizing that a cheaper technique (prompting or RAG) actually solves the stated problem just as well.",
+      "Overlooking the ongoing Provisioned Throughput and retraining maintenance costs of a fine-tuned model when comparing total cost of ownership against RAG or prompting-based alternatives."
+    ],
+    "aws_services": ["Amazon Bedrock", "Amazon Bedrock Knowledge Bases"],
+    "references": [
+      "https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models.html",
+      "https://docs.aws.amazon.com/bedrock/latest/userguide/prov-throughput.html"
+    ]
+  },
+  {
+    "id": "TH-D3-026",
+    "domain": 3,
+    "task_statements": ["3.4"],
+    "title": "Evaluating for bias and toxicity in foundation model outputs",
+    "summary": "Evaluating a foundation model isn't only about task accuracy — it also includes checking for biased or toxic output, since foundation models can reproduce biases and harmful patterns present in their training data. Amazon Bedrock Model Evaluation can incorporate toxicity scoring and other custom metrics as part of comparing candidate models, and can integrate with Amazon SageMaker Clarify and the open-source fmeval library for more structured bias and explainability analysis of generative model behavior. This evaluation should happen both during model selection (before committing to a foundation model for a use case) and periodically afterward, since model updates or shifts in usage patterns can change observed bias/toxicity characteristics over time.",
+    "key_points": [
+      "Bias and toxicity are legitimate evaluation dimensions alongside task accuracy metrics like ROUGE/BLEU/perplexity.",
+      "Bedrock Model Evaluation supports toxicity scoring and other custom evaluation metrics, not just task-accuracy metrics.",
+      "Integration with SageMaker Clarify and fmeval brings more structured bias/explainability analysis into the foundation model evaluation process.",
+      "This evaluation should occur both at model-selection time and periodically afterward, not just once.",
+      "This connects model evaluation (Domain 3) directly to responsible AI practices (Domain 4) — the two domains overlap here."
+    ],
+    "rule_of_thumb": "A thorough foundation model evaluation checks not just 'does it perform the task well' but also 'does it do so fairly and safely' — the latter uses toxicity scoring and bias/explainability tools alongside task-accuracy metrics.",
+    "common_confusions": [
+      "Treating model evaluation as purely a task-accuracy exercise (ROUGE/BLEU/perplexity) and overlooking bias/toxicity as an equally legitimate evaluation dimension.",
+      "Assuming bias evaluation is only relevant for classical ML models — generative foundation models can and do exhibit trained-in biases, and Bedrock Model Evaluation explicitly supports checking for this."
+    ],
+    "aws_services": ["Amazon Bedrock Model Evaluation", "Amazon SageMaker Clarify"],
+    "references": [
+      "https://docs.aws.amazon.com/bedrock/latest/userguide/model-evaluation.html",
+      "https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-model-explainability.html"
+    ]
+  },
+  {
+    "id": "TH-D3-027",
+    "domain": 3,
+    "task_statements": ["3.1"],
+    "title": "Designing for hallucination mitigation at the application layer",
+    "summary": "Beyond choosing RAG as a technique, application-level design choices further reduce the impact of hallucination in production. Instructing the model (via prompt) to explicitly say when it doesn't know an answer, rather than guessing, reduces confidently-wrong output. Requiring citations or source references in generated answers (supported naturally by RAG, since retrieved chunks can be surfaced alongside the answer) lets users verify claims rather than trusting them blindly. Setting a lower temperature for factual Q&A use cases reduces creative/random deviation from the retrieved or known facts. Adding human review (via A2I) for high-stakes or low-confidence outputs provides a final safety net before an answer is acted upon.",
+    "key_points": [
+      "Explicit 'say you don't know rather than guessing' instructions reduce confidently-wrong output in ambiguous cases.",
+      "Surfacing citations/sources (natural with RAG) lets end users independently verify claims rather than trusting them at face value.",
+      "Lower temperature for factual use cases reduces random deviation from retrieved/known correct information.",
+      "Human review (A2I) provides a safety net for high-stakes or low-confidence outputs before they're acted upon.",
+      "These are complementary, layered mitigations — no single one eliminates hallucination risk entirely, but combined they substantially reduce real-world impact."
+    ],
+    "rule_of_thumb": "Combine RAG (grounding), explicit 'admit uncertainty' instructions, citations, lower temperature for factual tasks, and human review for high-stakes cases — hallucination mitigation is a layered design problem, not a single fix.",
+    "common_confusions": [
+      "Assuming RAG alone is a complete hallucination fix — RAG substantially reduces but does not eliminate hallucination risk, especially if retrieval quality is poor or the model still deviates from retrieved content.",
+      "Treating hallucination mitigation as purely a model-choice problem — several of the most effective mitigations are application-design choices (prompting, citations, temperature, human review), not model selection."
+    ],
+    "aws_services": ["Amazon Bedrock", "Amazon Bedrock Knowledge Bases", "Amazon Augmented AI (A2I)"],
+    "references": [
+      "https://aws.amazon.com/what-is/retrieval-augmented-generation/",
+      "https://aws.amazon.com/augmented-ai/"
+    ]
+  },
+  {
+    "id": "TH-D3-028",
+    "domain": 3,
+    "task_statements": ["3.2"],
+    "title": "Prompt templates and variable substitution for production applications",
+    "summary": "In a production application, prompts are rarely hand-typed once — they are typically generated programmatically from a reusable template with variable placeholders filled in per request (e.g. a customer-support template that inserts the customer's specific issue, order ID, and account tier into a consistent instructional structure). This approach ensures every request follows a well-tested, consistent prompt structure, makes it easier to update behavior application-wide by editing one template rather than many ad hoc prompts, and supports systematic testing/evaluation of prompt changes before rolling them out broadly. Version-controlling prompt templates, similar to versioning code, is a recommended practice so changes can be tracked, tested, and rolled back if a new template version underperforms.",
+    "key_points": [
+      "Templates standardize prompt structure across many requests, filling in request-specific variables into a consistent, pre-tested structure.",
+      "Centralizing prompt logic in templates makes application-wide behavior changes a single edit rather than scattered ad hoc changes.",
+      "Version-controlling prompt templates supports testing, rollback, and auditability of prompt changes over time, similar to versioning application code.",
+      "This pattern scales prompt engineering from a one-off manual activity into a maintainable, production-grade system.",
+      "Systematic evaluation (potentially using Bedrock Model Evaluation or A/B testing) should validate a new template version before it fully replaces the previous one in production."
+    ],
+    "rule_of_thumb": "Production-grade prompt engineering means treating prompts as versioned, tested, centrally-managed templates with variable substitution, not as one-off hand-typed strings scattered through application code.",
+    "common_confusions": [
+      "Treating prompt engineering as a purely exploratory, one-time activity rather than an ongoing, version-controlled engineering practice in a production system.",
+      "Assuming template-based prompts eliminate the need for testing — a new template version should still be evaluated (automatically and/or with human review) before broadly replacing a previous, known-good version."
+    ],
+    "aws_services": ["Amazon Bedrock", "Amazon Bedrock Model Evaluation"],
+    "references": [
+      "https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-engineering-guidelines.html"
+    ]
+  }
+]

@@ -1,0 +1,143 @@
+[
+  {
+    "id": "Q-D2-0044",
+    "domain": 2,
+    "task_statement": "2.3",
+    "type": "single_choice",
+    "difficulty": "easy",
+    "theory_refs": [
+      "TH-D2-010"
+    ],
+    "case_study_id": null,
+    "stem": "What does a reflection step in an agent's workflow primarily involve?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Skipping generation entirely"
+      },
+      {
+        "key": "B",
+        "text": "Immediately discarding every output with no evaluation"
+      },
+      {
+        "key": "C",
+        "text": "Reviewing and critiquing a candidate output against the task's requirements before finalizing it"
+      },
+      {
+        "key": "D",
+        "text": "Running the task on a completely different, unrelated input"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "Reflection means reviewing a candidate output against the task's actual requirements, identifying specific issues, and deciding whether and how to revise -- before accepting the output as final.",
+      "why_incorrect": {
+        "B": "Reflection involves evaluating the output against criteria, not blindly discarding it with no assessment at all.",
+        "D": "Reflection reviews the SAME task's output, not an unrelated input; applying critique to a different input would not help evaluate the actual candidate answer.",
+        "A": "Reflection presupposes a candidate output already exists to review; it does not replace the generation step."
+      },
+      "rule_of_thumb": "Reflection is a targeted review of a candidate output against explicit requirements, not blind discarding or unrelated re-processing."
+    },
+    "tags": [
+      "reflection",
+      "self-critique"
+    ]
+  },
+  {
+    "id": "Q-D2-0045",
+    "domain": 2,
+    "task_statement": "2.3",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D2-011"
+    ],
+    "case_study_id": null,
+    "stem": "A team runs 8 rounds of self-critique-and-revise on a task, observing that round 1 fixed 5 significant issues, round 2 fixed 1 minor issue, and rounds 3-8 found nothing further. What does this best illustrate?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Evidence that exactly 8 rounds is always the right number for any task"
+      },
+      {
+        "key": "B",
+        "text": "Proof that self-critique loops never provide any benefit"
+      },
+      {
+        "key": "C",
+        "text": "Diminishing returns from additional self-critique iterations after the first couple of rounds"
+      },
+      {
+        "key": "D",
+        "text": "A sign that the critique step was completely broken from round 1 onward"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "The pattern of significant fixes early and progressively fewer or no fixes in later rounds is a textbook illustration of diminishing returns from additional self-critique iterations.",
+      "why_incorrect": {
+        "B": "Rounds 1 and 2 clearly provided real benefit by fixing issues; this contradicts the claim that self-critique never helps.",
+        "D": "The critique step working correctly in round 1 (finding 5 real issues) contradicts the idea that it was broken from the start.",
+        "A": "The fact that rounds 3-8 found nothing suggests fewer rounds (e.g. 2-3) would have sufficed for this task; 8 is not shown to be a universally correct number."
+      },
+      "rule_of_thumb": "A pattern of early rounds fixing significant issues and later rounds fixing little or nothing is the signature of diminishing returns, not a critique failure or a universal iteration count."
+    },
+    "tags": [
+      "self-critique-loop",
+      "diminishing-returns"
+    ]
+  },
+  {
+    "id": "Q-D2-0046",
+    "domain": 2,
+    "task_statement": "2.3",
+    "type": "single_choice",
+    "difficulty": "hard",
+    "theory_refs": [
+      "TH-D2-012"
+    ],
+    "case_study_id": null,
+    "stem": "An agent generates an answer based on a genuine, systematic misunderstanding of a technical concept. It is then asked to reflect on and critique its own answer using the same underlying model. What is the most likely outcome?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "The critique step will reliably catch and correct the error, since reflection catches all error types"
+      },
+      {
+        "key": "B",
+        "text": "The critique is likely to share the same systematic misunderstanding and may fail to catch the error"
+      },
+      {
+        "key": "C",
+        "text": "The model will automatically consult an external source during reflection with no additional setup"
+      },
+      {
+        "key": "D",
+        "text": "Self-critique guarantees the output becomes factually perfect"
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "explanation": {
+      "why_correct": "Since the critique step relies on the same underlying knowledge and reasoning as the original generation, a genuine systematic misunderstanding is likely to persist through the critique step as well, making it unlikely to be caught by self-reflection alone.",
+      "why_incorrect": {
+        "A": "Self-reflection is NOT reliable at catching every error type -- it specifically struggles with errors rooted in genuine knowledge gaps or systematic misunderstandings shared by both generation and critique.",
+        "C": "Self-reflection does not automatically invoke an external source; that requires an explicit grounding/tool-use mechanism, not implicit in reflection itself.",
+        "D": "Self-critique provides no such guarantee; it can improve certain classes of error but is not a path to factual perfection."
+      },
+      "rule_of_thumb": "Self-reflection shares the same blind spots as the original generation for systematic misunderstandings -- external verification is needed to catch these reliably."
+    },
+    "tags": [
+      "self-reflection-limitations",
+      "blind-spots"
+    ]
+  }
+]

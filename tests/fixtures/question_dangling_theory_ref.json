@@ -1,0 +1,28 @@
+[
+  {
+    "id": "Q-D1-0908",
+    "domain": 1,
+    "task_statement": "1.1",
+    "type": "single_choice",
+    "difficulty": "easy",
+    "theory_refs": ["TH-D1-999"],
+    "case_study_id": null,
+    "stem": "Broken fixture: this question references a theory card id that does not exist, to test the dangling-theory-ref gate.",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Option A text" },
+      { "key": "B", "text": "Option B text" },
+      { "key": "C", "text": "Option C text" }
+    ],
+    "correct": ["A"],
+    "explanation": {
+      "why_correct": "This explanation is only present to satisfy the schema; the point of this fixture is the dangling theory reference.",
+      "why_incorrect": {
+        "B": "Placeholder explanation for option B, long enough to pass the minimum length check.",
+        "C": "Placeholder explanation for option C, long enough to pass the minimum length check."
+      },
+      "rule_of_thumb": "Placeholder rule of thumb text for this fixture, long enough on its own."
+    },
+    "tags": ["fixture"]
+  }
+]

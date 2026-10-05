@@ -1,0 +1,143 @@
+[
+  {
+    "id": "Q-D4-0004",
+    "domain": 4,
+    "task_statement": "4.1",
+    "type": "single_choice",
+    "difficulty": "hard",
+    "theory_refs": [
+      "TH-D4-004"
+    ],
+    "case_study_id": null,
+    "stem": "An agent is configured to save literally every message exchanged, including small talk and one-off calculation results, into long-term memory with no filtering. What is the most likely downside?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "This eliminates the need for any retrieval mechanism"
+      },
+      {
+        "key": "B",
+        "text": "This guarantees perfect retrieval accuracy forever"
+      },
+      {
+        "key": "C",
+        "text": "The long-term store becomes cluttered with low-value information, making genuinely useful content harder to retrieve amid the noise"
+      },
+      {
+        "key": "D",
+        "text": "This has no downside whatsoever"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "Saving everything indiscriminately, including low-value one-off details, clutters the long-term store, making it harder for a retrieval mechanism to surface genuinely useful, recurring information amid the noise.",
+      "why_incorrect": {
+        "B": "Cluttering the store with low-value content tends to hurt retrieval quality, not guarantee perfect accuracy.",
+        "D": "There is a real, documented downside: a cluttered, harder-to-search long-term store.",
+        "A": "A retrieval mechanism is still very much needed regardless of how much is saved; saving everything doesn't eliminate this need."
+      },
+      "rule_of_thumb": "Saving everything indiscriminately clutters long-term memory and makes genuinely useful information harder to retrieve -- selective saving based on likely future relevance is preferable."
+    },
+    "tags": [
+      "memory-persistence-policy",
+      "long-term-memory"
+    ]
+  },
+  {
+    "id": "Q-D4-0005",
+    "domain": 4,
+    "task_statement": "4.1",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D4-001"
+    ],
+    "case_study_id": null,
+    "stem": "As a long conversation continues and new messages are added, older messages eventually get pushed out of the context window. What best describes this phenomenon?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "A deliberate decision by the agent to permanently delete the older information from all storage"
+      },
+      {
+        "key": "B",
+        "text": "Displacement from working memory due to the context window's natural size limit, which is different from deliberately discarding something from long-term storage"
+      },
+      {
+        "key": "C",
+        "text": "Proof that the agent has gained long-term memory automatically"
+      },
+      {
+        "key": "D",
+        "text": "An error that should never occur under any circumstances"
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "explanation": {
+      "why_correct": "Older messages falling out of the context window as new ones are added is a natural consequence of working memory's size limit -- displacement -- which is a distinct mechanism from a deliberate decision to delete something from long-term storage.",
+      "why_incorrect": {
+        "A": "This phenomenon doesn't necessarily delete the information from ALL storage; it's specifically about working memory capacity, and the information could still exist elsewhere (e.g. a transcript log) even if displaced from the active context.",
+        "C": "Context window displacement is a working-memory phenomenon, not evidence of any long-term memory capability being gained.",
+        "D": "This is an expected, normal consequence of any bounded context window, not an unusual error condition."
+      },
+      "rule_of_thumb": "Information falling out of working memory due to context window limits is displacement, a different mechanism from deliberately discarding something from long-term storage."
+    },
+    "tags": [
+      "working-memory",
+      "context-window"
+    ]
+  },
+  {
+    "id": "Q-D4-0006",
+    "domain": 4,
+    "task_statement": "4.1",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D4-002"
+    ],
+    "case_study_id": null,
+    "stem": "What role does a 'relevance-based search over stored memories' typically play in a long-term memory system?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "It replaces the need for working memory entirely"
+      },
+      {
+        "key": "B",
+        "text": "It permanently deletes all memories older than one day"
+      },
+      {
+        "key": "C",
+        "text": "It has no actual function in a memory system"
+      },
+      {
+        "key": "D",
+        "text": "It is the retrieval mechanism that decides what stored information to pull into working memory for the current situation"
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "A relevance-based search over stored memories is exactly the kind of retrieval mechanism needed to decide which stored long-term information is actually relevant enough to pull into working memory for the current situation.",
+      "why_incorrect": {
+        "B": "Relevance-based search is about finding relevant content, not about deleting content based on age -- these are different concerns.",
+        "C": "This mechanism serves a central, functional role: enabling effective retrieval, which is essential for long-term memory to actually be useful.",
+        "A": "Retrieval surfaces relevant long-term content INTO working memory; it doesn't replace the need for working memory, which is still where active reasoning happens."
+      },
+      "rule_of_thumb": "A relevance-based retrieval mechanism is what makes long-term memory actually useful by surfacing the right stored information into working memory when needed."
+    },
+    "tags": [
+      "memory-retrieval",
+      "long-term-memory"
+    ]
+  }
+]

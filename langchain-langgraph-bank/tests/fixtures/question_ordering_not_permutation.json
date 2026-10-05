@@ -1,0 +1,26 @@
+[
+  {
+    "id": "Q-D1-0903",
+    "domain": 1,
+    "task_statement": "1.3",
+    "type": "ordering",
+    "difficulty": "medium",
+    "theory_refs": ["TH-D1-001"],
+    "case_study_id": null,
+    "stem": "Broken fixture: ordering question whose correct array is missing option D, to test the permutation gate.",
+    "select_count": 4,
+    "options": [
+      { "key": "A", "text": "Step A" },
+      { "key": "B", "text": "Step B" },
+      { "key": "C", "text": "Step C" },
+      { "key": "D", "text": "Step D" }
+    ],
+    "correct": ["A", "B", "C"],
+    "explanation": {
+      "why_correct": "This explanation is only present to satisfy the schema; the point of this fixture is the non-permutation correct array.",
+      "why_incorrect": {},
+      "rule_of_thumb": "Placeholder rule of thumb text for this fixture."
+    },
+    "tags": ["fixture"]
+  }
+]

@@ -1,0 +1,143 @@
+[
+  {
+    "id": "Q-D3-0001",
+    "domain": 3,
+    "task_statement": "3.1",
+    "type": "single_choice",
+    "difficulty": "easy",
+    "theory_refs": [
+      "TH-D3-001"
+    ],
+    "case_study_id": null,
+    "stem": "Why can't a language model, by itself with no tools, cause a real-world side effect like sending an email?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Because emails require a fax machine"
+      },
+      {
+        "key": "B",
+        "text": "Because sending emails is technically impossible for any computer system"
+      },
+      {
+        "key": "C",
+        "text": "Because language models are forbidden by law from ever being connected to email systems"
+      },
+      {
+        "key": "D",
+        "text": "Because its only native capability is producing text; it has no inherent mechanism to execute external actions"
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "A language model's only native capability is generating text conditioned on its training and context; it has no built-in mechanism to execute external actions like sending an email -- that requires a separate tool and execution layer.",
+      "why_incorrect": {
+        "B": "Sending emails is a routine, well-established computing capability; the limitation is specifically about the model's own native capabilities, not about email technology in general.",
+        "C": "There is no such blanket legal prohibition; the actual limitation is architectural (text generation has no native action-execution mechanism), not legal.",
+        "A": "Email delivery has nothing to do with fax machines; this is an irrelevant distractor."
+      },
+      "rule_of_thumb": "A model's native capability is text generation only -- real-world side effects require a tool and a separate execution layer, not something achievable by the model alone."
+    },
+    "tags": [
+      "tool-necessity",
+      "grounding"
+    ]
+  },
+  {
+    "id": "Q-D3-0002",
+    "domain": 3,
+    "task_statement": "3.1",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D3-002"
+    ],
+    "case_study_id": null,
+    "stem": "A user asks an agent for today's weather. Why is relying on the model's internal training knowledge inappropriate for this specific request?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Weather information never changes once recorded"
+      },
+      {
+        "key": "B",
+        "text": "Weather is a rapidly changing fact that could not possibly have been captured in training data for 'today', specifically"
+      },
+      {
+        "key": "C",
+        "text": "Models are incapable of discussing weather topics in general"
+      },
+      {
+        "key": "D",
+        "text": "The user's question is inherently invalid"
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "explanation": {
+      "why_correct": "Today's specific weather is, by definition, current information that could not have existed in any fixed training dataset collected before today -- making a live tool-based lookup necessary rather than relying on internal knowledge.",
+      "why_incorrect": {
+        "C": "Models can discuss weather topics generally (e.g. explaining how weather forecasting works); the issue is specifically about CURRENT, real-time weather data, not the topic as a whole.",
+        "D": "The question is a perfectly reasonable, common request; the issue is about how it should be answered (via a tool), not whether it's a valid question.",
+        "A": "Weather is a textbook example of rapidly changing information, the opposite of unchanging."
+      },
+      "rule_of_thumb": "Current, rapidly changing facts like today's weather require a live tool lookup, since no training dataset could have captured 'today's' specific value in advance."
+    },
+    "tags": [
+      "freshness",
+      "stale-knowledge"
+    ]
+  },
+  {
+    "id": "Q-D3-0003",
+    "domain": 3,
+    "task_statement": "3.1",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D3-003"
+    ],
+    "case_study_id": null,
+    "stem": "Why do action tools (e.g. 'send payment', 'delete record') generally warrant more caution than read-only information-retrieval tools?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "A mistaken action-tool call causes a real, persistent side effect that cannot simply be undone by further reasoning, unlike a wrong search result"
+      },
+      {
+        "key": "B",
+        "text": "Action tools are always technically slower to execute than information tools"
+      },
+      {
+        "key": "C",
+        "text": "There is no meaningful difference in risk between the two categories"
+      },
+      {
+        "key": "D",
+        "text": "Information-retrieval tools never return incorrect data"
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "explanation": {
+      "why_correct": "A mistaken call to an action tool produces a real, persistent external consequence (money sent, record deleted) that cannot be undone just by the agent realizing its mistake, unlike a wrong information-retrieval result which only produces a wrong answer that can be corrected.",
+      "why_incorrect": {
+        "B": "Execution speed is not the relevant distinction here; the key difference is the severity and reversibility of consequences from a mistaken call.",
+        "C": "There is a well-established, meaningful difference in risk: real persistent side effects versus a merely wrong but correctable answer.",
+        "D": "Information-retrieval tools can certainly return incorrect or outdated data; this does not change the fact that action tools carry categorically different consequence risk."
+      },
+      "rule_of_thumb": "Action tools warrant more caution because their mistakes produce real, persistent consequences that cannot be undone by subsequent reasoning alone."
+    },
+    "tags": [
+      "action-tools",
+      "tool-risk-tiers"
+    ]
+  }
+]

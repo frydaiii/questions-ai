@@ -1,0 +1,143 @@
+[
+  {
+    "id": "Q-D2-0078",
+    "domain": 2,
+    "task_statement": "2.4",
+    "type": "single_choice",
+    "difficulty": "easy",
+    "theory_refs": [
+      "TH-D2-014"
+    ],
+    "case_study_id": null,
+    "stem": "Which of the following is the WEAKEST way to handle genuine ambiguity in task instructions?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Presenting results for multiple plausible interpretations when their consequences differ significantly"
+      },
+      {
+        "key": "B",
+        "text": "Stating the chosen interpretation explicitly before proceeding"
+      },
+      {
+        "key": "C",
+        "text": "Asking a clarifying question when the setting allows it"
+      },
+      {
+        "key": "D",
+        "text": "Silently picking one interpretation with no acknowledgment that a choice was made"
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "Silently resolving ambiguity with no acknowledgment hides a real decision point from the user, making it impossible for them to know an assumption was made or to correct it if wrong -- the weakest of the listed strategies.",
+      "why_incorrect": {
+        "B": "Explicitly stating the chosen interpretation keeps the decision point visible, which is a reasonable strategy, especially when asking isn't feasible.",
+        "C": "Asking a clarifying question when feasible is generally one of the strongest strategies for resolving genuine ambiguity.",
+        "A": "Presenting multiple interpretations is a reasonable strategy specifically when the different interpretations' consequences diverge significantly."
+      },
+      "rule_of_thumb": "Silently resolving ambiguity with no acknowledgment is the weakest strategy, since it hides the decision point entirely."
+    },
+    "tags": [
+      "ambiguity-handling"
+    ]
+  },
+  {
+    "id": "Q-D2-0079",
+    "domain": 2,
+    "task_statement": "2.4",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D2-015"
+    ],
+    "case_study_id": null,
+    "stem": "An agent's reasoning concludes a value that directly contradicts a fact it stated two steps earlier in the same response. What type of check would catch this specific issue?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "A grounding check against an external database"
+      },
+      {
+        "key": "B",
+        "text": "An internal consistency check between different parts of the same output"
+      },
+      {
+        "key": "C",
+        "text": "A sanity check against a physically plausible range"
+      },
+      {
+        "key": "D",
+        "text": "No check could possibly catch this type of issue"
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "explanation": {
+      "why_correct": "Comparing two statements within the same output for contradiction is exactly what an internal consistency check is designed to catch.",
+      "why_incorrect": {
+        "A": "A grounding check compares a statement against an external data source, not against another part of the same output -- a different mechanism from internal consistency checking.",
+        "C": "A sanity check against a plausible range addresses whether a value falls within reasonable bounds, not whether two statements within the response contradict each other.",
+        "D": "Internal consistency checks are a well-established, practical mechanism specifically suited to catching exactly this type of self-contradiction."
+      },
+      "rule_of_thumb": "Self-contradictions within a single output are caught by internal consistency checks, distinct from external grounding or plausible-range sanity checks."
+    },
+    "tags": [
+      "error-detection",
+      "consistency-check"
+    ]
+  },
+  {
+    "id": "Q-D2-0080",
+    "domain": 2,
+    "task_statement": "2.4",
+    "type": "multi_response",
+    "difficulty": "hard",
+    "theory_refs": [
+      "TH-D2-013",
+      "TH-D2-016"
+    ],
+    "case_study_id": null,
+    "stem": "Which of the following practices help an agent avoid presenting false confidence as if it were genuine, well-supported confidence? (Select 2)",
+    "select_count": 2,
+    "options": [
+      {
+        "key": "A",
+        "text": "Explicitly flagging low-evidence conclusions rather than phrasing them as definitive"
+      },
+      {
+        "key": "B",
+        "text": "Always using the most confident-sounding phrasing available, regardless of evidence"
+      },
+      {
+        "key": "C",
+        "text": "Cross-checking conclusions against external sources before presenting them as fact"
+      },
+      {
+        "key": "D",
+        "text": "Assuming that fluent, grammatically confident text is sufficient proof of correctness"
+      }
+    ],
+    "correct": [
+      "A",
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "Explicitly flagging low-evidence conclusions and cross-checking against external sources both directly address the false-confidence problem by tying expressed certainty to actual evidentiary support.",
+      "why_incorrect": {
+        "B": "Always using maximally confident phrasing regardless of evidence is precisely the behavior that produces false confidence, not a mitigation for it.",
+        "D": "Fluent, grammatically confident text has no inherent connection to factual correctness; treating it as sufficient proof is the exact mistake that enables false confidence to go unnoticed."
+      },
+      "rule_of_thumb": "Combat false confidence by tying expressed certainty to actual evidence -- flag weak conclusions and verify against external sources, rather than relying on fluent phrasing as a proxy for correctness."
+    },
+    "tags": [
+      "false-confidence",
+      "calibration"
+    ]
+  }
+]

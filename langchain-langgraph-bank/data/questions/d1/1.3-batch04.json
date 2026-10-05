@@ -1,0 +1,194 @@
+[
+  {
+    "id": "Q-D1-0064",
+    "domain": 1,
+    "task_statement": "1.3",
+    "type": "single_choice",
+    "difficulty": "easy",
+    "theory_refs": [
+      "TH-D1-014"
+    ],
+    "case_study_id": null,
+    "stem": "What does it mean for a deliberative agent to maintain a 'world model'?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "A literal 3D graphical rendering of the physical world"
+      },
+      {
+        "key": "B",
+        "text": "An internal representation of the task, environment, or goal state that the agent reasons over before acting"
+      },
+      {
+        "key": "C",
+        "text": "A fixed lookup table of condition-action rules"
+      },
+      {
+        "key": "D",
+        "text": "A log of every past user message, with no further processing"
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "explanation": {
+      "why_correct": "A world model, in this context, is an internal representation the agent builds and reasons over to understand the current task/environment/goal state, which it uses to plan ahead before acting.",
+      "why_incorrect": {
+        "C": "A fixed lookup table of condition-action rules describes reactive agent design, which is the opposite of maintaining and reasoning over an internal model.",
+        "D": "A raw, unprocessed log of past messages is not itself a world model; a world model involves some structured representation the agent actively reasons over, not merely stored history.",
+        "A": "A world model is a conceptual/informational representation relevant to reasoning, not necessarily any kind of graphical or visual rendering."
+      },
+      "rule_of_thumb": "A world model is an internal, reasoned-over representation of task/environment/goal state -- not a visual rendering, a fixed rule table, or an unprocessed log."
+    },
+    "tags": [
+      "deliberative-agent",
+      "world-model"
+    ]
+  },
+  {
+    "id": "Q-D1-0065",
+    "domain": 1,
+    "task_statement": "1.3",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D1-016"
+    ],
+    "case_study_id": null,
+    "stem": "A team has a theoretically ideal deliberative design for their task, but their product requires sub-second response times that the deliberative approach cannot meet. What does this situation illustrate?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Sub-second response times are never achievable by any AI system"
+      },
+      {
+        "key": "B",
+        "text": "Deliberative agents are always theoretically impossible to build"
+      },
+      {
+        "key": "C",
+        "text": "Latency and cost budgets can be a practical constraint that forces a faster, more reactive approach even when deliberation would theoretically help"
+      },
+      {
+        "key": "D",
+        "text": "The task must be abandoned entirely"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "This scenario is a direct illustration of latency/cost budgets acting as a practical constraint on architecture choice -- even if deliberation would theoretically produce better decisions, a hard response-time requirement may force a faster, more reactive approximation instead.",
+      "why_incorrect": {
+        "B": "Deliberative agents are regularly built and used; the issue here is a specific latency mismatch for this particular product, not a general impossibility.",
+        "D": "The appropriate response to this constraint is to adapt the architecture (e.g. move toward reactive or hybrid), not to abandon the task altogether.",
+        "A": "Sub-second responses are achievable, particularly with reactive or lightweight approaches; the problem is specifically that the deliberative approach as designed is too slow, not that fast responses are universally unattainable."
+      },
+      "rule_of_thumb": "When a theoretically ideal deliberative approach can't meet latency requirements, the practical fix is to adapt the architecture (reactive or hybrid), not to abandon the task or assume deliberation is categorically impossible."
+    },
+    "tags": [
+      "architecture-selection",
+      "latency-constraints"
+    ]
+  },
+  {
+    "id": "Q-D1-0066",
+    "domain": 1,
+    "task_statement": "1.3",
+    "type": "single_choice",
+    "difficulty": "hard",
+    "theory_refs": [
+      "TH-D1-015",
+      "TH-D1-016"
+    ],
+    "case_study_id": null,
+    "stem": "A hybrid system's escalation logic is poorly tuned: it almost always escalates to the deliberative layer, even for simple, routine requests. What is the most likely practical consequence?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "The reactive layer becomes entirely unnecessary and can be deleted with no effect"
+      },
+      {
+        "key": "B",
+        "text": "The system becomes more accurate than any possible alternative design"
+      },
+      {
+        "key": "C",
+        "text": "The system automatically fixes its own escalation logic over time with no intervention"
+      },
+      {
+        "key": "D",
+        "text": "The system loses most of the efficiency benefit that motivated the hybrid design in the first place, behaving closer to a purely deliberative system"
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "If the escalation threshold is miscalibrated to trigger almost always, the system pays the deliberative layer's cost on nearly every request, defeating the core purpose of the hybrid design -- which is to reserve that cost for cases that actually need it.",
+      "why_incorrect": {
+        "B": "Over-escalating does not inherently make the system more accurate than alternatives; it mainly costs efficiency without necessarily improving outcomes on the many simple cases that didn't need deliberation.",
+        "C": "Escalation logic does not self-correct automatically; it is a tuned parameter/threshold that requires deliberate adjustment by developers if miscalibrated.",
+        "A": "The reactive layer is not rendered unnecessary -- it is simply being under-utilized due to poor tuning; removing it would not address the root cause (the escalation threshold itself)."
+      },
+      "rule_of_thumb": "A hybrid system's value depends on correctly calibrated escalation -- over-escalating erodes the efficiency benefit, effectively collapsing the design toward a purely deliberative (and more expensive) system."
+    },
+    "tags": [
+      "hybrid-agent",
+      "escalation",
+      "design-tradeoffs"
+    ]
+  },
+  {
+    "id": "Q-D1-0067",
+    "domain": 1,
+    "task_statement": "1.3",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D1-013",
+      "TH-D1-016"
+    ],
+    "case_study_id": null,
+    "stem": "Which of the following is the strongest argument AGAINST always using a deliberative architecture, even for simple and well-understood tasks?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Deliberative agents are incapable of ever producing a correct answer"
+      },
+      {
+        "key": "B",
+        "text": "The added planning/lookahead computation is unnecessary overhead when the task is already well-handled by direct pattern matching"
+      },
+      {
+        "key": "C",
+        "text": "Deliberative agents cannot be built using language models"
+      },
+      {
+        "key": "D",
+        "text": "Deliberative agents are illegal to deploy in production systems"
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "explanation": {
+      "why_correct": "For simple, well-understood tasks that a reactive approach already handles well, the extra computation and latency of deliberation provide little to no additional benefit -- making it unnecessary overhead rather than a worthwhile investment.",
+      "why_incorrect": {
+        "A": "Deliberative agents are fully capable of producing correct answers; the argument against using them everywhere is about efficiency, not correctness capability.",
+        "C": "Deliberative reasoning is commonly implemented using language models; there's no technical incompatibility.",
+        "D": "There is no such legal restriction; this is purely an engineering efficiency consideration."
+      },
+      "rule_of_thumb": "The case against using deliberation everywhere is about avoiding unnecessary computational overhead on tasks that don't need it -- not about any inherent flaw or restriction on deliberative agents themselves."
+    },
+    "tags": [
+      "architecture-selection",
+      "efficiency",
+      "deliberative-agent"
+    ]
+  }
+]

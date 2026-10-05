@@ -1,0 +1,426 @@
+[
+  {
+    "id": "Q-D4-0046",
+    "domain": 4,
+    "task_statement": "4.2",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D4-005"
+    ],
+    "case_study_id": null,
+    "stem": "Which of the following best illustrates the value of episodic memory for 'recalling precedent'?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "An agent generating random, unrelated text with no connection to any past situation"
+      },
+      {
+        "key": "B",
+        "text": "An agent reciting a general, timeless mathematical fact"
+      },
+      {
+        "key": "C",
+        "text": "An agent recalling how a similar past dispute was resolved to inform how it approaches a new, similar dispute"
+      },
+      {
+        "key": "D",
+        "text": "An agent refusing to recall anything from any past interaction"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "Recalling how a similar past situation was resolved, to inform handling of a new similar situation, is exactly the 'recalling precedent' value that episodic memory provides.",
+      "why_incorrect": {
+        "B": "A timeless, general mathematical fact is semantic memory, not an example of recalling a specific past precedent.",
+        "D": "Refusing to recall anything is the opposite of using episodic memory to inform current reasoning.",
+        "A": "Random, unrelated text generation has no connection to recalling any specific relevant past situation."
+      },
+      "rule_of_thumb": "Recalling precedent -- how a similar past situation was handled -- is a direct, practical application of episodic memory."
+    },
+    "tags": [
+      "episodic-memory"
+    ]
+  },
+  {
+    "id": "Q-D4-0047",
+    "domain": 4,
+    "task_statement": "4.2",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D4-007"
+    ],
+    "case_study_id": null,
+    "stem": "What is the main efficiency benefit of maintaining procedural memory for recurring task types?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Guaranteeing that every future task of that type will be completed instantly with zero effort"
+      },
+      {
+        "key": "B",
+        "text": "Avoiding the need to re-derive a successful approach from scratch each time a similar task recurs"
+      },
+      {
+        "key": "C",
+        "text": "Eliminating the need for the agent to ever reason about anything again"
+      },
+      {
+        "key": "D",
+        "text": "Making all other memory types unnecessary"
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "explanation": {
+      "why_correct": "Procedural memory's main efficiency benefit is avoiding the need to re-derive a known-good approach from scratch every time a similar task type comes up again.",
+      "why_incorrect": {
+        "C": "Procedural memory doesn't eliminate reasoning entirely; it provides a useful starting point or framework that may still require some reasoning to apply correctly.",
+        "D": "Procedural memory serves a distinct purpose from episodic and semantic memory; it doesn't make the others unnecessary.",
+        "A": "Having a stored procedure doesn't guarantee instant, zero-effort completion; some execution and reasoning is typically still required to apply it to the current specific case."
+      },
+      "rule_of_thumb": "Procedural memory's core benefit is avoiding re-derivation of a known-good approach for recurring task types, not eliminating all further reasoning."
+    },
+    "tags": [
+      "procedural-memory"
+    ]
+  },
+  {
+    "id": "Q-D4-0048",
+    "domain": 4,
+    "task_statement": "4.2",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D4-008"
+    ],
+    "case_study_id": null,
+    "stem": "Which statement correctly reflects the relationship between episodic and semantic memory as suggested by the generalization process?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "They are distinct in function but can be connected -- semantic memory can emerge from patterns generalized across episodic observations"
+      },
+      {
+        "key": "B",
+        "text": "They are entirely unrelated with absolutely no possible connection of any kind"
+      },
+      {
+        "key": "C",
+        "text": "Episodic memory is just semantic memory with a different name"
+      },
+      {
+        "key": "D",
+        "text": "Semantic memory can never be influenced by episodic observations"
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "explanation": {
+      "why_correct": "While episodic and semantic memory serve different functional roles, they are connected in that semantic memory can emerge from generalizing a recurring pattern observed across multiple episodic memories.",
+      "why_incorrect": {
+        "B": "There is a documented connection -- generalization from episodic observations into semantic facts -- so they are not entirely unrelated.",
+        "C": "They are distinct concepts with different defining traits (specific event vs. general fact), not simply different names for the same thing.",
+        "D": "Semantic memory can indeed be influenced by and generalized from a pattern across multiple episodic observations."
+      },
+      "rule_of_thumb": "Episodic and semantic memory are functionally distinct but connected -- semantic facts can emerge by generalizing from recurring episodic patterns."
+    },
+    "tags": [
+      "episodic-memory",
+      "semantic-memory"
+    ]
+  },
+  {
+    "id": "Q-D4-0049",
+    "domain": 4,
+    "task_statement": "4.2",
+    "type": "single_choice",
+    "difficulty": "easy",
+    "theory_refs": [
+      "TH-D4-006"
+    ],
+    "case_study_id": null,
+    "stem": "Which of the following questions does semantic memory primarily help answer?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "What is generally true, independent of any specific event"
+      },
+      {
+        "key": "B",
+        "text": "What exactly happened during a specific past conversation"
+      },
+      {
+        "key": "C",
+        "text": "How to execute a multi-step process"
+      },
+      {
+        "key": "D",
+        "text": "What is the agent's current session ID"
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "explanation": {
+      "why_correct": "Semantic memory's defining role is holding general facts and knowledge that are true independent of any one specific event.",
+      "why_incorrect": {
+        "B": "What exactly happened during a specific past conversation is the defining question for episodic memory, not semantic.",
+        "C": "How to execute a multi-step process is the defining question for procedural memory, not semantic.",
+        "D": "A session ID is an unrelated technical/implementation detail, not connected to this memory-type distinction."
+      },
+      "rule_of_thumb": "Semantic memory answers 'what's generally true' -- distinct from episodic ('what happened') and procedural ('how to do it')."
+    },
+    "tags": [
+      "semantic-memory"
+    ]
+  },
+  {
+    "id": "Q-D4-0050",
+    "domain": 4,
+    "task_statement": "4.2",
+    "type": "single_choice",
+    "difficulty": "hard",
+    "theory_refs": [
+      "TH-D4-005",
+      "TH-D4-006",
+      "TH-D4-007"
+    ],
+    "case_study_id": null,
+    "stem": "A help-desk agent needs to decide, for a new ticket, whether to: (1) recall how a similar ticket was resolved before, (2) look up the company's standing policy relevant to the ticket, or (3) apply a known, reusable triage procedure. Which memory types correspond to these three needs, respectively?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Episodic, semantic, procedural"
+      },
+      {
+        "key": "B",
+        "text": "Procedural, episodic, semantic"
+      },
+      {
+        "key": "C",
+        "text": "Semantic, procedural, episodic"
+      },
+      {
+        "key": "D",
+        "text": "All three needs correspond to exactly the same single memory type"
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "explanation": {
+      "why_correct": "Recalling a similar past ticket is episodic (specific past event), looking up standing policy is semantic (general fact), and applying a known triage procedure is procedural (reusable method) -- in that exact order matching the three listed needs.",
+      "why_incorrect": {
+        "B": "This reorders the mapping incorrectly; recalling a similar past ticket is episodic, not procedural, and so on for the other two.",
+        "C": "This also misassigns the mapping; looking up standing policy is semantic, not procedural, and so on.",
+        "D": "These three needs are distinctly different in kind (specific precedent, general fact, reusable method) and map to three different memory types, not one single type."
+      },
+      "rule_of_thumb": "Specific precedent recall = episodic; general policy lookup = semantic; reusable procedure application = procedural."
+    },
+    "tags": [
+      "episodic-memory",
+      "semantic-memory",
+      "procedural-memory"
+    ]
+  },
+  {
+    "id": "Q-D4-0051",
+    "domain": 4,
+    "task_statement": "4.2",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D4-008"
+    ],
+    "case_study_id": null,
+    "stem": "Why is it inaccurate to claim that distinguishing episodic, semantic, and procedural memory implies these three types are completely unrelated to each other?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Because there is actually no distinction between any of the three types at all"
+      },
+      {
+        "key": "B",
+        "text": "Because the distinction is a design/organization tool for retrieval, and semantic memory can still be generalized from patterns in episodic memory"
+      },
+      {
+        "key": "C",
+        "text": "Because procedural memory is identical to semantic memory in every respect"
+      },
+      {
+        "key": "D",
+        "text": "Because episodic memory can never inform any other type of memory"
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "explanation": {
+      "why_correct": "The three-way distinction is primarily a tool for organizing storage and retrieval around different functional needs, and this is compatible with the types being connected -- for example, semantic facts emerging from a generalized pattern across episodic memories.",
+      "why_incorrect": {
+        "C": "Procedural and semantic memory are functionally distinct (methods/sequences vs. general facts), not identical.",
+        "D": "Episodic memory specifically CAN inform semantic memory through generalization, contradicting this claim.",
+        "A": "There is a real, meaningful functional distinction between the three types, even though they can be connected."
+      },
+      "rule_of_thumb": "The episodic/semantic/procedural distinction organizes memory by function; it doesn't preclude connections like semantic facts emerging from episodic generalization."
+    },
+    "tags": [
+      "memory-type-organization",
+      "episodic-memory",
+      "semantic-memory"
+    ]
+  },
+  {
+    "id": "Q-D4-0052",
+    "domain": 4,
+    "task_statement": "4.2",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D4-007"
+    ],
+    "case_study_id": null,
+    "stem": "Which scenario best illustrates procedural memory being appropriately refined over time, rather than treated as fixed?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "A stored triage procedure is updated after observing that a revised step order consistently produces better outcomes"
+      },
+      {
+        "key": "B",
+        "text": "A stored triage procedure is used exactly as originally written forever, regardless of its actual performance"
+      },
+      {
+        "key": "C",
+        "text": "A stored triage procedure is deleted the moment it is created, before ever being used"
+      },
+      {
+        "key": "D",
+        "text": "A stored triage procedure is converted into an episodic memory with no further use as a procedure"
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "explanation": {
+      "why_correct": "Updating a stored procedure after observing it can be improved, based on evidence of better outcomes with a revised approach, is exactly the appropriate refinement behavior procedural memory is meant to support.",
+      "why_incorrect": {
+        "B": "Keeping a procedure fixed forever regardless of actual performance is the opposite of appropriate refinement.",
+        "C": "Deleting it before ever being used provides no opportunity to observe or refine its performance at all.",
+        "D": "Converting it to episodic memory removes its reusable, procedural function rather than refining it as a procedure."
+      },
+      "rule_of_thumb": "Appropriately refining procedural memory means updating it based on observed performance, not keeping it rigidly fixed or discarding it entirely."
+    },
+    "tags": [
+      "procedural-memory"
+    ]
+  },
+  {
+    "id": "Q-D4-0053",
+    "domain": 4,
+    "task_statement": "4.2",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D4-005",
+      "TH-D4-008"
+    ],
+    "case_study_id": null,
+    "stem": "A travel-booking agent wants to recall 'what special requests did this specific traveler make on their last three trips.' Which memory type is most directly relevant to answering this?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Procedural memory, since it concerns how to book a flight"
+      },
+      {
+        "key": "B",
+        "text": "Semantic memory, since it concerns a general fact with no connection to any specific trip"
+      },
+      {
+        "key": "C",
+        "text": "Episodic memory, since it concerns specific past trips and their specific details"
+      },
+      {
+        "key": "D",
+        "text": "No memory type is relevant to this request"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "Recalling specific requests from specific past trips is exactly what episodic memory is designed to capture -- events tied to particular occasions, not general facts or procedures.",
+      "why_incorrect": {
+        "B": "This request is specifically about particular past trips, not a general, event-independent fact, so semantic memory isn't the primary fit.",
+        "D": "This is a direct, clear use case for episodic memory retrieval.",
+        "A": "The request concerns recalling what happened on specific past trips, not a method for performing the booking process itself."
+      },
+      "rule_of_thumb": "Recalling specific details tied to particular past occasions is the core use case for episodic memory."
+    },
+    "tags": [
+      "episodic-memory"
+    ]
+  },
+  {
+    "id": "Q-D4-0054",
+    "domain": 4,
+    "task_statement": "4.2",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D4-006",
+      "TH-D4-007"
+    ],
+    "case_study_id": null,
+    "stem": "Which pair correctly distinguishes semantic memory from procedural memory?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Semantic memory and procedural memory can only ever be used by entirely separate, unrelated agents"
+      },
+      {
+        "key": "B",
+        "text": "Semantic memory holds methods or sequences of steps; procedural memory holds general facts"
+      },
+      {
+        "key": "C",
+        "text": "Both are exactly identical with no distinguishable difference"
+      },
+      {
+        "key": "D",
+        "text": "Semantic memory holds general facts; procedural memory holds methods or sequences of steps for accomplishing tasks"
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "Semantic memory is specifically about general facts/knowledge, while procedural memory is specifically about methods or sequences for accomplishing tasks -- this is the correct distinction.",
+      "why_incorrect": {
+        "B": "This reverses the actual roles of the two memory types.",
+        "C": "They are clearly distinguishable: facts versus methods/procedures.",
+        "A": "Both memory types can coexist and be used together within a single agent; there's no requirement for separate agents."
+      },
+      "rule_of_thumb": "Semantic memory = general facts; procedural memory = methods/sequences for accomplishing tasks."
+    },
+    "tags": [
+      "semantic-memory",
+      "procedural-memory"
+    ]
+  }
+]

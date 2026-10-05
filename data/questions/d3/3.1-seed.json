@@ -1,0 +1,54 @@
+[
+  {
+    "id": "Q-D3-0001",
+    "domain": 3,
+    "task_statement": "3.1",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": ["TH-D3-001"],
+    "case_study_id": null,
+    "stem": "A financial services company uses a foundation model on Amazon Bedrock to answer customer questions about their account products. Product terms are revised every quarter, and answers must always reflect the current terms. Which approach requires the least ongoing model work while keeping answers current?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Fine-tune the foundation model on the revised product terms each quarter." },
+      { "key": "B", "text": "Use an Amazon Bedrock knowledge base so the model retrieves the current product terms at inference time." },
+      { "key": "C", "text": "Run continued pre-training on the company's full document corpus each quarter." },
+      { "key": "D", "text": "Increase the model's context window and raise the temperature setting." }
+    ],
+    "correct": ["B"],
+    "explanation": {
+      "why_correct": "Retrieval-Augmented Generation grounds each response in documents fetched at inference time. Updating the knowledge base source in Amazon S3 and re-syncing makes the new terms available immediately, with no change to model weights.",
+      "why_incorrect": {
+        "A": "Fine-tuning adjusts weights to change style, format, or task behavior. Using it to carry volatile facts means a retraining cycle every quarter, the highest ongoing effort of the options.",
+        "C": "Continued pre-training broadens general domain knowledge from large unlabeled corpora. It is heavier than fine-tuning and still leaves facts frozen at training time.",
+        "D": "Context window is a model capability, not a data-freshness mechanism, and temperature only controls output randomness. Raising temperature would make answers less reliable."
+      },
+      "rule_of_thumb": "Facts that change frequently -> RAG. Style, tone, or output format that must change -> fine-tuning. Broad new domain vocabulary from unlabeled text -> continued pre-training."
+    },
+    "tags": ["rag", "knowledge-bases", "fine-tuning", "bedrock", "customization"]
+  },
+  {
+    "id": "Q-D3-0004",
+    "domain": 3,
+    "task_statement": "3.2",
+    "type": "ordering",
+    "difficulty": "medium",
+    "theory_refs": ["TH-D3-001"],
+    "case_study_id": null,
+    "stem": "A prompt engineer is designing a chain-of-thought prompting workflow to help a foundation model solve a multi-step word problem correctly. Arrange the following elements of the prompt in the order they should appear, from first to last.",
+    "select_count": 4,
+    "options": [
+      { "key": "A", "text": "A system instruction establishing the model's role and the desired output format" },
+      { "key": "B", "text": "One or two worked examples showing step-by-step reasoning toward a final answer (few-shot)" },
+      { "key": "C", "text": "The actual word problem the model must solve" },
+      { "key": "D", "text": "An explicit instruction to show reasoning step by step before giving the final answer" }
+    ],
+    "correct": ["A", "B", "D", "C"],
+    "explanation": {
+      "why_correct": "A well-formed chain-of-thought prompt starts with a system instruction that sets the model's role and expected format (A), follows with few-shot worked examples that demonstrate the desired step-by-step reasoning pattern (B), then explicitly instructs the model to reason step by step (D), and finally presents the actual problem to solve (C), so the model applies everything set up before it.",
+      "why_incorrect": {},
+      "rule_of_thumb": "Prompt structure generally flows: role/format instruction -> demonstrations (few-shot examples) -> explicit reasoning instruction -> the actual task/question, so the model has full context before it needs to produce an answer."
+    },
+    "tags": ["prompt-engineering", "chain-of-thought", "few-shot", "ordering"]
+  }
+]

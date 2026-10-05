@@ -1,0 +1,131 @@
+[
+  {
+    "id": "Q-D2-0007",
+    "domain": 2,
+    "task_statement": "2.1",
+    "type": "multi_response",
+    "difficulty": "medium",
+    "theory_refs": ["TH-D2-001", "TH-D2-005"],
+    "case_study_id": null,
+    "stem": "Which of the following are genuine benefits of interleaving reasoning with action, compared to plain chain-of-thought reasoning alone? (Select 2)",
+    "select_count": 2,
+    "options": [
+      { "key": "A", "text": "The ability to incorporate new, external, dynamic information mid-reasoning via actions" },
+      { "key": "B", "text": "Guaranteed elimination of all possible reasoning errors" },
+      { "key": "C", "text": "The ability to correct flawed assumptions based on real observations rather than only internal knowledge" },
+      { "key": "D", "text": "Zero computational or latency cost compared to pure reasoning" }
+    ],
+    "correct": ["A", "C"],
+    "explanation": {
+      "why_correct": "Interleaving reasoning with action allows the agent to pull in new external information mid-process and to correct flawed assumptions using that real information, both of which plain chain-of-thought cannot do since it has no mechanism to act.",
+      "why_incorrect": {
+        "B": "No agentic pattern guarantees elimination of all reasoning errors; grounding reduces certain classes of error but is not a complete guarantee against mistakes.",
+        "D": "Taking actions (e.g. tool calls) adds computational and latency cost compared to reasoning alone; this is a tradeoff, not a free benefit."
+      },
+      "rule_of_thumb": "Interleaving reasoning with action helps most by enabling access to real external information and correcting assumptions against it -- not by eliminating all errors or adding zero cost."
+    },
+    "tags": ["react", "chain-of-thought", "grounding"]
+  },
+  {
+    "id": "Q-D2-0008",
+    "domain": 2,
+    "task_statement": "2.1",
+    "type": "multi_response",
+    "difficulty": "medium",
+    "theory_refs": ["TH-D2-004"],
+    "case_study_id": null,
+    "stem": "Which of the following are recognized failure patterns specific to interleaved reasoning-action agents? (Select 3)",
+    "select_count": 3,
+    "options": [
+      { "key": "A", "text": "Looping without converging on an answer" },
+      { "key": "B", "text": "Ignoring the content of a recent observation in the next thought" },
+      { "key": "C", "text": "Concluding before the gathered evidence actually supports the conclusion" },
+      { "key": "D", "text": "Successfully using an observation to revise an earlier assumption" }
+    ],
+    "correct": ["A", "B", "C"],
+    "explanation": {
+      "why_correct": "Looping, ignoring observations, and premature conclusion are the three failure patterns described as characteristic of interleaved reasoning-action agents, each requiring distinct diagnosis and fixes.",
+      "why_incorrect": {
+        "D": "Successfully using an observation to revise an assumption is the interleaved pattern working AS INTENDED, not a failure mode -- it's the desired behavior, not something to diagnose as broken."
+      },
+      "rule_of_thumb": "Looping, ignoring observations, and premature conclusion are the three characteristic failure patterns; successfully revising assumptions from observations is the healthy, intended behavior."
+    },
+    "tags": ["react", "failure-diagnosis"]
+  },
+  {
+    "id": "Q-D2-0009",
+    "domain": 2,
+    "task_statement": "2.1",
+    "type": "ordering",
+    "difficulty": "easy",
+    "theory_refs": ["TH-D2-001"],
+    "case_study_id": null,
+    "stem": "Place the following steps of one iteration of an interleaved reasoning-action loop in the correct order.",
+    "select_count": 3,
+    "options": [
+      { "key": "A", "text": "The agent generates an explicit thought about what to do next" },
+      { "key": "B", "text": "The agent takes a concrete action (e.g. a tool call)" },
+      { "key": "C", "text": "The agent receives an observation reflecting the action's result" }
+    ],
+    "correct": ["A", "B", "C"],
+    "explanation": {
+      "why_correct": "Each iteration of the interleaved loop proceeds thought first, then action based on that thought, then observation of the action's result, which in turn feeds the next thought.",
+      "why_incorrect": {},
+      "rule_of_thumb": "The interleaved loop always proceeds thought -> action -> observation within a single iteration, repeating from there."
+    },
+    "tags": ["react", "execution-order"]
+  },
+  {
+    "id": "Q-D2-0010",
+    "domain": 2,
+    "task_statement": "2.1",
+    "type": "ordering",
+    "difficulty": "medium",
+    "theory_refs": ["TH-D2-002"],
+    "case_study_id": null,
+    "stem": "Order the following reasoning chains from LEAST grounded to MOST grounded in verified external information.",
+    "select_count": 3,
+    "options": [
+      { "key": "A", "text": "A chain that never checks any assumption against an external source" },
+      { "key": "B", "text": "A chain that checks its final answer against an external source once, at the very end" },
+      { "key": "C", "text": "A chain that checks each major assumption against an external source as it is introduced" }
+    ],
+    "correct": ["A", "B", "C"],
+    "explanation": {
+      "why_correct": "No grounding at all is least grounded; checking only the final answer catches some errors but allows earlier flawed assumptions to compound first; checking each assumption as it arises is most grounded, catching errors earliest.",
+      "why_incorrect": {},
+      "rule_of_thumb": "Grounding checks performed earlier and more frequently throughout a reasoning chain catch errors sooner than a single late check or no check at all."
+    },
+    "tags": ["grounding", "error-compounding"]
+  },
+  {
+    "id": "Q-D2-0011",
+    "domain": 2,
+    "task_statement": "2.1",
+    "type": "matching",
+    "difficulty": "medium",
+    "theory_refs": ["TH-D2-004"],
+    "case_study_id": null,
+    "stem": "Match each described agent behavior to the failure pattern it illustrates.",
+    "select_count": 3,
+    "matching": {
+      "left": [
+        { "key": "L1", "text": "The agent calls a similar tool with nearly identical queries repeatedly, with no progress" },
+        { "key": "L2", "text": "The agent's next thought disregards the content of the latest tool result entirely" },
+        { "key": "L3", "text": "The agent finalizes an answer before its gathered observations actually support it" }
+      ],
+      "right": [
+        { "key": "R1", "text": "Looping" },
+        { "key": "R2", "text": "Ignoring observations" },
+        { "key": "R3", "text": "Premature conclusion" }
+      ]
+    },
+    "correct_pairs": { "L1": "R1", "L2": "R2", "L3": "R3" },
+    "explanation": {
+      "why_correct": "Each behavior maps directly to its named failure pattern: repeated non-progressing cycles are looping, disregarding a tool result is ignoring observations, and finalizing before sufficient evidence is premature conclusion.",
+      "why_incorrect": {},
+      "rule_of_thumb": "Looping = repetition without progress; ignoring observations = disregarding a specific result; premature conclusion = answering before evidence supports it."
+    },
+    "tags": ["react", "failure-diagnosis"]
+  }
+]

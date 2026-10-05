@@ -1,0 +1,606 @@
+[
+  {
+    "id": "Q-D1-0201",
+    "domain": 1, "task_statement": "1.2", "type": "single_choice", "difficulty": "easy",
+    "theory_refs": ["TH-D1-006"], "case_study_id": null,
+    "stem": "A company wants to automatically analyze thousands of customer support chat transcripts to determine overall sentiment (positive, negative, neutral) and extract key phrases mentioned most often. Which AWS service is purpose-built for this?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Amazon Textract" },
+      { "key": "B", "text": "Amazon Rekognition" },
+      { "key": "C", "text": "Amazon Comprehend" },
+      { "key": "D", "text": "Amazon Polly" }
+    ],
+    "correct": ["C"],
+    "explanation": {
+      "why_correct": "Amazon Comprehend performs natural language processing on text, including sentiment analysis and key phrase extraction, which directly matches this scenario of analyzing chat transcript sentiment and common phrases.",
+      "why_incorrect": {
+        "A": "Amazon Textract extracts text and structured data from scanned documents and images via OCR; the chat transcripts here are already text, and the need is sentiment/phrase analysis, not extraction from images.",
+        "B": "Amazon Rekognition analyzes images and video; it has no capability to analyze the sentiment of text transcripts.",
+        "D": "Amazon Polly converts text to speech; it has no role in analyzing sentiment or extracting key phrases from text."
+      },
+      "rule_of_thumb": "Understand meaning of text you already have (sentiment, entities, key phrases) -> Comprehend."
+    },
+    "tags": ["comprehend", "nlp", "sentiment-analysis"]
+  },
+  {
+    "id": "Q-D1-0202",
+    "domain": 1, "task_statement": "1.2", "type": "single_choice", "difficulty": "easy",
+    "theory_refs": ["TH-D1-006"], "case_study_id": null,
+    "stem": "A security team wants to automatically moderate user-uploaded photos on a community platform, flagging any images containing explicit or violent content before they are published. Which AWS service is designed for this?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Amazon Comprehend" },
+      { "key": "B", "text": "Amazon Rekognition" },
+      { "key": "C", "text": "Amazon Transcribe" },
+      { "key": "D", "text": "Amazon Kendra" }
+    ],
+    "correct": ["B"],
+    "explanation": {
+      "why_correct": "Amazon Rekognition analyzes images and video for content moderation, including detecting explicit or violent content, which is exactly the capability this platform needs to screen user-uploaded photos.",
+      "why_incorrect": {
+        "A": "Amazon Comprehend analyzes text for sentiment and entities; it has no capability to analyze the visual content of images.",
+        "C": "Amazon Transcribe converts speech to text; it has no role in analyzing image content for moderation.",
+        "D": "Amazon Kendra is an enterprise search service for finding documents/answers; it has no image-moderation capability."
+      },
+      "rule_of_thumb": "Understand or moderate image/video content -> Rekognition, AWS's computer vision service."
+    },
+    "tags": ["rekognition", "content-moderation", "computer-vision"]
+  },
+  {
+    "id": "Q-D1-0203",
+    "domain": 1, "task_statement": "1.2", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D1-006"], "case_study_id": null,
+    "stem": "An accounting firm receives thousands of scanned paper invoices each month and wants to automatically extract the vendor name, invoice number, and total amount from each into a structured database. Which AWS service directly addresses this?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Amazon Rekognition" },
+      { "key": "B", "text": "Amazon Comprehend" },
+      { "key": "C", "text": "Amazon Polly" },
+      { "key": "D", "text": "Amazon Textract" }
+    ],
+    "correct": ["D"],
+    "explanation": {
+      "why_correct": "Amazon Textract extracts text and structured data, including forms and tables, from scanned documents and images using OCR, which directly matches the need to pull structured fields like vendor name and invoice number out of scanned invoices.",
+      "why_incorrect": {
+        "A": "Amazon Rekognition analyzes visual content like objects and faces in images; it does not extract structured text/data fields from documents.",
+        "B": "Amazon Comprehend analyzes the meaning of text you already have (sentiment, entities); it does not perform OCR extraction from scanned document images.",
+        "C": "Amazon Polly converts text to speech; it has no role in extracting data from scanned documents."
+      },
+      "rule_of_thumb": "Pull text/data out of a scanned document -> Textract, AWS's OCR and document-extraction service."
+    },
+    "tags": ["textract", "ocr", "document-processing"]
+  },
+  {
+    "id": "Q-D1-0204",
+    "domain": 1, "task_statement": "1.2", "type": "single_choice", "difficulty": "easy",
+    "theory_refs": ["TH-D1-006"], "case_study_id": null,
+    "stem": "A media company wants to automatically generate accurate closed captions for thousands of hours of recorded video content by converting the spoken audio into text. Which AWS service is designed for this?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Amazon Polly" },
+      { "key": "B", "text": "Amazon Transcribe" },
+      { "key": "C", "text": "Amazon Textract" },
+      { "key": "D", "text": "Amazon Comprehend" }
+    ],
+    "correct": ["B"],
+    "explanation": {
+      "why_correct": "Amazon Transcribe converts speech to text, which is exactly the capability needed to generate closed captions from recorded video's spoken audio.",
+      "why_incorrect": {
+        "A": "Amazon Polly converts text to speech, the opposite direction from what this scenario needs (converting audio to text).",
+        "C": "Amazon Textract extracts text from document images via OCR; it does not process spoken audio.",
+        "D": "Amazon Comprehend analyzes existing text for sentiment/entities; it does not convert audio into text in the first place."
+      },
+      "rule_of_thumb": "Audio to text -> Transcribe. Text to audio -> Polly. These are inverse operations, a frequently tested distinction."
+    },
+    "tags": ["transcribe", "speech-to-text", "captioning"]
+  },
+  {
+    "id": "Q-D1-0205",
+    "domain": 1, "task_statement": "1.2", "type": "single_choice", "difficulty": "easy",
+    "theory_refs": ["TH-D1-006"], "case_study_id": null,
+    "stem": "An e-learning platform wants to convert its written course scripts into natural-sounding narrated audio lessons for students who prefer listening over reading. Which AWS service fits this need?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Amazon Transcribe" },
+      { "key": "B", "text": "Amazon Comprehend" },
+      { "key": "C", "text": "Amazon Polly" },
+      { "key": "D", "text": "Amazon Rekognition" }
+    ],
+    "correct": ["C"],
+    "explanation": {
+      "why_correct": "Amazon Polly converts text into lifelike speech, which is exactly the capability needed to turn written course scripts into narrated audio lessons.",
+      "why_incorrect": {
+        "A": "Amazon Transcribe converts speech to text, the opposite direction from what this scenario needs (converting text to speech).",
+        "B": "Amazon Comprehend analyzes text for sentiment/entities; it does not generate audio from text.",
+        "D": "Amazon Rekognition analyzes images/video; it has no role in text-to-speech conversion."
+      },
+      "rule_of_thumb": "Text to audio -> Polly. Audio to text -> Transcribe. Keep the direction straight when a scenario names the source and target format."
+    },
+    "tags": ["polly", "text-to-speech"]
+  },
+  {
+    "id": "Q-D1-0206",
+    "domain": 1, "task_statement": "1.2", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D1-006", "TH-D1-007"], "case_study_id": null,
+    "stem": "An enterprise wants employees to be able to type a natural-language question, such as 'what is our current parental leave policy,' and receive a specific answer sourced from the company's internal HR document library, rather than a list of links to click through. Which AWS service is designed for this exact capability?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Amazon Comprehend" },
+      { "key": "B", "text": "Amazon Kendra" },
+      { "key": "C", "text": "Amazon Lex" },
+      { "key": "D", "text": "Amazon Personalize" }
+    ],
+    "correct": ["B"],
+    "explanation": {
+      "why_correct": "Amazon Kendra is an intelligent enterprise search service that finds specific answers, not just document links, across a large document corpus using natural language queries, which precisely matches this HR-policy-lookup scenario.",
+      "why_incorrect": {
+        "A": "Amazon Comprehend analyzes the content of text you already feed it (sentiment, entities); it does not search across a document corpus to answer natural-language questions.",
+        "C": "Amazon Lex builds conversational chatbot/voice interfaces; it is the conversational front end, not the search-and-retrieval engine over a document corpus that Kendra provides.",
+        "D": "Amazon Personalize generates personalized product/content recommendations; it has no role in answering natural-language questions from a document library."
+      },
+      "rule_of_thumb": "Search a knowledge base/company documents in natural language, returning specific answers -> Kendra."
+    },
+    "tags": ["kendra", "enterprise-search"]
+  },
+  {
+    "id": "Q-D1-0207",
+    "domain": 1, "task_statement": "1.2", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D1-007"], "case_study_id": null,
+    "stem": "A retail bank wants to build a conversational interface where customers can check their account balance or report a lost card by typing or speaking naturally, without navigating a phone menu. Which AWS service is purpose-built for this?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Amazon Kendra" },
+      { "key": "B", "text": "Amazon Lex" },
+      { "key": "C", "text": "Amazon Forecast" },
+      { "key": "D", "text": "Amazon Fraud Detector" }
+    ],
+    "correct": ["B"],
+    "explanation": {
+      "why_correct": "Amazon Lex builds conversational interfaces, including chatbots and voice bots, using natural language understanding, which is exactly the capability needed for customers to interact naturally about account balances or lost cards.",
+      "why_incorrect": {
+        "A": "Amazon Kendra is an enterprise search engine for finding documents/answers; it is not designed to power a conversational, multi-turn dialogue interface.",
+        "C": "Amazon Forecast produces time-series forecasts like inventory demand; it has no relevance to building a conversational banking interface.",
+        "D": "Amazon Fraud Detector identifies potentially fraudulent activity; it does not build conversational interfaces."
+      },
+      "rule_of_thumb": "Build a chatbot or voice bot -> Lex, the conversational-interface service."
+    },
+    "tags": ["lex", "chatbot", "conversational-ai"]
+  },
+  {
+    "id": "Q-D1-0208",
+    "domain": 1, "task_statement": "1.2", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D1-007"], "case_study_id": null,
+    "stem": "A streaming music service wants to suggest playlists tailored to each individual listener's history, similar to 'because you listened to this artist.' Which AWS service is designed for this exact use case?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Amazon Personalize" },
+      { "key": "B", "text": "Amazon Forecast" },
+      { "key": "C", "text": "Amazon Kendra" },
+      { "key": "D", "text": "Amazon Fraud Detector" }
+    ],
+    "correct": ["A"],
+    "explanation": {
+      "why_correct": "Amazon Personalize generates personalized product/content recommendations based on user behavior, which precisely matches suggesting tailored playlists based on a listener's individual history.",
+      "why_incorrect": {
+        "B": "Amazon Forecast produces time-series forecasts of numeric values like inventory demand, which is unrelated to matching individual users to personalized content.",
+        "C": "Amazon Kendra is an enterprise search engine for retrieving documents/answers, not for generating personalized recommendations based on behavior.",
+        "D": "Amazon Fraud Detector identifies potentially fraudulent activity; it has no relevance to music recommendations."
+      },
+      "rule_of_thumb": "Personalized product/content recommendations based on individual behavior -> Personalize."
+    },
+    "tags": ["personalize", "recommendations"]
+  },
+  {
+    "id": "Q-D1-0209",
+    "domain": 1, "task_statement": "1.2", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D1-007"], "case_study_id": null,
+    "stem": "A warehouse operator wants to predict how many units of each product it will need to have in stock for each of the next 6 months, based on several years of historical sales and seasonal patterns. Which AWS service is purpose-built for this need?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Amazon Personalize" },
+      { "key": "B", "text": "Amazon Forecast" },
+      { "key": "C", "text": "Amazon Lex" },
+      { "key": "D", "text": "Amazon Comprehend" }
+    ],
+    "correct": ["B"],
+    "explanation": {
+      "why_correct": "Amazon Forecast produces time-series forecasts, such as inventory demand, which is exactly the capability needed to predict future monthly stock requirements based on historical sales patterns.",
+      "why_incorrect": {
+        "A": "Amazon Personalize matches individual users to items they're likely to want; it does not forecast aggregate future inventory needs over time.",
+        "C": "Amazon Lex builds conversational interfaces; it has no forecasting capability.",
+        "D": "Amazon Comprehend analyzes text for sentiment/entities; it has no role in numeric time-series forecasting."
+      },
+      "rule_of_thumb": "Predict future numeric time-series values, such as inventory demand -> Forecast."
+    },
+    "tags": ["forecast", "demand-forecasting"]
+  },
+  {
+    "id": "Q-D1-0210",
+    "domain": 1, "task_statement": "1.2", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D1-007"], "case_study_id": null,
+    "stem": "A payments company wants to automatically flag online transactions that show patterns consistent with historical fraud, using a purpose-built ML service trained on labeled fraud data rather than building its own model from scratch. Which AWS service directly fits this need?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Amazon Fraud Detector" },
+      { "key": "B", "text": "Amazon Forecast" },
+      { "key": "C", "text": "Amazon Kendra" },
+      { "key": "D", "text": "Amazon Personalize" }
+    ],
+    "correct": ["A"],
+    "explanation": {
+      "why_correct": "Amazon Fraud Detector is purpose-built to identify potentially fraudulent activity such as online payment fraud, using ML models trained on historical fraud patterns, which directly matches this scenario.",
+      "why_incorrect": {
+        "B": "Amazon Forecast predicts future numeric time-series values like demand; it is not designed for fraud detection.",
+        "C": "Amazon Kendra is an enterprise search service; it has no fraud-detection capability.",
+        "D": "Amazon Personalize generates personalized recommendations; it is not purpose-built for fraud detection."
+      },
+      "rule_of_thumb": "Detect fraud using a purpose-built managed service trained on historical fraud data -> Fraud Detector."
+    },
+    "tags": ["fraud-detector", "fraud-detection"]
+  },
+  {
+    "id": "Q-D1-0211",
+    "domain": 1, "task_statement": "1.2", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D1-008"], "case_study_id": null,
+    "stem": "A global news outlet wants to automatically translate its articles from English into Spanish, French, and Japanese for international readers, in near real time as articles are published. Which AWS service is designed for this?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Amazon Comprehend" },
+      { "key": "B", "text": "Amazon Transcribe" },
+      { "key": "C", "text": "Amazon Translate" },
+      { "key": "D", "text": "Amazon Polly" }
+    ],
+    "correct": ["C"],
+    "explanation": {
+      "why_correct": "Amazon Translate performs neural machine translation between languages, supporting real-time and batch translation, which directly matches the need to translate articles into multiple languages as they are published.",
+      "why_incorrect": {
+        "A": "Amazon Comprehend analyzes text for sentiment/entities; it does not perform language translation.",
+        "B": "Amazon Transcribe converts speech to text; it has no translation capability between written languages.",
+        "D": "Amazon Polly converts text to speech; it does not translate content between languages."
+      },
+      "rule_of_thumb": "Translate language A to language B -> Amazon Translate."
+    },
+    "tags": ["translate", "language-translation"]
+  },
+  {
+    "id": "Q-D1-0212",
+    "domain": 1, "task_statement": "1.2", "type": "single_choice", "difficulty": "hard",
+    "theory_refs": ["TH-D1-008"], "case_study_id": null,
+    "stem": "An insurance company wants to automate processing thousands of incoming claim forms: extracting the fields, classifying claim type, and routing low-confidence extractions to a human reviewer before final entry into the claims system. Which description best characterizes the overall solution?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "A single Amazon Rekognition deployment handling extraction, classification, and human review together" },
+      { "key": "B", "text": "An intelligent document processing (IDP) pattern combining Textract for extraction, Comprehend for classification/entity understanding, and A2I for human review of low-confidence cases" },
+      { "key": "C", "text": "Amazon Polly alone, since claim forms are text-based documents" },
+      { "key": "D", "text": "Amazon Forecast alone, since claims volume changes over time" }
+    ],
+    "correct": ["B"],
+    "explanation": {
+      "why_correct": "This scenario requires several distinct capabilities working together — OCR/extraction, text classification/entity understanding, and human review for uncertain cases — which is exactly the intelligent document processing (IDP) pattern: Textract for extraction, Comprehend for classification/understanding, and A2I for human review of low-confidence predictions.",
+      "why_incorrect": {
+        "A": "Amazon Rekognition analyzes images/video content like objects and faces; it does not extract structured text fields or classify claim types from documents.",
+        "C": "Amazon Polly converts text to speech; it has no role in extracting or classifying document content.",
+        "D": "Amazon Forecast predicts future numeric time-series values; it is unrelated to processing the content of individual claim forms."
+      },
+      "rule_of_thumb": "Automate extracting and classifying data from unstructured documents like claims -> the IDP pattern (Textract + Comprehend + A2I working together), not a single isolated service."
+    },
+    "tags": ["idp", "textract", "comprehend", "a2i", "document-processing"]
+  },
+  {
+    "id": "Q-D1-0213",
+    "domain": 1, "task_statement": "1.2", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D1-008"], "case_study_id": null,
+    "stem": "A hospital network wants to automatically extract structured information — diagnoses, medications, and dosages — from unstructured physician notes, and needs the service to correctly understand medical terminology that a general-purpose NLP service would likely mishandle. Which AWS service is purpose-built for this?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Amazon Comprehend Medical" },
+      { "key": "B", "text": "Amazon Comprehend (general)" },
+      { "key": "C", "text": "Amazon Kendra" },
+      { "key": "D", "text": "Amazon Textract (general)" }
+    ],
+    "correct": ["A"],
+    "explanation": {
+      "why_correct": "Amazon Comprehend Medical is specifically tuned to extract structured medical information such as diagnoses, medications, and dosages from unstructured clinical text, addressing exactly the medical-terminology accuracy concern in this scenario.",
+      "why_incorrect": {
+        "B": "General-purpose Amazon Comprehend is not tuned for medical vocabulary and would likely underperform on clinical terminology compared to the Medical-specific variant, which the scenario explicitly warns against.",
+        "C": "Amazon Kendra is an enterprise search service; it does not extract structured medical entities from clinical text.",
+        "D": "General Amazon Textract performs OCR/extraction from document images, but does not itself understand medical terminology at the entity level the way Comprehend Medical does."
+      },
+      "rule_of_thumb": "Clinical/medical text specifically -> the '...Medical' variant of the relevant service (Comprehend Medical, Transcribe Medical), since general models under-perform on medical vocabulary."
+    },
+    "tags": ["comprehend-medical", "healthcare-ai"]
+  },
+  {
+    "id": "Q-D1-0214",
+    "domain": 1, "task_statement": "1.2", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D1-009"], "case_study_id": null,
+    "stem": "A team is building a labeled dataset for a new image classification model and needs a crowdsourced marketplace of human workers to review and label thousands of raw training images before any model exists. Which AWS service is most directly designed for this pre-training labeling task?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Amazon Augmented AI (A2I)" },
+      { "key": "B", "text": "Amazon Mechanical Turk" },
+      { "key": "C", "text": "Amazon SageMaker Model Monitor" },
+      { "key": "D", "text": "Amazon SageMaker Clarify" }
+    ],
+    "correct": ["B"],
+    "explanation": {
+      "why_correct": "Amazon Mechanical Turk is a crowdsourcing marketplace where human workers complete discrete tasks such as data labeling, which is exactly the pre-training labeling need described: reviewing and labeling raw training images before any model exists.",
+      "why_incorrect": {
+        "A": "Amazon Augmented AI (A2I) adds human review to live ML predictions at inference time, after a model already exists — this scenario is about labeling data before training, a different stage.",
+        "C": "SageMaker Model Monitor detects drift in a deployed model's inputs/predictions; it has no role in pre-training data labeling.",
+        "D": "SageMaker Clarify detects bias and explains predictions for trained models; it does not perform data labeling."
+      },
+      "rule_of_thumb": "Need humans to label or verify training data before a model exists -> MTurk (or SageMaker Ground Truth). Need humans to review a live model's predictions -> A2I."
+    },
+    "tags": ["mechanical-turk", "data-labeling", "human-in-the-loop"]
+  },
+  {
+    "id": "Q-D1-0215",
+    "domain": 1, "task_statement": "1.2", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D1-009"], "case_study_id": null,
+    "stem": "A company has a deployed fraud-detection model in production and wants low-confidence fraud predictions automatically routed to a human analyst for review before any account action is taken. Which AWS service directly supports this workflow?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Amazon Mechanical Turk" },
+      { "key": "B", "text": "Amazon SageMaker Ground Truth" },
+      { "key": "C", "text": "Amazon Augmented AI (A2I)" },
+      { "key": "D", "text": "AWS Data Exchange" }
+    ],
+    "correct": ["C"],
+    "explanation": {
+      "why_correct": "Amazon Augmented AI (A2I) is specifically designed to route low-confidence ML predictions at inference time to human reviewers so their judgment can confirm or override the model's output before it is acted upon, which precisely matches this live production review workflow.",
+      "why_incorrect": {
+        "A": "Amazon Mechanical Turk is a general crowdsourcing marketplace typically used to label training data before a model exists, not to review specific live inference predictions in a structured workflow.",
+        "B": "Amazon SageMaker Ground Truth builds labeled training datasets pre-training; it is not designed for reviewing live production predictions.",
+        "D": "AWS Data Exchange provides access to third-party datasets; it has no role in human review of live model predictions."
+      },
+      "rule_of_thumb": "Need humans to double-check a live model's low-confidence predictions in production -> A2I."
+    },
+    "tags": ["a2i", "human-in-the-loop", "responsible-ai"]
+  },
+  {
+    "id": "Q-D1-0216",
+    "domain": 1, "task_statement": "1.2", "type": "single_choice", "difficulty": "hard",
+    "theory_refs": ["TH-D1-010"], "case_study_id": null,
+    "stem": "A company is training a very large foundation model from scratch and wants to minimize training cost while maximizing cost-efficiency for that specific workload, using AWS's own purpose-built silicon rather than general-purpose GPUs. Which hardware option is most directly designed for this need?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "AWS Inferentia" },
+      { "key": "B", "text": "AWS Trainium" },
+      { "key": "C", "text": "Graviton-based EC2 instances" },
+      { "key": "D", "text": "Standard general-purpose EC2 instances with no accelerator" }
+    ],
+    "correct": ["B"],
+    "explanation": {
+      "why_correct": "AWS Trainium is AWS's own silicon purpose-built specifically for high-performance, cost-efficient model training at scale, directly matching this scenario's need to train a large foundation model from scratch while controlling cost.",
+      "why_incorrect": {
+        "A": "AWS Inferentia is purpose-built for high-throughput, low-cost inference, not training, so it does not fit a training-focused requirement.",
+        "C": "Graviton-based instances are general-purpose, energy-efficient ARM instances best suited to lightweight inference workloads, not large-scale foundation model training.",
+        "D": "Standard general-purpose EC2 instances with no accelerator lack the specialized hardware needed for efficient large-scale deep learning training."
+      },
+      "rule_of_thumb": "Training large models at scale, cost matters -> Trainium. High-throughput inference, cost matters -> Inferentia."
+    },
+    "tags": ["trainium", "ai-hardware", "cost-optimization"]
+  },
+  {
+    "id": "Q-D1-0217",
+    "domain": 1, "task_statement": "1.2", "type": "single_choice", "difficulty": "hard",
+    "theory_refs": ["TH-D1-010"], "case_study_id": null,
+    "stem": "A company has a deployed deep learning model that needs to serve millions of inference requests per day as cheaply as possible, and is choosing between AWS's purpose-built accelerator families. Which hardware option is specifically designed to optimize this high-throughput inference cost?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "AWS Trainium" },
+      { "key": "B", "text": "P4/P5 GPU instances used exclusively for training" },
+      { "key": "C", "text": "AWS Inferentia" },
+      { "key": "D", "text": "On-premises hardware with no cloud involvement" }
+    ],
+    "correct": ["C"],
+    "explanation": {
+      "why_correct": "AWS Inferentia is purpose-built specifically for high-throughput, low-cost inference, which directly matches this scenario's need to serve millions of inference requests per day as cost-efficiently as possible.",
+      "why_incorrect": {
+        "A": "AWS Trainium is purpose-built for cost-efficient training, not inference; it does not directly address a high-volume inference cost optimization need.",
+        "B": "P4/P5 instances used exclusively for training would not even be applicable to an inference-serving requirement, and are also a higher-cost general-purpose GPU tier rather than the purpose-built inference accelerator.",
+        "D": "The scenario is framed around AWS hardware options; on-premises hardware is outside the scope of the AWS purpose-built accelerator comparison being asked about."
+      },
+      "rule_of_thumb": "High-throughput inference, cost matters -> Inferentia, AWS's purpose-built inference silicon."
+    },
+    "tags": ["inferentia", "ai-hardware", "cost-optimization"]
+  },
+  {
+    "id": "Q-D1-0218",
+    "domain": 1, "task_statement": "1.2", "type": "multi_response", "difficulty": "medium",
+    "theory_refs": ["TH-D1-006"], "case_study_id": null,
+    "stem": "A company is reviewing its AWS AI services for various use cases. Which TWO of the following service-to-use-case pairings are correct?",
+    "select_count": 2,
+    "options": [
+      { "key": "A", "text": "Amazon Rekognition for detecting inappropriate content in uploaded video clips" },
+      { "key": "B", "text": "Amazon Textract for analyzing the sentiment of customer support emails" },
+      { "key": "C", "text": "Amazon Comprehend for extracting key phrases and entities from product reviews" },
+      { "key": "D", "text": "Amazon Polly for converting scanned invoices into structured data" }
+    ],
+    "correct": ["A", "C"],
+    "explanation": {
+      "why_correct": "Amazon Rekognition is correctly matched to content moderation of video/images, and Amazon Comprehend is correctly matched to extracting key phrases and entities from text, both accurate service-to-use-case pairings.",
+      "why_incorrect": {
+        "B": "Amazon Textract extracts text/data from scanned document images via OCR; it does not analyze sentiment. Sentiment analysis of text is Comprehend's job, not Textract's.",
+        "D": "Amazon Polly converts text to speech; it does not extract structured data from scanned invoices. That extraction task is Textract's job, not Polly's."
+      },
+      "rule_of_thumb": "Understand meaning of text you already have -> Comprehend. Understand an image/video -> Rekognition. Pull text/data out of a scanned document -> Textract. Text to audio -> Polly."
+    },
+    "tags": ["comprehend", "rekognition", "textract", "polly", "service-mapping"]
+  },
+  {
+    "id": "Q-D1-0219",
+    "domain": 1, "task_statement": "1.2", "type": "multi_response", "difficulty": "medium",
+    "theory_refs": ["TH-D1-007"], "case_study_id": null,
+    "stem": "Which TWO of the following statements about AWS managed AI services are accurate?",
+    "select_count": 2,
+    "options": [
+      { "key": "A", "text": "Amazon Kendra returns specific answers from a document corpus using natural language queries, not just a list of links." },
+      { "key": "B", "text": "Amazon Personalize is designed primarily to predict aggregate future demand over a time series." },
+      { "key": "C", "text": "Amazon Forecast is designed primarily to predict future numeric values along a time-ordered series." },
+      { "key": "D", "text": "Amazon Fraud Detector is a general-purpose recommendation engine adaptable to any use case." }
+    ],
+    "correct": ["A", "C"],
+    "explanation": {
+      "why_correct": "Amazon Kendra does return specific natural-language answers from a document corpus rather than only links, and Amazon Forecast is indeed designed to predict future numeric time-series values, both accurate descriptions.",
+      "why_incorrect": {
+        "B": "Amazon Personalize is designed for matching individual users to items they are likely to want (recommendations), not for aggregate time-series demand forecasting — that is Forecast's role.",
+        "D": "Amazon Fraud Detector is purpose-built specifically for fraud detection using historical fraud-labeled data, not a general-purpose recommendation engine for arbitrary use cases."
+      },
+      "rule_of_thumb": "Personalize: 'what would this specific user want next.' Forecast: 'what will this time series look like in the future.' Fraud Detector: purpose-built for fraud, not general recommendations."
+    },
+    "tags": ["kendra", "personalize", "forecast", "fraud-detector", "service-mapping"]
+  },
+  {
+    "id": "Q-D1-0220",
+    "domain": 1, "task_statement": "1.2", "type": "matching", "difficulty": "medium",
+    "theory_refs": ["TH-D1-006"], "case_study_id": null,
+    "stem": "Match each AWS managed AI service on the left with the use case on the right that it is purpose-built for.",
+    "select_count": 5,
+    "matching": {
+      "left": [
+        { "key": "L1", "text": "Amazon Comprehend" },
+        { "key": "L2", "text": "Amazon Rekognition" },
+        { "key": "L3", "text": "Amazon Textract" },
+        { "key": "L4", "text": "Amazon Transcribe" },
+        { "key": "L5", "text": "Amazon Polly" }
+      ],
+      "right": [
+        { "key": "R1", "text": "Extracting sentiment and key phrases from customer feedback text" },
+        { "key": "R2", "text": "Detecting objects and moderating content in uploaded photos" },
+        { "key": "R3", "text": "Extracting structured fields and tables from scanned tax forms" },
+        { "key": "R4", "text": "Converting recorded customer service calls into text transcripts" },
+        { "key": "R5", "text": "Converting a written article into a natural-sounding narrated audio clip" }
+      ]
+    },
+    "correct_pairs": { "L1": "R1", "L2": "R2", "L3": "R3", "L4": "R4", "L5": "R5" },
+    "explanation": {
+      "why_correct": "Comprehend analyzes text for sentiment/key phrases (R1). Rekognition analyzes images for objects and moderation (R2). Textract extracts structured data from document images (R3). Transcribe converts speech to text (R4). Polly converts text to speech (R5).",
+      "why_incorrect": {},
+      "rule_of_thumb": "Understand text -> Comprehend. Understand images -> Rekognition. Extract from documents -> Textract. Speech to text -> Transcribe. Text to speech -> Polly."
+    },
+    "tags": ["comprehend", "rekognition", "textract", "transcribe", "polly", "service-mapping"]
+  },
+  {
+    "id": "Q-D1-0221",
+    "domain": 1, "task_statement": "1.2", "type": "matching", "difficulty": "medium",
+    "theory_refs": ["TH-D1-007"], "case_study_id": null,
+    "stem": "Match each AWS conversational, search, or predictive service on the left with the specific business use case on the right that it is purpose-built for.",
+    "select_count": 4,
+    "matching": {
+      "left": [
+        { "key": "L1", "text": "Amazon Lex" },
+        { "key": "L2", "text": "Amazon Kendra" },
+        { "key": "L3", "text": "Amazon Personalize" },
+        { "key": "L4", "text": "Amazon Fraud Detector" }
+      ],
+      "right": [
+        { "key": "R1", "text": "Building a voice-enabled chatbot for customer service" },
+        { "key": "R2", "text": "Answering natural-language questions from an internal knowledge base" },
+        { "key": "R3", "text": "Recommending products tailored to an individual shopper's browsing history" },
+        { "key": "R4", "text": "Flagging online transactions that match known fraud patterns" }
+      ]
+    },
+    "correct_pairs": { "L1": "R1", "L2": "R2", "L3": "R3", "L4": "R4" },
+    "explanation": {
+      "why_correct": "Lex builds the conversational chatbot interface (R1). Kendra answers natural-language questions from a document corpus (R2). Personalize generates individualized product recommendations (R3). Fraud Detector flags transactions matching fraud patterns (R4).",
+      "why_incorrect": {},
+      "rule_of_thumb": "Build a chatbot -> Lex. Enterprise search with specific answers -> Kendra. Personalized recommendations -> Personalize. Fraud detection -> Fraud Detector."
+    },
+    "tags": ["lex", "kendra", "personalize", "fraud-detector", "service-mapping"]
+  },
+  {
+    "id": "Q-D1-0222",
+    "domain": 1, "task_statement": "1.2", "type": "ordering", "difficulty": "hard",
+    "theory_refs": ["TH-D1-008"], "case_study_id": null,
+    "stem": "A company is implementing an intelligent document processing (IDP) workflow for incoming insurance claim forms. Arrange the following steps in the order they would typically occur, from first to last.",
+    "select_count": 4,
+    "options": [
+      { "key": "A", "text": "Use Amazon Textract to extract raw text and structured fields (like claim number and amount) from the scanned form image" },
+      { "key": "B", "text": "Use Amazon Comprehend to classify the claim type and extract relevant entities from the extracted text" },
+      { "key": "C", "text": "Route any low-confidence extractions or classifications to a human reviewer via Amazon Augmented AI (A2I)" },
+      { "key": "D", "text": "Load the final validated, structured claim data into the claims-processing database" }
+    ],
+    "correct": ["A", "B", "C", "D"],
+    "explanation": {
+      "why_correct": "The IDP pattern starts with extracting raw text/fields from the document image using Textract (A), then classifies and extracts entities from that text using Comprehend (B), then routes uncertain results to human review via A2I (C), and finally loads the validated data into the target system (D). Each step depends on the output of the one before it.",
+      "why_incorrect": {},
+      "rule_of_thumb": "IDP composition order: Textract extracts, Comprehend understands/classifies, A2I catches low-confidence cases for human review, then the validated result is used downstream."
+    },
+    "tags": ["idp", "textract", "comprehend", "a2i", "ordering"]
+  },
+  {
+    "id": "Q-D1-0223",
+    "domain": 1, "task_statement": "1.2", "type": "single_choice", "difficulty": "easy",
+    "theory_refs": ["TH-D1-006"], "case_study_id": null,
+    "stem": "A company wants to detect personally identifiable information (PII), such as names and phone numbers, embedded within customer support ticket text, as part of an automated redaction workflow. Which AWS service supports this directly?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Amazon Textract" },
+      { "key": "B", "text": "Amazon Rekognition" },
+      { "key": "C", "text": "Amazon Comprehend" },
+      { "key": "D", "text": "Amazon Forecast" }
+    ],
+    "correct": ["C"],
+    "explanation": {
+      "why_correct": "Amazon Comprehend includes PII detection as part of its natural language processing capabilities, directly supporting the need to identify PII entities like names and phone numbers embedded in text for a redaction workflow.",
+      "why_incorrect": {
+        "A": "Amazon Textract extracts text/data from document images via OCR; while it can extract text containing PII, PII entity detection within text content is specifically Comprehend's capability.",
+        "B": "Amazon Rekognition analyzes images/video; it has no text-based PII detection capability.",
+        "D": "Amazon Forecast predicts future numeric time-series values; it has no relevance to PII detection in text."
+      },
+      "rule_of_thumb": "Understand meaning of text you already have, including detecting PII entities -> Comprehend."
+    },
+    "tags": ["comprehend", "pii-detection"]
+  },
+  {
+    "id": "Q-D1-0224",
+    "domain": 1, "task_statement": "1.2", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D1-006"], "case_study_id": null,
+    "stem": "A retail chain wants to compare a photo of a person at a self-checkout kiosk against a photo on file to verify identity for age-restricted purchases. Which AWS service capability directly supports this facial comparison use case?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Amazon Rekognition facial comparison" },
+      { "key": "B", "text": "Amazon Comprehend entity recognition" },
+      { "key": "C", "text": "Amazon Textract table extraction" },
+      { "key": "D", "text": "Amazon Translate" }
+    ],
+    "correct": ["A"],
+    "explanation": {
+      "why_correct": "Amazon Rekognition includes facial comparison and analysis capabilities specifically designed for comparing faces across images, directly matching this identity-verification use case.",
+      "why_incorrect": {
+        "B": "Amazon Comprehend's entity recognition works on text, not on comparing faces in images.",
+        "C": "Amazon Textract's table extraction pulls structured data from document images; it has no facial-comparison capability.",
+        "D": "Amazon Translate performs language translation; it has no relevance to facial comparison."
+      },
+      "rule_of_thumb": "Understand an image/video, including facial comparison and analysis -> Rekognition."
+    },
+    "tags": ["rekognition", "facial-comparison"]
+  },
+  {
+    "id": "Q-D1-0225",
+    "domain": 1, "task_statement": "1.2", "type": "single_choice", "difficulty": "hard",
+    "theory_refs": ["TH-D1-009", "TH-D1-006"], "case_study_id": null,
+    "stem": "A company deploys a document-classification model that occasionally produces low-confidence predictions on ambiguous documents. It wants those specific low-confidence cases reviewed by a human before the classification is finalized, while continuing to auto-process high-confidence cases without any human involvement. Which AWS capability most directly supports this selective review workflow?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Amazon Textract used alone, with no other service" },
+      { "key": "B", "text": "Amazon Augmented AI (A2I), configured to route only low-confidence predictions to human reviewers" },
+      { "key": "C", "text": "Amazon Mechanical Turk, used to manually process every single document regardless of confidence" },
+      { "key": "D", "text": "Amazon Comprehend used alone, with no human review step at all" }
+    ],
+    "correct": ["B"],
+    "explanation": {
+      "why_correct": "Amazon Augmented AI (A2I) is specifically designed to route low-confidence predictions (or a configured sample) to human reviewers at inference time, while letting high-confidence predictions proceed automatically — exactly the selective review workflow described.",
+      "why_incorrect": {
+        "A": "Amazon Textract alone only extracts text/data from documents; it has no mechanism for confidence-based routing to human review.",
+        "C": "Using Mechanical Turk to review every single document regardless of confidence defeats the purpose of a selective, confidence-based review workflow, and is a much less efficient approach than A2I's targeted routing.",
+        "D": "Using Comprehend alone with no human review step provides no safety net for ambiguous, low-confidence cases at all."
+      },
+      "rule_of_thumb": "Need humans to double-check a live model's low-confidence predictions in production, while high-confidence cases proceed automatically -> A2I."
+    },
+    "tags": ["a2i", "human-in-the-loop", "responsible-ai"]
+  }
+]

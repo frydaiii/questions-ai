@@ -1,0 +1,532 @@
+[
+  {
+    "id": "TH-D1-001",
+    "domain": 1,
+    "task_statements": ["1.1"],
+    "title": "AI vs. machine learning vs. deep learning vs. generative AI",
+    "summary": "These four terms describe nested subsets, not competing technologies. Artificial intelligence (AI) is the broadest field: any system that performs tasks normally requiring human intelligence. Machine learning (ML) is a subset of AI in which systems learn patterns from data rather than following hand-written rules. Deep learning (DL) is a subset of ML that uses multi-layer neural networks, well suited to unstructured data such as images, audio, and text. Generative AI is a subset of deep learning, typically built on foundation models, that creates new content (text, images, audio, code) rather than only classifying or predicting on existing data.",
+    "key_points": [
+      "AI is the outer set; ML, DL, and generative AI are each progressively narrower subsets inside it.",
+      "ML replaces hand-coded rules with patterns learned from labeled or unlabeled data.",
+      "Deep learning specifically means multi-layer neural networks; it is the technique behind most modern computer vision and NLP.",
+      "Generative AI produces new output (text, images, audio) and is usually powered by large, pre-trained foundation models.",
+      "A rules engine that only follows if/then logic written by a human is AI but is NOT machine learning, because it never learns from data."
+    ],
+    "rule_of_thumb": "Ask 'does it learn from data, or just follow rules a person wrote?' If it learns from data, it's ML. If it also produces novel content, it's generative AI. If it uses many-layered neural networks on unstructured data, it's deep learning.",
+    "common_confusions": [
+      "Treating a rules-based expert system as machine learning just because it is described as 'AI' — rule engines with no learning step are AI but not ML.",
+      "Assuming all deep learning is generative — a CNN used only for image classification is deep learning but not generative AI, since it classifies rather than creates new content."
+    ],
+    "aws_services": ["Amazon Bedrock", "Amazon SageMaker", "Amazon Rekognition"],
+    "references": [
+      "https://aws.amazon.com/what-is/artificial-intelligence/",
+      "https://aws.amazon.com/what-is/machine-learning/"
+    ]
+  },
+  {
+    "id": "TH-D1-002",
+    "domain": 1,
+    "task_statements": ["1.1"],
+    "title": "Supervised, unsupervised, semi-supervised, self-supervised, and reinforcement learning",
+    "summary": "These are the five major ML training paradigms, distinguished by what kind of feedback signal the model learns from. Supervised learning trains on labeled input-output pairs to predict a target (classification or regression). Unsupervised learning finds structure in unlabeled data, such as clustering or dimensionality reduction, with no target label at all. Semi-supervised learning combines a small labeled set with a much larger unlabeled set. Self-supervised learning generates its own labels from the structure of the data itself (for example, predicting a masked word from surrounding text), which is how most large language models are pre-trained. Reinforcement learning (RL) trains an agent to take actions in an environment to maximize a cumulative reward signal, learning through trial and error rather than from a fixed dataset.",
+    "key_points": [
+      "Supervised learning needs labeled data and predicts a known target (e.g. spam/not spam).",
+      "Unsupervised learning needs no labels and discovers structure (e.g. customer segmentation via clustering).",
+      "Self-supervised learning creates its own training signal from raw data, which is how foundation models learn language structure at scale without human labeling.",
+      "Reinforcement learning optimizes for a reward over a sequence of actions, common in robotics, games, and RLHF for aligning generative models.",
+      "AWS DeepRacer is an AWS-branded example of reinforcement learning in practice."
+    ],
+    "rule_of_thumb": "Has labels for every example? Supervised. No labels at all, looking for structure? Unsupervised. A little labeled data plus a lot of unlabeled data? Semi-supervised. Labels generated automatically from the data's own structure? Self-supervised. Learning via trial-and-error reward signals over time? Reinforcement learning.",
+    "common_confusions": [
+      "Confusing unsupervised learning with reinforcement learning — unsupervised learning has no reward signal or sequential actions; it simply finds patterns in static unlabeled data.",
+      "Assuming LLM pre-training is supervised learning because it 'predicts the next word' — it is self-supervised, since the labels (the next word) come from the data itself, not from human annotation."
+    ],
+    "aws_services": ["Amazon SageMaker Ground Truth", "AWS DeepRacer", "Amazon SageMaker"],
+    "references": [
+      "https://aws.amazon.com/what-is/machine-learning/",
+      "https://docs.aws.amazon.com/sagemaker/latest/dg/whatis.html"
+    ]
+  },
+  {
+    "id": "TH-D1-003",
+    "domain": 1,
+    "task_statements": ["1.1"],
+    "title": "Common ML problem types: classification, regression, clustering, anomaly detection, recommendation, forecasting",
+    "summary": "AWS expects candidates to map a plain-English business scenario to the correct ML problem type. Classification predicts a discrete category (e.g. 'will this customer churn: yes/no'). Regression predicts a continuous numeric value (e.g. 'what will this house sell for'). Clustering groups similar unlabeled items together without predefined categories (e.g. customer segments). Anomaly detection flags data points that deviate from a learned norm (e.g. fraud or equipment failure). Recommendation predicts which items a user is likely to want, based on past behavior or similar users. Forecasting predicts future values of a time-ordered series (e.g. next month's demand).",
+    "key_points": [
+      "Classification: discrete category output. Regression: continuous numeric output. These are the two most commonly confused problem types on the exam.",
+      "Clustering has no labels and no predefined categories — the algorithm discovers the groupings itself.",
+      "Anomaly detection is about identifying rare or unusual patterns relative to a learned baseline, not about predicting a specific category or value.",
+      "Recommendation systems predict user-item affinity; forecasting predicts a value forward in time along a sequence.",
+      "The exam often gives a business scenario and asks which problem type it maps to, rather than asking for a definition directly."
+    ],
+    "rule_of_thumb": "'Yes/no' or 'which category' -> classification. 'How much' or 'what number' -> regression. 'Group similar things with no predefined labels' -> clustering. 'Is this unusual' -> anomaly detection. 'What will they want next' -> recommendation. 'What will this be next month' -> forecasting.",
+    "common_confusions": [
+      "Confusing classification and regression — predicting a customer's churn (yes/no) is classification; predicting a customer's lifetime spend in dollars is regression.",
+      "Confusing clustering with classification — clustering has no predefined categories at all, while classification assigns items to categories that were defined during training."
+    ],
+    "aws_services": ["Amazon SageMaker", "Amazon Forecast", "Amazon Personalize", "Amazon Fraud Detector"],
+    "references": [
+      "https://aws.amazon.com/what-is/machine-learning/",
+      "https://docs.aws.amazon.com/sagemaker/latest/dg/algos.html"
+    ]
+  },
+  {
+    "id": "TH-D1-004",
+    "domain": 1,
+    "task_statements": ["1.1"],
+    "title": "Bias-variance tradeoff, overfitting, and underfitting",
+    "summary": "A model that overfits has learned the training data too specifically, including its noise, and performs well on training data but poorly on new, unseen data (high variance). A model that underfits has not learned enough of the underlying pattern, performing poorly on both training and new data (high bias). The bias-variance tradeoff describes the balance between a model too simple to capture real patterns (bias) and a model too complex, memorizing noise instead of generalizing (variance). Common remedies for overfitting include using more or more diverse training data, simplifying the model, regularization, or early stopping. Common remedies for underfitting include training longer, adding more relevant features, or using a more complex model.",
+    "key_points": [
+      "Overfitting: great performance on training data, poor performance on new data (memorized noise, not patterns).",
+      "Underfitting: poor performance on both training and new data (the model hasn't learned enough).",
+      "High bias correlates with underfitting; high variance correlates with overfitting.",
+      "More diverse training data, regularization, and simpler models help fix overfitting; more training and richer features help fix underfitting.",
+      "A validation/test set (data the model never trained on) is how overfitting is actually detected — a large gap between training accuracy and validation accuracy is the classic signal."
+    ],
+    "rule_of_thumb": "Big gap between training performance and validation/test performance -> overfitting. Poor performance everywhere, even on training data -> underfitting.",
+    "common_confusions": [
+      "Assuming a model with very high training accuracy is automatically a 'good' model — if validation accuracy is much lower, that high training accuracy is a red flag for overfitting, not a strength.",
+      "Believing training for more epochs always improves a model — beyond a point, additional epochs on the same data increase the risk of overfitting rather than continuing to improve generalization."
+    ],
+    "aws_services": ["Amazon SageMaker", "Amazon SageMaker Automatic Model Tuning"],
+    "references": [
+      "https://docs.aws.amazon.com/sagemaker/latest/dg/model-tuning-explainability.html",
+      "https://aws.amazon.com/what-is/overfitting/"
+    ]
+  },
+  {
+    "id": "TH-D1-005",
+    "domain": 1,
+    "task_statements": ["1.1"],
+    "title": "Neural network architecture families: CNNs, RNNs, transformers, GANs, VAEs, diffusion models",
+    "summary": "Different neural network architectures are specialized for different data types and tasks. Convolutional neural networks (CNNs) excel at image data by learning spatial filters. Recurrent neural networks (RNNs), including LSTMs and GRUs, are designed for sequential data like time series or early language models, processing one step at a time while retaining memory of prior steps. Transformers process entire sequences at once using an attention mechanism, and are the architecture behind virtually all modern large language models (GPT, BERT, Claude, Titan). Generative adversarial networks (GANs) pair a generator and a discriminator competing against each other to produce realistic synthetic data, often images. Variational autoencoders (VAEs) learn a compressed latent representation of data and can generate new samples from that latent space. Diffusion models generate content by learning to reverse a gradual noising process, and power most modern image-generation systems.",
+    "key_points": [
+      "CNNs: spatial patterns in images (object detection, image classification).",
+      "RNNs/LSTMs/GRUs: sequential data processed step by step, largely superseded by transformers for language tasks but still relevant for some time-series and lightweight sequence tasks.",
+      "Transformers: attention-based, process full sequences in parallel, the backbone of virtually all modern LLMs.",
+      "GANs: generator vs. discriminator competition, strong at realistic image/video synthesis.",
+      "Diffusion models: denoise from random noise to a coherent output, dominant for text-to-image generation (e.g. Stable Diffusion)."
+    ],
+    "rule_of_thumb": "Images and spatial patterns -> CNN. Sequential/time-ordered data, older architecture -> RNN/LSTM. Modern large language models -> transformer. Photorealistic image generation via a noise-removal process -> diffusion. Two networks competing to produce realistic fakes -> GAN.",
+    "common_confusions": [
+      "Assuming all generative models are transformers — image-generation systems like Stable Diffusion and DALL-E are diffusion models, not transformer-only architectures, even though some also use transformer components internally.",
+      "Believing RNNs are obsolete for all sequence tasks — they are largely superseded by transformers for language, but the exam may still test recognition of RNNs/LSTMs as the 'older' sequential architecture."
+    ],
+    "aws_services": ["Amazon Bedrock", "Amazon SageMaker JumpStart", "Amazon Rekognition"],
+    "references": [
+      "https://aws.amazon.com/what-is/generative-ai/",
+      "https://aws.amazon.com/what-is/neural-network/"
+    ]
+  },
+  {
+    "id": "TH-D1-006",
+    "domain": 1,
+    "task_statements": ["1.2"],
+    "title": "Mapping AWS AI managed services to use cases: Comprehend, Rekognition, Textract, Transcribe, Polly",
+    "summary": "Amazon Comprehend performs natural language processing on text: sentiment analysis, key phrase extraction, entity recognition, and PII detection. Amazon Rekognition analyzes images and video for object/scene detection, facial analysis and comparison, and content moderation. Amazon Textract extracts text and structured data (forms, tables) from scanned documents and images using OCR. Amazon Transcribe converts speech to text, useful for captioning and call transcription. Amazon Polly converts text to lifelike speech. These five are the most frequently tested AWS managed AI services and are commonly paired as intentional distractors against each other.",
+    "key_points": [
+      "Comprehend: understands the meaning of existing text (sentiment, entities, PII, key phrases) — NLP on text you already have.",
+      "Rekognition: understands the content of images/video (objects, faces, moderation) — computer vision.",
+      "Textract: pulls text and structured data OUT of a document image (OCR) — the goal is extracting content, not understanding sentiment.",
+      "Transcribe: speech to text. Polly: text to speech. These are inverses of each other.",
+      "A scenario about 'analyzing customer feedback text for sentiment' is Comprehend; a scenario about 'digitizing scanned invoices into structured fields' is Textract."
+    ],
+    "rule_of_thumb": "Understand meaning of text you already have -> Comprehend. Understand an image/video -> Rekognition. Pull text/data out of a scanned document -> Textract. Audio to text -> Transcribe. Text to audio -> Polly.",
+    "common_confusions": [
+      "Confusing Comprehend and Kendra — Comprehend analyzes text you feed it (sentiment, entities); Kendra is an intelligent search engine that finds relevant documents/answers across a document corpus. A 'search across our knowledge base' scenario is Kendra, not Comprehend.",
+      "Confusing Rekognition and Textract — Rekognition understands visual content (objects, faces); Textract extracts textual/structured content from document images. A scanned W-2 form scenario is Textract, not Rekognition.",
+      "Confusing Transcribe and Polly — Transcribe converts speech to text (e.g. call center transcripts); Polly converts text to speech (e.g. voice-over generation). They are opposite directions."
+    ],
+    "aws_services": ["Amazon Comprehend", "Amazon Rekognition", "Amazon Textract", "Amazon Transcribe", "Amazon Polly"],
+    "references": [
+      "https://aws.amazon.com/comprehend/",
+      "https://aws.amazon.com/rekognition/",
+      "https://aws.amazon.com/textract/"
+    ]
+  },
+  {
+    "id": "TH-D1-007",
+    "domain": 1,
+    "task_statements": ["1.2"],
+    "title": "Mapping AWS AI managed services to use cases: Lex, Kendra, Personalize, Forecast, Fraud Detector",
+    "summary": "Amazon Lex builds conversational interfaces (chatbots and voice bots) using natural language understanding. Amazon Kendra is an intelligent enterprise search service that finds documents or specific answers across a large document corpus using natural language queries. Amazon Personalize generates personalized product/content recommendations based on user behavior, similar to 'customers who bought this also bought.' Amazon Forecast produces time-series forecasts, such as inventory demand or resource utilization. Amazon Fraud Detector identifies potentially fraudulent activity such as online payment fraud or fake account creation, using ML models trained on historical fraud patterns.",
+    "key_points": [
+      "Lex: conversational chatbot/voice bot interface (the 'front end' for a conversation).",
+      "Kendra: enterprise search across a document corpus, returning specific answers, not just links.",
+      "Personalize: 'what would this specific user want next' — personalized recommendations.",
+      "Forecast: 'what will this time series look like in the future' — demand, inventory, resource planning.",
+      "Fraud Detector: purpose-built for detecting fraudulent transactions/accounts using historical fraud-labeled data."
+    ],
+    "rule_of_thumb": "Build a chatbot -> Lex. Search a knowledge base/company documents in natural language -> Kendra. Personalized product recommendations -> Personalize. Predict future numeric time-series values -> Forecast. Detect fraud -> Fraud Detector.",
+    "common_confusions": [
+      "Confusing Kendra with Comprehend — Kendra searches and retrieves relevant documents/answers; Comprehend analyzes the content of text you already have (sentiment/entities), it does not search a corpus.",
+      "Confusing Personalize with Forecast — Personalize is about matching users to items (recommendations); Forecast is about predicting a numeric value over future time periods. A 'recommend a movie' scenario is Personalize; a 'predict next quarter's sales' scenario is Forecast."
+    ],
+    "aws_services": ["Amazon Lex", "Amazon Kendra", "Amazon Personalize", "Amazon Forecast", "Amazon Fraud Detector"],
+    "references": [
+      "https://aws.amazon.com/lex/",
+      "https://aws.amazon.com/kendra/",
+      "https://aws.amazon.com/personalize/"
+    ]
+  },
+  {
+    "id": "TH-D1-008",
+    "domain": 1,
+    "task_statements": ["1.2"],
+    "title": "Amazon Translate, intelligent document processing (IDP), and specialized healthcare AI services",
+    "summary": "Amazon Translate performs neural machine translation between languages, supporting real-time and batch translation for global applications. Intelligent Document Processing (IDP) is not a single service but a pattern that combines Textract (OCR/extraction), Comprehend (entity/sentiment understanding), and human review (A2I) to automate processing of unstructured documents such as invoices, contracts, and claims. Amazon Comprehend Medical and Amazon Transcribe Medical are healthcare-specialized variants that extract medical entities (conditions, medications, dosages) and transcribe clinical speech respectively, tuned for medical terminology and compliance-sensitive use cases.",
+    "key_points": [
+      "Amazon Translate: language-to-language translation, real-time or batch.",
+      "IDP is a multi-service pattern (Textract + Comprehend + A2I), not a single named product — the exam may ask you to recognize this composition.",
+      "Comprehend Medical: extracts structured medical information (diagnoses, medications, dosages) from unstructured clinical text.",
+      "Transcribe Medical: speech-to-text tuned for medical terminology, e.g. clinician dictation.",
+      "Healthcare-specific variants exist because general-purpose NLP/speech models are not tuned for medical vocabulary and accuracy requirements."
+    ],
+    "rule_of_thumb": "Translate language A to language B -> Amazon Translate. Automate extracting and classifying data from unstructured documents like invoices -> IDP pattern (Textract + Comprehend + A2I). Clinical/medical text or speech specifically -> the '...Medical' variant of the relevant service.",
+    "common_confusions": [
+      "Assuming a generic 'process these documents' business requirement calls for a single product — many real scenarios call for the IDP pattern (multiple services working together), not one isolated service.",
+      "Using general Comprehend or Transcribe for a medical use case when the scenario specifically involves clinical terminology — the Medical-specific variants exist precisely because general models under-perform on domain-specific medical vocabulary."
+    ],
+    "aws_services": ["Amazon Translate", "Amazon Comprehend Medical", "Amazon Transcribe Medical", "Amazon Textract", "Amazon Augmented AI (A2I)"],
+    "references": [
+      "https://aws.amazon.com/translate/",
+      "https://aws.amazon.com/comprehend/medical/"
+    ]
+  },
+  {
+    "id": "TH-D1-009",
+    "domain": 1,
+    "task_statements": ["1.2"],
+    "title": "Amazon Mechanical Turk and Amazon Augmented AI (A2I): human-in-the-loop at different stages",
+    "summary": "Amazon Mechanical Turk (MTurk) is a crowdsourcing marketplace where human workers complete discrete tasks such as data labeling, content moderation, or surveys, typically used to prepare or supplement training data before a model exists. Amazon Augmented AI (A2I) adds human review specifically to ML predictions at inference time, routing low-confidence predictions (or a random sample) to human reviewers so their judgment can override or confirm the model's output before it is acted on. The key distinction is timing and purpose: MTurk is generally used for building/labeling training data, while A2I is used for reviewing live model predictions in production.",
+    "key_points": [
+      "MTurk: a general crowdsourcing marketplace for human tasks, frequently used pre-training to generate or verify labeled training data.",
+      "A2I: human review integrated into a live inference workflow, typically for low-confidence predictions.",
+      "SageMaker Ground Truth (separate service) also uses human labelers, often via MTurk or a private workforce, specifically to build labeled training datasets — closely related to MTurk's role.",
+      "A2I is about catching and correcting individual production predictions the model isn't confident about, not about building datasets."
+    ],
+    "rule_of_thumb": "Need humans to label or verify training data before a model exists -> MTurk (or SageMaker Ground Truth). Need humans to double-check a live model's low-confidence predictions in production -> A2I.",
+    "common_confusions": [
+      "Confusing A2I with Ground Truth — Ground Truth is about creating labeled training datasets (pre-training); A2I is about reviewing live inference predictions in production (post-deployment).",
+      "Assuming human-in-the-loop only applies before training — A2I demonstrates that human oversight is also a legitimate, AWS-supported pattern at inference time for responsible AI."
+    ],
+    "aws_services": ["Amazon Mechanical Turk", "Amazon Augmented AI (A2I)", "Amazon SageMaker Ground Truth"],
+    "references": [
+      "https://aws.amazon.com/sagemaker/groundtruth/",
+      "https://aws.amazon.com/augmented-ai/"
+    ]
+  },
+  {
+    "id": "TH-D1-010",
+    "domain": 1,
+    "task_statements": ["1.2"],
+    "title": "AI hardware on AWS: general-purpose vs. purpose-built accelerators",
+    "summary": "General-purpose EC2 instances (such as Graviton-based ARM instances) can run lightweight ML inference cost-efficiently. GPU-based instances (such as the G5 and P4/P5 families, using NVIDIA GPUs) provide the raw parallel compute needed for training and running large deep learning models. AWS also offers purpose-built ML silicon: AWS Trainium is designed specifically for high-performance, cost-efficient model training, and AWS Inferentia is designed specifically for high-throughput, low-cost inference. Choosing the right hardware family is a cost/performance decision layered on top of the ML workload type (training vs. inference, model size, latency requirements).",
+    "key_points": [
+      "Graviton (ARM-based, e.g. C6g/M6g): general-purpose, energy-efficient, good for lighter inference workloads.",
+      "G5 (NVIDIA GPUs): graphics and general deep learning inference/training workloads.",
+      "P4/P5 (NVIDIA GPUs): high-performance training and large-scale inference, the highest raw compute tier.",
+      "AWS Trainium: AWS's own silicon purpose-built for training foundation models cost-efficiently at scale.",
+      "AWS Inferentia (e.g. Inf1/Inf2 instances): AWS's own silicon purpose-built for high-throughput, cost-efficient inference."
+    ],
+    "rule_of_thumb": "Training large models at scale, cost matters -> Trainium. High-throughput inference, cost matters -> Inferentia. Need maximum raw GPU compute for training or inference -> P4/P5 or G5. Lightweight, general-purpose, cost-sensitive -> Graviton.",
+    "common_confusions": [
+      "Assuming Trainium and Inferentia are interchangeable — Trainium targets training cost/performance, Inferentia targets inference cost/performance; they solve different problems in the ML lifecycle.",
+      "Defaulting to the biggest GPU instance for every workload — AWS's purpose-built chips (Trainium/Inferentia) are specifically positioned as more cost-efficient than general-purpose GPUs for their respective workload type."
+    ],
+    "aws_services": ["AWS Trainium", "AWS Inferentia", "Amazon EC2", "Amazon SageMaker"],
+    "references": [
+      "https://aws.amazon.com/machine-learning/trainium/",
+      "https://aws.amazon.com/machine-learning/inferentia/"
+    ]
+  },
+  {
+    "id": "TH-D1-011",
+    "domain": 1,
+    "task_statements": ["1.3"],
+    "title": "The 8-stage ML development lifecycle",
+    "summary": "AWS frames the ML development lifecycle as a repeatable sequence: (1) identify the business goal and success criteria, (2) frame the ML problem (choose problem type, define inputs/outputs/metrics), (3) collect data, (4) pre-process data (clean, split into train/validation/test), (5) engineer features, (6) train, tune, and evaluate the model, (7) deploy the model, and (8) monitor the model in production. Later stages often loop back to earlier ones — for example, poor monitoring results may send the team back to collect more data or re-engineer features. Every stage before training is really preparing the raw problem and data into a form a model can learn from.",
+    "key_points": [
+      "Order matters: business goal and problem framing always come first; monitoring always comes last (though the lifecycle is iterative, not strictly linear).",
+      "Data collection precedes pre-processing, which precedes feature engineering, which precedes training.",
+      "Training/tuning/evaluation happens as one combined stage before deployment.",
+      "Monitoring closes the loop, feeding drift/performance signals back into earlier stages for retraining.",
+      "The exam frequently tests this lifecycle via ordering-style questions or by asking which stage a given activity (e.g. one-hot encoding, or setting up CloudWatch alarms) belongs to."
+    ],
+    "rule_of_thumb": "Business goal -> frame ML problem -> collect data -> pre-process data -> engineer features -> train/tune/evaluate -> deploy -> monitor. If an activity is about defining success or the problem itself, it's early; if it's about the model's ongoing health after launch, it's the last stage.",
+    "common_confusions": [
+      "Placing feature engineering before data collection/pre-processing — features can only be engineered from data that has already been collected and cleaned.",
+      "Treating monitoring as optional or as part of deployment — monitoring is its own distinct final stage, feeding back into the lifecycle for retraining decisions."
+    ],
+    "aws_services": ["Amazon SageMaker", "AWS Glue", "Amazon S3"],
+    "references": [
+      "https://docs.aws.amazon.com/sagemaker/latest/dg/whatis.html",
+      "https://aws.amazon.com/what-is/machine-learning/"
+    ]
+  },
+  {
+    "id": "TH-D1-012",
+    "domain": 1,
+    "task_statements": ["1.3"],
+    "title": "Data collection and storage for ML: S3, Glue, AWS Data Exchange, Ground Truth",
+    "summary": "Amazon S3 is the primary storage layer for ML data on AWS, holding raw source data, processed features, and trained model artifacts alike. AWS Glue provides serverless ETL (extract, transform, load) to move and transform data from various sources into a usable, S3-resident format, and its Data Catalog stores dataset metadata/schemas (not the data itself). AWS Data Exchange provides secure, governed access to third-party datasets that can supplement an organization's own training data. Amazon SageMaker Ground Truth provides human labeling workflows (via a private workforce, vendor workforce, or Mechanical Turk) to produce labeled training data, particularly for ambiguous or subjective labeling tasks.",
+    "key_points": [
+      "S3 is the default 'landing zone' and long-term store for training data, feature data, and model artifacts across both SageMaker and Bedrock workflows.",
+      "Glue performs the transform step (cleaning, reformatting, deduplication) that moves raw data into an ML-ready state, typically writing results back to S3.",
+      "The Glue Data Catalog stores metadata/schema information about datasets, not the underlying data itself.",
+      "AWS Data Exchange is specifically for licensing/accessing external third-party datasets, not for storing your own data.",
+      "SageMaker Ground Truth is specifically for generating labels via human annotators when labels don't already exist."
+    ],
+    "rule_of_thumb": "Where does the data live? S3. How do you clean/transform it into shape? Glue. Need someone else's dataset? AWS Data Exchange. Need humans to label your own unlabeled data? SageMaker Ground Truth.",
+    "common_confusions": [
+      "Confusing the Glue Data Catalog (metadata/schema store) with S3 (the actual data store) — the Data Catalog describes the data; it does not hold the data itself.",
+      "Reaching for AWS Data Exchange when the real need is internal labeling of existing raw data — Data Exchange is for acquiring external datasets, not labeling your own."
+    ],
+    "aws_services": ["Amazon S3", "AWS Glue", "AWS Data Exchange", "Amazon SageMaker Ground Truth"],
+    "references": [
+      "https://docs.aws.amazon.com/glue/latest/dg/what-is-glue.html",
+      "https://aws.amazon.com/data-exchange/"
+    ]
+  },
+  {
+    "id": "TH-D1-013",
+    "domain": 1,
+    "task_statements": ["1.3"],
+    "title": "Data pre-processing: exploratory data analysis, cleaning, PII handling, train/validation/test splits",
+    "summary": "Before training, raw data must be explored (exploratory data analysis, or EDA) to understand distributions, missing values, and outliers, then cleaned by removing duplicates, filling or removing missing values, and anonymizing personally identifiable information (PII). AWS Glue DataBrew provides a visual interface for these cleaning steps, letting analysts define reusable transformation 'recipes' and data-quality rules without writing code. Amazon Macie specifically scans data in S3 to detect and help protect sensitive data such as PII. After cleaning, data is typically split into training (commonly around 80%), validation (around 10%), and test (around 10%) sets, so the model can be evaluated on data it never trained on.",
+    "key_points": [
+      "EDA comes first: understand the data's shape, quality, and issues before touching it.",
+      "Cleaning removes duplicates, handles missing values, and anonymizes/removes PII.",
+      "Glue DataBrew: a visual, low-code tool for defining and applying reusable cleaning 'recipes,' including built-in data-quality rules.",
+      "Amazon Macie: automatically discovers and classifies sensitive data (like PII) stored in S3, supporting the anonymization/protection step.",
+      "The train/validation/test split ensures the final reported performance reflects how the model does on genuinely unseen data, not memorized training examples."
+    ],
+    "rule_of_thumb": "Explore first, clean second, split last. Need automated PII discovery in S3 -> Macie. Need a visual, no-code way to define and reuse cleaning steps -> Glue DataBrew.",
+    "common_confusions": [
+      "Confusing Macie's PII-detection role with Comprehend's PII-detection role — Macie scans and classifies data at rest in S3 for security/compliance; Comprehend detects PII entities within text as part of NLP analysis. They can complement each other but serve different primary purposes (security discovery vs. text understanding).",
+      "Evaluating a model on the same data it trained on — without a separate validation/test split, reported accuracy is meaningless because it doesn't reflect generalization to new data."
+    ],
+    "aws_services": ["AWS Glue DataBrew", "Amazon Macie", "Amazon SageMaker Data Wrangler", "Amazon S3"],
+    "references": [
+      "https://docs.aws.amazon.com/databrew/latest/dg/what-is.html",
+      "https://aws.amazon.com/macie/"
+    ]
+  },
+  {
+    "id": "TH-D1-014",
+    "domain": 1,
+    "task_statements": ["1.3"],
+    "title": "Feature engineering: selection, creation, transformation, and encoding",
+    "summary": "Feature engineering turns cleaned raw data into the specific inputs a model will actually learn from. Feature selection identifies which existing variables are most relevant, reducing dimensionality and noise. Feature creation derives new variables from existing ones (e.g. computing 'days since last purchase' from a date field). Feature transformation applies mathematical operations like normalization or standardization so features contribute proportionally rather than being skewed by differing scales. Categorical encoding (such as one-hot encoding) converts non-numeric categories into a numeric form models can consume. Amazon SageMaker Feature Store centralizes engineered features so they can be reused consistently across training and inference, avoiding training/serving skew.",
+    "key_points": [
+      "Feature selection reduces the input set to the most relevant variables.",
+      "Feature creation derives new, often more predictive, variables from raw fields.",
+      "Feature transformation (normalization/standardization) rescales features so no single feature dominates due to scale alone.",
+      "One-hot encoding (and similar techniques) converts categorical variables into a numeric representation.",
+      "SageMaker Feature Store: a central repository ensuring the same feature definitions and values are used consistently in both training and real-time inference."
+    ],
+    "rule_of_thumb": "Picking which existing fields matter -> selection. Deriving a brand-new field from existing ones -> creation. Rescaling values -> transformation (normalization/standardization). Turning categories into numbers -> encoding. Need consistency between training-time and serving-time features -> Feature Store.",
+    "common_confusions": [
+      "Treating feature engineering and data cleaning as the same stage — cleaning fixes data quality issues (missing values, duplicates); feature engineering is about shaping already-clean data into better model inputs.",
+      "Skipping feature scaling for algorithms sensitive to feature magnitude — features on very different scales (e.g. income in dollars vs. age in years) can distort many algorithms unless normalized or standardized first."
+    ],
+    "aws_services": ["Amazon SageMaker Feature Store", "Amazon SageMaker Data Wrangler", "AWS Glue"],
+    "references": [
+      "https://docs.aws.amazon.com/sagemaker/latest/dg/feature-store.html",
+      "https://docs.aws.amazon.com/sagemaker/latest/dg/data-wrangler.html"
+    ]
+  },
+  {
+    "id": "TH-D1-015",
+    "domain": 1,
+    "task_statements": ["1.3"],
+    "title": "Hyperparameters: epochs, batch size, learning rate",
+    "summary": "Hyperparameters are settings chosen before training that control how a model learns, as opposed to the model's learned weights. Epochs specify how many times the training process passes over the entire training dataset; more epochs generally improve learning up to a point, but too many risk overfitting. Batch size specifies how many training examples are processed before the model's internal parameters are updated; smaller batches update more frequently (potentially noisier but sometimes faster to converge), while larger batches are more stable but require more memory and compute per step. Learning rate controls how large a step the model takes when updating its parameters after each batch; a learning rate that is too high can overshoot the optimal solution, while one that is too low can make training very slow or get stuck in a suboptimal solution.",
+    "key_points": [
+      "Epochs: full passes over the training data. More epochs = more learning, until overfitting risk dominates.",
+      "Batch size: number of examples per parameter update. Smaller = more frequent, noisier updates; larger = more stable, more resource-intensive updates.",
+      "Learning rate: size of each parameter update step. Too high risks overshooting; too low risks painfully slow or stalled training.",
+      "Amazon SageMaker Automatic Model Tuning (AMT) automates the search for good hyperparameter values against a chosen objective metric.",
+      "Hyperparameters are set before training starts and are not learned from data themselves — they configure how learning happens."
+    ],
+    "rule_of_thumb": "Epochs = how many times through the whole dataset. Batch size = how many examples per update. Learning rate = how big each update step is. Automating the search for the best combination -> SageMaker Automatic Model Tuning.",
+    "common_confusions": [
+      "Confusing hyperparameters (set before training, e.g. learning rate) with model parameters/weights (learned during training) — these are fundamentally different things even though both affect the final model.",
+      "Assuming a higher learning rate always trains faster with no downside — a learning rate too high can cause training to diverge or oscillate rather than converge."
+    ],
+    "aws_services": ["Amazon SageMaker", "Amazon SageMaker Automatic Model Tuning"],
+    "references": [
+      "https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning.html",
+      "https://docs.aws.amazon.com/sagemaker/latest/dg/algorithms.html"
+    ]
+  },
+  {
+    "id": "TH-D1-016",
+    "domain": 1,
+    "task_statements": ["1.3"],
+    "title": "Classification evaluation metrics: accuracy, precision, recall, F1, AUC-ROC, confusion matrix",
+    "summary": "A confusion matrix tabulates a classifier's predictions against actual outcomes (true positives, false positives, true negatives, false negatives) and is the basis for every other classification metric. Accuracy is the fraction of all predictions that were correct, useful mainly for balanced datasets. Precision is the fraction of positive predictions that were actually correct (minimizes false positives). Recall (true positive rate) is the fraction of actual positives that were correctly identified (minimizes false negatives). F1 score is the harmonic mean of precision and recall, useful when both false positives and false negatives matter. AUC-ROC plots true positive rate against false positive rate across classification thresholds, summarizing overall discriminative performance into a single area-under-curve value.",
+    "key_points": [
+      "Accuracy misleads on imbalanced datasets (e.g. 99% negative class) — a model predicting the majority class every time can score high accuracy while being useless.",
+      "Precision: of everything flagged positive, how much was really positive? High precision matters when false positives are costly (e.g. flagging legitimate transactions as fraud).",
+      "Recall: of everything that was really positive, how much did we catch? High recall matters when false negatives are costly (e.g. missing a disease diagnosis).",
+      "F1 balances precision and recall into one number, useful when you can't prioritize one over the other.",
+      "AUC-ROC summarizes performance across all possible decision thresholds, not just one fixed cutoff."
+    ],
+    "rule_of_thumb": "False positives expensive (e.g. spam filter blocking real email) -> optimize precision. False negatives expensive (e.g. missing a fraud case or a disease) -> optimize recall. Need one balanced number -> F1. Need a threshold-independent overall score -> AUC-ROC. Balanced classes, simple summary -> accuracy (with caution).",
+    "common_confusions": [
+      "Using accuracy as the primary metric on a highly imbalanced dataset — this is one of the most common exam traps; accuracy can look great while the model completely fails at the minority class that actually matters.",
+      "Confusing precision and recall's direction — precision is about the quality of positive predictions (false positives), recall is about the completeness of positive detection (false negatives)."
+    ],
+    "aws_services": ["Amazon SageMaker", "Amazon SageMaker Clarify"],
+    "references": [
+      "https://docs.aws.amazon.com/sagemaker/latest/dg/model-monitor-model-quality-metrics.html",
+      "https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-metrics-validation.html"
+    ]
+  },
+  {
+    "id": "TH-D1-017",
+    "domain": 1,
+    "task_statements": ["1.3"],
+    "title": "Regression evaluation metrics: MSE, RMSE, MAE",
+    "summary": "Regression metrics measure how far a model's numeric predictions are from actual values. Mean Squared Error (MSE) averages the squared differences between predicted and actual values, which heavily penalizes larger errors due to squaring. Root Mean Squared Error (RMSE) is the square root of MSE, expressing error in the same units as the original target variable, which makes it easier to interpret than MSE directly. Mean Absolute Error (MAE) averages the absolute (unsquared) differences between predicted and actual values, treating all error sizes proportionally rather than disproportionately penalizing large errors. For all three, lower values indicate better model performance.",
+    "key_points": [
+      "MSE squares errors before averaging, so large errors contribute disproportionately more to the score than small ones.",
+      "RMSE is MSE's square root, restoring the original unit scale (e.g. dollars, not dollars-squared), which makes it more directly interpretable.",
+      "MAE averages absolute errors without squaring, treating every unit of error equally regardless of magnitude.",
+      "Lower is always better for MSE, RMSE, and MAE.",
+      "Choosing between RMSE and MAE is a design decision: RMSE if large errors should be penalized more heavily, MAE if all errors should count equally."
+    ],
+    "rule_of_thumb": "Want to interpret error in the original units and penalize large errors more? RMSE. Want a metric where every error counts equally regardless of size? MAE. Comparing models or tuning without needing interpretable units? MSE works but is less intuitive than RMSE.",
+    "common_confusions": [
+      "Using MSE/RMSE/MAE for a classification problem — these are regression-only metrics for continuous numeric targets, not for predicting categories.",
+      "Assuming RMSE and MAE will always be close in value — RMSE will be noticeably higher than MAE whenever there are a few large outlier errors, because RMSE's squaring amplifies them."
+    ],
+    "aws_services": ["Amazon SageMaker", "Amazon Forecast"],
+    "references": [
+      "https://docs.aws.amazon.com/sagemaker/latest/dg/linear-learner.html",
+      "https://docs.aws.amazon.com/forecast/latest/dg/metrics.html"
+    ]
+  },
+  {
+    "id": "TH-D1-018",
+    "domain": 1,
+    "task_statements": ["1.3"],
+    "title": "Model deployment options on Amazon SageMaker: real-time, batch, asynchronous, serverless inference",
+    "summary": "SageMaker offers four inference deployment patterns, each suited to a different traffic and latency profile. Real-time inference deploys a persistent endpoint for low-latency, sustained-traffic predictions, with auto-scaling to handle load, and is billed for the instance uptime regardless of request volume. Batch transform processes a large dataset all at once asynchronously and is cost-effective for infrequent, bulk scoring jobs where no live endpoint is needed. Asynchronous inference queues requests and processes them without requiring an immediate response, suited to large payloads or longer-running inference where near-real-time latency isn't required. Serverless inference automatically provisions and scales compute with no infrastructure to manage, ideal for intermittent or unpredictable traffic where paying for idle capacity would be wasteful.",
+    "key_points": [
+      "Real-time inference: persistent endpoint, low latency, sustained traffic, always-on cost.",
+      "Batch transform: large offline batch jobs, no persistent endpoint, cost-effective for infrequent bulk scoring.",
+      "Asynchronous inference: queued requests, suited to large payloads or longer processing times, no immediate response required.",
+      "Serverless inference: auto-provisioned and auto-scaled, no infrastructure management, best for intermittent/spiky traffic with idle periods.",
+      "The choice is driven by traffic pattern (steady vs. intermittent vs. bulk) and latency tolerance (immediate vs. delayed), not by model type."
+    ],
+    "rule_of_thumb": "Steady, low-latency traffic -> real-time. Large one-off bulk job, no live traffic -> batch transform. Big payloads or longer processing, no need for instant response -> asynchronous. Unpredictable/intermittent traffic, don't want to manage or pay for idle infrastructure -> serverless.",
+    "common_confusions": [
+      "Choosing real-time inference for infrequent, bulk scoring jobs — this wastes money on a persistent endpoint sitting idle; batch transform is the cost-effective choice for that pattern.",
+      "Choosing serverless inference for sustained, predictable high-throughput traffic — serverless is optimized for intermittent workloads; consistently high, steady traffic is usually better and more cost-effective served by a real-time endpoint sized appropriately."
+    ],
+    "aws_services": ["Amazon SageMaker"],
+    "references": [
+      "https://docs.aws.amazon.com/sagemaker/latest/dg/deploy-model.html",
+      "https://docs.aws.amazon.com/sagemaker/latest/dg/serverless-endpoints.html"
+    ]
+  },
+  {
+    "id": "TH-D1-019",
+    "domain": 1,
+    "task_statements": ["1.3"],
+    "title": "Model monitoring: data drift vs. concept drift, and SageMaker Model Monitor",
+    "summary": "Once deployed, a model's performance can degrade over time even without any code changes, because the real world keeps changing. Data drift occurs when the statistical distribution of input data seen in production shifts away from the distribution seen during training, while the underlying relationship between inputs and outputs stays the same (e.g. a new customer demographic starts using the product). Concept drift occurs when the actual relationship between inputs and outputs changes over time, meaning patterns the model learned no longer hold (e.g. new fraud tactics the model was never trained to recognize). Amazon SageMaker Model Monitor continuously (or on a schedule) compares live inference data against a training-time baseline, using built-in or custom rules, and can send results to CloudWatch to trigger alerts or automated retraining workflows.",
+    "key_points": [
+      "Data drift: input distribution changes, but input-output relationship stays valid.",
+      "Concept drift: the input-output relationship itself changes, so previously learned patterns become wrong.",
+      "SageMaker Model Monitor detects both by comparing live data/predictions against a captured training baseline.",
+      "Monitoring results typically flow to Amazon CloudWatch for alarms and can trigger automated retraining pipelines.",
+      "Both drift types justify retraining, but concept drift is the more serious failure mode since the model's learned logic is now actually wrong, not just facing unfamiliar inputs."
+    ],
+    "rule_of_thumb": "Same relationship, different-looking inputs -> data drift. The relationship itself has changed -> concept drift. Detecting either in an AWS-native way -> SageMaker Model Monitor, feeding CloudWatch.",
+    "common_confusions": [
+      "Assuming any drop in production accuracy is data drift — if the underlying pattern the model relies on has actually changed (e.g. a new fraud pattern), that is concept drift, a more fundamental problem than a shift in input demographics.",
+      "Confusing SageMaker Model Monitor's job (detecting drift in a deployed model's inputs/predictions) with SageMaker Clarify's job (detecting bias/explainability at training or evaluation time) — they serve different points in the lifecycle."
+    ],
+    "aws_services": ["Amazon SageMaker Model Monitor", "Amazon CloudWatch"],
+    "references": [
+      "https://docs.aws.amazon.com/sagemaker/latest/dg/model-monitor.html",
+      "https://docs.aws.amazon.com/sagemaker/latest/dg/model-monitor-model-quality.html"
+    ]
+  },
+  {
+    "id": "TH-D1-020",
+    "domain": 1,
+    "task_statements": ["1.3"],
+    "title": "MLOps and automation: SageMaker Pipelines, Model Registry, and CI/CD for ML",
+    "summary": "MLOps applies DevOps-style discipline (automation, versioning, continuous integration/delivery) to the ML lifecycle. Amazon SageMaker Pipelines defines and automates an end-to-end ML workflow (data prep, training, evaluation, deployment) as a repeatable, version-controlled pipeline. Amazon SageMaker Model Registry tracks and versions trained models along with their metadata, enabling controlled promotion of specific model versions to production. AWS CodePipeline can orchestrate the broader build/test/deploy process around ML artifacts, similar to how it manages software deployments. Together, these tools let teams treat models as versioned, auditable, reproducible artifacts rather than one-off scripts run manually.",
+    "key_points": [
+      "SageMaker Pipelines: defines the ML workflow itself as automated, repeatable steps (a DAG of processing/training/evaluation/deployment steps).",
+      "SageMaker Model Registry: the catalog of trained model versions and their metadata, supporting approval workflows before production promotion.",
+      "AWS CodePipeline: general-purpose CI/CD orchestration, which can be used alongside SageMaker for the broader release process.",
+      "MLOps goals: reproducibility, auditability, automated retraining, and safe, controlled promotion of new model versions.",
+      "Versioning models (via Model Registry) is what makes rollback to a known-good version possible if a new model underperforms."
+    ],
+    "rule_of_thumb": "Automating the ML workflow steps themselves (prep -> train -> evaluate -> deploy) -> SageMaker Pipelines. Tracking and approving which model version is 'the' production model -> SageMaker Model Registry.",
+    "common_confusions": [
+      "Confusing SageMaker Pipelines (automates the ML workflow steps) with SageMaker Model Monitor (observes a model after it's already deployed) — Pipelines is about getting a model built and deployed repeatably; Model Monitor is about watching it once it's live.",
+      "Treating model versioning as optional — without Model Registry-style versioning, there is no reliable way to roll back to a previous model if a new deployment underperforms."
+    ],
+    "aws_services": ["Amazon SageMaker Pipelines", "Amazon SageMaker Model Registry", "AWS CodePipeline"],
+    "references": [
+      "https://docs.aws.amazon.com/sagemaker/latest/dg/pipelines.html",
+      "https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry.html"
+    ]
+  },
+  {
+    "id": "TH-D1-021",
+    "domain": 1,
+    "task_statements": ["1.3"],
+    "title": "Cost optimization for ML workloads: Managed Spot Training, Trusted Advisor, right-sizing",
+    "summary": "Training large models can be expensive, and AWS provides several levers to reduce cost without sacrificing correctness. SageMaker Managed Spot Training uses spare, interruptible EC2 capacity at a steep discount (commonly cited as up to 70% savings versus on-demand), automatically checkpointing progress so training can resume if the underlying spot capacity is reclaimed. AWS Trusted Advisor provides ongoing recommendations across cost, performance, security, and fault tolerance, including flagging idle or oversized resources. Right-sizing means choosing instance types and counts that match the actual workload requirements rather than over-provisioning 'just in case.' SageMaker Profiler helps identify inefficient resource utilization during training jobs (e.g. GPU underutilization) so compute spend maps to actual work being done.",
+    "key_points": [
+      "Managed Spot Training: up to ~70% training cost savings by using interruptible spare capacity, with checkpointing to survive interruptions.",
+      "Trusted Advisor: cross-cutting recommendations, including cost, that flag idle/underutilized resources across the account.",
+      "Right-sizing: matching instance type/count to actual workload needs, avoiding both under- and over-provisioning.",
+      "SageMaker Profiler: pinpoints resource inefficiencies (e.g. GPU sitting idle while waiting on data loading) during training jobs specifically.",
+      "Cost optimization is a continuous activity across the lifecycle, not a one-time setup step."
+    ],
+    "rule_of_thumb": "Cheaper training via interruption-tolerant spare capacity -> Managed Spot Training. General account-wide cost/performance/security recommendations -> Trusted Advisor. Diagnosing why a specific training job is inefficient -> SageMaker Profiler.",
+    "common_confusions": [
+      "Assuming Managed Spot Training is unsuitable for any serious workload because it can be interrupted — checkpointing is designed specifically to make interruption a non-issue for most training jobs, since progress resumes rather than restarting from scratch.",
+      "Treating Trusted Advisor as ML-specific — it is a general AWS account advisor covering cost, security, performance, and fault tolerance across all services, not an ML-only tool."
+    ],
+    "aws_services": ["Amazon SageMaker", "AWS Trusted Advisor", "Amazon SageMaker Profiler"],
+    "references": [
+      "https://docs.aws.amazon.com/sagemaker/latest/dg/model-managed-spot-training.html",
+      "https://aws.amazon.com/premiumsupport/technology/trusted-advisor/"
+    ]
+  },
+  {
+    "id": "TH-D1-022",
+    "domain": 1,
+    "task_statements": ["1.1", "1.2"],
+    "title": "Traditional ML vs. deep learning: when each approach fits",
+    "summary": "Traditional ML algorithms (linear/logistic regression, decision trees, gradient boosting such as XGBoost, support vector machines) work well on structured, tabular data with a moderate number of engineered features, are relatively cheap to train, and are often more directly interpretable. Deep learning, using multi-layer neural networks, excels on unstructured data (images, audio, raw text) at scale, can automatically learn relevant features from raw data rather than requiring manual feature engineering, but is more computationally expensive and typically less directly interpretable. Choosing between them is a business and data-shape decision: structured/tabular data with limited volume often favors traditional ML for speed, cost, and explainability; large volumes of unstructured data favor deep learning for its ability to learn representations automatically.",
+    "key_points": [
+      "Traditional ML: structured/tabular data, manual feature engineering, cheaper to train, generally easier to interpret and explain.",
+      "Deep learning: unstructured data at scale (images, audio, text), automatic feature learning, higher compute cost, generally harder to interpret directly.",
+      "SageMaker's built-in algorithms (like XGBoost, Linear Learner, Random Cut Forest) represent the traditional ML end of the spectrum on AWS.",
+      "Foundation models and computer vision/NLP deep networks represent the deep learning end of the spectrum.",
+      "Interpretability requirements (e.g. regulatory need to explain a decision) can be a deciding factor favoring traditional ML even when deep learning might achieve marginally higher accuracy."
+    ],
+    "rule_of_thumb": "Structured/tabular data, need interpretability, limited data volume -> traditional ML. Unstructured data (images/audio/text) at large scale, complex patterns -> deep learning.",
+    "common_confusions": [
+      "Assuming deep learning is always the 'better' choice — for small, structured, tabular datasets, traditional ML algorithms often perform just as well or better, at a fraction of the cost and with far easier explainability.",
+      "Believing traditional ML can't handle any of the data types deep learning handles — traditional ML can still process text/image data if it's heavily feature-engineered first, but deep learning removes the need for that manual step at scale."
+    ],
+    "aws_services": ["Amazon SageMaker", "Amazon SageMaker JumpStart"],
+    "references": [
+      "https://docs.aws.amazon.com/sagemaker/latest/dg/algos.html",
+      "https://aws.amazon.com/what-is/deep-learning/"
+    ]
+  }
+]

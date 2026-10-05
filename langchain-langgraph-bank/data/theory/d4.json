@@ -1,0 +1,254 @@
+[
+  {
+    "id": "TH-D4-001",
+    "domain": 4,
+    "task_statements": ["4.1"],
+    "title": "Working memory: what's immediately available within the current context",
+    "summary": "Working memory (or short-term memory) in an agent context refers to the information immediately available within the current reasoning context -- the current conversation, recent observations, and intermediate reasoning steps that the agent can directly reference without any separate retrieval step. This is distinct from long-term memory, which persists across sessions or beyond what fits in the immediate context, and must be deliberately retrieved before it becomes usable. Working memory is naturally limited in size (bounded by the context window), meaning older information can be pushed out or 'forgotten' simply by virtue of new information displacing it, not because it was deliberately discarded.",
+    "key_points": [
+      "Working memory is the information immediately available within the current context -- no separate retrieval step is needed to use it.",
+      "Working memory is naturally bounded in size (limited by context window constraints), unlike long-term memory, which can in principle store much more.",
+      "Information can fall out of working memory simply by being displaced by newer information, which is a different mechanism from a deliberate decision to discard something from long-term memory.",
+      "Working memory is well suited to the current task's immediate context: the ongoing conversation, recent tool outputs, and the current reasoning chain.",
+      "Because working memory is limited, agents handling long or complex tasks need some strategy for managing what stays in working memory versus what gets moved to or retrieved from long-term storage."
+    ],
+    "rule_of_thumb": "If information is directly present in the current context with no retrieval step needed, it's in working memory; if it requires an explicit retrieval step to bring back, it's in long-term memory.",
+    "common_confusions": [
+      "Assuming working memory is unlimited just because a context window is large -- a large window raises the limit but does not remove it; something can still eventually be pushed out as a long task continues.",
+      "Confusing information falling out of working memory due to displacement with deliberate, intentional forgetting -- these are different mechanisms with different implications for whether the information can be easily recovered."
+    ],
+    "related_tech": ["working memory", "short-term memory", "context window"],
+    "references": ["https://arxiv.org/abs/2304.03442"]
+  },
+  {
+    "id": "TH-D4-002",
+    "domain": 4,
+    "task_statements": ["4.1"],
+    "title": "Long-term memory: persistent storage retrieved on demand",
+    "summary": "Long-term memory refers to information stored outside the immediate working context, persisting across sessions or far beyond what any single context window could hold, and requiring a deliberate retrieval step before it can actually be used in reasoning. This retrieval step is itself a design point: an agent needs some mechanism (e.g. a search over stored memory, keyed by relevance to the current situation) to decide what to pull from long-term storage into working memory when it's actually needed. Long-term memory enables an agent to maintain continuity across sessions (e.g. remembering a user's past preferences) and to accumulate knowledge beyond what any single context window could hold at once.",
+    "key_points": [
+      "Long-term memory persists beyond the current context window and across sessions, unlike working memory which is tied to the current immediate context.",
+      "Using long-term memory requires an explicit retrieval step -- information doesn't become usable just by existing in storage; it must be actively brought into working memory.",
+      "A retrieval mechanism (e.g. relevance-based search over stored memories) is necessary to decide what to actually pull from long-term storage for the current situation.",
+      "Long-term memory enables continuity across sessions (e.g. remembering past user preferences or facts) that working memory alone, being limited to the current context, cannot provide.",
+      "The quality of an agent's long-term memory use depends heavily on how well its retrieval mechanism identifies genuinely relevant stored information for the current situation."
+    ],
+    "rule_of_thumb": "Long-term memory's value depends entirely on having a good retrieval mechanism -- information that's stored but never retrieved when relevant provides no actual benefit to the agent's behavior.",
+    "common_confusions": [
+      "Assuming simply storing information in long-term memory is sufficient -- without an effective retrieval mechanism to surface it at the right time, stored information provides no practical benefit.",
+      "Assuming long-term memory retrieval happens automatically with no design effort -- a deliberate retrieval mechanism (e.g. a relevance-based search) must be built and tuned for retrieval to actually work well."
+    ],
+    "related_tech": ["long-term memory", "memory retrieval", "persistent storage"],
+    "references": ["https://arxiv.org/abs/2304.03442"]
+  },
+  {
+    "id": "TH-D4-003",
+    "domain": 4,
+    "task_statements": ["4.1"],
+    "title": "The tradeoff between working memory and long-term memory for agent design",
+    "summary": "Relying solely on working memory (keeping everything in the immediate context) is simple but doesn't scale: as a task or conversation grows, eventually the context window fills up, forcing older information to be dropped or truncated, potentially losing something still relevant. Relying solely on long-term memory with no working memory concept doesn't make sense either, since the agent still needs some immediately available context to reason over at any given moment -- long-term memory supplements, rather than replaces, the need for a working context. Effective agent memory design typically uses working memory for the immediate task context and long-term memory as a supplementary store that's retrieved into working memory when relevant, rather than treating either as a complete solution on its own.",
+    "key_points": [
+      "Working-memory-only designs don't scale: as context grows, older (possibly still relevant) information eventually gets pushed out or truncated.",
+      "Long-term-memory-only designs don't make practical sense either, since the agent always needs some immediately available working context to actually reason over.",
+      "Effective designs typically combine both: working memory for the current task context, long-term memory as a supplementary store retrieved into working memory when relevant.",
+      "The two memory types are complementary, not substitutes for each other -- each addresses a limitation the other has.",
+      "A key design question is WHEN to move information between the two -- what to proactively or selectively save to long-term memory, and what to retrieve back into working memory given the current situation."
+    ],
+    "rule_of_thumb": "Working memory and long-term memory are complementary, not substitutes -- effective agent memory design uses both together, each addressing a limitation the other has.",
+    "common_confusions": [
+      "Assuming a bigger context window eliminates the need for long-term memory entirely -- even a large window is still finite, and long-term memory additionally provides persistence ACROSS sessions, which no context window size can provide on its own.",
+      "Assuming long-term memory alone, with no working memory concept, is sufficient -- the agent still needs an immediately available context to reason over moment to moment, which is what working memory provides."
+    ],
+    "related_tech": ["memory architecture", "working memory", "long-term memory"],
+    "references": ["https://arxiv.org/abs/2304.03442"]
+  },
+  {
+    "id": "TH-D4-004",
+    "domain": 4,
+    "task_statements": ["4.1"],
+    "title": "Deciding what information should be moved from working memory into long-term storage",
+    "summary": "Not everything that passes through an agent's working memory is worth persisting into long-term storage -- deciding what to save requires judgment about what's likely to be useful again later versus what was only relevant to the immediate moment. Over-saving (persisting nearly everything) risks a cluttered long-term store where genuinely useful information becomes harder to find amid low-value noise, and can waste storage/retrieval resources. Under-saving risks losing information that would have been valuable to retrieve in a future session. A reasonable approach weighs signals like whether the information is likely to recur in relevance (e.g. a stated user preference likely to matter again) versus information that was only relevant to resolving the current, one-off request.",
+    "key_points": [
+      "Not all working-memory content is worth persisting; deciding what to save requires judgment about likely future relevance, not blanket saving or blanket discarding.",
+      "Over-saving nearly everything risks a cluttered long-term store where genuinely useful information becomes harder to retrieve amid low-value noise.",
+      "Under-saving risks losing information that would have been valuable in a future session, if it's discarded without ever being persisted.",
+      "A useful signal for what to save is whether the information is likely to recur in relevance (e.g. a stated long-term preference) versus purely transient, one-off task details.",
+      "The specific policy for what to persist is a design choice that should reflect the actual use case -- a customer-preference-tracking agent has different save criteria than a one-off calculation assistant."
+    ],
+    "rule_of_thumb": "Save to long-term memory based on likely future relevance, not blanket save-everything or save-nothing policies -- both extremes have real costs.",
+    "common_confusions": [
+      "Assuming it's always safer to save everything to long-term memory just in case -- this risks cluttering the store and making genuinely useful information harder to find and retrieve later.",
+      "Assuming long-term memory should only ever store explicit user preferences -- useful persisted information can include a range of recurring facts and context, not just stated preferences."
+    ],
+    "related_tech": ["memory persistence policy", "working memory", "long-term memory"],
+    "references": ["https://arxiv.org/abs/2304.03442"]
+  },
+  {
+    "id": "TH-D4-005",
+    "domain": 4,
+    "task_statements": ["4.2"],
+    "title": "Episodic memory: records of specific past events and experiences",
+    "summary": "Episodic memory refers to records of specific past events or experiences -- what happened, when, and in what context -- as opposed to general facts or skills. For an agent, episodic memory might include a record of a specific past conversation, a specific action taken and its outcome, or a specific interaction with a particular user at a particular time. Episodic memory is valuable for tasks that benefit from recalling precedent (what happened in a similar situation before) or for maintaining continuity about a specific ongoing relationship or process, as opposed to general world knowledge that applies regardless of any specific past event.",
+    "key_points": [
+      "Episodic memory stores specific past events or experiences, tied to a particular time, context, and situation.",
+      "Examples include a record of a specific past conversation, a specific action and its outcome, or a specific interaction with a particular user.",
+      "Episodic memory is valuable for recalling precedent -- what happened in a similar past situation -- and for maintaining continuity in an ongoing relationship or process.",
+      "Episodic memory is distinct from general factual knowledge, since it's about a specific occurrence, not a general truth that holds regardless of any particular event.",
+      "Retrieving relevant episodic memories typically requires matching the current situation against stored past situations for similarity, not just exact keyword matching."
+    ],
+    "rule_of_thumb": "Episodic memory answers 'what specifically happened, when, in what situation' -- if the content is tied to a specific past occurrence rather than a general truth, it's episodic.",
+    "common_confusions": [
+      "Confusing episodic memory with general factual knowledge -- 'the user mentioned they prefer email on Tuesday the 3rd' is episodic (a specific event), while 'the user generally prefers email over phone calls' is more like a general fact drawn from or informed by episodic observations.",
+      "Assuming episodic memory retrieval is just exact keyword matching -- useful episodic retrieval often requires matching based on situational similarity, not just literal text overlap."
+    ],
+    "related_tech": ["episodic memory", "event records", "precedent recall"],
+    "references": ["https://arxiv.org/abs/2304.03442"]
+  },
+  {
+    "id": "TH-D4-006",
+    "domain": 4,
+    "task_statements": ["4.2"],
+    "title": "Semantic memory: general facts and knowledge independent of specific events",
+    "summary": "Semantic memory refers to general facts and knowledge that hold true independent of any specific event or occasion -- for example, a general fact about how a particular process works, a stable preference a user has expressed as a general rule, or domain knowledge not tied to any one specific interaction. Unlike episodic memory, semantic memory content doesn't need to reference when or in what specific context it was learned to be useful; it's useful simply as a standing fact. Semantic memory can be built up FROM episodic memories over time (e.g. observing the same preference stated in several different episodes might generalize into a standing semantic fact), but the two serve different purposes and are retrieved differently.",
+    "key_points": [
+      "Semantic memory stores general facts and knowledge that hold true independent of any specific past event or occasion.",
+      "Unlike episodic memory, semantic memory content is useful on its own as a standing fact, without needing to reference a specific originating event.",
+      "Semantic memory can be built up by generalizing from multiple episodic observations over time, though the two remain distinct in how they're used.",
+      "Examples of semantic memory include general domain facts, generalized user preferences, and stable rules or definitions relevant to the agent's tasks.",
+      "Retrieval of semantic memory is typically based on topical/conceptual relevance to the current need, rather than situational similarity to a specific past event."
+    ],
+    "rule_of_thumb": "Semantic memory answers 'what's generally true' -- if the content is useful as a standing fact without needing to reference a specific past occasion, it's semantic.",
+    "common_confusions": [
+      "Assuming semantic memory must come only from explicit statements of general facts -- it can also be generalized or inferred from a pattern across multiple specific episodic observations.",
+      "Treating episodic and semantic memory as needing identical retrieval approaches -- episodic retrieval often benefits from situational similarity matching, while semantic retrieval often benefits more from topical/conceptual relevance matching."
+    ],
+    "related_tech": ["semantic memory", "general knowledge", "fact generalization"],
+    "references": ["https://arxiv.org/abs/2304.03442"]
+  },
+  {
+    "id": "TH-D4-007",
+    "domain": 4,
+    "task_statements": ["4.2"],
+    "title": "Procedural memory: knowledge of how to perform tasks or sequences of actions",
+    "summary": "Procedural memory refers to knowledge of HOW to do something -- a sequence of steps, a learned strategy, or a reusable procedure for accomplishing a type of task -- as opposed to episodic memory (what happened) or semantic memory (general facts). For an agent, procedural memory might include a reusable multi-step plan template for a recurring task type, a learned strategy for handling a certain category of problem, or a refined approach that worked well in the past and is worth reusing rather than re-deriving from scratch each time. Procedural memory is valuable specifically because it lets an agent avoid re-deriving the same successful approach repeatedly, instead reusing (and potentially refining) a known-good procedure.",
+    "key_points": [
+      "Procedural memory stores knowledge of HOW to accomplish a type of task -- a sequence of steps, strategy, or reusable procedure.",
+      "This is distinct from episodic memory (specific past events) and semantic memory (general facts) -- procedural memory is specifically about method or process.",
+      "A reusable multi-step plan template for a recurring task type is a clear example of procedural memory.",
+      "Procedural memory's value is avoiding re-deriving the same successful approach from scratch every time a similar task recurs.",
+      "Procedural memory can be refined over time -- if a stored procedure consistently underperforms, that's a signal it may need to be updated or replaced, not treated as a fixed, permanent recipe."
+    ],
+    "rule_of_thumb": "Procedural memory answers 'how to do this type of task' -- if the content is a reusable method, strategy, or sequence of steps, it's procedural, not episodic or semantic.",
+    "common_confusions": [
+      "Confusing a procedural memory (a general reusable method) with an episodic memory of one specific instance where that method happened to be used -- the general method itself is procedural, while a specific past application of it is episodic.",
+      "Assuming procedural memory, once stored, should never be revised -- a procedure that consistently underperforms should be updated, not treated as an unchangeable fixed recipe."
+    ],
+    "related_tech": ["procedural memory", "reusable strategies", "plan templates"],
+    "references": ["https://arxiv.org/abs/2304.03442"]
+  },
+  {
+    "id": "TH-D4-008",
+    "domain": 4,
+    "task_statements": ["4.2"],
+    "title": "Why distinguishing episodic, semantic, and procedural memory matters for agent design",
+    "summary": "Distinguishing episodic, semantic, and procedural memory matters because each type is retrieved differently, used differently in reasoning, and benefits from a different storage/organization approach. Conflating them into one undifferentiated memory store risks retrieval that mismatches the actual need -- for example, retrieving a specific past event when what's actually needed is a general fact, or retrieving a general fact when what's actually needed is a proven step-by-step procedure. Designing separate (or at least separately taggable) storage and retrieval paths for each memory type allows an agent to request the kind of memory that's actually relevant to its current need, rather than searching one large undifferentiated pool and hoping something useful surfaces.",
+    "key_points": [
+      "Each memory type (episodic, semantic, procedural) is typically retrieved differently and serves a different purpose in reasoning.",
+      "Conflating all memory into one undifferentiated store risks retrieval mismatches -- surfacing the wrong type of memory for the actual current need.",
+      "Separately organized (or at least separately taggable) storage for each type allows more targeted, relevant retrieval than one large undifferentiated pool.",
+      "A reasoning process that needs 'how to do this' benefits from procedural memory retrieval specifically, not a mix of episodic anecdotes and general facts.",
+      "This distinction is a design and organization tool, not a claim that the three types are entirely unrelated -- semantic memory can be generalized from episodic observations, for instance."
+    ],
+    "rule_of_thumb": "Organize and retrieve episodic, semantic, and procedural memory separately when possible -- matching retrieval to the actual type of need reduces mismatches versus one undifferentiated memory pool.",
+    "common_confusions": [
+      "Assuming all memory types should always be stored and searched together as one pool -- this risks retrieving the wrong TYPE of memory for the current need, even if something superficially relevant is found.",
+      "Assuming this three-way distinction means the types are entirely unrelated -- semantic memory can be generalized FROM episodic memory, showing they can be connected even while serving different functional roles."
+    ],
+    "related_tech": ["memory type organization", "episodic memory", "semantic memory", "procedural memory"],
+    "references": ["https://arxiv.org/abs/2304.03442"]
+  },
+  {
+    "id": "TH-D4-009",
+    "domain": 4,
+    "task_statements": ["4.3"],
+    "title": "Relevance-based retrieval: surfacing the right memories for the current situation",
+    "summary": "Relevance-based retrieval means selecting which stored memories to surface for the current situation based on how pertinent they actually are to what's needed right now, rather than retrieving everything stored or retrieving based on an arbitrary or purely chronological criterion. A common approach uses similarity between the current context and stored memory content (e.g. via semantic similarity) to rank candidates, surfacing the most relevant few rather than everything that technically matches some loose criterion. Poor relevance assessment can surface memories that are superficially similar but not actually useful for the current need, or miss genuinely relevant memories that happen to be phrased very differently from the current context.",
+    "key_points": [
+      "Relevance-based retrieval selects memories based on actual pertinence to the current situation, not blanket retrieval of everything stored.",
+      "Similarity-based ranking (e.g. semantic similarity between current context and stored content) is a common mechanism for assessing relevance.",
+      "Retrieving only the most relevant few memories, rather than everything that loosely matches, keeps the retrieved content focused and useful.",
+      "Poor relevance assessment risks two failure directions: surfacing superficially similar but unhelpful memories, or missing genuinely relevant memories phrased differently.",
+      "The quality of relevance assessment directly determines whether long-term memory's stored content actually translates into better agent behavior."
+    ],
+    "rule_of_thumb": "Good retrieval surfaces the few memories most pertinent to the current situation -- not everything stored, and not merely whatever is superficially similar in wording.",
+    "common_confusions": [
+      "Assuming retrieving more memories is always safer or better -- surfacing too many memories, including marginally relevant ones, can dilute focus and bury the genuinely useful content.",
+      "Assuming relevance is purely about literal word overlap -- genuinely relevant memories can be phrased very differently from the current context, requiring similarity measures that go beyond exact text matching."
+    ],
+    "related_tech": ["relevance-based retrieval", "similarity ranking", "memory retrieval"],
+    "references": ["https://arxiv.org/abs/2304.03442"]
+  },
+  {
+    "id": "TH-D4-010",
+    "domain": 4,
+    "task_statements": ["4.3"],
+    "title": "Recency and frequency as additional signals alongside pure relevance",
+    "summary": "Beyond pure topical/situational relevance, two other signals commonly inform what memory to retrieve or prioritize: recency (how recently a memory was formed or last used) and frequency (how often a similar memory or fact has recurred). Recency matters because more recent information is often more likely to reflect the current state of affairs, especially for information that can change over time; frequency matters because something observed repeatedly is more likely to be a stable, generalizable pattern rather than a one-off anomaly. Good retrieval systems typically combine relevance with recency and frequency rather than relying on any single signal alone, since each addresses a different kind of blind spot the others have.",
+    "key_points": [
+      "Recency (how recently formed or used) is a signal that more recent information may better reflect current reality, especially for facts that can change over time.",
+      "Frequency (how often something has recurred) is a signal that a repeatedly observed pattern is more likely stable and generalizable than a one-off anomaly.",
+      "Relying on relevance alone, with no recency consideration, risks surfacing an outdated memory that was once relevant but no longer reflects current reality.",
+      "Relying on relevance alone, with no frequency consideration, risks treating a one-off anomaly with the same weight as a well-established, repeatedly confirmed pattern.",
+      "Combining relevance, recency, and frequency generally produces more robust retrieval than relying on any single signal in isolation."
+    ],
+    "rule_of_thumb": "Combine relevance with recency and frequency signals -- relevance alone can surface outdated information or treat a one-off anomaly as if it were an established pattern.",
+    "common_confusions": [
+      "Assuming the most relevant memory is always the right one to use, regardless of how old it is -- a highly relevant but very outdated memory can be actively misleading if the underlying fact has since changed.",
+      "Assuming frequency alone (how often something was observed) is sufficient without considering relevance -- a frequently observed but currently irrelevant pattern isn't useful just because it recurred often in the past."
+    ],
+    "related_tech": ["recency", "frequency", "retrieval signals"],
+    "references": ["https://arxiv.org/abs/2304.03442"]
+  },
+  {
+    "id": "TH-D4-011",
+    "domain": 4,
+    "task_statements": ["4.3"],
+    "title": "Forgetting as a deliberate, useful mechanism rather than only a limitation",
+    "summary": "While forgetting is sometimes framed purely as a limitation (losing information that might have been useful), deliberate forgetting -- actively removing or deprioritizing stored memories that are outdated, superseded, or no longer relevant -- is also a useful mechanism for keeping a memory store effective. Without some form of deliberate forgetting, a long-term memory store accumulates outdated or superseded information indefinitely, which can clutter retrieval and risk surfacing stale content alongside or instead of current, accurate information. Effective forgetting policies typically target information that has been explicitly superseded (e.g. an old address replaced by a new one) or that has become reliably irrelevant, rather than discarding content indiscriminately.",
+    "key_points": [
+      "Deliberate forgetting -- removing or deprioritizing outdated or superseded memories -- is a useful mechanism, not purely a limitation to be avoided.",
+      "Without some forgetting mechanism, a memory store accumulates outdated content indefinitely, risking clutter and stale information surfacing in retrieval.",
+      "Effective forgetting policies typically target explicitly superseded information (e.g. an old address replaced by a new one) or reliably irrelevant content.",
+      "Indiscriminate forgetting (discarding content with no judgment about what's actually safe to remove) risks losing genuinely useful information, just as indiscriminate saving risks clutter.",
+      "A well-designed memory system treats forgetting as an active maintenance process, not simply the passive result of running out of storage space."
+    ],
+    "rule_of_thumb": "Deliberate forgetting of outdated or superseded information is a useful maintenance mechanism, not just an unfortunate limitation -- the goal is targeted removal, not indiscriminate discarding.",
+    "common_confusions": [
+      "Assuming forgetting is always bad and should be minimized at all costs -- deliberately removing clearly outdated or superseded information actually improves the quality and usefulness of what remains.",
+      "Assuming any forgetting mechanism is equally good -- indiscriminate forgetting (with no judgment about what's actually safe to remove) risks losing genuinely useful information, which is a different problem from targeted, judgment-based forgetting."
+    ],
+    "related_tech": ["forgetting mechanisms", "memory maintenance", "superseded information"],
+    "references": ["https://arxiv.org/abs/2304.03442"]
+  },
+  {
+    "id": "TH-D4-012",
+    "domain": 4,
+    "task_statements": ["4.3"],
+    "title": "Handling contradictions between stored memories and current information",
+    "summary": "When a newly observed piece of information contradicts something already stored in memory (e.g. a user states a new address that differs from a previously stored one), an agent needs a policy for resolving the contradiction rather than simply holding both pieces of information with no resolution. A common, reasonable default is to treat the newer information as superseding the older one, since it more likely reflects current reality -- but this isn't universally correct, since some contradictions reflect a genuine correction while others might reflect noise, a misunderstanding, or a context-specific exception rather than a true update. Good design distinguishes between information that should be fully replaced, information that should be retained alongside the new information as still contextually relevant, and information that warrants a clarifying check given the stakes of acting on the wrong version.",
+    "key_points": [
+      "Contradictions between stored memory and newly observed information require some resolution policy, rather than silently retaining both with no reconciliation.",
+      "Treating newer information as superseding older information is a reasonable common default, since it often better reflects current reality.",
+      "This default isn't universally correct -- some apparent contradictions reflect noise, a misunderstanding, or a context-specific exception, not a true, permanent update.",
+      "For high-stakes contradictions, a clarifying check may be more appropriate than silently assuming the newer information is simply correct and overriding the old.",
+      "Good memory design distinguishes between information that should be replaced, information that should coexist as still relevant in some contexts, and information needing explicit clarification before being resolved either way."
+    ],
+    "rule_of_thumb": "Default to treating newer information as superseding older information, but add a clarifying check for high-stakes contradictions rather than always resolving silently.",
+    "common_confusions": [
+      "Assuming every contradiction should automatically be resolved by trusting whichever information is newer -- some contradictions reflect noise or a special-case exception rather than a genuine, permanent update.",
+      "Assuming contradictions should always be flagged to a human rather than resolved automatically -- for low-stakes, clearly-an-update situations, automatically treating the newer information as current is often perfectly reasonable."
+    ],
+    "related_tech": ["contradiction resolution", "memory updates", "information supersession"],
+    "references": ["https://arxiv.org/abs/2304.03442"]
+  }
+]

@@ -1,0 +1,86 @@
+[
+  {
+    "id": "Q-D3-0029",
+    "domain": 3,
+    "task_statement": "3.2",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": ["TH-D3-006"],
+    "case_study_id": null,
+    "stem": "An agent has access to both a 'web_search' tool and a 'internal_docs_search' tool with vague, nearly identical descriptions. What is the most likely consequence?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "The agent is likely to correctly select the right tool every single time due to the model's inherent intelligence" },
+      { "key": "B", "text": "Increased risk of selecting the wrong tool for a given need, since the descriptions don't clearly distinguish their purposes" },
+      { "key": "C", "text": "The two tools will automatically merge into one" },
+      { "key": "D", "text": "No tool will ever be callable again" }
+    ],
+    "correct": ["B"],
+    "explanation": {
+      "why_correct": "Since the agent can only reason about tool selection as well as the information it has about each tool, vague and nearly identical descriptions increase the risk of choosing the wrong one for a given actual need.",
+      "why_incorrect": {
+        "A": "Model intelligence does not substitute for clear tool descriptions; even a capable model can select incorrectly if given insufficiently distinguishing information.",
+        "C": "Tools do not merge on their own; they remain two distinct, separately callable tools regardless of how similar their descriptions are.",
+        "D": "Vague descriptions affect selection accuracy, not whether any tool can be called at all."
+      },
+      "rule_of_thumb": "Vague or overlapping tool descriptions directly increase the risk of incorrect tool selection, regardless of the underlying model's general capability."
+    },
+    "tags": ["tool-selection", "tool-descriptions"]
+  },
+  {
+    "id": "Q-D3-0030",
+    "domain": 3,
+    "task_statement": "3.2",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": ["TH-D3-007"],
+    "case_study_id": null,
+    "stem": "An agent correctly selects a 'get_weather' tool but passes a malformed date string that the tool cannot parse. What type of error is this?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "A tool selection error" },
+      { "key": "B", "text": "A parameter construction error, distinct from tool selection" },
+      { "key": "C", "text": "Proof that the tool itself does not exist" },
+      { "key": "D", "text": "An error that cannot occur in any real system" }
+    ],
+    "correct": ["B"],
+    "explanation": {
+      "why_correct": "The correct tool was selected; the problem is specifically that the call's parameter (the date string) was malformed -- this is a distinct parameter construction error, not a selection error.",
+      "why_incorrect": {
+        "A": "Tool selection was correct in this scenario (the right tool, 'get_weather', was chosen); the issue lies specifically in how the call's parameters were constructed.",
+        "C": "The tool clearly exists and was called; the issue is with the malformed input, not the tool's existence.",
+        "D": "Malformed parameter errors are a common, well-documented real-world failure mode in tool-using systems."
+      },
+      "rule_of_thumb": "Correct tool selection with malformed parameters is a distinct failure mode (parameter construction error) from selecting the wrong tool entirely."
+    },
+    "tags": ["parameter-construction", "tool-call-errors"]
+  },
+  {
+    "id": "Q-D3-0031",
+    "domain": 3,
+    "task_statement": "3.2",
+    "type": "single_choice",
+    "difficulty": "hard",
+    "theory_refs": ["TH-D3-008"],
+    "case_study_id": null,
+    "stem": "A task requires looking up the current prices of three unrelated products, where the price of one has no bearing on how to query the others. Which invocation strategy is most appropriate?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Sequential invocation, waiting for each price lookup to complete before starting the next" },
+      { "key": "B", "text": "Parallel invocation, since the three lookups are independent of each other's results" },
+      { "key": "C", "text": "No invocation at all, guessing all three prices from memory" },
+      { "key": "D", "text": "Invoking the tool exactly once for all three products combined into a single malformed query" }
+    ],
+    "correct": ["B"],
+    "explanation": {
+      "why_correct": "Since the three price lookups are genuinely independent -- none depends on another's result -- parallel invocation is appropriate and avoids unnecessary sequential waiting.",
+      "why_incorrect": {
+        "A": "Sequential invocation here would introduce needless waiting with no correctness benefit, since none of the three lookups actually depends on another's result.",
+        "C": "Guessing current prices from memory risks relying on stale information when a live, accurate lookup is both needed and readily available.",
+        "D": "Combining three distinct product queries into a single malformed call risks the tool failing to correctly process any of them."
+      },
+      "rule_of_thumb": "Genuinely independent tool calls should be issued in parallel to avoid unnecessary sequential waiting."
+    },
+    "tags": ["parallel-invocation", "tool-invocation-strategy"]
+  }
+]

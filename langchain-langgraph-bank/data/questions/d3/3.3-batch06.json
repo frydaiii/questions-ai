@@ -1,0 +1,145 @@
+[
+  {
+    "id": "Q-D3-0071",
+    "domain": 3,
+    "task_statement": "3.3",
+    "type": "multi_response",
+    "difficulty": "hard",
+    "theory_refs": [
+      "TH-D3-010",
+      "TH-D3-011",
+      "TH-D3-012"
+    ],
+    "case_study_id": null,
+    "stem": "Which of the following statements correctly match a failure cause to an appropriate recovery strategy? (Select 2)",
+    "select_count": 2,
+    "options": [
+      {
+        "key": "A",
+        "text": "A plausibly transient network timeout warrants a retry with backoff"
+      },
+      {
+        "key": "B",
+        "text": "A permanently deprecated API warrants a fallback to an alternative source, not repeated retries"
+      },
+      {
+        "key": "C",
+        "text": "Any failure, regardless of cause, should always be retried exactly 1000 times before giving up"
+      },
+      {
+        "key": "D",
+        "text": "A permission-denied error should always be silently ignored with no further action"
+      }
+    ],
+    "correct": [
+      "A",
+      "B"
+    ],
+    "explanation": {
+      "why_correct": "A transient timeout fits retry-with-backoff, and a permanently deprecated API fits a fallback switch since retries cannot help a permanent failure -- both correctly match cause to strategy.",
+      "why_incorrect": {
+        "C": "A fixed, blanket retry count regardless of cause ignores whether the failure is actually transient or persistent, wasting effort on causes retries cannot fix.",
+        "D": "Silently ignoring a permission error discards useful diagnostic information and fails to address the underlying access issue."
+      },
+      "rule_of_thumb": "Match recovery strategy to the actual failure cause -- retries for transient issues, fallbacks for permanent ones, and never silently ignore explicit errors."
+    },
+    "tags": [
+      "retry-strategy",
+      "fallback-strategy"
+    ]
+  },
+  {
+    "id": "Q-D3-0072",
+    "domain": 3,
+    "task_statement": "3.3",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D3-013"
+    ],
+    "case_study_id": null,
+    "stem": "Which practice best helps an agent avoid being misled by a technically 'successful' but actually unhelpful tool result?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Actively comparing the result against what was actually expected or needed, rather than treating 'no error' as proof of correctness"
+      },
+      {
+        "key": "B",
+        "text": "Assuming every error-free result is automatically fully correct"
+      },
+      {
+        "key": "C",
+        "text": "Never checking any tool result under any circumstances"
+      },
+      {
+        "key": "D",
+        "text": "Disabling all tools entirely to avoid any possible misleading result"
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "explanation": {
+      "why_correct": "Actively comparing a result against what was actually expected helps catch cases where a technically error-free call returned something unhelpful, incomplete, or wrong for the agent's actual purpose.",
+      "why_incorrect": {
+        "B": "This is exactly the assumption that lets misleading-success failures go unnoticed; it is the problem, not the solution.",
+        "C": "Never checking results would leave the agent fully exposed to this failure mode with no safeguard at all.",
+        "D": "Disabling tools entirely sacrifices all the benefits of tool use just to avoid one specific failure mode, which is an overreaction."
+      },
+      "rule_of_thumb": "Actively sanity-checking results against actual expectations is the key defense against misleading-success failures."
+    },
+    "tags": [
+      "sanity-checking",
+      "misleading-results"
+    ]
+  },
+  {
+    "id": "Q-D3-0073",
+    "domain": 3,
+    "task_statement": "3.3",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D3-010"
+    ],
+    "case_study_id": null,
+    "stem": "A tool consistently takes 30+ seconds to respond and then times out under heavy load, but succeeds quickly when load is lower. Which category best describes this failure, and what does it suggest?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "A permanent, unfixable failure that will never succeed again"
+      },
+      {
+        "key": "B",
+        "text": "A plausibly transient unavailability issue tied to load conditions, suggesting retrying (possibly with backoff) is a reasonable strategy"
+      },
+      {
+        "key": "C",
+        "text": "An explicit, well-labeled permission error"
+      },
+      {
+        "key": "D",
+        "text": "Clear evidence the tool should be permanently deleted from the system"
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "explanation": {
+      "why_correct": "The failure is correlated with load conditions and succeeds when load is lower, which is the signature of a transient, load-dependent unavailability issue -- making retry-with-backoff a reasonable strategy.",
+      "why_incorrect": {
+        "C": "There's no indication of a permission-related error here; the described symptom is about timing/load, not access rights.",
+        "D": "A load-dependent, intermittent issue does not imply the tool is fundamentally broken or should be removed; it suggests a need for retry/backoff handling instead.",
+        "A": "The fact that it succeeds under lower load directly indicates the failure is NOT permanent -- it is condition-dependent and plausibly transient."
+      },
+      "rule_of_thumb": "A failure correlated with load conditions and succeeding under lighter load is a classic transient unavailability pattern, well suited to retry-with-backoff."
+    },
+    "tags": [
+      "failure-categorization",
+      "retry-strategy"
+    ]
+  }
+]

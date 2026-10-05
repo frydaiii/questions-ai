@@ -1,0 +1,141 @@
+[
+  {
+    "id": "Q-D4-0029",
+    "domain": 4,
+    "task_statement": "4.2",
+    "type": "single_choice",
+    "difficulty": "easy",
+    "theory_refs": [
+      "TH-D4-005"
+    ],
+    "case_study_id": null,
+    "stem": "Which of the following is an example of episodic memory?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "A reusable step-by-step procedure for handling refund requests"
+      },
+      {
+        "key": "B",
+        "text": "The general fact that water boils at 100 degrees Celsius at sea level"
+      },
+      {
+        "key": "C",
+        "text": "A record of a specific conversation that happened last Tuesday with a particular user"
+      },
+      {
+        "key": "D",
+        "text": "A general rule about how a certain type of task should always be approached"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "A record of a specific conversation tied to a particular time and user is exactly what episodic memory captures -- a specific past event or experience.",
+      "why_incorrect": {
+        "B": "A general physical fact independent of any specific event is semantic memory, not episodic.",
+        "D": "A general rule for approaching a task type is procedural (or semantic) in nature, not tied to a specific past occurrence.",
+        "A": "A reusable step-by-step procedure is procedural memory -- knowledge of how to do something, not a record of a specific past event."
+      },
+      "rule_of_thumb": "Episodic memory is tied to a specific past event, time, and context -- not a general fact or reusable procedure."
+    },
+    "tags": [
+      "episodic-memory"
+    ]
+  },
+  {
+    "id": "Q-D4-0030",
+    "domain": 4,
+    "task_statement": "4.2",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D4-006"
+    ],
+    "case_study_id": null,
+    "stem": "A user mentions on three separate occasions, in three separate conversations, that they prefer concise answers. The agent generalizes this into a standing rule: 'this user generally prefers concise answers.' What type of memory does this generalized rule represent?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Semantic memory, since it's now a general, standing fact independent of any one specific conversation"
+      },
+      {
+        "key": "B",
+        "text": "Episodic memory, since it only ever applies to exactly one of the three conversations"
+      },
+      {
+        "key": "C",
+        "text": "Procedural memory, since it describes a sequence of steps"
+      },
+      {
+        "key": "D",
+        "text": "No memory type applies to this scenario at all"
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "explanation": {
+      "why_correct": "Once generalized into a standing rule that holds regardless of any one specific conversation, this becomes semantic memory -- a general fact, even though it was built up by observing a pattern across multiple episodic occurrences.",
+      "why_incorrect": {
+        "B": "The generalized rule applies broadly across the user's interactions, not to just one specific past conversation, which is what episodic memory would represent.",
+        "C": "This rule is a general fact about the user's preference, not a sequence of steps for accomplishing a task, so it isn't procedural.",
+        "D": "This is a direct, clear example of semantic memory being generalized from episodic observations."
+      },
+      "rule_of_thumb": "A pattern generalized from multiple specific events into a standing rule becomes semantic memory, even though it originated from episodic observations."
+    },
+    "tags": [
+      "semantic-memory",
+      "episodic-memory"
+    ]
+  },
+  {
+    "id": "Q-D4-0031",
+    "domain": 4,
+    "task_statement": "4.2",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D4-007"
+    ],
+    "case_study_id": null,
+    "stem": "An agent stores a reusable multi-step template for handling 'cancel subscription' requests, refined from past successful attempts. What type of memory is this template?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Working memory, since it must be re-derived from scratch every single time"
+      },
+      {
+        "key": "B",
+        "text": "Episodic memory, since it only applies to one specific past cancellation"
+      },
+      {
+        "key": "C",
+        "text": "Semantic memory, since it has nothing to do with how to perform any task"
+      },
+      {
+        "key": "D",
+        "text": "Procedural memory, since it's a reusable method or sequence of steps for accomplishing a type of task"
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "A reusable multi-step template for accomplishing a recurring task type is a clear example of procedural memory -- knowledge of HOW to do something, refined over time rather than re-derived each time.",
+      "why_incorrect": {
+        "B": "This template is explicitly reusable across cancellation requests generally, not tied to just one specific past instance.",
+        "C": "Semantic memory is about general facts, not methods for performing tasks; this template is specifically about HOW to accomplish a task, which is procedural.",
+        "A": "The whole point of procedural memory is to AVOID re-deriving the approach from scratch each time; this template being reusable is the opposite of needing re-derivation."
+      },
+      "rule_of_thumb": "A reusable, refined method or template for accomplishing a task type is procedural memory, specifically designed to avoid re-deriving the approach each time."
+    },
+    "tags": [
+      "procedural-memory"
+    ]
+  }
+]

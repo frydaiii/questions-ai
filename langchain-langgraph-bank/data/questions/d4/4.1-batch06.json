@@ -1,0 +1,145 @@
+[
+  {
+    "id": "Q-D4-0016",
+    "domain": 4,
+    "task_statement": "4.1",
+    "type": "multi_response",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D4-004"
+    ],
+    "case_study_id": null,
+    "stem": "Which of the following are real costs of an overly aggressive 'save everything' long-term memory policy? (Select 2)",
+    "select_count": 2,
+    "options": [
+      {
+        "key": "A",
+        "text": "A cluttered store that makes genuinely useful information harder to find"
+      },
+      {
+        "key": "B",
+        "text": "Wasted storage and retrieval resources on low-value content"
+      },
+      {
+        "key": "C",
+        "text": "Guaranteed perfect recall of every past interaction with zero downside"
+      },
+      {
+        "key": "D",
+        "text": "Elimination of the need for any retrieval mechanism"
+      }
+    ],
+    "correct": [
+      "A",
+      "B"
+    ],
+    "explanation": {
+      "why_correct": "Saving everything indiscriminately clutters the store (making useful content harder to find) and wastes storage/retrieval resources on low-value content -- both genuine costs.",
+      "why_incorrect": {
+        "C": "This framing ignores the real downside (clutter, wasted resources) that comes with saving everything; it is not a cost-free guarantee.",
+        "D": "A retrieval mechanism is still needed regardless of how aggressively information is saved; saving more doesn't eliminate this need."
+      },
+      "rule_of_thumb": "Saving everything indiscriminately has real costs: clutter and wasted resources, not a cost-free guarantee of perfect recall."
+    },
+    "tags": [
+      "memory-persistence-policy"
+    ]
+  },
+  {
+    "id": "Q-D4-0017",
+    "domain": 4,
+    "task_statement": "4.1",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D4-003"
+    ],
+    "case_study_id": null,
+    "stem": "Which statement correctly describes WHY long-term memory supplements rather than replaces working memory?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "The agent still needs some immediately available context to reason over at any given moment, which only working memory provides"
+      },
+      {
+        "key": "B",
+        "text": "Long-term memory is always slower to access than any other form of storage"
+      },
+      {
+        "key": "C",
+        "text": "Working memory is a deprecated, outdated concept with no modern relevance"
+      },
+      {
+        "key": "D",
+        "text": "Long-term memory cannot store any information related to the current conversation"
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "explanation": {
+      "why_correct": "Regardless of how much long-term memory exists, the agent still needs some immediately available working context to actually reason over moment to moment -- this is a role only working memory serves, which is why long-term memory supplements rather than replaces it.",
+      "why_incorrect": {
+        "B": "Relative access speed is a secondary implementation detail, not the fundamental reason long-term memory supplements rather than replaces working memory.",
+        "C": "Working memory remains a fundamental, necessary concept for any agent that needs an immediate context to reason over.",
+        "D": "Long-term memory can certainly store information relevant to past or ongoing conversations; this is not an inherent restriction."
+      },
+      "rule_of_thumb": "Long-term memory supplements working memory because the agent always needs an immediately available context to reason over, which only working memory provides."
+    },
+    "tags": [
+      "memory-architecture",
+      "working-memory",
+      "long-term-memory"
+    ]
+  },
+  {
+    "id": "Q-D4-0018",
+    "domain": 4,
+    "task_statement": "4.1",
+    "type": "single_choice",
+    "difficulty": "hard",
+    "theory_refs": [
+      "TH-D4-001",
+      "TH-D4-004"
+    ],
+    "case_study_id": null,
+    "stem": "An agent proactively copies a user's stated preference from the current conversation into a long-term store immediately after it's mentioned, rather than waiting for it to be displaced from working memory. What does this behavior best illustrate?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Proof that working memory and long-term memory are identical"
+      },
+      {
+        "key": "B",
+        "text": "A malfunction that should never occur in a well-designed agent"
+      },
+      {
+        "key": "C",
+        "text": "A deliberate persistence decision based on anticipated future relevance, rather than relying on passive displacement to determine what's retained"
+      },
+      {
+        "key": "D",
+        "text": "An action with no relationship to memory management at all"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "Proactively saving a preference based on anticipated future relevance is exactly the kind of deliberate persistence decision that good memory design calls for, rather than passively waiting for working-memory displacement to determine (essentially by accident) what gets lost or retained.",
+      "why_incorrect": {
+        "B": "This is a desirable, deliberate design behavior, not a malfunction -- it reflects good persistence judgment.",
+        "D": "This action is directly and centrally about memory management -- specifically, persistence policy decisions.",
+        "A": "This behavior specifically demonstrates the DISTINCTION between the two memory types -- deliberately moving something from one to the other -- not that they're identical."
+      },
+      "rule_of_thumb": "Proactively persisting information based on anticipated future relevance, rather than relying on passive displacement, reflects good deliberate memory management."
+    },
+    "tags": [
+      "memory-persistence-policy",
+      "working-memory",
+      "long-term-memory"
+    ]
+  }
+]

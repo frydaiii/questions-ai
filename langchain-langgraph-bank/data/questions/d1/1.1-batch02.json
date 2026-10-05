@@ -1,0 +1,241 @@
+[
+  {
+    "id": "Q-D1-0011",
+    "domain": 1,
+    "task_statement": "1.1",
+    "type": "multi_response",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D1-003"
+    ],
+    "case_study_id": null,
+    "stem": "Which of the following are considered minimum functional components of a complete agentic loop? (Select 2)",
+    "select_count": 2,
+    "options": [
+      {
+        "key": "A",
+        "text": "A reasoning core that decides what action to take"
+      },
+      {
+        "key": "B",
+        "text": "A termination condition that determines when to stop"
+      },
+      {
+        "key": "C",
+        "text": "A long-term memory database"
+      },
+      {
+        "key": "D",
+        "text": "A planning module that creates multi-step plans in advance"
+      }
+    ],
+    "correct": [
+      "A",
+      "B"
+    ],
+    "explanation": {
+      "why_correct": "A reasoning core and a termination condition are both part of the strictly minimal agent loop -- without a decision-maker there is no agency, and without a stopping condition the loop would never end.",
+      "why_incorrect": {
+        "C": "Long-term memory is a common enhancement but not a strict requirement -- a reactive agent can operate within a single task with no persistent memory across sessions.",
+        "D": "Explicit upfront planning is one strategy among several for sequencing actions, but reactive agents can decide one action at a time without a separate planning module."
+      },
+      "rule_of_thumb": "The strictly minimal agent loop needs a decision-maker and a stopping condition; memory and explicit planning are valuable but optional enhancements."
+    },
+    "tags": [
+      "agent-components",
+      "minimal-agent"
+    ]
+  },
+  {
+    "id": "Q-D1-0012",
+    "domain": 1,
+    "task_statement": "1.1",
+    "type": "multi_response",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D1-004"
+    ],
+    "case_study_id": null,
+    "stem": "Which of the following are genuine limitations of a single-shot LLM call that agentic designs are intended to address? (Select 2)",
+    "select_count": 2,
+    "options": [
+      {
+        "key": "A",
+        "text": "Inability to access information outside its training data and prompt context"
+      },
+      {
+        "key": "B",
+        "text": "Inability to verify or revise its own output before it is finalized"
+      },
+      {
+        "key": "C",
+        "text": "Inability to generate grammatically correct sentences"
+      },
+      {
+        "key": "D",
+        "text": "Inability to process more than one word at a time"
+      }
+    ],
+    "correct": [
+      "A",
+      "B"
+    ],
+    "explanation": {
+      "why_correct": "A single-shot call cannot fetch live or external data beyond its training and prompt, and it has no built-in step to check its own answer -- both are real gaps that tool use and self-critique/reflection loops respectively address.",
+      "why_incorrect": {
+        "C": "Modern LLMs are generally capable of producing grammatically correct text in a single pass; this is not the limitation agentic designs target.",
+        "D": "LLMs process input as sequences of tokens with full context, not strictly one word at a time in the sense implied; this is not a genuine limitation driving agentic design."
+      },
+      "rule_of_thumb": "The real motivations for agentic design are grounding (fresh/external knowledge) and self-correction (verification/revision) -- not basic language fluency, which single-shot calls already handle well."
+    },
+    "tags": [
+      "limitations",
+      "tool-use-motivation",
+      "self-critique"
+    ]
+  },
+  {
+    "id": "Q-D1-0013",
+    "domain": 1,
+    "task_statement": "1.1",
+    "type": "multi_response",
+    "difficulty": "hard",
+    "theory_refs": [
+      "TH-D1-002",
+      "TH-D1-005"
+    ],
+    "case_study_id": null,
+    "stem": "Which of the following systems should be classified as workflows rather than agents? (Select 2)",
+    "select_count": 2,
+    "options": [
+      {
+        "key": "A",
+        "text": "A system that always runs steps A, then B, then C, in that fixed order, regardless of input"
+      },
+      {
+        "key": "B",
+        "text": "A system that classifies input into one of five predefined branches using a fixed classifier, with no further runtime decisions"
+      },
+      {
+        "key": "C",
+        "text": "A system where the model decides, at runtime, which of an open-ended set of tools to call and how many times"
+      },
+      {
+        "key": "D",
+        "text": "A system where the model decides when to stop iterating based on its own assessment of task completion"
+      }
+    ],
+    "correct": [
+      "A",
+      "B"
+    ],
+    "explanation": {
+      "why_correct": "Both a fixed sequential pipeline and a fixed-branch classifier represent control flow fully authored in advance by a developer, with no runtime decision-making by the model about what to do next -- the defining trait of a workflow.",
+      "why_incorrect": {
+        "C": "Dynamically choosing among an open-ended set of tools at runtime is exactly the kind of model-driven decision-making that characterizes an agent, not a workflow.",
+        "D": "Deciding when to stop based on the model's own assessment (rather than a fixed step count defined in advance) is an agentic trait, since the termination point is determined dynamically."
+      },
+      "rule_of_thumb": "Fixed sequences and fixed-branch classifiers are workflows; dynamic tool selection and model-decided termination are hallmarks of agentic control flow."
+    },
+    "tags": [
+      "workflow-vs-agent",
+      "control-flow"
+    ]
+  },
+  {
+    "id": "Q-D1-0014",
+    "domain": 1,
+    "task_statement": "1.1",
+    "type": "multi_response",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D1-006"
+    ],
+    "case_study_id": null,
+    "stem": "Which of the following are legitimate reasons to deliberately LIMIT an agent's autonomy rather than maximizing it? (Select 2)",
+    "select_count": 2,
+    "options": [
+      {
+        "key": "A",
+        "text": "The task involves actions that are costly or impossible to reverse if done incorrectly"
+      },
+      {
+        "key": "B",
+        "text": "The system needs to be predictable and auditable for compliance reasons"
+      },
+      {
+        "key": "C",
+        "text": "Full autonomy is always technically impossible to implement"
+      },
+      {
+        "key": "D",
+        "text": "Limiting autonomy guarantees the agent will never make mistakes"
+      }
+    ],
+    "correct": [
+      "A",
+      "B"
+    ],
+    "explanation": {
+      "why_correct": "High-stakes, hard-to-reverse actions and the need for predictable, auditable behavior are both well-established, legitimate engineering reasons to constrain an agent's autonomy rather than maximizing it.",
+      "why_incorrect": {
+        "C": "Full autonomy is technically achievable in many systems; the reasons to limit it are about risk and predictability tradeoffs, not technical impossibility.",
+        "D": "Limiting autonomy reduces risk surface and improves predictability, but it does not guarantee error-free behavior -- a constrained agent can still make mistakes within its narrower scope."
+      },
+      "rule_of_thumb": "Autonomy limits are a deliberate risk/predictability tradeoff, driven by the cost of errors and auditability needs -- not a technical limitation or an error-elimination guarantee."
+    },
+    "tags": [
+      "autonomy",
+      "risk",
+      "design-tradeoffs"
+    ]
+  },
+  {
+    "id": "Q-D1-0015",
+    "domain": 1,
+    "task_statement": "1.1",
+    "type": "multi_response",
+    "difficulty": "easy",
+    "theory_refs": [
+      "TH-D1-001"
+    ],
+    "case_study_id": null,
+    "stem": "Which of the following properties are commonly used to characterize an AI agent? (Select 2)",
+    "select_count": 2,
+    "options": [
+      {
+        "key": "A",
+        "text": "Some degree of autonomy in deciding its own next action"
+      },
+      {
+        "key": "B",
+        "text": "Goal-directed behavior organized toward an objective"
+      },
+      {
+        "key": "C",
+        "text": "Guaranteed perfect accuracy on every task"
+      },
+      {
+        "key": "D",
+        "text": "A requirement to always use at least three different tools per task"
+      }
+    ],
+    "correct": [
+      "A",
+      "B"
+    ],
+    "explanation": {
+      "why_correct": "Autonomy over deciding next actions and goal-directedness are the two core properties most commonly used to characterize what makes a system agentic, as opposed to a fixed function or script.",
+      "why_incorrect": {
+        "C": "No accuracy guarantee is implied by or required for a system to be considered an agent; agents can and do make mistakes while still being agentic.",
+        "D": "There is no fixed minimum tool-count requirement for agency; a minimal agent could use zero or one tool depending on the task."
+      },
+      "rule_of_thumb": "Agency is characterized by autonomy and goal-directedness, not by any guarantee of accuracy or a fixed tool-usage quota."
+    },
+    "tags": [
+      "agent-definition",
+      "autonomy",
+      "goal-directedness"
+    ]
+  }
+]

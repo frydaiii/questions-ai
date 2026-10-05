@@ -1,0 +1,143 @@
+[
+  {
+    "id": "Q-D3-0065",
+    "domain": 3,
+    "task_statement": "3.3",
+    "type": "single_choice",
+    "difficulty": "easy",
+    "theory_refs": [
+      "TH-D3-010"
+    ],
+    "case_study_id": null,
+    "stem": "A tool call returns a 'permission denied' response. Which failure category does this fall into?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Tool unavailability"
+      },
+      {
+        "key": "B",
+        "text": "An explicit error response"
+      },
+      {
+        "key": "C",
+        "text": "A misleading-success result"
+      },
+      {
+        "key": "D",
+        "text": "A fully successful outcome"
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "explanation": {
+      "why_correct": "A 'permission denied' message is a clear, explicit error response signaling that the call did not succeed as intended for a specific, stated reason.",
+      "why_incorrect": {
+        "A": "The tool was reachable and responded; the issue is a permissions problem, not an inability to reach the tool at all.",
+        "C": "This is not misleading, since the error is explicit and clearly communicated, not hidden behind an apparently successful result.",
+        "D": "A permission denial means the call did not succeed in its intended purpose; it is not a successful outcome."
+      },
+      "rule_of_thumb": "A clearly communicated denial or rejection message is an explicit error response, distinct from unavailability or misleading success."
+    },
+    "tags": [
+      "failure-categorization"
+    ]
+  },
+  {
+    "id": "Q-D3-0066",
+    "domain": 3,
+    "task_statement": "3.3",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D3-011"
+    ],
+    "case_study_id": null,
+    "stem": "An agent retries a failed call exactly once with no backoff, immediately and identically, and the retry also fails for the same transient reason that hadn't yet resolved. What design improvement would most likely help?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Retrying infinitely with no delay between attempts"
+      },
+      {
+        "key": "B",
+        "text": "Removing all retry logic entirely"
+      },
+      {
+        "key": "C",
+        "text": "Adding a backoff delay between attempts, giving the transient condition more time to actually resolve before retrying"
+      },
+      {
+        "key": "D",
+        "text": "Switching to a completely unrelated tool with no connection to the original task"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "Since the condition was transient but hadn't resolved yet, adding a backoff delay gives it more time to actually clear before the next attempt, increasing the odds that a subsequent retry succeeds.",
+      "why_incorrect": {
+        "B": "Removing retry logic entirely would prevent the agent from ever recovering from genuinely transient failures.",
+        "D": "Switching to a completely unrelated tool would not address the actual task's needs; a fallback should still be relevant to the original need.",
+        "A": "Retrying infinitely with no delay could worsen the situation (e.g. if the issue is server overload) and provides no stopping condition."
+      },
+      "rule_of_thumb": "When an immediate retry fails for a transient reason, adding backoff gives the condition more time to clear before trying again."
+    },
+    "tags": [
+      "retry-strategy",
+      "backoff"
+    ]
+  },
+  {
+    "id": "Q-D3-0067",
+    "domain": 3,
+    "task_statement": "3.3",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D3-013"
+    ],
+    "case_study_id": null,
+    "stem": "An agent is told by a lookup tool that a given database table has 'zero matching records' for a high-stakes compliance check. What is the most prudent next step before concluding the check passed?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Sanity-check the query itself and consider cross-checking against another source, given the high stakes, before treating the zero result as conclusive"
+      },
+      {
+        "key": "B",
+        "text": "Immediately conclude the compliance check passed with full confidence and no further scrutiny"
+      },
+      {
+        "key": "C",
+        "text": "Assume the database itself has been permanently deleted"
+      },
+      {
+        "key": "D",
+        "text": "Ignore the result entirely and make up an answer instead"
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "explanation": {
+      "why_correct": "Given the high stakes of a compliance check, sanity-checking whether the zero-result query was actually correct, and potentially cross-checking against another source, is the prudent step before treating the result as a conclusive true negative.",
+      "why_incorrect": {
+        "B": "Concluding immediately with full confidence skips exactly the scrutiny that high-stakes, surprising, or pivotal results warrant.",
+        "C": "A zero-record result does not imply the entire database was deleted; this is an unsupported leap unrelated to the actual finding.",
+        "D": "Ignoring the actual result and fabricating an answer discards real information in favor of an ungrounded guess, which is clearly worse."
+      },
+      "rule_of_thumb": "For high-stakes, surprising, or pivotal results, sanity-check the query and consider cross-checking against another source before treating the result as conclusive."
+    },
+    "tags": [
+      "sanity-checking",
+      "high-stakes",
+      "misleading-results"
+    ]
+  }
+]

@@ -1,0 +1,242 @@
+[
+  {
+    "id": "Q-D2-0017",
+    "domain": 2,
+    "task_statement": "2.1",
+    "type": "single_choice",
+    "difficulty": "easy",
+    "theory_refs": [
+      "TH-D2-005"
+    ],
+    "case_study_id": null,
+    "stem": "Which task is best suited to plain chain-of-thought reasoning without any interleaved actions?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Finding today's currency exchange rate"
+      },
+      {
+        "key": "B",
+        "text": "Solving a self-contained arithmetic word problem with all values given in the prompt"
+      },
+      {
+        "key": "C",
+        "text": "Booking a real-world appointment through an external calendar system"
+      },
+      {
+        "key": "D",
+        "text": "Retrieving the current weather for a specific city"
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "explanation": {
+      "why_correct": "A self-contained arithmetic problem with all needed values already in the prompt requires no external information, making plain chain-of-thought reasoning sufficient.",
+      "why_incorrect": {
+        "A": "Current exchange rates change constantly and require an external, up-to-date lookup, which plain reasoning cannot provide.",
+        "C": "Booking a real-world appointment requires taking an actual external action (interacting with a calendar system), not just internal reasoning.",
+        "D": "Current weather is dynamic, external information that must be fetched via an action, not recalled from internal knowledge."
+      },
+      "rule_of_thumb": "Plain reasoning suffices only when the task is self-contained with no dependency on external or time-sensitive information."
+    },
+    "tags": [
+      "chain-of-thought",
+      "task-fit"
+    ]
+  },
+  {
+    "id": "Q-D2-0018",
+    "domain": 2,
+    "task_statement": "2.1",
+    "type": "multi_response",
+    "difficulty": "hard",
+    "theory_refs": [
+      "TH-D2-002",
+      "TH-D2-003"
+    ],
+    "case_study_id": null,
+    "stem": "Which of the following design choices would help an interleaved reasoning-action agent avoid acting prematurely? (Select 2)",
+    "select_count": 2,
+    "options": [
+      {
+        "key": "A",
+        "text": "Requiring the agent to articulate a concrete justification before each action"
+      },
+      {
+        "key": "B",
+        "text": "Removing all reasoning steps to speed up the loop"
+      },
+      {
+        "key": "C",
+        "text": "Adding a check for whether enough information has been gathered to justify the planned action"
+      },
+      {
+        "key": "D",
+        "text": "Forcing exactly one action per reasoning step regardless of context"
+      }
+    ],
+    "correct": [
+      "A",
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "Requiring explicit justification before acting, and checking whether sufficient information has actually been gathered, both directly target the premature-action problem by ensuring the agent has a real basis before committing to an action.",
+      "why_incorrect": {
+        "B": "Removing reasoning steps entirely would make premature action MORE likely, not less, since there would be no justification step at all.",
+        "D": "A rigid one-action-per-step rule ignores whether an action is actually justified yet, which does nothing to prevent premature action and may even force it."
+      },
+      "rule_of_thumb": "Preventing premature action requires justification checks and sufficiency checks before acting -- not removing reasoning or imposing arbitrary rigid schedules."
+    },
+    "tags": [
+      "reasoning-action-balance",
+      "design-tradeoffs"
+    ]
+  },
+  {
+    "id": "Q-D2-0019",
+    "domain": 2,
+    "task_statement": "2.1",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D2-004"
+    ],
+    "case_study_id": null,
+    "stem": "Which mitigation is most directly targeted at fixing the 'premature conclusion' failure pattern specifically?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Adding a step/iteration limit to the loop"
+      },
+      {
+        "key": "B",
+        "text": "Making the most recent observation more prominent in the next prompt"
+      },
+      {
+        "key": "C",
+        "text": "Adding an explicit completeness or confidence check before finalizing an answer"
+      },
+      {
+        "key": "D",
+        "text": "Switching to a purely reactive architecture"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "An explicit completeness or confidence check before finalizing an answer directly targets premature conclusion by forcing a check on whether the gathered evidence actually justifies stopping.",
+      "why_incorrect": {
+        "A": "A step/iteration limit is targeted at containing looping behavior, not at verifying whether a conclusion is adequately supported by evidence.",
+        "B": "Foregrounding the latest observation addresses the ignoring-observations failure pattern, not premature conclusion.",
+        "D": "Switching architectures entirely is a much more drastic and unrelated change; it does not specifically target the premature-conclusion issue."
+      },
+      "rule_of_thumb": "Match the mitigation to the specific failure pattern: completeness/confidence checks for premature conclusion, step limits for looping, prompt structuring for ignored observations."
+    },
+    "tags": [
+      "react",
+      "failure-diagnosis",
+      "premature-conclusion"
+    ]
+  },
+  {
+    "id": "Q-D2-0020",
+    "domain": 2,
+    "task_statement": "2.1",
+    "type": "single_choice",
+    "difficulty": "hard",
+    "theory_refs": [
+      "TH-D2-001",
+      "TH-D2-002"
+    ],
+    "case_study_id": null,
+    "stem": "An agent's thought step says 'I believe the file was last modified in 2021' without having called any tool to check. The next action is a tool call to verify this. What best describes this specific thought-action pair?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "An example of ignoring observations"
+      },
+      {
+        "key": "B",
+        "text": "A failure pattern that should be avoided at all costs"
+      },
+      {
+        "key": "C",
+        "text": "Proof that the agent's architecture is purely reactive"
+      },
+      {
+        "key": "D",
+        "text": "An ungrounded assumption being appropriately followed by a grounding action to verify it"
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "Stating a tentative, ungrounded belief and then taking an action specifically to verify it is a healthy, appropriate use of the interleaved pattern -- surfacing the assumption explicitly before grounding it against a real check.",
+      "why_incorrect": {
+        "B": "This is not a failure pattern; explicitly flagging an assumption and then verifying it is exactly the kind of grounding behavior the interleaved pattern is designed to encourage.",
+        "C": "Explicit reasoning before acting is the opposite of purely reactive behavior, which has no internal reasoning trace at all.",
+        "A": "Ignoring observations refers to disregarding an observation already received; this scenario is about forming an assumption and then seeking an observation to check it, which is different."
+      },
+      "rule_of_thumb": "Explicitly surfacing a tentative assumption and then taking an action to verify it is healthy grounding behavior, not a failure pattern."
+    },
+    "tags": [
+      "grounding",
+      "react",
+      "healthy-behavior"
+    ]
+  },
+  {
+    "id": "Q-D2-0021",
+    "domain": 2,
+    "task_statement": "2.1",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D2-005"
+    ],
+    "case_study_id": null,
+    "stem": "A developer claims chain-of-thought reasoning is strictly obsolete now that interleaved reasoning-action patterns exist. Is this an accurate characterization?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Inaccurate, because interleaved agents are strictly slower in literally every case with no exceptions"
+      },
+      {
+        "key": "B",
+        "text": "Accurate -- chain-of-thought should never be used again under any circumstances"
+      },
+      {
+        "key": "C",
+        "text": "Accurate, because interleaved agents never use any reasoning at all"
+      },
+      {
+        "key": "D",
+        "text": "Inaccurate -- chain-of-thought remains appropriate for self-contained tasks that need no external grounding, where the added action-taking overhead is unnecessary"
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "Chain-of-thought remains the appropriate, simpler choice for self-contained tasks with no need for external grounding, where the added overhead of action-taking would be unnecessary -- neither approach is universally superior.",
+      "why_incorrect": {
+        "B": "Declaring chain-of-thought entirely obsolete ignores that it remains well suited to self-contained reasoning tasks that don't require external information.",
+        "C": "Interleaved agents DO use explicit reasoning (the 'thought' steps); they are not action-only, so this claim misdescribes the pattern.",
+        "A": "This answer reaches the right practical conclusion (chain-of-thought still has a place) via faulty reasoning (an absolute, unqualified speed claim), which is not an accurate generalization."
+      },
+      "rule_of_thumb": "Neither chain-of-thought nor interleaved reasoning-action is universally superior -- choose based on whether the task needs external grounding."
+    },
+    "tags": [
+      "chain-of-thought",
+      "react",
+      "task-fit"
+    ]
+  }
+]

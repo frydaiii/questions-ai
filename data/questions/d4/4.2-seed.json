@@ -1,0 +1,81 @@
+[
+  {
+    "id": "Q-D4-0001",
+    "domain": 4,
+    "task_statement": "4.2",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": ["TH-D4-001"],
+    "case_study_id": null,
+    "stem": "A data science team has built a classical tabular model that predicts loan approval decisions, and a regulator has asked them to explain which input features most influenced an individual denial. Which AWS capability directly addresses this request?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Amazon Bedrock Guardrails" },
+      { "key": "B", "text": "Amazon SageMaker Clarify" },
+      { "key": "C", "text": "AWS CloudTrail" },
+      { "key": "D", "text": "Amazon Bedrock Agents" }
+    ],
+    "correct": ["B"],
+    "explanation": {
+      "why_correct": "Amazon SageMaker Clarify provides explainability reports, including feature attribution, for classical ML models, which directly answers a regulator's question about which inputs drove an individual prediction.",
+      "why_incorrect": {
+        "A": "Bedrock Guardrails filters generative AI inputs/outputs for content safety; it has no role in explaining a classical tabular model's predictions.",
+        "C": "CloudTrail records API call history for auditing purposes; it does not analyze or explain feature attribution for a model's predictions.",
+        "D": "Bedrock Agents orchestrate multistep generative AI workflows; they are unrelated to explainability for a classical ML model."
+      },
+      "rule_of_thumb": "Bias in a prediction or an unexplainable classical ML model -> SageMaker Clarify. Inappropriate or unsafe generative text -> Bedrock Guardrails."
+    },
+    "tags": ["sagemaker-clarify", "explainability", "responsible-ai"]
+  },
+  {
+    "id": "Q-D4-0002",
+    "domain": 4,
+    "task_statement": "4.1",
+    "type": "multi_response",
+    "difficulty": "medium",
+    "theory_refs": ["TH-D4-001"],
+    "case_study_id": null,
+    "stem": "A company is deploying a customer-facing chatbot on Amazon Bedrock and wants to prevent it from discussing competitor products or leaking any PII a customer might paste into the chat. Which TWO capabilities of Amazon Bedrock Guardrails directly support these requirements?",
+    "select_count": 2,
+    "options": [
+      { "key": "A", "text": "Denied topics, to block discussion of specific subjects such as competitor products" },
+      { "key": "B", "text": "PII redaction, to detect and mask personally identifiable information in input or output" },
+      { "key": "C", "text": "Feature attribution reports for tabular model predictions" },
+      { "key": "D", "text": "API call history for security auditing" }
+    ],
+    "correct": ["A", "B"],
+    "explanation": {
+      "why_correct": "Denied topics let the application block or steer away from specific subjects such as competitor products, and PII redaction detects and masks personally identifiable information moving through the model, which is exactly the pair of controls this scenario calls for.",
+      "why_incorrect": {
+        "C": "Feature attribution reports for tabular model predictions are a SageMaker Clarify capability aimed at classical ML explainability, not a Bedrock Guardrails content-safety feature.",
+        "D": "API call history for security auditing is a CloudTrail capability, unrelated to filtering chatbot content for topics or PII."
+      },
+      "rule_of_thumb": "Bedrock Guardrails is a generative-AI content-safety control: denied topics, harmful content filtering, and PII redaction, enforced at inference time on every request/response."
+    },
+    "tags": ["bedrock-guardrails", "pii", "content-safety"]
+  },
+  {
+    "id": "Q-D4-0003",
+    "domain": 4,
+    "task_statement": "4.1",
+    "type": "ordering",
+    "difficulty": "medium",
+    "theory_refs": ["TH-D4-001"],
+    "case_study_id": null,
+    "stem": "A team is investigating a fairness complaint about a classical ML model's loan decisions and wants to follow a responsible sequence of diagnostic steps. Arrange the following steps in the order they should be performed, from first to last.",
+    "select_count": 4,
+    "options": [
+      { "key": "A", "text": "Run SageMaker Clarify to check for statistical bias across protected attributes in the training data" },
+      { "key": "B", "text": "Generate feature attribution reports for a sample of denied applications" },
+      { "key": "C", "text": "Review the model card documentation for known limitations and intended use" },
+      { "key": "D", "text": "Implement and validate a bias-mitigation change, then re-run the bias check to confirm improvement" }
+    ],
+    "correct": ["C", "A", "B", "D"],
+    "explanation": {
+      "why_correct": "The investigation should begin by reviewing existing documentation of known limitations (C), then run a systematic bias check across protected attributes (A), then drill into specific denied cases with feature attribution to understand individual decisions (B), and finally implement and re-validate a fix (D).",
+      "why_incorrect": {},
+      "rule_of_thumb": "Responsible AI investigations start with existing documentation, move to systematic statistical bias detection, then to individual explainability, and finish with a validated mitigation and re-check."
+    },
+    "tags": ["responsible-ai", "bias", "sagemaker-clarify", "ordering"]
+  }
+]

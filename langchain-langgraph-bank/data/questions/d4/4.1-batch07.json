@@ -1,0 +1,473 @@
+[
+  {
+    "id": "Q-D4-0019",
+    "domain": 4,
+    "task_statement": "4.1",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D4-001"
+    ],
+    "case_study_id": null,
+    "stem": "What practical constraint does working memory face that long-term memory, in principle, does not?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "A total inability to hold more than one piece of information"
+      },
+      {
+        "key": "B",
+        "text": "An inability to be used during reasoning"
+      },
+      {
+        "key": "C",
+        "text": "A requirement to be manually re-typed by the user every time"
+      },
+      {
+        "key": "D",
+        "text": "A bounded size limit tied to the context window"
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "Working memory is bounded by the context window's size, while long-term memory can, in principle, store far more information outside that constraint.",
+      "why_incorrect": {
+        "B": "Working memory is specifically what IS used during active reasoning; it's directly available for that purpose, unlike this claim suggests.",
+        "C": "Information in working memory doesn't need to be manually re-typed by the user; it's part of the ongoing context automatically.",
+        "A": "Working memory can hold many pieces of information simultaneously, up to its size limit -- not just one."
+      },
+      "rule_of_thumb": "Working memory's defining practical constraint is its bounded size tied to the context window, unlike long-term memory's much larger storage capacity."
+    },
+    "tags": [
+      "working-memory",
+      "context-window"
+    ]
+  },
+  {
+    "id": "Q-D4-0020",
+    "domain": 4,
+    "task_statement": "4.1",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D4-002",
+      "TH-D4-003"
+    ],
+    "case_study_id": null,
+    "stem": "A personal assistant agent remembers, across many separate sessions spanning months, that a user prefers morning meetings. What memory capability does this depend on?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Long-term memory, since this persistence spans well beyond any single session's working context"
+      },
+      {
+        "key": "B",
+        "text": "Working memory alone, with no need for any persistence beyond the current session"
+      },
+      {
+        "key": "C",
+        "text": "No memory capability of any kind is involved"
+      },
+      {
+        "key": "D",
+        "text": "A capability that has nothing to do with memory concepts discussed in this domain"
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "explanation": {
+      "why_correct": "Remembering a preference across many separate sessions over months requires persistence well beyond any single session's working context, which is precisely what long-term memory provides.",
+      "why_incorrect": {
+        "B": "Working memory alone, tied to the current session's context, cannot explain persistence across entirely separate sessions spanning months.",
+        "C": "This behavior directly depends on a memory capability -- specifically, long-term, cross-session persistence.",
+        "D": "This is a textbook example of long-term memory's core value: cross-session persistence of relevant information."
+      },
+      "rule_of_thumb": "Persistence of relevant information across separate sessions is a direct application of long-term memory, not something working memory alone can provide."
+    },
+    "tags": [
+      "long-term-memory"
+    ]
+  },
+  {
+    "id": "Q-D4-0021",
+    "domain": 4,
+    "task_statement": "4.1",
+    "type": "single_choice",
+    "difficulty": "hard",
+    "theory_refs": [
+      "TH-D4-004"
+    ],
+    "case_study_id": null,
+    "stem": "Which heuristic best captures a reasonable approach to deciding what to persist to long-term memory?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Weigh whether the information is likely to recur in relevance in future interactions, against the cost of cluttering the store if it's saved"
+      },
+      {
+        "key": "B",
+        "text": "Save literally nothing, ever, regardless of context"
+      },
+      {
+        "key": "C",
+        "text": "Save literally everything exchanged, with absolutely no filtering of any kind"
+      },
+      {
+        "key": "D",
+        "text": "Save only information that contains the word 'remember' explicitly"
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "explanation": {
+      "why_correct": "Weighing likely future relevance against the cost of clutter is exactly the balanced judgment that avoids both under-saving (losing useful future information) and over-saving (cluttering the store).",
+      "why_incorrect": {
+        "B": "Saving nothing ever would forfeit any benefit of long-term persistence, even for clearly recurring, valuable information.",
+        "C": "Saving everything with no filtering risks the clutter and resource-waste problems associated with over-saving.",
+        "D": "Relying on a specific trigger word like 'remember' would miss many legitimately persistence-worthy pieces of information that weren't phrased that way, and might also capture irrelevant content that happened to include that word."
+      },
+      "rule_of_thumb": "A balanced persistence heuristic weighs likely future relevance against the cost of clutter -- not an all-or-nothing or keyword-triggered rule."
+    },
+    "tags": [
+      "memory-persistence-policy"
+    ]
+  },
+  {
+    "id": "Q-D4-0022",
+    "domain": 4,
+    "task_statement": "4.1",
+    "type": "single_choice",
+    "difficulty": "easy",
+    "theory_refs": [
+      "TH-D4-003"
+    ],
+    "case_study_id": null,
+    "stem": "Which statement best summarizes the proper relationship between working memory and long-term memory?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "They are identical concepts with different names"
+      },
+      {
+        "key": "B",
+        "text": "They are competing alternatives, and an agent should pick exactly one to use forever"
+      },
+      {
+        "key": "C",
+        "text": "They are complementary systems that together address limitations neither has on its own"
+      },
+      {
+        "key": "D",
+        "text": "Working memory is strictly obsolete and should never be used in modern agent design"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "The two memory types are complementary: working memory provides immediate context, and long-term memory provides persistence beyond that context -- together addressing limitations each has individually.",
+      "why_incorrect": {
+        "B": "They are not competing alternatives requiring an exclusive choice; effective designs typically use both together.",
+        "D": "Working memory remains essential, since an agent always needs some immediately available context to reason over.",
+        "A": "They are clearly distinct concepts with different properties (immediacy vs. persistence, no retrieval needed vs. retrieval required)."
+      },
+      "rule_of_thumb": "Working memory and long-term memory are complementary systems, not competing or interchangeable alternatives."
+    },
+    "tags": [
+      "memory-architecture"
+    ]
+  },
+  {
+    "id": "Q-D4-0023",
+    "domain": 4,
+    "task_statement": "4.1",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D4-002"
+    ],
+    "case_study_id": null,
+    "stem": "Why does the design of a long-term memory's retrieval mechanism matter as much as the design of its storage mechanism?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Because retrieval mechanisms have no actual effect on agent behavior"
+      },
+      {
+        "key": "B",
+        "text": "Because storage mechanisms are always technically impossible to build"
+      },
+      {
+        "key": "C",
+        "text": "Because stored information that is never successfully retrieved when relevant provides no practical benefit to the agent's behavior"
+      },
+      {
+        "key": "D",
+        "text": "Because storage and retrieval are literally the exact same operation with no distinction"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "Even perfectly stored information provides no actual benefit unless the retrieval mechanism successfully surfaces it when relevant -- making retrieval design just as important as storage design.",
+      "why_incorrect": {
+        "B": "Storage mechanisms are commonly and successfully built in practice; this claim is simply false.",
+        "D": "Storage (saving information) and retrieval (finding and surfacing relevant information later) are distinct operations with different design considerations.",
+        "A": "Retrieval mechanisms directly determine whether stored information ever actually influences the agent's behavior, which is a significant effect."
+      },
+      "rule_of_thumb": "Retrieval design matters as much as storage design, since stored-but-never-retrieved information provides no practical benefit."
+    },
+    "tags": [
+      "memory-retrieval",
+      "long-term-memory"
+    ]
+  },
+  {
+    "id": "Q-D4-0024",
+    "domain": 4,
+    "task_statement": "4.1",
+    "type": "multi_response",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D4-001",
+      "TH-D4-002"
+    ],
+    "case_study_id": null,
+    "stem": "Which of the following statements correctly describe working memory, long-term memory, or both? (Select 2)",
+    "select_count": 2,
+    "options": [
+      {
+        "key": "A",
+        "text": "Working memory requires no separate retrieval step to be used"
+      },
+      {
+        "key": "B",
+        "text": "Long-term memory requires a deliberate retrieval step before it can influence reasoning"
+      },
+      {
+        "key": "C",
+        "text": "Both memory types are always exactly the same size with no variation"
+      },
+      {
+        "key": "D",
+        "text": "Long-term memory cannot persist across separate sessions under any circumstances"
+      }
+    ],
+    "correct": [
+      "A",
+      "B"
+    ],
+    "explanation": {
+      "why_correct": "Working memory is directly usable with no retrieval step, and long-term memory specifically requires a deliberate retrieval step before it can influence reasoning -- both accurate, defining characteristics.",
+      "why_incorrect": {
+        "C": "The two memory types differ significantly in typical size and constraints; they are not described as being equal in size.",
+        "D": "Persisting across separate sessions is precisely one of long-term memory's defining capabilities, not something it's incapable of."
+      },
+      "rule_of_thumb": "Working memory needs no retrieval; long-term memory does, and it specifically enables persistence across sessions."
+    },
+    "tags": [
+      "working-memory",
+      "long-term-memory"
+    ]
+  },
+  {
+    "id": "Q-D4-0025",
+    "domain": 4,
+    "task_statement": "4.1",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D4-003"
+    ],
+    "case_study_id": null,
+    "stem": "A task requires both reasoning about the current message AND recalling a fact from a conversation that happened last week. Which memory capability does each part require?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Only long-term memory is needed for both parts"
+      },
+      {
+        "key": "B",
+        "text": "Working memory for the current message, and long-term memory (with retrieval) for last week's fact"
+      },
+      {
+        "key": "C",
+        "text": "Only working memory is needed for both parts"
+      },
+      {
+        "key": "D",
+        "text": "Neither memory type is relevant to this task"
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "explanation": {
+      "why_correct": "The current message is directly available in the current context (working memory), while last week's fact requires retrieval from persistent storage beyond the current session (long-term memory) -- each part maps to a different, appropriate memory capability.",
+      "why_incorrect": {
+        "C": "Working memory alone cannot account for recalling something from a conversation that ended a week ago; that specifically needs long-term memory and retrieval.",
+        "D": "This task is a clear, direct illustration of both memory types being relevant and necessary, each for a different part of the task.",
+        "A": "The current message doesn't require retrieval; it's already directly available in working memory, making long-term memory alone insufficient to explain how it's used."
+      },
+      "rule_of_thumb": "Tasks mixing current context with recall from past sessions require both working memory and long-term memory, each serving its distinct part."
+    },
+    "tags": [
+      "working-memory",
+      "long-term-memory",
+      "memory-architecture"
+    ]
+  },
+  {
+    "id": "Q-D4-0026",
+    "domain": 4,
+    "task_statement": "4.1",
+    "type": "single_choice",
+    "difficulty": "hard",
+    "theory_refs": [
+      "TH-D4-004"
+    ],
+    "case_study_id": null,
+    "stem": "A persistence policy saves information only if it is explicitly tagged by the user as 'important,' ignoring everything else. What is a likely limitation of this specific policy?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "It guarantees every important fact is always captured with perfect accuracy"
+      },
+      {
+        "key": "B",
+        "text": "It may miss genuinely recurring, useful information that the user never explicitly tagged, even though it would have been valuable to persist"
+      },
+      {
+        "key": "C",
+        "text": "It has no limitations of any kind"
+      },
+      {
+        "key": "D",
+        "text": "It eliminates the need for any retrieval mechanism entirely"
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "explanation": {
+      "why_correct": "Relying solely on explicit user tagging risks missing genuinely useful, recurring information that the user simply never thought to tag, even though it would have been valuable to retain.",
+      "why_incorrect": {
+        "C": "The policy has a real limitation: it depends on an external, potentially inconsistent signal (user tagging) rather than an assessment of actual likely future relevance.",
+        "D": "A retrieval mechanism is still needed for whatever IS saved under this policy; tagging-based saving doesn't eliminate the need for retrieval.",
+        "A": "This policy depends entirely on the user remembering to tag things; it provides no guarantee that all genuinely important information gets captured."
+      },
+      "rule_of_thumb": "Relying solely on explicit user tagging for persistence risks missing valuable, recurring information the user never thought to flag."
+    },
+    "tags": [
+      "memory-persistence-policy"
+    ]
+  },
+  {
+    "id": "Q-D4-0027",
+    "domain": 4,
+    "task_statement": "4.1",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D4-001",
+      "TH-D4-002"
+    ],
+    "case_study_id": null,
+    "stem": "Which of the following correctly orders memory types from most immediately available to least immediately available?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Working memory (immediately available), then long-term memory (requires retrieval)"
+      },
+      {
+        "key": "B",
+        "text": "Long-term memory (immediately available), then working memory (requires retrieval)"
+      },
+      {
+        "key": "C",
+        "text": "Both are equally immediately available with no difference"
+      },
+      {
+        "key": "D",
+        "text": "Neither memory type is ever immediately available under any circumstances"
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "explanation": {
+      "why_correct": "Working memory is directly available in the current context with no retrieval needed, while long-term memory specifically requires a retrieval step -- making working memory the more immediately available of the two.",
+      "why_incorrect": {
+        "B": "This reverses the actual relationship -- long-term memory is the one that requires retrieval, not working memory.",
+        "C": "There is a clear, meaningful difference in immediacy between the two, which is one of their defining distinctions.",
+        "D": "Working memory is specifically defined by being immediately available with no retrieval step needed."
+      },
+      "rule_of_thumb": "Working memory is immediately available; long-term memory requires an explicit retrieval step -- this ordering is one of their core defining distinctions."
+    },
+    "tags": [
+      "working-memory",
+      "long-term-memory"
+    ]
+  },
+  {
+    "id": "Q-D4-0028",
+    "domain": 4,
+    "task_statement": "4.1",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D4-003",
+      "TH-D4-004"
+    ],
+    "case_study_id": null,
+    "stem": "What is the key design question that arises specifically from combining working memory and long-term memory in a single agent architecture?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Whether context windows should be eliminated entirely"
+      },
+      {
+        "key": "B",
+        "text": "Whether to disable one of the two memory types permanently"
+      },
+      {
+        "key": "C",
+        "text": "How to make both memory types exactly identical in every respect"
+      },
+      {
+        "key": "D",
+        "text": "What information to move between the two -- what to save to long-term storage, and what to retrieve back into working memory given the current situation"
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "A central design question in combining both memory types is deciding what information should move between them -- what's worth persisting to long-term storage, and what should be retrieved back into working memory for the current situation.",
+      "why_incorrect": {
+        "B": "The point of combining both is to use each for what it's good at, not to disable one of them permanently.",
+        "C": "Making them identical would eliminate the very distinction (immediacy vs. persistence) that makes combining them valuable in the first place.",
+        "A": "Working memory still requires some context window concept to function; eliminating it entirely isn't a sensible design question here."
+      },
+      "rule_of_thumb": "The key design question in combined memory architectures is what to move between working and long-term memory, and when."
+    },
+    "tags": [
+      "memory-architecture",
+      "memory-persistence-policy"
+    ]
+  }
+]

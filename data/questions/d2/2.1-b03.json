@@ -1,0 +1,508 @@
+[
+  {
+    "id": "Q-D2-0146",
+    "domain": 2, "task_statement": "2.1", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D2-002"], "case_study_id": null,
+    "stem": "Which best explains why a foundation model can typically answer a novel trivia question it was never explicitly trained on, while a traditional supervised classifier could never answer a question outside its specific trained categories?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Traditional classifiers actually have broader general knowledge than any foundation model." },
+      { "key": "B", "text": "Foundation models secretly search the internet in real time for every single query." },
+      { "key": "C", "text": "There is no meaningful difference between the two types of models in this regard." },
+      { "key": "D", "text": "The foundation model draws on broad general knowledge encoded during pre-training on massive, diverse data, rather than being limited to a fixed, narrow set of trained categories." }
+    ],
+    "correct": ["D"],
+    "explanation": {
+      "why_correct": "A foundation model's broad pre-training on massive, diverse data encodes wide-ranging general knowledge that lets it respond to novel questions outside any fixed set of categories, unlike a traditional classifier which is limited strictly to the narrow categories it was explicitly trained on.",
+      "why_incorrect": {
+        "A": "This reverses the actual relationship; traditional classifiers are narrow by design, while foundation models have the broader general knowledge from pre-training.",
+        "B": "Foundation models do not automatically search the internet in real time; they draw on knowledge encoded during pre-training (unless explicitly augmented with a tool like RAG or a search-enabled agent).",
+        "C": "There is a real, significant difference: foundation models generalize broadly from pre-training, while traditional classifiers are limited to their specific trained categories."
+      },
+      "rule_of_thumb": "Foundation models are pre-trained once on massive, broad data, giving them general knowledge; traditional ML models are narrow, limited strictly to their specific trained task/categories."
+    },
+    "tags": ["foundation-models", "traditional-ml"]
+  },
+  {
+    "id": "Q-D2-0147",
+    "domain": 2, "task_statement": "2.1", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D2-003"], "case_study_id": null,
+    "stem": "An accessibility team wants a tool that automatically generates a spoken audio description of the visual content in an image, for users with visual impairments. Which combination of capabilities is required?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "A purely text-based summarization model with no image or audio capability." },
+      { "key": "B", "text": "A speech-to-text model alone." },
+      { "key": "C", "text": "A single-modality image classifier with no text or audio output at all." },
+      { "key": "D", "text": "Multimodal image understanding to describe the image in text, combined with text-to-speech to convert that description into audio." }
+    ],
+    "correct": ["D"],
+    "explanation": {
+      "why_correct": "This use case requires understanding an image well enough to describe it in text (a multimodal capability) and then converting that text description into spoken audio (text-to-speech), combining both steps to meet the full accessibility requirement.",
+      "why_incorrect": {
+        "A": "A purely text-based summarizer with no image capability cannot process or describe the image's visual content at all.",
+        "B": "Speech-to-text converts audio into text, the opposite direction needed here; this scenario needs text (or image) converted TO audio.",
+        "C": "A single-modality image classifier that only outputs a category label, with no text description or audio output, does not meet the full requirement of a spoken description."
+      },
+      "rule_of_thumb": "Multimodal image understanding plus text-to-speech together solve tasks that neither alone can — describing visual content and then vocalizing that description."
+    },
+    "tags": ["multimodal-models"]
+  },
+  {
+    "id": "Q-D2-0148",
+    "domain": 2, "task_statement": "2.1", "type": "single_choice", "difficulty": "hard",
+    "theory_refs": ["TH-D2-004", "TH-D1-005"], "case_study_id": null,
+    "stem": "A team is evaluating two candidate architectures for a new photorealistic product-image generator: one based on reverse diffusion, and one based on a generator-discriminator adversarial setup. Which statement accurately compares these two options for this use case?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "GANs have completely replaced diffusion models for all image-generation use cases as of today." },
+      { "key": "B", "text": "Both approaches are functionally identical, with the only difference being their names." },
+      { "key": "C", "text": "Neither approach is capable of generating photorealistic images under any circumstances." },
+      { "key": "D", "text": "Diffusion models are the currently dominant, mainstream technique for high-quality, prompt-controllable image generation, while GANs were an earlier dominant approach." }
+    ],
+    "correct": ["D"],
+    "explanation": {
+      "why_correct": "Diffusion models are indeed the current mainstream, dominant technique for high-quality, prompt-controllable photorealistic image generation, with GANs representing an earlier, now less dominant approach for this specific use case.",
+      "why_incorrect": {
+        "A": "This reverses the actual current trend; diffusion models, not GANs, are now the dominant mainstream technique for this use case.",
+        "B": "These are fundamentally different mechanisms (noise-removal vs. adversarial competition), not functionally identical approaches with different names.",
+        "C": "Both diffusion models and GANs are well documented to be capable of generating photorealistic images; this statement is factually incorrect."
+      },
+      "rule_of_thumb": "Assuming image generation always uses GANs is a common misconception — GANs were an earlier dominant approach, but diffusion models are now the mainstream technique for high-quality, prompt-controllable image generation."
+    },
+    "tags": ["diffusion-models", "gan"]
+  },
+  {
+    "id": "Q-D2-0149",
+    "domain": 2, "task_statement": "2.1", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D2-001"], "case_study_id": null,
+    "stem": "A chatbot application needs to include the last 10 turns of conversation history in every new request so the model maintains context. As the conversation grows longer, what constraint must the application account for?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "There is no limit at all on how much conversation history can be included." },
+      { "key": "B", "text": "Conversation history has no effect on token usage or cost." },
+      { "key": "C", "text": "The model automatically summarizes conversation history with no application-level handling required." },
+      { "key": "D", "text": "The growing conversation history, plus the new message and expected response, must still fit within the model's context window." }
+    ],
+    "correct": ["D"],
+    "explanation": {
+      "why_correct": "As conversation history grows, the combined total of history tokens, the new message, and expected response tokens must still fit within the model's context window — a hard ceiling the application must account for, often by truncating or summarizing older history as needed.",
+      "why_incorrect": {
+        "A": "The context window is a hard ceiling; there absolutely is a limit on how much text (including conversation history) can be included in a single request.",
+        "B": "Conversation history tokens count toward both token-based billing and the context window limit; they are not free or without effect.",
+        "C": "Unless specifically built into the application logic (e.g. a summarization step), the model does not automatically manage or summarize conversation history on its own — the application typically must handle this."
+      },
+      "rule_of_thumb": "The context window is a hard ceiling: prompt tokens (including conversation history) + expected output tokens must fit within it, or the request fails or gets truncated."
+    },
+    "tags": ["context-window", "conversation-history"]
+  },
+  {
+    "id": "Q-D2-0150",
+    "domain": 2, "task_statement": "2.1", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D2-005"], "case_study_id": null,
+    "stem": "A team observes that adding two well-chosen examples to a prompt significantly improved output consistency for a specific formatting task, without any training job being run. What best explains this improvement?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "The model was automatically fine-tuned in the background without the team's knowledge." },
+      { "key": "B", "text": "The examples permanently altered the model's weights for all future users." },
+      { "key": "C", "text": "Adding examples to a prompt has no real effect on output consistency." },
+      { "key": "D", "text": "The model used in-context learning, leveraging patterns from its pre-training to follow the demonstrated pattern within the prompt, with no weight changes." }
+    ],
+    "correct": ["D"],
+    "explanation": {
+      "why_correct": "Adding examples within a prompt leverages in-context learning: the model uses patterns from its broad pre-training to follow the demonstrated pattern for the duration of that request, with zero weight changes and no actual training job involved.",
+      "why_incorrect": {
+        "A": "No training job (fine-tuning) occurred; the team explicitly noted this. The improvement came from in-context learning within the prompt, not background fine-tuning.",
+        "B": "In-context learning does not permanently alter the model's weights or affect other users; its effects are limited to the specific request/conversation.",
+        "C": "The scenario explicitly describes significant improvement from adding examples, contradicting the claim that examples have no real effect."
+      },
+      "rule_of_thumb": "If model behavior changes only because of what's written in the current prompt, and reverts back to default on the next separate request, that's in-context learning — not fine-tuning."
+    },
+    "tags": ["in-context-learning", "few-shot"]
+  },
+  {
+    "id": "Q-D2-0151",
+    "domain": 2, "task_statement": "2.1", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D2-002"], "case_study_id": null,
+    "stem": "Anthropic Claude and Amazon Titan, both accessible via Amazon Bedrock, are examples of which category of model?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Traditional decision trees" },
+      { "key": "B", "text": "Simple linear regression models" },
+      { "key": "C", "text": "Rules engines" },
+      { "key": "D", "text": "Foundation models" }
+    ],
+    "correct": ["D"],
+    "explanation": {
+      "why_correct": "Anthropic Claude and Amazon Titan are both examples of foundation models: large models pre-trained broadly on massive data, adaptable to many downstream tasks, and accessible via Amazon Bedrock's unified API.",
+      "why_incorrect": {
+        "A": "Decision trees are a traditional ML technique for structured data classification/regression; Claude and Titan are large-scale pre-trained generative models, not decision trees.",
+        "B": "Linear regression predicts a single continuous value from features; it is a much simpler, narrower technique than the large pre-trained foundation models named here.",
+        "C": "Rules engines follow fixed human-written logic with no learning; Claude and Titan are learned, pre-trained neural network models, not rules engines."
+      },
+      "rule_of_thumb": "Amazon Titan and Anthropic Claude (available via Bedrock) are textbook examples of foundation models."
+    },
+    "tags": ["foundation-models", "bedrock"]
+  },
+  {
+    "id": "Q-D2-0152",
+    "domain": 2, "task_statement": "2.1", "type": "multi_response", "difficulty": "medium",
+    "theory_refs": ["TH-D2-001", "TH-D2-002"], "case_study_id": null,
+    "stem": "Which TWO of the following are true about how foundation models and traditional ML models handle brand-new, previously unseen tasks?",
+    "select_count": 2,
+    "options": [
+      { "key": "A", "text": "A foundation model can often attempt a brand-new task immediately via a well-crafted prompt, using knowledge from its pre-training." },
+      { "key": "B", "text": "A traditional ML model has zero capability on a brand-new task until it is explicitly trained on labeled examples for that specific task." },
+      { "key": "C", "text": "Both foundation models and traditional ML models require identical amounts of training data for every new task." },
+      { "key": "D", "text": "Traditional ML models can handle any new task automatically with no additional training required." }
+    ],
+    "correct": ["A", "B"],
+    "explanation": {
+      "why_correct": "A foundation model can often attempt new tasks immediately via prompting due to its broad pre-training, while a traditional ML model genuinely has zero capability on a new task until explicitly trained for it — both accurate, contrasting statements.",
+      "why_incorrect": {
+        "C": "This is false; foundation models often need zero additional training data for a new task (just a prompt), while traditional ML models require a full labeled dataset — these needs are not identical.",
+        "D": "This is the opposite of how traditional ML models work; they specifically CANNOT handle a new task without additional training on labeled examples for that task."
+      },
+      "rule_of_thumb": "A foundation model can often handle a brand-new task via prompting alone, with no additional training required, unlike a traditional ML model, which has no capability at all until trained on labeled examples for that task."
+    },
+    "tags": ["foundation-models", "traditional-ml"]
+  },
+  {
+    "id": "Q-D2-0153",
+    "domain": 2, "task_statement": "2.1", "type": "multi_response", "difficulty": "hard",
+    "theory_refs": ["TH-D2-003", "TH-D2-004"], "case_study_id": null,
+    "stem": "Which TWO of the following statements accurately reflect key properties of multimodal models and diffusion models respectively?",
+    "select_count": 2,
+    "options": [
+      { "key": "A", "text": "Multimodal models map each modality into a shared representation space so relationships across modalities can be learned together." },
+      { "key": "B", "text": "Diffusion models generate content by learning to reverse a gradual noising process." },
+      { "key": "C", "text": "Multimodal models are incapable of processing text under any circumstances." },
+      { "key": "D", "text": "Diffusion models require exactly the same training data format as a traditional decision tree." }
+    ],
+    "correct": ["A", "B"],
+    "explanation": {
+      "why_correct": "Multimodal models do map modalities into a shared representation space to relate concepts across them, and diffusion models do generate content by reversing a gradual noising process — both accurate, foundational descriptions.",
+      "why_incorrect": {
+        "C": "Multimodal models commonly process text as one of their modalities (often alongside images or audio); they are not incapable of processing text.",
+        "D": "Diffusion models and decision trees use entirely different training approaches and data formats; there is no such equivalence."
+      },
+      "rule_of_thumb": "A shared embedding/representation space is what allows multimodal models to relate concepts across modalities; diffusion models specifically reverse a noising process to generate content."
+    },
+    "tags": ["multimodal-models", "diffusion-models"]
+  },
+  {
+    "id": "Q-D2-0154",
+    "domain": 2, "task_statement": "2.1", "type": "matching", "difficulty": "medium",
+    "theory_refs": ["TH-D2-002", "TH-D2-003"], "case_study_id": null,
+    "stem": "Match each model category on the left with the example on the right that best represents it.",
+    "select_count": 4,
+    "matching": {
+      "left": [
+        { "key": "L1", "text": "Foundation model" },
+        { "key": "L2", "text": "Traditional ML model" },
+        { "key": "L3", "text": "Multimodal model" },
+        { "key": "L4", "text": "Text-only large language model" }
+      ],
+      "right": [
+        { "key": "R1", "text": "Amazon Titan, broadly pre-trained and adaptable via prompting to many tasks" },
+        { "key": "R2", "text": "A custom SageMaker XGBoost model trained from scratch for one specific churn-prediction task" },
+        { "key": "R3", "text": "A model that can both understand an uploaded image and generate a text caption describing it" },
+        { "key": "R4", "text": "A model that generates written summaries but has no capability to process images or audio" }
+      ]
+    },
+    "correct_pairs": { "L1": "R1", "L2": "R2", "L3": "R3", "L4": "R4" },
+    "explanation": {
+      "why_correct": "Amazon Titan is a foundation model (R1). The custom XGBoost model is a traditional ML model (R2). Image understanding plus text captioning is multimodal (R3). A text-only summarizer with no image/audio capability is a text-only LLM (R4).",
+      "why_incorrect": {},
+      "rule_of_thumb": "Broadly pre-trained, prompt-adaptable -> foundation model. Narrow, trained-from-scratch -> traditional ML. Handles 2+ data types -> multimodal. Text in, text out only -> text-only LLM."
+    },
+    "tags": ["foundation-models", "traditional-ml", "multimodal-models", "matching"]
+  },
+  {
+    "id": "Q-D2-0155",
+    "domain": 2, "task_statement": "2.1", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D2-022"], "case_study_id": null,
+    "stem": "A creative writing tool intentionally wants highly varied, surprising output every time a user requests a new short story from the same starting prompt. Which property of generative AI does the tool's design rely on?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "A completely deterministic, rule-based system with zero randomness" },
+      { "key": "B", "text": "A fixed lookup table of pre-written stories" },
+      { "key": "C", "text": "The stochastic, probability-based sampling behavior of generative models, especially when using a higher temperature setting" },
+      { "key": "D", "text": "A context window set to its absolute minimum value" }
+    ],
+    "correct": ["C"],
+    "explanation": {
+      "why_correct": "Generative models are stochastic by default, sampling from a probability distribution over possible outputs; using a higher temperature setting amplifies this variability, producing more varied and surprising results across repeated requests, exactly matching the tool's design intent.",
+      "why_incorrect": {
+        "A": "A fully deterministic, rule-based system with zero randomness would produce the exact same output every time, the opposite of what this creative tool wants.",
+        "B": "A fixed lookup table would produce the same limited set of pre-written stories rather than genuinely varied, freshly generated content.",
+        "D": "Context window size controls how much text can be processed, not the randomness/variability of the generated output."
+      },
+      "rule_of_thumb": "Higher temperature flattens the probability distribution, increasing randomness and variety in generated output — useful when creative variability is the explicit goal."
+    },
+    "tags": ["deterministic-vs-stochastic", "temperature"]
+  },
+  {
+    "id": "Q-D2-0156",
+    "domain": 2, "task_statement": "2.1", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D2-001"], "case_study_id": null,
+    "stem": "Which of the following correctly explains why embeddings are commonly stored in a specialized vector database rather than a traditional relational database table?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Relational databases are completely incapable of storing any numeric data whatsoever." },
+      { "key": "B", "text": "Embeddings must always be stored as plain text strings, never as numeric vectors." },
+      { "key": "C", "text": "Vector databases are optimized for fast similarity search across high-dimensional numeric vectors, which traditional relational indexing is not designed for." },
+      { "key": "D", "text": "There is no meaningful difference between a vector database and a relational database for this purpose." }
+    ],
+    "correct": ["C"],
+    "explanation": {
+      "why_correct": "Vector databases are purpose-built with indexing structures optimized for fast similarity search across high-dimensional numeric vectors (like k-NN search), a capability traditional relational database indexing is not designed to provide efficiently at scale.",
+      "why_incorrect": {
+        "A": "Relational databases can absolutely store numeric data; the issue is not storage capability but efficient similarity search across high-dimensional vectors at scale.",
+        "B": "Embeddings are numeric vectors by definition, not plain text strings; storing them as vectors (not as text) is exactly the point.",
+        "D": "There is a meaningful difference: vector databases provide specialized indexing (e.g. k-NN) for efficient large-scale similarity search that traditional relational indexing does not provide as efficiently."
+      },
+      "rule_of_thumb": "Embeddings are typically stored and queried in a vector database to support fast similarity search at scale, which relational databases are not optimized for."
+    },
+    "tags": ["embeddings", "vector-database"]
+  },
+  {
+    "id": "Q-D2-0157",
+    "domain": 2, "task_statement": "2.1", "type": "single_choice", "difficulty": "hard",
+    "theory_refs": ["TH-D2-002", "TH-D2-005"], "case_study_id": null,
+    "stem": "A team argues that because a foundation model can answer questions on almost any topic via prompting, it must have been separately trained on labeled examples for each of those specific topics, just like a traditional classifier would need. Why is this reasoning flawed?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "The reasoning is actually correct; every single topic must be separately labeled and trained for." },
+      { "key": "B", "text": "Foundation models never use any form of training at all." },
+      { "key": "C", "text": "The model's broad general knowledge comes from pre-training on massive, diverse data, not from separate, topic-specific labeled training for each individual query it can answer." },
+      { "key": "D", "text": "Traditional classifiers can also answer questions on any topic without task-specific training." }
+    ],
+    "correct": ["C"],
+    "explanation": {
+      "why_correct": "A foundation model's ability to respond across many topics comes from broad pre-training on massive, diverse data during a single pre-training process, not from separate labeled training runs for each individual topic or question, which is exactly why the team's reasoning is flawed.",
+      "why_incorrect": {
+        "A": "This is the flawed reasoning being questioned; foundation models do NOT require separate topic-specific labeled training for every question they can answer.",
+        "B": "Foundation models do undergo training (pre-training, and often further steps like RLHF); the flaw is in assuming EACH topic needs separate task-specific training, not that no training occurs at all.",
+        "D": "This is backwards; traditional classifiers specifically CANNOT answer questions outside their narrow trained categories without additional task-specific training, unlike foundation models."
+      },
+      "rule_of_thumb": "Foundation models are pre-trained once on massive, broad data, giving them general-purpose capabilities across many topics — not through separate training for every individual topic or task."
+    },
+    "tags": ["foundation-models", "pretraining"]
+  },
+  {
+    "id": "Q-D2-0158",
+    "domain": 2, "task_statement": "2.1", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D2-003"], "case_study_id": null,
+    "stem": "Which scenario is the best example of visual question answering, a common multimodal use case?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "A user uploads a photo of a car engine and asks 'what part is this?', and the model answers in natural language based on the image content." },
+      { "key": "B", "text": "A user asks a text-only chatbot to summarize a news article." },
+      { "key": "C", "text": "A user asks a forecasting model to predict next month's sales." },
+      { "key": "D", "text": "A user runs a spell-checker on a text document." }
+    ],
+    "correct": ["A"],
+    "explanation": {
+      "why_correct": "Answering a natural-language question about the content of an uploaded image is precisely the definition of visual question answering, a genuine multimodal use case combining image understanding and text generation.",
+      "why_incorrect": {
+        "B": "Summarizing a text article is a single-modality (text-to-text) task, not a multimodal visual question answering use case.",
+        "C": "Forecasting from historical numeric data is a single-modality (numeric time-series) task, unrelated to visual question answering.",
+        "D": "Spell-checking a text document is a single-modality (text) task with no visual component involved."
+      },
+      "rule_of_thumb": "Common multimodal use cases include image captioning, visual question answering, and text-to-image generation — all requiring reasoning across more than one data type."
+    },
+    "tags": ["multimodal-models", "visual-question-answering"]
+  },
+  {
+    "id": "Q-D2-0159",
+    "domain": 2, "task_statement": "2.1", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D2-005"], "case_study_id": null,
+    "stem": "Which of the following statements accurately captures the tradeoff between few-shot prompting and zero-shot prompting?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Few-shot prompting generally improves consistency with a desired format at the cost of a longer, more token-expensive prompt, while zero-shot is cheaper but relies entirely on the model's default behavior." },
+      { "key": "B", "text": "Zero-shot prompting always produces strictly better results than few-shot prompting in every scenario." },
+      { "key": "C", "text": "Few-shot prompting requires updating the model's weights through a training job." },
+      { "key": "D", "text": "There is no cost difference whatsoever between zero-shot and few-shot prompting." }
+    ],
+    "correct": ["A"],
+    "explanation": {
+      "why_correct": "Few-shot prompting does tend to improve consistency with a desired format/style due to the included examples, but at the cost of a longer, more token-expensive prompt, while zero-shot is cheaper (shorter) but depends entirely on the model's default behavior with no demonstrated pattern — an accurate tradeoff description.",
+      "why_incorrect": {
+        "B": "This is an overstatement; few-shot often outperforms zero-shot specifically for tasks needing a particular format or style, though zero-shot may suffice for simpler tasks.",
+        "C": "Few-shot prompting involves no training or weight updates at all; it works purely through in-context learning within a single prompt.",
+        "D": "There is a real cost difference: few-shot prompts are longer (more examples included), consuming more tokens and therefore costing more per request than a shorter zero-shot prompt."
+      },
+      "rule_of_thumb": "Few-shot: multiple examples, generally more reliable for tasks needing a specific output format, at higher token cost. Zero-shot: instructions only, cheapest and shortest, relies on the model's default capability."
+    },
+    "tags": ["few-shot", "zero-shot", "prompting"]
+  },
+  {
+    "id": "Q-D2-0160",
+    "domain": 2, "task_statement": "2.1", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D2-001"], "case_study_id": null,
+    "stem": "A non-English-language document is being processed by a foundation model, and the team notices the token count for an equivalent-length passage is much higher than it would be for English text. What is the most likely explanation?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Tokenization efficiency can vary by language, and less common languages/scripts may require more tokens to represent the same amount of text." },
+      { "key": "B", "text": "Non-English text is never processed by foundation models under any circumstances." },
+      { "key": "C", "text": "Token counts have no relationship to the language or script of the text being processed." },
+      { "key": "D", "text": "This indicates the model is malfunctioning and should be restarted." }
+    ],
+    "correct": ["A"],
+    "explanation": {
+      "why_correct": "Tokenization efficiency can genuinely vary by language, since tokenizers are often optimized primarily around the training data's dominant language (often English); less common languages or scripts frequently require more tokens to represent the same amount of text.",
+      "why_incorrect": {
+        "B": "Many foundation models do process non-English text; the observation here is about token efficiency, not a claim that non-English text can't be processed.",
+        "C": "Token counts absolutely can and do vary based on language/script, contrary to this statement — this is the exact phenomenon the scenario describes.",
+        "D": "This is a well-documented, expected tokenization characteristic across languages, not a sign of malfunction."
+      },
+      "rule_of_thumb": "Believing 1 token equals 1 word is a common misconception — token counts are usually higher than word counts, especially for uncommon words or non-English text."
+    },
+    "tags": ["tokens", "tokenization"]
+  },
+  {
+    "id": "Q-D2-0161",
+    "domain": 2, "task_statement": "2.1", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D2-002"], "case_study_id": null,
+    "stem": "A company deciding whether a use case needs a foundation model or a traditional ML model determines the task is narrow, well-defined, has abundant labeled data, and needs the absolute lowest per-inference cost at extremely high volume, with no need for broader general capability. Which approach is more likely appropriate here?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "A traditional, narrow ML model, since the task is well-defined with abundant labeled data and the priority is minimizing per-inference cost at scale." },
+      { "key": "B", "text": "A foundation model is always the correct choice regardless of task characteristics." },
+      { "key": "C", "text": "Neither approach can handle a narrow, well-defined task under any circumstances." },
+      { "key": "D", "text": "A rules engine is always superior to any ML approach for this scenario." }
+    ],
+    "correct": ["A"],
+    "explanation": {
+      "why_correct": "For a narrow, well-defined task with abundant labeled data and a strong priority on minimizing per-inference cost at high volume, a traditional, purpose-built ML model is often more cost-effective and appropriate than the broader (and often costlier per-inference) foundation model approach.",
+      "why_incorrect": {
+        "B": "Foundation models are not automatically the correct choice for every scenario; narrow, well-defined tasks with abundant labeled data and strict cost-at-scale priorities are often better served by traditional ML.",
+        "C": "Traditional ML models are specifically well suited to narrow, well-defined tasks; this statement incorrectly claims neither approach can handle this scenario.",
+        "D": "A rules engine (no learning at all) is not necessarily superior; if abundant labeled data exists, a trained model can typically outperform fixed hand-written rules and adapt as data evolves."
+      },
+      "rule_of_thumb": "Not every AI problem calls for a foundation model — a narrow, well-defined task with abundant labeled data and strict cost-at-scale requirements is often a better fit for traditional ML."
+    },
+    "tags": ["foundation-models", "traditional-ml", "cost-tradeoffs"]
+  },
+  {
+    "id": "Q-D2-0162",
+    "domain": 2, "task_statement": "2.1", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D2-004"], "case_study_id": null,
+    "stem": "Which of the following AWS-related statements about diffusion-based image generation is accurate?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Amazon Bedrock provides access to diffusion-based image-generation foundation models through the same unified API used for text models." },
+      { "key": "B", "text": "Diffusion-based image generation is not available through any AWS service." },
+      { "key": "C", "text": "Amazon Bedrock requires a completely separate, unrelated API for image-generation models compared to text models." },
+      { "key": "D", "text": "Diffusion models can only be accessed by training them entirely from scratch on SageMaker with no pre-trained options available." }
+    ],
+    "correct": ["A"],
+    "explanation": {
+      "why_correct": "Amazon Bedrock does provide access to diffusion-based image-generation foundation models through the same unified API used for text models, letting an application access both text and image generation capabilities consistently.",
+      "why_incorrect": {
+        "B": "Diffusion-based image generation IS available through AWS, specifically via Amazon Bedrock.",
+        "C": "Bedrock's value proposition is specifically a UNIFIED API across model types, including both text and image-generation models, not separate, unrelated APIs.",
+        "D": "Bedrock provides access to pre-trained diffusion-based image-generation models directly; training entirely from scratch on SageMaker is not the only way to access this capability."
+      },
+      "rule_of_thumb": "Amazon Bedrock provides access to diffusion-based image-generation foundation models through the same unified API used for text models."
+    },
+    "tags": ["diffusion-models", "bedrock"]
+  },
+  {
+    "id": "Q-D2-0163",
+    "domain": 2, "task_statement": "2.1", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D2-024"], "case_study_id": null,
+    "stem": "Which of the following most accurately describes what the attention mechanism does within a transformer model?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "It lets the model weigh the relevance of every other token in a sequence when processing each individual token." },
+      { "key": "B", "text": "It restricts the model to only ever considering the single most recent token in a sequence." },
+      { "key": "C", "text": "It removes the need for the model to process any of the input sequence at all." },
+      { "key": "D", "text": "It is a data storage mechanism unrelated to how the model processes sequences." }
+    ],
+    "correct": ["A"],
+    "explanation": {
+      "why_correct": "The attention mechanism specifically lets the model weigh the relevance of every other token in the sequence when processing each token, capturing relationships across the full sequence rather than just nearby tokens.",
+      "why_incorrect": {
+        "B": "This describes the opposite of attention's actual function; attention specifically looks across the ENTIRE sequence, not just the single most recent token.",
+        "C": "Attention is precisely HOW the model processes the input sequence; it does not remove the need to process it.",
+        "D": "Attention is a core computational mechanism for sequence processing, not a data storage mechanism."
+      },
+      "rule_of_thumb": "Attention lets the model weigh the relevance of all other tokens when processing each token, rather than only nearby tokens in sequence — capturing long-range dependencies effectively."
+    },
+    "tags": ["transformer", "attention"]
+  },
+  {
+    "id": "Q-D2-0164",
+    "domain": 2, "task_statement": "2.1", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D2-005"], "case_study_id": null,
+    "stem": "A team wants to change a model's output style for a single upcoming request only, without any lasting effect on the model for future, unrelated requests, and without any training cost. What is the most appropriate approach?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Adjust the prompt for that specific request, leveraging in-context learning." },
+      { "key": "B", "text": "Run a full fine-tuning job that updates the model's weights." },
+      { "key": "C", "text": "Run continued pre-training on a large unlabeled corpus." },
+      { "key": "D", "text": "Permanently retrain the entire foundation model from scratch." }
+    ],
+    "correct": ["A"],
+    "explanation": {
+      "why_correct": "Adjusting the prompt for a single request leverages in-context learning, which changes behavior only for that specific request with zero training cost and no lasting effect on future, unrelated requests — exactly matching the stated requirement.",
+      "why_incorrect": {
+        "B": "Fine-tuning updates the model's weights, causing a lasting effect across ALL future requests using that fine-tuned model, not just a single one-off request.",
+        "C": "Continued pre-training is an expensive, heavyweight training process with lasting effects; it is entirely inappropriate for a single request's temporary need.",
+        "D": "Retraining the entire foundation model from scratch is by far the most extreme, costly, and lasting option, completely mismatched to a single-request, temporary need."
+      },
+      "rule_of_thumb": "If the 'tuning' happens by changing what's in the prompt for a single request, that's prompt engineering / in-context learning — no training involved, no lasting effect."
+    },
+    "tags": ["in-context-learning", "prompt-engineering"]
+  },
+  {
+    "id": "Q-D2-0165",
+    "domain": 2, "task_statement": "2.1", "type": "single_choice", "difficulty": "medium",
+    "theory_refs": ["TH-D2-002"], "case_study_id": null,
+    "stem": "Which statement correctly describes SageMaker JumpStart's relationship to foundation models?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "SageMaker JumpStart provides a hub for accessing and deploying pre-trained models, including many foundation models, to a self-managed SageMaker endpoint." },
+      { "key": "B", "text": "SageMaker JumpStart can only be used for training traditional decision trees, never foundation models." },
+      { "key": "C", "text": "SageMaker JumpStart has no relationship to foundation models whatsoever." },
+      { "key": "D", "text": "SageMaker JumpStart is a fully serverless, no-infrastructure alternative identical to Amazon Bedrock in every respect." }
+    ],
+    "correct": ["A"],
+    "explanation": {
+      "why_correct": "SageMaker JumpStart provides a hub of pre-trained models, including many foundation models, that can be deployed to a self-managed SageMaker endpoint, giving more infrastructure control than a fully serverless alternative.",
+      "why_incorrect": {
+        "B": "JumpStart is well known specifically for providing access to foundation models (among other pre-trained models), not just traditional decision trees.",
+        "C": "JumpStart has a direct, well-documented relationship to foundation models, providing a hub for accessing and deploying many of them.",
+        "D": "JumpStart deploys to a self-managed SageMaker endpoint, requiring infrastructure management, unlike Bedrock's fully serverless model; the two are not identical in this respect."
+      },
+      "rule_of_thumb": "SageMaker JumpStart: deploy to your own SageMaker endpoint, more infrastructure control than the fully serverless Bedrock alternative."
+    },
+    "tags": ["sagemaker-jumpstart", "foundation-models"]
+  },
+  {
+    "id": "Q-D2-0166",
+    "domain": 2, "task_statement": "2.1", "type": "single_choice", "difficulty": "hard",
+    "theory_refs": ["TH-D2-001", "TH-D2-002"], "case_study_id": null,
+    "stem": "A candidate is evaluating whether increasing a foundation model's context window, without any other change, would help a RAG application that currently returns lower-quality answers due to retrieving too few relevant document chunks. Which statement is most accurate?",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "A larger context window could allow more retrieved chunks to be included in the prompt, but retrieval quality itself (which chunks are found) is a separate concern from context window size." },
+      { "key": "B", "text": "Increasing the context window guarantees the RAG system will always retrieve the correct, most relevant chunks." },
+      { "key": "C", "text": "Context window size and RAG retrieval quality are entirely unrelated with zero connection." },
+      { "key": "D", "text": "A larger context window automatically fixes any embedding or vector-search configuration problems." }
+    ],
+    "correct": ["A"],
+    "explanation": {
+      "why_correct": "A larger context window can allow more retrieved chunks to fit into the prompt at once, but it does not affect the RETRIEVAL process itself (how well the embedding/vector search finds the most relevant chunks) — these are related but distinct concerns.",
+      "why_incorrect": {
+        "B": "A larger context window has no effect on retrieval accuracy; it only affects how much retrieved content CAN be included, not whether the right content is retrieved in the first place.",
+        "C": "There is a real, if indirect, connection: a larger window can accommodate more retrieved chunks, even though it doesn't fix retrieval quality itself.",
+        "D": "Context window size is unrelated to the embedding/vector-search configuration; fixing retrieval quality issues requires addressing the embedding/retrieval pipeline itself, not the context window."
+      },
+      "rule_of_thumb": "A larger context window lets a model reference more conversation history or more retrieved documents in a single call, but does not by itself make the model or the retrieval process more accurate."
+    },
+    "tags": ["context-window", "rag"]
+  }
+]

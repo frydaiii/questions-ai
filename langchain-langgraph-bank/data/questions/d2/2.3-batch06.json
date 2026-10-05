@@ -1,0 +1,240 @@
+[
+  {
+    "id": "Q-D2-0059",
+    "domain": 2,
+    "task_statement": "2.3",
+    "type": "single_choice",
+    "difficulty": "easy",
+    "theory_refs": [
+      "TH-D2-010"
+    ],
+    "case_study_id": null,
+    "stem": "What is a reasonable set of explicit criteria for a reflection step to check a candidate output against?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "The current time of day only"
+      },
+      {
+        "key": "B",
+        "text": "Task requirements, factual correctness, completeness, and format"
+      },
+      {
+        "key": "C",
+        "text": "The number of words in the user's original prompt"
+      },
+      {
+        "key": "D",
+        "text": "Nothing specific -- a vague overall impression is sufficient"
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "explanation": {
+      "why_correct": "Checking against task requirements, factual correctness, completeness, and format are concrete, explicit criteria that give a reflection step something specific and actionable to evaluate.",
+      "why_incorrect": {
+        "C": "Prompt word count is a surface statistic unrelated to the actual correctness or completeness of the generated output.",
+        "D": "A vague overall impression without explicit criteria is precisely the kind of weak, non-specific review that fails to reliably catch real issues.",
+        "A": "Time of day has no relevance to whether a candidate output actually meets the task's substantive requirements."
+      },
+      "rule_of_thumb": "Effective reflection checks against explicit, substantive criteria like requirements, correctness, completeness, and format -- not vague impressions or irrelevant surface statistics."
+    },
+    "tags": [
+      "reflection",
+      "evaluation-criteria"
+    ]
+  },
+  {
+    "id": "Q-D2-0060",
+    "domain": 2,
+    "task_statement": "2.3",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D2-011"
+    ],
+    "case_study_id": null,
+    "stem": "In a self-critique loop, why is it important that the critique step produces SPECIFIC identified issues rather than a generic 'needs improvement' verdict?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Specific issues always guarantee the loop will run exactly once"
+      },
+      {
+        "key": "B",
+        "text": "Specificity has no effect on the quality of the next revision"
+      },
+      {
+        "key": "C",
+        "text": "Generic verdicts are always more accurate than specific ones"
+      },
+      {
+        "key": "D",
+        "text": "Specific issues give the next generation/revision step concrete, actionable direction for what to actually change"
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "A specific, identified issue (e.g. 'the output omits X requirement') gives the subsequent revision step concrete direction, whereas a generic 'needs improvement' verdict provides no actionable guidance on what to actually fix.",
+      "why_incorrect": {
+        "B": "Specificity strongly affects revision quality -- vague feedback tends to produce vague or ineffective revisions.",
+        "C": "Generic verdicts are not inherently more accurate; they simply convey less actionable information, regardless of their accuracy.",
+        "A": "The specificity of identified issues has no inherent bearing on how many loop iterations will occur; that depends on how many issues are found and fixed over time."
+      },
+      "rule_of_thumb": "Specific, actionable critique feedback is what makes a self-critique loop's revision step effective -- vague verdicts provide little direction for improvement."
+    },
+    "tags": [
+      "self-critique-loop",
+      "critique-quality"
+    ]
+  },
+  {
+    "id": "Q-D2-0061",
+    "domain": 2,
+    "task_statement": "2.3",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D2-012"
+    ],
+    "case_study_id": null,
+    "stem": "A model trained with a specific, widespread misconception about a scientific topic is used both to generate and to critique an answer about that topic. What is the expected limitation here?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "The misconception is likely to be absent during critique even though it was present during generation"
+      },
+      {
+        "key": "B",
+        "text": "The misconception is likely to persist through both the generation and the critique, since both rely on the same underlying (flawed) knowledge"
+      },
+      {
+        "key": "C",
+        "text": "Critique always uses entirely different training data than generation"
+      },
+      {
+        "key": "D",
+        "text": "This scenario has no bearing on self-reflection's effectiveness"
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "explanation": {
+      "why_correct": "Since both the generation and critique steps draw on the same underlying model and its embedded misconception, the critique is likely to share and fail to catch that same misconception.",
+      "why_incorrect": {
+        "A": "There's no mechanism by which the misconception would disappear specifically during critique while being present during generation -- both draw on the same knowledge base.",
+        "C": "The critique step, using the same model, does not draw on different training data than the generation step; they share the same underlying knowledge.",
+        "D": "This scenario is a direct, central illustration of self-reflection's core limitation regarding shared knowledge gaps."
+      },
+      "rule_of_thumb": "A systematic misconception embedded in a model's knowledge is likely to persist through both generation and self-critique, since both draw on the same underlying knowledge."
+    },
+    "tags": [
+      "self-reflection-limitations",
+      "blind-spots"
+    ]
+  },
+  {
+    "id": "Q-D2-0062",
+    "domain": 2,
+    "task_statement": "2.3",
+    "type": "single_choice",
+    "difficulty": "easy",
+    "theory_refs": [
+      "TH-D2-011"
+    ],
+    "case_study_id": null,
+    "stem": "Which best describes the relationship between the number of self-critique iterations and the expected marginal benefit of each additional round?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "The marginal benefit is unrelated to the number of rounds completed"
+      },
+      {
+        "key": "B",
+        "text": "The marginal benefit per round always increases without limit"
+      },
+      {
+        "key": "C",
+        "text": "The marginal benefit per round is always exactly zero from the very first round"
+      },
+      {
+        "key": "D",
+        "text": "The marginal benefit per round tends to decrease as more rounds are completed, following a pattern of diminishing returns"
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "Self-critique loops typically show diminishing returns: the first rounds tend to catch the most significant issues, while later rounds catch progressively smaller or fewer issues.",
+      "why_incorrect": {
+        "B": "An ever-increasing marginal benefit per round would be unusual and contrary to the typical diminishing-returns pattern observed in iterative refinement.",
+        "C": "If marginal benefit were zero from the first round, the first round would never have fixed anything -- but the first round often fixes the most significant issues.",
+        "A": "The number of rounds completed is directly related to expected marginal benefit, which is why diminishing returns is a meaningful, predictable pattern rather than a random one."
+      },
+      "rule_of_thumb": "Expect diminishing marginal returns as self-critique iterations accumulate -- early rounds tend to matter most."
+    },
+    "tags": [
+      "self-critique-loop",
+      "diminishing-returns"
+    ]
+  },
+  {
+    "id": "Q-D2-0063",
+    "domain": 2,
+    "task_statement": "2.3",
+    "type": "multi_response",
+    "difficulty": "hard",
+    "theory_refs": [
+      "TH-D2-010",
+      "TH-D2-011",
+      "TH-D2-012"
+    ],
+    "case_study_id": null,
+    "stem": "Which of the following design practices would make a reflection/self-critique mechanism MORE effective in practice? (Select 2)",
+    "select_count": 2,
+    "options": [
+      {
+        "key": "A",
+        "text": "Defining explicit, checkable criteria for the critique step to evaluate against"
+      },
+      {
+        "key": "B",
+        "text": "Pairing self-critique with an external verification step for high-stakes outputs"
+      },
+      {
+        "key": "C",
+        "text": "Allowing the critique step to always respond with a vague 'looks fine' with no specific checks"
+      },
+      {
+        "key": "D",
+        "text": "Running an unlimited number of iterations with no stopping condition"
+      }
+    ],
+    "correct": [
+      "A",
+      "B"
+    ],
+    "explanation": {
+      "why_correct": "Explicit, checkable criteria make the critique substantive and actionable, and pairing with external verification addresses self-reflection's blind-spot limitation for high-stakes cases -- both genuinely improve effectiveness.",
+      "why_incorrect": {
+        "C": "A vague, uncritical 'looks fine' response defeats the purpose of critique entirely, providing no real evaluation.",
+        "D": "Unlimited iterations with no stopping condition risk wasting computation on diminishing-returns rounds with no corresponding benefit."
+      },
+      "rule_of_thumb": "Effective reflection/self-critique design relies on explicit criteria and, for high-stakes cases, external verification -- not vague approval or unbounded iteration."
+    },
+    "tags": [
+      "reflection",
+      "self-critique-loop",
+      "design-best-practices"
+    ]
+  }
+]

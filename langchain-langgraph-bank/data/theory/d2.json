@@ -1,0 +1,338 @@
+[
+  {
+    "id": "TH-D2-001",
+    "domain": 2,
+    "task_statements": ["2.1"],
+    "title": "Interleaving reasoning and action: the core idea behind ReAct-style agents",
+    "summary": "Interleaving reasoning and action means an agent alternates between generating an explicit reasoning trace (a 'thought') and taking a concrete action (e.g. calling a tool), rather than either reasoning fully upfront with no action, or acting immediately with no reasoning. After each action, the resulting observation is fed back into the next reasoning step, allowing the agent to adjust its approach based on what it actually learns rather than committing to a single fixed plan before seeing any results. This pattern improves on pure chain-of-thought reasoning (which has no way to incorporate new, external information mid-reasoning) and on pure action-only agents (which have no explicit record of why a given action was chosen).",
+    "key_points": [
+      "The interleaved pattern alternates: thought -> action -> observation -> thought -> action -> observation, continuing until the task is resolved.",
+      "Explicit 'thought' steps make the agent's reasoning legible and inspectable, which helps with debugging and trust compared to action-only agents.",
+      "Observations from each action update the agent's understanding before the next reasoning step, enabling course correction based on real information rather than a static upfront plan.",
+      "This pattern directly addresses a weakness of pure chain-of-thought reasoning: it has no mechanism to pull in new external information partway through reasoning.",
+      "This pattern also addresses a weakness of pure action-only agents: without an explicit reasoning trace, it's hard to tell why a particular action was chosen or to catch flawed reasoning before it leads to a bad action."
+    ],
+    "rule_of_thumb": "If an agent explicitly narrates why it's about to act, acts, observes the result, and then explicitly re-reasons from that observation, it is using an interleaved reasoning-action pattern.",
+    "common_confusions": [
+      "Confusing interleaved reasoning-action with simply printing a reasoning string before every tool call -- the key property is that the thought actually influences the next action AND the following observation feeds back into the next thought, not merely cosmetic logging.",
+      "Assuming more interleaving steps always means better outcomes -- excessive back-and-forth without converging on an answer can indicate the agent is stuck in a loop rather than making genuine progress."
+    ],
+    "related_tech": ["ReAct", "thought-action-observation loop", "chain-of-thought"],
+    "references": ["https://arxiv.org/abs/2210.03629"]
+  },
+  {
+    "id": "TH-D2-002",
+    "domain": 2,
+    "task_statements": ["2.1"],
+    "title": "Why grounding reasoning in actions reduces hallucination and compounding errors",
+    "summary": "When an agent's reasoning is grounded by real observations from actions (such as tool calls), errors in its internal assumptions get corrected by actual data before they can compound into a wrong final answer. Pure reasoning with no grounding action can confidently proceed from a flawed assumption all the way to a plausible-sounding but incorrect conclusion, since nothing in the process ever checks the assumption against reality. Interleaving actions throughout reasoning (rather than only at the very end) means incorrect assumptions can be caught and corrected early, before the agent has built an elaborate chain of reasoning on top of them.",
+    "key_points": [
+      "Grounding means checking an assumption or claim against an external, verifiable source (e.g. a tool call result) rather than relying solely on the model's internal, possibly outdated or incorrect, knowledge.",
+      "Errors that go unchecked early in a reasoning chain tend to compound, since later reasoning steps build on top of the earlier flawed assumption.",
+      "Taking grounding actions throughout the reasoning process (not just at the end) allows earlier correction, which limits how far a wrong assumption can propagate.",
+      "A model's internal knowledge can be outdated, incomplete, or simply wrong for a specific case; grounding actions substitute verified, current information for that uncertain internal knowledge.",
+      "The earlier an incorrect assumption is checked and corrected, the less reasoning work has to be redone or discarded."
+    ],
+    "rule_of_thumb": "The earlier a reasoning chain checks its assumptions against real, external observations, the less an initial error can compound into a confidently wrong final answer.",
+    "common_confusions": [
+      "Assuming grounding only matters for factual lookup tasks -- grounding is equally important for intermediate computational or logical assumptions that could otherwise silently propagate downstream.",
+      "Believing that one grounding action at the very end of reasoning is equivalent to grounding throughout -- a single late check cannot catch an error that already caused many wasted or misdirected reasoning steps earlier in the chain."
+    ],
+    "related_tech": ["grounding", "hallucination mitigation", "error compounding"],
+    "references": ["https://arxiv.org/abs/2210.03629"]
+  },
+  {
+    "id": "TH-D2-003",
+    "domain": 2,
+    "task_statements": ["2.1"],
+    "title": "Deciding when to think vs. when to act within an interleaved loop",
+    "summary": "A well-designed interleaved reasoning agent must decide, at each step, whether it has enough information to act (and if so, which action), or whether it needs more reasoning (or more information) before taking any action. Acting prematurely, before sufficiently reasoning about the situation, risks wasted or incorrect tool calls; over-reasoning without ever acting risks never making progress on gathering the real-world information the task actually requires. The decision of when to transition from thought to action is typically driven by whether the current reasoning has identified a concrete, well-justified next step, not by a fixed number of reasoning tokens or a fixed schedule.",
+    "key_points": [
+      "At each loop iteration, the agent must decide between continuing to reason or committing to a concrete action, based on whether a well-justified next step has been identified.",
+      "Acting too early, before sufficient reasoning, risks wasted, redundant, or incorrect actions (e.g. calling the wrong tool or calling a tool with wrong parameters).",
+      "Reasoning too long without ever acting risks never obtaining the real-world information or outcome the task actually requires, since reasoning alone cannot access external systems.",
+      "There is no universal fixed number of reasoning steps before acting -- the right balance depends on the task's complexity and how much the agent already knows with confidence.",
+      "A sign of a well-tuned interleaved agent is that actions are purposeful and justified by the preceding thought, not reflexive or arbitrary."
+    ],
+    "rule_of_thumb": "An agent should act once its reasoning has identified a concrete, justified next step -- not before (risking wasted actions) and not indefinitely after (risking never making real progress).",
+    "common_confusions": [
+      "Assuming longer reasoning traces are always better -- excessive reasoning with no corresponding action can be just as unproductive as acting with no reasoning at all, since the task may require actual external information that only an action can provide.",
+      "Treating the thought-to-action transition as governed by a fixed step count -- the appropriate point to act depends on task complexity and current confidence, not an arbitrary fixed schedule."
+    ],
+    "related_tech": ["ReAct", "action selection", "reasoning-action balance"],
+    "references": ["https://arxiv.org/abs/2210.03629"]
+  },
+  {
+    "id": "TH-D2-004",
+    "domain": 2,
+    "task_statements": ["2.1"],
+    "title": "Common failure patterns in interleaved reasoning-action loops",
+    "summary": "Interleaved reasoning-action agents can fail in characteristic ways: looping (repeating a similar thought-action-observation cycle without converging on an answer), ignoring observations (the next thought disregards what the latest action actually returned, as if the action had never happened), and premature conclusion (stopping and answering before the gathered observations actually justify the conclusion). Recognizing these failure patterns is important because they often require different fixes -- looping may call for a step-limit or novelty check, ignoring observations may call for making the observation more prominent in the next prompt, and premature conclusion may call for an explicit completeness check before finalizing an answer.",
+    "key_points": [
+      "Looping: the agent repeats a similar sequence of thought-action-observation without making genuine progress toward resolving the task.",
+      "Ignoring observations: the next reasoning step proceeds as if the most recent action's result was never received, effectively wasting that action.",
+      "Premature conclusion: the agent commits to a final answer before the gathered observations actually support that conclusion.",
+      "Each failure mode often requires a distinct mitigation: step/iteration limits and novelty checks for looping; prompt structuring that foregrounds the latest observation for ignoring-observations; and explicit completeness/confidence checks before finalizing an answer for premature conclusion.",
+      "Diagnosing which specific failure pattern occurred (by inspecting the thought-action-observation trace) is usually more productive than making a generic 'try harder' adjustment."
+    ],
+    "rule_of_thumb": "When an interleaved agent fails, inspect its thought-action-observation trace to identify whether it looped, ignored an observation, or concluded prematurely -- each has a distinct, targeted fix.",
+    "common_confusions": [
+      "Assuming all interleaved-loop failures are the same 'the agent got confused' problem -- looping, ignoring observations, and premature conclusion are distinct failure patterns with different root causes and different fixes.",
+      "Assuming a step limit alone fixes every failure mode -- a step limit helps contain looping, but does nothing for an agent that ignores observations or concludes prematurely well within that limit."
+    ],
+    "related_tech": ["ReAct", "failure diagnosis", "agent loop debugging"],
+    "references": ["https://arxiv.org/abs/2210.03629"]
+  },
+  {
+    "id": "TH-D2-005",
+    "domain": 2,
+    "task_statements": ["2.1"],
+    "title": "ReAct compared to plain chain-of-thought and plain action-only agents",
+    "summary": "Plain chain-of-thought reasoning produces a step-by-step reasoning trace but has no mechanism to incorporate new external information mid-reasoning -- everything must come from the model's internal knowledge, generated upfront. Plain action-only agents take actions based on the current state with no explicit reasoning trace recorded, making their decisions harder to inspect, debug, or trust. The interleaved reasoning-action pattern combines benefits of both: it keeps an explicit, legible reasoning trace (like chain-of-thought) while also grounding that reasoning in real external observations gathered via actions (unlike chain-of-thought, which cannot do this), and unlike plain action-only agents, every action is preceded by an inspectable justification.",
+    "key_points": [
+      "Plain chain-of-thought: explicit reasoning trace, but no way to pull in new external information partway through -- entirely dependent on the model's internal (possibly incomplete or wrong) knowledge.",
+      "Plain action-only: takes actions based on current state, but with no explicit, inspectable reasoning trace explaining why a given action was chosen.",
+      "Interleaved reasoning-action keeps the inspectability benefit of chain-of-thought while adding the real-world grounding benefit of taking actions throughout the process, not just reasoning in isolation.",
+      "The combination specifically helps on tasks that require both multi-step reasoning AND access to external, dynamic, or current information that the model doesn't already have memorized.",
+      "None of the three approaches is strictly superior for every task -- simple tasks needing no external information may do fine with plain chain-of-thought, and simple reactive tasks may do fine with plain action-only behavior."
+    ],
+    "rule_of_thumb": "Interleaved reasoning-action is most valuable when a task needs BOTH multi-step reasoning AND access to external, dynamic information -- for tasks needing only one of those, a simpler pattern may suffice.",
+    "common_confusions": [
+      "Assuming interleaved reasoning-action is always strictly better than chain-of-thought or action-only agents -- for tasks that genuinely don't need external grounding, the extra action-taking overhead of the interleaved pattern may be unnecessary.",
+      "Treating chain-of-thought as inherently 'wrong' for needing no external actions -- for self-contained reasoning tasks (e.g. a logic puzzle with all needed information already given), chain-of-thought alone can be entirely appropriate."
+    ],
+    "related_tech": ["ReAct", "chain-of-thought", "action-only agents"],
+    "references": ["https://arxiv.org/abs/2201.11903"]
+  },
+  {
+    "id": "TH-D2-006",
+    "domain": 2,
+    "task_statements": ["2.2"],
+    "title": "Task decomposition: breaking a complex goal into manageable sub-tasks",
+    "summary": "Task decomposition is the process of breaking a large, complex goal into a set of smaller, more manageable sub-tasks that are individually easier to solve, verify, and recover from if they fail. Decomposition is valuable because large, monolithic tasks are harder to reason about directly, harder to verify piece by piece, and a single error anywhere in the process can be harder to localize and fix. By contrast, a well-decomposed task allows each sub-task's result to be checked independently, and if one sub-task fails, the agent can often retry or fix just that piece rather than redoing the entire task from scratch.",
+    "key_points": [
+      "Decomposition breaks a complex goal into smaller, more tractable sub-tasks, each individually easier to solve and verify.",
+      "A monolithic, non-decomposed approach makes it harder to localize exactly where an error occurred within a large, complex response.",
+      "Decomposed sub-tasks can often be verified independently, catching errors earlier and more precisely than checking only a final combined output.",
+      "If one sub-task fails, a decomposed approach often allows retrying or fixing just that sub-task, rather than discarding and redoing the entire original task.",
+      "Decomposition is not free -- it adds overhead in planning how to split the task and in coordinating/combining sub-task results back into a final answer."
+    ],
+    "rule_of_thumb": "A good decomposition produces sub-tasks that are individually easier to verify and fix than the original complex task would be as a single unit.",
+    "common_confusions": [
+      "Assuming decomposition is always worth the overhead -- for genuinely simple tasks, the cost of planning and coordinating sub-tasks can exceed the benefit of decomposing at all.",
+      "Treating decomposition as splitting a task into arbitrary equal-sized pieces -- effective decomposition splits along natural sub-problem boundaries, not an arbitrary count or length."
+    ],
+    "related_tech": ["task decomposition", "plan-and-execute", "sub-task planning"],
+    "references": ["https://arxiv.org/abs/2305.04091"]
+  },
+  {
+    "id": "TH-D2-007",
+    "domain": 2,
+    "task_statements": ["2.2"],
+    "title": "Plan-and-execute: separating upfront planning from step-by-step execution",
+    "summary": "In a plan-and-execute pattern, the agent first generates a multi-step plan in full before executing any of it, then carries out each planned step in sequence (optionally revising the remaining plan if a step's result changes what's needed). This differs from the interleaved reasoning-action pattern, which generates only one next step at a time; plan-and-execute instead commits to a broader structure upfront, which can produce more globally coherent plans but risks the plan becoming invalid partway through if an early step's actual result differs from what was assumed when the plan was made.",
+    "key_points": [
+      "Plan-and-execute generates a full multi-step plan upfront, before executing any step, as opposed to interleaving one step of reasoning and one action at a time.",
+      "Upfront planning can produce more globally coherent plans, since the agent considers the whole task structure at once rather than one step at a time.",
+      "A risk of plan-and-execute is that an early step's actual result may invalidate assumptions baked into the rest of the plan, requiring re-planning.",
+      "A well-designed plan-and-execute agent includes a re-planning or plan-revision step when execution reveals that the original plan no longer fits reality.",
+      "Plan-and-execute and interleaved reasoning-action are not mutually exclusive -- some systems plan at a coarse level upfront, then interleave more fine-grained reasoning and action within each planned step."
+    ],
+    "rule_of_thumb": "Plan-and-execute trades the interleaved pattern's step-by-step adaptability for more globally coherent upfront structure -- but needs a re-planning mechanism to handle plans invalidated by real execution results.",
+    "common_confusions": [
+      "Assuming a plan generated upfront is fixed and must be followed exactly even if execution reveals it's wrong -- a well-designed plan-and-execute system revises the plan when needed, rather than blindly executing a now-invalid plan.",
+      "Treating plan-and-execute and interleaved reasoning-action as mutually exclusive opposites -- many practical systems combine coarse upfront planning with finer-grained interleaving within each step."
+    ],
+    "related_tech": ["plan-and-execute", "re-planning", "upfront planning"],
+    "references": ["https://arxiv.org/abs/2305.04091"]
+  },
+  {
+    "id": "TH-D2-008",
+    "domain": 2,
+    "task_statements": ["2.2"],
+    "title": "Tree-of-thought: exploring multiple reasoning branches instead of one linear chain",
+    "summary": "Tree-of-thought reasoning explores multiple candidate reasoning paths (branches) from a given point, rather than committing to a single linear chain of reasoning as in standard chain-of-thought. At each branching point, several different next-step options are generated and evaluated, and the most promising branches are pursued further while weaker ones are pruned, similar in spirit to a search process. This approach is valuable for problems where an early reasoning step could plausibly go several different directions, and where committing to the wrong one early (as a purely linear chain would) could prevent reaching the actual correct solution.",
+    "key_points": [
+      "Tree-of-thought generates and evaluates multiple candidate next-steps (branches) at each point, rather than committing to a single linear path.",
+      "Weaker branches can be pruned, while more promising branches are explored further, similar in spirit to search algorithms.",
+      "This approach helps on problems where a single early wrong turn in a purely linear chain-of-thought would prevent ever reaching the correct answer.",
+      "Exploring multiple branches costs more computation than a single linear chain, since multiple candidate paths must be generated and evaluated.",
+      "A mechanism for evaluating or scoring branches (to decide which to pursue and which to prune) is a necessary component of this approach, not an optional add-on."
+    ],
+    "rule_of_thumb": "Tree-of-thought is worth its extra computational cost specifically when early reasoning steps are genuinely ambiguous and a wrong early commitment would be hard to recover from in a linear chain.",
+    "common_confusions": [
+      "Assuming tree-of-thought always finds the globally best answer -- it depends heavily on the quality of the branch-evaluation mechanism; a poor evaluator can still prune away the actually-best branch.",
+      "Using tree-of-thought on problems with no genuine branching ambiguity -- if there's really only one sensible next step at each point, exploring multiple branches wastes computation without adding value."
+    ],
+    "related_tech": ["tree-of-thought", "search-based reasoning", "branch pruning"],
+    "references": ["https://arxiv.org/abs/2305.10601"]
+  },
+  {
+    "id": "TH-D2-009",
+    "domain": 2,
+    "task_statements": ["2.2"],
+    "title": "Choosing a planning strategy based on task structure",
+    "summary": "The choice between no explicit decomposition, plan-and-execute, and tree-of-thought-style exploration should be driven by the task's structure: how interdependent are the sub-steps, how much does early uncertainty affect later steps, and how costly is it to explore multiple candidate paths. Simple, linear tasks with little ambiguity need no special decomposition strategy at all. Tasks with clearly separable, mostly independent sub-goals benefit from decomposition and plan-and-execute. Tasks where an early decision could plausibly branch in several directions, each requiring exploration to know which is correct, benefit most from tree-of-thought-style approaches, assuming the extra computational cost is acceptable for the task.",
+    "key_points": [
+      "Simple, linear, unambiguous tasks often need no explicit decomposition or branching strategy -- a straightforward approach suffices.",
+      "Tasks with separable, mostly independent sub-goals benefit from decomposition into sub-tasks, optionally planned upfront via plan-and-execute.",
+      "Tasks with genuine early-step ambiguity, where a wrong early commitment would be hard to recover from, benefit most from exploring multiple branches (tree-of-thought-style).",
+      "The decision also depends on acceptable cost: tree-of-thought-style exploration is more expensive, so it should be reserved for tasks where that exploration is likely to pay off.",
+      "Mismatching strategy to task structure wastes computation (e.g. branching on an unambiguous task) or risks poor outcomes (e.g. using no decomposition on a highly complex, interdependent task)."
+    ],
+    "rule_of_thumb": "Match planning strategy to task structure: simple and linear needs no special strategy, separable sub-goals benefit from decomposition/plan-and-execute, and genuine early-step ambiguity benefits from tree-of-thought-style exploration.",
+    "common_confusions": [
+      "Assuming more sophisticated planning strategies (tree-of-thought) are always better -- for simple, unambiguous tasks, this adds unnecessary computational cost without improving outcomes.",
+      "Applying decomposition to tasks whose sub-steps are tightly interdependent -- decomposition works best when sub-tasks can be meaningfully separated; forcing separation onto a tightly coupled problem can produce worse results than treating it as a single unit."
+    ],
+    "related_tech": ["planning strategy selection", "task structure analysis"],
+    "references": ["https://arxiv.org/abs/2305.10601"]
+  },
+  {
+    "id": "TH-D2-010",
+    "domain": 2,
+    "task_statements": ["2.3"],
+    "title": "Reflection: an agent evaluating its own output before finalizing it",
+    "summary": "Reflection is the process by which an agent reviews and critiques its own intermediate or final output, checking it against the task's requirements before accepting it as final. A reflection step can catch errors that the original generation process missed, since generating an answer and critically evaluating that same answer are different cognitive tasks that can surface different issues. Reflection is distinct from simply regenerating a response from scratch -- it specifically involves examining a candidate output for identifiable problems (factual errors, missed requirements, logical gaps) and then deciding whether to revise, and how.",
+    "key_points": [
+      "Reflection means reviewing and critiquing a candidate output against the task's actual requirements before finalizing it.",
+      "Generation and critical evaluation are different cognitive tasks -- a model can sometimes catch its own errors on a second, critical pass even though it missed them while generating.",
+      "Reflection is not the same as blind regeneration; it specifically targets identified problems and then decides on revisions, rather than discarding and starting over with no diagnosis.",
+      "A reflection step typically checks a candidate output against explicit criteria (task requirements, factual correctness, completeness, format) rather than a vague 'does this look right' pass.",
+      "Reflection adds a review step and therefore added latency/cost per task, which is a tradeoff against its error-catching benefit."
+    ],
+    "rule_of_thumb": "Genuine reflection involves checking a candidate output against explicit criteria and identifying specific issues -- not just regenerating from scratch or giving a vague approval.",
+    "common_confusions": [
+      "Equating reflection with simply asking the model 'are you sure?' and accepting whatever it says next -- genuine reflection requires checking against explicit, specific criteria, not just prompting for a vague confidence check.",
+      "Assuming reflection always catches every error -- a model's self-critique is still limited by the same underlying knowledge and reasoning limitations that produced the original error, so it is not a complete safety net."
+    ],
+    "related_tech": ["self-reflection", "self-critique", "output review"],
+    "references": ["https://arxiv.org/abs/2303.11366"]
+  },
+  {
+    "id": "TH-D2-011",
+    "domain": 2,
+    "task_statements": ["2.3"],
+    "title": "Self-critique loops: iterating between generation and critique",
+    "summary": "A self-critique loop repeatedly alternates between generating (or revising) a candidate output and critiquing that output, using the critique to produce an improved next version, continuing until the critique finds no further significant issues or a maximum iteration count is reached. This differs from a single one-shot reflection pass by allowing multiple rounds of improvement, each informed by the previous round's identified issues. Diminishing returns are common: the first critique-and-revise round often fixes the most significant issues, while later rounds may surface progressively smaller or more marginal issues, meaning unlimited iteration is rarely worth its added cost.",
+    "key_points": [
+      "A self-critique loop alternates: generate/revise -> critique -> generate/revise -> critique, continuing until the critique finds no major remaining issues or a limit is reached.",
+      "This differs from one-shot reflection by allowing multiple rounds, each building on the issues identified in the previous round.",
+      "Diminishing returns are typical -- later iterations tend to catch progressively smaller issues than the first round, which usually catches the most significant ones.",
+      "A maximum iteration limit (or a 'no further significant issues found' stopping condition) is necessary to prevent the loop from running indefinitely without meaningful improvement.",
+      "The critique step's quality determines the loop's value -- a weak or overly lenient critique will approve a flawed output early, limiting how much benefit the loop provides."
+    ],
+    "rule_of_thumb": "Expect diminishing returns from additional self-critique rounds -- the first round typically catches the most significant issues, and a stopping condition is needed to avoid unproductive extra iterations.",
+    "common_confusions": [
+      "Assuming more iterations are always better -- after the first one or two rounds, additional iterations often provide only marginal improvement while still costing additional latency and computation.",
+      "Treating the critique step as automatically reliable -- if the critique itself is weak or overly lenient, the loop will converge on an output that still has unaddressed issues."
+    ],
+    "related_tech": ["self-critique loop", "iterative refinement", "stopping condition"],
+    "references": ["https://arxiv.org/abs/2303.17651"]
+  },
+  {
+    "id": "TH-D2-012",
+    "domain": 2,
+    "task_statements": ["2.3"],
+    "title": "Limitations of self-reflection: a model cannot fully evaluate its own blind spots",
+    "summary": "Self-reflection has a fundamental limitation: if a model's error stems from a genuine knowledge gap or systematic reasoning blind spot, that same gap or blind spot is likely to persist during the critique step too, since the critique uses the same underlying model and knowledge. Self-reflection is most effective at catching errors that stem from momentary slips, incomplete coverage of stated requirements, or logical inconsistencies that become visible on a second, more deliberate pass -- but it is much less effective at catching errors that stem from the model simply not knowing or systematically misunderstanding something. This is why external verification (e.g. grounding against a tool, or human review) remains important even when self-reflection is used, especially for high-stakes outputs.",
+    "key_points": [
+      "If an error stems from a genuine knowledge gap, the critique step -- using the same underlying knowledge -- is likely to share that same gap and fail to catch the error.",
+      "Self-reflection is comparatively effective at catching requirement-coverage gaps, logical inconsistencies, and slips that become apparent on a more careful second pass.",
+      "Self-reflection is comparatively ineffective at catching errors rooted in the model's systematic misunderstanding or lack of knowledge about a topic.",
+      "External verification (tool-based grounding, independent review, human oversight) remains valuable specifically because it does not share the same blind spots as the model's own self-critique.",
+      "Relying on self-reflection alone for high-stakes outputs, without any external check, risks leaving systematic errors uncaught."
+    ],
+    "rule_of_thumb": "Self-reflection catches slips and requirement gaps well, but shares the same blind spots as the original generation for genuine knowledge gaps -- pair it with external verification for high-stakes outputs.",
+    "common_confusions": [
+      "Assuming self-reflection is a complete substitute for external verification -- it cannot catch errors rooted in a genuine, systematic knowledge gap shared between generation and critique.",
+      "Assuming self-reflection provides no value because it isn't a complete solution -- it remains useful for catching a real and meaningful class of errors (slips, requirement gaps, inconsistencies), just not every class of error."
+    ],
+    "related_tech": ["self-reflection limitations", "external verification", "blind spots"],
+    "references": ["https://arxiv.org/abs/2303.11366"]
+  },
+  {
+    "id": "TH-D2-013",
+    "domain": 2,
+    "task_statements": ["2.4"],
+    "title": "Recognizing genuine uncertainty vs. false confidence",
+    "summary": "An agent faces genuine uncertainty when the available information is insufficient to determine a single correct answer with confidence, as opposed to false confidence, where a model produces a definitive-sounding answer despite the underlying basis for that answer being weak or absent. The practical danger of false confidence is that it is often indistinguishable from genuine confidence just by looking at the output's tone -- a confidently worded wrong answer looks the same, on the surface, as a confidently worded correct one. Well-designed agents should have some mechanism (explicit uncertainty estimation, cross-checking against external sources, or flagging low-evidence conclusions) to distinguish cases that warrant confident answers from cases that warrant hedging, clarifying, or seeking more information.",
+    "key_points": [
+      "Genuine uncertainty exists when available information is insufficient to confidently determine a single correct answer.",
+      "False confidence is a definitive-sounding answer produced despite a weak or absent underlying basis -- a serious risk because it looks the same as genuine confidence from the output's tone alone.",
+      "Tone/confidence of phrasing is not a reliable signal of actual correctness, since models can produce confidently worded answers regardless of whether the underlying basis is strong.",
+      "Mechanisms like explicit uncertainty estimation, cross-checking against external sources, or evidence-strength flags help distinguish genuinely well-supported answers from under-supported ones.",
+      "An agent that cannot distinguish genuine confidence from false confidence will tend to overstate certainty on exactly the cases where hedging or seeking more information would be more appropriate."
+    ],
+    "rule_of_thumb": "Never equate confident-sounding phrasing with actual correctness -- the two are independent, and a dedicated mechanism is needed to tell them apart.",
+    "common_confusions": [
+      "Assuming a confidently worded answer must be well-supported -- phrasing confidence and evidentiary support are independent properties of a response.",
+      "Assuming all hedged, uncertain-sounding answers are therefore more trustworthy -- genuine uncertainty should be flagged when it exists, but hedging language alone doesn't guarantee the underlying reasoning is any more or less correct."
+    ],
+    "related_tech": ["uncertainty estimation", "false confidence", "calibration"],
+    "references": ["https://arxiv.org/abs/2207.05221"]
+  },
+  {
+    "id": "TH-D2-014",
+    "domain": 2,
+    "task_statements": ["2.4"],
+    "title": "Strategies for handling ambiguous task instructions",
+    "summary": "When a task's instructions are genuinely ambiguous -- admitting multiple reasonable interpretations -- an agent has several possible strategies: proceed with the most likely interpretation and clearly state that assumption, ask a clarifying question before proceeding, or attempt multiple interpretations and present the results of each. The right strategy depends on factors like the cost of guessing wrong, whether a clarifying question is actually feasible (e.g. an interactive setting vs. a fully autonomous batch job), and how different the possible interpretations' consequences actually are. Silently picking one interpretation with no acknowledgment of the ambiguity is generally the weakest strategy, since it hides a real decision point from the user or downstream process.",
+    "key_points": [
+      "Proceeding with the most likely interpretation while explicitly stating that assumption keeps the choice visible, even without pausing to ask.",
+      "Asking a clarifying question is often the safest strategy, but requires an interactive setting where a question is actually answerable before the agent needs to proceed.",
+      "Presenting results for multiple plausible interpretations can be useful when the interpretations' consequences differ significantly and asking isn't feasible.",
+      "The right choice among these strategies depends on the cost of a wrong guess, interactivity constraints, and how divergent the different interpretations actually are.",
+      "Silently resolving ambiguity with no acknowledgment at all is generally the weakest option, since it hides a real decision point that the user might have wanted to weigh in on."
+    ],
+    "rule_of_thumb": "When facing genuine ambiguity, make the ambiguity visible -- via a stated assumption, a clarifying question, or multiple presented interpretations -- rather than silently picking one with no acknowledgment.",
+    "common_confusions": [
+      "Assuming clarifying questions are always the best choice -- in fully autonomous, non-interactive settings, asking a question that cannot be answered just stalls the task; stating an assumption and proceeding may be more appropriate there.",
+      "Treating all ambiguity as requiring the same handling strategy -- the right choice depends on the cost of guessing wrong and how different the interpretations' consequences are, not a one-size-fits-all rule."
+    ],
+    "related_tech": ["ambiguity handling", "clarifying questions", "assumption stating"],
+    "references": ["https://arxiv.org/abs/2305.14325"]
+  },
+  {
+    "id": "TH-D2-015",
+    "domain": 2,
+    "task_statements": ["2.4"],
+    "title": "Detecting and recovering from reasoning errors mid-task",
+    "summary": "Reasoning errors -- flawed logical steps, incorrect calculations, or misapplied rules -- can occur at any point in an agent's reasoning process, and detecting them as early as possible limits how far they propagate before being caught. Detection mechanisms include consistency checks (does this conclusion contradict an earlier established fact?), sanity checks against known constraints (does this answer fall within a plausible range?), and grounding checks (does this match an external, verifiable source?). Once a reasoning error is detected, recovery generally requires backtracking to the point where the error was introduced and re-reasoning from there, rather than simply patching the final output, since later steps built on the flawed step may also need to change.",
+    "key_points": [
+      "Reasoning errors can occur at any point in a reasoning process -- a flawed logical step, miscalculation, or misapplied rule.",
+      "Detection mechanisms include internal consistency checks, sanity checks against known constraints or plausible ranges, and grounding checks against external verifiable sources.",
+      "The earlier a reasoning error is detected, the less subsequent reasoning has been built on top of the flawed step, reducing wasted work and compounding error risk.",
+      "Proper recovery typically requires backtracking to the point where the error was introduced and re-reasoning from there, since later conclusions may depend on the now-known-flawed step.",
+      "Simply patching the final output without addressing the underlying flawed step risks leaving related, downstream errors uncorrected."
+    ],
+    "rule_of_thumb": "When a reasoning error is detected, backtrack to where it was introduced and re-reason from there -- patching only the final output risks leaving related downstream errors in place.",
+    "common_confusions": [
+      "Assuming a detected error can always be fixed by just editing the final answer -- if later reasoning steps depended on the flawed step, those steps may also need to be redone, not just the final output text.",
+      "Relying on only one type of check (e.g. only grounding checks) -- consistency checks and sanity checks can catch different classes of errors that a grounding check alone might miss, and vice versa."
+    ],
+    "related_tech": ["error detection", "backtracking", "consistency checking"],
+    "references": ["https://arxiv.org/abs/2303.17651"]
+  },
+  {
+    "id": "TH-D2-016",
+    "domain": 2,
+    "task_statements": ["2.4"],
+    "title": "The cost of overconfidence vs. the cost of excessive hedging",
+    "summary": "Both overconfidence (presenting an uncertain or wrong conclusion as definitely correct) and excessive hedging (qualifying every statement so heavily that the response becomes unhelpfully noncommittal) are failure modes, but they fail in different ways and have different costs depending on context. Overconfidence risks a user acting on a wrong answer believing it to be reliable, which can be especially costly in high-stakes domains. Excessive hedging risks the response being so qualified that it fails to actually help the user make a decision, effectively wasting the interaction. The appropriate level of expressed confidence should track the actual strength of the underlying evidence or reasoning, calibrated to the stakes of the specific task -- not a fixed, context-independent level of hedging or confidence.",
+    "key_points": [
+      "Overconfidence presents an uncertain or wrong conclusion as definitely correct, risking users acting on unreliable information as if it were reliable.",
+      "Excessive hedging qualifies every statement so heavily that the response fails to actually help the user make a decision, wasting the interaction's value.",
+      "The right level of expressed confidence should track the actual strength of the underlying evidence, not be fixed at either extreme regardless of the actual situation.",
+      "Higher-stakes domains generally warrant more caution against overconfidence specifically, since the cost of a wrong confident answer is higher there.",
+      "Calibration -- matching expressed confidence to actual evidentiary strength -- is the underlying goal that balances these two failure modes."
+    ],
+    "rule_of_thumb": "Calibrate expressed confidence to actual evidence strength and task stakes -- avoid both overconfident wrong answers and excessively hedged, unhelpfully noncommittal ones.",
+    "common_confusions": [
+      "Assuming hedging is always the 'safer' choice -- excessive hedging has its own real cost: an unhelpfully noncommittal response that fails to actually assist the user.",
+      "Treating confidence calibration as a fixed, universal setting -- the appropriate balance depends on the specific task's stakes and the actual strength of the available evidence, not a one-size-fits-all level of caution."
+    ],
+    "related_tech": ["calibration", "overconfidence", "hedging"],
+    "references": ["https://arxiv.org/abs/2207.05221"]
+  }
+]

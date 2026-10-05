@@ -1,0 +1,213 @@
+[
+  {
+    "id": "Q-D1-0016",
+    "domain": 1,
+    "task_statement": "1.1",
+    "type": "ordering",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D1-003"
+    ],
+    "case_study_id": null,
+    "stem": "Place the following steps of a minimal agent loop in the order they typically occur, from first to last, for a single action cycle.",
+    "select_count": 3,
+    "options": [
+      {
+        "key": "A",
+        "text": "The reasoning core decides which action to take given the current context"
+      },
+      {
+        "key": "B",
+        "text": "The chosen action is executed and produces a result"
+      },
+      {
+        "key": "C",
+        "text": "The result is observed and fed back into the context for the next decision"
+      }
+    ],
+    "correct": [
+      "A",
+      "B",
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "Within one cycle of the agent loop, the reasoning core first decides an action based on current context, that action is then executed to produce a result, and finally that result is observed and folded back into context to inform the next decision -- the canonical decide-act-observe sequence.",
+      "why_incorrect": {},
+      "rule_of_thumb": "Each turn of the agent loop follows decide, then act, then observe -- the observation of one turn becomes part of the context for the next turn's decision."
+    },
+    "tags": [
+      "agent-loop",
+      "execution-order"
+    ]
+  },
+  {
+    "id": "Q-D1-0017",
+    "domain": 1,
+    "task_statement": "1.1",
+    "type": "ordering",
+    "difficulty": "hard",
+    "theory_refs": [
+      "TH-D1-002"
+    ],
+    "case_study_id": null,
+    "stem": "Order the following system designs from LEAST agentic to MOST agentic, based on how much runtime control-flow decision-making is made by the model itself rather than fixed in advance.",
+    "select_count": 4,
+    "options": [
+      {
+        "key": "A",
+        "text": "A single prompt-completion call with no further steps"
+      },
+      {
+        "key": "B",
+        "text": "A fixed three-step prompt chain executed in the same order every time"
+      },
+      {
+        "key": "C",
+        "text": "A router that selects one of five predefined branches based on classified intent"
+      },
+      {
+        "key": "D",
+        "text": "An open-ended agent loop where the model decides the number of steps, which tools to call, and when to stop"
+      }
+    ],
+    "correct": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "This ordering reflects increasing runtime decision-making by the model: a single call has none, a fixed chain has none despite multiple steps, a router makes one bounded choice among predefined options, and a fully open-ended agent loop makes unbounded decisions about steps, tools, and stopping -- the clearest progression along the agentic spectrum.",
+      "why_incorrect": {},
+      "rule_of_thumb": "Rank systems on the agentic spectrum by how much of the control flow (step count, branch choice, stopping point) is decided by the model at runtime versus fixed by a developer in advance."
+    },
+    "tags": [
+      "agentic-spectrum",
+      "control-flow"
+    ]
+  },
+  {
+    "id": "Q-D1-0018",
+    "domain": 1,
+    "task_statement": "1.1",
+    "type": "matching",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D1-005"
+    ],
+    "case_study_id": null,
+    "stem": "Match each system type on the left to the description that best characterizes its control flow on the right.",
+    "select_count": 3,
+    "matching": {
+      "left": [
+        {
+          "key": "L1",
+          "text": "Chatbot"
+        },
+        {
+          "key": "L2",
+          "text": "Workflow"
+        },
+        {
+          "key": "L3",
+          "text": "Agent"
+        }
+      ],
+      "right": [
+        {
+          "key": "R1",
+          "text": "Centers on turn-by-turn conversational dialogue"
+        },
+        {
+          "key": "R2",
+          "text": "Executes a developer-authored, fixed sequence of steps"
+        },
+        {
+          "key": "R3",
+          "text": "The model decides its own sequence of actions at runtime"
+        }
+      ]
+    },
+    "correct_pairs": {
+      "L1": "R1",
+      "L2": "R2",
+      "L3": "R3"
+    },
+    "explanation": {
+      "why_correct": "A chatbot's core unit is the conversational turn, a workflow's control flow is fixed in advance by a developer regardless of which LLM calls it includes, and an agent is defined by the model making its own runtime decisions about which actions to take and in what sequence.",
+      "why_incorrect": {},
+      "rule_of_thumb": "Chatbot = turn-taking dialogue focus; workflow = developer-fixed control flow; agent = model-decided control flow at runtime."
+    },
+    "tags": [
+      "workflow-vs-agent",
+      "chatbot",
+      "control-flow"
+    ]
+  },
+  {
+    "id": "Q-D1-0019",
+    "domain": 1,
+    "task_statement": "1.1",
+    "type": "matching",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D1-003"
+    ],
+    "case_study_id": null,
+    "stem": "Match each component of the minimal agent loop on the left to its function on the right.",
+    "select_count": 4,
+    "matching": {
+      "left": [
+        {
+          "key": "L1",
+          "text": "Reasoning core"
+        },
+        {
+          "key": "L2",
+          "text": "Action space"
+        },
+        {
+          "key": "L3",
+          "text": "Observation"
+        },
+        {
+          "key": "L4",
+          "text": "Termination condition"
+        }
+      ],
+      "right": [
+        {
+          "key": "R1",
+          "text": "Decides what action to take given current context"
+        },
+        {
+          "key": "R2",
+          "text": "Defines the set of operations the agent is permitted to perform"
+        },
+        {
+          "key": "R3",
+          "text": "Feeds the results of an action back into context"
+        },
+        {
+          "key": "R4",
+          "text": "Determines when the agent stops looping and returns a final result"
+        }
+      ]
+    },
+    "correct_pairs": {
+      "L1": "R1",
+      "L2": "R2",
+      "L3": "R3",
+      "L4": "R4"
+    },
+    "explanation": {
+      "why_correct": "Each of the four minimal agent-loop components has a distinct, non-overlapping function: the reasoning core makes decisions, the action space bounds what's possible, observation closes the feedback loop, and the termination condition prevents infinite looping.",
+      "why_incorrect": {},
+      "rule_of_thumb": "The four minimal agent-loop parts map cleanly to decide (reasoning core), can-do (action space), perceive (observation), and stop (termination condition)."
+    },
+    "tags": [
+      "agent-components",
+      "minimal-agent"
+    ]
+  }
+]

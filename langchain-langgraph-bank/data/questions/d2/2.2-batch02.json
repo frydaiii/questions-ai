@@ -1,0 +1,191 @@
+[
+  {
+    "id": "Q-D2-0026",
+    "domain": 2,
+    "task_statement": "2.2",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D2-007"
+    ],
+    "case_study_id": null,
+    "stem": "What is a key structural difference between plan-and-execute and the interleaved reasoning-action (ReAct) pattern?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Plan-and-execute generates a full multi-step plan before executing any step, while interleaving generates one step at a time"
+      },
+      {
+        "key": "B",
+        "text": "Plan-and-execute never allows any tool calls"
+      },
+      {
+        "key": "C",
+        "text": "Interleaving always requires a human to approve each step"
+      },
+      {
+        "key": "D",
+        "text": "There is no meaningful structural difference between the two"
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "explanation": {
+      "why_correct": "The key structural difference is timing: plan-and-execute commits to a full plan upfront before executing anything, whereas the interleaved pattern generates and executes one step at a time, adapting continuously.",
+      "why_incorrect": {
+        "B": "Plan-and-execute agents routinely use tool calls as part of executing their planned steps; there's no restriction against this.",
+        "C": "Human approval is an optional oversight mechanism that could be added to either pattern; it is not an inherent requirement of the interleaved pattern specifically.",
+        "D": "There is a clear, well-documented structural difference in when planning happens relative to execution between the two patterns."
+      },
+      "rule_of_thumb": "Plan-and-execute plans fully before executing; interleaved reasoning-action plans and acts one step at a time."
+    },
+    "tags": [
+      "plan-and-execute",
+      "react",
+      "architecture-comparison"
+    ]
+  },
+  {
+    "id": "Q-D2-0027",
+    "domain": 2,
+    "task_statement": "2.2",
+    "type": "single_choice",
+    "difficulty": "easy",
+    "theory_refs": [
+      "TH-D2-008"
+    ],
+    "case_study_id": null,
+    "stem": "In tree-of-thought reasoning, what happens to reasoning branches that are evaluated as weaker or less promising?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "They are merged with the strongest branch with no further evaluation"
+      },
+      {
+        "key": "B",
+        "text": "They are always executed anyway, regardless of evaluation"
+      },
+      {
+        "key": "C",
+        "text": "They automatically become the final answer"
+      },
+      {
+        "key": "D",
+        "text": "They are typically pruned, while more promising branches are explored further"
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "Weaker branches are typically pruned so computational effort can focus on the more promising ones, similar in spirit to a search process that discards unpromising paths.",
+      "why_incorrect": {
+        "B": "Executing weak branches anyway would waste computation on paths already evaluated as unpromising, defeating the purpose of branch evaluation.",
+        "C": "Weak branches being evaluated as less promising means they are specifically NOT favored to become the final answer.",
+        "A": "Merging branches with no further evaluation is not how tree-of-thought pruning works; branches are compared and selected, not blindly merged."
+      },
+      "rule_of_thumb": "Tree-of-thought prunes weaker branches and continues exploring stronger ones, concentrating effort where it's likely to pay off."
+    },
+    "tags": [
+      "tree-of-thought",
+      "branch-pruning"
+    ]
+  },
+  {
+    "id": "Q-D2-0028",
+    "domain": 2,
+    "task_statement": "2.2",
+    "type": "multi_response",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D2-006"
+    ],
+    "case_study_id": null,
+    "stem": "Which of the following are genuine benefits of decomposing a complex task into sub-tasks? (Select 2)",
+    "select_count": 2,
+    "options": [
+      {
+        "key": "A",
+        "text": "Errors can often be localized to a specific sub-task rather than the entire combined output"
+      },
+      {
+        "key": "B",
+        "text": "Decomposition always has zero coordination overhead"
+      },
+      {
+        "key": "C",
+        "text": "If one sub-task fails, it can often be retried or fixed without redoing the whole task"
+      },
+      {
+        "key": "D",
+        "text": "Decomposition guarantees the final combined answer is always correct"
+      }
+    ],
+    "correct": [
+      "A",
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "Decomposition's genuine benefits are easier error localization within individual sub-tasks, and the ability to retry or fix just the failing piece rather than redoing everything.",
+      "why_incorrect": {
+        "B": "Decomposition introduces real coordination overhead (planning the split, combining results), which is not zero.",
+        "D": "Decomposition improves the PROCESS of solving and verifying a complex task, but does not guarantee correctness of the final combined answer -- errors in combining sub-results are still possible."
+      },
+      "rule_of_thumb": "Decomposition helps localize and fix errors at the sub-task level, but it is not free and does not guarantee a correct final result."
+    },
+    "tags": [
+      "task-decomposition",
+      "benefits"
+    ]
+  },
+  {
+    "id": "Q-D2-0029",
+    "domain": 2,
+    "task_statement": "2.2",
+    "type": "multi_response",
+    "difficulty": "hard",
+    "theory_refs": [
+      "TH-D2-009"
+    ],
+    "case_study_id": null,
+    "stem": "Which factors should influence the choice of planning strategy for a given task? (Select 3)",
+    "select_count": 3,
+    "options": [
+      {
+        "key": "A",
+        "text": "How interdependent the task's sub-steps are"
+      },
+      {
+        "key": "B",
+        "text": "How much early-step uncertainty could affect the correctness of later steps"
+      },
+      {
+        "key": "C",
+        "text": "The acceptable computational/latency cost for the task"
+      },
+      {
+        "key": "D",
+        "text": "The number of words in the user's original request"
+      }
+    ],
+    "correct": [
+      "A",
+      "B",
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "Sub-step interdependence, the impact of early-step uncertainty, and acceptable cost are all legitimate factors that should drive the choice between no decomposition, plan-and-execute, or tree-of-thought-style exploration.",
+      "why_incorrect": {
+        "D": "The literal word count of the user's request has no principled bearing on the task's actual structural complexity or planning needs."
+      },
+      "rule_of_thumb": "Choose a planning strategy based on sub-step interdependence, early-step uncertainty, and acceptable cost -- not surface features like request length."
+    },
+    "tags": [
+      "planning-strategy-selection",
+      "task-structure"
+    ]
+  }
+]

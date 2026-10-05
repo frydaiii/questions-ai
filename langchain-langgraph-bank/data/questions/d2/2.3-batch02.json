@@ -1,0 +1,143 @@
+[
+  {
+    "id": "Q-D2-0047",
+    "domain": 2,
+    "task_statement": "2.3",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D2-010"
+    ],
+    "case_study_id": null,
+    "stem": "Why can a model sometimes catch an error during a reflection pass that it missed during the original generation pass?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Reflection is mathematically guaranteed to find every error"
+      },
+      {
+        "key": "B",
+        "text": "Reflection always uses a completely different, more powerful model"
+      },
+      {
+        "key": "C",
+        "text": "Reflection physically re-reads the user's original prompt character by character"
+      },
+      {
+        "key": "D",
+        "text": "Generating an answer and critically evaluating that same answer are different cognitive tasks that can surface different issues"
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "Generation and critical evaluation engage the model in different ways -- one producing content, the other scrutinizing it against criteria -- which is why a second, critical pass can sometimes surface issues missed during the original generation.",
+      "why_incorrect": {
+        "B": "Reflection does not require switching to a different or more powerful model; the same model can serve both the generation and critique roles.",
+        "C": "There's no special mechanical re-reading process that explains reflection's value; the benefit comes from the different cognitive framing of critique versus generation.",
+        "A": "Reflection is not a guarantee of catching every error, especially those rooted in genuine knowledge gaps shared between generation and critique."
+      },
+      "rule_of_thumb": "Reflection helps because critique and generation are different cognitive framings of the same content, not because of model switching or guaranteed completeness."
+    },
+    "tags": [
+      "reflection",
+      "self-critique"
+    ]
+  },
+  {
+    "id": "Q-D2-0048",
+    "domain": 2,
+    "task_statement": "2.3",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D2-011"
+    ],
+    "case_study_id": null,
+    "stem": "What role does a stopping condition play in a self-critique loop?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "It eliminates the need for any critique step at all"
+      },
+      {
+        "key": "B",
+        "text": "It guarantees that the very first generated output is always already correct"
+      },
+      {
+        "key": "C",
+        "text": "It prevents the loop from running indefinitely once no further significant issues are found or a limit is reached"
+      },
+      {
+        "key": "D",
+        "text": "It forces the loop to run forever regardless of outcome"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "A stopping condition halts the loop once the critique finds no further significant issues (or a max-iteration limit is hit), preventing unproductive extra rounds that would otherwise continue indefinitely.",
+      "why_incorrect": {
+        "B": "A stopping condition says nothing about the correctness of the very first output; it simply governs when to stop iterating.",
+        "D": "A stopping condition's entire purpose is to prevent the loop from running forever, the opposite of forcing indefinite continuation.",
+        "A": "The stopping condition depends on the critique step's findings; it doesn't eliminate the need for critique, it uses the critique's output to decide when to stop."
+      },
+      "rule_of_thumb": "A stopping condition is what prevents a self-critique loop from running unproductively forever -- it uses the critique's findings to decide when enough is enough."
+    },
+    "tags": [
+      "self-critique-loop",
+      "stopping-condition"
+    ]
+  },
+  {
+    "id": "Q-D2-0049",
+    "domain": 2,
+    "task_statement": "2.3",
+    "type": "single_choice",
+    "difficulty": "hard",
+    "theory_refs": [
+      "TH-D2-011"
+    ],
+    "case_study_id": null,
+    "stem": "A self-critique loop's critique step is implemented in a way that always responds 'looks good, no issues' regardless of actual quality. What is the practical consequence?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "The loop will faithfully catch and fix every error in the output"
+      },
+      {
+        "key": "B",
+        "text": "The loop provides essentially no benefit, since the overly lenient critique will approve flawed outputs without identifying real issues"
+      },
+      {
+        "key": "C",
+        "text": "The loop will run for an unnecessarily large number of iterations"
+      },
+      {
+        "key": "D",
+        "text": "The output quality will improve regardless of the critique's actual behavior"
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "explanation": {
+      "why_correct": "Since the loop's value depends entirely on the critique step actually identifying real issues, a critique that always approves regardless of quality provides no meaningful improvement -- flawed outputs will simply be accepted immediately.",
+      "why_incorrect": {
+        "A": "An always-approving critique by definition never identifies issues, so it cannot catch or fix any errors.",
+        "C": "An always-approving critique would actually cause the loop to STOP immediately (since 'no issues' is a stopping signal), not run excessively long.",
+        "D": "Output quality will NOT improve if the critique never flags real problems; the loop's benefit is entirely contingent on the critique actually working."
+      },
+      "rule_of_thumb": "A self-critique loop's value is entirely dependent on the critique step genuinely identifying real issues -- a weak or overly lenient critique makes the whole loop ineffective."
+    },
+    "tags": [
+      "self-critique-loop",
+      "design-tradeoffs"
+    ]
+  }
+]

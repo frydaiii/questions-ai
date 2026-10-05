@@ -1,0 +1,64 @@
+[
+  {
+    "id": "Q-D5-0003",
+    "domain": 5,
+    "task_statement": "5.1",
+    "type": "matching",
+    "difficulty": "medium",
+    "theory_refs": ["TH-D5-001"],
+    "case_study_id": null,
+    "stem": "Match each AWS monitoring or audit service on the left with the question it is best suited to answer on the right.",
+    "select_count": 3,
+    "matching": {
+      "left": [
+        { "key": "L1", "text": "AWS CloudTrail" },
+        { "key": "L2", "text": "Amazon CloudWatch" },
+        { "key": "L3", "text": "Amazon SageMaker Model Monitor" }
+      ],
+      "right": [
+        { "key": "R1", "text": "Which IAM user invoked a specific Bedrock model, and at what time?" },
+        { "key": "R2", "text": "Has the invocation latency of a SageMaker endpoint increased in the last hour?" },
+        { "key": "R3", "text": "Has the statistical distribution of incoming inference data drifted from the training baseline?" },
+        { "key": "R4", "text": "Which input feature most influenced a specific loan-denial prediction?" }
+      ]
+    },
+    "correct_pairs": { "L1": "R1", "L2": "R2", "L3": "R3" },
+    "explanation": {
+      "why_correct": "CloudTrail answers 'who did what, and when' questions such as which principal invoked a model (R1). CloudWatch answers operational health questions such as latency trends (R2). SageMaker Model Monitor answers data-drift questions by comparing live inference data to a training baseline (R3).",
+      "why_incorrect": {},
+      "rule_of_thumb": "CloudTrail = API call audit trail. CloudWatch = operational metrics/alarms. Model Monitor = drift detection against a baseline. Feature attribution (R4) belongs to SageMaker Clarify, not any of these three."
+    },
+    "tags": ["cloudtrail", "cloudwatch", "model-monitor", "service-mapping"]
+  },
+  {
+    "id": "Q-D5-0004",
+    "domain": 5,
+    "task_statement": "5.2",
+    "type": "matching",
+    "difficulty": "medium",
+    "theory_refs": ["TH-D5-001"],
+    "case_study_id": null,
+    "stem": "Match each governance/compliance scenario on the left with the AWS capability best suited to address it on the right.",
+    "select_count": 3,
+    "matching": {
+      "left": [
+        { "key": "L1", "text": "Auditors need proof of exactly which principal invoked a Bedrock model and when, over the past quarter" },
+        { "key": "L2", "text": "The security team wants a real-time alarm if a SageMaker endpoint's inference latency spikes" },
+        { "key": "L3", "text": "The ML team wants to know if production traffic has statistically drifted from the training data distribution" }
+      ],
+      "right": [
+        { "key": "R1", "text": "AWS CloudTrail" },
+        { "key": "R2", "text": "Amazon CloudWatch alarms" },
+        { "key": "R3", "text": "Amazon SageMaker Model Monitor" },
+        { "key": "R4", "text": "Amazon SageMaker Clarify" }
+      ]
+    },
+    "correct_pairs": { "L1": "R1", "L2": "R2", "L3": "R3" },
+    "explanation": {
+      "why_correct": "An audit of who invoked a model and when is answered by CloudTrail's API call history (R1). A real-time latency spike alarm is a CloudWatch alarm on an operational metric (R2). Detecting that production data has drifted from the training distribution is exactly what SageMaker Model Monitor is built for (R3).",
+      "why_incorrect": {},
+      "rule_of_thumb": "CloudTrail = who/when audit trail. CloudWatch = live operational metrics and alarms. Model Monitor = drift detection against a training baseline. SageMaker Clarify (R4) is for bias/explainability, not audit, alarms, or drift."
+    },
+    "tags": ["cloudtrail", "cloudwatch", "model-monitor", "governance", "compliance"]
+  }
+]

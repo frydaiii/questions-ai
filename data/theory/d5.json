@@ -1,0 +1,333 @@
+[
+  {
+    "id": "TH-D5-001",
+    "domain": 5,
+    "task_statements": ["5.1"],
+    "title": "AWS CloudTrail vs Amazon CloudWatch for AI workload monitoring and auditing",
+    "summary": "Both services observe AWS activity but answer different questions. AWS CloudTrail records API-level activity: who called which API (for example, InvokeModel on Amazon Bedrock, or CreateTrainingJob on Amazon SageMaker), when, from where, and with what parameters — the audit trail needed for compliance and security investigations. Amazon CloudWatch collects operational metrics and logs: latency, error rates, invocation counts, custom application logs, and can trigger alarms when a metric crosses a threshold. For a security or compliance question ('who did this, and when'), the answer is CloudTrail. For a performance or health question ('is this endpoint slow, or throwing errors'), the answer is CloudWatch.",
+    "key_points": [
+      "CloudTrail = who did what, and when (API call history) — the audit/compliance answer.",
+      "CloudWatch = how is it performing right now (metrics, logs, alarms) — the operational/monitoring answer.",
+      "Amazon Bedrock model invocation logging (which can be sent to CloudWatch Logs or S3) captures prompts and responses for governance review — a specific application of this monitoring/audit split to generative AI.",
+      "SageMaker Model Monitor uses CloudWatch as its downstream destination for drift-detection results and alarms."
+    ],
+    "rule_of_thumb": "'Who called this API and when' -> CloudTrail. 'Is it healthy, fast, and within budget right now' -> CloudWatch.",
+    "common_confusions": [
+      "Reaching for CloudWatch when the scenario is really asking for an audit trail of API calls for a compliance review — that is CloudTrail's job.",
+      "Reaching for CloudTrail to detect a spike in inference latency or errors — that is an operational metric, which is CloudWatch's job."
+    ],
+    "aws_services": ["AWS CloudTrail", "Amazon CloudWatch", "Amazon Bedrock", "Amazon SageMaker Model Monitor"],
+    "references": [
+      "https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-user-guide.html",
+      "https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html"
+    ]
+  },
+  {
+    "id": "TH-D5-002",
+    "domain": 5,
+    "task_statements": ["5.1"],
+    "title": "IAM least privilege for AI/ML workloads",
+    "summary": "The principle of least privilege means granting an IAM identity (user, role, or service) only the specific permissions it needs to perform its job, and nothing more. For AI/ML workloads, this means a SageMaker training job's execution role should only have access to the specific S3 buckets/prefixes it needs for input data and output artifacts, not broad account-wide S3 access; a Bedrock application's role should only be permitted to invoke the specific models it actually uses; and human users should generally access AWS resources through IAM roles with temporary credentials rather than long-lived IAM user access keys. Overly broad permissions increase the blast radius of any compromised credential or misconfigured application, which is why least privilege is a foundational security control, not merely a best-practice suggestion.",
+    "key_points": [
+      "Grant only the specific permissions needed for a specific job/role, scoped as narrowly as practical (specific S3 prefixes, specific model ARNs, specific actions).",
+      "Prefer IAM roles with temporary credentials over long-lived IAM user access keys, especially for human/developer access.",
+      "A SageMaker training job's execution role should be scoped to its actual required data/artifact locations, not broad account-wide access.",
+      "A Bedrock application's IAM policy should specify which model(s) it's allowed to invoke, rather than granting blanket Bedrock access.",
+      "Least privilege limits the damage if a credential is compromised or a role is misconfigured — a core, foundational security control applicable to any AWS workload, including AI/ML."
+    ],
+    "rule_of_thumb": "When in doubt, scope permissions to the narrowest set of resources and actions that still lets the workload function — broad 'just in case' permissions are a security anti-pattern, not a convenience worth the risk.",
+    "common_confusions": [
+      "Assuming AI/ML workloads need special or relaxed IAM treatment compared to other AWS workloads — the same least-privilege principle applies identically; SageMaker and Bedrock resources are just additional resource types to scope permissions around.",
+      "Using long-lived IAM user access keys for convenience in scripts/automation, when a role with temporary credentials (assumed via STS) is the safer, recommended pattern."
+    ],
+    "aws_services": ["AWS IAM", "Amazon SageMaker", "Amazon Bedrock"],
+    "references": [
+      "https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html",
+      "https://docs.aws.amazon.com/sagemaker/latest/dg/security-iam.html"
+    ]
+  },
+  {
+    "id": "TH-D5-003",
+    "domain": 5,
+    "task_statements": ["5.1"],
+    "title": "VPC isolation and AWS PrivateLink for AI services",
+    "summary": "By default, calls to AWS AI services (like Bedrock or SageMaker endpoints) may traverse the public internet unless explicitly configured otherwise. Running ML workloads inside a VPC with no direct internet access, and using VPC endpoints (via AWS PrivateLink) to reach AWS services, keeps that traffic entirely on the AWS private network backbone instead of the public internet, reducing exposure to interception or unauthorized access. This is especially important for AI workloads processing sensitive data (PII, proprietary business data, regulated data), where an organization's security policy may require that no traffic related to that data ever traverses the public internet.",
+    "key_points": [
+      "VPC isolation: running compute resources (e.g. SageMaker notebook instances/training jobs) within a private VPC with controlled network access.",
+      "AWS PrivateLink / VPC endpoints: let VPC resources reach AWS services (like S3, Bedrock, SageMaker APIs) without traversing the public internet.",
+      "This pattern is especially relevant for regulated or sensitive data workloads with strict network isolation requirements.",
+      "PrivateLink keeps traffic on the AWS private backbone rather than the public internet, reducing the attack surface for interception.",
+      "This is a network-layer control, complementary to (not a replacement for) IAM-based access control and encryption."
+    ],
+    "rule_of_thumb": "A requirement that AI/ML-related network traffic never touches the public internet points to VPC isolation plus PrivateLink/VPC endpoints, not just IAM permission scoping alone.",
+    "common_confusions": [
+      "Assuming IAM permissions alone satisfy a 'no public internet traffic' security requirement — IAM controls WHO can access a resource; PrivateLink/VPC endpoints control the network PATH that traffic takes, a separate and complementary concern.",
+      "Forgetting that PrivateLink applies to reaching AWS services themselves (like Bedrock's API), not just resources within your own VPC-to-VPC communication."
+    ],
+    "aws_services": ["Amazon VPC", "AWS PrivateLink", "Amazon SageMaker", "Amazon Bedrock"],
+    "references": [
+      "https://docs.aws.amazon.com/vpc/latest/privatelink/what-is-privatelink.html",
+      "https://docs.aws.amazon.com/sagemaker/latest/dg/infrastructure-give-access.html"
+    ]
+  },
+  {
+    "id": "TH-D5-004",
+    "domain": 5,
+    "task_statements": ["5.1"],
+    "title": "Encryption at rest and in transit for AI/ML data and models",
+    "summary": "Encryption at rest protects stored data (training datasets, model artifacts, logs) so that even if underlying storage were somehow accessed improperly, the data remains unreadable without the decryption key. AWS Key Management Service (KMS) is the standard AWS mechanism for managing the encryption keys used across services like S3, SageMaker, and Bedrock; SageMaker encrypts data at rest by default using KMS. Encryption in transit protects data moving across a network (e.g. between a client and a Bedrock API endpoint) using TLS, preventing interception or tampering while data is in motion. Both are baseline security controls expected on any AI/ML workload handling sensitive or regulated data, not optional add-ons.",
+    "key_points": [
+      "Encryption at rest: protects stored data (S3 objects, EBS volumes, model artifacts) using KMS-managed keys.",
+      "Encryption in transit: protects data moving over the network using TLS.",
+      "SageMaker encrypts data at rest and in transit by default using KMS, reflecting AWS's security-by-default posture for ML workloads.",
+      "KMS is the central AWS service for creating, managing, and controlling access to the encryption keys used across many other services.",
+      "Encryption is a baseline expectation for regulated or sensitive AI/ML workloads, complementing (not replacing) IAM and network isolation controls."
+    ],
+    "rule_of_thumb": "Data sitting in storage -> encryption at rest (KMS). Data moving across a network -> encryption in transit (TLS). Both should be assumed as baseline requirements for any AI workload handling sensitive data, not optional extras.",
+    "common_confusions": [
+      "Assuming encryption at rest alone is sufficient security for sensitive data — data must also be protected while moving across networks (in transit), which is a separate control (TLS) from at-rest encryption (KMS).",
+      "Assuming KMS and TLS are interchangeable or serve the same purpose — KMS manages keys for protecting stored data; TLS protects data actively moving across a network connection."
+    ],
+    "aws_services": ["AWS KMS", "Amazon SageMaker", "Amazon Bedrock", "Amazon S3"],
+    "references": [
+      "https://docs.aws.amazon.com/sagemaker/latest/dg/encryption-at-rest.html",
+      "https://docs.aws.amazon.com/kms/latest/developerguide/overview.html"
+    ]
+  },
+  {
+    "id": "TH-D5-005",
+    "domain": 5,
+    "task_statements": ["5.1"],
+    "title": "S3 Block Public Access and preventing accidental data exposure",
+    "summary": "Amazon S3 Block Public Access is an account- or bucket-level setting that overrides any other configuration (including individual object ACLs or bucket policies) to prevent S3 data from being made publicly accessible, even by accident or misconfiguration. For AI/ML workloads, this is a critical safeguard because training data, model artifacts, and inference logs stored in S3 may contain sensitive, proprietary, or regulated information that must never be exposed to the public internet. Enabling Block Public Access at the account level provides a strong default protection that individual bucket-level misconfigurations cannot override, functioning as a deliberate 'fail-safe' layered on top of (not instead of) careful IAM and bucket policy design.",
+    "key_points": [
+      "S3 Block Public Access overrides other settings (ACLs, bucket policies) to guarantee data cannot become publicly accessible, even via misconfiguration.",
+      "This is especially important for ML training data and model artifacts, which often contain sensitive or proprietary information.",
+      "Account-level Block Public Access provides a strong safety net that survives individual bucket-level mistakes.",
+      "This control complements, but does not replace, careful IAM permission scoping and bucket policy design.",
+      "The exam may frame this as 'preventing accidental public exposure of ML training data' — recognize S3 Block Public Access as the direct AWS-native answer."
+    ],
+    "rule_of_thumb": "A requirement to guarantee ML data in S3 can never accidentally become publicly accessible, regardless of individual misconfiguration, points to S3 Block Public Access as the override-level safeguard.",
+    "common_confusions": [
+      "Assuming careful IAM policies alone prevent accidental public S3 exposure — a misconfigured bucket policy or object ACL can still expose data unless Block Public Access is explicitly enabled as an overriding safeguard.",
+      "Treating Block Public Access as a substitute for proper IAM/bucket policy design — it's a safety net specifically for public exposure, not a comprehensive access-control replacement."
+    ],
+    "aws_services": ["Amazon S3"],
+    "references": [
+      "https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-control-block-public-access.html"
+    ]
+  },
+  {
+    "id": "TH-D5-006",
+    "domain": 5,
+    "task_statements": ["5.1"],
+    "title": "AWS IAM Identity Center for centralized access management",
+    "summary": "AWS IAM Identity Center (formerly AWS SSO) provides centralized identity and access management across multiple AWS accounts and applications, letting an organization manage user access to AWS resources (including SageMaker and Bedrock across multiple accounts) from a single place, and integrate with existing corporate identity providers (such as Active Directory) rather than managing separate AWS-specific credentials per user. For organizations running AI/ML workloads across multiple AWS accounts (e.g. separate dev/test/production accounts for a SageMaker pipeline), IAM Identity Center simplifies consistent access governance and reduces the operational burden of managing per-account IAM users individually.",
+    "key_points": [
+      "IAM Identity Center centralizes identity/access management across multiple AWS accounts, not just within a single account.",
+      "It integrates with existing corporate identity providers (like Active Directory), avoiding separate AWS-specific credential management per user.",
+      "This is particularly relevant for organizations with multi-account AWS setups for ML workloads (e.g. separate accounts per environment or team).",
+      "It reduces the operational and security burden of managing individual IAM users scattered across many accounts.",
+      "This is a governance/identity-management topic distinct from within-account least-privilege IAM policy design, though both matter together for overall access security."
+    ],
+    "rule_of_thumb": "Managing access consistently for many users across MULTIPLE AWS accounts, ideally tied to an existing corporate identity provider, points to IAM Identity Center rather than per-account IAM user management.",
+    "common_confusions": [
+      "Confusing IAM Identity Center (multi-account, centralized identity management, often tied to an external identity provider) with standard IAM (within a single account, defining roles/policies/users) — they solve related but different scope-of-management problems.",
+      "Assuming IAM Identity Center replaces the need for well-scoped IAM roles/policies within each account — it centralizes WHO can get access and how they authenticate; least-privilege policy design within each account is still required."
+    ],
+    "aws_services": ["AWS IAM Identity Center", "AWS IAM"],
+    "references": [
+      "https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html"
+    ]
+  },
+  {
+    "id": "TH-D5-007",
+    "domain": 5,
+    "task_statements": ["5.1"],
+    "title": "Amazon Macie for discovering and protecting sensitive data",
+    "summary": "Amazon Macie uses machine learning and pattern matching to automatically discover and classify sensitive data (such as PII, financial data, or credentials) stored in Amazon S3, at scale, across potentially many buckets and accounts. For AI/ML workloads, Macie helps identify where sensitive data might exist within training datasets or data lakes before that data is used for training or shared broadly, supporting both the data-preparation stage (identifying PII that needs anonymization) and ongoing security/compliance monitoring (detecting sensitive data that shouldn't be in a particular location). Macie's findings can feed into a broader data governance and remediation workflow, such as flagging a bucket for review or triggering an anonymization pipeline step.",
+    "key_points": [
+      "Macie automatically discovers and classifies sensitive data (PII, credentials, financial data) stored in S3, at scale.",
+      "For ML workloads, Macie supports finding sensitive data in training datasets before that data is used for training or otherwise shared.",
+      "Macie's findings can trigger downstream governance actions, such as flagging data for review or anonymization.",
+      "Macie focuses on discovering/classifying data at rest in S3; it does not itself analyze the sentiment or entities of text the way Comprehend does — the underlying technique differs in purpose (security/discovery vs. NLP understanding).",
+      "This is a security/data-governance tool, applied early in the ML lifecycle (data preparation) and on an ongoing basis for security monitoring."
+    ],
+    "rule_of_thumb": "Need to automatically discover and classify sensitive data sitting in S3 buckets, potentially across a large data lake -> Amazon Macie.",
+    "common_confusions": [
+      "Confusing Macie's role (discovering/classifying sensitive data at rest in S3, a security/governance function) with Comprehend's PII detection feature (identifying PII entities within text being actively analyzed for NLP purposes) — they can complement each other but serve different primary purposes.",
+      "Assuming Macie modifies or anonymizes the data itself — Macie discovers and classifies sensitive data; acting on those findings (e.g. anonymization) is typically a separate downstream step in the data pipeline."
+    ],
+    "aws_services": ["Amazon Macie", "Amazon S3"],
+    "references": [
+      "https://aws.amazon.com/macie/",
+      "https://docs.aws.amazon.com/macie/latest/user/what-is-macie.html"
+    ]
+  },
+  {
+    "id": "TH-D5-008",
+    "domain": 5,
+    "task_statements": ["5.1"],
+    "title": "AWS Config, Amazon Inspector, and continuous configuration/vulnerability monitoring",
+    "summary": "AWS Config continuously records and evaluates the configuration of AWS resources against defined rules, detecting configuration drift (e.g. a security group unexpectedly opened to the public, or an S3 bucket policy changed) and supporting compliance auditing by maintaining a history of configuration changes over time. Amazon Inspector automatically scans workloads (such as EC2 instances and container images that might underlie a custom ML training or inference environment) for software vulnerabilities and unintended network exposure. For AI/ML environments, these tools support the security dimension of the ML lifecycle: Config catches configuration drift that could weaken security posture (like an accidentally-opened resource), while Inspector catches vulnerabilities in the underlying compute/container environment that ML workloads run on.",
+    "key_points": [
+      "AWS Config: tracks and evaluates resource CONFIGURATION over time against defined rules, catching configuration drift.",
+      "Amazon Inspector: scans for software VULNERABILITIES and unintended network exposure in compute/container environments.",
+      "Config answers 'has this resource's configuration changed in a way that violates policy'; Inspector answers 'does this workload have a known vulnerability or unsafe network exposure.'",
+      "Both support continuous, ongoing security monitoring rather than a one-time setup check.",
+      "For ML workloads running custom training/inference environments (e.g. custom Docker containers on SageMaker or EC2), Inspector's vulnerability scanning is directly relevant."
+    ],
+    "rule_of_thumb": "Tracking whether a resource's CONFIGURATION has drifted from policy over time -> AWS Config. Scanning compute/container environments for known VULNERABILITIES -> Amazon Inspector.",
+    "common_confusions": [
+      "Confusing AWS Config (configuration compliance/drift tracking) with AWS CloudTrail (API call history) — Config tracks the STATE of resources over time; CloudTrail tracks the ACTIONS (API calls) that were taken.",
+      "Assuming Inspector is only relevant to traditional EC2/web workloads and not ML — any custom ML training/inference environment running on EC2 or in containers is just as subject to software vulnerabilities as any other compute workload."
+    ],
+    "aws_services": ["AWS Config", "Amazon Inspector"],
+    "references": [
+      "https://docs.aws.amazon.com/config/latest/developerguide/WhatIsConfig.html",
+      "https://docs.aws.amazon.com/inspector/latest/user/what-is-inspector.html"
+    ]
+  },
+  {
+    "id": "TH-D5-009",
+    "domain": 5,
+    "task_statements": ["5.1"],
+    "title": "AWS shared responsibility model applied to Bedrock and SageMaker",
+    "summary": "The AWS shared responsibility model divides security obligations between AWS and the customer. For Bedrock, a fully managed service, AWS is responsible for the security OF the underlying infrastructure, foundation model hosting, and platform (the model weights, the serving infrastructure), while the customer remains responsible for security IN the cloud: correctly scoping IAM permissions to their Bedrock resources, configuring Guardrails appropriately, protecting their own data before sending it to the model, and managing their application-layer security. For SageMaker, which offers more customer-managed infrastructure options (like self-managed training/inference instances), the customer takes on a larger share of responsibility, including securing their own training code, container images, network configuration (VPC/PrivateLink), and instance-level security, in addition to the same data protection and IAM responsibilities.",
+    "key_points": [
+      "AWS is always responsible for security OF the cloud (the underlying physical/platform infrastructure), for any AWS service including Bedrock and SageMaker.",
+      "The customer is always responsible for security IN the cloud (their configuration, data, IAM permissions, and application logic), regardless of which AI service they use.",
+      "The customer's specific slice of responsibility grows with how much infrastructure control the service model gives them — Bedrock (fully managed, serverless) shifts more of the operational infrastructure burden to AWS than SageMaker (more customer-managed infrastructure options) does.",
+      "Even with a fully managed service like Bedrock, the customer is still responsible for IAM scoping, Guardrails configuration, and protecting the data they send to the model.",
+      "This is the same shared responsibility model that applies to all of AWS, simply applied specifically to AI/ML services in this domain."
+    ],
+    "rule_of_thumb": "AWS always secures the underlying infrastructure ('of the cloud'); you always secure your configuration, data, and access controls ('in the cloud') — the more managed the service (Bedrock more than SageMaker's self-managed options), the more of the operational infrastructure burden shifts to AWS, but customer responsibilities for data and access never disappear entirely.",
+    "common_confusions": [
+      "Assuming a fully managed service like Bedrock removes ALL security responsibility from the customer — the customer still must correctly scope IAM permissions, configure Guardrails, and protect their own data.",
+      "Assuming SageMaker and Bedrock have identical shared-responsibility splits — SageMaker's greater degree of customer-managed infrastructure (e.g. custom training containers, instance configuration) shifts more responsibility to the customer than Bedrock's fully managed, serverless model does."
+    ],
+    "aws_services": ["Amazon Bedrock", "Amazon SageMaker", "AWS IAM"],
+    "references": [
+      "https://aws.amazon.com/compliance/shared-responsibility-model/",
+      "https://docs.aws.amazon.com/bedrock/latest/userguide/security.html"
+    ]
+  },
+  {
+    "id": "TH-D5-010",
+    "domain": 5,
+    "task_statements": ["5.1"],
+    "title": "Amazon Bedrock model invocation logging for governance",
+    "summary": "Amazon Bedrock supports model invocation logging, which captures the input prompts and output responses (and associated metadata) for each model invocation, and can be configured to send those logs to Amazon CloudWatch Logs and/or Amazon S3. This capability directly supports governance requirements to review what was actually asked of a generative AI system and what it returned, supporting audits, quality reviews, and investigation of reported issues (such as a customer complaint about an inappropriate chatbot response). Unlike CloudTrail (which records that an InvokeModel API call happened, by whom, and when), invocation logging captures the actual CONTENT of the prompts and responses themselves, which is the level of detail needed for content-focused governance review, not just access auditing.",
+    "key_points": [
+      "Bedrock model invocation logging captures the actual prompt/response CONTENT, not just the fact that an API call occurred.",
+      "Logs can be routed to CloudWatch Logs and/or S3 for storage, review, and further analysis.",
+      "This complements CloudTrail: CloudTrail proves WHO called InvokeModel and WHEN; invocation logging shows WHAT was actually asked and returned.",
+      "This capability is essential for investigating specific content-related complaints or conducting quality/compliance reviews of generative AI outputs in production.",
+      "Enabling this logging is a deliberate configuration choice, supporting governance and audit requirements around generative AI content, not enabled by default without setup."
+    ],
+    "rule_of_thumb": "Need to review the actual CONTENT of what was asked and answered by a Bedrock model for a governance or complaint investigation -> Bedrock model invocation logging, not just CloudTrail (which only proves the call happened).",
+    "common_confusions": [
+      "Assuming CloudTrail alone is sufficient to investigate a content-related complaint about a chatbot's response — CloudTrail confirms the API call occurred but does not capture the actual prompt/response content; that requires Bedrock invocation logging.",
+      "Assuming invocation logging is enabled automatically with no configuration — it must be explicitly configured to route logs to CloudWatch Logs and/or S3."
+    ],
+    "aws_services": ["Amazon Bedrock", "Amazon CloudWatch", "Amazon S3", "AWS CloudTrail"],
+    "references": [
+      "https://docs.aws.amazon.com/bedrock/latest/userguide/model-invocation-logging.html"
+    ]
+  },
+  {
+    "id": "TH-D5-011",
+    "domain": 5,
+    "task_statements": ["5.2"],
+    "title": "Data and model lineage for AI governance",
+    "summary": "Data lineage tracks the origin, transformations, and movement of data throughout its lifecycle — where a specific piece of training data came from, what transformations (cleaning, feature engineering) were applied to it, and which model(s) it was used to train. Model lineage tracks a model's own history — what data and code version produced it, what hyperparameters were used, and what evaluation results it achieved — creating a reproducible record connecting a specific deployed model back to exactly how it was built. Amazon SageMaker ML Lineage Tracking captures this workflow information automatically within SageMaker Pipelines, supporting reproducibility (rebuilding the same model later), auditability (proving how a specific model was built, for compliance), and debugging (tracing an issue with model behavior back to a specific data or code change).",
+    "key_points": [
+      "Data lineage: tracks a specific dataset's origin and transformations through the pipeline.",
+      "Model lineage: tracks a specific model's build history — data version, code version, hyperparameters, evaluation results.",
+      "SageMaker ML Lineage Tracking automatically captures this information within SageMaker Pipelines workflows.",
+      "Lineage supports reproducibility, auditability/compliance, and debugging — being able to answer 'exactly how was this specific model built' at any later point.",
+      "Lineage tracking is a governance capability distinct from, but complementary to, Model Registry (which manages VERSIONS) and Model Cards (which document CHARACTERISTICS) — lineage specifically answers 'how was this built.'"
+    ],
+    "rule_of_thumb": "Need to trace exactly what data, code, and configuration produced a specific deployed model, for reproducibility or an audit -> data/model lineage tracking (SageMaker ML Lineage Tracking).",
+    "common_confusions": [
+      "Confusing lineage tracking (the build history/provenance of a specific model) with Model Registry (versioning and approval workflow for promoting models to production) — lineage answers 'how was this built,' Registry answers 'which version is approved for production.'",
+      "Assuming lineage tracking happens automatically with no pipeline structure — it is captured specifically within the context of structured workflows like SageMaker Pipelines, not from arbitrary ad hoc training scripts run outside that framework."
+    ],
+    "aws_services": ["Amazon SageMaker", "Amazon SageMaker Pipelines"],
+    "references": [
+      "https://docs.aws.amazon.com/sagemaker/latest/dg/lineage-tracking.html"
+    ]
+  },
+  {
+    "id": "TH-D5-012",
+    "domain": 5,
+    "task_statements": ["5.2"],
+    "title": "AWS compliance support: Artifact, Audit Manager, and industry regulations",
+    "summary": "AWS Artifact provides on-demand, self-service access to AWS's own compliance reports and agreements (such as SOC reports, ISO certifications, and various regulatory attestations), which an organization can use as evidence that the underlying AWS infrastructure meets specific compliance standards. AWS Audit Manager automates evidence collection and continuously assesses an organization's OWN AWS resource configurations against a chosen compliance framework (such as GDPR-related controls or a custom framework), streamlining audit preparation. Neither tool makes an AI application itself automatically compliant with a given regulation — an organization still must design its own data handling, model governance, and application logic to actually meet the substantive requirements of applicable regulations like GDPR or HIPAA; these tools support the evidence-gathering and infrastructure-compliance side of that broader effort.",
+    "key_points": [
+      "AWS Artifact: provides AWS's own compliance documentation/reports (proving what AWS's infrastructure complies with).",
+      "AWS Audit Manager: continuously assesses YOUR AWS resource configuration against a chosen framework, automating evidence collection for audits.",
+      "Neither tool automatically makes an AI application compliant with a regulation like GDPR or HIPAA — they support evidence and infrastructure-level compliance, not substantive business/application-level compliance design.",
+      "Regulatory compliance for an AI application still requires deliberate design choices around data handling, consent, retention, and model governance specific to that regulation.",
+      "Using both Artifact (AWS's own attestations) and Audit Manager (your own continuous assessment) together supports a more complete compliance posture."
+    ],
+    "rule_of_thumb": "Need proof of what AWS's infrastructure itself complies with -> AWS Artifact. Need to continuously assess and gather evidence about YOUR OWN resource configuration against a compliance framework -> AWS Audit Manager. Neither alone makes your application substantively compliant with a regulation.",
+    "common_confusions": [
+      "Assuming using AWS Artifact or Audit Manager automatically makes an AI application GDPR- or HIPAA-compliant — these tools support evidence and infrastructure compliance; substantive regulatory compliance still requires application-level design decisions.",
+      "Confusing Artifact (AWS's compliance reports about AWS itself) with Audit Manager (your own continuous compliance assessment of your resources) — one is about AWS's infrastructure, the other is about your account's configuration."
+    ],
+    "aws_services": ["AWS Artifact", "AWS Audit Manager"],
+    "references": [
+      "https://aws.amazon.com/artifact/",
+      "https://aws.amazon.com/audit-manager/"
+    ]
+  },
+  {
+    "id": "TH-D5-013",
+    "domain": 5,
+    "task_statements": ["5.2"],
+    "title": "Data residency, data classification, and regulated AI workloads",
+    "summary": "Data residency requirements specify that certain data must be stored and/or processed within a specific geographic region or jurisdiction, often driven by regulations like GDPR (for EU personal data) or specific national data-sovereignty laws; for AI workloads this means carefully choosing AWS Regions for training data storage, model training, and inference to comply with those requirements. Data classification means categorizing data by sensitivity level (e.g. public, internal, confidential, highly restricted/regulated) so that appropriate handling controls (encryption, access restrictions, retention policies) can be applied consistently based on that classification, rather than treating all data uniformly. Regulated workloads (healthcare data under HIPAA, financial data under various financial regulations) impose additional, industry-specific requirements on top of general data residency and classification practices, often including specific audit, retention, and access-control obligations.",
+    "key_points": [
+      "Data residency: data must be stored/processed within specific geographic/jurisdictional boundaries, directly affecting AWS Region selection for AI workloads.",
+      "Data classification: categorizing data by sensitivity to apply appropriate, differentiated handling controls.",
+      "Regulated workloads (HIPAA for healthcare, various financial regulations) impose specific additional requirements beyond general best practice.",
+      "AWS Region choice for training/storage/inference is a direct, practical lever for satisfying data residency requirements.",
+      "These requirements should inform architecture decisions from the start of a project, not be retrofitted after a system is already built in the wrong region or without proper classification."
+    ],
+    "rule_of_thumb": "A requirement that data must stay within a specific country/region -> data residency, address via AWS Region selection. A need to apply different handling controls based on data sensitivity -> data classification. Healthcare or financial data specifically -> expect additional regulation-specific requirements (HIPAA, financial regulations) layered on top.",
+    "common_confusions": [
+      "Assuming data residency is automatically satisfied by AWS's global infrastructure without deliberate Region selection — an organization must explicitly choose and configure services within the required Region(s) to satisfy residency requirements.",
+      "Treating all data as needing the same handling regardless of sensitivity — data classification exists specifically to differentiate handling (e.g. encryption strength, access restriction) based on how sensitive or regulated a specific dataset is."
+    ],
+    "aws_services": ["Amazon S3", "Amazon SageMaker", "Amazon Bedrock", "AWS KMS"],
+    "references": [
+      "https://aws.amazon.com/compliance/data-residency/",
+      "https://aws.amazon.com/compliance/hipaa-compliance/"
+    ]
+  },
+  {
+    "id": "TH-D5-014",
+    "domain": 5,
+    "task_statements": ["5.2"],
+    "title": "AI governance frameworks and organizational policy",
+    "summary": "AI governance is the organizational structure of policies, roles, and processes that ensure AI systems are developed and used responsibly, consistently, and in compliance with applicable regulations, spanning the entire lifecycle rather than being a single technical control. An AI governance framework typically defines who is accountable for AI-related decisions (governance roles), what review/approval processes a model must pass through before production deployment (often supported technically by SageMaker Model Registry approval workflows and documented via Model Cards), what ongoing monitoring and audit obligations exist (supported by CloudTrail, CloudWatch, Model Monitor, and Audit Manager), and what acceptable-use policies apply to employees or customers interacting with AI systems. Effective AI governance ties together the technical controls covered elsewhere in Domains 4 and 5 into a coherent, accountable organizational practice.",
+    "key_points": [
+      "AI governance is an organizational practice (policy, accountability, process) that USES many of the technical tools covered elsewhere (Model Registry, Model Cards, CloudTrail, Audit Manager) as supporting infrastructure.",
+      "Clear accountability (who owns AI-related decisions and risk) is a core governance requirement, not an afterthought.",
+      "Formal review/approval processes before production deployment connect governance policy to technical tools like SageMaker Model Registry approval workflows.",
+      "Ongoing monitoring and audit obligations under a governance framework are supported by CloudTrail, CloudWatch, Model Monitor, and Audit Manager working together.",
+      "Acceptable-use policies define how employees/customers are permitted to interact with and rely upon an organization's AI systems."
+    ],
+    "rule_of_thumb": "AI governance is the 'who decides, who approves, who monitors, and what's the policy' layer that sits on top of and coordinates the individual technical tools (Model Registry, Model Cards, CloudTrail, Audit Manager, Clarify, Guardrails) covered throughout Domains 4 and 5.",
+    "common_confusions": [
+      "Treating governance as just another technical tool to configure — it is fundamentally an organizational/process layer (accountability, policy, review processes) that coordinates and gives purpose to the individual technical controls.",
+      "Assuming a single tool (like Model Registry alone) constitutes 'AI governance' — real governance combines organizational policy and accountability with multiple supporting technical tools across the lifecycle."
+    ],
+    "aws_services": ["Amazon SageMaker Model Registry", "Amazon SageMaker Model Cards", "AWS Audit Manager", "AWS CloudTrail"],
+    "references": [
+      "https://aws.amazon.com/machine-learning/responsible-ai/",
+      "https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry.html"
+    ]
+  }
+]

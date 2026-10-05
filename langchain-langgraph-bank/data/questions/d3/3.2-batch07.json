@@ -1,0 +1,380 @@
+[
+  {
+    "id": "Q-D3-0047",
+    "domain": 3,
+    "task_statement": "3.2",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D3-006"
+    ],
+    "case_study_id": null,
+    "stem": "Two tools, 'lookup_customer' and 'lookup_order', are both plausible candidates for a request about 'the customer's most recent order.' How should the agent decide between them?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "By always picking whichever tool name is alphabetically first"
+      },
+      {
+        "key": "B",
+        "text": "By determining which tool's documented purpose actually matches the specific need -- retrieving order information -- rather than guessing from name similarity alone"
+      },
+      {
+        "key": "C",
+        "text": "By picking both tools and ignoring their results entirely"
+      },
+      {
+        "key": "D",
+        "text": "By flipping a coin"
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "explanation": {
+      "why_correct": "Since the actual need is retrieving order information, the agent should determine that 'lookup_order' is documented to serve that specific need, rather than relying on arbitrary tie-breaking methods.",
+      "why_incorrect": {
+        "C": "Calling tools and then ignoring their results would waste the calls without ever answering the actual request.",
+        "D": "A coin flip ignores the actual distinguishing information (documented purpose) that should drive a reasoned selection.",
+        "A": "Alphabetical order has no relationship to which tool actually serves the specific informational need."
+      },
+      "rule_of_thumb": "When multiple tools seem plausible, select based on which one's documented purpose actually matches the specific need, not arbitrary tie-breaking."
+    },
+    "tags": [
+      "tool-selection"
+    ]
+  },
+  {
+    "id": "Q-D3-0048",
+    "domain": 3,
+    "task_statement": "3.2",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D3-007"
+    ],
+    "case_study_id": null,
+    "stem": "A tool's documentation specifies that its 'limit' parameter must be an integer between 1 and 100. An agent passes 'limit': 'a lot'. What is the most appropriate system behavior?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Crash the entire system with no error message"
+      },
+      {
+        "key": "B",
+        "text": "Silently interpret 'a lot' as exactly 100 with no indication anything was adjusted"
+      },
+      {
+        "key": "C",
+        "text": "Execute the call anyway and return a random, unrelated result"
+      },
+      {
+        "key": "D",
+        "text": "Reject the call early with a clear validation error indicating the expected type and range"
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "Given the clear type/range mismatch, rejecting the call early with a specific, clear validation error is the most appropriate behavior, surfacing the problem immediately rather than guessing or failing silently.",
+      "why_incorrect": {
+        "B": "Silently substituting a guessed value hides the actual problem from whoever is reviewing the agent's behavior, risking confusion later.",
+        "C": "Returning a random, unrelated result when the input doesn't validate would produce a misleading 'successful'-looking but nonsensical outcome.",
+        "A": "A full system crash with no error message is a disproportionate, unhelpful response to a routine, detectable input validation issue."
+      },
+      "rule_of_thumb": "Prefer clear, early validation errors over silent guessing, nonsensical results, or uninformative crashes."
+    },
+    "tags": [
+      "parameter-construction",
+      "tool-call-validation"
+    ]
+  },
+  {
+    "id": "Q-D3-0049",
+    "domain": 3,
+    "task_statement": "3.2",
+    "type": "single_choice",
+    "difficulty": "hard",
+    "theory_refs": [
+      "TH-D3-008"
+    ],
+    "case_study_id": null,
+    "stem": "A developer wants to maximize speed for a multi-tool task but is unsure which calls are actually independent. What is the safest approach before deciding to parallelize?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Explicitly analyze each call's parameters to confirm whether any of them depend on another call's result before parallelizing"
+      },
+      {
+        "key": "B",
+        "text": "Parallelize everything by default and hope for the best"
+      },
+      {
+        "key": "C",
+        "text": "Never parallelize anything under any circumstances, even when calls are clearly independent"
+      },
+      {
+        "key": "D",
+        "text": "Randomly decide which calls to parallelize without analysis"
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "explanation": {
+      "why_correct": "Explicitly checking whether each call's parameters depend on another call's result is the correct, safe way to determine which calls can be validly parallelized without risking a dependent call being issued before its needed input exists.",
+      "why_incorrect": {
+        "B": "Blindly parallelizing without checking dependencies risks dependent calls being issued with missing or wrong information.",
+        "C": "Refusing to ever parallelize, even for genuinely independent calls, unnecessarily sacrifices real speed benefits with no correctness justification.",
+        "D": "Random decisions ignore the actual dependency structure, risking the same correctness problems as blind parallelization."
+      },
+      "rule_of_thumb": "Explicitly analyze dependencies before parallelizing -- this is the safe path to gaining speed benefits without correctness risk."
+    },
+    "tags": [
+      "parallel-invocation",
+      "dependency-analysis"
+    ]
+  },
+  {
+    "id": "Q-D3-0050",
+    "domain": 3,
+    "task_statement": "3.2",
+    "type": "multi_response",
+    "difficulty": "hard",
+    "theory_refs": [
+      "TH-D3-006",
+      "TH-D3-007",
+      "TH-D3-008",
+      "TH-D3-009"
+    ],
+    "case_study_id": null,
+    "stem": "Which of the following are genuinely distinct categories of tool-use design concerns discussed in this domain? (Select 3)",
+    "select_count": 3,
+    "options": [
+      {
+        "key": "A",
+        "text": "Selecting the right tool for a given need"
+      },
+      {
+        "key": "B",
+        "text": "Constructing correct call parameters for the selected tool"
+      },
+      {
+        "key": "C",
+        "text": "Deciding whether to invoke multiple calls sequentially or in parallel"
+      },
+      {
+        "key": "D",
+        "text": "Making every tool's name exactly five characters long"
+      }
+    ],
+    "correct": [
+      "A",
+      "B",
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "Tool selection, parameter construction, and sequential/parallel invocation strategy are the three genuinely distinct design concerns discussed, each with its own failure modes and mitigations.",
+      "why_incorrect": {
+        "D": "Tool name length is an arbitrary, irrelevant surface constraint with no bearing on any of the actual design concerns discussed."
+      },
+      "rule_of_thumb": "Tool selection, parameter construction, and invocation ordering are the three key, independently addressable tool-use design concerns."
+    },
+    "tags": [
+      "tool-selection",
+      "parameter-construction",
+      "tool-invocation-strategy"
+    ]
+  },
+  {
+    "id": "Q-D3-0051",
+    "domain": 3,
+    "task_statement": "3.2",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D3-009"
+    ],
+    "case_study_id": null,
+    "stem": "A system dynamically determines the user's task category (e.g. 'travel booking') and exposes only the 5 tools relevant to that category, out of 150 total defined tools. What design principle does this reflect?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Proof that parameter construction errors are now impossible"
+      },
+      {
+        "key": "B",
+        "text": "A requirement that every system must always have exactly 150 tools"
+      },
+      {
+        "key": "C",
+        "text": "Scoping the exposed tool set to what's actually relevant to the current context, balancing coverage against selection accuracy"
+      },
+      {
+        "key": "D",
+        "text": "A violation of all tool-use best practices"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "Dynamically scoping the exposed tools to the detected task category is a direct application of the principle of balancing coverage (having what's needed) against selection accuracy and overhead (not drowning in irrelevant options).",
+      "why_incorrect": {
+        "B": "The total tool count (150) is just the size of the overall library; there's no inherent requirement for any system to have exactly that many tools.",
+        "D": "This is actually a recommended best practice (context-based scoping), not a violation of one.",
+        "A": "Tool exposure scoping addresses selection risk, not parameter construction, which remains a separate concern even with a well-scoped tool list."
+      },
+      "rule_of_thumb": "Dynamically scoping exposed tools to the current task context is a recommended practice for balancing coverage against selection accuracy."
+    },
+    "tags": [
+      "tool-exposure-scoping"
+    ]
+  },
+  {
+    "id": "Q-D3-0052",
+    "domain": 3,
+    "task_statement": "3.2",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D3-007"
+    ],
+    "case_study_id": null,
+    "stem": "Why is 'the call executed without throwing an error' NOT sufficient evidence that a tool call was actually correct or useful?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Tools never execute without throwing an error under any circumstances"
+      },
+      {
+        "key": "B",
+        "text": "A call can execute successfully yet still return a nonsensical or unhelpful result due to vague or poorly chosen parameters"
+      },
+      {
+        "key": "C",
+        "text": "Successful execution always perfectly guarantees a useful result"
+      },
+      {
+        "key": "D",
+        "text": "This statement is entirely false and execution success is always sufficient evidence"
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "explanation": {
+      "why_correct": "A tool call can technically execute without error (no exception thrown) while still producing a result that's unhelpful or nonsensical because of vague or poorly constructed parameters -- execution success and result usefulness are different things.",
+      "why_incorrect": {
+        "C": "This is the opposite of the actual point -- execution success does NOT guarantee a useful or correct result.",
+        "D": "The original statement is accurate: execution success alone is not sufficient evidence of a correct or useful outcome.",
+        "A": "Tools can and do execute without error regularly; the point is that error-free execution alone doesn't guarantee the RESULT was useful."
+      },
+      "rule_of_thumb": "Error-free execution and a genuinely useful, correct result are two different things -- always check the actual result's content, not just whether an error was thrown."
+    },
+    "tags": [
+      "parameter-construction",
+      "tool-call-validation"
+    ]
+  },
+  {
+    "id": "Q-D3-0053",
+    "domain": 3,
+    "task_statement": "3.2",
+    "type": "single_choice",
+    "difficulty": "easy",
+    "theory_refs": [
+      "TH-D3-008"
+    ],
+    "case_study_id": null,
+    "stem": "What is the primary benefit of using parallel tool invocation when calls are genuinely independent?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Reduced overall latency by avoiding unnecessary sequential waiting"
+      },
+      {
+        "key": "B",
+        "text": "Guaranteed higher accuracy regardless of task content"
+      },
+      {
+        "key": "C",
+        "text": "Automatic elimination of all parameter construction errors"
+      },
+      {
+        "key": "D",
+        "text": "A requirement that the agent use fewer tools overall"
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "explanation": {
+      "why_correct": "When calls are genuinely independent, issuing them in parallel avoids the unnecessary wait of doing them one at a time, directly reducing overall latency.",
+      "why_incorrect": {
+        "B": "Parallelization affects timing/latency, not the inherent accuracy of the calls' results.",
+        "C": "Parameter construction correctness is a separate concern unaffected by whether calls are parallel or sequential.",
+        "D": "Parallelizing calls has no bearing on how many distinct tools are used overall; it's about timing of calls, not tool count."
+      },
+      "rule_of_thumb": "Parallel invocation's main benefit for independent calls is reduced latency, not improved accuracy or reduced tool count."
+    },
+    "tags": [
+      "parallel-invocation"
+    ]
+  },
+  {
+    "id": "Q-D3-0054",
+    "domain": 3,
+    "task_statement": "3.2",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D3-006",
+      "TH-D3-009"
+    ],
+    "case_study_id": null,
+    "stem": "A newly added tool has a description that only says 'does stuff with data.' What problem does this create for tool selection?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "This guarantees the tool will never be selected under any circumstances"
+      },
+      {
+        "key": "B",
+        "text": "No problem at all, since any description is equally useful"
+      },
+      {
+        "key": "C",
+        "text": "The tool will automatically fix its own description over time"
+      },
+      {
+        "key": "D",
+        "text": "The vague description gives the agent insufficient information to determine when this tool is actually the right choice, increasing selection risk"
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "A vague, non-specific description like 'does stuff with data' gives the agent essentially no basis for determining when this tool is actually the appropriate choice, directly increasing the risk of incorrect selection.",
+      "why_incorrect": {
+        "B": "Description quality matters significantly for selection accuracy; a vague description is clearly less useful than a specific one.",
+        "C": "Tool descriptions do not self-improve automatically; they require deliberate authoring/updating by developers.",
+        "A": "A vague description could just as easily lead to the tool being selected inappropriately as never being selected -- the actual risk is incorrect selection in either direction, not guaranteed non-selection."
+      },
+      "rule_of_thumb": "Vague tool descriptions directly undermine selection accuracy by failing to give the agent a basis for distinguishing when the tool is actually appropriate."
+    },
+    "tags": [
+      "tool-selection",
+      "tool-descriptions"
+    ]
+  }
+]

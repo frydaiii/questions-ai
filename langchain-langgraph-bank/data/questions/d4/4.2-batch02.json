@@ -1,0 +1,142 @@
+[
+  {
+    "id": "Q-D4-0032",
+    "domain": 4,
+    "task_statement": "4.2",
+    "type": "single_choice",
+    "difficulty": "hard",
+    "theory_refs": [
+      "TH-D4-008"
+    ],
+    "case_study_id": null,
+    "stem": "An agent's memory system stores all episodic, semantic, and procedural information in one undifferentiated pool, searched with simple keyword matching. What risk does this design create?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "The complete elimination of the need for any memory type distinctions"
+      },
+      {
+        "key": "B",
+        "text": "Guaranteed perfect retrieval regardless of the type of memory actually needed"
+      },
+      {
+        "key": "C",
+        "text": "Retrieval mismatches, where the wrong TYPE of memory (e.g. a specific anecdote instead of a needed general procedure) is surfaced for the current need"
+      },
+      {
+        "key": "D",
+        "text": "No risk whatsoever, since memory type never matters for retrieval quality"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "Without distinguishing memory types, retrieval risks surfacing the wrong kind of content for the current need -- for example, a specific past anecdote when what's actually needed is a general reusable procedure.",
+      "why_incorrect": {
+        "B": "An undifferentiated pool with simple keyword matching is MORE prone to mismatches, not guaranteed accuracy, since it can't distinguish what TYPE of memory is actually needed.",
+        "D": "Memory type matters significantly for retrieval relevance, since different types serve different purposes in reasoning.",
+        "A": "This design choice doesn't eliminate the underlying need for distinguishing memory types; it just fails to apply that distinction, risking worse retrieval."
+      },
+      "rule_of_thumb": "Undifferentiated memory pools risk retrieving the wrong type of memory for the actual current need, which separately organized storage helps avoid."
+    },
+    "tags": [
+      "memory-type-organization"
+    ]
+  },
+  {
+    "id": "Q-D4-0033",
+    "domain": 4,
+    "task_statement": "4.2",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D4-005",
+      "TH-D4-006"
+    ],
+    "case_study_id": null,
+    "stem": "Which of the following best distinguishes episodic memory from semantic memory?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Episodic memory is tied to a specific past event, while semantic memory is a general fact independent of any one event"
+      },
+      {
+        "key": "B",
+        "text": "Episodic memory is always more accurate than semantic memory"
+      },
+      {
+        "key": "C",
+        "text": "Semantic memory can only ever be stated explicitly by a user, never generalized"
+      },
+      {
+        "key": "D",
+        "text": "There is no meaningful distinction between the two"
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "explanation": {
+      "why_correct": "The core distinction is specificity to an event: episodic memory records specific occurrences, while semantic memory holds general facts that are useful regardless of any one specific event.",
+      "why_incorrect": {
+        "B": "Accuracy is not the distinguishing factor between the two types; both can be accurate or inaccurate independent of this distinction.",
+        "C": "Semantic memory can be built by generalizing from patterns across multiple episodic observations, not only from explicit statements.",
+        "D": "There is a clear, well-established distinction based on whether content is tied to a specific event or holds as a general truth."
+      },
+      "rule_of_thumb": "The episodic/semantic distinction is about specificity: tied to one event (episodic) versus a general, event-independent fact (semantic)."
+    },
+    "tags": [
+      "episodic-memory",
+      "semantic-memory"
+    ]
+  },
+  {
+    "id": "Q-D4-0034",
+    "domain": 4,
+    "task_statement": "4.2",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D4-007"
+    ],
+    "case_study_id": null,
+    "stem": "A stored procedure for handling a certain task type consistently leads to worse outcomes than a newer approach discovered more recently. What should happen to the stored procedural memory?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "It must be kept exactly as originally stored forever, with no possible revision"
+      },
+      {
+        "key": "B",
+        "text": "It should be updated or replaced, since procedural memory is not meant to be a fixed, unchangeable recipe"
+      },
+      {
+        "key": "C",
+        "text": "It should be converted into episodic memory instead"
+      },
+      {
+        "key": "D",
+        "text": "It should be deleted and never replaced with any procedure at all"
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "explanation": {
+      "why_correct": "Since the stored procedure now consistently underperforms a newer approach, it should be updated or replaced -- procedural memory is meant to be refined over time, not treated as an unchangeable fixed recipe.",
+      "why_incorrect": {
+        "C": "Converting it to episodic memory doesn't address the actual issue (the procedure itself needs improvement); episodic and procedural memory serve different purposes.",
+        "D": "Deleting it with no replacement would discard the benefit of having ANY reusable procedure, when the better move is simply replacing it with the improved approach.",
+        "A": "Treating a demonstrably underperforming procedure as permanently fixed ignores the clear signal that it should be revised."
+      },
+      "rule_of_thumb": "A procedure that consistently underperforms a known better alternative should be updated or replaced, not kept as a fixed, unchangeable recipe."
+    },
+    "tags": [
+      "procedural-memory"
+    ]
+  }
+]

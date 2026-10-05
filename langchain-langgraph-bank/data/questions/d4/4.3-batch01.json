@@ -1,0 +1,142 @@
+[
+  {
+    "id": "Q-D4-0055",
+    "domain": 4,
+    "task_statement": "4.3",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D4-009"
+    ],
+    "case_study_id": null,
+    "stem": "Why is retrieving everything stored, rather than the most relevant few memories, generally a poor retrieval strategy?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "It dilutes focus and can bury genuinely useful content amid a large amount of marginally relevant material"
+      },
+      {
+        "key": "B",
+        "text": "It guarantees the agent will never miss any relevant information"
+      },
+      {
+        "key": "C",
+        "text": "It is technically impossible to retrieve more than one memory at a time"
+      },
+      {
+        "key": "D",
+        "text": "It has no effect on the quality of the agent's reasoning"
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "explanation": {
+      "why_correct": "Surfacing everything stored, rather than a focused set of the most relevant items, dilutes attention and can bury the genuinely useful content amid a lot of marginally relevant or irrelevant material.",
+      "why_incorrect": {
+        "B": "Retrieving everything doesn't guarantee nothing is missed in a meaningful sense -- the problem is less about missing content and more about burying useful signal in noise.",
+        "C": "Retrieving multiple memories at once is technically straightforward; this isn't a technical limitation.",
+        "D": "Flooding the context with excessive, mostly irrelevant retrieved content can meaningfully degrade reasoning quality by diluting focus."
+      },
+      "rule_of_thumb": "Retrieving everything stored dilutes focus and risks burying genuinely useful content -- targeted, relevance-based retrieval of a focused few is preferable."
+    },
+    "tags": [
+      "relevance-based-retrieval"
+    ]
+  },
+  {
+    "id": "Q-D4-0056",
+    "domain": 4,
+    "task_statement": "4.3",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D4-010"
+    ],
+    "case_study_id": null,
+    "stem": "A memory system retrieves the most topically relevant memory about a user's address, but that memory is three years old and the user has since moved. What additional signal, if used, would have helped avoid surfacing this outdated information as if current?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Increasing the font size of the retrieved text"
+      },
+      {
+        "key": "B",
+        "text": "No additional signal could possibly help in this situation"
+      },
+      {
+        "key": "C",
+        "text": "Recency, since a more recent memory (if one exists) would better reflect the user's current address"
+      },
+      {
+        "key": "D",
+        "text": "Randomizing which memory gets retrieved each time"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "Incorporating recency alongside relevance would favor a more recently formed or updated memory about the address (if one exists), which is more likely to reflect the user's current situation than an old, topically relevant but outdated one.",
+      "why_incorrect": {
+        "B": "Recency is a well-established signal specifically suited to addressing exactly this kind of staleness problem.",
+        "D": "Randomizing retrieval would not reliably favor more current information; it would just as likely surface the same outdated memory or something else irrelevant.",
+        "A": "Font size is a cosmetic presentation detail with no bearing on which underlying memory is retrieved or how current it is."
+      },
+      "rule_of_thumb": "Combining recency with relevance helps avoid surfacing outdated-but-topically-relevant memories as if they reflect the current state of affairs."
+    },
+    "tags": [
+      "recency",
+      "memory-retrieval"
+    ]
+  },
+  {
+    "id": "Q-D4-0057",
+    "domain": 4,
+    "task_statement": "4.3",
+    "type": "single_choice",
+    "difficulty": "hard",
+    "theory_refs": [
+      "TH-D4-011"
+    ],
+    "case_study_id": null,
+    "stem": "A system with no forgetting mechanism at all has accumulated years of memories, including many clearly superseded facts (e.g. five different old addresses for the same user). What problem does this illustrate?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Accumulated outdated, superseded information clutters the store and risks stale content surfacing in retrieval alongside or instead of current facts"
+      },
+      {
+        "key": "B",
+        "text": "This is an ideal design with no downside of any kind"
+      },
+      {
+        "key": "C",
+        "text": "The lack of forgetting guarantees perfectly accurate retrieval forever"
+      },
+      {
+        "key": "D",
+        "text": "This proves memory systems should never store any information at all"
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "explanation": {
+      "why_correct": "Without any mechanism to remove or deprioritize clearly superseded information, the store accumulates clutter, risking stale, outdated content (like old addresses) surfacing in retrieval alongside or instead of the actually current fact.",
+      "why_incorrect": {
+        "B": "This scenario specifically illustrates a real downside -- clutter and the risk of surfacing stale information -- not an ideal, downside-free design.",
+        "C": "Accumulated outdated information actively RISKS inaccurate retrieval, not guaranteed accuracy.",
+        "D": "This illustrates the need for a forgetting mechanism alongside storage, not an argument against storing information at all."
+      },
+      "rule_of_thumb": "Memory systems without any forgetting mechanism accumulate superseded clutter, risking stale information surfacing instead of or alongside current facts."
+    },
+    "tags": [
+      "forgetting-mechanisms",
+      "memory-maintenance"
+    ]
+  }
+]

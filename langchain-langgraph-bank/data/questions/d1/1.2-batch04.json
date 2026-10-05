@@ -1,0 +1,239 @@
+[
+  {
+    "id": "Q-D1-0045",
+    "domain": 1,
+    "task_statement": "1.2",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D1-009"
+    ],
+    "case_study_id": null,
+    "stem": "A multi-constraint scheduling problem requires the agent to balance several conflicting preferences before producing a final time slot. Which reasoning approach is most appropriate for this task?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Skipping reasoning entirely and picking the first available slot"
+      },
+      {
+        "key": "B",
+        "text": "A purely reactive pattern match with no consideration of constraints"
+      },
+      {
+        "key": "C",
+        "text": "Explicit, multi-step deliberation that weighs the competing constraints before committing to a decision"
+      },
+      {
+        "key": "D",
+        "text": "Delegating the decision to a termination condition"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "A genuinely multi-constraint problem benefits from explicit deliberation that can weigh competing preferences against each other, since the correct answer depends on balancing multiple factors rather than a single obvious pattern.",
+      "why_incorrect": {
+        "A": "Picking the first available slot ignores the stated conflicting preferences entirely and is likely to produce a poor-quality result for a genuinely constrained problem.",
+        "D": "A termination condition determines when the loop stops; it has no role in making a substantive scheduling decision.",
+        "B": "A purely reactive pattern match is suited to simple, well-pattern-matched decisions, not problems requiring explicit weighing of multiple conflicting constraints."
+      },
+      "rule_of_thumb": "Problems requiring the balancing of multiple conflicting constraints benefit from explicit multi-step deliberation, where simple reactive pattern-matching would likely under-perform."
+    },
+    "tags": [
+      "reasoning-depth",
+      "deliberation"
+    ]
+  },
+  {
+    "id": "Q-D1-0046",
+    "domain": 1,
+    "task_statement": "1.2",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D1-008"
+    ],
+    "case_study_id": null,
+    "stem": "A multi-agent system has Agent A send a status update message to Agent B. From Agent B's perspective, what is this message?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "An action that Agent B must execute"
+      },
+      {
+        "key": "B",
+        "text": "A termination signal for Agent B's loop"
+      },
+      {
+        "key": "C",
+        "text": "A perception input that Agent B can incorporate into its next reasoning step"
+      },
+      {
+        "key": "D",
+        "text": "Irrelevant information that Agent B should always discard"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "From Agent B's point of view, a message received from another agent is new information entering its context -- exactly what counts as a perception input, which it can then reason about.",
+      "why_incorrect": {
+        "A": "The message itself is information, not an action that Agent B performs; Agent B may choose to act in response, but the message is the input, not the action.",
+        "B": "Nothing about receiving a status update inherently signals that Agent B's loop should terminate; termination depends on Agent B's own task-completion logic.",
+        "D": "Messages from other agents are a legitimate and often important perception source in multi-agent systems; discarding them by default would defeat the purpose of inter-agent communication."
+      },
+      "rule_of_thumb": "In multi-agent systems, messages from other agents are perception inputs to the receiving agent's reasoning step, just like tool outputs or user messages."
+    },
+    "tags": [
+      "perception",
+      "multi-agent-context"
+    ]
+  },
+  {
+    "id": "Q-D1-0047",
+    "domain": 1,
+    "task_statement": "1.2",
+    "type": "single_choice",
+    "difficulty": "hard",
+    "theory_refs": [
+      "TH-D1-011"
+    ],
+    "case_study_id": null,
+    "stem": "A developer argues that their system, which runs five fixed LLM calls in sequence, is 'adaptive' because each call's output is passed as input to the next call. Is this accurate use of the term 'adaptive' in the agentic sense?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Fully accurate, since five calls is more than one call"
+      },
+      {
+        "key": "B",
+        "text": "Fully accurate, since data flows between the calls"
+      },
+      {
+        "key": "C",
+        "text": "Partially accurate at best -- passing output forward is not the same as the system changing its course of action based on whether that output indicates success or failure"
+      },
+      {
+        "key": "D",
+        "text": "Inaccurate, because fixed sequences can never pass data between steps"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "Simply piping output from one call into the next as input is a data-flow pattern, not adaptiveness in the agentic sense -- true adaptiveness requires the system to examine whether an outcome succeeded or failed and CHANGE its subsequent course of action accordingly, which a fixed five-step sequence does not do.",
+      "why_incorrect": {
+        "B": "Data flowing between steps is necessary but not sufficient for adaptiveness; the sequence and choice of steps remain fixed regardless of what the data says.",
+        "D": "Fixed sequences commonly do pass data between steps (as described in the scenario); this is a common and unremarkable pattern, not a contradiction.",
+        "A": "The number of calls is irrelevant to whether the system adapts its behavior based on outcomes; five fixed calls are no more adaptive than one."
+      },
+      "rule_of_thumb": "Passing data forward between fixed steps is not the same as adaptive behavior -- true adaptiveness requires the system's course of action to change based on whether an outcome succeeded or failed."
+    },
+    "tags": [
+      "feedback-loop",
+      "adaptive-behavior",
+      "misconceptions"
+    ]
+  },
+  {
+    "id": "Q-D1-0048",
+    "domain": 1,
+    "task_statement": "1.2",
+    "type": "single_choice",
+    "difficulty": "easy",
+    "theory_refs": [
+      "TH-D1-007"
+    ],
+    "case_study_id": null,
+    "stem": "Why is the perceive-reason-act cycle typically described as a 'loop' rather than a one-time sequence?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Because loops are a required programming construct in all AI systems"
+      },
+      {
+        "key": "B",
+        "text": "Because the cycle repeats, with each action's outcome becoming the next cycle's perception, until a termination condition is met"
+      },
+      {
+        "key": "C",
+        "text": "Because 'loop' is simply a more exciting name than 'sequence'"
+      },
+      {
+        "key": "D",
+        "text": "Because every agent must run for exactly the same number of cycles"
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "explanation": {
+      "why_correct": "The cycle is a loop precisely because it repeats -- each action's outcome feeds back as the next perception -- continuing iteratively until some termination condition causes it to stop, rather than running through the three phases just once.",
+      "why_incorrect": {
+        "A": "The 'loop' terminology describes the actual repeating behavior of the agent's control flow, not an unrelated programming-language requirement.",
+        "C": "The naming reflects a substantive architectural property (repetition with feedback), not merely stylistic preference.",
+        "D": "Agents commonly run for a variable number of cycles depending on the task and when the termination condition is met; there is no requirement for a fixed, identical cycle count across all agents."
+      },
+      "rule_of_thumb": "It's called a loop because it genuinely repeats with feedback -- each cycle's action outcome becomes the next cycle's perception, continuing until termination."
+    },
+    "tags": [
+      "perceive-reason-act",
+      "agent-loop"
+    ]
+  },
+  {
+    "id": "Q-D1-0049",
+    "domain": 1,
+    "task_statement": "1.2",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D1-012"
+    ],
+    "case_study_id": null,
+    "stem": "A developer notices their agent keeps giving outdated information even after they updated the agent's prompt with better instructions. The agent is actually querying a cached, stale copy of a database rather than the live one. What should the developer conclude?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "The termination condition is set incorrectly"
+      },
+      {
+        "key": "B",
+        "text": "The agent's model needs to be replaced with a larger one"
+      },
+      {
+        "key": "C",
+        "text": "The prompt change was the wrong fix, since this is a perception failure (stale data reaching the agent), not a reasoning failure"
+      },
+      {
+        "key": "D",
+        "text": "This proves agents can never use databases reliably"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "The root cause here is that stale data is reaching the agent (a perception failure), so no amount of prompt/reasoning tweaking will fix it -- the actual fix is to correct the data source (e.g. query the live database instead of a stale cache).",
+      "why_incorrect": {
+        "B": "A larger model would not fix a data-freshness problem; the model is reasoning correctly over the information it receives, which happens to be stale.",
+        "D": "This is a specific implementation bug (querying a stale cache instead of live data), not evidence of a general inability of agents to use databases reliably.",
+        "A": "The termination condition determines when the loop stops, which is unrelated to why the data itself is outdated."
+      },
+      "rule_of_thumb": "When a prompt/reasoning fix doesn't resolve a problem, re-check whether the actual root cause is a perception issue (bad or stale data reaching the agent) before concluding the model itself is at fault."
+    },
+    "tags": [
+      "failure-diagnosis",
+      "perception",
+      "root-cause-analysis"
+    ]
+  }
+]

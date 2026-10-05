@@ -1,0 +1,241 @@
+[
+  {
+    "id": "Q-D1-0068",
+    "domain": 1,
+    "task_statement": "1.3",
+    "type": "single_choice",
+    "difficulty": "easy",
+    "theory_refs": [
+      "TH-D1-013"
+    ],
+    "case_study_id": null,
+    "stem": "Which best describes a 'condition-action rule' as used in reactive agent design?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "A rule that changes itself automatically every time it is used"
+      },
+      {
+        "key": "B",
+        "text": "A rule that only applies after extensive multi-step planning"
+      },
+      {
+        "key": "C",
+        "text": "A rule that requires consulting a world model before being applied"
+      },
+      {
+        "key": "D",
+        "text": "A rule specifying that when a certain situation/condition is detected, a specific action should be taken"
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "A condition-action rule directly specifies that a given condition (situation) triggers a specific action, which is the fundamental building block of reactive agent behavior -- no planning or world-model consultation involved.",
+      "why_incorrect": {
+        "B": "Condition-action rules apply directly and immediately upon detecting their condition; they do not require or involve multi-step planning, which is a deliberative trait.",
+        "C": "Reactive agents using condition-action rules specifically do NOT maintain or consult an internal world model; that's the deliberative approach.",
+        "A": "Condition-action rules as typically defined are fixed; they do not self-modify simply through use, though a developer could update them as part of system maintenance."
+      },
+      "rule_of_thumb": "A condition-action rule is a direct 'if this situation, then this action' mapping -- the basic unit of reactive agent behavior."
+    },
+    "tags": [
+      "reactive-agent",
+      "condition-action-rules"
+    ]
+  },
+  {
+    "id": "Q-D1-0069",
+    "domain": 1,
+    "task_statement": "1.3",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D1-014"
+    ],
+    "case_study_id": null,
+    "stem": "Why might a deliberative agent generate and compare multiple candidate plans before acting, rather than committing to the first viable one it finds?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "To intentionally slow down the system for no functional benefit"
+      },
+      {
+        "key": "B",
+        "text": "Because reactive agents require this step"
+      },
+      {
+        "key": "C",
+        "text": "Because generating one plan is technically impossible for any agent"
+      },
+      {
+        "key": "D",
+        "text": "To identify which candidate best satisfies the task's goals and constraints, since the first viable option may not be the best one"
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "Comparing multiple candidate plans lets a deliberative agent select the one that best satisfies the task's actual goals and constraints, since the first viable option found is not guaranteed to be the best among the possibilities.",
+      "why_incorrect": {
+        "B": "This comparison behavior is a deliberative trait, not something reactive agents do or require -- reactive agents don't generate or compare multiple candidate plans at all.",
+        "C": "Generating a single plan is entirely possible; comparing multiple is a deliberate choice to find a better outcome, not a technical necessity.",
+        "A": "The added computation serves a real functional purpose (finding a better plan among alternatives), not merely slowing the system down arbitrarily."
+      },
+      "rule_of_thumb": "Comparing multiple candidate plans is a deliberate tradeoff of extra computation for a better (not just viable) final decision."
+    },
+    "tags": [
+      "deliberative-agent",
+      "planning"
+    ]
+  },
+  {
+    "id": "Q-D1-0070",
+    "domain": 1,
+    "task_statement": "1.3",
+    "type": "multi_response",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D1-013",
+      "TH-D1-014",
+      "TH-D1-015"
+    ],
+    "case_study_id": null,
+    "stem": "Which of the following statements correctly distinguish the three agent architectures discussed (reactive, deliberative, hybrid)? (Select 2)",
+    "select_count": 2,
+    "options": [
+      {
+        "key": "A",
+        "text": "Reactive agents respond fastest but may struggle with novel situations outside their rule set"
+      },
+      {
+        "key": "B",
+        "text": "Hybrid agents always run both the reactive and deliberative layers fully, in parallel, on every request"
+      },
+      {
+        "key": "C",
+        "text": "Deliberative agents trade speed for the ability to handle complex, multi-step, or novel problems more robustly"
+      },
+      {
+        "key": "D",
+        "text": "All three architectures require exactly the same amount of computation per decision"
+      }
+    ],
+    "correct": [
+      "A",
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "Reactive agents' speed advantage comes at the cost of struggling with novel situations, and deliberative agents trade that speed for more robust handling of complex problems -- these are the core, accurate tradeoffs that distinguish the architectures.",
+      "why_incorrect": {
+        "B": "A well-designed hybrid agent does NOT run both layers fully on every request; the point is to selectively escalate to the deliberative layer only when the fast path is insufficient, saving computation on the common case.",
+        "D": "The three architectures have meaningfully different computational costs per decision -- reactive is cheapest, deliberative is most expensive, and hybrid varies depending on how often escalation occurs."
+      },
+      "rule_of_thumb": "Reactive = fast but brittle on novelty; deliberative = robust but costly; hybrid = selectively combines both, not running everything in parallel every time."
+    },
+    "tags": [
+      "agent-types",
+      "architecture-comparison"
+    ]
+  },
+  {
+    "id": "Q-D1-0071",
+    "domain": 1,
+    "task_statement": "1.3",
+    "type": "single_choice",
+    "difficulty": "hard",
+    "theory_refs": [
+      "TH-D1-014",
+      "TH-D1-016"
+    ],
+    "case_study_id": null,
+    "stem": "A deliberative agent is deployed for a task where the environment changes faster than the agent's planning process can complete -- by the time a plan is finalized, the situation has already changed. What design problem does this illustrate?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "A problem that can only be fixed by switching programming languages"
+      },
+      {
+        "key": "B",
+        "text": "Proof that deliberative agents are fundamentally broken and should never be used"
+      },
+      {
+        "key": "C",
+        "text": "Evidence that the agent's world model contains a syntax error"
+      },
+      {
+        "key": "D",
+        "text": "A mismatch between the architecture's deliberation speed and the environment's actual rate of change, suggesting a faster or hybrid approach may be more appropriate"
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "This scenario is a direct example of architecture-environment mismatch: the environment's rate of change exceeds the deliberation process's completion time, which is a strong signal that a faster (more reactive) or hybrid approach would better fit this specific environment's dynamics.",
+      "why_incorrect": {
+        "B": "Deliberative agents work well in many environments; the issue here is a specific mismatch with THIS environment's speed, not evidence of a fundamental, universal flaw.",
+        "C": "There is no inherent connection between planning taking too long and a syntax error in the world model; the problem described is about timing/speed, not code correctness.",
+        "A": "Programming language choice is unrelated to this architectural mismatch between deliberation speed and environmental change rate."
+      },
+      "rule_of_thumb": "When an environment changes faster than deliberation can complete, that's a signal of architecture-environment mismatch calling for a faster or hybrid design -- not evidence that deliberation is universally flawed."
+    },
+    "tags": [
+      "architecture-selection",
+      "deliberative-agent",
+      "task-fit"
+    ]
+  },
+  {
+    "id": "Q-D1-0072",
+    "domain": 1,
+    "task_statement": "1.3",
+    "type": "single_choice",
+    "difficulty": "easy",
+    "theory_refs": [
+      "TH-D1-016"
+    ],
+    "case_study_id": null,
+    "stem": "What is the main factor that should drive the choice between reactive, deliberative, and hybrid agent architectures?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "The architecture that uses the largest language model"
+      },
+      {
+        "key": "B",
+        "text": "Whichever architecture is most recently published in research"
+      },
+      {
+        "key": "C",
+        "text": "The personal preference of whichever developer is available that day"
+      },
+      {
+        "key": "D",
+        "text": "Properties of the task and environment, such as time-sensitivity and situation novelty"
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "The right architecture choice is driven by the actual properties of the task and environment -- how time-sensitive the task is, and how novel or recurring the situations tend to be -- not by trends, preference, or model size.",
+      "why_incorrect": {
+        "B": "Recency of publication has no bearing on whether an architecture fits a specific task's actual requirements.",
+        "C": "Architecture selection should be a reasoned engineering decision based on task fit, not arbitrary personal preference.",
+        "A": "Model size is unrelated to the reactive/deliberative/hybrid architectural distinction, which is about control-flow design, not raw model scale."
+      },
+      "rule_of_thumb": "Choose an agent architecture based on the actual task and environment properties -- time-sensitivity and situation novelty -- not trends, preference, or model size."
+    },
+    "tags": [
+      "architecture-selection",
+      "task-fit"
+    ]
+  }
+]

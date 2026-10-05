@@ -1,0 +1,82 @@
+[
+  {
+    "id": "Q-D4-0007",
+    "domain": 4,
+    "task_statement": "4.1",
+    "type": "multi_response",
+    "difficulty": "medium",
+    "theory_refs": ["TH-D4-003"],
+    "case_study_id": null,
+    "stem": "Which of the following accurately describe the relationship between working memory and long-term memory in effective agent design? (Select 2)",
+    "select_count": 2,
+    "options": [
+      { "key": "A", "text": "They are complementary -- each addresses a limitation the other has" },
+      { "key": "B", "text": "A sufficiently large context window makes long-term memory entirely unnecessary in every case" },
+      { "key": "C", "text": "Effective designs typically use working memory for immediate context and long-term memory as a retrievable supplementary store" },
+      { "key": "D", "text": "Long-term memory alone, with no working memory concept, is a complete and sufficient design" }
+    ],
+    "correct": ["A", "C"],
+    "explanation": {
+      "why_correct": "Working and long-term memory are complementary, and effective designs typically combine working memory for immediate context with long-term memory as a supplementary, retrievable store.",
+      "why_incorrect": {
+        "B": "Even a large context window is finite and lacks cross-session persistence, which long-term memory specifically provides; it doesn't make long-term memory unnecessary in every case.",
+        "D": "An agent still needs some immediately available working context to reason over moment to moment; long-term memory alone isn't a complete, practical design."
+      },
+      "rule_of_thumb": "Working memory and long-term memory are complementary -- effective designs combine both rather than relying on either alone."
+    },
+    "tags": ["memory-architecture", "working-memory", "long-term-memory"]
+  },
+  {
+    "id": "Q-D4-0008",
+    "domain": 4,
+    "task_statement": "4.1",
+    "type": "ordering",
+    "difficulty": "medium",
+    "theory_refs": ["TH-D4-002"],
+    "case_study_id": null,
+    "stem": "Place the following steps of using long-term memory effectively in the correct order.",
+    "select_count": 3,
+    "options": [
+      { "key": "A", "text": "Information is persisted into long-term storage" },
+      { "key": "B", "text": "A retrieval mechanism identifies relevant stored information for the current situation" },
+      { "key": "C", "text": "The retrieved information is brought into working memory where it can influence reasoning" }
+    ],
+    "correct": ["A", "B", "C"],
+    "explanation": {
+      "why_correct": "Information must first be persisted, then a retrieval mechanism must identify it as relevant to the current situation, and finally it must be brought into working memory where it can actually influence reasoning -- in that order.",
+      "why_incorrect": {},
+      "rule_of_thumb": "Long-term memory usage proceeds: persist, retrieve based on relevance, then bring into working memory to actually influence reasoning."
+    },
+    "tags": ["long-term-memory", "memory-retrieval", "execution-order"]
+  },
+  {
+    "id": "Q-D4-0009",
+    "domain": 4,
+    "task_statement": "4.1",
+    "type": "matching",
+    "difficulty": "medium",
+    "theory_refs": ["TH-D4-001", "TH-D4-002", "TH-D4-004"],
+    "case_study_id": null,
+    "stem": "Match each memory-related concept on the left to its correct description on the right.",
+    "select_count": 3,
+    "matching": {
+      "left": [
+        { "key": "L1", "text": "Working memory" },
+        { "key": "L2", "text": "Long-term memory" },
+        { "key": "L3", "text": "Memory persistence policy" }
+      ],
+      "right": [
+        { "key": "R1", "text": "Information immediately usable in the current context with no retrieval step" },
+        { "key": "R2", "text": "Information persisting beyond the current context, requiring explicit retrieval to use" },
+        { "key": "R3", "text": "The criteria used to decide what's worth saving for likely future relevance" }
+      ]
+    },
+    "correct_pairs": { "L1": "R1", "L2": "R2", "L3": "R3" },
+    "explanation": {
+      "why_correct": "Working memory is immediately usable context, long-term memory requires explicit retrieval, and a persistence policy is the criteria for deciding what's worth saving.",
+      "why_incorrect": {},
+      "rule_of_thumb": "Working memory = immediate, no retrieval needed; long-term memory = persistent, retrieval required; persistence policy = what's worth saving."
+    },
+    "tags": ["working-memory", "long-term-memory", "memory-persistence-policy"]
+  }
+]

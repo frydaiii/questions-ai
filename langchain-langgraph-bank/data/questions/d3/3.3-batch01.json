@@ -1,0 +1,143 @@
+[
+  {
+    "id": "Q-D3-0056",
+    "domain": 3,
+    "task_statement": "3.3",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D3-010"
+    ],
+    "case_study_id": null,
+    "stem": "A search tool returns an empty result set that the agent interprets as definitive proof the thing searched for doesn't exist, when actually the query was overly narrow. Which failure category does this best illustrate?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Tool unavailability"
+      },
+      {
+        "key": "B",
+        "text": "An explicit error response"
+      },
+      {
+        "key": "C",
+        "text": "A misleading-success result that looks fine on the surface but is actually wrong or incomplete"
+      },
+      {
+        "key": "D",
+        "text": "A successful, fully correct outcome"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "The call technically succeeded (no explicit error) but the result was misinterpreted due to the actual cause being a flawed, overly narrow query rather than a genuine true negative -- exactly the misleading-success failure category.",
+      "why_incorrect": {
+        "A": "The tool was reachable and responded; this is not an availability failure.",
+        "B": "No explicit error was returned by the tool; the problem is in interpreting a technically 'successful' but misleading result.",
+        "D": "This is not a correct outcome -- the agent drew a wrong conclusion from a misleading result."
+      },
+      "rule_of_thumb": "An empty or unexpected result from an otherwise error-free call is a classic misleading-success scenario, not a true availability or explicit-error failure."
+    },
+    "tags": [
+      "misleading-results",
+      "failure-categorization"
+    ]
+  },
+  {
+    "id": "Q-D3-0057",
+    "domain": 3,
+    "task_statement": "3.3",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D3-011"
+    ],
+    "case_study_id": null,
+    "stem": "A tool call fails because the API key used is permanently invalid. Is retrying this call repeatedly a sensible recovery strategy?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Yes, because waiting longer between retries always fixes invalid credentials"
+      },
+      {
+        "key": "B",
+        "text": "Yes, retrying always eventually succeeds no matter the cause"
+      },
+      {
+        "key": "C",
+        "text": "No, since the cause is persistent, not transient, so repeated retries have no realistic chance of succeeding"
+      },
+      {
+        "key": "D",
+        "text": "Only if the agent retries at least one million times"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "Since a permanently invalid API key is a persistent cause, not a transient one, repeating the exact same call will keep failing for the same reason -- retrying has no realistic chance of success here.",
+      "why_incorrect": {
+        "B": "Retrying only helps when the underlying cause is transient; a persistent cause like an invalid key will keep causing the same failure regardless of how many times it's retried.",
+        "D": "No number of retries fixes a fundamentally invalid credential; the issue requires actually correcting the credential, not persistence.",
+        "A": "Backoff (waiting longer between attempts) addresses transient issues like temporary overload, not a permanently invalid credential, which doesn't change with time."
+      },
+      "rule_of_thumb": "Retrying only helps for transient failure causes -- a persistent cause like a permanently invalid credential needs to be fixed directly, not retried past."
+    },
+    "tags": [
+      "retry-strategy",
+      "transient-vs-persistent"
+    ]
+  },
+  {
+    "id": "Q-D3-0058",
+    "domain": 3,
+    "task_statement": "3.3",
+    "type": "single_choice",
+    "difficulty": "hard",
+    "theory_refs": [
+      "TH-D3-012"
+    ],
+    "case_study_id": null,
+    "stem": "A primary data source tool is fully deprecated and permanently unavailable going forward. What is the most effective recovery strategy, given that retrying will never succeed?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Abandon the task permanently with no further attempt of any kind"
+      },
+      {
+        "key": "B",
+        "text": "Retry the deprecated tool indefinitely until it eventually works again"
+      },
+      {
+        "key": "C",
+        "text": "Switch to a pre-identified fallback source or tool that can provide a reasonable alternative path to the needed information"
+      },
+      {
+        "key": "D",
+        "text": "Wait exactly one hour and then assume the problem has resolved itself"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "Since the primary tool is permanently unavailable and retrying cannot help, switching to a pre-identified fallback alternative is the appropriate recovery strategy that offers a genuine chance of still completing the task.",
+      "why_incorrect": {
+        "B": "A permanently deprecated tool will never start working again no matter how many times it's retried.",
+        "D": "Waiting an arbitrary amount of time does not fix a permanent deprecation; nothing about the situation changes with elapsed time alone.",
+        "A": "Abandoning the task entirely is unnecessarily drastic when a reasonable fallback alternative may exist."
+      },
+      "rule_of_thumb": "For permanent, non-transient failures, a pre-identified fallback is the appropriate recovery path -- retrying or waiting cannot help here."
+    },
+    "tags": [
+      "fallback-strategy",
+      "permanent-failure"
+    ]
+  }
+]

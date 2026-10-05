@@ -1,0 +1,147 @@
+[
+  {
+    "id": "Q-D3-0013",
+    "domain": 3,
+    "task_statement": "3.1",
+    "type": "single_choice",
+    "difficulty": "hard",
+    "theory_refs": [
+      "TH-D3-005"
+    ],
+    "case_study_id": null,
+    "stem": "An agent is configured to always call at least three tools for every request, regardless of content, as a blanket policy. What is the most likely downside of this policy for simple, self-contained requests?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Unnecessary added latency and complexity with no corresponding benefit for requests that didn't need any tool at all"
+      },
+      {
+        "key": "B",
+        "text": "Guaranteed improvement in accuracy for every single request"
+      },
+      {
+        "key": "C",
+        "text": "The complete elimination of all possible errors"
+      },
+      {
+        "key": "D",
+        "text": "No downside whatsoever under any circumstances"
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "explanation": {
+      "why_correct": "For simple, self-contained requests that don't actually need external information or actions, forcing multiple tool calls anyway adds latency and complexity without providing any real accuracy or correctness benefit.",
+      "why_incorrect": {
+        "B": "Calling tools unnecessarily does not inherently improve accuracy on tasks that were already well within the model's reliable knowledge.",
+        "C": "Blanket tool-calling does not eliminate all possible errors; a tool call itself can also return incorrect information or be misapplied.",
+        "D": "There is a real, meaningful downside (wasted latency/complexity) for tasks that didn't actually need tool use."
+      },
+      "rule_of_thumb": "Blanket, content-independent tool-calling policies waste resources on tasks that don't need tools, without a compensating accuracy benefit."
+    },
+    "tags": [
+      "tool-necessity",
+      "design-tradeoffs"
+    ]
+  },
+  {
+    "id": "Q-D3-0014",
+    "domain": 3,
+    "task_statement": "3.1",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D3-001",
+      "TH-D3-003"
+    ],
+    "case_study_id": null,
+    "stem": "Which pair of tool categories reflects the key distinction discussed between types of tools an agent might use?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Tools invented before 2020 versus tools invented after 2020"
+      },
+      {
+        "key": "B",
+        "text": "Tools written in Python versus tools written in any other language"
+      },
+      {
+        "key": "C",
+        "text": "Tools that are free versus tools that cost money to use"
+      },
+      {
+        "key": "D",
+        "text": "Information-retrieval tools (read-only) versus action tools (cause real side effects)"
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "The key conceptual distinction discussed is between read-only, information-retrieval tools and action tools that cause real, persistent external side effects -- this distinction drives differences in appropriate caution.",
+      "why_incorrect": {
+        "B": "The programming language used to implement a tool has no bearing on the conceptual read-only versus side-effecting distinction that matters for risk assessment.",
+        "C": "Cost is a separate, unrelated practical consideration from the fundamental risk distinction between information retrieval and real-world action.",
+        "A": "The date a tool was created has no bearing on whether it is read-only or side-effecting."
+      },
+      "rule_of_thumb": "The key tool-risk distinction is read-only information retrieval versus side-effecting real-world action, not implementation details like language, cost, or age."
+    },
+    "tags": [
+      "action-tools",
+      "tool-categories"
+    ]
+  },
+  {
+    "id": "Q-D3-0015",
+    "domain": 3,
+    "task_statement": "3.1",
+    "type": "multi_response",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D3-001",
+      "TH-D3-002",
+      "TH-D3-003"
+    ],
+    "case_study_id": null,
+    "stem": "Which of the following are genuine capabilities that tools add to an otherwise tool-less language model? (Select 3)",
+    "select_count": 3,
+    "options": [
+      {
+        "key": "A",
+        "text": "Access to information that changed or emerged after the model's training cutoff"
+      },
+      {
+        "key": "B",
+        "text": "The ability to cause real, persistent side effects in external systems"
+      },
+      {
+        "key": "C",
+        "text": "The ability to verify claims against a traceable external source"
+      },
+      {
+        "key": "D",
+        "text": "The ability to generate grammatically correct sentences"
+      }
+    ],
+    "correct": [
+      "A",
+      "B",
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "Tools specifically add access to post-training information, the ability to cause real external side effects, and traceable verification against external sources -- capabilities a tool-less model lacks natively.",
+      "why_incorrect": {
+        "D": "Generating grammatically correct sentences is a native language-modeling capability that does not depend on tool use at all."
+      },
+      "rule_of_thumb": "Tools add fresh information access, real-world action capability, and traceable verification -- not basic language generation, which models already do natively."
+    },
+    "tags": [
+      "tool-use",
+      "grounding",
+      "freshness"
+    ]
+  }
+]

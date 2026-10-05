@@ -1,0 +1,27 @@
+[
+  {
+    "id": "Q-D1-0905",
+    "domain": 1,
+    "task_statement": "1.1",
+    "type": "single_choice",
+    "difficulty": "easy",
+    "theory_refs": ["TH-D1-001"],
+    "case_study_id": null,
+    "stem": "Broken fixture: why_incorrect is missing an entry for option C, to test the explanation-completeness gate.",
+    "select_count": 1,
+    "options": [
+      { "key": "A", "text": "Option A text" },
+      { "key": "B", "text": "Option B text" },
+      { "key": "C", "text": "Option C text" }
+    ],
+    "correct": ["A"],
+    "explanation": {
+      "why_correct": "This is a sufficiently long why_correct explanation so that only the missing why_incorrect entry triggers a failure in this fixture.",
+      "why_incorrect": {
+        "B": "Placeholder explanation for option B, long enough to pass the minimum length check on its own."
+      },
+      "rule_of_thumb": "This is a placeholder rule of thumb long enough to not trip the length gate by itself."
+    },
+    "tags": ["fixture"]
+  }
+]
