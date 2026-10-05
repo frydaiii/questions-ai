@@ -148,6 +148,40 @@ def print_tag_frequency(questions: list[dict]) -> None:
     print()
 
 
+PARENT_CONCEPT_GROUPS: dict[str, tuple[str, ...]] = {
+    "Core Architecture & Components": (
+        "Agent",
+        "Environment",
+        "Perception",
+        "State / State Management",
+        "Memory",
+        "Tools & Tool Discovery",
+        "Model Context Protocol (MCP)",
+    ),
+    "Cognitive & Reasoning Mechanics": (
+        "Reasoning Loop (ReAct)",
+        "Chain of Thought (CoT)",
+        "Planning",
+        "Reflex Agents",
+        "Utility & Goal-Based Agents",
+        "Context Engineering",
+    ),
+    "Coordination & Multi-Agent Scaling": (
+        "Orchestration",
+        "Multi-Agent Systems",
+        "Sub-agents & Handoffs",
+        "Swarm Intelligence",
+        "Agent Debate",
+    ),
+    "Safety, Guardrails & Improvement": (
+        "Guardrails",
+        "Human-in-the-Loop (HITL)",
+        "Error Recovery",
+        "Evaluation & Learning Loops",
+    ),
+}
+
+
 def print_concept_frequency(questions: list[dict], concepts: list[str]) -> None:
     print("=" * 70)
     print("CONCEPT FREQUENCY")
@@ -157,8 +191,16 @@ def print_concept_frequency(questions: list[dict], concepts: list[str]) -> None:
         for q in questions
         for concept in q.get("concepts", []) or []
     )
-    for concept in concepts:
-        print(f"  {concept:<35} {counts.get(concept, 0)}")
+    for parent, child_concepts in PARENT_CONCEPT_GROUPS.items():
+        aggregate = sum(counts.get(concept, 0) for concept in child_concepts)
+        print(f"{parent} (aggregate: {aggregate})")
+        for concept in child_concepts:
+            print(f"  {concept:<35} {counts.get(concept, 0)}")
+    unmapped = [concept for concept in concepts if all(concept not in children for children in PARENT_CONCEPT_GROUPS.values())]
+    if unmapped:
+        print("Unmapped concepts:")
+        for concept in unmapped:
+            print(f"  {concept:<35} {counts.get(concept, 0)}")
     print()
 
 
