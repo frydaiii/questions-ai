@@ -1,0 +1,345 @@
+[
+  {
+    "id": "Q-D5-0058",
+    "domain": 5,
+    "task_statement": "5.2",
+    "type": "single_choice",
+    "difficulty": "hard",
+    "theory_refs": [
+      "TH-D5-013",
+      "TH-D5-002"
+    ],
+    "case_study_id": null,
+    "stem": "A compliance-audit system uses one flat orchestrator that directly supervises 30 worker agents reviewing filings for six regulatory regions. The orchestrator's context is filling with raw worker reports, and it has started assigning overlapping work and forgetting region-specific rules. The team wants to move to a hierarchy. Which design best addresses the problem without creating new ones?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Create six regional sub-orchestrators that are told only their region name, let them run on their own, and have them forward every worker transcript to the top-level orchestrator for synthesis"
+      },
+      {
+        "key": "B",
+        "text": "Add three more management layers so each manager supervises only one or two agents, which maximizes parallelism and minimizes each manager's context"
+      },
+      {
+        "key": "C",
+        "text": "Create six regional sub-orchestrators, each given an explicit sub-goal, budget, authority limits, and output contract, supervising about five workers and returning a condensed structured result to the lead, which tracks progress and re-plans"
+      },
+      {
+        "key": "D",
+        "text": "Keep the flat orchestrator but switch to a larger context window and allow the workers to message one another freely to settle overlaps themselves"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "The flat design fails on span of control and context load. Regional sub-orchestrators each own a coherent sub-goal and a manageable group of workers, and they return a condensed result so the lead's context stays small. Constraints do not propagate automatically, so the goal, budget, authority limits, and output contract must be passed down explicitly. The lead keeps a progress record so it can re-plan if a region fails.",
+      "why_incorrect": {
+        "A": "Telling sub-orchestrators only a region name omits the goal, budget, and authority limits they cannot infer, and forwarding raw transcripts defeats the purpose of condensing context upward.",
+        "B": "Each extra level adds delegation latency and another lossy summarization step. Managers with one or two reports give up the span-of-control benefit and make the hierarchy deeper than the problem needs.",
+        "D": "A larger window does not fix inconsistent assignment, since long contexts are used unevenly. Free worker-to-worker messaging removes central assignment and adds coordination traffic."
+      },
+      "rule_of_thumb": "Add a management level when span of control or sub-goal size demands it, and pass goals, budgets, and limits down explicitly while condensing results upward."
+    },
+    "tags": [
+      "hierarchical-agents",
+      "sub-orchestrator",
+      "span-of-control",
+      "compliance"
+    ],
+    "concepts": [
+      "Orchestration",
+      "Multi-Agent Systems",
+      "Sub-agents & Handoffs"
+    ]
+  },
+  {
+    "id": "Q-D5-0059",
+    "domain": 5,
+    "task_statement": "5.2",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D5-014",
+      "TH-D5-015"
+    ],
+    "case_study_id": null,
+    "stem": "A contract-translation pipeline runs extract, translate, and review stages in a fixed order. The review agent uses the same model, the same prompt style, and the same context as the translation agent, and it approves 98% of drafts. A human audit finds many untranslated clauses and mistranslated defined terms in approved drafts. What is the most effective change to the review stage?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Add a second review stage that uses the identical model, prompt, and context so approvals are confirmed twice"
+      },
+      {
+        "key": "B",
+        "text": "Have the reviewer output a score from 1 to 100 instead of an approve or reject verdict"
+      },
+      {
+        "key": "C",
+        "text": "Let the translation agent grade its own draft before passing it on, since it has the most context"
+      },
+      {
+        "key": "D",
+        "text": "Give the reviewer a distinct rubric and independent evidence such as glossary and clause-coverage checks against the source, return a structured verdict with feedback, and calibrate it on human-labeled samples"
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "A reviewer that shares the generator's model, prompt, and context inherits its blind spots, so its approvals add little independent signal. A judge is stronger when it checks against something the generator did not control, such as a glossary, clause-coverage checks, or a rubric. It should return a structured verdict with actionable feedback, and calibration against human labels shows whether its approvals can be trusted. This also gives the pipeline a meaningful quality gate.",
+      "why_incorrect": {
+        "A": "A second reviewer with identical model, prompt, and context has correlated errors, so repeated approval is not independent verification.",
+        "B": "Changing the output scale does not add evidence or independence. A numeric score from the same blind-spotted judge is still unverified and harder to act on.",
+        "C": "Self-grading by the generator invites self-enhancement bias and removes the separation of production from evaluation that the pattern depends on."
+      },
+      "rule_of_thumb": "Let the checker verify against criteria, evidence, or tests the generator did not control, and calibrate it against human labels."
+    },
+    "tags": [
+      "generator-critic",
+      "llm-judge",
+      "pipeline",
+      "quality-gate"
+    ],
+    "concepts": [
+      "Evaluation & Learning Loops",
+      "Multi-Agent Systems"
+    ]
+  },
+  {
+    "id": "Q-D5-0060",
+    "domain": 5,
+    "task_statement": "5.2",
+    "type": "single_choice",
+    "difficulty": "easy",
+    "theory_refs": [
+      "TH-D5-013",
+      "TH-D5-015"
+    ],
+    "case_study_id": null,
+    "stem": "Which statement correctly distinguishes a hierarchical agent team from a sequential pipeline of agents?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "A pipeline relies on managers that re-plan at run time, while a hierarchy always executes its agents in one fixed order"
+      },
+      {
+        "key": "B",
+        "text": "A hierarchy delegates through managers that choose assignments and re-plan at run time, while a pipeline runs fixed stages that hand structured artifacts forward in a preset order"
+      },
+      {
+        "key": "C",
+        "text": "The two are the same pattern, and the only difference is how many agents each one contains"
+      },
+      {
+        "key": "D",
+        "text": "A pipeline needs a manager agent at every stage, while a hierarchy has no coordinating agent at all"
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "explanation": {
+      "why_correct": "In a hierarchical team, a top-level coordinator and sub-orchestrators decide at run time which agents handle which sub-goals and can re-plan. In a sequential pipeline the stage order is fixed in advance, and each stage consumes a defined input artifact and produces a defined output artifact. No central agent chooses the next step. This makes pipelines predictable and testable stage by stage, while hierarchies handle work whose steps are not known ahead of time.",
+      "why_incorrect": {
+        "A": "This reverses the two patterns: run-time routing and re-planning belong to hierarchies, and a fixed order belongs to pipelines.",
+        "C": "The patterns differ in how control works, not in agent count. A pipeline can have many agents and a hierarchy can be small.",
+        "D": "A pipeline has no central agent deciding the next step, and a hierarchy depends on coordinating managers, so both halves are wrong."
+      },
+      "rule_of_thumb": "Fixed order and artifact handoffs mean pipeline; managers that assign and re-plan at run time mean hierarchy."
+    },
+    "tags": [
+      "hierarchical-agents",
+      "pipeline",
+      "coordination-patterns"
+    ],
+    "concepts": [
+      "Multi-Agent Systems",
+      "Orchestration"
+    ]
+  },
+  {
+    "id": "Q-D5-0061",
+    "domain": 5,
+    "task_statement": "5.2",
+    "type": "multi_response",
+    "difficulty": "hard",
+    "theory_refs": [
+      "TH-D5-015",
+      "TH-D5-014"
+    ],
+    "case_study_id": null,
+    "stem": "A loan-processing system uses a fixed pipeline: document extraction, eligibility check, risk summary, and customer letter. An audit shows that an OCR misread of annual income in the extraction stage flowed unchanged into the risk summary and the customer letter, and no later stage noticed. Select TWO changes that best contain this kind of upstream error.",
+    "select_count": 2,
+    "options": [
+      {
+        "key": "A",
+        "text": "Rely on the letter-writing stage to detect and silently correct inconsistent upstream values"
+      },
+      {
+        "key": "B",
+        "text": "Insert a validation gate after extraction that checks schema, value ranges, and cross-field consistency against the source document and halts the flow on failure"
+      },
+      {
+        "key": "C",
+        "text": "Replace the pipeline with an unrestricted group chat in which any agent may rewrite any artifact"
+      },
+      {
+        "key": "D",
+        "text": "Add a feedback edge from the gate back to extraction with a bounded retry count and escalation to a human reviewer when the limit is reached"
+      },
+      {
+        "key": "E",
+        "text": "Append a second letter-writing stage that rephrases the first draft for clarity"
+      }
+    ],
+    "correct": [
+      "B",
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "Pipelines propagate an upstream error into every later stage unless a gate stops it. A validation gate with objective checks, such as schema, range, and cross-field consistency against the source, catches the misread where it occurs and is stronger than opinion-only review. A feedback edge back to extraction lets the pipeline repair the problem. Bounding retries and escalating to a human prevents an endless loop when extraction keeps failing.",
+      "why_incorrect": {
+        "A": "Later stages treat upstream values as premises and are not designed to audit them, so a final stage cannot be relied on to repair upstream corruption.",
+        "C": "An unrestricted group chat gives up the defined artifacts, ownership, and stage-wise testability, and it introduces conflicting rewrites without adding any verification.",
+        "E": "An extra rewriting stage after the letter does not check the income value, so the wrong figure still reaches the customer, and it adds cost and latency."
+      },
+      "rule_of_thumb": "Put an objective quality gate where errors enter a pipeline, and pair it with a bounded feedback edge."
+    },
+    "tags": [
+      "pipeline",
+      "quality-gate",
+      "error-propagation",
+      "feedback-edge",
+      "finance"
+    ],
+    "concepts": [
+      "Error Recovery",
+      "Guardrails",
+      "Multi-Agent Systems"
+    ]
+  },
+  {
+    "id": "Q-D5-0062",
+    "domain": 5,
+    "task_statement": "5.2",
+    "type": "multi_response",
+    "difficulty": "hard",
+    "theory_refs": [
+      "TH-D5-013",
+      "TH-D5-014"
+    ],
+    "case_study_id": null,
+    "stem": "An incident-response system has an incident commander agent, three team-lead sub-orchestrators (database, network, application), and worker agents under each lead. A postmortem found that the network lead exceeded its spending allowance and restarted a service outside the scope the commander intended, and that the commander accepted the database lead's summary 'root cause resolved' although the summary was wrong. Select TWO changes that best address these two failures.",
+    "select_count": 2,
+    "options": [
+      {
+        "key": "A",
+        "text": "Pass an explicit budget, scope, and authority limit with every delegation, and enforce them outside the leads' own judgment"
+      },
+      {
+        "key": "B",
+        "text": "Rely on each lead to infer the commander's constraints from the shared incident title"
+      },
+      {
+        "key": "C",
+        "text": "Insert a fourth management layer so that every manager supervises exactly one worker"
+      },
+      {
+        "key": "D",
+        "text": "Have the commander accept lead summaries without checking them, because leads have more specialist expertise than the commander"
+      },
+      {
+        "key": "E",
+        "text": "Have an independent verifier check each lead's resolution claim against evidence such as logs and health checks before the commander accepts it"
+      }
+    ],
+    "correct": [
+      "A",
+      "E"
+    ],
+    "explanation": {
+      "why_correct": "The first failure is that constraints did not propagate down: a sub-orchestrator does not inherit the top-level goal, budget, or authority limits unless they are passed explicitly, and enforcing them outside the lead keeps them from being ignored. The second failure is an unverified summary moving upward. A verifier that is independent of the lead and checks the claim against objective evidence catches wrong resolutions before the commander acts on them.",
+      "why_incorrect": {
+        "B": "Constraints are not inherited implicitly. A shared title carries no budget or scope, so leads would guess.",
+        "C": "Another layer adds delegation latency and another lossy summarization step, and it does not give the commander any basis to verify claims.",
+        "D": "A hierarchy of authority is not a hierarchy of correctness. Accepting a summary unchecked lets a wrong claim propagate to the top."
+      },
+      "rule_of_thumb": "Pass limits down explicitly, and verify claims on the way up against evidence the claimant did not control."
+    },
+    "tags": [
+      "hierarchical-agents",
+      "delegation-limits",
+      "verification",
+      "incident-response"
+    ],
+    "concepts": [
+      "Orchestration",
+      "Sub-agents & Handoffs",
+      "Guardrails"
+    ]
+  },
+  {
+    "id": "Q-D5-0063",
+    "domain": 5,
+    "task_statement": "5.2",
+    "type": "ordering",
+    "difficulty": "hard",
+    "theory_refs": [
+      "TH-D5-013",
+      "TH-D5-014",
+      "TH-D5-015"
+    ],
+    "case_study_id": null,
+    "stem": "A lead orchestrator delegates a feature request to a sub-orchestrator whose team runs a fixed design-then-implement pipeline and is checked by an independent verifier. Put the steps in the correct sequence, from first to last.",
+    "select_count": 5,
+    "options": [
+      {
+        "key": "A",
+        "text": "The sub-orchestrator condenses the verified result into a structured summary and reports it upward"
+      },
+      {
+        "key": "B",
+        "text": "The lead decomposes the request and gives the sub-orchestrator its sub-goal, budget, and authority limits"
+      },
+      {
+        "key": "C",
+        "text": "The lead records the result in its progress ledger and decides whether to finish or re-plan"
+      },
+      {
+        "key": "D",
+        "text": "An independent verifier runs executable tests on the artifact and returns a structured verdict"
+      },
+      {
+        "key": "E",
+        "text": "The sub-orchestrator runs its fixed design-then-implement pipeline, handing a structured artifact from each stage to the next"
+      }
+    ],
+    "correct": [
+      "B",
+      "E",
+      "D",
+      "A",
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "Delegation comes first, because limits and goals must be passed down explicitly before any work starts. The sub-orchestrator then runs its fixed pipeline, with each stage consuming and producing a defined artifact. Verification comes next, since an independent verifier should test the artifact with executable checks before anything is reported upward. Only then does the sub-orchestrator condense the verified result for the lead, avoiding an unverified claim moving up the hierarchy. Last, the lead records the outcome in its progress ledger and decides whether to finish or re-plan.",
+      "why_incorrect": {},
+      "rule_of_thumb": "Delegate with limits, produce, verify, condense upward, then let the top level record and decide."
+    },
+    "tags": [
+      "hierarchical-agents",
+      "pipeline",
+      "verification",
+      "ordering"
+    ],
+    "concepts": [
+      "Orchestration",
+      "Sub-agents & Handoffs",
+      "Planning"
+    ]
+  }
+]

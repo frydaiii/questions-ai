@@ -1,0 +1,537 @@
+[
+  {
+    "id": "Q-D5-0011",
+    "domain": 5,
+    "task_statement": "5.3",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D5-003"
+    ],
+    "case_study_id": null,
+    "stem": "An insurance claims intake agent has gathered the policy number, loss date, and photos for a water-damage claim, and must pass the claim to a specialist estimation agent. Which description captures what this handoff is meant to accomplish?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "The intake agent forwards the claimant's raw messages but stays fully responsible for the final estimate, while the specialist only offers advice."
+      },
+      {
+        "key": "B",
+        "text": "The intake agent copies its complete tool set and permissions to the specialist so the specialist can continue without any restrictions."
+      },
+      {
+        "key": "C",
+        "text": "The intake agent transfers responsibility for the estimate to the specialist along with the compact set of claim facts needed to continue without re-asking the claimant."
+      },
+      {
+        "key": "D",
+        "text": "The intake agent restarts the claim from scratch so the specialist forms an independent view without inheriting any of the collected facts."
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "A handoff transfers responsibility for a bounded piece of work together with the context needed to continue it. Here the specialist becomes the owner of the estimate and receives the policy number, loss date, and photos, so the claimant is not asked the same questions twice. The result is a clear change of ownership with just enough information to proceed.",
+      "why_incorrect": {
+        "A": "If the intake agent keeps responsibility and the specialist only advises, no ownership has changed, so this is a consultation rather than a handoff. Accountability for the estimate would stay ambiguous.",
+        "B": "Copying the full tool set and permissions ignores the authority boundary. A handoff should grant only the authority the delegated task needs, not everything the sender can do.",
+        "D": "Restarting from scratch discards the context already collected and wastes effort. Independence of view is a goal of debate or critique patterns, not of a handoff meant to continue work."
+      },
+      "rule_of_thumb": "A handoff moves bounded ownership plus the context needed to continue, not a copy of everything and not a restart."
+    },
+    "tags": [
+      "handoff",
+      "delegation",
+      "ownership"
+    ],
+    "concepts": [
+      "Sub-agents & Handoffs",
+      "Multi-Agent Systems",
+      "Orchestration"
+    ]
+  },
+  {
+    "id": "Q-D5-0012",
+    "domain": 5,
+    "task_statement": "5.3",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D5-003",
+      "TH-D5-017"
+    ],
+    "case_study_id": null,
+    "stem": "In a DevOps platform, a triage agent has identified a p99 latency spike on a checkout database and delegates the fix to a remediation agent. Which handoff package gives the remediation agent what it needs to act safely and report back?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "The complete alert history, every earlier triage conversation, and the on-call roster, so the remediation agent can decide for itself what matters."
+      },
+      {
+        "key": "B",
+        "text": "The triage agent's confidence score and a one-word alert category, since the remediation agent will rediscover the supporting details on its own."
+      },
+      {
+        "key": "C",
+        "text": "The affected service name and the remediation goal, with permissions left at the platform default so the agent can use whatever tools it finds."
+      },
+      {
+        "key": "D",
+        "text": "The affected service and the symptom evidence so far, the remediation task with a success check, the actions it may take, and what it must report back."
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "A good handoff package names the task and its success check, includes only the context relevant to it (the service and the evidence gathered), states the authority boundary (which actions are allowed), and defines the expected return. This lets the remediation agent work without guessing and lets the triage agent verify the outcome.",
+      "why_incorrect": {
+        "A": "Dumping the full history and unrelated material buries the relevant evidence and leaves the receiver to guess what matters. The package should be compact and task-relevant.",
+        "B": "A confidence score and a label carry too little information to continue the work, forcing the receiver to redo the diagnosis. It also gives no task definition or return condition.",
+        "C": "Leaving permissions at the default means the authority boundary is implicit and possibly too broad. There is also no success criterion or defined return path."
+      },
+      "rule_of_thumb": "A handoff package states the task, the relevant context, the authority, and the expected return."
+    },
+    "tags": [
+      "handoff-context",
+      "interface",
+      "devops"
+    ],
+    "concepts": [
+      "Sub-agents & Handoffs",
+      "Multi-Agent Systems"
+    ]
+  },
+  {
+    "id": "Q-D5-0013",
+    "domain": 5,
+    "task_statement": "5.3",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D5-003"
+    ],
+    "case_study_id": null,
+    "stem": "A travel-support orchestrator delegates \"summarize this baggage-loss complaint\" to a sub-agent. The sub-agent also called the compensation tool and issued a voucher, because it inherited the orchestrator's full tool set. Which change best addresses the root cause?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Give the sub-agent a larger context window so that it understands the complaint well enough to judge that a voucher is premature."
+      },
+      {
+        "key": "B",
+        "text": "Run a second summarization sub-agent in parallel and compare the two summaries before either one is allowed to return a result."
+      },
+      {
+        "key": "C",
+        "text": "Add an instruction to the sub-agent's prompt asking it to be careful about compensation decisions and to avoid issuing vouchers."
+      },
+      {
+        "key": "D",
+        "text": "Scope the handoff to read-only complaint tools with no compensation tool, so the action is outside the delegated authority regardless of the prompt."
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "The failure is an authority boundary that was not enforced in the handoff contract: the sub-agent held a tool that its task never required. Restricting the delegated tool set to read-only complaint access makes the unwanted action impossible rather than merely discouraged, which is what least privilege means for delegation.",
+      "why_incorrect": {
+        "A": "A larger context window may improve comprehension, but it does not remove the capability to issue vouchers. The problem is excess authority, not insufficient understanding.",
+        "B": "Comparing two summaries addresses summary quality or diversity, and both sub-agents would still hold the compensation tool. It does nothing to bound authority.",
+        "C": "A prompt instruction is a soft request that can be ignored or misread. Boundaries on side-effecting actions should be enforced by the tool set granted, not only by wording."
+      },
+      "rule_of_thumb": "Enforce delegated authority through the tools and permissions granted, not through prompt wording alone."
+    },
+    "tags": [
+      "authority",
+      "least-privilege",
+      "tool-scoping"
+    ],
+    "concepts": [
+      "Sub-agents & Handoffs",
+      "Multi-Agent Systems",
+      "Guardrails"
+    ]
+  },
+  {
+    "id": "Q-D5-0014",
+    "domain": 5,
+    "task_statement": "5.3",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D5-003",
+      "TH-D5-010"
+    ],
+    "case_study_id": null,
+    "stem": "A sales-operations orchestrator delegates a contract-clause comparison to a legal-review sub-agent and passes the entire 90,000-token account-manager chat, which includes pricing negotiations and unrelated side threads. The sub-agent's report starts citing discount discussions that have nothing to do with the clauses. Which handoff change fixes this, and why?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Truncate the transcript to its last few messages, because a receiving agent cannot process more than a small amount of context."
+      },
+      {
+        "key": "B",
+        "text": "Convert the transcript to structured JSON, because models ignore free-form text in a handoff and only attend to structured fields."
+      },
+      {
+        "key": "C",
+        "text": "Pass the clause texts, the comparison criteria, and any decisions that constrain the review, because irrelevant material dilutes attention and adds ambiguity."
+      },
+      {
+        "key": "D",
+        "text": "Keep passing the full transcript and instruct the sub-agent to ignore anything unrelated, since filtering is cheap for the receiver."
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "A handoff should carry a focused, task-relevant context package. Extra material competes for attention, can mislead the receiver, and raises cost; here the sub-agent was distracted by pricing threads. Passing the clauses, criteria, and constraining decisions gives it what it needs with less noise, at the price of the sender having to select carefully.",
+      "why_incorrect": {
+        "A": "Cutting to the last few messages is arbitrary and may drop exactly the clauses that matter. Receivers can read long inputs; the problem is relevance, not capacity.",
+        "B": "Structure can help clarity, but models do read free-form text. Reformatting the same irrelevant content does not remove the distraction.",
+        "D": "Asking the receiver to ignore noise still leaves the noise in its context, so it can still influence the output. Selecting what to hand off is the sender's job."
+      },
+      "rule_of_thumb": "Hand off the smallest context that lets the receiver do the task, not the whole history."
+    },
+    "tags": [
+      "context",
+      "handoff",
+      "context-isolation"
+    ],
+    "concepts": [
+      "Sub-agents & Handoffs",
+      "Multi-Agent Systems"
+    ]
+  },
+  {
+    "id": "Q-D5-0015",
+    "domain": 5,
+    "task_statement": "5.3",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D5-003",
+      "TH-D5-020"
+    ],
+    "case_study_id": null,
+    "stem": "A data-pipeline orchestrator delegates schema mapping to a sub-agent, which keeps tweaking its mapping and calling the validator tool, burning tokens for hours without returning. What should end the sub-agent's loop?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "The sub-agent's own statement that the mapping seems good enough after its latest revision, with no external check."
+      },
+      {
+        "key": "B",
+        "text": "A defined completion criterion, such as validation passing on a sample, plus an externally enforced retry and token budget that escalates to the orchestrator when exceeded."
+      },
+      {
+        "key": "C",
+        "text": "The orchestrator sending another refinement request each time until the wording of the sub-agent's output stops changing."
+      },
+      {
+        "key": "D",
+        "text": "The first successful call to the validator tool, regardless of whether the checks it returned actually passed."
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "explanation": {
+      "why_correct": "A delegated loop needs explicit stop conditions: a measurable definition of done, and a bound enforced outside the agent (retries, tokens, time) with a defined behavior when the bound is hit, such as returning a partial result or escalating. That prevents runaway loops while still letting the sub-agent finish when the validation succeeds.",
+      "why_incorrect": {
+        "A": "A self-declared 'good enough' is an unverifiable stopping rule. The agent that is stuck in a loop is the least reliable judge of when to stop.",
+        "C": "Repeated refinement requests keep the loop alive and wording stability says nothing about correctness. This option drives a ping-pong rather than ending one.",
+        "D": "A successful call only means the tool ran, not that the mapping passed validation. Stopping on it would accept failing mappings as done."
+      },
+      "rule_of_thumb": "Every delegated loop needs a measurable completion criterion and an externally enforced bound with a defined fallback."
+    },
+    "tags": [
+      "termination",
+      "handoff-loop",
+      "budget"
+    ],
+    "concepts": [
+      "Sub-agents & Handoffs",
+      "Multi-Agent Systems",
+      "Error Recovery"
+    ]
+  },
+  {
+    "id": "Q-D5-0016",
+    "domain": 5,
+    "task_statement": "5.3",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D5-004",
+      "TH-D5-017"
+    ],
+    "case_study_id": null,
+    "stem": "A research orchestrator delegates a competitor-pricing brief to a market-analysis specialist, whose contract requires every figure to cite a source. The task returns with status \"completed\", but none of the figures include sources. What is the best next step?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Accept the brief because the task status is completed, and add the missing citations during final editing."
+      },
+      {
+        "key": "B",
+        "text": "Discard the brief and the task record, then rerun the same delegation with an identical instruction."
+      },
+      {
+        "key": "C",
+        "text": "Return the task as incomplete with the missing-evidence deficiency recorded, allow a bounded number of corrections, and escalate if still deficient."
+      },
+      {
+        "key": "D",
+        "text": "Let the specialist retry as many times as it needs to produce citations, since meeting its own contract is its responsibility."
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "The returned artifact violates the agreed communication contract, so the orchestrator should not trust the 'completed' status alone. Recording the specific deficiency and requesting a bounded correction keeps the audit trail and gives the specialist a fair chance, while an escalation path prevents endless retries or unverified claims reaching the final output.",
+      "why_incorrect": {
+        "A": "A status flag is not proof that the contract was met. Accepting unsourced figures pushes unverified claims downstream and makes the later fix harder to attribute.",
+        "B": "Deleting the task history removes the evidence of what went wrong, and an identical rerun is likely to repeat the same deficiency without new guidance.",
+        "D": "Unlimited retries can loop indefinitely and consume budget. Corrections should be bounded and followed by escalation when they fail."
+      },
+      "rule_of_thumb": "Verify returned artifacts against the contract; on a gap, request a bounded fix with the deficiency recorded, then escalate."
+    },
+    "tags": [
+      "handoff",
+      "evidence",
+      "contract-verification"
+    ],
+    "concepts": [
+      "Sub-agents & Handoffs",
+      "Multi-Agent Systems",
+      "Orchestration"
+    ]
+  },
+  {
+    "id": "Q-D5-0017",
+    "domain": 5,
+    "task_statement": "5.3",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D5-004",
+      "TH-D5-016"
+    ],
+    "case_study_id": null,
+    "stem": "In an e-commerce catalog system, a pricing sub-agent and a promotions sub-agent each believe they own the draft product-listing record, and both write to it during the same run. Which outcome is most likely, and what prevents it?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Silent overwrites and duplicated effort, prevented by naming one owner per artifact and versioning writes so stale edits are detected."
+      },
+      {
+        "key": "B",
+        "text": "Faster convergence through redundancy, since either agent's edit corrects the other's, so no ownership rule is needed."
+      },
+      {
+        "key": "C",
+        "text": "A guaranteed consistent listing, because shared-state writes are automatically serialized by the order of the agents' turns."
+      },
+      {
+        "key": "D",
+        "text": "Higher token cost only, with no effect on the listing content, prevented by giving each agent a smaller context window."
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "explanation": {
+      "why_correct": "When two agents both believe they own a shared artifact, concurrent writes can overwrite one another and the same work can be done twice. The fix is protocol-level: assign a single owner (or defined writers), version the artifact, and detect stale or conflicting updates rather than overwriting silently.",
+      "why_incorrect": {
+        "B": "Redundant edits do not self-correct; without versioning, the last writer wins and may erase the other agent's valid change.",
+        "C": "Turn order does not guarantee consistency. An agent may write based on a stale read, and shared state does not by itself provide serialization or conflict detection.",
+        "D": "The problem is conflicting content, not merely cost. A smaller context window does not resolve who is allowed to change the record."
+      },
+      "rule_of_thumb": "Give every shared artifact one owner and a version, and detect stale writes instead of overwriting."
+    },
+    "tags": [
+      "ownership",
+      "shared-state",
+      "versioning"
+    ],
+    "concepts": [
+      "Sub-agents & Handoffs",
+      "Multi-Agent Systems",
+      "State / State Management"
+    ]
+  },
+  {
+    "id": "Q-D5-0018",
+    "domain": 5,
+    "task_statement": "5.3",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D5-004",
+      "TH-D5-020"
+    ],
+    "case_study_id": null,
+    "stem": "In a customer-support system, a billing agent and a technical agent keep returning the same ticket to each other with \"this belongs to the other team\", reaching 40 hops before a customer complains. How can the coordinator best reduce this handoff looping?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Let each agent forward the ticket whenever it is uncertain, so the most suitable agent eventually receives it."
+      },
+      {
+        "key": "B",
+        "text": "Remove the original customer description from each handoff so neither agent is anchored by the other's framing."
+      },
+      {
+        "key": "C",
+        "text": "Increase both agents' sampling temperature so they diversify their routing decisions between attempts."
+      },
+      {
+        "key": "D",
+        "text": "Assign one accountable owner per ticket, define when a ticket may be returned, and enforce a hop budget that escalates to a human."
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "Ping-pong delegation arises when ownership and return conditions are vague and nothing limits the number of transfers. A single accountable owner, explicit rules for when a return is allowed, and an externally enforced hop budget with escalation make the loop impossible to run forever and make the outcome predictable.",
+      "why_incorrect": {
+        "A": "Forwarding on any uncertainty is exactly what causes the loop. With no ownership, the ticket can bounce indefinitely.",
+        "B": "Hiding the original description removes the context agents need to decide, making routing worse. The objective must stay visible through each hop.",
+        "C": "Randomizing routing via temperature does not create ownership or a stopping condition, and may produce erratic routes. Loop prevention needs structural limits."
+      },
+      "rule_of_thumb": "Prevent handoff loops with explicit ownership, return conditions, and an externally enforced hop budget."
+    },
+    "tags": [
+      "loop-prevention",
+      "hop-budget",
+      "ownership"
+    ],
+    "concepts": [
+      "Sub-agents & Handoffs",
+      "Multi-Agent Systems",
+      "Orchestration"
+    ]
+  },
+  {
+    "id": "Q-D5-0019",
+    "domain": 5,
+    "task_statement": "5.3",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D5-003",
+      "TH-D5-013"
+    ],
+    "case_study_id": null,
+    "stem": "A prior-authorization sub-agent is assembling an insurance appeal. It finds that a required clinical note is missing, and the only way to submit on time is to include a form attesting that the physician approved the treatment, which the sub-agent is not authorized to sign. What should it do?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Fill in the attestation based on the closest earlier case, record it in a log afterwards, and continue so that the deadline is met."
+      },
+      {
+        "key": "B",
+        "text": "Return a finished-looking packet marked complete without mentioning the gap, because the orchestrator asked for a completed appeal."
+      },
+      {
+        "key": "C",
+        "text": "Stop before submitting and escalate to the orchestrator or a human reviewer, stating what is missing and what authority is needed."
+      },
+      {
+        "key": "D",
+        "text": "Retry the same document extraction quietly until the note appears, since escalation is only meant for tool errors."
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "Escalation is appropriate when required evidence or authority is missing and the risk is material. Submitting a false attestation or hiding the gap would create a harmful, possibly irreversible action. Reporting what is missing and what is needed lets a higher level or a human decide, which is the purpose of a defined escalation path.",
+      "why_incorrect": {
+        "A": "Improvising an attestation exceeds the sub-agent's authority, and a log entry afterwards does not undo a submitted false statement.",
+        "B": "Marking an incomplete packet as complete misrepresents its status and hides the risk from the orchestrator that must decide what to do.",
+        "D": "Retrying the extraction is reasonable for transient errors, but the note is simply absent. Silent retries only delay the decision and cannot supply the missing authority."
+      },
+      "rule_of_thumb": "Escalate with a clear description of the gap when evidence or authority is missing and the risk is material."
+    },
+    "tags": [
+      "escalation",
+      "authority",
+      "hitl"
+    ],
+    "concepts": [
+      "Sub-agents & Handoffs",
+      "Multi-Agent Systems",
+      "Human-in-the-Loop (HITL)"
+    ]
+  },
+  {
+    "id": "Q-D5-0020",
+    "domain": 5,
+    "task_statement": "5.3",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D5-003",
+      "TH-D5-017"
+    ],
+    "case_study_id": null,
+    "stem": "A legal-research platform's planner agent will hand a citation-verification task to a verifier sub-agent. Which design best reflects a safe handoff?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "The verifier inherits the planner's complete permissions and memory so that it never needs to ask for anything."
+      },
+      {
+        "key": "B",
+        "text": "The planner stays silent after delegating and treats the verifier's silence as success, so that it never blocks on replies."
+      },
+      {
+        "key": "C",
+        "text": "The verifier's work is tracked only inside the planner's private reasoning, which keeps the interface between them simple."
+      },
+      {
+        "key": "D",
+        "text": "The verifier is recorded as owner of the check, receives the relevant documents, has read-only access to sources, and can return results or escalate."
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "A safe handoff has an observable change of ownership, a relevant context package, a bounded authority (here read-only access), and a defined way to return results or escalate. This makes the delegation auditable and limits what can go wrong if the verifier errs or is manipulated by content it reads.",
+      "why_incorrect": {
+        "A": "Inheriting all permissions and memory removes the authority boundary and exposes unrelated data. The verifier should receive only what the task needs.",
+        "B": "Treating silence as success hides failures and gives no completion or failure signal. Handoffs need explicit status, return, and escalation semantics.",
+        "C": "A state transition that exists only in private reasoning is not observable or auditable, so no one else can tell who owns the task or what happened."
+      },
+      "rule_of_thumb": "A safe handoff makes ownership, context, authority, and the return path explicit and observable."
+    },
+    "tags": [
+      "handoff",
+      "ownership",
+      "audit"
+    ],
+    "concepts": [
+      "Sub-agents & Handoffs",
+      "Multi-Agent Systems"
+    ]
+  }
+]

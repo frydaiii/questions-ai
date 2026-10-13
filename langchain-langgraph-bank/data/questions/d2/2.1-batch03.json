@@ -156,7 +156,8 @@
     "type": "single_choice",
     "difficulty": "medium",
     "theory_refs": [
-      "TH-D2-005"
+      "TH-D2-005",
+      "TH-D2-017"
     ],
     "case_study_id": null,
     "stem": "Which statement accurately contrasts plain action-only agents with interleaved reasoning-action agents?",

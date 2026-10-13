@@ -53,46 +53,54 @@
     "id": "Q-D4-0047",
     "domain": 4,
     "task_statement": "4.2",
-    "type": "single_choice",
-    "difficulty": "medium",
+    "type": "multi_response",
+    "difficulty": "easy",
     "theory_refs": [
-      "TH-D4-007"
+      "TH-D4-007",
+      "TH-D4-017"
     ],
     "case_study_id": null,
-    "stem": "What is the main efficiency benefit of maintaining procedural memory for recurring task types?",
-    "select_count": 1,
+    "stem": "A claims-processing agent keeps a stored, verified routine for handling warranty claims instead of re-planning each claim from scratch. Which TWO benefits does this procedural memory provide? (Select TWO)",
+    "select_count": 2,
     "options": [
       {
         "key": "A",
-        "text": "Guaranteeing that every future task of that type will be completed instantly with zero effort"
+        "text": "It guarantees every future claim is resolved instantly with no reasoning at all"
       },
       {
         "key": "B",
-        "text": "Avoiding the need to re-derive a successful approach from scratch each time a similar task recurs"
+        "text": "It avoids re-deriving a working approach each time a similar claim arrives"
       },
       {
         "key": "C",
-        "text": "Eliminating the need for the agent to ever reason about anything again"
+        "text": "It records the specific details of every past claim for later recall"
       },
       {
         "key": "D",
-        "text": "Making all other memory types unnecessary"
+        "text": "It reuses an approach already known to work, which cuts planning effort and repeated mistakes"
+      },
+      {
+        "key": "E",
+        "text": "It makes semantic and episodic memory unnecessary"
       }
     ],
     "correct": [
-      "B"
+      "B",
+      "D"
     ],
     "explanation": {
-      "why_correct": "Procedural memory's main efficiency benefit is avoiding the need to re-derive a known-good approach from scratch every time a similar task type comes up again.",
+      "why_correct": "Procedural memory stores how to do a recurring kind of task. Reusing a verified routine saves the effort of re-deriving the method and avoids repeating earlier mistakes, though the agent must still apply it to the case in front of it.",
       "why_incorrect": {
-        "C": "Procedural memory doesn't eliminate reasoning entirely; it provides a useful starting point or framework that may still require some reasoning to apply correctly.",
-        "D": "Procedural memory serves a distinct purpose from episodic and semantic memory; it doesn't make the others unnecessary.",
-        "A": "Having a stored procedure doesn't guarantee instant, zero-effort completion; some execution and reasoning is typically still required to apply it to the current specific case."
+        "A": "A stored routine is a starting framework; applying it to a specific claim still takes execution and judgment, so nothing is guaranteed to be instant.",
+        "C": "Recording the specifics of individual past claims is the role of episodic memory, not procedural memory.",
+        "E": "Procedural memory answers a different question (how to do a task); facts and past events still need semantic and episodic memory."
       },
-      "rule_of_thumb": "Procedural memory's core benefit is avoiding re-derivation of a known-good approach for recurring task types, not eliminating all further reasoning."
+      "rule_of_thumb": "Procedural memory pays off by reusing a verified method for recurring tasks -- it saves re-derivation, not all reasoning."
     },
     "tags": [
-      "procedural-memory"
+      "procedural-memory",
+      "skill-reuse",
+      "planning-cost"
     ],
     "concepts": [
       "Memory",
@@ -360,47 +368,74 @@
     "id": "Q-D4-0053",
     "domain": 4,
     "task_statement": "4.2",
-    "type": "single_choice",
-    "difficulty": "medium",
+    "type": "matching",
+    "difficulty": "hard",
     "theory_refs": [
       "TH-D4-005",
-      "TH-D4-008"
+      "TH-D4-016",
+      "TH-D4-017"
     ],
     "case_study_id": null,
-    "stem": "A travel-booking agent wants to recall 'what special requests did this specific traveler make on their last three trips.' Which memory type is most directly relevant to answering this?",
-    "select_count": 1,
-    "options": [
-      {
-        "key": "A",
-        "text": "Procedural memory, since it concerns how to book a flight"
-      },
-      {
-        "key": "B",
-        "text": "Semantic memory, since it concerns a general fact with no connection to any specific trip"
-      },
-      {
-        "key": "C",
-        "text": "Episodic memory, since it concerns specific past trips and their specific details"
-      },
-      {
-        "key": "D",
-        "text": "No memory type is relevant to this request"
-      }
-    ],
-    "correct": [
-      "C"
-    ],
+    "stem": "Match each item from a travel-booking agent's memory (left) to the memory type or process it represents (right).",
+    "select_count": 4,
+    "matching": {
+      "left": [
+        {
+          "key": "L1",
+          "text": "Entry: traveler 8841 requested a vegetarian meal and a window seat on the March Lisbon trip"
+        },
+        {
+          "key": "L2",
+          "text": "A scheduled job that reads many such entries and writes 'traveler 8841 consistently requests vegetarian meals'"
+        },
+        {
+          "key": "L3",
+          "text": "The stored statement 'traveler 8841 is vegetarian', applied to any future trip"
+        },
+        {
+          "key": "L4",
+          "text": "A verified, reusable routine for rebooking a traveler after a missed connection, retrieved by task description"
+        }
+      ],
+      "right": [
+        {
+          "key": "R1",
+          "text": "Semantic memory"
+        },
+        {
+          "key": "R2",
+          "text": "Reflection-based consolidation"
+        },
+        {
+          "key": "R3",
+          "text": "Scratchpad contents for the current turn"
+        },
+        {
+          "key": "R4",
+          "text": "Procedural memory (skill library)"
+        },
+        {
+          "key": "R5",
+          "text": "Episodic memory"
+        }
+      ]
+    },
+    "correct_pairs": {
+      "L1": "R5",
+      "L2": "R2",
+      "L3": "R1",
+      "L4": "R4"
+    },
     "explanation": {
-      "why_correct": "Recalling specific requests from specific past trips is exactly what episodic memory is designed to capture -- events tied to particular occasions, not general facts or procedures.",
-      "why_incorrect": {
-        "B": "This request is specifically about particular past trips, not a general, event-independent fact, so semantic memory isn't the primary fit.",
-        "D": "This is a direct, clear use case for episodic memory retrieval.",
-        "A": "The request concerns recalling what happened on specific past trips, not a method for performing the booking process itself."
-      },
-      "rule_of_thumb": "Recalling specific details tied to particular past occasions is the core use case for episodic memory."
+      "why_correct": "The trip log entry is tied to one specific occasion, so it is episodic. The job that reads many episodes and writes a higher-level conclusion is reflection-based consolidation. Its output, a general statement independent of any one trip, is semantic memory. The verified rebooking routine is a reusable method, so it is procedural memory stored in a skill library. Scratchpad contents are transient working memory and match none of the items.",
+      "why_incorrect": {},
+      "rule_of_thumb": "Specific event = episodic; reflection distills episodes into general facts = semantic; verified reusable method = procedural."
     },
     "tags": [
-      "episodic-memory"
+      "episodic-memory",
+      "semantic-memory",
+      "reflection",
+      "skill-library"
     ],
     "concepts": [
       "Memory",
@@ -411,52 +446,59 @@
     "id": "Q-D4-0054",
     "domain": 4,
     "task_statement": "4.2",
-    "type": "single_choice",
-    "difficulty": "medium",
+    "type": "ordering",
+    "difficulty": "hard",
     "theory_refs": [
-      "TH-D4-006",
-      "TH-D4-007"
+      "TH-D4-007",
+      "TH-D4-017"
     ],
     "case_study_id": null,
-    "stem": "Which pair correctly distinguishes semantic memory from procedural memory?",
-    "select_count": 1,
+    "stem": "In a Voyager-style skill library used as procedural memory, place the lifecycle of one new skill in the correct sequence.",
+    "select_count": 5,
     "options": [
       {
         "key": "A",
-        "text": "Semantic memory and procedural memory can only ever be used by entirely separate, unrelated agents"
+        "text": "On a later, similar task, the skill is retrieved by matching the task against skill descriptions and reused instead of being re-derived"
       },
       {
         "key": "B",
-        "text": "Semantic memory holds methods or sequences of steps; procedural memory holds general facts"
+        "text": "With no matching skill in the library, the agent composes a new procedure, drawing on the closest retrieved skills"
       },
       {
         "key": "C",
-        "text": "Both are exactly identical with no distinguishable difference"
+        "text": "When the environment changes and the skill starts failing, it is revised or retired"
       },
       {
         "key": "D",
-        "text": "Semantic memory holds general facts; procedural memory holds methods or sequences of steps for accomplishing tasks"
+        "text": "The procedure is executed and execution feedback or a self-check confirms that it achieved the goal"
+      },
+      {
+        "key": "E",
+        "text": "Only after verification passes, the procedure is saved to the library and indexed by a description of what it does"
       }
     ],
     "correct": [
-      "D"
+      "B",
+      "D",
+      "E",
+      "A",
+      "C"
     ],
     "explanation": {
-      "why_correct": "Semantic memory is specifically about general facts/knowledge, while procedural memory is specifically about methods or sequences for accomplishing tasks -- this is the correct distinction.",
-      "why_incorrect": {
-        "B": "This reverses the actual roles of the two memory types.",
-        "C": "They are clearly distinguishable: facts versus methods/procedures.",
-        "A": "Both memory types can coexist and be used together within a single agent; there's no requirement for separate agents."
-      },
-      "rule_of_thumb": "Semantic memory = general facts; procedural memory = methods/sequences for accomplishing tasks."
+      "why_correct": "A new skill is composed when no stored one fits, then executed and verified; only a verified procedure is admitted to the library and indexed by a description. Later tasks retrieve it by description similarity rather than by exact name. Finally, a skill that begins to fail after the environment changes must be revised or retired. Storing before verification would pollute the library with procedures that do not work.",
+      "why_incorrect": {},
+      "rule_of_thumb": "Compose, execute and verify, store with a description, retrieve for reuse, then maintain -- never store before verifying."
     },
     "tags": [
-      "semantic-memory",
-      "procedural-memory"
+      "skill-library",
+      "procedural-memory",
+      "verification",
+      "execution-order"
     ],
     "concepts": [
       "Memory",
-      "Context Engineering"
+      "Context Engineering",
+      "Evaluation & Learning Loops"
     ]
   }
 ]

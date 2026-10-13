@@ -161,7 +161,8 @@
     "difficulty": "hard",
     "theory_refs": [
       "TH-D2-001",
-      "TH-D2-002"
+      "TH-D2-002",
+      "TH-D2-017"
     ],
     "case_study_id": null,
     "stem": "An agent's thought step says 'I believe the file was last modified in 2021' without having called any tool to check. The next action is a tool call to verify this. What best describes this specific thought-action pair?",

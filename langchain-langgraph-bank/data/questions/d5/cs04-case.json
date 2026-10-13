@@ -1,0 +1,56 @@
+[
+  {
+    "id": "Q-D5-0089",
+    "domain": 5,
+    "task_statement": "5.4",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D5-019",
+      "TH-D5-014"
+    ],
+    "case_study_id": "CS-04",
+    "stem": "In the claims pilot, the reviewer agent approves nearly every draft. Investigation shows that it receives the drafting agent's full rationale with the instruction \"confirm or correct this decision\", and it runs on the same model, prompt style, and context. Misreadings of policy clauses are slipping through. Which change best restores independent verification?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Add two more reviewer agents with the same prompt and the same context, and require all three to agree before payment"
+      },
+      {
+        "key": "B",
+        "text": "Have the reviewer check the draft against the retrieved policy clauses and the extracted claim fields without seeing the drafter's rationale, using a different prompt and, if possible, a different model"
+      },
+      {
+        "key": "C",
+        "text": "Add several rounds of discussion between the drafter and the reviewer, and release the claim once they reach agreement"
+      },
+      {
+        "key": "D",
+        "text": "Give the reviewer a strict-auditor persona in the same prompt and context, so that it scrutinizes the drafter's reasoning more harshly"
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "explanation": {
+      "why_correct": "Agents on the same model share correlated errors, and reading the drafter's rationale first anchors the reviewer toward agreement. Independence comes from separating what the checker sees and how it is configured: it verifies the output against evidence the generator did not control, in a different role, prompt, or model, and returns a structured verdict. This breaks the conformity pattern instead of repeating it.",
+      "why_incorrect": {
+        "A": "Three copies with identical context and prompt have correlated errors, so unanimity looks stronger than it is and adds cost without adding independence.",
+        "C": "More discussion rounds can entrench a shared mistake, since a model confident in an early wrong answer rarely revises it through further exchange with a like-minded peer.",
+        "D": "A persona on the same model with the same context still anchors on the drafter's rationale. Different persona prompts do not create genuinely independent viewpoints."
+      },
+      "rule_of_thumb": "Make the checker verify against evidence the generator did not control; agreement among correlated agents is not verification."
+    },
+    "tags": [
+      "conformity",
+      "generator-critic",
+      "independent-review",
+      "groupthink"
+    ],
+    "concepts": [
+      "Multi-Agent Systems",
+      "Agent Debate"
+    ]
+  }
+]

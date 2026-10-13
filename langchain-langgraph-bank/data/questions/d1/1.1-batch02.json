@@ -106,48 +106,49 @@
     "id": "Q-D1-0013",
     "domain": 1,
     "task_statement": "1.1",
-    "type": "multi_response",
-    "difficulty": "hard",
+    "type": "single_choice",
+    "difficulty": "medium",
     "theory_refs": [
       "TH-D1-002",
       "TH-D1-005"
     ],
     "case_study_id": null,
-    "stem": "Which of the following systems should be classified as workflows rather than agents? (Select 2)",
-    "select_count": 2,
+    "stem": "A finance operations team inventories four internal AI features. Which one is best classified as a workflow rather than an agent?",
+    "select_count": 1,
     "options": [
       {
         "key": "A",
-        "text": "A system that always runs steps A, then B, then C, in that fixed order, regardless of input"
+        "text": "A research assistant that decides at runtime whether to run another web search or to write up its final report"
       },
       {
         "key": "B",
-        "text": "A system that classifies input into one of five predefined branches using a fixed classifier, with no further runtime decisions"
+        "text": "A coding helper that keeps editing files and re-running tests until it judges the test suite to be green"
       },
       {
         "key": "C",
-        "text": "A system where the model decides, at runtime, which of an open-ended set of tools to call and how many times"
+        "text": "A travel bot that chooses, for each request, which of fifteen booking tools to call and in what order"
       },
       {
         "key": "D",
-        "text": "A system where the model decides when to stop iterating based on its own assessment of task completion"
+        "text": "An invoice pipeline that extracts fields, validates totals, and files the record in the same order for every document"
       }
     ],
     "correct": [
-      "A",
-      "B"
+      "D"
     ],
     "explanation": {
-      "why_correct": "Both a fixed sequential pipeline and a fixed-branch classifier represent control flow fully authored in advance by a developer, with no runtime decision-making by the model about what to do next -- the defining trait of a workflow.",
+      "why_correct": "The invoice pipeline's control flow is fully authored by a developer in advance: the same steps run in the same order for every document, and the model never chooses what happens next or when to stop. That fixed, developer-defined sequence is the defining trait of a workflow, even though individual steps may call an LLM.",
       "why_incorrect": {
-        "C": "Dynamically choosing among an open-ended set of tools at runtime is exactly the kind of model-driven decision-making that characterizes an agent, not a workflow.",
-        "D": "Deciding when to stop based on the model's own assessment (rather than a fixed step count defined in advance) is an agentic trait, since the termination point is determined dynamically."
+        "A": "Choosing between another search and writing the report is a runtime decision made by the model about its own next step, which is characteristic of an agent.",
+        "B": "Looping until the model itself judges the tests to be passing means both the step count and the stopping point are model-determined, an agentic trait.",
+        "C": "Picking among many tools and sequencing them per request is open-ended, model-driven control flow, which is agentic rather than a fixed workflow."
       },
-      "rule_of_thumb": "Fixed sequences and fixed-branch classifiers are workflows; dynamic tool selection and model-decided termination are hallmarks of agentic control flow."
+      "rule_of_thumb": "If the whole execution path can be drawn as a fixed flowchart before any input arrives, it is a workflow; if the model chooses the next step and when to stop, it is an agent."
     },
     "tags": [
       "workflow-vs-agent",
-      "control-flow"
+      "control-flow",
+      "classification"
     ],
     "concepts": [
       "Agent",

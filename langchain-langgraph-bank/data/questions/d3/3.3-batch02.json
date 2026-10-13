@@ -55,47 +55,72 @@
     "id": "Q-D3-0060",
     "domain": 3,
     "task_statement": "3.3",
-    "type": "single_choice",
-    "difficulty": "medium",
+    "type": "matching",
+    "difficulty": "hard",
     "theory_refs": [
-      "TH-D3-011"
+      "TH-D3-011",
+      "TH-D3-019"
     ],
     "case_study_id": null,
-    "stem": "What is the purpose of 'backoff' (waiting progressively longer between retry attempts) in a retry strategy?",
-    "select_count": 1,
-    "options": [
-      {
-        "key": "A",
-        "text": "To guarantee the call will never fail again"
-      },
-      {
-        "key": "B",
-        "text": "To avoid overwhelming a struggling service with rapid repeated requests while still allowing a chance for a transient issue to resolve"
-      },
-      {
-        "key": "C",
-        "text": "To make the agent wait forever with no limit"
-      },
-      {
-        "key": "D",
-        "text": "To permanently disable the tool after one failure"
-      }
-    ],
-    "correct": [
-      "B"
-    ],
+    "stem": "Match each retry-design element on the left to the specific risk it controls on the right. One risk on the right is not controlled by any listed element.",
+    "select_count": 4,
+    "matching": {
+      "left": [
+        {
+          "key": "L1",
+          "text": "Backoff delay that grows between attempts"
+        },
+        {
+          "key": "L2",
+          "text": "A maximum attempt count"
+        },
+        {
+          "key": "L3",
+          "text": "A unique idempotency key attached to a write call"
+        },
+        {
+          "key": "L4",
+          "text": "Classifying a failure as transient or persistent before retrying"
+        }
+      ],
+      "right": [
+        {
+          "key": "R1",
+          "text": "Applying a side effect twice when a timed-out action had actually succeeded"
+        },
+        {
+          "key": "R2",
+          "text": "Retrying a cause that waiting cannot fix, such as a permanently invalid credential"
+        },
+        {
+          "key": "R3",
+          "text": "Piling extra load onto a service that is already struggling"
+        },
+        {
+          "key": "R4",
+          "text": "Spending unbounded time and resources on a call that may never succeed"
+        },
+        {
+          "key": "R5",
+          "text": "Accepting an empty result set as proof that nothing exists"
+        }
+      ]
+    },
+    "correct_pairs": {
+      "L1": "R3",
+      "L2": "R4",
+      "L3": "R1",
+      "L4": "R2"
+    },
     "explanation": {
-      "why_correct": "Backoff spaces out retry attempts to avoid piling additional load onto a possibly struggling service, while still giving a genuinely transient issue time to resolve before the next attempt.",
-      "why_incorrect": {
-        "C": "Backoff still has a limited number of attempts with a stopping condition; it is not meant to continue indefinitely.",
-        "D": "Backoff is about spacing retries, not permanently disabling the tool after a single failure.",
-        "A": "Backoff does not guarantee future success; it simply manages the pacing of retry attempts for transient issues."
-      },
-      "rule_of_thumb": "Backoff spaces out retries to avoid overloading a struggling service while still allowing transient issues time to resolve, within a limited attempt budget."
+      "why_correct": "Backoff spaces out attempts so a struggling service is not flooded. A maximum attempt count bounds the time and resources spent on a call that may never succeed. An idempotency key lets a retried write be recognized as the same request, so a timed-out action that actually succeeded is not applied twice. Classifying the failure as transient or persistent before retrying avoids retrying causes that waiting cannot fix, such as an invalid credential. Accepting an empty result as a true negative is a sanity-checking concern, not a retry-design one.",
+      "why_incorrect": {},
+      "rule_of_thumb": "Backoff protects the service, the cap protects your budget, idempotency protects against duplicates, and classification avoids pointless retries."
     },
     "tags": [
       "retry-strategy",
-      "backoff"
+      "backoff",
+      "idempotency"
     ],
     "concepts": [
       "Tools & Tool Discovery",

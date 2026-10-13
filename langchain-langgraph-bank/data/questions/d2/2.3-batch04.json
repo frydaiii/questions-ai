@@ -57,7 +57,8 @@
     "type": "single_choice",
     "difficulty": "medium",
     "theory_refs": [
-      "TH-D2-012"
+      "TH-D2-012",
+      "TH-D2-020"
     ],
     "case_study_id": null,
     "stem": "For a high-stakes output where correctness truly matters, which combination is most robust against the limitations of self-reflection alone?",

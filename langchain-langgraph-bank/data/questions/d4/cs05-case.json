@@ -1,0 +1,62 @@
+[
+  {
+    "id": "Q-D4-0085",
+    "domain": 4,
+    "task_statement": "4.3",
+    "type": "multi_response",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D4-019",
+      "TH-D4-017",
+      "TH-D4-012"
+    ],
+    "case_study_id": "CS-05",
+    "stem": "The scribe agent writes post-incident notes, often quoting log lines that contain user-supplied text, into a long-term store that future incidents retrieve from. In the pilot, an old stored runbook also overrode what live telemetry showed. Select TWO safeguards that best protect the memory's later usefulness and safety.",
+    "select_count": 2,
+    "options": [
+      {
+        "key": "A",
+        "text": "Record the provenance and trust level of every entry, and quarantine content derived from unverified user-supplied log text until it has been reviewed"
+      },
+      {
+        "key": "B",
+        "text": "Write every raw log line from the incident into memory verbatim, so that nothing relevant is lost and retrieval can sort it out later"
+      },
+      {
+        "key": "C",
+        "text": "Let the most similar stored note override live telemetry when the two conflict, because stored incidents were already resolved once"
+      },
+      {
+        "key": "D",
+        "text": "Disable decay and retirement of old runbook entries, so that stale remediation steps remain available for every future incident"
+      },
+      {
+        "key": "E",
+        "text": "Promote a remediation into reusable procedural memory only after an outcome check confirms that the service actually recovered, and revise or retire it when it stops working"
+      }
+    ],
+    "correct": [
+      "A",
+      "E"
+    ],
+    "explanation": {
+      "why_correct": "Memory writes are trust decisions. Provenance tracking and quarantine of untrusted text limit memory poisoning, which would otherwise persist and re-trigger across sessions. Gating procedural entries on verified outcomes, with revision or retirement when they fail, keeps the store from confidently reusing steps that no longer work and supports reconciling stored memory against current evidence.",
+      "why_incorrect": {
+        "B": "Dumping raw logs wholesale writes untrusted text into trusted memory and buries useful notes, making both poisoning and poor retrieval more likely.",
+        "C": "Retrieved memory is data, not authority. When it conflicts with fresh telemetry, the current observation should win or the conflict should be flagged, not silently overridden by a past note.",
+        "D": "Never retiring entries lets stale procedures accumulate and be retrieved with false confidence, which is the failure observed in the pilot."
+      },
+      "rule_of_thumb": "Treat each memory write as a trust decision, and save a procedure only after it is verified to work."
+    },
+    "tags": [
+      "memory-poisoning",
+      "provenance",
+      "skill-library",
+      "stale-memory"
+    ],
+    "concepts": [
+      "Memory",
+      "Guardrails"
+    ]
+  }
+]

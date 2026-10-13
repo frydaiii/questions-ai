@@ -334,5 +334,156 @@
     ],
     "related_tech": ["calibration", "overconfidence", "hedging"],
     "references": ["https://arxiv.org/abs/2207.05221"]
+  },
+  {
+    "id": "TH-D2-017",
+    "domain": 2,
+    "task_statements": [
+      "2.1"
+    ],
+    "title": "Faithfulness of reasoning traces: a legible thought is not necessarily the true cause of an action",
+    "summary": "The 'thought' steps in an interleaved reasoning-action loop make an agent's behavior legible, but legibility is not the same as faithfulness. A written reasoning trace can be a plausible after-the-fact rationalization that omits the factors that actually drove the model's choice, such as a biasing cue in the prompt, an option ordering effect, or an injected instruction. Treating the trace as a guaranteed window into the model's real decision process can therefore create unwarranted trust, so important actions should be checked against observable evidence and outcomes rather than against the narration alone.",
+    "key_points": [
+      "A reasoning trace is plausible if it reads like a sensible justification, and faithful only if it reflects the factors that actually determined the model's output.",
+      "Studies of chain-of-thought show explanations can systematically omit influential features (for example a biasing hint or answer-position pattern in the prompt) while still sounding coherent.",
+      "Models can produce fluent rationalizations for an answer they were nudged toward, so a persuasive thought does not prove the action was correctly motivated.",
+      "Inspecting thoughts is still valuable for debugging, but trust in an agent's behavior should rest on grounded observations, tool results, and outcome checks, not on narration alone.",
+      "Faithfulness concerns grow with stakes: for high-impact actions, pair trace inspection with independent verification or human review."
+    ],
+    "rule_of_thumb": "Read an agent's thoughts as a useful but fallible account of its behavior; verify consequential actions against external observations rather than trusting the narration to be the true reason.",
+    "common_confusions": [
+      "Assuming a detailed, step-by-step thought trace proves the agent reasoned correctly -- a coherent explanation can still rationalize an answer driven by an unmentioned factor.",
+      "Concluding that thought traces are worthless because they may be unfaithful -- they remain valuable for spotting loops, ignored observations, and visible logic errors, just not as proof of the model's true internal process."
+    ],
+    "related_tech": [
+      "chain-of-thought faithfulness",
+      "unfaithful explanations",
+      "rationalization",
+      "ReAct"
+    ],
+    "references": [
+      "https://arxiv.org/abs/2305.04388"
+    ]
+  },
+  {
+    "id": "TH-D2-018",
+    "domain": 2,
+    "task_statements": [
+      "2.2"
+    ],
+    "title": "Decoupled planning: planning all tool calls upfront without observations (ReWOO-style)",
+    "summary": "In a decoupled, ReWOO-style design, a planner reasons about the whole task and emits a full plan of tool calls in one pass, using placeholders to refer to results that do not exist yet. Independent workers then execute the tool calls, and a solver combines the collected evidence into a final answer. Because the model is not re-invoked with the growing history after every observation, this avoids repeated prompt overhead and cuts token use compared with a step-by-step interleaved loop, at the price of less ability to adapt to surprising intermediate results.",
+    "key_points": [
+      "The planner writes the complete sequence of tool calls upfront, referencing earlier results through placeholder variables instead of waiting to see them.",
+      "Workers carry out the planned calls without further model reasoning, and a solver step synthesizes the final answer from the gathered evidence.",
+      "Interleaved loops re-send the accumulating thought-action-observation history on every step, so decoupling reduces redundant prompt tokens and model calls.",
+      "Independent planned calls can run in parallel, which can lower latency when steps do not depend on each other's outputs.",
+      "The trade-off is reduced adaptivity: if an early observation contradicts the plan's assumptions, the plan needs a revision or re-planning step, which a fully interleaved loop handles naturally."
+    ],
+    "rule_of_thumb": "Choose decoupled planning when the needed tool calls are largely predictable and cost or latency matters; choose interleaving when each observation is likely to change what should happen next.",
+    "common_confusions": [
+      "Treating decoupled planning as the same thing as plain plan-and-execute -- the distinguishing feature is that the plan is written without observing any tool output and the executors do not call the model again between steps.",
+      "Assuming decoupling is strictly more accurate because the plan is global -- it saves tokens and enables parallelism, but a plan built on wrong assumptions cannot self-correct unless a re-planning step is added."
+    ],
+    "related_tech": [
+      "ReWOO",
+      "plan-and-execute",
+      "planner-worker-solver",
+      "placeholder variables"
+    ],
+    "references": [
+      "https://arxiv.org/abs/2305.18323"
+    ]
+  },
+  {
+    "id": "TH-D2-019",
+    "domain": 2,
+    "task_statements": [
+      "2.2",
+      "2.4"
+    ],
+    "title": "Self-consistency: sampling several reasoning paths and voting on the answer",
+    "summary": "Self-consistency replaces a single greedy reasoning chain with several independently sampled chains of thought and selects the final answer that the largest number of chains agree on. It rests on the intuition that a hard problem usually has many valid routes to one correct answer, while flawed chains tend to scatter across different wrong answers. The degree of agreement among samples can also act as a rough confidence signal, though it multiplies cost and does not help when the model's mistakes are consistent.",
+    "key_points": [
+      "The method samples multiple diverse reasoning paths (using non-zero sampling temperature) and takes a majority vote over the final answers, not over the reasoning text.",
+      "It improves reliability on problems with a single checkable final answer, such as arithmetic or multiple-choice reasoning, by reducing the impact of one unlucky chain.",
+      "Agreement across samples can be used as a confidence signal: strong consensus suggests a more reliable answer, while a scattered vote suggests uncertainty worth flagging or escalating.",
+      "Cost scales roughly linearly with the number of sampled chains, and the samples can be generated in parallel.",
+      "It is a sampling-and-aggregation technique over independent chains, which differs from tree-of-thought search with branch evaluation and from reflection that revises a single output."
+    ],
+    "rule_of_thumb": "When one reasoning chain is a gamble and the answer is easy to compare, sample several chains and trust the consensus -- and treat a split vote as a signal to escalate or verify.",
+    "common_confusions": [
+      "Assuming majority agreement guarantees correctness -- if the model has a systematic misconception, many samples can agree on the same wrong answer.",
+      "Confusing self-consistency with tree-of-thought -- self-consistency samples complete chains independently and votes at the end, whereas tree-of-thought evaluates and prunes partial branches during the search."
+    ],
+    "related_tech": [
+      "self-consistency",
+      "majority voting",
+      "sampling temperature",
+      "chain-of-thought"
+    ],
+    "references": [
+      "https://arxiv.org/abs/2203.11171"
+    ]
+  },
+  {
+    "id": "TH-D2-020",
+    "domain": 2,
+    "task_statements": [
+      "2.3"
+    ],
+    "title": "Reflexion-style learning across attempts: verbal lessons stored in episodic memory",
+    "summary": "In Reflexion-style agents, reflection is not just a polish pass on one output: after a failed attempt, the agent converts feedback (such as test results, an environment reward, or an evaluator's judgment) into a short written lesson and stores it in an episodic memory buffer. On the next trial that lesson is added to the context, so the agent changes its behavior without any weight updates. This acts like trial-and-error learning in language, and it depends on getting a trustworthy feedback signal about what went wrong.",
+    "key_points": [
+      "The loop is attempt -> evaluate -> write a verbal reflection on what failed -> store it in memory -> retry with the reflection in context.",
+      "Learning happens through text in the prompt and memory, not through gradient updates or fine-tuning of the model's weights.",
+      "Feedback can be external (unit tests, environment rewards, tool errors) or model-generated, and reflections grounded in concrete external signals are generally more reliable than purely self-judged ones.",
+      "The memory buffer is typically bounded, since stuffing in every past reflection would crowd the context; keeping only recent or most useful lessons is a practical design choice.",
+      "It differs from a single-pass self-critique loop because the lessons persist across separate episodes and target the next attempt, rather than only revising the current draft."
+    ],
+    "rule_of_thumb": "Use cross-attempt reflection when an agent can retry a task and receive a concrete failure signal; the written lesson, not a weight change, is what carries learning to the next trial.",
+    "common_confusions": [
+      "Believing Reflexion fine-tunes the model -- the model's parameters stay fixed, and improvement comes entirely from reflective text carried into later attempts.",
+      "Assuming reflection works equally well without a good feedback signal -- if the agent has no reliable evidence about why it failed, its reflection may simply restate or reinforce the original mistake."
+    ],
+    "related_tech": [
+      "Reflexion",
+      "verbal reinforcement learning",
+      "episodic memory",
+      "trial-and-error"
+    ],
+    "references": [
+      "https://arxiv.org/abs/2303.11366"
+    ]
+  },
+  {
+    "id": "TH-D2-021",
+    "domain": 2,
+    "task_statements": [
+      "2.4"
+    ],
+    "title": "Selective abstention: declining to answer or escalating when uncertainty is high",
+    "summary": "Selective abstention means an agent deliberately declines to give a definitive answer, or escalates to a human or a verifying tool, when its uncertainty estimate indicates the answer is unreliable. A confidence threshold sets the trade-off: abstaining on the most uncertain cases raises the accuracy of the answers that are given, but lowers coverage because fewer questions are answered. Abstention is especially useful for unanswerable questions and high-stakes actions, where a wrong confident answer costs more than a deferral.",
+    "key_points": [
+      "Abstention is driven by an uncertainty signal, such as sample disagreement, token-level probabilities, or an explicitly stated confidence, compared against a threshold.",
+      "Raising the threshold increases precision on answered cases but reduces coverage, so the threshold should be tuned to the stakes and the cost of a wrong answer versus a deferral.",
+      "Abstention is helpful for questions that cannot be answered from available information, where a fabricated answer would otherwise be a hallucination.",
+      "A good abstention outcome is actionable: the agent states what is missing or hands off to a human or a retrieval step, instead of returning a bare refusal.",
+      "Uncertainty signals are only useful if reasonably calibrated; a model that is confidently wrong will not abstain when it should."
+    ],
+    "rule_of_thumb": "Set the abstention threshold by the cost of a wrong answer versus the cost of a deferral, and make every abstention hand off a next step rather than a dead end.",
+    "common_confusions": [
+      "Treating abstention as a failure to be minimized -- on the cases the model is likely to get wrong, abstaining is the correct behavior and improves the reliability of what is answered.",
+      "Assuming abstention and excessive hedging are the same -- abstention is a clear decision to withhold or escalate based on measured uncertainty, whereas excessive hedging buries an answer under vague qualifiers."
+    ],
+    "related_tech": [
+      "selective prediction",
+      "abstention",
+      "uncertainty thresholding",
+      "human escalation"
+    ],
+    "references": [
+      "https://arxiv.org/abs/2404.10960"
+    ]
   }
 ]

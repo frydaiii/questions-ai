@@ -17,8 +17,9 @@ validator/stats toolchain.
 
 ## Status
 
-Work in progress, built incrementally. Run `python tools/stats.py` at any time to see current
-coverage against the target blueprint (`blueprint.json`).
+The bank is complete against `blueprint.json`: 500 questions (480 standalone + 20 case-study
+questions in 5 cross-domain clusters) and 116 theory cards. `python tools/validate.py --strict`
+passes. Run `python tools/stats.py` at any time to see current coverage.
 
 ## Repository layout
 
@@ -148,6 +149,8 @@ python tools/stats.py --theory      # theory card library grouped by domain/task
 python tools/export_xlsx.py         # export all questions to exports/langchain-langgraph-questions.xlsx
 python tools/export_xlsx.py --output path/to/questions.xlsx
 
+python tools/make_slides.py         # build exports/langchain-langgraph-bank-overview.pptx (needs python-pptx)
+
 pytest tests/                       # validator rule test suite
 ```
 
@@ -155,4 +158,4 @@ pytest tests/                       # validator rule test suite
 
 ### Concept classification
 
-Every question has a `concepts` array containing one or more labels from the supplied AI concept taxonomy. `tags` remain fine-grained authoring/search keywords; `concepts` are normalized curriculum-level classifications. A question may have multiple concepts when it tests a cross-cutting mechanism (for example, tool selection can also involve context engineering and orchestration). The currently populated bank contains questions through Domain 4; taxonomy labels without matching questions yet remain valid schema values for future Domain 5-6 content.
+Every question has a `concepts` array containing one or more labels from the supplied AI concept taxonomy. `tags` remain fine-grained authoring/search keywords; `concepts` are normalized curriculum-level classifications. A question may have multiple concepts when it tests a cross-cutting mechanism (for example, tool selection can also involve context engineering and orchestration). All 500 questions carry concept labels, and every taxonomy label is used at least once.

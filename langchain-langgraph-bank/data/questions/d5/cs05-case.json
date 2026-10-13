@@ -1,0 +1,56 @@
+[
+  {
+    "id": "Q-D5-0090",
+    "domain": 5,
+    "task_statement": "5.4",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D5-020",
+      "TH-D5-004"
+    ],
+    "case_study_id": "CS-05",
+    "stem": "In the incident team, the scaling agent adds capacity whenever latency rises, and the cost-control agent removes capacity whenever utilization drops. They keep reversing each other's changes, and the resulting burst of calls exhausts the shared API rate limit so the diagnosis agent is starved. Which fix is most appropriate?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Instruct each agent in its prompt to notice when it is repeating itself and stop on its own"
+      },
+      {
+        "key": "B",
+        "text": "Raise each agent's retry cap so that each of them can finish its adjustments before the other reacts"
+      },
+      {
+        "key": "C",
+        "text": "Give each agent its own private copy of the cluster state, so that they no longer disagree about current conditions"
+      },
+      {
+        "key": "D",
+        "text": "Route capacity changes through a single owner with a versioned shared plan, give each agent a quota of the rate limit, enforce limits on actions outside the agents, and escalate to a human when a limit is hit"
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "This is a contention and runaway-loop failure: two agents with opposing objectives act on one shared resource. Ownership of capacity decisions, a versioned shared plan that detects stale or conflicting updates, per-agent quotas on the shared rate limit, and externally enforced bounds with graceful escalation break the oscillation and protect the diagnosis agent from starvation.",
+      "why_incorrect": {
+        "A": "Agents cannot be relied on to recognize their own looping, so a prompt-level instruction is not an enforced bound on repeated actions.",
+        "B": "A higher retry cap does not address opposing objectives, and it lets the oscillation consume even more of the shared rate limit.",
+        "C": "Private copies of state increase stale reads and make the conflict harder to detect. The agents would still issue contradictory changes against the same real cluster."
+      },
+      "rule_of_thumb": "Every loop and shared resource needs an externally enforced bound, with a defined behavior when the bound is hit."
+    },
+    "tags": [
+      "runaway-loops",
+      "resource-contention",
+      "shared-state",
+      "devops"
+    ],
+    "concepts": [
+      "Multi-Agent Systems",
+      "Orchestration"
+    ]
+  }
+]

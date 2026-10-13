@@ -6,7 +6,8 @@
     "type": "single_choice",
     "difficulty": "easy",
     "theory_refs": [
-      "TH-D4-001"
+      "TH-D4-001",
+      "TH-D4-015"
     ],
     "case_study_id": null,
     "stem": "Which of the following is an example of information in working memory, as opposed to long-term memory?",

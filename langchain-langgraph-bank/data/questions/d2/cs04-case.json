@@ -1,0 +1,56 @@
+[
+  {
+    "id": "Q-D2-0090",
+    "domain": 2,
+    "task_statement": "2.4",
+    "type": "single_choice",
+    "difficulty": "hard",
+    "theory_refs": [
+      "TH-D2-021",
+      "TH-D2-019"
+    ],
+    "case_study_id": "CS-04",
+    "stem": "For a rare-procedure claim, the drafting agent is run five times independently. Three drafts approve coverage and two deny it, each citing a different clause of the ambiguous policy text. Both a wrong denial and a wrong payment are costly. What should the system do?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Accept the majority and approve the claim, since the most common answer across samples is the most reliable one"
+      },
+      {
+        "key": "B",
+        "text": "Resample the drafting agent until all runs agree, then accept the unanimous result as verified"
+      },
+      {
+        "key": "C",
+        "text": "Deny by default to protect plan funds, since an unresolved split means the claim is not clearly covered"
+      },
+      {
+        "key": "D",
+        "text": "Treat the split as an uncertainty signal and route the claim to a human adjudicator together with both readings and the clauses each one cites"
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "A 3-to-2 split is exactly the kind of scattered vote that self-consistency treats as low confidence rather than as a winner. With high costs on both sides of the error, the right move is selective abstention: withhold the automated decision and hand off an actionable package (competing readings plus cited clauses) so the human resolves the genuine ambiguity in the policy text.",
+      "why_incorrect": {
+        "A": "Majority voting helps when consensus is strong. A narrow 3-to-2 split on ambiguous wording carries little evidence, and acting on it automatically accepts a large chance of a costly error.",
+        "B": "Resampling until the runs agree manufactures consensus by selection and hides the underlying ambiguity. Agreement reached this way is not evidence of correctness.",
+        "C": "A default denial just converts uncertainty into a systematic harm to members. Abstention should escalate with next steps, not silently pick the outcome that is cheapest for the insurer."
+      },
+      "rule_of_thumb": "A split vote on a high-stakes decision is a signal to escalate with context, not a tie to be broken by the system itself."
+    },
+    "tags": [
+      "abstention",
+      "self-consistency",
+      "uncertainty",
+      "escalation"
+    ],
+    "concepts": [
+      "Human-in-the-Loop (HITL)",
+      "Evaluation & Learning Loops"
+    ]
+  }
+]

@@ -110,7 +110,8 @@
     "type": "single_choice",
     "difficulty": "medium",
     "theory_refs": [
-      "TH-D2-007"
+      "TH-D2-007",
+      "TH-D2-018"
     ],
     "case_study_id": null,
     "stem": "Which practical combination best describes how coarse upfront planning and fine-grained interleaved reasoning-action can be used together, rather than as mutually exclusive opposites?",

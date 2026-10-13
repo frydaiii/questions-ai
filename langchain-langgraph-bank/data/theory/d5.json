@@ -1,1 +1,679 @@
-[]
+[
+  {
+    "id": "TH-D5-001",
+    "domain": 5,
+    "task_statements": [
+      "5.1"
+    ],
+    "title": "When multi-agent decomposition is useful",
+    "summary": "A multi-agent system is justified when a task contains separable responsibilities, requires distinct capabilities, or benefits from independent perspectives. Decomposition can improve modularity and parallelism, but it also introduces communication, coordination, and failure costs. Research systems such as CAMEL and AutoGen illustrate role specialization and agent-to-agent interaction rather than treating multiple agents as a free performance multiplier.",
+    "key_points": [
+      "Decompose when responsibilities or capabilities are meaningfully distinct.",
+      "Parallelism and specialization can improve throughput or quality.",
+      "Every additional agent adds communication, coordination, and monitoring overhead.",
+      "A single agent remains preferable when the task is simple and tightly coupled."
+    ],
+    "rule_of_thumb": "Add agents only when the expected specialization or parallelism benefit exceeds coordination cost.",
+    "common_confusions": [
+      "Assuming more agents always improve quality.",
+      "Confusing multiple prompts in one workflow with independent agents.",
+      "Ignoring communication and failure costs when estimating benefits."
+    ],
+    "related_tech": [
+      "multi-agent systems",
+      "task decomposition",
+      "specialization",
+      "coordination cost"
+    ],
+    "references": [
+      "https://arxiv.org/abs/2303.17760",
+      "https://arxiv.org/abs/2308.08155"
+    ]
+  },
+  {
+    "id": "TH-D5-002",
+    "domain": 5,
+    "task_statements": [
+      "5.2"
+    ],
+    "title": "Orchestrator-worker coordination",
+    "summary": "An orchestrator-worker pattern gives one coordinator responsibility for decomposing work, assigning subtasks, collecting results, and deciding when the overall task is complete. Workers focus on bounded subtasks. Central coordination makes policies and state easier to inspect, but the orchestrator can become a bottleneck or single point of failure, as illustrated by multi-agent conversation frameworks such as AutoGen.",
+    "key_points": [
+      "The orchestrator owns routing and completion decisions.",
+      "Workers should have bounded responsibilities and clear input/output contracts.",
+      "Centralized coordination improves observability but can limit scalability.",
+      "Retries and duplicate work need explicit coordination policy."
+    ],
+    "rule_of_thumb": "Use an orchestrator when global task state and explicit assignment are more valuable than fully decentralized autonomy.",
+    "common_confusions": [
+      "Treating the orchestrator as an unlimited-capacity worker.",
+      "Assuming worker independence eliminates the need for result validation.",
+      "Confusing routing with substantive task execution."
+    ],
+    "related_tech": [
+      "orchestrator-worker",
+      "task routing",
+      "coordination protocol"
+    ],
+    "references": [
+      "https://arxiv.org/abs/2308.08155"
+    ]
+  },
+  {
+    "id": "TH-D5-003",
+    "domain": 5,
+    "task_statements": [
+      "5.3"
+    ],
+    "title": "Sub-agent boundaries and handoffs",
+    "summary": "A sub-agent handoff transfers responsibility for a bounded portion of work together with the context needed to continue it. Effective handoffs define the receiving agent, input contract, expected output, authority boundary, and return or escalation path. Role-specialized systems such as MetaGPT and AgentVerse demonstrate why explicit role boundaries can make collaboration more manageable than unconstrained agent conversation.",
+    "key_points": [
+      "A handoff should carry a compact, task-relevant context package.",
+      "The receiving agent needs a clear contract and authority boundary.",
+      "Handoffs need completion, return, retry, and escalation semantics.",
+      "Unbounded delegation can create loops, duplicated work, or lost context."
+    ],
+    "rule_of_thumb": "A handoff is safe when ownership, context, authority, and return conditions are explicit.",
+    "common_confusions": [
+      "Thinking a handoff is merely a chat message with no ownership change.",
+      "Passing the entire transcript instead of a bounded context package.",
+      "Allowing a sub-agent to take actions outside its delegated authority."
+    ],
+    "related_tech": [
+      "sub-agents",
+      "handoffs",
+      "role specialization",
+      "delegation"
+    ],
+    "references": [
+      "https://arxiv.org/abs/2308.00352",
+      "https://arxiv.org/abs/2308.10848"
+    ]
+  },
+  {
+    "id": "TH-D5-004",
+    "domain": 5,
+    "task_statements": [
+      "5.3"
+    ],
+    "title": "Shared state and communication contracts",
+    "summary": "Multi-agent collaboration requires a dependable way to exchange observations, decisions, and artifacts. Shared state can reduce repeated work, but it also creates consistency, ownership, and stale-read problems. Explicit message schemas and ownership rules make collaboration auditable and reduce ambiguity about which agent may update a shared artifact.",
+    "key_points": [
+      "Messages should distinguish requests, observations, results, and errors.",
+      "Shared artifacts need ownership and versioning rules.",
+      "Stale or conflicting state must be detected rather than silently overwritten.",
+      "More shared state is not automatically better than passing a focused result."
+    ],
+    "rule_of_thumb": "Share the smallest well-defined artifact that lets the next agent continue correctly.",
+    "common_confusions": [
+      "Assuming all agents observe the same state at the same time.",
+      "Treating a shared scratchpad as a substitute for a protocol.",
+      "Ignoring concurrent updates and stale results."
+    ],
+    "related_tech": [
+      "shared state",
+      "message schema",
+      "artifact passing",
+      "versioning"
+    ],
+    "references": [
+      "https://arxiv.org/abs/2308.08155",
+      "https://arxiv.org/abs/2308.00352"
+    ]
+  },
+  {
+    "id": "TH-D5-005",
+    "domain": 5,
+    "task_statements": [
+      "5.4"
+    ],
+    "title": "Swarm-style local coordination",
+    "summary": "Swarm intelligence describes coordination that emerges from many agents following local rules and interacting with nearby information rather than relying on one global controller. Swarm-style organization can be resilient and scalable, but local decisions may produce inefficient or unsafe global behavior. The pattern is useful when the environment supports distributed feedback and no single coordinator must own every decision.",
+    "key_points": [
+      "Swarm agents use local observations and local interaction rules.",
+      "Global organization can emerge without a central planner.",
+      "Decentralization can improve resilience but reduces global predictability.",
+      "Local rules need safety bounds and feedback to avoid runaway emergent behavior."
+    ],
+    "rule_of_thumb": "Use swarm coordination only when local rules can reliably produce acceptable global behavior.",
+    "common_confusions": [
+      "Calling any collection of agents a swarm.",
+      "Assuming emergent coordination guarantees optimality.",
+      "Removing global safety constraints because control is decentralized."
+    ],
+    "related_tech": [
+      "swarm intelligence",
+      "local rules",
+      "emergence",
+      "decentralized coordination"
+    ],
+    "references": [
+      "https://arxiv.org/abs/2406.04692"
+    ]
+  },
+  {
+    "id": "TH-D5-006",
+    "domain": 5,
+    "task_statements": [
+      "5.2"
+    ],
+    "title": "Multi-agent debate and independent critique",
+    "summary": "Agent debate asks multiple reasoning agents to produce or critique candidate answers before an aggregation step selects a result. Independent perspectives can expose errors that one pass misses, but debate can also amplify a shared mistake, encourage conformity, and consume substantial inference budget. The debate protocol therefore needs independent inputs, evidence-sensitive aggregation, and a stopping rule.",
+    "key_points": [
+      "Debate quality depends on useful independence, not merely repeated agreement.",
+      "An aggregator should weigh evidence and reasoning quality, not vote blindly.",
+      "Debate adds latency and cost and can amplify correlated errors.",
+      "A fixed or quality-based stopping rule prevents endless discussion."
+    ],
+    "rule_of_thumb": "Debate is a verification strategy, not a guarantee that the majority is correct.",
+    "common_confusions": [
+      "Equating majority vote with truth.",
+      "Assuming agents are independent when they share the same blind spot.",
+      "Adding debate turns without a measurable verification benefit."
+    ],
+    "related_tech": [
+      "multi-agent debate",
+      "critique",
+      "aggregation",
+      "independence"
+    ],
+    "references": [
+      "https://arxiv.org/abs/2305.14325"
+    ]
+  },
+  {
+    "id": "TH-D5-007",
+    "domain": 5,
+    "task_statements": [
+      "5.4"
+    ],
+    "title": "Emergent behavior in interacting agents",
+    "summary": "When agents interact repeatedly, system-level behavior can arise from local rules and memory rather than from one agent explicitly planning it. Generative-agent research demonstrates that interaction patterns can yield coherent social behavior, while also showing why observation, memory, and feedback can create unexpected dynamics. Emergence must therefore be evaluated at the system level, not inferred from isolated agent behavior.",
+    "key_points": [
+      "System behavior can differ qualitatively from individual-agent behavior.",
+      "Memory and repeated interaction can create feedback loops.",
+      "Emergent behavior may be beneficial, harmful, or difficult to predict.",
+      "Evaluation should include population-level and interaction-level outcomes."
+    ],
+    "rule_of_thumb": "Test the collective dynamics; passing single-agent tests does not prove multi-agent safety.",
+    "common_confusions": [
+      "Assuming emergent means random.",
+      "Assuming desirable local behavior guarantees desirable collective behavior.",
+      "Evaluating agents only in isolation."
+    ],
+    "related_tech": [
+      "emergence",
+      "interaction dynamics",
+      "collective behavior",
+      "feedback loops"
+    ],
+    "references": [
+      "https://arxiv.org/abs/2304.03442"
+    ]
+  },
+  {
+    "id": "TH-D5-008",
+    "domain": 5,
+    "task_statements": [
+      "5.4"
+    ],
+    "title": "Failure containment in multi-agent systems",
+    "summary": "Multi-agent systems can fail through cascading errors, deadlocks, duplicated work, conflicting actions, or a compromised participant. AgentBench emphasizes evaluating agents in interactive environments rather than judging only isolated text quality. Containment requires bounded permissions, timeouts, provenance, conflict handling, and an explicit way to stop or isolate a failing participant.",
+    "key_points": [
+      "One agent's incorrect output can become another agent's premise.",
+      "Timeouts and budgets limit runaway coordination.",
+      "Provenance helps identify which agent produced a questionable artifact.",
+      "Isolation and escalation are safer than allowing unbounded propagation."
+    ],
+    "rule_of_thumb": "Design for containment because coordination can multiply both useful work and failure impact.",
+    "common_confusions": [
+      "Assuming a final reviewer can always repair upstream corruption.",
+      "Using retries without an attempt budget.",
+      "Treating coordination failures as ordinary single-agent errors."
+    ],
+    "related_tech": [
+      "failure containment",
+      "provenance",
+      "timeouts",
+      "agent evaluation"
+    ],
+    "references": [
+      "https://arxiv.org/abs/2308.03688"
+    ]
+  },
+  {
+    "id": "TH-D5-009",
+    "domain": 5,
+    "task_statements": [
+      "5.1"
+    ],
+    "title": "Cost, latency, and token overhead of multi-agent systems",
+    "summary": "Multi-agent systems typically consume far more tokens than a single agent because every agent carries its own prompt, tool results, and intermediate reasoning, and agents re-communicate findings to each other. Reported engineering experience shows that the extra tokens can buy real quality on valuable, breadth-heavy tasks, but also that many multi-agent designs deliver minimal gains over a strong single agent. The decision should therefore weigh task value, latency budget, and measured benefit against the multiplied cost.",
+    "key_points": [
+      "Token usage is a first-order driver of multi-agent cost; each added agent repeats instructions and re-reads shared findings.",
+      "Parallel agents can reduce wall-clock time while increasing total compute spent.",
+      "Coordination turns (delegation, reporting, synthesis) add sequential latency that parallel work does not remove.",
+      "Multi-agent designs pay off mainly when task value is high and the work is broad or parallelizable.",
+      "Measure quality, cost, and latency against a single-agent baseline before committing to the extra architecture."
+    ],
+    "rule_of_thumb": "Treat each extra agent as a purchase: it must buy measurable quality or speed that justifies the added tokens and coordination latency.",
+    "common_confusions": [
+      "Equating lower wall-clock time with lower cost; parallel agents often finish sooner while spending more tokens in total.",
+      "Assuming benchmark gains reported for one task type transfer to tightly coupled tasks.",
+      "Ignoring the cost of agent-to-agent summaries, retries, and synthesis steps when estimating overhead."
+    ],
+    "related_tech": [
+      "token budget",
+      "latency-cost tradeoff",
+      "single-agent baseline",
+      "coordination overhead",
+      "MAST failure taxonomy"
+    ],
+    "references": [
+      "https://www.anthropic.com/engineering/multi-agent-research-system",
+      "https://arxiv.org/abs/2503.13657"
+    ]
+  },
+  {
+    "id": "TH-D5-010",
+    "domain": 5,
+    "task_statements": [
+      "5.1"
+    ],
+    "title": "Context isolation and compression through sub-agents",
+    "summary": "A sub-agent can work in its own fresh context window, explore a subproblem in depth, and return only a condensed result to its caller. This keeps the coordinator's context small and focused, and it separates tools, prompts, and exploration paths between subtasks. Because language models use very long contexts unevenly, isolating and compressing context is a genuine reason to decompose, not just a way to organize code.",
+    "key_points": [
+      "Each sub-agent starts from a clean context containing only what its subtask needs.",
+      "Returning a distilled summary or artifact keeps the coordinator's context compact.",
+      "Models can use information in long contexts unreliably, especially in the middle, so a smaller focused context can help.",
+      "Isolation limits cross-contamination of reasoning paths and reduces the blast radius of a distracting or malicious document.",
+      "Compression is lossy: over-aggressive summaries can drop details the coordinator later needs."
+    ],
+    "rule_of_thumb": "Isolate context when a subtask needs lots of intermediate material but the caller needs only its conclusion.",
+    "common_confusions": [
+      "Believing a larger shared context window always beats isolation; long contexts can dilute relevant information.",
+      "Assuming isolation is free; the coordinator must supply a sufficient task description and accept lossy summaries.",
+      "Confusing context isolation with security isolation; separate windows do not by themselves enforce permission boundaries."
+    ],
+    "related_tech": [
+      "context window",
+      "lost in the middle",
+      "sub-agents",
+      "context compression",
+      "separation of concerns"
+    ],
+    "references": [
+      "https://www.anthropic.com/engineering/multi-agent-research-system",
+      "https://arxiv.org/abs/2307.03172"
+    ]
+  },
+  {
+    "id": "TH-D5-011",
+    "domain": 5,
+    "task_statements": [
+      "5.1"
+    ],
+    "title": "Role specialization versus a single generalist agent",
+    "summary": "Role-specialized agents such as planner, coder, reviewer, and tester each carry a narrow prompt, tool set, and success criterion, which can improve focus and make outputs easier to inspect. Systems like ChatDev and MetaGPT show that mapping agents onto a human-style workflow can structure complex artifacts. A single capable agent with the right tools can still be the better choice when roles are artificial, work is tightly coupled, or the handoff overhead outweighs the focus benefit.",
+    "key_points": [
+      "Specialization narrows instructions, tools, and evaluation criteria per agent.",
+      "Distinct roles make intermediate artifacts easier to review, test, and attribute.",
+      "Roles that differ only in name add handoff cost without adding real capability or perspective.",
+      "A strong single agent with well-chosen tools is the baseline any specialization must beat.",
+      "Narrow permissions per role support least-privilege access."
+    ],
+    "rule_of_thumb": "Create a role only when it has a different tool set, success criterion, or perspective that a single agent would handle poorly.",
+    "common_confusions": [
+      "Assuming a persona prompt creates new capability; a role label alone changes framing, not underlying knowledge.",
+      "Splitting a tightly coupled task into many roles and then paying to reconstruct the shared context.",
+      "Treating human organizational charts as an automatically optimal agent topology."
+    ],
+    "related_tech": [
+      "role specialization",
+      "ChatDev",
+      "MetaGPT",
+      "least privilege",
+      "persona prompting"
+    ],
+    "references": [
+      "https://arxiv.org/abs/2307.07924",
+      "https://arxiv.org/abs/2308.00352"
+    ]
+  },
+  {
+    "id": "TH-D5-012",
+    "domain": 5,
+    "task_statements": [
+      "5.1"
+    ],
+    "title": "Parallelism and dependency structure in agent tasks",
+    "summary": "Work can run in parallel only when subtasks do not depend on each other's outputs. Planners that express a task as a dependency graph can dispatch independent calls concurrently, cutting latency and sometimes cost compared with a strictly sequential reason-act loop. Breadth-style tasks such as surveying many independent sources parallelize well, while tightly coupled tasks such as editing one shared code path gain little and risk conflicting changes.",
+    "key_points": [
+      "Independent subtasks can run concurrently; dependent subtasks must wait for upstream results.",
+      "The longest dependency chain, not the number of agents, bounds achievable speedup.",
+      "A planner that emits a dependency graph enables concurrent dispatch and a final join step.",
+      "Parallel agents writing to shared artifacts need conflict handling and merge rules.",
+      "A join or synthesis step adds its own latency and can become the new bottleneck."
+    ],
+    "rule_of_thumb": "Parallelize breadth, serialize dependencies: speedup comes from independent branches, not from adding agents.",
+    "common_confusions": [
+      "Expecting N agents to give N-times speedup regardless of task dependencies.",
+      "Assuming parallel work removes the need for a merge or reconciliation step.",
+      "Applying parallel fan-out to tightly coupled tasks where branches need each other's intermediate results."
+    ],
+    "related_tech": [
+      "dependency graph",
+      "fan-out and fan-in",
+      "parallel function calling",
+      "critical path",
+      "Amdahl's law"
+    ],
+    "references": [
+      "https://arxiv.org/abs/2312.04511",
+      "https://www.anthropic.com/engineering/multi-agent-research-system"
+    ]
+  },
+  {
+    "id": "TH-D5-013",
+    "domain": 5,
+    "task_statements": [
+      "5.2"
+    ],
+    "title": "Hierarchical teams and multi-level delegation",
+    "summary": "A hierarchical team arranges agents in levels: a top-level coordinator delegates to team leads or sub-orchestrators, which in turn direct their own workers. This bounds how many agents any one coordinator must track and lets each level manage a coherent sub-goal. Systems such as Magentic-One use a lead orchestrator that plans, tracks progress, and re-plans, and group-based frameworks such as AgentVerse show how agent teams can be composed and adjusted for a task. Each additional level adds latency and a place where context can be lost or distorted.",
+    "key_points": [
+      "Each manager coordinates a limited span of agents, which keeps per-level context manageable.",
+      "Sub-orchestrators own a sub-goal and report a condensed result upward.",
+      "Every extra level adds delegation latency and another lossy summarization step.",
+      "Goals, budgets, and authority limits must be passed down explicitly and cannot be assumed to propagate.",
+      "A planning-and-progress record at the top level supports re-planning when a branch fails."
+    ],
+    "rule_of_thumb": "Add a management level only when the span of control or the size of a sub-goal makes a flat orchestrator impractical.",
+    "common_confusions": [
+      "Thinking deeper hierarchies are inherently more capable; each level adds loss and delay.",
+      "Assuming a sub-orchestrator inherits the top-level goal and constraints without them being passed down.",
+      "Confusing a hierarchy of authority with a hierarchy of expertise."
+    ],
+    "related_tech": [
+      "hierarchical agents",
+      "sub-orchestrator",
+      "span of control",
+      "progress ledger",
+      "re-planning",
+      "AgentVerse"
+    ],
+    "references": [
+      "https://arxiv.org/abs/2411.04468",
+      "https://arxiv.org/abs/2308.10848"
+    ]
+  },
+  {
+    "id": "TH-D5-014",
+    "domain": 5,
+    "task_statements": [
+      "5.2"
+    ],
+    "title": "Generator-critic and judge-verifier separation",
+    "summary": "In a generator-critic or judge pattern, one agent proposes an answer and a separate agent evaluates it against criteria, evidence, or a rubric before the result is accepted. Separating production from evaluation can catch errors the producer is blind to, and a judge can arbitrate between competing candidates, as in judge-managed debate. LLM judges are not neutral: they show position, verbosity, and self-enhancement biases, so the judge needs clear criteria, ideally independent evidence or tools, and calibration against human or ground-truth labels.",
+    "key_points": [
+      "The evaluator should have a different role, prompt, and ideally different evidence from the generator.",
+      "Judges can be biased toward position, longer answers, or outputs resembling their own style.",
+      "Objective checks such as tests, schema validation, or retrieval evidence are stronger than opinion-only critique.",
+      "A judge should return a structured verdict and actionable feedback, not only a score.",
+      "The loop needs a bounded number of revisions and a defined action when the verdict stays negative."
+    ],
+    "rule_of_thumb": "Let the checker verify against something the generator did not control: criteria, evidence, or executable tests.",
+    "common_confusions": [
+      "Assuming a judge agent is automatically more accurate than the generator.",
+      "Using the same model, prompt, and context for generator and judge and expecting independent review.",
+      "Treating this pattern as identical to debate; a single critic or judge need not involve multi-round adversarial exchange."
+    ],
+    "related_tech": [
+      "LLM-as-a-judge",
+      "generator-critic",
+      "verifier",
+      "self-enhancement bias",
+      "rubric-based evaluation"
+    ],
+    "references": [
+      "https://arxiv.org/abs/2306.05685",
+      "https://arxiv.org/abs/2305.19118"
+    ]
+  },
+  {
+    "id": "TH-D5-015",
+    "domain": 5,
+    "task_statements": [
+      "5.2"
+    ],
+    "title": "Sequential pipelines and standard operating procedures",
+    "summary": "In a sequential pipeline, a fixed series of agents each perform one stage, such as requirements, design, implementation, and testing, and pass a structured artifact to the next stage. MetaGPT encodes human-style standard operating procedures into agent roles and intermediate documents, and ChatDev organizes agents along a waterfall-style chat chain. Fixed pipelines are predictable, cheap to monitor, and easy to evaluate stage by stage, but they cannot adapt routing at run time and they propagate any upstream error downstream.",
+    "key_points": [
+      "Each stage consumes a defined input artifact and produces a defined output artifact.",
+      "The order is fixed in advance, which makes behavior predictable and stages independently testable.",
+      "Errors introduced in an early stage flow into every later stage unless a validation gate stops them.",
+      "Pipelines fit well-understood workflows; open-ended tasks with unknown steps need dynamic orchestration.",
+      "Quality gates and feedback edges (for example, test failures returning to implementation) make pipelines more robust."
+    ],
+    "rule_of_thumb": "Use a pipeline when the steps are known and stable; use an orchestrator when the next step depends on what was just discovered.",
+    "common_confusions": [
+      "Treating a pipeline as an orchestrator; a pipeline has no central agent deciding the next step at run time.",
+      "Assuming later stages will automatically detect and repair upstream mistakes.",
+      "Believing a pipeline cannot contain loops; feedback edges and bounded retries are common."
+    ],
+    "related_tech": [
+      "standard operating procedure",
+      "pipeline architecture",
+      "quality gate",
+      "MetaGPT",
+      "chat chain",
+      "waterfall workflow"
+    ],
+    "references": [
+      "https://arxiv.org/abs/2308.00352",
+      "https://arxiv.org/abs/2307.07924"
+    ]
+  },
+  {
+    "id": "TH-D5-016",
+    "domain": 5,
+    "task_statements": [
+      "5.3"
+    ],
+    "title": "Blackboard architecture for shared problem-solving",
+    "summary": "In a blackboard architecture, agents do not message each other directly; they read from and write to a shared workspace that holds the evolving problem state. A controller or selection rule chooses which agent should act next based on the current blackboard contents, and the cycle repeats until the blackboard reflects a solution or consensus. This suits problems where the sequence of needed expertise is not known in advance, but broadcasting everything to everyone raises token cost and requires rules for writes and conflicts.",
+    "key_points": [
+      "Agents communicate indirectly through a shared workspace rather than point-to-point messages.",
+      "Which agent acts next is chosen from the current blackboard content, not a fixed order.",
+      "Contributions should be attributed and versioned so conflicting or stale entries can be detected.",
+      "Letting every agent read the whole board increases context cost and can leak information across roles.",
+      "A termination condition, such as consensus or a completed solution, is needed to end the cycle."
+    ],
+    "rule_of_thumb": "Choose a blackboard when the needed expertise emerges from the evolving state, and give it write rules, scoping, and a stop condition.",
+    "common_confusions": [
+      "Treating the blackboard as unstructured chat history with no schema or ownership.",
+      "Assuming a shared workspace guarantees all agents act on the same up-to-date view.",
+      "Assuming denser communication is always better; sparse or scoped communication can match quality at lower cost."
+    ],
+    "related_tech": [
+      "blackboard architecture",
+      "shared workspace",
+      "controller or scheduler",
+      "sparse communication topology",
+      "consensus"
+    ],
+    "references": [
+      "https://arxiv.org/abs/2507.01701",
+      "https://arxiv.org/abs/2406.11776"
+    ]
+  },
+  {
+    "id": "TH-D5-017",
+    "domain": 5,
+    "task_statements": [
+      "5.3"
+    ],
+    "title": "Agent interoperability protocols: tool access versus agent-to-agent",
+    "summary": "Interoperability protocols standardize how agents connect to the outside world and to each other. Tool-access protocols such as the Model Context Protocol define a client-server interface for invoking tools and exchanging typed data, while agent-to-agent protocols such as A2A support discovery of peer capabilities (for example via capability descriptions called agent cards) and delegation of tasks across independently built agents. Open protocols reduce bespoke integrations but add trust, authentication, and versioning questions that the receiving system must still handle.",
+    "key_points": [
+      "Tool-access protocols connect an agent to tools and data; agent-to-agent protocols connect an agent to peer agents.",
+      "Capability descriptions let one agent discover what another can do and how to call it.",
+      "Typed, versioned messages and task states make cross-vendor collaboration auditable.",
+      "A standard transport does not establish trust; authentication, authorization, and validation of incoming content are still required.",
+      "Task delegation across agents needs explicit status, completion, and failure semantics."
+    ],
+    "rule_of_thumb": "Standardize the envelope and capability description, but never trust a remote agent's content just because the protocol is standard.",
+    "common_confusions": [
+      "Treating tool-access protocols and agent-to-agent protocols as competing names for the same thing.",
+      "Assuming a protocol-compliant peer is trustworthy or correct.",
+      "Believing a shared protocol removes the need for message schemas specific to the application domain."
+    ],
+    "related_tech": [
+      "agent-to-agent protocol",
+      "tool-access protocol",
+      "agent card",
+      "capability discovery",
+      "JSON-RPC",
+      "task lifecycle"
+    ],
+    "references": [
+      "https://arxiv.org/abs/2505.02279"
+    ]
+  },
+  {
+    "id": "TH-D5-018",
+    "domain": 5,
+    "task_statements": [
+      "5.3"
+    ],
+    "title": "Shared versus private memory and access control between agents",
+    "summary": "Agents can keep private memory visible only to themselves or their principal, and shared memory that other agents may read, and the split determines what knowledge transfers and what leaks. Shared memory enables reuse and avoids repeated discovery, as in generative-agent memory streams that agents retrieve from. It also creates privacy, poisoning, and consistency risks, so collaborative-memory designs attach provenance to each entry and enforce read and write policies that depend on the requesting agent, user, and resource.",
+    "key_points": [
+      "Private memory protects sensitive or role-specific content; shared memory enables reuse and coordination.",
+      "Each memory entry should record its source, time, and contributing agent so access checks and audits are possible.",
+      "Read policies can filter or transform entries into views appropriate for the requester.",
+      "Write policies decide what is retained or promoted from private to shared memory.",
+      "A single poisoned or wrong shared entry can influence every agent that retrieves it."
+    ],
+    "rule_of_thumb": "Default memory to private and promote to shared only with provenance and a policy check.",
+    "common_confusions": [
+      "Assuming all agents in one system should read all memory.",
+      "Confusing shared memory with a shared prompt; memory is retrieved selectively and persists across tasks.",
+      "Treating retrieval relevance as authorization; a relevant entry may still be off-limits to the requester."
+    ],
+    "related_tech": [
+      "shared memory",
+      "private memory",
+      "provenance",
+      "access control",
+      "memory stream",
+      "memory poisoning"
+    ],
+    "references": [
+      "https://arxiv.org/abs/2505.18279",
+      "https://arxiv.org/abs/2304.03442"
+    ]
+  },
+  {
+    "id": "TH-D5-019",
+    "domain": 5,
+    "task_statements": [
+      "5.4"
+    ],
+    "title": "Conformity and groupthink in agent teams",
+    "summary": "Agents built on the same model share training biases, knowledge gaps, and agreeable tendencies, so letting them read one another's answers can produce conformity rather than independent verification. Once a model is confident in an initial answer, further self-reflection or discussion may fail to produce new ideas, a problem called degeneration of thought. Counter-measures include collecting independent first answers before any exchange, diversifying models, prompts, and evidence sources, and judging on evidence instead of agreement.",
+    "key_points": [
+      "Agents from the same model have correlated errors, so agreement is weaker evidence than it appears.",
+      "Reading peers' answers before committing encourages anchoring and sycophantic agreement.",
+      "Degeneration of thought: an agent confident in an early wrong answer rarely revises it by reflection alone.",
+      "Diversity of model, prompt, tools, or retrieved evidence increases real independence.",
+      "A designated dissenter or evidence-based judge can break premature consensus, at added cost."
+    ],
+    "rule_of_thumb": "Collect independent answers first, then compare; agreement among correlated agents is not verification.",
+    "common_confusions": [
+      "Treating unanimous agreement as proof of correctness.",
+      "Assuming different persona prompts on the same model give independent viewpoints.",
+      "Believing more debate rounds always reduce error; they can entrench a shared mistake."
+    ],
+    "related_tech": [
+      "groupthink",
+      "sycophancy",
+      "degeneration of thought",
+      "correlated errors",
+      "independent sampling",
+      "devil's advocate agent"
+    ],
+    "references": [
+      "https://arxiv.org/abs/2305.19118",
+      "https://arxiv.org/abs/2503.13657"
+    ]
+  },
+  {
+    "id": "TH-D5-020",
+    "domain": 5,
+    "task_statements": [
+      "5.4"
+    ],
+    "title": "Runaway loops, deadlock, and resource contention",
+    "summary": "When agents can call or wait on one another, coordination itself can fail: two agents may keep handing work back and forth, repeat steps, or each wait for the other's output. Agents sharing a rate limit, tool, file, or budget can also contend for it and starve one another or overwrite each other's work. Failure analyses of multi-agent traces and agent benchmarks report repeated steps, unaware-of-termination behavior, and exceeding the allowed number of turns as common failure modes, so loops need explicit external limits.",
+    "key_points": [
+      "Ping-pong delegation and repeated steps are typical runaway patterns, especially without clear termination conditions.",
+      "Circular waits between agents produce deadlock; timeouts and ownership rules break them.",
+      "Agents sharing a rate limit, budget, or resource need quotas, locks, or queues to prevent starvation and conflicting writes.",
+      "Limits on turns, tokens, spend, and wall-clock time should be enforced outside the agents' own judgment.",
+      "On hitting a limit, the system should degrade gracefully by returning a partial result or escalating to a human."
+    ],
+    "rule_of_thumb": "Every loop and every shared resource needs an externally enforced bound and a defined behavior when the bound is hit.",
+    "common_confusions": [
+      "Expecting agents to reliably recognize that they are looping and stop on their own.",
+      "Treating a retry count as sufficient when a circular delegation chain can bypass it.",
+      "Assuming resource contention only matters for shared databases, not rate limits, budgets, or files."
+    ],
+    "related_tech": [
+      "termination condition",
+      "deadlock",
+      "step repetition",
+      "turn budget",
+      "resource contention",
+      "circuit breaker"
+    ],
+    "references": [
+      "https://arxiv.org/abs/2503.13657",
+      "https://arxiv.org/abs/2308.03688"
+    ]
+  },
+  {
+    "id": "TH-D5-021",
+    "domain": 5,
+    "task_statements": [
+      "5.4"
+    ],
+    "title": "Collusion and malicious contagion between agents",
+    "summary": "Multi-agent risk analyses identify collusion, where agents coordinate in ways their designers or overseers did not intend, alongside miscoordination and conflict. A related security hazard is contagion: a malicious instruction injected into one agent's input can be passed along in its output and self-replicate across connected agents. Because agents often trust messages from peers more than raw external content, defenses include treating inter-agent messages as untrusted input, tagging message origin, limiting what a compromised agent can reach, and monitoring from a vantage point the monitored agents cannot influence.",
+    "key_points": [
+      "Collusion can arise when agents share incentives or channels and an overseer agent shares the same blind spots or objectives.",
+      "Injected instructions can propagate agent to agent, turning one compromised input into system-wide impact.",
+      "Peer messages should be handled as untrusted data, not as trusted instructions.",
+      "Origin tagging and provenance help trace where a harmful instruction entered.",
+      "Least privilege and isolation limit what any single compromised agent can do."
+    ],
+    "rule_of_thumb": "Do not grant an agent's message more trust than the least-trusted source that could have influenced it.",
+    "common_confusions": [
+      "Assuming an internal peer agent is a trusted source.",
+      "Assuming an overseer agent of the same model family is independent of the agent it monitors.",
+      "Treating prompt injection as a single-agent problem that stays confined to the first agent it reaches."
+    ],
+    "related_tech": [
+      "collusion",
+      "prompt infection",
+      "indirect prompt injection",
+      "provenance tagging",
+      "least privilege",
+      "multi-agent security"
+    ],
+    "references": [
+      "https://arxiv.org/abs/2502.14143",
+      "https://arxiv.org/abs/2410.07283"
+    ]
+  }
+]

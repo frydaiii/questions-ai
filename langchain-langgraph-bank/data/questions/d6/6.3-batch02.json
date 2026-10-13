@@ -1,0 +1,714 @@
+[
+  {
+    "id": "Q-D6-0061",
+    "domain": 6,
+    "task_statement": "6.3",
+    "type": "single_choice",
+    "difficulty": "easy",
+    "theory_refs": [
+      "TH-D6-016"
+    ],
+    "case_study_id": null,
+    "stem": "A finance-operations agent can call a `create_wire_transfer` tool. The security team wants a check that inspects the proposed beneficiary account, amount, and currency against policy limits and the caller's permissions immediately before the transfer executes, and blocks the call if anything is out of bounds. In a layered guardrail design, which layer does this check belong to?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "The input layer, because it screens what the user typed before the model sees it"
+      },
+      {
+        "key": "B",
+        "text": "The output layer, because it checks the final text that is returned to the user"
+      },
+      {
+        "key": "C",
+        "text": "The training layer, because the model should have learned never to propose bad transfers"
+      },
+      {
+        "key": "D",
+        "text": "The action layer, because it validates tool arguments and permissions before execution"
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "A check that examines the arguments of a side-effecting tool call and the caller's permissions before the call runs is a tool-call (action) gate. It is the last chance to stop a harmful real-world effect, because once the transfer executes, filtering the model's text can no longer undo it.",
+      "why_incorrect": {
+        "A": "Input filters classify user prompts and retrieved content before the model reasons over them; they cannot see the specific arguments the model later chooses for the tool.",
+        "B": "An output filter inspects the response shown to the user, usually after the tool has already run, so it cannot prevent the transfer itself.",
+        "C": "Training shapes default behavior but gives no deterministic guarantee about specific arguments or limits; policy limits must be enforced at runtime."
+      },
+      "rule_of_thumb": "Validate arguments and permissions at the action layer, right before any side effect."
+    },
+    "tags": [
+      "layered-guardrails",
+      "tool-call-gate",
+      "finance"
+    ],
+    "concepts": [
+      "Guardrails"
+    ]
+  },
+  {
+    "id": "Q-D6-0062",
+    "domain": 6,
+    "task_statement": "6.3",
+    "type": "single_choice",
+    "difficulty": "easy",
+    "theory_refs": [
+      "TH-D6-017"
+    ],
+    "case_study_id": null,
+    "stem": "A team is aligning an assistant with reinforcement learning from human feedback (RLHF). Annotators are shown two candidate responses to the same prompt and asked which one they prefer. What is the primary use of these preference comparisons in the RLHF pipeline?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "They are added to the system prompt as few-shot examples of banned responses"
+      },
+      {
+        "key": "B",
+        "text": "They become the final guardrail that filters outputs at inference time"
+      },
+      {
+        "key": "C",
+        "text": "They train a reward model whose scores guide optimization of the policy"
+      },
+      {
+        "key": "D",
+        "text": "They replace pre-training so that the model no longer needs a text corpus"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "In RLHF, human preference comparisons are used to train a reward model that scores responses. The policy is then optimized, typically with reinforcement learning, to produce responses that the reward model rates highly, nudging default behavior toward what annotators preferred.",
+      "why_incorrect": {
+        "A": "Preference data is a training signal, not prompt content; putting it in the system prompt is prompt engineering and does not change the model's weights.",
+        "B": "RLHF shapes the model before deployment. A runtime output filter is a separate guardrail layer that is not trained from preference comparisons in this way.",
+        "D": "RLHF is applied after large-scale pre-training; preference comparisons are far too few and narrow to teach the model language or world knowledge."
+      },
+      "rule_of_thumb": "RLHF: human comparisons train a reward model, and the reward model steers the policy."
+    },
+    "tags": [
+      "rlhf",
+      "reward-model",
+      "preference-data"
+    ],
+    "concepts": [
+      "Guardrails"
+    ]
+  },
+  {
+    "id": "Q-D6-0063",
+    "domain": 6,
+    "task_statement": "6.3",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D6-016",
+      "TH-D6-001"
+    ],
+    "case_study_id": null,
+    "stem": "A customer-support agent has an output filter that scans every reply for abusive language and leaked personal data. After launch, an audit finds that the agent issued several large refunds to the wrong accounts because the `issue_refund` tool executes whatever the model proposes. Replies to customers were always clean. Which change best addresses the root cause?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Tighten the output filter's keyword list so it also flags the word 'refund'"
+      },
+      {
+        "key": "B",
+        "text": "Add a tool-call gate that validates refund arguments and permissions, and requires human approval above a defined amount"
+      },
+      {
+        "key": "C",
+        "text": "Ask the model in the system prompt to double-check each refund before it calls the tool"
+      },
+      {
+        "key": "D",
+        "text": "Move the output filter to run twice so that every reply is scanned two times"
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "explanation": {
+      "why_correct": "The failure happened at the action stage, which had no independent control. A tool-call gate that checks the account, amount, and the caller's authority, plus a risk-based human approval step for high-value refunds, puts a check where the harm occurs. This is the layered-guardrail principle: text-only checks leave actions unchecked.",
+      "why_incorrect": {
+        "A": "Flagging a word in reply text still does not stop the tool from running; the harmful effect is the refund itself, not the wording of the message.",
+        "C": "A prompt instruction is a soft, model-dependent control. It can be ignored or misapplied and is not an independent check on the tool arguments.",
+        "D": "Running the same text filter twice adds no coverage of tool calls; it duplicates a layer instead of adding a different one."
+      },
+      "rule_of_thumb": "If the harm is an action, the control must sit on the action, not only on the text."
+    },
+    "tags": [
+      "tool-call-gate",
+      "approval-threshold",
+      "customer-support"
+    ],
+    "concepts": [
+      "Guardrails",
+      "Human-in-the-Loop (HITL)"
+    ]
+  },
+  {
+    "id": "Q-D6-0064",
+    "domain": 6,
+    "task_statement": "6.3",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D6-017",
+      "TH-D6-003"
+    ],
+    "case_study_id": null,
+    "stem": "A product manager argues: 'Our base model was aligned with RLHF and constitutional training, so we can remove the runtime input and output filters and the red-team regression suite to cut latency and cost.' As the safety engineer, what is the most accurate response?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Agree, because RLHF specifically optimizes for harmlessness, so residual risk is negligible"
+      },
+      {
+        "key": "B",
+        "text": "Agree only if the reward model scored the training outputs above a high threshold"
+      },
+      {
+        "key": "C",
+        "text": "Disagree, because training shapes default behavior but misses cases, so runtime guardrails and evaluation remain necessary"
+      },
+      {
+        "key": "D",
+        "text": "Disagree, because alignment training only affects the first token generated and nothing after it"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "Alignment training changes the model's default tendencies, but it does not give guarantees. Distribution shift, adversarial prompts, and tool use can still elicit failures that training did not cover. Runtime guardrails and ongoing evaluation provide independent layers that catch what training misses, consistent with defense in depth.",
+      "why_incorrect": {
+        "A": "RLHF reduces but does not eliminate harmful behavior, and the claim that residual risk is negligible is unsupported without ongoing testing.",
+        "B": "A high reward-model score is only a proxy for the true human objective; it does not certify safe behavior in new or adversarial conditions.",
+        "D": "This is false: training affects the whole generation distribution, not only the first token. The disagreement is correct, but the stated reason is not."
+      },
+      "rule_of_thumb": "Alignment training shapes the default; guardrails and evaluation catch what it misses."
+    },
+    "tags": [
+      "alignment-training",
+      "defense-in-depth",
+      "evaluation"
+    ],
+    "concepts": [
+      "Guardrails"
+    ]
+  },
+  {
+    "id": "Q-D6-0065",
+    "domain": 6,
+    "task_statement": "6.3",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D6-017"
+    ],
+    "case_study_id": null,
+    "stem": "A lab adopts a constitutional approach to reduce harmful replies. A stakeholder claims the method 'removes humans from alignment entirely'. Which description of how humans and the model contribute in this approach is most accurate?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Humans label every response pair manually; the written principles are used only for documentation"
+      },
+      {
+        "key": "B",
+        "text": "Humans are removed, and the model invents its own principles from its pre-training data"
+      },
+      {
+        "key": "C",
+        "text": "Humans write the final answers, and the model memorizes them as a lookup table"
+      },
+      {
+        "key": "D",
+        "text": "Humans write the principles; the model critiques and revises its outputs and supplies AI preference labels guided by them"
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "In constitutional methods, people author a written set of principles. The model then uses those principles to critique and revise its own responses and to produce AI preference labels, which replaces much, though not all, of the human labeling. Human input is concentrated in choosing and refining the principles.",
+      "why_incorrect": {
+        "A": "This describes plain RLHF with manual labels. In a constitutional approach, the principles actively drive the critique and the AI feedback rather than serving as documentation.",
+        "B": "Humans still supply the principles. A model deriving its own values from pre-training data would offer no controlled, auditable specification.",
+        "C": "Constitutional methods do not hand-write answers for memorization; they use principles to generate critiques, revisions, and preference labels."
+      },
+      "rule_of_thumb": "Constitutional AI shifts human effort from labeling many outputs to writing principles."
+    },
+    "tags": [
+      "constitutional-ai",
+      "rlaif",
+      "principles"
+    ],
+    "concepts": [
+      "Guardrails"
+    ]
+  },
+  {
+    "id": "Q-D6-0066",
+    "domain": 6,
+    "task_statement": "6.3",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D6-016",
+      "TH-D6-002"
+    ],
+    "case_study_id": null,
+    "stem": "A healthcare-scheduling agent has input, tool-call, and output guardrails that all log their blocks. After a month, clinicians report that the output filter blocks many legitimate answers about medication timing, and some staff have started asking IT to switch it off. A separate review also finds a few unsafe replies that no layer blocked. What is the best next step?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Review the logged blocks and misses per layer to measure false positives and false negatives, then tune that layer's rules and thresholds"
+      },
+      {
+        "key": "B",
+        "text": "Disable the output filter now, since input and tool-call layers already provide enough protection"
+      },
+      {
+        "key": "C",
+        "text": "Raise every guardrail to its strictest setting so that no unsafe reply can pass"
+      },
+      {
+        "key": "D",
+        "text": "Replace the three layers with one new classifier trained on the clinicians' complaints"
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "explanation": {
+      "why_correct": "Layered guardrails need measurement. Logged blocks let the team separate false positives (legitimate answers blocked) from misses (unsafe replies that slipped through) for each layer and tune accordingly. This keeps the layer useful enough that people do not disable it while still improving coverage.",
+      "why_incorrect": {
+        "B": "Removing a layer because it is annoying throws away independent protection and does not address the unsafe replies that were missed.",
+        "C": "Maximum strictness would raise false positives further, pushing more users to disable guardrails, which is a recognized failure mode.",
+        "D": "Collapsing layers into a single classifier recreates the single point of failure that defense in depth is meant to avoid."
+      },
+      "rule_of_thumb": "Measure each layer's false positives and misses from logs, then tune instead of disabling."
+    },
+    "tags": [
+      "guardrail-tuning",
+      "false-positives",
+      "logging"
+    ],
+    "concepts": [
+      "Guardrails",
+      "Human-in-the-Loop (HITL)"
+    ]
+  },
+  {
+    "id": "Q-D6-0067",
+    "domain": 6,
+    "task_statement": "6.3",
+    "type": "single_choice",
+    "difficulty": "hard",
+    "theory_refs": [
+      "TH-D6-016",
+      "TH-D6-017"
+    ],
+    "case_study_id": null,
+    "stem": "A research-assistant agent was aligned with RLHF and passes the team's chat red-team suite: it refuses direct requests for instructions to bypass a paywall's access controls. In production, a user splits the same goal into harmless-looking steps, and the agent calls its `http_request` and `file_write` tools to carry out the pieces. The only runtime safeguard is a classifier on final chat text, which never fired. Which diagnosis and fix are most appropriate?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "The reward model was too weak; retrain with more annotators and keep the single text classifier"
+      },
+      {
+        "key": "B",
+        "text": "The refusal was keyword-based; add the banned phrases to the final-text classifier's blocklist"
+      },
+      {
+        "key": "C",
+        "text": "Alignment and text checks were evaluated only on chat; add a tool-call gate and test on multi-step action trajectories"
+      },
+      {
+        "key": "D",
+        "text": "The agent has too many tools; remove all tools so it can only answer in plain text"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "Refusal behavior learned in chat does not automatically transfer to decomposed, tool-driven tasks, and a text-only classifier never sees the actions. The weakness is both in what was evaluated and in the layers present. A tool-call gate validates the requests and writes, and red-teaming on multi-step trajectories measures whether the constraints hold when the goal is split. This reflects both that training shapes defaults but misses cases, and that checks belong at the action stage.",
+      "why_incorrect": {
+        "A": "More annotators may help the default, but retraining alone would still leave actions unchecked and the evaluation gap in place.",
+        "B": "A blocklist on final text is brittle and still does not inspect tool calls, which is where the harmful pieces were executed.",
+        "D": "Removing every tool eliminates the product's purpose; the goal is to constrain and test actions, not to give up the capability."
+      },
+      "rule_of_thumb": "Evaluate and guard the actions the agent takes, not just the sentences it writes."
+    },
+    "tags": [
+      "tool-call-gate",
+      "decomposed-attack",
+      "trajectory-red-teaming"
+    ],
+    "concepts": [
+      "Guardrails"
+    ]
+  },
+  {
+    "id": "Q-D6-0068",
+    "domain": 6,
+    "task_statement": "6.3",
+    "type": "single_choice",
+    "difficulty": "hard",
+    "theory_refs": [
+      "TH-D6-017"
+    ],
+    "case_study_id": null,
+    "stem": "A team has about 40,000 curated pairs of (chosen, rejected) responses and wants to align a model with them. Their previous RLHF attempt was costly: it required training a separate reward model, sampling from the policy during optimization, and tuning an unstable RL loop. They also want to keep a runtime moderation layer afterwards. Which approach best fits their data and constraint, and what should they expect afterwards?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Supervised fine-tuning on only the rejected responses, because the model learns what to avoid"
+      },
+      {
+        "key": "B",
+        "text": "A larger reward model with PPO, because it is the only method that can use preference pairs"
+      },
+      {
+        "key": "C",
+        "text": "Prompting with ten of the chosen responses, which makes weight updates unnecessary"
+      },
+      {
+        "key": "D",
+        "text": "Direct preference optimization on the pairs, accepting that it reduces but does not remove misbehavior, so moderation stays"
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "Direct preference optimization fits the policy directly to chosen-versus-rejected pairs, so it avoids training an explicit reward model and the reinforcement-learning sampling loop. It still only shapes default behavior and depends on the quality and coverage of the preference data, so the team should keep runtime moderation and evaluate afterward.",
+      "why_incorrect": {
+        "A": "Training on rejected responses alone would raise their likelihood, which is the opposite of the intended effect; the preference signal comes from contrasting chosen with rejected.",
+        "B": "RLHF is not the only way to use preference pairs; DPO was designed precisely to do so without the reward-model-plus-RL pipeline.",
+        "C": "Few-shot prompting can shift behavior in a single context but does not change the model's weights, so it is not an alignment training method."
+      },
+      "rule_of_thumb": "Preference pairs plus no appetite for an RL loop points to DPO, still alongside runtime controls."
+    },
+    "tags": [
+      "dpo",
+      "preference-optimization",
+      "rlhf-alternatives"
+    ],
+    "concepts": [
+      "Guardrails"
+    ]
+  },
+  {
+    "id": "Q-D6-0069",
+    "domain": 6,
+    "task_statement": "6.3",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D6-003",
+      "TH-D6-001"
+    ],
+    "case_study_id": null,
+    "stem": "A DevOps agent runs a long database migration in many steps. An engineer watching the dashboard sees it begin deleting the wrong partitions and clicks 'Stop', but the agent finishes its remaining batch before the model next checks its own plan, causing further damage. Which redesign gives the human reviewer the most meaningful ability to halt the work?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Add a note to the system prompt asking the agent to stop whenever it senses disapproval"
+      },
+      {
+        "key": "B",
+        "text": "Enforce a stop control outside the model that is checked between small, reversible steps and halts execution at the next checkpoint"
+      },
+      {
+        "key": "C",
+        "text": "Send the engineer an email summary of the completed migration to review once it finishes"
+      },
+      {
+        "key": "D",
+        "text": "Make the dashboard button larger and add a confirmation dialog before the agent starts"
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "explanation": {
+      "why_correct": "Meaningful oversight means a reviewer can reject, modify, or stop an action, and that authority must be enforced by the surrounding system rather than depend on the model noticing. Checking an external stop flag between small, reversible steps bounds the damage after a stop and keeps the human's decision binding.",
+      "why_incorrect": {
+        "A": "A prompt instruction depends on the model's judgment and timing, and does not guarantee a halt when the reviewer presses stop.",
+        "C": "A post-hoc summary is review after the fact; it cannot prevent harm from an in-progress irreversible operation.",
+        "D": "A larger button or a start-time confirmation does not change how quickly the running agent stops once the migration is underway."
+      },
+      "rule_of_thumb": "A stop button only counts if the system enforces it at the next safe checkpoint."
+    },
+    "tags": [
+      "stop-control",
+      "checkpoints",
+      "human-oversight"
+    ],
+    "concepts": [
+      "Guardrails",
+      "Human-in-the-Loop (HITL)"
+    ]
+  },
+  {
+    "id": "Q-D6-0070",
+    "domain": 6,
+    "task_statement": "6.3",
+    "type": "multi_response",
+    "difficulty": "easy",
+    "theory_refs": [
+      "TH-D6-016"
+    ],
+    "case_study_id": null,
+    "stem": "An agent that answers questions from a company knowledge base uses layered guardrails. Select TWO checks that belong at the output layer, after the model has drafted a response and before it reaches the user.",
+    "select_count": 2,
+    "options": [
+      {
+        "key": "A",
+        "text": "Classifying retrieved web pages for hidden instructions before they enter the context"
+      },
+      {
+        "key": "B",
+        "text": "Scanning the drafted reply for personal data or credentials that should not be disclosed"
+      },
+      {
+        "key": "C",
+        "text": "Validating that a tool's JSON arguments match the allowed schema before the call runs"
+      },
+      {
+        "key": "D",
+        "text": "Checking that factual claims in the draft are supported by the retrieved sources"
+      },
+      {
+        "key": "E",
+        "text": "Verifying that the calling user holds permission to invoke a sensitive API"
+      }
+    ],
+    "correct": [
+      "B",
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "Output-layer checks inspect the drafted response itself: scanning for leaked personal data or credentials, and checking that claims are supported by evidence. Screening retrieved pages belongs to the input layer, while schema validation and permission checks gate tool calls at the action layer.",
+      "why_incorrect": {
+        "A": "Screening retrieved content for hidden instructions is an input-layer control that runs before the content reaches the model.",
+        "C": "Schema validation of tool arguments is an action-layer (tool-call gate) check that happens before execution.",
+        "E": "Permission verification for a sensitive API belongs to the action layer, not to the drafted reply."
+      },
+      "rule_of_thumb": "Input checks guard what goes in, action checks guard what executes, output checks guard what goes out."
+    },
+    "tags": [
+      "layered-guardrails",
+      "output-filter",
+      "stage-placement"
+    ],
+    "concepts": [
+      "Guardrails"
+    ]
+  },
+  {
+    "id": "Q-D6-0071",
+    "domain": 6,
+    "task_statement": "6.3",
+    "type": "multi_response",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D6-017"
+    ],
+    "case_study_id": null,
+    "stem": "A study group is reviewing alignment training methods before an architecture review. Select TWO statements that are accurate.",
+    "select_count": 2,
+    "options": [
+      {
+        "key": "A",
+        "text": "Constitutional methods involve no human input because the model supplies all of its own preference labels"
+      },
+      {
+        "key": "B",
+        "text": "A high score from the reward model proves that the response satisfies the true human objective"
+      },
+      {
+        "key": "C",
+        "text": "RLHF trains a reward model from human preference comparisons and then optimizes the policy against it"
+      },
+      {
+        "key": "D",
+        "text": "Once a model is aligned through training, runtime guardrails are redundant and can be removed"
+      },
+      {
+        "key": "E",
+        "text": "Direct preference optimization fits the policy to preference pairs without a separate reward-model and RL sampling loop"
+      }
+    ],
+    "correct": [
+      "C",
+      "E"
+    ],
+    "explanation": {
+      "why_correct": "RLHF learns a reward model from human comparisons and optimizes the policy against it, while DPO uses preference pairs to optimize the policy directly, skipping the explicit reward-model and RL sampling loop. The other statements are common confusions: humans write the constitution, a reward score is only a proxy, and training does not replace runtime controls.",
+      "why_incorrect": {
+        "A": "Humans author the written principles that drive critique, revision, and AI labels, so human input is still present.",
+        "B": "The reward model is a learned proxy for human preferences; a high score can reflect its errors or be exploited, so it does not prove the true objective is met.",
+        "D": "Training lowers but does not eliminate misbehavior, so guardrails and evaluation remain part of a defense-in-depth design."
+      },
+      "rule_of_thumb": "Know the mechanics of each method, and remember that none of them replaces runtime controls."
+    },
+    "tags": [
+      "rlhf",
+      "dpo",
+      "common-misconceptions"
+    ],
+    "concepts": [
+      "Guardrails"
+    ]
+  },
+  {
+    "id": "Q-D6-0072",
+    "domain": 6,
+    "task_statement": "6.3",
+    "type": "multi_response",
+    "difficulty": "hard",
+    "theory_refs": [
+      "TH-D6-016",
+      "TH-D6-002"
+    ],
+    "case_study_id": null,
+    "stem": "A claims-processing agent reads uploaded documents and can call an `approve_payout` tool. In a postmortem, one uploaded PDF contained hidden text telling the agent to approve a large payout; the agent complied. Only a system prompt told it to follow claim policy, and no checks existed beyond it. Select THREE changes that best apply layered guardrails and escalation to this incident.",
+    "select_count": 3,
+    "options": [
+      {
+        "key": "A",
+        "text": "Rewrite the system prompt in capital letters and add a warning that documents may be hostile"
+      },
+      {
+        "key": "B",
+        "text": "Classify uploaded and retrieved document content for embedded instructions before it enters the agent's context"
+      },
+      {
+        "key": "C",
+        "text": "Add one large classifier on the final chat message and rely on it as the sole control"
+      },
+      {
+        "key": "D",
+        "text": "Gate `approve_payout` with argument and permission validation and route payouts above a threshold to a human with the evidence"
+      },
+      {
+        "key": "E",
+        "text": "Log each layer's blocks and escalations, then review false positives and misses to tune thresholds"
+      }
+    ],
+    "correct": [
+      "B",
+      "D",
+      "E"
+    ],
+    "explanation": {
+      "why_correct": "The incident combines untrusted content entering the context, an ungated high-impact action, and no feedback loop. Screening document content at the input layer reduces injection, the tool-call gate with threshold-based escalation bounds the consequences even if injection succeeds, and logging with review lets the team measure and tune each layer. Together they provide independent checks so one miss does not become an incident.",
+      "why_incorrect": {
+        "A": "Emphasis in the system prompt is a soft control that injected text can still override; it adds no independent check.",
+        "C": "A single final-message classifier recreates a single point of failure and never sees the tool call that caused the payout."
+      },
+      "rule_of_thumb": "Layer independent checks at input and action, escalate high-impact decisions, and tune from logs."
+    },
+    "tags": [
+      "prompt-injection",
+      "layered-guardrails",
+      "escalation"
+    ],
+    "concepts": [
+      "Guardrails",
+      "Human-in-the-Loop (HITL)"
+    ]
+  },
+  {
+    "id": "Q-D6-0073",
+    "domain": 6,
+    "task_statement": "6.3",
+    "type": "matching",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D6-016",
+      "TH-D6-017"
+    ],
+    "case_study_id": null,
+    "stem": "Match each safeguard or alignment technique on the left to the description that best characterizes it on the right. One description on the right is not used.",
+    "select_count": 4,
+    "matching": {
+      "left": [
+        {
+          "key": "L1",
+          "text": "Tool-call gate"
+        },
+        {
+          "key": "L2",
+          "text": "RLHF"
+        },
+        {
+          "key": "L3",
+          "text": "Constitutional approach"
+        },
+        {
+          "key": "L4",
+          "text": "Direct preference optimization"
+        }
+      ],
+      "right": [
+        {
+          "key": "R1",
+          "text": "Trains a reward model from human preference comparisons, then optimizes the policy against it"
+        },
+        {
+          "key": "R2",
+          "text": "Uses written principles so the model critiques and revises outputs and provides AI preference labels"
+        },
+        {
+          "key": "R3",
+          "text": "Fits the policy directly to chosen-versus-rejected pairs without a separate reward-model and RL sampling loop"
+        },
+        {
+          "key": "R4",
+          "text": "Validates arguments and permissions, or requires approval, before a side-effecting call executes"
+        },
+        {
+          "key": "R5",
+          "text": "Scans a drafted reply for leaked data before it is shown to the user"
+        }
+      ]
+    },
+    "correct_pairs": {
+      "L1": "R4",
+      "L2": "R1",
+      "L3": "R2",
+      "L4": "R3"
+    },
+    "explanation": {
+      "why_correct": "A tool-call gate is a runtime action-layer control that checks arguments and permissions, or demands approval, before a call executes. RLHF learns a reward model from human preference comparisons and optimizes the policy against it. A constitutional approach uses written principles to drive critique, revision, and AI preference labels. Direct preference optimization fits the policy to preference pairs directly, skipping the separate reward model and RL sampling loop. R5 describes an output-layer filter, which is the unused description.",
+      "why_incorrect": {},
+      "rule_of_thumb": "Gates and filters act at runtime; RLHF, constitutional methods, and DPO shape the model during training."
+    },
+    "tags": [
+      "alignment-training",
+      "layered-guardrails",
+      "matching"
+    ],
+    "concepts": [
+      "Guardrails"
+    ]
+  }
+]

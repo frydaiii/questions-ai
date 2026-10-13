@@ -55,48 +55,48 @@
     "id": "Q-D4-0014",
     "domain": 4,
     "task_statement": "4.1",
-    "type": "single_choice",
-    "difficulty": "medium",
+    "type": "ordering",
+    "difficulty": "easy",
     "theory_refs": [
       "TH-D4-001",
-      "TH-D4-003"
+      "TH-D4-013"
     ],
     "case_study_id": null,
-    "stem": "In a very long single-session conversation that never ends, what happens to the earliest messages as the context window fills with new content, assuming no long-term memory system is in place?",
-    "select_count": 1,
+    "stem": "A support-chat agent uses rolling summarization to cope with a conversation that keeps growing. Place the following steps in the correct sequence.",
+    "select_count": 4,
     "options": [
       {
         "key": "A",
-        "text": "They are eventually displaced from the working context and may become unavailable to the agent going forward"
+        "text": "The oldest turns are compressed into a short running summary"
       },
       {
         "key": "B",
-        "text": "They are automatically transferred into a long-term memory system with no further design needed"
+        "text": "New turns keep arriving, and the summary is later updated to absorb the turns that have aged out"
       },
       {
         "key": "C",
-        "text": "They remain fully accessible forever regardless of context window size"
+        "text": "The conversation grows until the context window is nearly full"
       },
       {
         "key": "D",
-        "text": "The conversation becomes permanently impossible to continue at all"
+        "text": "The summary is placed in context ahead of the most recent turns, which are kept verbatim"
       }
     ],
     "correct": [
-      "A"
+      "C",
+      "A",
+      "D",
+      "B"
     ],
     "explanation": {
-      "why_correct": "Without a long-term memory system in place, the earliest messages are simply displaced from working memory as the window fills with newer content, potentially becoming unavailable to the agent going forward.",
-      "why_incorrect": {
-        "B": "Without an actual long-term memory system in place, there's no automatic transfer -- that requires deliberate design and implementation, which is explicitly absent in this scenario.",
-        "C": "The context window's finite size means older content cannot remain fully accessible indefinitely without being displaced.",
-        "D": "The conversation can typically continue; it's the earlier content specifically that becomes unavailable, not the conversation as a whole."
-      },
-      "rule_of_thumb": "Without a long-term memory system, older content in a growing conversation is simply displaced and lost from working memory, not automatically preserved elsewhere."
+      "why_correct": "The process starts when growth nears the window limit. The oldest turns are then compressed into a running summary, which is carried in context ahead of the recent turns kept verbatim. As new turns arrive and more turns age out, the summary is updated again. Because every pass is lossy, exact details that must survive should be pinned elsewhere.",
+      "why_incorrect": {},
+      "rule_of_thumb": "Rolling summarization: hit the limit, compress the oldest turns, carry the summary plus recent turns verbatim, then keep updating it."
     },
     "tags": [
-      "working-memory",
-      "context-window"
+      "context-window",
+      "rolling-summarization",
+      "execution-order"
     ],
     "concepts": [
       "State / State Management",

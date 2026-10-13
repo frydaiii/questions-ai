@@ -6,7 +6,8 @@
     "type": "single_choice",
     "difficulty": "easy",
     "theory_refs": [
-      "TH-D2-007"
+      "TH-D2-007",
+      "TH-D2-018"
     ],
     "case_study_id": null,
     "stem": "What is a potential drawback of generating a full plan upfront in a plan-and-execute pattern?",

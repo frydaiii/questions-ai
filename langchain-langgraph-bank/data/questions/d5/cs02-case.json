@@ -1,0 +1,56 @@
+[
+  {
+    "id": "Q-D5-0087",
+    "domain": 5,
+    "task_statement": "5.3",
+    "type": "single_choice",
+    "difficulty": "hard",
+    "theory_refs": [
+      "TH-D5-018",
+      "TH-D5-016"
+    ],
+    "case_study_id": "CS-02",
+    "stem": "Harborline's workers post findings to a shared case file. The importer's negotiated pricing and the raw sanctions-screening hits are confidential. Which design for the shared case file is most appropriate?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Keep sensitive items private by default, and promote a finding to the shared file with provenance attached and a policy check on who may read it"
+      },
+      {
+        "key": "B",
+        "text": "Let every agent read the whole case file, since relevant retrieval results are safe for any agent to see"
+      },
+      {
+        "key": "C",
+        "text": "Store everything in the shared file and rely on instructions in each worker's prompt to ignore data outside its role"
+      },
+      {
+        "key": "D",
+        "text": "Remove the shared file entirely so workers can only communicate by free-form chat that nobody records"
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "explanation": {
+      "why_correct": "Shared workspaces let agents build on one another's findings, but they also create leakage and poisoning risk. Defaulting to private memory and promoting entries to shared state only with recorded provenance and a read/write policy keeps pricing and screening hits scoped to the roles that need them. Provenance also lets the team audit or remove a wrong entry that other agents might act on. A blackboard remains useful once it has scoping and attribution rules.",
+      "why_incorrect": {
+        "B": "Relevance is not authorization; an entry that is useful to a worker may still be off-limits to it, and broad reads also raise token cost.",
+        "C": "A prompt instruction to ignore data is not an access control; the data is still in the worker's context and can leak into its outputs.",
+        "D": "Removing the shared state loses coordination and auditability; unrecorded chat has no provenance, schema, or ownership, which makes conflicts and leaks harder to trace."
+      },
+      "rule_of_thumb": "Default memory to private and promote to shared only with provenance and a policy check."
+    },
+    "tags": [
+      "shared-state",
+      "access-control",
+      "blackboard",
+      "provenance"
+    ],
+    "concepts": [
+      "Multi-Agent Systems",
+      "State / State Management"
+    ]
+  }
+]

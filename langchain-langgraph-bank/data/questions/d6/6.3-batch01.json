@@ -1,0 +1,528 @@
+[
+  {
+    "id": "Q-D6-0001",
+    "domain": 6,
+    "task_statement": "6.3",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D6-001",
+      "TH-D6-002"
+    ],
+    "case_study_id": null,
+    "stem": "An infrastructure agent can restart a staging service, rotate log files, and delete production database snapshots. The team wants approval gates that keep the agent useful for routine work without letting it make a damaging mistake. Where should the human approval gate be placed?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Before every tool call, so the full action log is reviewed by an engineer before any step runs"
+      },
+      {
+        "key": "B",
+        "text": "After execution, once the agent reports which production resources it changed and why"
+      },
+      {
+        "key": "C",
+        "text": "Before irreversible or production-affecting actions such as deleting snapshots, with routine steps running unattended"
+      },
+      {
+        "key": "D",
+        "text": "Nowhere, provided the agent reports a self-assessed confidence above 90 percent on each action"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "Approval has the most value before consequential, hard-to-reverse actions. Deleting production snapshots cannot be undone once executed, so a reviewer must see the proposal first. Restarting staging and rotating logs are low-impact and recoverable, so they can run without a gate and keep the automation worthwhile.",
+      "why_incorrect": {
+        "A": "Gating every call overwhelms reviewers and delays harmless work without a proportional reduction in risk.",
+        "B": "A post-hoc report cannot stop an irreversible deletion; it only documents damage after it has happened.",
+        "D": "Self-reported confidence is not a safe substitute for review on high-impact actions; a confidently wrong agent would proceed."
+      },
+      "rule_of_thumb": "Put the human before high-impact, irreversible actions, not after them and not before everything."
+    },
+    "tags": [
+      "approval-gate",
+      "irreversible-actions",
+      "devops"
+    ],
+    "concepts": [
+      "Human-in-the-Loop (HITL)",
+      "Guardrails"
+    ]
+  },
+  {
+    "id": "Q-D6-0002",
+    "domain": 6,
+    "task_statement": "6.3",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D6-001",
+      "TH-D6-002"
+    ],
+    "case_study_id": null,
+    "stem": "A credit-limit agent reads income figures from a payroll API and a bank-statement summary. For one applicant the two sources disagree by 40 percent, and the proposed action is a large limit increase. The team is defining explicit triggers for sending cases to a human underwriter. Which trigger is best?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Escalate any case where the drafted decision explanation runs longer than a fixed word count"
+      },
+      {
+        "key": "B",
+        "text": "Escalate whenever the model's self-reported confidence on any step is below 99 percent"
+      },
+      {
+        "key": "C",
+        "text": "Escalate whenever an applicant's request includes an attachment or more than one question"
+      },
+      {
+        "key": "D",
+        "text": "Escalate when the proposed change is consequential and conflicting evidence remains unresolved"
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "A good escalation signal combines consequence with a concrete uncertainty condition. A large credit increase is costly to reverse, and unresolved disagreement between income sources means the agent cannot safely decide alone. The trigger is explicit, testable, and tied to risk.",
+      "why_incorrect": {
+        "A": "Explanation length is unrelated to risk or uncertainty, so it would route cases to humans arbitrarily.",
+        "B": "Confidence alone is an incomplete safety signal and a 99 percent bar would escalate nearly everything, flooding reviewers.",
+        "C": "Attachments or multi-part questions are surface features of the request, not indicators of consequence or doubt."
+      },
+      "rule_of_thumb": "Escalate on defined risk signals, such as high consequence plus unresolved conflict, not on superficial features."
+    },
+    "tags": [
+      "escalation",
+      "conflicting-evidence",
+      "credit-decisions"
+    ],
+    "concepts": [
+      "Human-in-the-Loop (HITL)",
+      "Guardrails"
+    ]
+  },
+  {
+    "id": "Q-D6-0003",
+    "domain": 6,
+    "task_statement": "6.3",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D6-001"
+    ],
+    "case_study_id": null,
+    "stem": "A data-pipeline team routes all 400 daily agent steps, including file reads and formatting, to a single reviewer for approval. After two weeks the reviewer clicks Approve within seconds on nearly everything, and a bad schema change slips through. What is the best interpretation and fix?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Reviewer fatigue is making the gate ineffective; tier steps by risk and reserve approval for consequential ones"
+      },
+      {
+        "key": "B",
+        "text": "The gate works as intended; add a second reviewer for each step so errors are caught twice"
+      },
+      {
+        "key": "C",
+        "text": "The agent is degrading from repeated approvals; retrain it nightly on the reviewer's clicks"
+      },
+      {
+        "key": "D",
+        "text": "Reviews are the problem; remove the approvals and rely on reading the logs after each run"
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "explanation": {
+      "why_correct": "Reviewing every low-risk step overloads people and turns approval into a reflex, so the one consequential schema change gets the same cursory click as a formatting step. Risk-tiering concentrates scarce attention where review genuinely reduces risk and lets routine work flow.",
+      "why_incorrect": {
+        "B": "Doubling reviewers multiplies the workload on low-risk steps and does not restore real scrutiny.",
+        "C": "Approvals do not change the agent mid-run, and training on rubber-stamp clicks would reinforce the problem.",
+        "D": "Removing all gates sacrifices protection against consequential changes; logs read after the fact cannot prevent them."
+      },
+      "rule_of_thumb": "Reviewer attention is a limited safety resource; spend it on consequential actions, not on every step."
+    },
+    "tags": [
+      "reviewer-load",
+      "risk-tiering",
+      "approval-fatigue"
+    ],
+    "concepts": [
+      "Human-in-the-Loop (HITL)"
+    ]
+  },
+  {
+    "id": "Q-D6-0004",
+    "domain": 6,
+    "task_statement": "6.3",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D6-002"
+    ],
+    "case_study_id": null,
+    "stem": "An insurance-claims agent flags a disputed water-damage claim and hands it to an adjuster with the message 'Needs review: low confidence.' Adjusters report they must redo the whole investigation. How should the escalation handoff be redesigned?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Attach the agent's full raw context window so that no information is withheld from the adjuster"
+      },
+      {
+        "key": "B",
+        "text": "Remove the agent's recommendation so the adjuster forms an unbiased opinion from the claim file alone"
+      },
+      {
+        "key": "C",
+        "text": "Include the proposed payout, key evidence, the specific uncertainty, attempted steps, and available options"
+      },
+      {
+        "key": "D",
+        "text": "Send only a priority label such as P1 with the claim number so the adjuster can decide quickly"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "A useful handoff lets the reviewer act, not just acknowledge an alert. Showing the proposed action, the evidence behind it, what the agent was unsure about, what it already tried, and the choices open to the adjuster avoids duplicate work and supports a meaningful decision.",
+      "why_incorrect": {
+        "A": "A raw dump buries the relevant facts in noise; the handoff should be curated to what the decision needs.",
+        "B": "Hiding the proposal and attempted steps forces the adjuster to repeat the work, which is the current complaint.",
+        "D": "A priority label with an ID conveys urgency but no evidence, so the reviewer still cannot decide efficiently."
+      },
+      "rule_of_thumb": "An escalation is a decision package: proposal, evidence, uncertainty, attempts, and options."
+    },
+    "tags": [
+      "escalation-context",
+      "handoff",
+      "claims-processing"
+    ],
+    "concepts": [
+      "Human-in-the-Loop (HITL)",
+      "Guardrails"
+    ]
+  },
+  {
+    "id": "Q-D6-0005",
+    "domain": 6,
+    "task_statement": "6.3",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D6-001",
+      "TH-D6-003"
+    ],
+    "case_study_id": null,
+    "stem": "An HR-operations agent proposes deactivating a contractor's system accounts, and the supervising manager rejects the request with a note that the contract was extended. What should the system do next?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Resubmit the same deactivation with reworded parameters until a different reviewer approves it"
+      },
+      {
+        "key": "B",
+        "text": "Drop the request silently and purge it from the logs so the queue stays uncluttered"
+      },
+      {
+        "key": "C",
+        "text": "Suspend the agent for the whole team because a rejection proves its proposals are unreliable"
+      },
+      {
+        "key": "D",
+        "text": "Log the rejection and reason, block the action, and allow re-proposal only through a defined appeal path"
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "A rejection is a binding oversight decision. The system should record who rejected it and why, prevent the action from running, and permit a new attempt only through a defined route such as an appeal with new evidence. That preserves reviewer authority and the audit trail.",
+      "why_incorrect": {
+        "A": "Rewording to shop for a different approver circumvents oversight and undermines the reviewer's authority.",
+        "B": "Purging the record destroys the audit trail, so the decision and its rationale can no longer be examined.",
+        "C": "One justified rejection is evidence about one proposal, not proof that all agent actions are unsafe."
+      },
+      "rule_of_thumb": "Honor and record rejections; allow reconsideration only through a defined appeal path."
+    },
+    "tags": [
+      "override",
+      "audit-trail",
+      "reviewer-authority"
+    ],
+    "concepts": [
+      "Human-in-the-Loop (HITL)",
+      "Guardrails"
+    ]
+  },
+  {
+    "id": "Q-D6-0006",
+    "domain": 6,
+    "task_statement": "6.3",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D6-002",
+      "TH-D6-003"
+    ],
+    "case_study_id": null,
+    "stem": "A fraud-triage team is comparing two escalation policies for its transaction-review agent. Policy X sends many cases to analysts; Policy Y sends far fewer. Which evidence best shows which policy is better designed?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Total escalations per week, since a higher count indicates the policy is being more careful"
+      },
+      {
+        "key": "B",
+        "text": "How many truly consequential cases each policy escalates, weighed against precision and reviewer workload"
+      },
+      {
+        "key": "C",
+        "text": "The average word count of the agent's escalation messages as written for each policy"
+      },
+      {
+        "key": "D",
+        "text": "The share of analysts who agree on the outcome of routine, low-risk transactions"
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "explanation": {
+      "why_correct": "An escalation policy has two jobs: catch the consequential cases and avoid wasting reviewer time. Measuring how many truly high-impact cases were escalated, together with how many escalations were unnecessary and the resulting workload, evaluates decision quality rather than raw volume.",
+      "why_incorrect": {
+        "A": "Raw volume rewards over-escalation; a policy that escalates everything scores best while burying reviewers.",
+        "C": "Message length says nothing about whether the right cases were escalated.",
+        "D": "Agreement on routine low-risk cases is not what an escalation policy is for and ignores missed consequential cases."
+      },
+      "rule_of_thumb": "Judge escalation by coverage of consequential cases and reviewer burden, never by volume alone."
+    },
+    "tags": [
+      "escalation-metrics",
+      "precision-recall",
+      "fraud-triage"
+    ],
+    "concepts": [
+      "Human-in-the-Loop (HITL)",
+      "Evaluation & Learning Loops"
+    ]
+  },
+  {
+    "id": "Q-D6-0007",
+    "domain": 6,
+    "task_statement": "6.3",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D6-001",
+      "TH-D6-003"
+    ],
+    "case_study_id": null,
+    "stem": "A contract-review agent asks a paralegal to confirm changes using a dialog that says 'Apply agent edits? [Approve]' with a confidence badge and no further detail. Paralegals approve without reading. Which redesign gives them meaningful control?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Send an email after the edits are applied with a link to inspect what changed"
+      },
+      {
+        "key": "B",
+        "text": "Add a larger confidence percentage and keep the single Approve button for speed"
+      },
+      {
+        "key": "C",
+        "text": "Show the proposed edits and supporting evidence, and let the reviewer approve, modify, reject, or stop"
+      },
+      {
+        "key": "D",
+        "text": "Bundle the whole day's edits into one approval and attach the model's complete reasoning trace"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "Meaningful control requires that the reviewer can see what will happen and why, and can change the outcome. A clear proposal with evidence plus options to approve, modify, reject, or stop makes review a real decision instead of a ceremonial click.",
+      "why_incorrect": {
+        "A": "A notification after execution is read-only; the reviewer cannot influence what already happened.",
+        "B": "A confidence number with only an Approve button gives no evidence and no meaningful alternatives.",
+        "D": "One bulk approval of a whole day with a huge trace hides individual details and makes careful review impractical."
+      },
+      "rule_of_thumb": "Real oversight means visible proposals, supporting evidence, and the power to change or stop the action."
+    },
+    "tags": [
+      "human-control",
+      "approval-ui",
+      "contract-review"
+    ],
+    "concepts": [
+      "Human-in-the-Loop (HITL)",
+      "Guardrails"
+    ]
+  },
+  {
+    "id": "Q-D6-0008",
+    "domain": 6,
+    "task_statement": "6.3",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D6-003"
+    ],
+    "case_study_id": null,
+    "stem": "A support team tunes its agent using thumbs-up and thumbs-down ratings from reps. An audit finds that reps under queue pressure often upvote confident-sounding but wrong answers, and two reps disagree on about 30 percent of the same replies. What is the best response?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Treat every rating as ground truth and weight reps by volume, since more labels cancel out noise"
+      },
+      {
+        "key": "B",
+        "text": "Discard human feedback entirely and tune only against scores produced by another model"
+      },
+      {
+        "key": "C",
+        "text": "Ask reps to rate faster so that individual bias averages out across a larger sample"
+      },
+      {
+        "key": "D",
+        "text": "Measure agreement, give reviewers a rubric and context, audit samples, and pair feedback with automated evals"
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "Human feedback is valuable but can be inconsistent, biased, rushed, or missing context. Checking inter-reviewer agreement, supplying a clear rubric and relevant context, spot-auditing labels, and combining them with automated evaluation reduces dependence on any single noisy signal.",
+      "why_incorrect": {
+        "A": "Volume weighting rewards the fastest raters, and systematic errors from time pressure do not average away.",
+        "B": "Dropping humans removes an important signal; another model's scores have their own blind spots and biases.",
+        "C": "Rating faster worsens the time-pressure problem and would increase, not reduce, careless labels."
+      },
+      "rule_of_thumb": "Human feedback is a noisy signal: check consistency, support reviewers, and back it with evaluation."
+    },
+    "tags": [
+      "feedback-quality",
+      "inter-rater-agreement",
+      "limitations"
+    ],
+    "concepts": [
+      "Human-in-the-Loop (HITL)",
+      "Evaluation & Learning Loops"
+    ]
+  },
+  {
+    "id": "Q-D6-0009",
+    "domain": 6,
+    "task_statement": "6.3",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D6-001",
+      "TH-D6-002"
+    ],
+    "case_study_id": null,
+    "stem": "A travel-booking agent can search flights (read-only), place 24-hour seat holds (free to cancel), and buy non-refundable tickets over a set amount. The team is designing risk-tiered review checkpoints. Which design fits best?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Let searches run freely, log holds for later audit, and require pre-approval for large non-refundable purchases"
+      },
+      {
+        "key": "B",
+        "text": "Require identical pre-approval for searches, holds, and purchases so the process is uniform and easy to explain"
+      },
+      {
+        "key": "C",
+        "text": "Let all three run automatically and review a monthly spending report, since charges can be disputed later"
+      },
+      {
+        "key": "D",
+        "text": "Require approval only for searches, because they touch the largest number of external data sources"
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "explanation": {
+      "why_correct": "Risk-tiering matches the strength of review to the consequence and reversibility of each action. Searches are harmless and holds are cheap to undo, so they stay efficient, while a large non-refundable purchase is costly to reverse and gets pre-approval.",
+      "why_incorrect": {
+        "B": "Uniform review ignores risk differences, burdening reviewers on harmless steps and diluting attention on purchases.",
+        "C": "A monthly report is after the fact and disputes are not guaranteed to succeed, so large losses can occur.",
+        "D": "Searches are read-only and low impact; reviewing them while leaving purchases ungated inverts the risk logic."
+      },
+      "rule_of_thumb": "Scale review strength to consequence and reversibility so risky actions get gates and safe ones stay fast."
+    },
+    "tags": [
+      "risk-tiering",
+      "reversibility",
+      "travel-booking"
+    ],
+    "concepts": [
+      "Human-in-the-Loop (HITL)",
+      "Guardrails"
+    ]
+  },
+  {
+    "id": "Q-D6-0010",
+    "domain": 6,
+    "task_statement": "6.3",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D6-003"
+    ],
+    "case_study_id": null,
+    "stem": "A platform team proposes removing least-privilege tool scopes and output validation from its deploy agent, arguing that an on-call engineer approves every production deployment anyway. As the safety reviewer, what is the most accurate response?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Agree; once an engineer approves a change, further automated checks and monitoring are redundant"
+      },
+      {
+        "key": "B",
+        "text": "Keep scoped permissions, automated validation, and evaluation, because the reviewer may miss errors or lack context"
+      },
+      {
+        "key": "C",
+        "text": "Swap the engineer for a second agent that approves changes, since automated reviewers are always faster"
+      },
+      {
+        "key": "D",
+        "text": "Remove the human gate instead, because guardrails alone are sufficient for production safety"
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "explanation": {
+      "why_correct": "Human oversight is one layer in a defense-in-depth design, not a guarantee of correctness. An approver can be overloaded, rushed, or missing context, so bounded permissions, automated validation, and ongoing evaluation must remain to limit harm when a review fails.",
+      "why_incorrect": {
+        "A": "Approval does not prove the change is correct or that the system will stay within constraints afterwards.",
+        "C": "Replacing the human with another agent removes human judgment and speed does not make it safer or aligned.",
+        "D": "Dropping the human discards a valuable control; layered defenses work best when oversight and automation complement each other."
+      },
+      "rule_of_thumb": "Treat human review as one defensive layer alongside permissions, guardrails, and evaluation."
+    },
+    "tags": [
+      "defense-in-depth",
+      "least-privilege",
+      "oversight"
+    ],
+    "concepts": [
+      "Human-in-the-Loop (HITL)",
+      "Guardrails",
+      "Evaluation & Learning Loops"
+    ]
+  }
+]

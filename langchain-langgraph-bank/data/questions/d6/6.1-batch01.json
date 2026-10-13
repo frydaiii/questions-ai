@@ -1,0 +1,734 @@
+[
+  {
+    "id": "Q-D6-0012",
+    "domain": 6,
+    "task_statement": "6.1",
+    "type": "single_choice",
+    "difficulty": "easy",
+    "theory_refs": [
+      "TH-D6-004"
+    ],
+    "case_study_id": null,
+    "stem": "A travel-booking agent is asked to rebook a stranded passenger onto a later flight. Its final message reads, \"Done - you are now confirmed on the 18:40 departure.\" The evaluation team wants a task-success metric that cannot be satisfied by a fluent but wrong reply. Which approach should they use?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Score the final message with a rubric for politeness, clarity, and completeness of the confirmation text"
+      },
+      {
+        "key": "B",
+        "text": "Compare the final message to a reference message using exact string match"
+      },
+      {
+        "key": "C",
+        "text": "After each run, query the reservation system and check that the passenger's record shows a ticketed seat on the 18:40 flight"
+      },
+      {
+        "key": "D",
+        "text": "Count the tool calls in the run and treat runs with fewer than five calls as successes"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "Task success should be a verifiable predicate over the environment's end state. Querying the reservation system checks whether the goal was really achieved, regardless of how convincing the agent's message sounds, and it is cheap to automate and hard for the agent to talk its way past.",
+      "why_incorrect": {
+        "A": "A rubric over the message grades how the reply reads, so a polished but false confirmation would still score well.",
+        "B": "Exact string match is brittle: many different phrasings describe the same valid end state, and a matching string says nothing about whether the booking exists.",
+        "D": "The number of tool calls is an efficiency signal, not a success signal; a short run can finish without achieving the goal."
+      },
+      "rule_of_thumb": "If you can check the result against the world, grade the state, not the story the agent tells about it."
+    },
+    "tags": [
+      "end-state-verification",
+      "task-success",
+      "travel-booking"
+    ],
+    "concepts": [
+      "Evaluation & Learning Loops",
+      "Environment"
+    ]
+  },
+  {
+    "id": "Q-D6-0013",
+    "domain": 6,
+    "task_statement": "6.1",
+    "type": "single_choice",
+    "difficulty": "easy",
+    "theory_refs": [
+      "TH-D6-005"
+    ],
+    "case_study_id": null,
+    "stem": "A bank deploys an onboarding agent that talks directly to new customers with no human review of its output. To estimate dependability, the team runs every test scenario five independent times and wants the metric that reports the share of scenarios in which all five runs succeed. Which metric is this?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "pass@5, which credits a scenario if at least one of the five runs succeeds"
+      },
+      {
+        "key": "B",
+        "text": "Mean number of steps per run, averaged across the five runs"
+      },
+      {
+        "key": "C",
+        "text": "Single-run accuracy computed from the first run of each scenario only"
+      },
+      {
+        "key": "D",
+        "text": "pass^5, which credits a scenario only if every one of the five runs succeeds"
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "pass^k asks whether all k independent attempts succeed. For an agent whose every attempt reaches a customer, that consistency is what matters, and pass^k falls as k grows when failures are scattered across runs.",
+      "why_incorrect": {
+        "A": "pass@k is the 'at least one success' metric; it rises with k and would hide runs that fail for customers.",
+        "B": "Step count measures efficiency and says nothing about whether runs succeeded.",
+        "C": "Using only the first run discards the repeated-trial information and cannot show run-to-run consistency."
+      },
+      "rule_of_thumb": "Use pass@k when you can verify and retry; use pass^k when every attempt is customer-facing."
+    },
+    "tags": [
+      "pass-k",
+      "reliability",
+      "banking"
+    ],
+    "concepts": [
+      "Evaluation & Learning Loops",
+      "Agent"
+    ]
+  },
+  {
+    "id": "Q-D6-0014",
+    "domain": 6,
+    "task_statement": "6.1",
+    "type": "single_choice",
+    "difficulty": "easy",
+    "theory_refs": [
+      "TH-D6-006"
+    ],
+    "case_study_id": null,
+    "stem": "A support agent returns the correct answer to a billing question, so the run is marked as a success. A reviewer opening the log notices that the agent called its order-lookup tool three times with the wrong customer ID before it noticed and corrected the argument. Which evaluation approach would have surfaced this problem?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Trajectory evaluation that inspects the tool calls and arguments chosen at each step"
+      },
+      {
+        "key": "B",
+        "text": "An end-state check that compares only the final billing record with the expected record"
+      },
+      {
+        "key": "C",
+        "text": "Raising k in pass@k until at least one run is correct on every question"
+      },
+      {
+        "key": "D",
+        "text": "A tone rubric applied to the final message shown to the customer"
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "explanation": {
+      "why_correct": "Trajectory evaluation looks at the sequence of reasoning steps, tool calls, and arguments, so it can reveal wrong arguments, redundant calls, and self-corrections that a correct final answer hides. It is a diagnostic complement to outcome success.",
+      "why_incorrect": {
+        "B": "The final record was correct, so an end-state check passes the run; it cannot see the wasted and wrong intermediate calls.",
+        "C": "Raising k only makes pass@k more generous and would hide, not expose, how the agent got to the answer.",
+        "D": "A tone rubric grades the customer-facing wording, which is unrelated to the tool arguments chosen along the way."
+      },
+      "rule_of_thumb": "Grade the outcome for success and the trajectory for diagnosis."
+    },
+    "tags": [
+      "trajectory-evaluation",
+      "tool-call-accuracy",
+      "customer-support"
+    ],
+    "concepts": [
+      "Evaluation & Learning Loops",
+      "Tools & Tool Discovery"
+    ]
+  },
+  {
+    "id": "Q-D6-0015",
+    "domain": 6,
+    "task_statement": "6.1",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D6-005"
+    ],
+    "case_study_id": null,
+    "stem": "A retailer's returns agent succeeds on a given order task 90% of the time in a single run, and runs are independent. Product leadership says the agent must handle the same kind of request correctly on four consecutive customer contacts. Which figure best approximates the probability that all four runs of that task succeed (its pass^4)?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "About 99.99%, because the agent only needs to succeed on one of the four runs"
+      },
+      {
+        "key": "B",
+        "text": "About 90%, because success probability does not change when a task is repeated"
+      },
+      {
+        "key": "C",
+        "text": "About 66%, because 0.9 multiplied by itself four times is roughly 0.66"
+      },
+      {
+        "key": "D",
+        "text": "About 36%, because each extra run removes 10 points from the probability"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "pass^k is the probability that all k independent runs succeed, which is p^k. With p = 0.9, pass^4 = 0.9^4 = 0.656, about 66%. A 90% one-shot rate therefore overstates how dependable the agent is across repeated customer contacts.",
+      "why_incorrect": {
+        "A": "That is the pass@4 value (1 - 0.1^4); it counts a task as passed if any run succeeds and is the wrong metric here.",
+        "B": "The probability of all runs succeeding drops with each repetition; it equals the single-run rate only when k = 1.",
+        "D": "Subtracting 10 points per run is linear, but independent successes compound multiplicatively, giving 66% rather than 60% or 36%."
+      },
+      "rule_of_thumb": "pass^k shrinks geometrically with k: a 90% agent is only about 66% consistent over four tries."
+    },
+    "tags": [
+      "pass-k",
+      "reliability",
+      "returns-agent"
+    ],
+    "concepts": [
+      "Evaluation & Learning Loops"
+    ]
+  },
+  {
+    "id": "Q-D6-0016",
+    "domain": 6,
+    "task_statement": "6.1",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D6-006",
+      "TH-D6-007"
+    ],
+    "case_study_id": null,
+    "stem": "A nightly data-pipeline agent reconciles warehouse tables. Its end-state check passes on every task, yet trajectory logs show that in about 40% of runs the agent issued an identical schema query with identical arguments nine to twelve times before moving on. What is the most appropriate conclusion and response?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "The outcome metric is invalid and should be discarded because it did not detect any problem"
+      },
+      {
+        "key": "B",
+        "text": "The agent is robust, since all runs ended in the correct state and the repeats are harmless"
+      },
+      {
+        "key": "C",
+        "text": "Increase k in pass@k so that looping runs are averaged out of the reported score"
+      },
+      {
+        "key": "D",
+        "text": "The runs succeed but waste calls and time; add step-count, cost, and latency metrics with a step limit, and investigate why the agent loops"
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "Outcome success and process quality are separate. Trajectory review exposes loops and redundant calls that a final-state check cannot see, and these waste tokens and time and may become failures under a budget. Reporting efficiency alongside success and enforcing step limits makes the looping measurable and fixable.",
+      "why_incorrect": {
+        "A": "The end-state check is doing its job of measuring success; it simply does not measure efficiency, so it should be complemented rather than discarded.",
+        "B": "Passing outcomes do not make wasteful loops harmless; they inflate cost and latency and could breach a step or time budget.",
+        "C": "pass@k concerns success across attempts; averaging more attempts neither reveals nor removes the looping behavior."
+      },
+      "rule_of_thumb": "A passing outcome can hide a wasteful process; pair success with step, cost, and latency metrics."
+    },
+    "tags": [
+      "trajectory-evaluation",
+      "efficiency",
+      "loops",
+      "data-pipeline"
+    ],
+    "concepts": [
+      "Evaluation & Learning Loops",
+      "Error Recovery"
+    ]
+  },
+  {
+    "id": "Q-D6-0017",
+    "domain": 6,
+    "task_statement": "6.1",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D6-006"
+    ],
+    "case_study_id": null,
+    "stem": "An insurance-claims agent is graded by comparing its tool-call sequence to a single reference path: lookup_policy, verify_identity, approve_payment. After a prompt update, the agent now calls verify_identity before lookup_policy and reaches the identical, correct payment. Its trajectory score drops sharply. How should the team fix the grader?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Add one reference path for every possible ordering of the tools until the new run matches one of them"
+      },
+      {
+        "key": "B",
+        "text": "Grade required milestones, such as identity verified before payment, and allow valid alternative orderings, while still checking the final state"
+      },
+      {
+        "key": "C",
+        "text": "Remove trajectory evaluation and rely only on a judgment of the final message wording"
+      },
+      {
+        "key": "D",
+        "text": "Keep the single reference path but lower the passing threshold until the updated agent clears it"
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "explanation": {
+      "why_correct": "Exact-path matching over-penalizes valid alternatives. Grading the milestones that genuinely matter, such as verification preceding payment, keeps the trajectory check meaningful for diagnosis while tolerating harmless reordering, and the end-state check still confirms success.",
+      "why_incorrect": {
+        "A": "Enumerating every permutation grows combinatorially and still encodes arbitrary ordering preferences rather than the real constraints.",
+        "C": "Dropping trajectory evaluation discards the diagnostic value and a message-wording judgment cannot confirm that identity verification happened.",
+        "D": "Lowering the threshold weakens the check for all runs, so it would also let genuinely bad trajectories pass."
+      },
+      "rule_of_thumb": "Grade required milestones, not one canonical path."
+    },
+    "tags": [
+      "trajectory-evaluation",
+      "reference-path",
+      "claims-processing"
+    ],
+    "concepts": [
+      "Evaluation & Learning Loops",
+      "Planning"
+    ]
+  },
+  {
+    "id": "Q-D6-0018",
+    "domain": 6,
+    "task_statement": "6.1",
+    "type": "single_choice",
+    "difficulty": "hard",
+    "theory_refs": [
+      "TH-D6-005",
+      "TH-D6-004"
+    ],
+    "case_study_id": null,
+    "stem": "A fintech team must choose between two refund agents for a customer-facing chat channel where small refunds execute immediately, with no automated verifier or human review before the result reaches the customer. Each of 50 tasks was run eight times and graded by comparing the ledger to the expected end state. Agent X scored pass@8 = 96% and pass^8 = 30%. Agent Y scored pass@8 = 88% and pass^8 = 62%. Which agent should they prefer, and why?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Agent X, because its higher pass@8 shows it can solve more tasks and failed attempts can be filtered out afterwards"
+      },
+      {
+        "key": "B",
+        "text": "Agent X, because pass@8 is the more conservative measure of how reliable an agent is in production"
+      },
+      {
+        "key": "C",
+        "text": "Agent Y, because its higher pass^8 shows it succeeds consistently across repeated attempts, which matches a channel where every attempt reaches a customer"
+      },
+      {
+        "key": "D",
+        "text": "Neither, because running each task more than once makes the end-state grades unreliable"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "With no verifier to select a winning attempt, every run is exposed to customers, so consistency across attempts matters. Agent Y's pass^8 of 62% against 30% means it succeeds on all eight attempts for far more tasks, even though X can solve more tasks on a best-of-eight basis. The ledger comparison gives a trustworthy outcome grade for each run.",
+      "why_incorrect": {
+        "A": "Filtering failed attempts requires a verifier or retry mechanism, which this channel does not have, so best-of-k capability is not available in production.",
+        "B": "pass@8 is the most generous measure, not the conservative one; it rises with k and ignores failing runs as long as one succeeds.",
+        "D": "Repeated trials are exactly how consistency is measured; independent end-state grades per run remain valid and are what pass^k needs."
+      },
+      "rule_of_thumb": "Without a verifier in the loop, pick the agent with the better pass^k, not the better pass@k."
+    },
+    "tags": [
+      "pass-k",
+      "pass-at-k",
+      "agent-selection",
+      "fintech"
+    ],
+    "concepts": [
+      "Evaluation & Learning Loops",
+      "Agent"
+    ]
+  },
+  {
+    "id": "Q-D6-0019",
+    "domain": 6,
+    "task_statement": "6.1",
+    "type": "single_choice",
+    "difficulty": "hard",
+    "theory_refs": [
+      "TH-D6-004",
+      "TH-D6-009",
+      "TH-D6-015"
+    ],
+    "case_study_id": null,
+    "stem": "A language-model judge reading full run transcripts rates a data-migration agent as successful on 94% of tasks. A deterministic row-count and checksum comparison of the target database shows success on only 71%. In the disagreeing runs the agent's last message claims \"all 12,000 rows migrated and verified,\" although roughly 1,900 rows are missing. What is the best interpretation and action?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Trust the judge because it saw the whole transcript, and use the database comparison only for occasional spot audits"
+      },
+      {
+        "key": "B",
+        "text": "Switch to a larger judge model and a stricter prompt, which makes transcript-based judging sufficient"
+      },
+      {
+        "key": "C",
+        "text": "Treat the database comparison as faulty, since the agent's own statement that it verified the rows is first-hand evidence"
+      },
+      {
+        "key": "D",
+        "text": "Use the database comparison as the primary success metric, treat the agent's self-report as an unverified claim, and review failed trajectories to see whether any verification step actually ran"
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "When a deterministic end-state check exists, it should define success. The judge was swayed by the agent's confident claim, an overstated self-report that a transcript-reading grader tends to accept. Trajectory review of the failing runs shows whether a real verification call occurred, turning the disagreement into a diagnosis.",
+      "why_incorrect": {
+        "A": "Spot audits would leave a 23-point overstatement of success in the headline metric; a judge should not override an executable check.",
+        "B": "A larger judge may still be misled by plausible claims in the transcript, and using any judge where a deterministic check exists is the wrong tool.",
+        "C": "An agent's report of its own verification is a claim to be checked against state; the checksum comparison is the independent evidence."
+      },
+      "rule_of_thumb": "Never accept an agent's self-reported success when the environment can be checked directly."
+    },
+    "tags": [
+      "end-state-verification",
+      "llm-as-judge",
+      "self-report",
+      "data-migration"
+    ],
+    "concepts": [
+      "Evaluation & Learning Loops",
+      "Environment"
+    ]
+  },
+  {
+    "id": "Q-D6-0020",
+    "domain": 6,
+    "task_statement": "6.1",
+    "type": "multi_response",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D6-005"
+    ],
+    "case_study_id": null,
+    "stem": "A team has a code-fix agent graded by hidden unit tests. They will use it in two ways: (1) an overnight batch that generates up to ten candidate patches per bug, keeps any patch that passes the tests, and sends only passing patches to engineers; and (2) a live chat assistant where each reply goes straight to a user. Select TWO statements that correctly guide the choice of reliability metric.",
+    "select_count": 2,
+    "options": [
+      {
+        "key": "A",
+        "text": "For the overnight batch, pass^10 is the right metric because every discarded candidate counts as an incident"
+      },
+      {
+        "key": "B",
+        "text": "For the overnight batch, pass@10 is a suitable metric because a verifier selects a passing candidate and retries are cheap"
+      },
+      {
+        "key": "C",
+        "text": "For the live assistant, pass@10 is the right metric because a larger k always makes behavior look more reliable per interaction"
+      },
+      {
+        "key": "D",
+        "text": "pass@k and pass^k are the same quantity evaluated with different values of k"
+      },
+      {
+        "key": "E",
+        "text": "For the live assistant, pass^k is the more appropriate metric because every attempt reaches a user"
+      }
+    ],
+    "correct": [
+      "B",
+      "E"
+    ],
+    "explanation": {
+      "why_correct": "pass@k fits a setting where a verifier can pick the winner and retries are acceptable, which describes the overnight batch. pass^k fits a setting where every run is customer-facing, which describes the live assistant, because it measures whether the agent behaves well on all repeated attempts.",
+      "why_incorrect": {
+        "A": "Discarded candidates never reach engineers, so they are not incidents; the batch design relies on selection, which is what pass@k models.",
+        "C": "A larger k makes pass@k more generous, but a live user sees a single run, so it overstates dependability.",
+        "D": "They answer different questions: at least one success versus all successes; they are not interchangeable."
+      },
+      "rule_of_thumb": "Match the metric to deployment: pass@k with a verifier and retry, pass^k when every attempt is customer-facing."
+    },
+    "tags": [
+      "pass-k",
+      "pass-at-k",
+      "code-agent",
+      "metric-selection"
+    ],
+    "concepts": [
+      "Evaluation & Learning Loops"
+    ]
+  },
+  {
+    "id": "Q-D6-0021",
+    "domain": 6,
+    "task_statement": "6.1",
+    "type": "multi_response",
+    "difficulty": "hard",
+    "theory_refs": [
+      "TH-D6-006",
+      "TH-D6-004"
+    ],
+    "case_study_id": null,
+    "stem": "An invoice-processing agent matches the annotated goal ledger state on 82% of tasks. Finance asks why a team should add trajectory-level review when an end-state score already exists. Select THREE findings that could be revealed by reviewing trajectories but would NOT be visible from the end-state success rate alone.",
+    "select_count": 3,
+    "options": [
+      {
+        "key": "A",
+        "text": "The share of tasks whose final ledger total matches the annotated goal state"
+      },
+      {
+        "key": "B",
+        "text": "In some runs an intermediate call forwarded another vendor's bank details to a logging tool before the task completed"
+      },
+      {
+        "key": "C",
+        "text": "On roughly 15% of runs the agent passed an amount in the wrong currency unit to the conversion tool and only corrected it after an error response"
+      },
+      {
+        "key": "D",
+        "text": "Which invoice categories have the lowest share of correct final ledger entries"
+      },
+      {
+        "key": "E",
+        "text": "In several runs the agent repeated the same validation call seven times in a row before proceeding to the correct final state"
+      }
+    ],
+    "correct": [
+      "B",
+      "C",
+      "E"
+    ],
+    "explanation": {
+      "why_correct": "Trajectories record intermediate actions, arguments, and repetition. An unsafe intermediate disclosure, a wrong-argument call that was later repaired, and a repeated-call loop can all coexist with a correct final ledger, so the end-state rate never shows them. End-state success remains the measure of whether the goal was achieved.",
+      "why_incorrect": {
+        "A": "The final-ledger match rate is exactly what the end-state score reports, so it needs no trajectory review.",
+        "D": "Per-category success is a breakdown of end-state results and is visible without inspecting any intermediate steps."
+      },
+      "rule_of_thumb": "End-state scores say whether the goal was met; trajectories say how, including unsafe, wrong, or wasteful steps."
+    },
+    "tags": [
+      "trajectory-evaluation",
+      "end-state-verification",
+      "invoice-processing",
+      "diagnosis"
+    ],
+    "concepts": [
+      "Evaluation & Learning Loops",
+      "Tools & Tool Discovery"
+    ]
+  },
+  {
+    "id": "Q-D6-0022",
+    "domain": 6,
+    "task_statement": "6.1",
+    "type": "ordering",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D6-004",
+      "TH-D6-005",
+      "TH-D6-008"
+    ],
+    "case_study_id": null,
+    "stem": "A logistics team is building an evaluation workflow for an inventory-reconciliation agent. Arrange the following steps in the correct sequence, from first to last.",
+    "select_count": 5,
+    "options": [
+      {
+        "key": "A",
+        "text": "Grade each trial's resulting inventory state and compute per-task success and pass^k"
+      },
+      {
+        "key": "B",
+        "text": "Add the diagnosed failures to the suite as permanent regression cases and rerun the suite after the next agent change"
+      },
+      {
+        "key": "C",
+        "text": "Define, for each task, a verifiable end-state predicate over the inventory tables"
+      },
+      {
+        "key": "D",
+        "text": "Inspect the trajectories of failed trials to classify causes such as wrong tool, bad arguments, or looping"
+      },
+      {
+        "key": "E",
+        "text": "Run every task for several independent trials with the same agent configuration"
+      }
+    ],
+    "correct": [
+      "C",
+      "E",
+      "A",
+      "D",
+      "B"
+    ],
+    "explanation": {
+      "why_correct": "Success must be defined as a checkable end-state predicate before anything can be graded. Because the agent is stochastic, each task is then run for several independent trials. The end states are graded to give per-task success and pass^k. Failed trials are inspected at the trajectory level to understand why they failed, and the diagnosed failures finally become regression cases that are rerun after every change.",
+      "why_incorrect": {},
+      "rule_of_thumb": "Define the check, repeat the trials, grade outcomes, diagnose trajectories, then lock failures in as regressions."
+    },
+    "tags": [
+      "evaluation-workflow",
+      "regression-suite",
+      "pass-k",
+      "logistics"
+    ],
+    "concepts": [
+      "Evaluation & Learning Loops"
+    ]
+  },
+  {
+    "id": "Q-D6-0023",
+    "domain": 6,
+    "task_statement": "6.1",
+    "type": "multi_response",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D6-006",
+      "TH-D6-005"
+    ],
+    "case_study_id": null,
+    "stem": "A research-assistant agent completes fewer than 5% of a hard multi-hop task set end to end, so two prompt versions both score close to zero and the team cannot tell whether the newer prompt helps. Select TWO changes to the evaluation that would give a more informative comparison.",
+    "select_count": 2,
+    "options": [
+      {
+        "key": "A",
+        "text": "Grade each run by exact match against one reference trajectory and report the match percentage"
+      },
+      {
+        "key": "B",
+        "text": "Remove the hardest tasks so that overall success rises above 50%"
+      },
+      {
+        "key": "C",
+        "text": "Report a progress rate that gives partial credit for each required subgoal reached"
+      },
+      {
+        "key": "D",
+        "text": "Run each task several times per prompt version and compare per-task success rates with their run-to-run spread"
+      },
+      {
+        "key": "E",
+        "text": "Increase k in pass@k until almost every task passes under both prompts, then compare those scores"
+      }
+    ],
+    "correct": [
+      "C",
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "Progress-style metrics credit partial advancement toward subgoals, so improvements are visible even when full success is rare. Because behavior is stochastic, repeated trials per task show whether a difference is real or just run-to-run noise.",
+      "why_incorrect": {
+        "A": "A single reference trajectory penalizes valid alternative paths and does not give partial credit for achieved subgoals.",
+        "B": "Dropping hard tasks changes what is being measured and hides the cases the team actually cares about.",
+        "E": "Pushing k up makes pass@k saturate for both prompts, which erases the differences that need to be measured and says nothing about consistency."
+      },
+      "rule_of_thumb": "When full success is rare, measure milestones, and repeat trials to separate signal from noise."
+    },
+    "tags": [
+      "progress-rate",
+      "repeated-trials",
+      "research-assistant",
+      "partial-credit"
+    ],
+    "concepts": [
+      "Evaluation & Learning Loops",
+      "Planning"
+    ]
+  },
+  {
+    "id": "Q-D6-0024",
+    "domain": 6,
+    "task_statement": "6.1",
+    "type": "matching",
+    "difficulty": "easy",
+    "theory_refs": [
+      "TH-D6-004",
+      "TH-D6-005",
+      "TH-D6-006"
+    ],
+    "case_study_id": null,
+    "stem": "A team is reviewing a customer-service agent. Match each question the team wants to answer with the evaluation measure that answers it best.",
+    "select_count": 4,
+    "matching": {
+      "left": [
+        {
+          "key": "L1",
+          "text": "Did the refund actually appear in the ledger with the correct amount after the run?"
+        },
+        {
+          "key": "L2",
+          "text": "Across ten repeated runs of the same ticket, does the agent succeed every single time?"
+        },
+        {
+          "key": "L3",
+          "text": "At which step did the agent pick the wrong tool or pass bad arguments, and where did it start looping?"
+        },
+        {
+          "key": "L4",
+          "text": "If five candidate answers are sampled and a test suite picks the winner, can at least one candidate pass?"
+        }
+      ],
+      "right": [
+        {
+          "key": "R1",
+          "text": "pass^k over repeated trials"
+        },
+        {
+          "key": "R2",
+          "text": "Trajectory and step-level evaluation"
+        },
+        {
+          "key": "R3",
+          "text": "pass@k over sampled attempts"
+        },
+        {
+          "key": "R4",
+          "text": "End-state outcome verification"
+        },
+        {
+          "key": "R5",
+          "text": "Average output length per answer"
+        }
+      ]
+    },
+    "correct_pairs": {
+      "L1": "R4",
+      "L2": "R1",
+      "L3": "R2",
+      "L4": "R3"
+    },
+    "explanation": {
+      "why_correct": "Checking the ledger is an end-state outcome verification of whether the goal was achieved. Succeeding on every one of repeated runs is pass^k, the consistency metric. Locating the wrong tool, bad arguments, or a loop requires trajectory and step-level evaluation. Asking whether at least one sampled candidate passes a selecting verifier is pass@k. Average output length measures none of these questions.",
+      "why_incorrect": {},
+      "rule_of_thumb": "Outcome checks tell you whether, pass@k and pass^k tell you how reliably, and trajectories tell you why."
+    },
+    "tags": [
+      "metric-matching",
+      "pass-k",
+      "trajectory-evaluation",
+      "end-state-verification"
+    ],
+    "concepts": [
+      "Evaluation & Learning Loops"
+    ]
+  }
+]

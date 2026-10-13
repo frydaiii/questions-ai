@@ -3,49 +3,76 @@
     "id": "Q-D2-0081",
     "domain": 2,
     "task_statement": "2.4",
-    "type": "single_choice",
-    "difficulty": "medium",
+    "type": "matching",
+    "difficulty": "easy",
     "theory_refs": [
-      "TH-D2-016"
+      "TH-D2-016",
+      "TH-D2-021"
     ],
     "case_study_id": null,
-    "stem": "What is the underlying goal that balances the risks of overconfidence and excessive hedging?",
-    "select_count": 1,
-    "options": [
-      {
-        "key": "A",
-        "text": "Always defaulting to maximum confidence in every single response"
-      },
-      {
-        "key": "B",
-        "text": "Calibration -- matching expressed confidence to the actual strength of the underlying evidence, adjusted for task stakes"
-      },
-      {
-        "key": "C",
-        "text": "Always defaulting to maximum hedging in every single response"
-      },
-      {
-        "key": "D",
-        "text": "Flipping a coin to decide which extreme to use for each response"
-      }
-    ],
-    "correct": [
-      "B"
-    ],
+    "stem": "Match each way of expressing (or withholding) confidence on the left to its correct description on the right.",
+    "select_count": 4,
+    "matching": {
+      "left": [
+        {
+          "key": "L1",
+          "text": "Overconfidence"
+        },
+        {
+          "key": "L2",
+          "text": "Excessive hedging"
+        },
+        {
+          "key": "L3",
+          "text": "Calibration"
+        },
+        {
+          "key": "L4",
+          "text": "Selective abstention"
+        }
+      ],
+      "right": [
+        {
+          "key": "R1",
+          "text": "Qualifying every statement so heavily that the user cannot make a decision"
+        },
+        {
+          "key": "R2",
+          "text": "Declining to answer, or escalating, when measured uncertainty is above a threshold"
+        },
+        {
+          "key": "R3",
+          "text": "Presenting an uncertain or wrong conclusion as definitely correct"
+        },
+        {
+          "key": "R4",
+          "text": "Matching expressed confidence to the strength of the evidence and the stakes of the task"
+        },
+        {
+          "key": "R5",
+          "text": "Fixing only the final output text while leaving the flawed reasoning step in place"
+        }
+      ]
+    },
+    "correct_pairs": {
+      "L1": "R3",
+      "L2": "R1",
+      "L3": "R4",
+      "L4": "R2"
+    },
     "explanation": {
-      "why_correct": "Calibration -- aligning expressed confidence with the actual evidentiary basis and the task's stakes -- is the principle that avoids both overconfidence and excessive hedging as fixed, context-independent defaults.",
-      "why_incorrect": {
-        "C": "Always defaulting to maximum hedging would produce excessive hedging even when evidence is actually strong, the other failure mode being balanced against.",
-        "D": "Randomly choosing between extremes has no relationship to the actual evidence or stakes, which is precisely what calibration is meant to track.",
-        "A": "Always defaulting to maximum confidence would produce overconfidence whenever the actual evidence is weak, one of the two failure modes being balanced against."
-      },
-      "rule_of_thumb": "Calibration is the balancing principle: match expressed confidence to actual evidence strength and task stakes, not a fixed extreme."
+      "why_correct": "Overconfidence presents an unreliable conclusion as certain; excessive hedging buries the answer under qualifiers until it is unhelpful; calibration is the balancing goal of matching expressed confidence to evidence strength and stakes; selective abstention is the deliberate decision to decline or escalate when uncertainty exceeds a threshold. The remaining right-hand item describes patching the output instead of backtracking, which is a different topic.",
+      "why_incorrect": {},
+      "rule_of_thumb": "Overconfidence and hedging are the two failure modes, calibration is the goal between them, and abstention is the deliberate fallback when evidence is too weak."
     },
     "tags": [
-      "calibration"
+      "calibration",
+      "abstention",
+      "overconfidence"
     ],
     "concepts": [
-      "Error Recovery"
+      "Error Recovery",
+      "Human-in-the-Loop (HITL)"
     ]
   },
   {
@@ -56,7 +83,8 @@
     "difficulty": "hard",
     "theory_refs": [
       "TH-D2-014",
-      "TH-D2-016"
+      "TH-D2-016",
+      "TH-D2-021"
     ],
     "case_study_id": null,
     "stem": "An agent faces an ambiguous instruction AND the available evidence for any given interpretation is weak. Which combination of responses best addresses both issues together?",
@@ -158,7 +186,8 @@
     "type": "single_choice",
     "difficulty": "easy",
     "theory_refs": [
-      "TH-D2-013"
+      "TH-D2-013",
+      "TH-D2-019"
     ],
     "case_study_id": null,
     "stem": "Which practice best helps distinguish cases warranting a confident answer from cases warranting hedging or clarification?",

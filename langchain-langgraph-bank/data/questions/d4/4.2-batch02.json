@@ -107,7 +107,8 @@
     "type": "single_choice",
     "difficulty": "medium",
     "theory_refs": [
-      "TH-D4-007"
+      "TH-D4-007",
+      "TH-D4-017"
     ],
     "case_study_id": null,
     "stem": "A stored procedure for handling a certain task type consistently leads to worse outcomes than a newer approach discovered more recently. What should happen to the stored procedural memory?",

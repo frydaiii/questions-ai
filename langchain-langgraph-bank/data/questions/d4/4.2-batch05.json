@@ -105,49 +105,57 @@
     "id": "Q-D4-0043",
     "domain": 4,
     "task_statement": "4.2",
-    "type": "single_choice",
-    "difficulty": "medium",
+    "type": "multi_response",
+    "difficulty": "easy",
     "theory_refs": [
-      "TH-D4-008"
+      "TH-D4-008",
+      "TH-D4-017"
     ],
     "case_study_id": null,
-    "stem": "Which design practice best supports giving an agent targeted access to the specific TYPE of memory it actually needs for a given reasoning step?",
-    "select_count": 1,
+    "stem": "Which TWO design practices help an agent get targeted access to the type of memory a given reasoning step actually needs? (Select TWO)",
+    "select_count": 2,
     "options": [
       {
         "key": "A",
-        "text": "Deleting all memory types except episodic memory"
+        "text": "Tag or organize stored memories as episodic, semantic, or procedural so retrieval can target the right kind"
       },
       {
         "key": "B",
-        "text": "Storing all memories with no type information whatsoever"
+        "text": "Strip type information so every memory looks identical to the retriever"
       },
       {
         "key": "C",
-        "text": "Organizing or tagging stored memories by type (episodic, semantic, procedural) so retrieval can be targeted to the actual need"
+        "text": "Assign type labels at random so retrieval is unbiased"
       },
       {
         "key": "D",
-        "text": "Randomly assigning a memory type label with no relationship to actual content"
+        "text": "Keep generalized, verified procedures separate from the log of specific past events"
+      },
+      {
+        "key": "E",
+        "text": "Delete every memory type except episodic memory"
       }
     ],
     "correct": [
-      "C"
+      "A",
+      "D"
     ],
     "explanation": {
-      "why_correct": "Organizing or tagging memories by type allows retrieval to be targeted specifically to the kind of memory actually needed for a given reasoning step, reducing the risk of retrieval mismatches.",
+      "why_correct": "Organizing memories by type, and keeping verified how-to procedures apart from the record of specific events, lets retrieval match the kind of memory a step needs. A step asking for a method should not have to search through event logs, and vice versa.",
       "why_incorrect": {
-        "B": "Storing with no type information makes it harder to target retrieval to the specific need, increasing the risk of mismatches.",
-        "D": "Randomly assigned labels with no relationship to actual content would be worse than no labels at all, since they'd actively mislead retrieval.",
-        "A": "Eliminating semantic and procedural memory would remove valuable capabilities (general facts, reusable methods) that episodic memory alone cannot provide."
+        "B": "Removing type information makes targeted retrieval harder and invites mismatches between the need and what is returned.",
+        "C": "Random labels would actively mislead retrieval, which is worse than having no labels.",
+        "E": "Dropping semantic and procedural memory removes general facts and reusable methods that episodic records cannot supply."
       },
-      "rule_of_thumb": "Tagging or organizing memories by type supports targeted retrieval matched to the actual current need."
+      "rule_of_thumb": "Separate or tag memories by type so a step that needs a fact, a precedent, or a method retrieves from the matching store."
     },
     "tags": [
-      "memory-type-organization"
+      "memory-type-organization",
+      "retrieval-targeting"
     ],
     "concepts": [
-      "Memory"
+      "Memory",
+      "Context Engineering"
     ]
   }
 ]

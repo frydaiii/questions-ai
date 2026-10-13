@@ -1,0 +1,56 @@
+[
+  {
+    "id": "Q-D2-0088",
+    "domain": 2,
+    "task_statement": "2.2",
+    "type": "single_choice",
+    "difficulty": "hard",
+    "theory_refs": [
+      "TH-D2-007",
+      "TH-D2-018"
+    ],
+    "case_study_id": "CS-02",
+    "stem": "Harborline's orchestrator must plan each clearance job. The stage order is usually the same, but an ambiguous item description or a sanctions hit found midway can change which later steps are needed. Which planning approach best fits this task structure?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Write the entire sequence of tool calls once with placeholders for unseen results, and have workers run it without the model re-reading any observation"
+      },
+      {
+        "key": "B",
+        "text": "Drop explicit planning so that each worker independently decides its next action without any shared plan from the orchestrator"
+      },
+      {
+        "key": "C",
+        "text": "Generate the stage plan up front for coherence, but include a re-planning step that runs when a worker result contradicts the plan's assumptions"
+      },
+      {
+        "key": "D",
+        "text": "Explore a tree of alternative stage orderings for every shipment and execute whichever branch scores highest"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "The stages are mostly stable, so an upfront plan gives a globally coherent structure and avoids re-deriving the pipeline for every shipment. Because a sanctions hit or an ambiguous item can invalidate later steps, the plan needs a revision mechanism that triggers on contradicting observations. This is the plan-and-execute pattern with re-planning, which keeps coherence while preserving adaptability where the task is genuinely uncertain.",
+      "why_incorrect": {
+        "A": "A fully decoupled plan that never reads observations cannot react to a sanctions hit or an ambiguous classification; it saves tokens only when the needed calls are predictable, which is not guaranteed here.",
+        "B": "Without a shared plan the workers lose the task structure and the orchestrator cannot track progress or know when the declaration is ready; the stages are separable enough to plan.",
+        "D": "Tree-style exploration of orderings is expensive and suited to tasks with real early-step ambiguity; here the order is mostly fixed, so branching adds cost without improving outcomes."
+      },
+      "rule_of_thumb": "Plan the stable structure up front, and add a re-plan trigger for the observations that can break it."
+    },
+    "tags": [
+      "planning",
+      "plan-and-execute",
+      "re-planning",
+      "orchestrator"
+    ],
+    "concepts": [
+      "Planning",
+      "Orchestration"
+    ]
+  }
+]

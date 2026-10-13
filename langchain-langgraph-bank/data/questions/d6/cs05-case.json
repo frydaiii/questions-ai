@@ -1,0 +1,56 @@
+[
+  {
+    "id": "Q-D6-0075",
+    "domain": 6,
+    "task_statement": "6.3",
+    "type": "single_choice",
+    "difficulty": "hard",
+    "theory_refs": [
+      "TH-D6-001",
+      "TH-D6-003"
+    ],
+    "case_study_id": "CS-05",
+    "stem": "The first version of the incident team asked a human to approve every action. On busy nights engineers approved prompts almost automatically, and a database failover was approved with little supporting context. Which redesign best addresses the problem?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Tier actions by consequence and reversibility: allow read-only and low-impact reversible actions automatically within limits, and require human approval before irreversible, high-impact actions such as a database failover, shown with the proposed action, evidence, and blast radius"
+      },
+      {
+        "key": "B",
+        "text": "Keep approval on every action but auto-approve any prompt that has waited 30 seconds, so incidents are never blocked on a busy engineer"
+      },
+      {
+        "key": "C",
+        "text": "Remove approvals entirely, since engineers cannot keep up and post-incident review will catch any bad actions later"
+      },
+      {
+        "key": "D",
+        "text": "Keep approval on every action and treat each approved action as validated, then drop the automated limits on the remediation tools because a human now reviews everything"
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "explanation": {
+      "why_correct": "Oversight is only valuable where human judgment materially reduces risk, and only if the reviewer has the context to make a real decision. Tiering by consequence and reversibility keeps humans before irreversible actions, shows them what they need, and lowers reviewer load so attention stays meaningful. Automated constraints remain, because human approval is one layer in a defense-in-depth design, not proof of correctness.",
+      "why_incorrect": {
+        "B": "A timeout auto-approval turns approval into a delay rather than a control and removes the human exactly when a busy reviewer is least able to respond.",
+        "C": "Deleting approvals removes the checkpoint for irreversible actions entirely, and after-the-fact review cannot undo a failover that has already happened.",
+        "D": "Approval does not prove an action is correct, and removing automated limits because a reviewer exists exposes the system when that reviewer is fatigued or under-informed."
+      },
+      "rule_of_thumb": "Put humans before high-impact irreversible actions with enough context to judge them, and keep automated constraints in place as well."
+    },
+    "tags": [
+      "hitl",
+      "approval-fatigue",
+      "risk-tiering",
+      "oversight"
+    ],
+    "concepts": [
+      "Human-in-the-Loop (HITL)",
+      "Guardrails"
+    ]
+  }
+]

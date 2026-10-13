@@ -6,7 +6,8 @@
     "type": "single_choice",
     "difficulty": "medium",
     "theory_refs": [
-      "TH-D2-010"
+      "TH-D2-010",
+      "TH-D2-020"
     ],
     "case_study_id": null,
     "stem": "An agent produces a draft response, then reflects and notices the response omits a constraint explicitly stated in the original task. What should it do next, according to the principles of effective reflection?",

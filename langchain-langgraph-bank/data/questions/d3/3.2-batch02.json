@@ -6,7 +6,8 @@
     "type": "single_choice",
     "difficulty": "medium",
     "theory_refs": [
-      "TH-D3-009"
+      "TH-D3-009",
+      "TH-D3-014"
     ],
     "case_study_id": null,
     "stem": "A system exposes all 200 of its defined tools to the agent for every single request, regardless of task category. What is a likely downside of this approach?",

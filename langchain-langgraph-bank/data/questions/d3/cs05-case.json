@@ -1,0 +1,56 @@
+[
+  {
+    "id": "Q-D3-0094",
+    "domain": 3,
+    "task_statement": "3.3",
+    "type": "single_choice",
+    "difficulty": "hard",
+    "theory_refs": [
+      "TH-D3-019",
+      "TH-D3-011"
+    ],
+    "case_study_id": "CS-05",
+    "stem": "During an incident, the remediation agent calls a tool that launches ten additional nodes, and the call times out with no response. The agent cannot tell whether the nodes were created. Which recovery step is safest?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Retry with exponential backoff up to five attempts, since backoff prevents overloading the API and therefore makes the repeat safe"
+      },
+      {
+        "key": "B",
+        "text": "Assume the timeout means nothing happened and repeat the call at once so that the cluster reaches the target capacity sooner"
+      },
+      {
+        "key": "C",
+        "text": "Check the cluster's current node count with a read-only query before repeating anything, and attach a unique request key to the call if the tool supports one"
+      },
+      {
+        "key": "D",
+        "text": "Switch to a second scaling tool with equivalent behavior and run both calls in parallel, so that at least one of them is sure to succeed"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "A timeout on an action tool is ambiguous: the side effect may have happened and only the response was lost. A read-only state check shows whether the nodes already exist, and a unique request key lets a repeated call be recognized as the same request, so a retry converges to the same end state. Retry limits and backoff only bound load, not duplicated side effects.",
+      "why_incorrect": {
+        "A": "Backoff and attempt caps protect the API, but they do nothing to prevent a repeated call from launching another ten nodes if the first one succeeded.",
+        "B": "A missing response does not mean a missing effect. Repeating immediately risks double-provisioning, which is exactly the duplicate capacity seen in the pilot.",
+        "D": "Running two equivalent action tools in parallel multiplies the chance of duplicated side effects rather than reducing it."
+      },
+      "rule_of_thumb": "Before retrying a side-effecting call, ask whether the first attempt may already have succeeded, then use an idempotency key or check state first."
+    },
+    "tags": [
+      "idempotency",
+      "retry",
+      "timeouts",
+      "side-effects"
+    ],
+    "concepts": [
+      "Error Recovery",
+      "Tools & Tool Discovery"
+    ]
+  }
+]

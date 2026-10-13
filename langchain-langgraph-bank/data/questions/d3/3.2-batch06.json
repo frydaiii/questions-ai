@@ -105,48 +105,54 @@
     "id": "Q-D3-0046",
     "domain": 3,
     "task_statement": "3.2",
-    "type": "single_choice",
-    "difficulty": "medium",
+    "type": "multi_response",
+    "difficulty": "easy",
     "theory_refs": [
       "TH-D3-006",
       "TH-D3-007"
     ],
     "case_study_id": null,
-    "stem": "Which statement correctly summarizes the relationship between tool selection and parameter construction as sources of error?",
-    "select_count": 1,
+    "stem": "A debugging log lists five failed tool calls. Which TWO describe tool SELECTION errors rather than parameter construction errors? (Select TWO)",
+    "select_count": 2,
     "options": [
       {
         "key": "A",
-        "text": "Tool selection errors can only happen if parameter construction was also wrong"
+        "text": "The agent called lookup_order to find a customer's phone number, although lookup_customer was the tool built for that"
       },
       {
         "key": "B",
-        "text": "They are the exact same thing with no meaningful distinction"
+        "text": "The agent called get_weather with the date written as 'next Tuesday' when the tool expects YYYY-MM-DD"
       },
       {
         "key": "C",
-        "text": "Parameter construction errors can only happen if tool selection was also wrong"
+        "text": "The agent called send_email but left out the required recipient field"
       },
       {
         "key": "D",
-        "text": "They are distinct, independently occurring error sources -- correct selection does not guarantee correct parameters, and vice versa"
+        "text": "The agent used web_search for a question about internal HR policy, although internal_docs_search covered it"
+      },
+      {
+        "key": "E",
+        "text": "The agent passed a price to a pricing tool as the text '$40' when it expects a plain number"
       }
     ],
     "correct": [
+      "A",
       "D"
     ],
     "explanation": {
-      "why_correct": "Tool selection (choosing the right tool) and parameter construction (correctly formatting the call to that tool) are independent steps -- an agent can get one right while getting the other wrong, and vice versa.",
+      "why_correct": "Selection errors are about WHICH tool was chosen. Using lookup_order to find a customer's phone number, and using public web search for an internal HR policy, both pick a tool that does not match the need even though a better-fitting tool (lookup_customer, internal_docs_search) was available.",
       "why_incorrect": {
-        "B": "They are clearly distinct concerns: WHICH tool to use versus HOW to call it correctly.",
-        "C": "A correctly selected tool can still receive malformed parameters; selection correctness does not imply parameter correctness.",
-        "A": "An incorrectly selected tool could still, coincidentally, receive well-formatted parameters for that (wrong) tool; parameter correctness does not imply selection correctness."
+        "B": "The right tool (get_weather) was chosen, but the date was not in the expected format. That is a parameter construction error.",
+        "C": "send_email was the right tool, but a required field was left out. That is a parameter construction error.",
+        "E": "The right tool was chosen, but the price was passed as text instead of a plain number. That is a parameter type/format error."
       },
-      "rule_of_thumb": "Tool selection and parameter construction are independent potential failure points -- diagnose and fix them separately."
+      "rule_of_thumb": "Wrong tool for the need is a selection error; right tool with bad arguments is a parameter construction error."
     },
     "tags": [
       "tool-selection",
-      "parameter-construction"
+      "parameter-construction",
+      "debugging"
     ],
     "concepts": [
       "Tools & Tool Discovery"

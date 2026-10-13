@@ -54,50 +54,58 @@
     "id": "Q-D3-0030",
     "domain": 3,
     "task_statement": "3.2",
-    "type": "single_choice",
-    "difficulty": "medium",
+    "type": "ordering",
+    "difficulty": "hard",
     "theory_refs": [
-      "TH-D3-007"
+      "TH-D3-007",
+      "TH-D3-017",
+      "TH-D3-018"
     ],
     "case_study_id": null,
-    "stem": "An agent correctly selects a 'get_weather' tool but passes a malformed date string that the tool cannot parse. What type of error is this?",
-    "select_count": 1,
+    "stem": "A claims-processing agent runs on a function-calling runtime that enforces tool argument schemas. Arrange the stages of one tool call in the order they occur, from the model's first decision to the observation it reasons over next.",
+    "select_count": 5,
     "options": [
       {
         "key": "A",
-        "text": "A tool selection error"
+        "text": "The execution layer checks business rules and permissions, such as whether the claim exists and the caller may modify it"
       },
       {
         "key": "B",
-        "text": "A parameter construction error, distinct from tool selection"
+        "text": "The model emits arguments constrained to the tool's declared schema"
       },
       {
         "key": "C",
-        "text": "Proof that the tool itself does not exist"
+        "text": "The result is shaped into a concise, actionable observation and returned to the model"
       },
       {
         "key": "D",
-        "text": "An error that cannot occur in any real system"
+        "text": "The model picks the tool whose description best matches the need"
+      },
+      {
+        "key": "E",
+        "text": "The tool executes against the claims system and produces its output"
       }
     ],
     "correct": [
-      "B"
+      "D",
+      "B",
+      "A",
+      "E",
+      "C"
     ],
     "explanation": {
-      "why_correct": "The correct tool was selected; the problem is specifically that the call's parameter (the date string) was malformed -- this is a distinct parameter construction error, not a selection error.",
-      "why_incorrect": {
-        "A": "Tool selection was correct in this scenario (the right tool, 'get_weather', was chosen); the issue lies specifically in how the call's parameters were constructed.",
-        "C": "The tool clearly exists and was called; the issue is with the malformed input, not the tool's existence.",
-        "D": "Malformed parameter errors are a common, well-documented real-world failure mode in tool-using systems."
-      },
-      "rule_of_thumb": "Correct tool selection with malformed parameters is a distinct failure mode (parameter construction error) from selecting the wrong tool entirely."
+      "why_correct": "The model first selects the tool whose description matches the need, then emits arguments constrained to that tool's schema, so they are well-formed. Well-formed does not mean correct, so the execution layer next checks business rules and permissions (does the claim exist, may the caller change it) before anything runs. Only then does the tool execute, and its output is finally shaped into a concise, actionable observation for the model. Semantic validation has to come after the schema-valid arguments exist and before execution.",
+      "why_incorrect": {},
+      "rule_of_thumb": "Select, emit schema-valid arguments, validate meaning and permission, execute, then return a compact observation."
     },
     "tags": [
-      "parameter-construction",
-      "tool-call-errors"
+      "function-calling",
+      "schema-validation",
+      "tool-call-pipeline"
     ],
     "concepts": [
-      "Tools & Tool Discovery"
+      "Tools & Tool Discovery",
+      "Guardrails"
     ]
   },
   {

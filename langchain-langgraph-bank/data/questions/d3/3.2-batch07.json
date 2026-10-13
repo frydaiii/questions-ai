@@ -55,7 +55,9 @@
     "type": "single_choice",
     "difficulty": "medium",
     "theory_refs": [
-      "TH-D3-007"
+      "TH-D3-007",
+      "TH-D3-017",
+      "TH-D3-018"
     ],
     "case_study_id": null,
     "stem": "A tool's documentation specifies that its 'limit' parameter must be an integer between 1 and 100. An agent passes 'limit': 'a lot'. What is the most appropriate system behavior?",
@@ -208,46 +210,52 @@
     "id": "Q-D3-0051",
     "domain": 3,
     "task_statement": "3.2",
-    "type": "single_choice",
-    "difficulty": "medium",
+    "type": "multi_response",
+    "difficulty": "easy",
     "theory_refs": [
       "TH-D3-009"
     ],
     "case_study_id": null,
-    "stem": "A system dynamically determines the user's task category (e.g. 'travel booking') and exposes only the 5 tools relevant to that category, out of 150 total defined tools. What design principle does this reflect?",
-    "select_count": 1,
+    "stem": "A platform has 150 defined tools. When it detects a trip-planning conversation, it exposes only the five travel-related tools. Which TWO benefits does this scoping provide? (Select TWO)",
+    "select_count": 2,
     "options": [
       {
         "key": "A",
-        "text": "Proof that parameter construction errors are now impossible"
+        "text": "Parameter construction errors can no longer occur for the exposed tools"
       },
       {
         "key": "B",
-        "text": "A requirement that every system must always have exactly 150 tools"
+        "text": "There are fewer look-alike options, so an unsuitable tool is less likely to be chosen"
       },
       {
         "key": "C",
-        "text": "Scoping the exposed tool set to what's actually relevant to the current context, balancing coverage against selection accuracy"
+        "text": "The tool list to process on each request is shorter, which reduces reasoning overhead, cost, and latency"
       },
       {
         "key": "D",
-        "text": "A violation of all tool-use best practices"
+        "text": "The agent can never need a tool outside the exposed set during that conversation"
+      },
+      {
+        "key": "E",
+        "text": "The five exposed tools no longer need clear descriptions"
       }
     ],
     "correct": [
+      "B",
       "C"
     ],
     "explanation": {
-      "why_correct": "Dynamically scoping the exposed tools to the detected task category is a direct application of the principle of balancing coverage (having what's needed) against selection accuracy and overhead (not drowning in irrelevant options).",
+      "why_correct": "A smaller, relevant tool set leaves fewer look-alike or overlapping options, so the agent is less likely to choose an unsuitable tool. It also shortens the tool list that has to be processed on each request, reducing reasoning overhead, cost, and latency.",
       "why_incorrect": {
-        "B": "The total tool count (150) is just the size of the overall library; there's no inherent requirement for any system to have exactly that many tools.",
-        "D": "This is actually a recommended best practice (context-based scoping), not a violation of one.",
-        "A": "Tool exposure scoping addresses selection risk, not parameter construction, which remains a separate concern even with a well-scoped tool list."
+        "A": "Scoping addresses selection and overhead. Parameter construction is a separate failure source that still applies to any exposed tool.",
+        "D": "A scoped set can miss a tool a particular conversation unexpectedly needs, so scoping trades some coverage for accuracy and does not remove that risk.",
+        "E": "Clear descriptions matter for any exposed tool, even within a small set, because the agent still reasons from them when selecting."
       },
-      "rule_of_thumb": "Dynamically scoping exposed tools to the current task context is a recommended practice for balancing coverage against selection accuracy."
+      "rule_of_thumb": "Scope exposed tools to the current context to cut selection errors and overhead, while keeping descriptions clear."
     },
     "tags": [
-      "tool-exposure-scoping"
+      "tool-exposure-scoping",
+      "tool-selection"
     ],
     "concepts": [
       "Tools & Tool Discovery",
@@ -261,7 +269,8 @@
     "type": "single_choice",
     "difficulty": "medium",
     "theory_refs": [
-      "TH-D3-007"
+      "TH-D3-007",
+      "TH-D3-017"
     ],
     "case_study_id": null,
     "stem": "Why is 'the call executed without throwing an error' NOT sufficient evidence that a tool call was actually correct or useful?",
@@ -363,7 +372,8 @@
     "difficulty": "medium",
     "theory_refs": [
       "TH-D3-006",
-      "TH-D3-009"
+      "TH-D3-009",
+      "TH-D3-014"
     ],
     "case_study_id": null,
     "stem": "A newly added tool has a description that only says 'does stuff with data.' What problem does this create for tool selection?",

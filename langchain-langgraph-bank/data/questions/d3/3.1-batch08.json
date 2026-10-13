@@ -6,7 +6,8 @@
     "type": "single_choice",
     "difficulty": "medium",
     "theory_refs": [
-      "TH-D3-005"
+      "TH-D3-005",
+      "TH-D3-016"
     ],
     "case_study_id": null,
     "stem": "Which of the following best describes a reasonable default heuristic for deciding whether to use a tool?",
@@ -318,7 +319,8 @@
     "type": "single_choice",
     "difficulty": "medium",
     "theory_refs": [
-      "TH-D3-003"
+      "TH-D3-003",
+      "TH-D3-019"
     ],
     "case_study_id": null,
     "stem": "A notification-sending tool and a database-record-deleting tool are both classified as 'action tools.' Should they necessarily receive identical levels of caution and safeguards?",

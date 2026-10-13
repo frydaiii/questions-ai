@@ -1,0 +1,56 @@
+[
+  {
+    "id": "Q-D2-0087",
+    "domain": 2,
+    "task_statement": "2.1",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D2-005",
+      "TH-D2-001"
+    ],
+    "case_study_id": "CS-01",
+    "stem": "In the warehouse scenario, the agent must reason about a self-contained route constraint but also query a live inventory tool when stock information is missing. Which approach is best?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Use chain-of-thought for the self-contained constraint and interleave action when live evidence is needed"
+      },
+      {
+        "key": "B",
+        "text": "Use only a fixed action sequence"
+      },
+      {
+        "key": "C",
+        "text": "Use only a tool call without reasoning"
+      },
+      {
+        "key": "D",
+        "text": "Use debate indefinitely before any lookup"
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "explanation": {
+      "why_correct": "Use chain-of-thought for the self-contained constraint and interleave action when live evidence is needed This follows the cited research principle and fits the scenario.",
+      "why_incorrect": {
+        "B": "This does not address the central principle: use chain-of-thought for the self-contained constraint and interleave action when live evidence is needed",
+        "C": "This does not address the central principle: use chain-of-thought for the self-contained constraint and interleave action when live evidence is needed",
+        "D": "This does not address the central principle: use chain-of-thought for the self-contained constraint and interleave action when live evidence is needed"
+      },
+      "rule_of_thumb": "Prefer the option that reflects use chain-of-thought for the self-contained constraint and interleave action when live evidence is needed."
+    },
+    "tags": [
+      "case-study",
+      "cot",
+      "react"
+    ],
+    "concepts": [
+      "Reasoning Loop (ReAct)",
+      "Chain of Thought (CoT)",
+      "Tools & Tool Discovery"
+    ]
+  }
+]

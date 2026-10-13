@@ -1,0 +1,55 @@
+[
+  {
+    "id": "Q-D1-0075",
+    "domain": 1,
+    "task_statement": "1.1",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D1-006",
+      "TH-D1-005"
+    ],
+    "case_study_id": "CS-04",
+    "stem": "In the insurer's claims pilot, the team is deciding how much autonomy each stage deserves. Which allocation best reflects sound autonomy choices for the intake stage and the fraud-investigation stage?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Make every stage fully autonomous, letting the model choose its own step order and tools, so the system stays flexible across all claim types"
+      },
+      {
+        "key": "B",
+        "text": "Make every stage a fixed workflow, including the fraud investigation, so that no stage relies on model-chosen next steps at runtime"
+      },
+      {
+        "key": "C",
+        "text": "Run intake as a fixed, testable workflow with developer-authored steps, and reserve a bounded agentic loop, with a scoped action space and a step limit, for the open-ended fraud investigation"
+      },
+      {
+        "key": "D",
+        "text": "Turn intake into an agent that decides the extraction order at runtime, and reduce the fraud investigation to a single prompt with no tool access"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "Intake repeats the same steps on standardized forms, so a developer-authored workflow is more predictable, cheaper, and easier to test and audit. Fraud investigation is open-ended: which provider records to pull and in what order cannot be enumerated in advance, which is where model-decided control flow earns its cost. Even there, autonomy should be bounded by a narrow action space and a hard step limit, since an unbounded agent is unpredictable and costly.",
+      "why_incorrect": {
+        "A": "Maximal autonomy is not a goal in itself. Letting the model reorder a fixed extraction task adds cost and unpredictability without any benefit, and it makes the pipeline harder to audit.",
+        "B": "A fixed flowchart cannot anticipate every fraud pattern, so forcing the investigation into one removes the flexibility that justifies an agent for that stage.",
+        "D": "This inverts the guidance: it spends model autonomy on a task with a small, enumerable solution space, and it strips the genuinely open-ended task of the tools it needs."
+      },
+      "rule_of_thumb": "Use fixed workflows where the solution path is known, and spend bounded agentic autonomy only where the path cannot be known in advance."
+    },
+    "tags": [
+      "autonomy-spectrum",
+      "workflow-vs-agent",
+      "claims-processing"
+    ],
+    "concepts": [
+      "Agent",
+      "Orchestration"
+    ]
+  }
+]

@@ -1,0 +1,266 @@
+[
+  {
+    "id": "Q-D5-0001",
+    "domain": 5,
+    "task_statement": "5.1",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D5-001",
+      "TH-D5-012"
+    ],
+    "case_study_id": null,
+    "stem": "A market-intelligence team must produce a competitor brief covering 40 independent companies. Each company needs its own web research and filings review, and the results are only combined in a final summary. One agent working sequentially takes over an hour. Which design best justifies decomposing the work across multiple agents?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Chain the agents so each one waits for the previous agent's notes before researching its own company"
+      },
+      {
+        "key": "B",
+        "text": "Add a second agent that rereads all 40 companies' notes so both agents hold identical full context"
+      },
+      {
+        "key": "C",
+        "text": "Dispatch the per-company research subtasks to workers in parallel, then join the results in one synthesis step"
+      },
+      {
+        "key": "D",
+        "text": "Assign one agent to each paragraph of the final brief so each drafts its text without seeing the others"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "The 40 company investigations do not depend on each other's outputs, so they can run concurrently, and the only coupling is the final join. This is the breadth-style, parallelizable work where decomposition pays off: wall-clock time is bounded by the slowest branch plus the synthesis step rather than by the sum of all branches.",
+      "why_incorrect": {
+        "A": "Chaining makes independent work artificially sequential, so it keeps the one-hour latency and adds handoff overhead with no specialization benefit.",
+        "B": "Giving two agents identical full context duplicates tokens and effort; decomposition helps when responsibilities differ, not when everything is repeated.",
+        "D": "Drafting paragraphs in isolation splits tightly coupled writing work, so the pieces would be inconsistent and need costly reconciliation."
+      },
+      "rule_of_thumb": "Parallelize breadth, serialize dependencies: split along independent branches and add one join step."
+    },
+    "tags": [
+      "parallelism",
+      "decomposition",
+      "research-agents"
+    ],
+    "concepts": [
+      "Multi-Agent Systems",
+      "Orchestration"
+    ]
+  },
+  {
+    "id": "Q-D5-0002",
+    "domain": 5,
+    "task_statement": "5.1",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D5-009",
+      "TH-D5-001"
+    ],
+    "case_study_id": null,
+    "stem": "A finance-operations team has one agent that reliably converts incoming invoice PDFs into a fixed JSON schema using an OCR tool, in a short, tightly sequential flow. A colleague proposes replacing it with four agents: reader, validator, formatter, and reviewer. What is the strongest argument against the change?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Multi-agent systems cannot call deterministic tools such as OCR engines or schema validators"
+      },
+      {
+        "key": "B",
+        "text": "Splitting the work lowers total token spend because each agent receives a shorter prompt than the original"
+      },
+      {
+        "key": "C",
+        "text": "The four agents would have to run fully in parallel, which no invoice workflow can support"
+      },
+      {
+        "key": "D",
+        "text": "The extra handoffs and repeated context would raise cost and latency without adding capability the single agent lacks"
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "The task is short, deterministic, and tightly coupled, and the single agent already meets the requirement. Adding agents means each one carries its own prompt, re-reads shared artifacts, and adds sequential delegation turns, so total tokens and latency go up while specialization adds nothing the current agent lacks. The single agent is the baseline any multi-agent design must beat.",
+      "why_incorrect": {
+        "A": "Multi-agent systems can use deterministic tools just as single agents do; tool access is not what limits this design.",
+        "B": "Total spend usually rises because every agent repeats instructions and re-reads shared findings, so shorter individual prompts do not offset the overhead.",
+        "C": "The roles could be arranged sequentially, so parallelism is not required; the real problem is that the split buys nothing here."
+      },
+      "rule_of_thumb": "Treat each extra agent as a purchase: it must buy measurable quality or speed that exceeds its added tokens and latency."
+    },
+    "tags": [
+      "cost-overhead",
+      "task-fit",
+      "single-agent-baseline"
+    ],
+    "concepts": [
+      "Multi-Agent Systems"
+    ]
+  },
+  {
+    "id": "Q-D5-0003",
+    "domain": 5,
+    "task_statement": "5.1",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D5-011",
+      "TH-D5-001"
+    ],
+    "case_study_id": null,
+    "stem": "A team says its code reviewer is a three-agent system, but all three are the same model call with the same tools and full repository context, differing only in a persona line reading 'Security', 'Style', or 'Performance'. Which change would most make this a genuine role-specialized design?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Add more persona labels such as 'Principal Engineer' and 'Architect' to the shared prompt"
+      },
+      {
+        "key": "B",
+        "text": "Give each reviewer its own tool set, scoped context, and output contract tied to its success criterion"
+      },
+      {
+        "key": "C",
+        "text": "Run the three calls at a higher sampling temperature so their outputs diverge from one another"
+      },
+      {
+        "key": "D",
+        "text": "Pass each reviewer's full transcript to the others so all three converge on a single shared view"
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "explanation": {
+      "why_correct": "A persona label changes framing, not capability. A genuine role has a distinct tool set, a narrower context, and its own success criterion, for example the security reviewer gets a static analysis scanner and reports findings in a defined structure. That makes its outputs inspectable, attributable, and scoped by least privilege, which is what separates agents from repeated prompts to one model.",
+      "why_incorrect": {
+        "A": "More labels on an identical prompt, tools, and context still produce the same underlying capability and only add noise.",
+        "C": "Temperature changes sampling variability, not roles or responsibilities, so it yields diverse wording rather than specialized review.",
+        "D": "Sharing everything with everyone removes the role boundaries and pushes the agents toward the same conclusions instead of independent perspectives."
+      },
+      "rule_of_thumb": "Create a role only when it has a different tool set, success criterion, or perspective that one generalist would handle poorly."
+    },
+    "tags": [
+      "role-specialization",
+      "agent-boundaries",
+      "code-review"
+    ],
+    "concepts": [
+      "Multi-Agent Systems",
+      "Sub-agents & Handoffs"
+    ]
+  },
+  {
+    "id": "Q-D5-0004",
+    "domain": 5,
+    "task_statement": "5.1",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D5-011",
+      "TH-D5-014"
+    ],
+    "case_study_id": null,
+    "stem": "A pharma literature assistant uses a retrieval agent that gathers papers, a verifier that checks each claim against the retrieved passages, and a synthesizer that writes the final answer. After launch, reviewers find unsupported statements much easier to locate and fix. Which architectural property best explains this?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Each agent re-runs every retrieval call, so the same evidence is fetched three times for redundancy"
+      },
+      {
+        "key": "B",
+        "text": "The verifier's judgments are unnecessary in evaluation because the synthesizer already checks itself"
+      },
+      {
+        "key": "C",
+        "text": "Retrieval, claim checking, and writing are separate roles with defined outputs, so errors can be attributed to one stage"
+      },
+      {
+        "key": "D",
+        "text": "All three agents write to one shared scratchpad, so no stage needs a defined output format"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "Separating retrieval, verification, and synthesis gives each stage a bounded responsibility and an inspectable artifact: the retrieved passages, the verifier's per-claim verdicts, and the final text. An unsupported claim can then be traced to the stage that introduced or failed to catch it. The verifier also checks against evidence the synthesizer did not control, which is stronger than self-review.",
+      "why_incorrect": {
+        "A": "Repeating the same retrieval in every agent wastes tokens and does not make errors easier to attribute.",
+        "B": "A writer reviewing its own output shares its blind spots; the separate verifier is exactly what adds an independent check and it still needs to be evaluated.",
+        "D": "A shared scratchpad with no output format blurs responsibilities and makes it harder, not easier, to see which stage produced a given claim."
+      },
+      "rule_of_thumb": "Explicit roles with defined outputs turn a single opaque answer into stages you can inspect, test, and attribute."
+    },
+    "tags": [
+      "verification",
+      "role-specialization",
+      "attribution"
+    ],
+    "concepts": [
+      "Multi-Agent Systems",
+      "Orchestration"
+    ]
+  },
+  {
+    "id": "Q-D5-0005",
+    "domain": 5,
+    "task_statement": "5.1",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D5-009",
+      "TH-D5-001"
+    ],
+    "case_study_id": null,
+    "stem": "A logistics startup is weighing a five-agent route-planning team against its current single agent, which already meets accuracy targets on most requests. Leadership wants a decision grounded in evidence. Which approach is best?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Run both designs on the same representative tasks and compare quality gains against added tokens, latency, and failure modes"
+      },
+      {
+        "key": "B",
+        "text": "Adopt the five-agent team because published demos show that more agents tend to produce better results"
+      },
+      {
+        "key": "C",
+        "text": "Compare the agents' persona descriptions to decide which design sounds more specialized and therefore stronger"
+      },
+      {
+        "key": "D",
+        "text": "Estimate the cost as five times the single agent's token usage and skip quality measurement to save time"
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "explanation": {
+      "why_correct": "The multi-agent benefit is real only when specialization or parallelism gains exceed communication, token, and failure costs, and that depends on the task. A side-by-side run on representative tasks measures quality, cost, and latency against the single-agent baseline, which is exactly the comparison needed before committing to the extra architecture.",
+      "why_incorrect": {
+        "B": "Demo results for other task types do not transfer automatically; more agents are not a free quality multiplier.",
+        "C": "Persona wording does not measure capability or outcomes, so it cannot show whether the design pays for itself.",
+        "D": "Overhead is not a simple multiple of agent count, and skipping quality measurement ignores whether the extra spend buys anything."
+      },
+      "rule_of_thumb": "Measure quality, cost, and latency against a single-agent baseline before adding agents."
+    },
+    "tags": [
+      "design-tradeoff",
+      "cost-benefit",
+      "baseline-comparison"
+    ],
+    "concepts": [
+      "Multi-Agent Systems",
+      "Evaluation & Learning Loops"
+    ]
+  }
+]

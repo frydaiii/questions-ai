@@ -47,46 +47,48 @@
     "id": "Q-D1-0017",
     "domain": 1,
     "task_statement": "1.1",
-    "type": "ordering",
-    "difficulty": "hard",
+    "type": "single_choice",
+    "difficulty": "medium",
     "theory_refs": [
       "TH-D1-002"
     ],
     "case_study_id": null,
-    "stem": "Order the following system designs from LEAST agentic to MOST agentic, based on how much runtime control-flow decision-making is made by the model itself rather than fixed in advance.",
-    "select_count": 4,
+    "stem": "A bank's operations group is comparing four designs for handling customer dispute emails. Which design gives the model the most runtime control over its own control flow, making it the most agentic?",
+    "select_count": 1,
     "options": [
       {
         "key": "A",
-        "text": "A single prompt-completion call with no further steps"
+        "text": "A single prompt that classifies the email and drafts a reply in one model call"
       },
       {
         "key": "B",
-        "text": "A fixed three-step prompt chain executed in the same order every time"
+        "text": "A fixed chain that extracts details, looks up the account, and drafts a reply, always in that order"
       },
       {
         "key": "C",
-        "text": "A router that selects one of five predefined branches based on classified intent"
+        "text": "A loop in which the model picks among lookup, ledger-query, and escalate tools, repeating until it decides the dispute is resolved"
       },
       {
         "key": "D",
-        "text": "An open-ended agent loop where the model decides the number of steps, which tools to call, and when to stop"
+        "text": "A router that sends each email to one of four pre-written handling scripts based on a classifier label"
       }
     ],
     "correct": [
-      "A",
-      "B",
-      "C",
-      "D"
+      "C"
     ],
     "explanation": {
-      "why_correct": "This ordering reflects increasing runtime decision-making by the model: a single call has none, a fixed chain has none despite multiple steps, a router makes one bounded choice among predefined options, and a fully open-ended agent loop makes unbounded decisions about steps, tools, and stopping -- the clearest progression along the agentic spectrum.",
-      "why_incorrect": {},
-      "rule_of_thumb": "Rank systems on the agentic spectrum by how much of the control flow (step count, branch choice, stopping point) is decided by the model at runtime versus fixed by a developer in advance."
+      "why_correct": "Only the looping design lets the model decide, at runtime, how many steps to take, which tool to call at each step, and when to stop. The single call has no control flow at all, the chain is fixed in advance, and the router makes one bounded choice among predefined branches, so each of those sits further toward the workflow end of the spectrum.",
+      "why_incorrect": {
+        "A": "A single call involves no multi-step decisions; it sits at the least agentic end of the spectrum.",
+        "B": "A fixed chain runs multiple steps, but the order and count are hard-coded, so the model decides nothing about control flow.",
+        "D": "A router lets the model make one bounded selection among predefined scripts, which is limited agency but far short of open-ended step, tool, and stopping decisions."
+      },
+      "rule_of_thumb": "Rank agency by who decides the number of steps, the choice of action, and the stopping point: the more the model decides at runtime, the more agentic the design."
     },
     "tags": [
       "agentic-spectrum",
-      "control-flow"
+      "control-flow",
+      "routing"
     ],
     "concepts": [
       "Agent",
@@ -158,66 +160,49 @@
     "id": "Q-D1-0019",
     "domain": 1,
     "task_statement": "1.1",
-    "type": "matching",
+    "type": "single_choice",
     "difficulty": "medium",
     "theory_refs": [
-      "TH-D1-003"
+      "TH-D1-003",
+      "TH-D1-017"
     ],
     "case_study_id": null,
-    "stem": "Match each component of the minimal agent loop on the left to its function on the right.",
-    "select_count": 4,
-    "matching": {
-      "left": [
-        {
-          "key": "L1",
-          "text": "Reasoning core"
-        },
-        {
-          "key": "L2",
-          "text": "Action space"
-        },
-        {
-          "key": "L3",
-          "text": "Observation"
-        },
-        {
-          "key": "L4",
-          "text": "Termination condition"
-        }
-      ],
-      "right": [
-        {
-          "key": "R1",
-          "text": "Decides what action to take given current context"
-        },
-        {
-          "key": "R2",
-          "text": "Defines the set of operations the agent is permitted to perform"
-        },
-        {
-          "key": "R3",
-          "text": "Feeds the results of an action back into context"
-        },
-        {
-          "key": "R4",
-          "text": "Determines when the agent stops looping and returns a final result"
-        }
-      ]
-    },
-    "correct_pairs": {
-      "L1": "R1",
-      "L2": "R2",
-      "L3": "R3",
-      "L4": "R4"
-    },
+    "stem": "A research agent reads each search result it receives, yet it keeps writing 'Thought: the evidence still looks thin, search again' and issuing another search, dozens of iterations in a row, long after it has gathered ample evidence. Which minimal agent-loop component is missing or ineffective?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "The action space, because the agent has no tool capable of retrieving evidence"
+      },
+      {
+        "key": "B",
+        "text": "The termination condition, because nothing tells the loop to stop and return a final answer once the evidence suffices"
+      },
+      {
+        "key": "C",
+        "text": "The observation step, because search results are never fed back into the context"
+      },
+      {
+        "key": "D",
+        "text": "The reasoning core, because the model is unable to produce a written thought at all"
+      }
+    ],
+    "correct": [
+      "B"
+    ],
     "explanation": {
-      "why_correct": "Each of the four minimal agent-loop components has a distinct, non-overlapping function: the reasoning core makes decisions, the action space bounds what's possible, observation closes the feedback loop, and the termination condition prevents infinite looping.",
-      "why_incorrect": {},
-      "rule_of_thumb": "The four minimal agent-loop parts map cleanly to decide (reasoning core), can-do (action space), perceive (observation), and stop (termination condition)."
+      "why_correct": "The agent can act (it searches), observe (it reads the results), and reason (it writes thoughts), so the gap is the component that ends the loop. Without a final-answer criterion or a step cap, nothing forces the cycle to stop, and the agent keeps cycling through repetitive thought-action pairs even when it already has enough evidence.",
+      "why_incorrect": {
+        "A": "The agent is demonstrably calling a search tool and receiving results, so its action space already includes evidence retrieval.",
+        "C": "The scenario states that the agent reads every result, so observations are being fed back; the problem is not a broken observation channel.",
+        "D": "The agent is producing written thoughts at every iteration, so the reasoning core is functioning; its output just never leads to a stop decision."
+      },
+      "rule_of_thumb": "Reasoning core decides, action space permits, observation feeds back, and the termination condition stops; an agent that works but never ends is missing the last one."
     },
     "tags": [
       "agent-components",
-      "minimal-agent"
+      "termination-condition",
+      "react"
     ],
     "concepts": [
       "Agent"

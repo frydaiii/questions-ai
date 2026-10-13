@@ -106,51 +106,52 @@
     "id": "Q-D1-0038",
     "domain": 1,
     "task_statement": "1.2",
-    "type": "multi_response",
-    "difficulty": "hard",
+    "type": "single_choice",
+    "difficulty": "medium",
     "theory_refs": [
       "TH-D1-010"
     ],
     "case_study_id": null,
-    "stem": "Which of the following actions would typically be classified as side-effecting rather than output-only? (Select 2)",
-    "select_count": 2,
+    "stem": "An HR-screening agent is equipped with four tools. Which tool should be treated as side-effecting, and therefore placed behind extra safeguards such as human approval?",
+    "select_count": 1,
     "options": [
       {
         "key": "A",
-        "text": "Transferring funds between two bank accounts via a connected API"
+        "text": "A tool that drafts a polite rejection email and returns the text to the recruiter for review"
       },
       {
         "key": "B",
-        "text": "Writing a new row into a production database"
+        "text": "A tool that reformats a parsed resume into the company template and shows it on screen"
       },
       {
         "key": "C",
-        "text": "Summarizing a document into three bullet points"
+        "text": "A tool that sends the finalized rejection email straight to the candidate's inbox"
       },
       {
         "key": "D",
-        "text": "Translating a sentence from English to French for display to the user"
+        "text": "A tool that computes a candidate's total years of experience from the parsed resume"
       }
     ],
     "correct": [
-      "A",
-      "B"
+      "C"
     ],
     "explanation": {
-      "why_correct": "Transferring funds and writing to a production database both change state outside the conversation in ways that may be difficult to reverse -- the defining trait of side-effecting actions.",
+      "why_correct": "Sending the email changes the world outside the conversation: once delivered, it cannot be recalled, and undoing it would require a separate corrective action such as a follow-up message. That irreversibility makes it a side-effecting action that deserves a gate, while the other tools only produce or transform content.",
       "why_incorrect": {
-        "C": "Summarizing a document produces output content for the user with no external state change; it is output-only.",
-        "D": "Translating text for display is purely informational output; nothing external is modified as a result."
+        "A": "Drafting returns text to a human for review and changes nothing externally; the risky step is the later send, not the draft.",
+        "B": "Reformatting a resume for on-screen display is output-only content generation with no external state change.",
+        "D": "Computing years of experience is a read-only calculation whose result stays inside the agent loop, so it carries no external side effect."
       },
-      "rule_of_thumb": "If undoing the action would require a separate corrective real-world action (reversing a transfer, deleting a database row), it's side-effecting; if it only produces text/content, it's output-only."
+      "rule_of_thumb": "Gate the tools that change the outside world (send, write, delete, pay), not the ones that merely produce text for someone to review."
     },
     "tags": [
       "action-space",
-      "side-effects"
+      "side-effects",
+      "approval-gate"
     ],
     "concepts": [
       "Agent",
-      "Reasoning Loop (ReAct)"
+      "Guardrails"
     ]
   },
   {
@@ -160,7 +161,8 @@
     "type": "multi_response",
     "difficulty": "medium",
     "theory_refs": [
-      "TH-D1-011"
+      "TH-D1-011",
+      "TH-D1-017"
     ],
     "case_study_id": null,
     "stem": "Which of the following scenarios demonstrate a properly closed feedback loop (as opposed to a broken one)? (Select 2)",

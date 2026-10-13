@@ -1,0 +1,268 @@
+[
+  {
+    "id": "Q-D5-0006",
+    "domain": 5,
+    "task_statement": "5.2",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D5-002",
+      "TH-D5-012"
+    ],
+    "case_study_id": null,
+    "stem": "In a travel-booking system with an orchestrator and flight, hotel, and car-rental workers, a user asks for a three-day conference trip with a hotel within walking distance of the venue and a flight landing before 2 p.m. Which behavior best reflects orchestrator-worker coordination?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "The flight worker decides which other workers to consult, based on its own partial view of the request"
+      },
+      {
+        "key": "B",
+        "text": "Each worker bids for subtasks and the first to respond is awarded them without reference to any plan"
+      },
+      {
+        "key": "C",
+        "text": "The user must approve every message passed between workers before the next subtask can start"
+      },
+      {
+        "key": "D",
+        "text": "The orchestrator splits the request, assigns subtasks from shared task state, and holds the hotel search until the venue is known"
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "The orchestrator owns decomposition, assignment, and completion decisions using global task state. It can dispatch independent subtasks such as flights and car rental concurrently while sequencing the hotel search after the venue lookup, because that subtask depends on an upstream result. Workers stay bounded and return results to it.",
+      "why_incorrect": {
+        "A": "A worker sees only its own slice of the task, so letting it route work gives up the global view that justifies central coordination.",
+        "B": "First-responder bidding ignores dependencies and the plan, which can assign work that cannot yet be done or duplicate effort.",
+        "C": "Requiring user approval of every internal message removes automation and is not how coordination responsibility is normally allocated."
+      },
+      "rule_of_thumb": "The orchestrator assigns work from global state; workers execute bounded subtasks and report back."
+    },
+    "tags": [
+      "orchestrator-worker",
+      "assignment",
+      "dependencies"
+    ],
+    "concepts": [
+      "Multi-Agent Systems",
+      "Orchestration"
+    ]
+  },
+  {
+    "id": "Q-D5-0007",
+    "domain": 5,
+    "task_statement": "5.2",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D5-002",
+      "TH-D5-004"
+    ],
+    "case_study_id": null,
+    "stem": "In a data-analytics team, an orchestrator passes a request to a SQL worker and then hands its output to a chart worker. Integration keeps failing because the SQL worker sometimes returns prose, sometimes a query with commentary, and sometimes a file path. Which fix best addresses the root cause?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Let the chart worker read the SQL worker's full reasoning transcript and infer the result itself"
+      },
+      {
+        "key": "B",
+        "text": "Enlarge the SQL worker's context window so that its replies become more consistent in form"
+      },
+      {
+        "key": "C",
+        "text": "Define a typed output contract with the query, a status, and row-count evidence, and validate it before handoff"
+      },
+      {
+        "key": "D",
+        "text": "Require the SQL worker to share all of its private state with every other worker in the team"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "The failure comes from undefined expectations at the boundary between workers. An explicit input and output contract states what each worker must return, makes responsibilities and integration expectations inspectable, and lets the orchestrator validate the result before passing it on or rejecting it for retry.",
+      "why_incorrect": {
+        "A": "Making a downstream worker guess from a transcript is brittle and enlarges its context, while the missing contract remains unresolved.",
+        "B": "A larger context window does not specify the required format, so replies can remain inconsistent.",
+        "D": "Sharing all private state couples workers, bloats context, and still does not define what a valid result looks like."
+      },
+      "rule_of_thumb": "Specify what each worker takes in and returns, and validate it at the boundary."
+    },
+    "tags": [
+      "contracts",
+      "integration",
+      "observability"
+    ],
+    "concepts": [
+      "Multi-Agent Systems",
+      "Orchestration"
+    ]
+  },
+  {
+    "id": "Q-D5-0008",
+    "domain": 5,
+    "task_statement": "5.2",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D5-002",
+      "TH-D5-020"
+    ],
+    "case_study_id": null,
+    "stem": "An orchestrator in a DevOps remediation system keeps reassigning the same failing 'apply patch' subtask to the patcher worker, which returns the identical error each time. Overnight logs show 40 attempts and rising cloud spend. Which control is most important to add?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Add three more patcher workers with different personas and send the same subtask to all of them every cycle"
+      },
+      {
+        "key": "B",
+        "text": "Raise the context limit so the orchestrator can keep the full history of failed attempts in view"
+      },
+      {
+        "key": "C",
+        "text": "Stop collecting worker results so the orchestrator no longer sees the repeated error message"
+      },
+      {
+        "key": "D",
+        "text": "Cap attempts per subtask outside the model, and on exhaustion re-plan or escalate to a human with the failure trace"
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "Retries need an explicit coordination policy. An externally enforced attempt budget stops the loop regardless of what the model decides, and a defined escalation or stop condition (re-planning, a different approach, or human review with the failure trace) gives the system a way to make progress or fail gracefully instead of burning spend.",
+      "why_incorrect": {
+        "A": "More workers repeating the same failing subtask multiply cost and attempts without changing the cause of the failure.",
+        "B": "A longer view of past failures does not itself force a stop; the orchestrator can still choose to retry indefinitely.",
+        "C": "Hiding results removes the signal needed to detect failure and hands the orchestrator no basis for completion decisions."
+      },
+      "rule_of_thumb": "Every retry loop needs an externally enforced bound and a defined behavior when the bound is hit."
+    },
+    "tags": [
+      "retry-budget",
+      "failure-containment",
+      "escalation"
+    ],
+    "concepts": [
+      "Multi-Agent Systems",
+      "Orchestration",
+      "Error Recovery"
+    ]
+  },
+  {
+    "id": "Q-D5-0009",
+    "domain": 5,
+    "task_statement": "5.2",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D5-002",
+      "TH-D5-013"
+    ],
+    "case_study_id": null,
+    "stem": "A claims-processing platform routes thousands of claims per hour through one orchestrator that decomposes, assigns, and collects every result. Workers sit idle half the time while the orchestrator's queue grows, and when it restarts, in-flight claims stall. Which diagnosis and fix fit best?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "The central orchestrator is a bottleneck and single point of failure; partition claims across sub-orchestrators and persist task state"
+      },
+      {
+        "key": "B",
+        "text": "Workers are returning results too quickly, so inserting a wait before each collection would balance the load"
+      },
+      {
+        "key": "C",
+        "text": "Workers have become identical to one another, so giving each a new persona would restore throughput"
+      },
+      {
+        "key": "D",
+        "text": "Global task state is the root problem, so removing it and letting workers self-assign guarantees resilience"
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "explanation": {
+      "why_correct": "Centralized coordination gives inspectability but concentrates routing and collection in one component. Idle workers with a growing queue indicate the orchestrator is the throughput limit, and stalled claims on restart show it is a single point of failure. Delegating to sub-orchestrators limits each one's span of control, and persisting task state lets work resume after a failure.",
+      "why_incorrect": {
+        "B": "Fast worker responses are not the problem; the queue builds at the orchestrator, and adding waits would lower throughput further.",
+        "C": "Worker identity is not the cause, and personas do not change the orchestrator's capacity or recovery behavior.",
+        "D": "Dropping shared state and self-assignment trades away visibility and coordination, and decentralization does not guarantee resilience."
+      },
+      "rule_of_thumb": "A single coordinator is easy to inspect but limits scale; add levels or partitions when it saturates."
+    },
+    "tags": [
+      "bottleneck",
+      "single-point-of-failure",
+      "scalability"
+    ],
+    "concepts": [
+      "Multi-Agent Systems",
+      "Orchestration"
+    ]
+  },
+  {
+    "id": "Q-D5-0010",
+    "domain": 5,
+    "task_statement": "5.2",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D5-002",
+      "TH-D5-014"
+    ],
+    "case_study_id": null,
+    "stem": "A code-migration orchestrator delegates 'upgrade the payments module to the new API' to a worker, which replies 'Done, high confidence.' The orchestrator marks the subtask complete, and the build later fails. What should the orchestrator have required before marking it complete?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "A longer confidence statement with the worker's rationale for why the change is probably correct"
+      },
+      {
+        "key": "B",
+        "text": "The worker's complete hidden reasoning transcript, reviewed line by line by the orchestrator"
+      },
+      {
+        "key": "C",
+        "text": "The changed artifact, a status, and checkable evidence such as build and test results it can verify"
+      },
+      {
+        "key": "D",
+        "text": "A reply proposing the next follow-up task the worker thinks the team should take on"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "Completion is the orchestrator's decision, and it needs something it can validate. The diff or artifact shows what changed, the status states the outcome, and evidence such as a passing build and tests lets the orchestrator check the claim independently of the worker's self-assessment. A confident adjective does not meet that standard.",
+      "why_incorrect": {
+        "A": "A more elaborate confidence statement is still self-report with nothing to verify, which is how the failed build got through.",
+        "B": "Reading a full reasoning transcript is costly and not reliable proof; checkable outputs are a better basis for validation.",
+        "D": "Proposing new work does not show the assigned subtask was completed."
+      },
+      "rule_of_thumb": "Accept 'done' only with an artifact, a status, and evidence the orchestrator can independently check."
+    },
+    "tags": [
+      "completion",
+      "evidence",
+      "validation"
+    ],
+    "concepts": [
+      "Multi-Agent Systems",
+      "Orchestration"
+    ]
+  }
+]

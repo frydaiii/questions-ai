@@ -3,51 +3,58 @@
     "id": "Q-D3-0004",
     "domain": 3,
     "task_statement": "3.1",
-    "type": "single_choice",
-    "difficulty": "medium",
+    "type": "multi_response",
+    "difficulty": "easy",
     "theory_refs": [
-      "TH-D3-004"
+      "TH-D3-004",
+      "TH-D3-015"
     ],
     "case_study_id": null,
-    "stem": "What specific benefit does grounding a claim in a tool-retrieved source provide, even if that source could itself turn out to be wrong?",
-    "select_count": 1,
+    "stem": "A research assistant agent attaches the retrieved web page behind each factual statement it makes. Which TWO benefits does this kind of grounding provide? (Select TWO)",
+    "select_count": 2,
     "options": [
       {
         "key": "A",
-        "text": "It gives the claim a traceable origin, making it possible to distinguish a wrong source from a model misrepresentation if an error is found"
+        "text": "It guarantees that every cited statement is correct"
       },
       {
         "key": "B",
-        "text": "It makes the claim mathematically guaranteed to be correct"
+        "text": "If a statement later proves wrong, reviewers can tell whether the cited page was wrong or the model misreported it"
       },
       {
         "key": "C",
-        "text": "It eliminates the need for the source to ever be checked again"
+        "text": "It removes any need to re-check the cited sources as they age"
       },
       {
         "key": "D",
-        "text": "It has no benefit at all if the source could be wrong"
+        "text": "It prevents hallucination everywhere in the answer, including in uncited statements"
+      },
+      {
+        "key": "E",
+        "text": "Readers can verify a claim directly against its source instead of taking the model's word for it"
       }
     ],
     "correct": [
-      "A"
+      "B",
+      "E"
     ],
     "explanation": {
-      "why_correct": "Grounding provides traceability: if an error surfaces, it becomes possible to determine whether the retrieved source itself was wrong or whether the model misrepresented a correct source, which is more diagnosable than an ungrounded claim with no origin at all.",
+      "why_correct": "Attaching the retrieved source gives each claim a traceable origin. If an error surfaces, reviewers can check whether the page itself was wrong or whether the model misreported a correct page, and readers can verify the claim against the evidence instead of trusting the model's word.",
       "why_incorrect": {
-        "B": "Grounding does not guarantee correctness; the source itself could be outdated or wrong, so grounding provides traceability, not an absolute correctness guarantee.",
-        "C": "Grounding a claim does not mean the source is permanently beyond further scrutiny; sources can still be re-checked, especially if later found questionable.",
-        "D": "Grounding provides real value (traceability and auditability) even when the source could be wrong, which is a distinct benefit from pure correctness guarantees."
+        "A": "Grounding does not guarantee correctness, because the retrieved source can itself be outdated, wrong, or misread. It adds traceability, not certainty.",
+        "C": "Sources can still go stale or be found questionable, so they may need re-checking. A citation does not retire that need.",
+        "D": "Grounding applies to the claims it is attached to. It does not stop the model from hallucinating in statements that carry no source."
       },
-      "rule_of_thumb": "Grounding's value is traceability and auditability, not an absolute guarantee that the retrieved information is correct."
+      "rule_of_thumb": "Grounding buys traceability and checkability, not a guarantee of correctness."
     },
     "tags": [
       "grounding",
-      "traceability"
+      "traceability",
+      "attribution"
     ],
     "concepts": [
-      "Environment",
-      "Tools & Tool Discovery"
+      "Tools & Tool Discovery",
+      "Environment"
     ]
   },
   {

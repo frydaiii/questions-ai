@@ -1,0 +1,61 @@
+[
+  {
+    "id": "Q-D2-0089",
+    "domain": 2,
+    "task_statement": "2.3",
+    "type": "multi_response",
+    "difficulty": "hard",
+    "theory_refs": [
+      "TH-D2-020",
+      "TH-D2-012"
+    ],
+    "case_study_id": "CS-03",
+    "stem": "After failed drill fixes, Meridian wants the investigator's written lessons to improve the next attempt. Select TWO design choices that make this cross-attempt learning more reliable.",
+    "select_count": 2,
+    "options": [
+      {
+        "key": "A",
+        "text": "Fine-tune the model's weights after each failed drill so the lesson becomes part of the model"
+      },
+      {
+        "key": "B",
+        "text": "Let the investigator re-read its own diagnosis and declare it sound, since a second pass by the same model reliably exposes gaps in its knowledge"
+      },
+      {
+        "key": "C",
+        "text": "Ground each lesson in concrete external feedback, such as the failed health check and error output, rather than only the agent's own judgment"
+      },
+      {
+        "key": "D",
+        "text": "Lower the sampling temperature so the next attempt repeats the previous diagnosis more consistently"
+      },
+      {
+        "key": "E",
+        "text": "Keep a bounded buffer of the most recent or most useful lessons instead of appending every reflection to the context"
+      }
+    ],
+    "correct": [
+      "C",
+      "E"
+    ],
+    "explanation": {
+      "why_correct": "Reflexion-style learning turns feedback from a failed attempt into a short written lesson that is placed in memory and added to the next attempt's context; no weights change. It works best when the lesson is grounded in concrete signals such as error output, because a purely self-judged critique shares the model's blind spots and may simply restate the original mistake. The memory is typically bounded so that accumulated lessons do not crowd the context. External evidence plus a curated buffer are the two supporting choices.",
+      "why_incorrect": {
+        "A": "Reflexion-style agents improve through text in memory and context, not weight updates; fine-tuning after each drill is heavyweight and is not the mechanism described.",
+        "B": "A same-model second pass is effective at slips and requirement gaps but shares knowledge gaps with the original diagnosis, so it cannot be relied on to expose them.",
+        "D": "Repeating the previous diagnosis more consistently entrenches a failed approach; the point of a lesson is to change the next attempt."
+      },
+      "rule_of_thumb": "Ground reflections in external evidence, and keep the lesson buffer small and curated."
+    },
+    "tags": [
+      "reflexion",
+      "episodic-memory",
+      "feedback",
+      "self-reflection"
+    ],
+    "concepts": [
+      "Evaluation & Learning Loops",
+      "Memory"
+    ]
+  }
+]

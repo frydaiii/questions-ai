@@ -1,0 +1,56 @@
+[
+  {
+    "id": "Q-D1-0074",
+    "domain": 1,
+    "task_statement": "1.2",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D1-009",
+      "TH-D1-016"
+    ],
+    "case_study_id": "CS-03",
+    "stem": "Meridian's triage step sees thousands of alerts a day, most matching known signatures, plus an occasional novel multi-service outage. How should the agent's reasoning depth be set across these cases?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Use extended multi-step deliberation on every alert so that no alert is ever handled by quick pattern matching"
+      },
+      {
+        "key": "B",
+        "text": "Apply the same single-step pattern match to both known alerts and novel outages to keep behavior uniform"
+      },
+      {
+        "key": "C",
+        "text": "Handle known signatures with fast pattern-matched reasoning, and reserve explicit multi-step reasoning for novel or ambiguous incidents"
+      },
+      {
+        "key": "D",
+        "text": "Skip reasoning entirely and let the remediation agent act on the first observation of each alert"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "Reasoning depth should match task complexity. Known signatures are well-matched decisions where cheap, fast reasoning is enough, and extended deliberation would add latency and token cost without improving outcomes. Novel multi-service outages involve interdependent evidence, so explicit and inspectable multi-step reasoning pays off there. This is the same logic as a hybrid design: fast handling where patterns are known, deliberate reasoning where they are not.",
+      "why_incorrect": {
+        "A": "Deliberating over thousands of routine alerts wastes latency and cost on decisions a quick match handles correctly, and delays the alerts that are time-critical.",
+        "B": "A uniform single-step match underserves the rare novel outage, where shallow reasoning over incomplete evidence is the likeliest way to reach a bad decision.",
+        "D": "Acting on the first observation removes the reasoning step that converts perceptions into a decision, and the actions here are consequential service changes."
+      },
+      "rule_of_thumb": "Match reasoning depth to task complexity: quick matching for the familiar, explicit deliberation for the novel."
+    },
+    "tags": [
+      "reasoning-depth",
+      "triage",
+      "perceive-reason-act",
+      "hybrid"
+    ],
+    "concepts": [
+      "Agent",
+      "Reasoning Loop (ReAct)"
+    ]
+  }
+]

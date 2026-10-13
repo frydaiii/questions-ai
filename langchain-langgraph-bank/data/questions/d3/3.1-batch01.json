@@ -105,51 +105,53 @@
     "id": "Q-D3-0003",
     "domain": 3,
     "task_statement": "3.1",
-    "type": "single_choice",
-    "difficulty": "medium",
+    "type": "ordering",
+    "difficulty": "easy",
     "theory_refs": [
-      "TH-D3-003"
+      "TH-D3-003",
+      "TH-D3-001"
     ],
     "case_study_id": null,
-    "stem": "Why do action tools (e.g. 'send payment', 'delete record') generally warrant more caution than read-only information-retrieval tools?",
-    "select_count": 1,
+    "stem": "An agent decides to issue a customer refund through a high-risk action tool guarded by a confirmation step. Arrange the events in the order they occur.",
+    "select_count": 4,
     "options": [
       {
         "key": "A",
-        "text": "A mistaken action-tool call causes a real, persistent side effect that cannot simply be undone by further reasoning, unlike a wrong search result"
+        "text": "A human reviewer approves the proposed refund"
       },
       {
         "key": "B",
-        "text": "Action tools are always technically slower to execute than information tools"
+        "text": "The model requests the refund by emitting a tool call"
       },
       {
         "key": "C",
-        "text": "There is no meaningful difference in risk between the two categories"
+        "text": "The refund is executed and the outcome returns to the model as an observation"
       },
       {
         "key": "D",
-        "text": "Information-retrieval tools never return incorrect data"
+        "text": "The execution layer flags the call as high-risk and pauses it before running"
       }
     ],
     "correct": [
-      "A"
+      "B",
+      "D",
+      "A",
+      "C"
     ],
     "explanation": {
-      "why_correct": "A mistaken call to an action tool produces a real, persistent external consequence (money sent, record deleted) that cannot be undone just by the agent realizing its mistake, unlike a wrong information-retrieval result which only produces a wrong answer that can be corrected.",
-      "why_incorrect": {
-        "B": "Execution speed is not the relevant distinction here; the key difference is the severity and reversibility of consequences from a mistaken call.",
-        "C": "There is a well-established, meaningful difference in risk: real persistent side effects versus a merely wrong but correctable answer.",
-        "D": "Information-retrieval tools can certainly return incorrect or outdated data; this does not change the fact that action tools carry categorically different consequence risk."
-      },
-      "rule_of_thumb": "Action tools warrant more caution because their mistakes produce real, persistent consequences that cannot be undone by subsequent reasoning alone."
+      "why_correct": "The model only requests the refund by emitting a tool call. A separate execution layer then recognizes it as high-risk and pauses it, a human approves the proposed refund, and only then is it executed and the result returned to the model as an observation. The pause sits before execution because a completed refund cannot be undone by further reasoning.",
+      "why_incorrect": {},
+      "rule_of_thumb": "For risky action tools the order is request, pause for review, approval, execution, then observation."
     },
     "tags": [
       "action-tools",
-      "tool-risk-tiers"
+      "confirmation-step",
+      "execution-order"
     ],
     "concepts": [
       "Tools & Tool Discovery",
-      "Guardrails"
+      "Guardrails",
+      "Human-in-the-Loop (HITL)"
     ]
   }
 ]

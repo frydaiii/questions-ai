@@ -104,46 +104,54 @@
     "id": "Q-D4-0075",
     "domain": 4,
     "task_statement": "4.3",
-    "type": "single_choice",
-    "difficulty": "medium",
+    "type": "ordering",
+    "difficulty": "hard",
     "theory_refs": [
-      "TH-D4-011"
+      "TH-D4-011",
+      "TH-D4-020"
     ],
     "case_study_id": null,
-    "stem": "Which framing of forgetting is more accurate, based on the discussion of deliberate forgetting as a maintenance mechanism?",
-    "select_count": 1,
+    "stem": "A meal-planning assistant uses strength-based retention for a low-importance note, 'user once asked about vegan desserts'. Place the events in the order that leads to the note being dropped from the retrieval pool.",
+    "select_count": 5,
     "options": [
       {
         "key": "A",
-        "text": "Forgetting never serves any useful purpose under any circumstances"
+        "text": "A related query retrieves the note and its strength is boosted"
       },
       {
         "key": "B",
-        "text": "Forgetting is always purely bad and should be eliminated entirely in every system"
+        "text": "The strength falls below the retention threshold and the note is deprioritized or pruned"
       },
       {
         "key": "C",
-        "text": "Forgetting can be a deliberate, useful maintenance mechanism, not purely an unfortunate limitation to be minimized at all costs"
+        "text": "The note is written with an initial strength derived from its importance score"
       },
       {
         "key": "D",
-        "text": "Forgetting and remembering are the exact same operation with no distinction"
+        "text": "Another long idle stretch passes and the strength decays again"
+      },
+      {
+        "key": "E",
+        "text": "Weeks pass with no retrieval and the strength decays"
       }
     ],
     "correct": [
-      "C"
+      "C",
+      "E",
+      "A",
+      "D",
+      "B"
     ],
     "explanation": {
-      "why_correct": "Deliberate forgetting of outdated or superseded information serves a useful maintenance function, keeping a memory store effective -- it should be understood as a useful mechanism, not purely a limitation to avoid.",
-      "why_incorrect": {
-        "B": "Eliminating forgetting entirely leads to indefinite accumulation of outdated clutter, which has real downsides, as discussed.",
-        "D": "Forgetting (removing/deprioritizing) and remembering (retaining) are clearly distinct, opposite operations.",
-        "A": "Deliberate, targeted forgetting serves the real, useful purpose of keeping a memory store accurate and uncluttered."
-      },
-      "rule_of_thumb": "Deliberate forgetting is a useful maintenance mechanism for keeping memory stores accurate and uncluttered, not purely a limitation to minimize."
+      "why_correct": "The note starts with an importance-based strength, decays while unused, and is reinforced when a query retrieves it, which pushes it away from the threshold. Further idle time lets decay resume, and only once the strength drops below the retention threshold is the note deprioritized or pruned. Reinforcement therefore delays but does not by itself prevent eventual fading for a low-importance, rarely used memory.",
+      "why_incorrect": {},
+      "rule_of_thumb": "Write with strength, decay when idle, reinforce on retrieval, decay again, and prune only when the strength crosses the threshold."
     },
     "tags": [
-      "forgetting-mechanisms"
+      "decay",
+      "reinforcement",
+      "forgetting-mechanisms",
+      "execution-order"
     ],
     "concepts": [
       "Memory",
@@ -265,7 +273,8 @@
     "type": "single_choice",
     "difficulty": "medium",
     "theory_refs": [
-      "TH-D4-009"
+      "TH-D4-009",
+      "TH-D4-018"
     ],
     "case_study_id": null,
     "stem": "Which design choice best supports surfacing the 'most pertinent few' memories rather than everything that loosely matches a query?",
@@ -312,48 +321,55 @@
     "id": "Q-D4-0079",
     "domain": 4,
     "task_statement": "4.3",
-    "type": "single_choice",
-    "difficulty": "medium",
+    "type": "multi_response",
+    "difficulty": "easy",
     "theory_refs": [
       "TH-D4-010",
-      "TH-D4-011"
+      "TH-D4-011",
+      "TH-D4-020"
     ],
     "case_study_id": null,
-    "stem": "How are recency and forgetting related as mechanisms for keeping a memory system accurate over time?",
-    "select_count": 1,
+    "stem": "A long-running assistant keeps surfacing outdated entries from its memory store. Which TWO mechanisms address this staleness from different angles? (Select TWO)",
+    "select_count": 2,
     "options": [
       {
         "key": "A",
-        "text": "Recency helps prioritize more current information at retrieval time, while forgetting actively removes or deprioritizes outdated content from the store itself -- both address staleness from different angles"
+        "text": "Ranking candidates purely by textual similarity to the query"
       },
       {
         "key": "B",
-        "text": "They are the exact same mechanism with no distinction whatsoever"
+        "text": "Weighting recency alongside relevance when ranking candidates at retrieval time"
       },
       {
         "key": "C",
-        "text": "Recency and forgetting work against each other and can never be used together"
+        "text": "Raising the number of retrieved items so current entries are more likely to be included"
       },
       {
         "key": "D",
-        "text": "Neither mechanism has anything to do with addressing outdated information"
+        "text": "Removing, deprioritizing, or letting unused low-importance entries decay out of the retrieval pool"
+      },
+      {
+        "key": "E",
+        "text": "Saving each new fact with no link to the older version it replaces"
       }
     ],
     "correct": [
-      "A"
+      "B",
+      "D"
     ],
     "explanation": {
-      "why_correct": "Recency helps retrieval favor more current information when ranking candidates, while forgetting addresses staleness more directly by removing or deprioritizing outdated content in the store itself -- both are complementary approaches to the same underlying staleness problem.",
+      "why_correct": "Recency weighting acts at retrieval time by favoring newer information when ranking, while forgetting or decay acts on the store itself by removing or deprioritizing stale entries. They are complementary answers to the same staleness problem.",
       "why_incorrect": {
-        "B": "They operate at different points (retrieval-time ranking vs. store maintenance) and are not literally the same mechanism.",
-        "C": "They are complementary, not opposing -- a system can use both recency weighting at retrieval time and forgetting for store maintenance together.",
-        "D": "Both mechanisms are specifically about addressing the risk of outdated information remaining influential, directly relevant to this concern."
+        "A": "Similarity-only ranking has no notion of age, so an old entry that matches well can outrank the current one.",
+        "C": "Retrieving more items adds more stale and marginal material rather than fixing staleness.",
+        "E": "Without a link to the superseded version, nothing signals which entry is current, which makes staleness worse."
       },
-      "rule_of_thumb": "Recency and forgetting are complementary mechanisms addressing staleness from different angles -- retrieval-time ranking versus store maintenance."
+      "rule_of_thumb": "Recency fixes staleness at ranking time; forgetting and decay fix it in the store -- use both."
     },
     "tags": [
       "recency",
-      "forgetting-mechanisms"
+      "forgetting-mechanisms",
+      "decay"
     ],
     "concepts": [
       "Memory",

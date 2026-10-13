@@ -3,46 +3,53 @@
     "id": "Q-D2-0033",
     "domain": 2,
     "task_statement": "2.2",
-    "type": "single_choice",
-    "difficulty": "medium",
+    "type": "multi_response",
+    "difficulty": "easy",
     "theory_refs": [
-      "TH-D2-006"
+      "TH-D2-006",
+      "TH-D2-018"
     ],
     "case_study_id": null,
-    "stem": "A research task requires gathering facts from three unrelated sources and then synthesizing a summary. Which approach best fits task decomposition principles?",
-    "select_count": 1,
+    "stem": "A reporting agent must build a weekly briefing that needs sales figures from three separate regional databases and then one combined summary. Which TWO statements describe a sound decomposition of this task? (Select TWO)",
+    "select_count": 2,
     "options": [
       {
         "key": "A",
-        "text": "Treat the entire task as one indivisible step with no intermediate verification"
+        "text": "Treat the whole briefing as one indivisible step so no intermediate results need checking"
       },
       {
         "key": "B",
-        "text": "Decompose into three independent fact-gathering sub-tasks plus one synthesis sub-task, verifying each before combining"
+        "text": "Make each regional lookup its own sub-task, since the three lookups do not depend on one another and each can be verified separately"
       },
       {
         "key": "C",
-        "text": "Decompose into exactly ten arbitrary sub-tasks regardless of the task's actual structure"
+        "text": "Make the combined summary a final sub-task that starts only after all three regional results are available"
       },
       {
         "key": "D",
-        "text": "Skip gathering facts and only perform synthesis"
+        "text": "Chain the lookups strictly one after another because each region's query needs the previous region's output"
+      },
+      {
+        "key": "E",
+        "text": "Split every lookup into dozens of tiny sub-tasks so that the plan looks thorough"
       }
     ],
     "correct": [
-      "B"
+      "B",
+      "C"
     ],
     "explanation": {
-      "why_correct": "The three fact-gathering sub-tasks are naturally independent and separately verifiable, and the synthesis step naturally depends on their combined results -- decomposing along these natural boundaries fits the task's actual structure.",
+      "why_correct": "The three regional lookups are naturally independent, so each is a clean sub-task that can be checked on its own and, because none needs another's output, can even be planned upfront and run in parallel. The summary genuinely depends on all three results, so it belongs last as the synthesis sub-task.",
       "why_incorrect": {
-        "A": "Treating this as one indivisible step forfeits the ability to verify each source's facts independently before the final synthesis.",
-        "C": "An arbitrary fixed count of sub-tasks ignores the task's actual natural structure (three sources, one synthesis), which may not align with a count of ten.",
-        "D": "Skipping fact-gathering entirely would produce a synthesis with no actual grounded content to summarize."
+        "A": "One indivisible step forfeits the chance to verify each region's figures separately and to retry only the part that fails.",
+        "D": "Nothing in the task makes one region's query depend on another's output, so forcing a sequence adds latency without any benefit.",
+        "E": "Splitting far below the task's natural boundaries creates coordination overhead with nothing extra to verify or retry."
       },
-      "rule_of_thumb": "Effective decomposition follows the task's natural sub-problem boundaries, not an arbitrary split count."
+      "rule_of_thumb": "Split along natural boundaries: independent parts become separate sub-tasks, and a part that needs everything else goes last."
     },
     "tags": [
       "task-decomposition",
+      "parallel-subtasks",
       "planning"
     ],
     "concepts": [
@@ -107,7 +114,8 @@
     "type": "single_choice",
     "difficulty": "medium",
     "theory_refs": [
-      "TH-D2-008"
+      "TH-D2-008",
+      "TH-D2-019"
     ],
     "case_study_id": null,
     "stem": "What is a key requirement for tree-of-thought reasoning to actually produce better outcomes than a linear chain-of-thought?",

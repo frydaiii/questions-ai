@@ -6,7 +6,8 @@
     "type": "single_choice",
     "difficulty": "hard",
     "theory_refs": [
-      "TH-D4-004"
+      "TH-D4-004",
+      "TH-D4-019"
     ],
     "case_study_id": null,
     "stem": "An agent is configured to save literally every message exchanged, including small talk and one-off calculation results, into long-term memory with no filtering. What is the most likely downside?",
@@ -55,47 +56,74 @@
     "id": "Q-D4-0005",
     "domain": 4,
     "task_statement": "4.1",
-    "type": "single_choice",
-    "difficulty": "medium",
+    "type": "matching",
+    "difficulty": "hard",
     "theory_refs": [
-      "TH-D4-001"
+      "TH-D4-001",
+      "TH-D4-013",
+      "TH-D4-014"
     ],
     "case_study_id": null,
-    "stem": "As a long conversation continues and new messages are added, older messages eventually get pushed out of the context window. What best describes this phenomenon?",
-    "select_count": 1,
-    "options": [
-      {
-        "key": "A",
-        "text": "A deliberate decision by the agent to permanently delete the older information from all storage"
-      },
-      {
-        "key": "B",
-        "text": "Displacement from working memory due to the context window's natural size limit, which is different from deliberately discarding something from long-term storage"
-      },
-      {
-        "key": "C",
-        "text": "Proof that the agent has gained long-term memory automatically"
-      },
-      {
-        "key": "D",
-        "text": "An error that should never occur under any circumstances"
-      }
-    ],
-    "correct": [
-      "B"
-    ],
+    "stem": "Match each way of handling a conversation that has outgrown the context window (left) to its defining behavior or main risk (right).",
+    "select_count": 4,
+    "matching": {
+      "left": [
+        {
+          "key": "L1",
+          "text": "Truncation (dropping the oldest turns)"
+        },
+        {
+          "key": "L2",
+          "text": "Rolling summarization"
+        },
+        {
+          "key": "L3",
+          "text": "Pinning must-keep facts (constraints, IDs) outside the summarized history"
+        },
+        {
+          "key": "L4",
+          "text": "MemGPT-style paging to an external memory tier"
+        }
+      ],
+      "right": [
+        {
+          "key": "R1",
+          "text": "The agent issues explicit search and write operations to move data between the in-context tier and external storage, at the cost of extra model calls"
+        },
+        {
+          "key": "R2",
+          "text": "Removes the need to move any content because the window never fills"
+        },
+        {
+          "key": "R3",
+          "text": "Discards old content outright, so facts the task still needs can be lost silently"
+        },
+        {
+          "key": "R4",
+          "text": "Keeps exact values intact no matter how many times the surrounding history is compressed"
+        },
+        {
+          "key": "R5",
+          "text": "Compresses older turns into a running summary, but exact values can be blurred or dropped"
+        }
+      ]
+    },
+    "correct_pairs": {
+      "L1": "R3",
+      "L2": "R5",
+      "L3": "R4",
+      "L4": "R1"
+    },
     "explanation": {
-      "why_correct": "Older messages falling out of the context window as new ones are added is a natural consequence of working memory's size limit -- displacement -- which is a distinct mechanism from a deliberate decision to delete something from long-term storage.",
-      "why_incorrect": {
-        "A": "This phenomenon doesn't necessarily delete the information from ALL storage; it's specifically about working memory capacity, and the information could still exist elsewhere (e.g. a transcript log) even if displaced from the active context.",
-        "C": "Context window displacement is a working-memory phenomenon, not evidence of any long-term memory capability being gained.",
-        "D": "This is an expected, normal consequence of any bounded context window, not an unusual error condition."
-      },
-      "rule_of_thumb": "Information falling out of working memory due to context window limits is displacement, a different mechanism from deliberately discarding something from long-term storage."
+      "why_correct": "Truncation removes content entirely, so needed facts disappear silently. Rolling summarization keeps the gist at lower token cost but is lossy for exact details. Pinning must-keep facts outside the summary protects exactly the details a summarizer is most likely to distort. MemGPT-style paging has the agent itself search and write between a small in-context tier and external storage, paying for extra calls. No approach makes the window itself unlimited.",
+      "why_incorrect": {},
+      "rule_of_thumb": "Truncation loses, summarization blurs, pinning preserves, paging moves -- and none of them make the window bigger."
     },
     "tags": [
-      "working-memory",
-      "context-window"
+      "context-overflow",
+      "summarization",
+      "paging",
+      "memgpt"
     ],
     "concepts": [
       "State / State Management",

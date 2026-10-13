@@ -56,7 +56,9 @@
     "type": "single_choice",
     "difficulty": "medium",
     "theory_refs": [
-      "TH-D3-013"
+      "TH-D3-013",
+      "TH-D3-018",
+      "TH-D3-020"
     ],
     "case_study_id": null,
     "stem": "A high-stakes legal research tool returns a single matching document for a broad legal question, and the agent treats this as the complete and final answer with no further scrutiny. What risk does this illustrate?",
@@ -268,7 +270,8 @@
     "difficulty": "medium",
     "theory_refs": [
       "TH-D3-010",
-      "TH-D3-013"
+      "TH-D3-013",
+      "TH-D3-016"
     ],
     "case_study_id": null,
     "stem": "Which of the following scenarios represent a misleading-success tool result, as opposed to an explicit error or unavailability? (Select 2)",
@@ -420,7 +423,8 @@
     "type": "single_choice",
     "difficulty": "hard",
     "theory_refs": [
-      "TH-D3-013"
+      "TH-D3-013",
+      "TH-D3-020"
     ],
     "case_study_id": null,
     "stem": "An agent's sanity-checking logic flags a surprising zero-result lookup and triggers a review of the original query, discovering the query had an unintended typo. What does this outcome demonstrate?",

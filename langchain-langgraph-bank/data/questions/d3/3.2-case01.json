@@ -1,0 +1,55 @@
+[
+  {
+    "id": "Q-D3-0083",
+    "domain": 3,
+    "task_statement": "3.2",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D3-014"
+    ],
+    "case_study_id": "CS-01",
+    "stem": "The warehouse host exposes inventory and route tools through a standardized tool protocol. What is the main value of protocol-level discovery?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "The model can discover structured tool capabilities and schemas instead of relying on undocumented assumptions"
+      },
+      {
+        "key": "B",
+        "text": "Every tool becomes safe without authorization checks"
+      },
+      {
+        "key": "C",
+        "text": "The protocol replaces all tool-result validation"
+      },
+      {
+        "key": "D",
+        "text": "The protocol forces the model to call every available tool"
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "explanation": {
+      "why_correct": "The model can discover structured tool capabilities and schemas instead of relying on undocumented assumptions This follows the cited research principle and fits the scenario.",
+      "why_incorrect": {
+        "B": "This does not address the central principle: the model can discover structured tool capabilities and schemas instead of relying on undocumented assumptions",
+        "C": "This does not address the central principle: the model can discover structured tool capabilities and schemas instead of relying on undocumented assumptions",
+        "D": "This does not address the central principle: the model can discover structured tool capabilities and schemas instead of relying on undocumented assumptions"
+      },
+      "rule_of_thumb": "Prefer the option that reflects the model can discover structured tool capabilities and schemas instead of relying on undocumented assumptions."
+    },
+    "tags": [
+      "case-study",
+      "mcp",
+      "tool-discovery"
+    ],
+    "concepts": [
+      "Model Context Protocol (MCP)",
+      "Tools & Tool Discovery",
+      "Context Engineering"
+    ]
+  }
+]

@@ -1,0 +1,531 @@
+[
+  {
+    "id": "Q-D5-0031",
+    "domain": 5,
+    "task_statement": "5.2",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D5-006"
+    ],
+    "case_study_id": null,
+    "stem": "A medical-coding team finds that a single LLM pass sometimes assigns the wrong billing code and backs it with a plausible-sounding rationale. They replace it with three agents that each propose a code and then critique one another's rationales before a final code is selected. What is the primary benefit this design is meant to deliver?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "It lowers token spend because the agents reuse one cached rationale instead of each producing their own reasoning"
+      },
+      {
+        "key": "B",
+        "text": "It turns uncertain model output into a statistically guaranteed correct code once three agents are involved"
+      },
+      {
+        "key": "C",
+        "text": "It exposes each candidate's reasoning to critique from other agents, so flaws that one pass misses can be caught before a code is chosen"
+      },
+      {
+        "key": "D",
+        "text": "It splits the code list by chapter so each agent only handles a portion of the claim and the work finishes sooner"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "The point of debate is to put candidate answers and their reasoning in front of independent critics before an aggregation step picks a result. A rationale that sounds plausible to its author can still contain an error that a second agent, checking the claim directly, will notice. This makes debate a verification strategy: it can catch mistakes a single pass lets through, at additional cost.",
+      "why_incorrect": {
+        "A": "Debate does the opposite of saving tokens: every agent produces its own reasoning and critiques, so total token use rises compared with one pass.",
+        "B": "Debate gives no statistical guarantee of correctness; agents can agree on the same wrong answer, so it reduces risk without eliminating it.",
+        "D": "Partitioning work by chapter is task decomposition for throughput, not debate; in debate the agents evaluate the same question rather than separate portions."
+      },
+      "rule_of_thumb": "Use debate to expose candidate reasoning to critique before aggregation; it is verification, not a free accuracy guarantee."
+    },
+    "tags": [
+      "debate",
+      "critique",
+      "verification"
+    ],
+    "concepts": [
+      "Agent Debate",
+      "Multi-Agent Systems"
+    ]
+  },
+  {
+    "id": "Q-D5-0032",
+    "domain": 5,
+    "task_statement": "5.2",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D5-006",
+      "TH-D5-014"
+    ],
+    "case_study_id": null,
+    "stem": "A fintech team wants a verification step for LLM-generated loan-covenant summaries and plans to use three agents plus a judge. Which design gives the debate the best chance of surfacing a wrong figure in a summary?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Three copies of the same prompt and context read one another's drafts live and keep refining a single shared draft"
+      },
+      {
+        "key": "B",
+        "text": "One agent drafts the summary, and the other two are asked only to reply 'approve' if the draft looks reasonable to them"
+      },
+      {
+        "key": "C",
+        "text": "Each agent is told to align with the answer from the agent labeled most experienced, to keep the final summary consistent"
+      },
+      {
+        "key": "D",
+        "text": "Each agent drafts its figures independently from the covenant text, then a judge compares the drafts against quoted source passages and investigates discrepancies"
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "Independence plus evidence-sensitive comparison is what makes debate effective. When agents produce answers separately, a wrong figure shows up as a disagreement; the judge can then resolve it by checking quoted source text rather than by counting heads. Reading each other's drafts early, rubber-stamp approval, or deference to a label all collapse independence and hide errors.",
+      "why_incorrect": {
+        "A": "Agents with identical prompts and context who edit one shared draft anchor on its first content and share the same blind spots, so errors are carried forward rather than surfaced.",
+        "B": "A request to approve invites rubber-stamping; the reviewers never produce their own figures, so there is nothing to disagree with and little pressure to check the source.",
+        "C": "Deferring to a seniority label is the conformity pattern that debate is meant to avoid; it suppresses independent evaluation instead of encouraging it."
+      },
+      "rule_of_thumb": "For debate to find errors, generate answers independently first, then compare them against evidence."
+    },
+    "tags": [
+      "independence",
+      "evidence",
+      "judge"
+    ],
+    "concepts": [
+      "Agent Debate",
+      "Multi-Agent Systems"
+    ]
+  },
+  {
+    "id": "Q-D5-0033",
+    "domain": 5,
+    "task_statement": "5.2",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D5-006",
+      "TH-D5-019"
+    ],
+    "case_study_id": null,
+    "stem": "A compliance team runs five debate agents, all backed by the same model and the same retrieval context, to fact-check regulatory claims. Last week all five voted 'compliant' on a filing that an auditor later showed was non-compliant because of a rule that all five misread. Why does majority voting alone fail to protect against this?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Votes are only meaningful when cast by human reviewers, because model outputs cannot be compared on the same scale"
+      },
+      {
+        "key": "B",
+        "text": "Five participants are too few; reliable voting would have caught the error with roughly ten or more agents in the group"
+      },
+      {
+        "key": "C",
+        "text": "Agents that share a model and context have correlated errors, so unanimous agreement can reflect a shared misreading instead of independent confirmation"
+      },
+      {
+        "key": "D",
+        "text": "Votes are cast before any evidence is retrieved, so the tally can never be improved by adding tools or source documents later"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "Majority voting assumes that voters err independently. Agents built on the same model with the same retrieved context tend to make the same mistakes, so a 5-0 outcome adds little evidence beyond a single agent's answer. A stronger aggregator weighs evidence and reasoning quality, and the system needs real diversity of model, prompt, or evidence source.",
+      "why_incorrect": {
+        "A": "Model outputs can be tallied just fine; the weakness is correlated error, not the identity of the voter, and adding humans would not by itself fix a shared misreading.",
+        "B": "More copies of the same correlated agents would repeat the same mistake; the number of voters does not substitute for independence.",
+        "D": "Votes can follow retrieval and tool use, and many designs do exactly that; the failure here is the shared misreading, not the ordering of the vote."
+      },
+      "rule_of_thumb": "Agreement among correlated agents is not verification; require independence or evidence, not just a majority."
+    },
+    "tags": [
+      "correlated-error",
+      "aggregation",
+      "majority-vote"
+    ],
+    "concepts": [
+      "Agent Debate",
+      "Multi-Agent Systems"
+    ]
+  },
+  {
+    "id": "Q-D5-0034",
+    "domain": 5,
+    "task_statement": "5.2",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D5-006",
+      "TH-D5-014"
+    ],
+    "case_study_id": null,
+    "stem": "In a vulnerability-triage workflow, one agent argues that a dependency CVE affects the deployed version and another argues that it does not. A judge agent must choose between them. What should the judge primarily base its decision on?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Which agent produced the longer, more detailed argument, since thoroughness usually signals a stronger analysis"
+      },
+      {
+        "key": "B",
+        "text": "Which agent replied first, since an early answer has been less influenced by the opposing agent's framing"
+      },
+      {
+        "key": "C",
+        "text": "Which agent has the more specialized role label, since stated expertise should outweigh the other side's claims"
+      },
+      {
+        "key": "D",
+        "text": "Whether each claim is backed by checkable evidence, such as the advisory's affected-version range, and whether the reasoning is internally consistent"
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "A judge adds value only if it compares the substance of the arguments: whether claims are supported by evidence it can check, whether the reasoning holds together, and whether it addresses the actual task question. Here the affected-version range in the advisory can settle the dispute. Length, arrival order, and role labels are surface features that LLM judges are known to over-weight.",
+      "why_incorrect": {
+        "A": "Verbosity is a known judge bias; a longer argument can be wrong, and rewarding length encourages padding instead of evidence.",
+        "B": "Arrival order is irrelevant to correctness, and position effects are another known bias that a well-designed judge must not let decide the result.",
+        "C": "A role label describes the prompt, not verified knowledge; deferring to it replaces evaluation with authority and invites conformity."
+      },
+      "rule_of_thumb": "A judge should weigh evidence, consistency, and task correctness, not length, order, or labels."
+    },
+    "tags": [
+      "judge",
+      "evaluation",
+      "evidence"
+    ],
+    "concepts": [
+      "Agent Debate",
+      "Multi-Agent Systems"
+    ]
+  },
+  {
+    "id": "Q-D5-0035",
+    "domain": 5,
+    "task_statement": "5.2",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D5-006",
+      "TH-D5-020"
+    ],
+    "case_study_id": null,
+    "stem": "A legal-research assistant debates contract-clause interpretations. In the last three rounds no agent has raised a new objection or changed its evidence-based confidence, yet the loop keeps consuming tokens until it reaches a 12-round hard cap. Which stopping design would fit this system best?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Stop only when every agent states full agreement, since unanimity shows that the question is truly settled"
+      },
+      {
+        "key": "B",
+        "text": "Remove the round cap so agents can keep going until some agent finally raises a new objection"
+      },
+      {
+        "key": "C",
+        "text": "Combine a hard budget on rounds and tokens with an early exit when another round no longer changes the evidence-based verdict"
+      },
+      {
+        "key": "D",
+        "text": "Stop after the first round so that later critique cannot raise cost or introduce additional disagreement"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "A good stopping rule pairs an externally enforced budget with a quality-based exit. The hard cap guarantees the loop cannot run away, while the early exit avoids paying for rounds that add no new information. Together they bound cost and latency without cutting off useful critique prematurely.",
+      "why_incorrect": {
+        "A": "Requiring unanimity can loop forever when agents keep disagreeing, and it can also reward conformity, so it is neither bounded nor a reliable sign of correctness.",
+        "B": "Removing the cap eliminates the external bound that prevents runaway loops and uncontrolled spend; agents cannot be relied upon to stop themselves.",
+        "D": "Stopping before any critique has been exchanged removes the verification benefit that justified the debate in the first place."
+      },
+      "rule_of_thumb": "Bound debate with a hard budget plus a quality-based early exit, never an open-ended or unanimity-only loop."
+    },
+    "tags": [
+      "stopping-rule",
+      "cost",
+      "termination"
+    ],
+    "concepts": [
+      "Agent Debate",
+      "Multi-Agent Systems"
+    ]
+  },
+  {
+    "id": "Q-D5-0036",
+    "domain": 5,
+    "task_statement": "5.2",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D5-006",
+      "TH-D5-019"
+    ],
+    "case_study_id": null,
+    "stem": "In a product-support debate, a lead agent labeled 'senior reviewer' posts first and states that the refund window is 60 days. Three other agents each reply 'I agree with the senior reviewer' without opening the policy document, which says 30 days. Which failure does this illustrate?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Deadlock, because the agents wait on one another's output and none can proceed until another finishes"
+      },
+      {
+        "key": "B",
+        "text": "Resource contention, because several agents compete for the same policy document at the same moment"
+      },
+      {
+        "key": "C",
+        "text": "Over-decomposition, because the task was split among more agents than the structure of the work justified"
+      },
+      {
+        "key": "D",
+        "text": "Sycophantic conformity, where agents adopt a first or senior answer instead of independently evaluating the evidence"
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "The other agents adopted the senior reviewer's answer without consulting the policy text, so their agreement carried no independent information. This is conformity or sycophancy: reading a prior or authoritative answer before committing anchors later agents on it. Counter-measures include collecting independent first answers and requiring each agent to cite evidence.",
+      "why_incorrect": {
+        "A": "Deadlock is a circular wait with no progress; here the agents replied immediately, they simply did not evaluate the claim.",
+        "B": "Nothing indicates contention over the document; the agents never opened it, so the problem is lack of independent checking, not competition for a resource.",
+        "C": "The issue is not that the task was split too finely; it is that the agents deferred to one answer instead of verifying it."
+      },
+      "rule_of_thumb": "When agents agree without citing evidence, suspect conformity rather than verification."
+    },
+    "tags": [
+      "sycophancy",
+      "independence",
+      "conformity"
+    ],
+    "concepts": [
+      "Agent Debate",
+      "Multi-Agent Systems"
+    ]
+  },
+  {
+    "id": "Q-D5-0037",
+    "domain": 5,
+    "task_statement": "5.2",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D5-006",
+      "TH-D5-009"
+    ],
+    "case_study_id": null,
+    "stem": "A support team's debate pipeline runs four agents for three rounds on every ticket, including simple password resets. Finance reports that per-ticket token usage and response time have risen sharply, while accuracy on simple tickets did not change. What does this most directly show about adding debate rounds?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Each extra round multiplies inference tokens and adds sequential delay, so debate should be reserved for tasks where verification is worth that cost"
+      },
+      {
+        "key": "B",
+        "text": "Extra rounds mainly increase transcript storage costs, while the changes in tokens and response time come from unrelated model upgrades"
+      },
+      {
+        "key": "C",
+        "text": "Cost grows only with the number of agents and not with the number of rounds, so trimming rounds would not reduce spend"
+      },
+      {
+        "key": "D",
+        "text": "The overhead is a one-time setup fee that disappears once the debate transcripts from earlier tickets are cached for reuse"
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "explanation": {
+      "why_correct": "Every debate round requires each agent to read the accumulated discussion and produce a new response, so token use and latency both grow with rounds and agents. Because rounds run in sequence, they delay the final answer even if agents within a round run in parallel. Debate is therefore best saved for high-stakes or error-prone tasks, not applied to trivial tickets where it buys nothing.",
+      "why_incorrect": {
+        "B": "Storage is a minor cost; the observed token and latency growth comes directly from additional model calls in each round.",
+        "C": "Cost scales with both agents and rounds, since every round repeats the calls and re-reads a longer transcript; cutting rounds would reduce spend.",
+        "D": "Debate overhead recurs on every ticket as new model calls; transcripts from other tickets are not reusable answers for a new one."
+      },
+      "rule_of_thumb": "Debate rounds cost tokens and latency on every run; apply them only where verification value justifies it."
+    },
+    "tags": [
+      "debate-cost",
+      "latency",
+      "token-overhead"
+    ],
+    "concepts": [
+      "Agent Debate",
+      "Multi-Agent Systems"
+    ]
+  },
+  {
+    "id": "Q-D5-0038",
+    "domain": 5,
+    "task_statement": "5.2",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D5-006",
+      "TH-D5-014"
+    ],
+    "case_study_id": null,
+    "stem": "A research team reviews logs from a debate system that screens drug-interaction summaries. Which logged outcome is the strongest sign that the debate added real verification value?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "All four agents produced word-for-word identical dosage statements, which shows that the claim was robustly confirmed"
+      },
+      {
+        "key": "B",
+        "text": "A critic flagged a cited dosage that contradicted the source label, and the judge corrected the summary after checking the label text"
+      },
+      {
+        "key": "C",
+        "text": "The summary grew from 200 to 900 words over three rounds as agents added caveats and elaboration to the first draft"
+      },
+      {
+        "key": "D",
+        "text": "The agent with the most previous correct answers won every round, so its verdict was adopted each time without changes"
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "explanation": {
+      "why_correct": "Useful disagreement is specific and resolvable: a critic points to a concrete contradiction, and the judge settles it by checking evidence, so an error was actually found and fixed. Identical outputs may reflect shared mistakes, length growth is not correctness, and always deferring to the historical best agent skips the verification that debate is for.",
+      "why_incorrect": {
+        "A": "Identical wording across agents is more likely a sign of copying or correlated errors than independent confirmation, especially if they share a model.",
+        "C": "A longer summary shows more text, not more correctness; added caveats may be unverified and can even dilute accurate content.",
+        "D": "Adopting the historically strongest agent's answer each time means the debate never changed an outcome, so it demonstrates no verification benefit."
+      },
+      "rule_of_thumb": "Count debate as useful when a specific critique leads to an evidence-based correction, not when text merely agrees or grows."
+    },
+    "tags": [
+      "critique",
+      "verification",
+      "judge"
+    ],
+    "concepts": [
+      "Agent Debate",
+      "Multi-Agent Systems"
+    ]
+  },
+  {
+    "id": "Q-D5-0039",
+    "domain": 5,
+    "task_statement": "5.2",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D5-006",
+      "TH-D5-019"
+    ],
+    "case_study_id": null,
+    "stem": "An e-commerce team's fraud-review debate keeps missing a new gift-card abuse pattern because all agents use the same model, the same prompt, and the same internal rulebook retrieval. Which change most reduces the chance that this shared blind spot survives?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Add two more agents with the same model and prompt so that the final vote has a larger majority"
+      },
+      {
+        "key": "B",
+        "text": "Have every agent read the first agent's analysis before it forms an opinion, so later agents can build on it"
+      },
+      {
+        "key": "C",
+        "text": "Give agents different models or prompts and different evidence sources, and add an adversarial reviewer tasked with finding cases the rulebook misses"
+      },
+      {
+        "key": "D",
+        "text": "Replace the judge with a rule that accepts any answer repeated by at least three agents, to avoid judge bias"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "A shared blind spot persists when agents share the same model, prompt, and evidence. Real independence comes from diversity in those inputs, and an adversarial reviewer is explicitly rewarded for finding what the rulebook misses. This raises the probability that at least one agent notices the new pattern.",
+      "why_incorrect": {
+        "A": "Duplicating the same configuration adds correlated voters; the larger majority would reproduce the same miss with more confidence.",
+        "B": "Reading the first analysis encourages anchoring and conformity, so later agents are less likely to notice what the first one missed.",
+        "D": "A repetition threshold is just a majority vote in disguise; correlated agents will repeat the same wrong answer and nobody checks it against evidence."
+      },
+      "rule_of_thumb": "Fight shared blind spots with diversity of model, prompt, and evidence plus adversarial checks, not with more identical voters."
+    },
+    "tags": [
+      "blind-spot",
+      "adversarial-check",
+      "diversity"
+    ],
+    "concepts": [
+      "Agent Debate",
+      "Multi-Agent Systems"
+    ]
+  },
+  {
+    "id": "Q-D5-0040",
+    "domain": 5,
+    "task_statement": "5.2",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D5-006",
+      "TH-D5-008"
+    ],
+    "case_study_id": null,
+    "stem": "A CTO proposes adding a three-agent debate to a clinical-summary pipeline and removing the existing source-citation check to save cost, arguing that three agreeing agents make the summary reliably factual. Which response is most accurate?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Agree, because unanimous agreement among three agents is enough to guarantee that the summary is factual"
+      },
+      {
+        "key": "B",
+        "text": "Agree in part: debate can replace source checking as long as an odd number of agents is used to avoid ties"
+      },
+      {
+        "key": "C",
+        "text": "Disagree, because debate is simply a fixed prompt chain and adds nothing beyond what a sequential pipeline already provides"
+      },
+      {
+        "key": "D",
+        "text": "Disagree, because debate is a verification mechanism with its own cost and failure modes, so agent agreement does not replace checking against sources"
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "Debate can catch errors, but agents may share the same mistake, defer to each other, or converge on an unsupported claim, and every round adds cost. Agreement is therefore not proof of factuality, and removing the source-citation check would eliminate the one control grounded in external evidence. The right design keeps source checks alongside debate.",
+      "why_incorrect": {
+        "A": "Unanimity does not guarantee factuality; correlated agents can all repeat the same unsupported claim, as in the common failure of shared blind spots.",
+        "B": "An odd number of agents only avoids ties; it does nothing to make agents independent or to ground their claims in sources.",
+        "C": "Debate is not a fixed chain, since agents critique competing candidates before aggregation; and this objection also overlooks the real reason to keep citation checks."
+      },
+      "rule_of_thumb": "Debate adds verification with cost and failure modes; it never replaces checking claims against sources."
+    },
+    "tags": [
+      "debate-limitations",
+      "verification",
+      "grounding"
+    ],
+    "concepts": [
+      "Agent Debate",
+      "Multi-Agent Systems"
+    ]
+  }
+]

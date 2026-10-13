@@ -54,47 +54,54 @@
     "id": "Q-D4-0065",
     "domain": 4,
     "task_statement": "4.3",
-    "type": "single_choice",
-    "difficulty": "medium",
+    "type": "multi_response",
+    "difficulty": "easy",
     "theory_refs": [
-      "TH-D4-009"
+      "TH-D4-009",
+      "TH-D4-018"
     ],
     "case_study_id": null,
-    "stem": "A retrieval system uses only exact keyword matching to find relevant memories, missing a clearly relevant memory because it used different wording than the current query. What does this illustrate?",
-    "select_count": 1,
+    "stem": "One memory retriever uses exact keyword matching and misses a relevant note that is worded differently, while a second pipeline packs 40 retrieved notes into a single prompt. Which TWO statements are correct? (Select TWO)",
+    "select_count": 2,
     "options": [
       {
         "key": "A",
-        "text": "A limitation of relying purely on literal text matching rather than a broader similarity measure for assessing relevance"
+        "text": "If a memory appears anywhere in the prompt, the model is guaranteed to use it"
       },
       {
         "key": "B",
-        "text": "Proof that memory retrieval should never be attempted"
+        "text": "Literal keyword matching can miss relevant memories phrased differently, so similarity-based relevance is often preferable"
       },
       {
         "key": "C",
-        "text": "Evidence that the missed memory was not actually stored at all"
+        "text": "Adding more retrieved items never hurts because each one adds helpful context"
       },
       {
         "key": "D",
-        "text": "A sign that recency is the only signal that ever matters"
+        "text": "A missed match proves the note was never stored"
+      },
+      {
+        "key": "E",
+        "text": "Items buried in the middle of a long memory block can be overlooked, so fewer, better items with the strongest at the edges help"
       }
     ],
     "correct": [
-      "A"
+      "B",
+      "E"
     ],
     "explanation": {
-      "why_correct": "This scenario is a direct illustration of exact keyword matching's limitation: a genuinely relevant memory phrased differently can be missed, which is why broader similarity-based relevance measures are often preferable to literal text matching alone.",
+      "why_correct": "Exact matching depends on shared wording, so a similarity-based measure surfaces relevant notes that use different words. Separately, being present in the prompt is not the same as being used: models attend less reliably to the middle of long contexts, so retrieving fewer, higher-quality items and placing the best at the edges is a cheap mitigation.",
       "why_incorrect": {
-        "B": "This illustrates a limitation of one specific matching approach, not an argument against memory retrieval as a whole.",
-        "C": "The memory was described as actually relevant and presumably stored; the issue is that it wasn't surfaced due to differing wording, not that it didn't exist.",
-        "D": "This scenario is about relevance matching quality, not about recency being the only signal that matters."
+        "A": "Long-context models can overlook information in poorly attended positions even when it is present.",
+        "C": "Extra items add distractors and push relevant ones toward the weakly used middle, so returns diminish and can turn negative.",
+        "D": "The note can exist yet not be surfaced; the failure here is the matching method, not storage."
       },
-      "rule_of_thumb": "Exact keyword matching can miss genuinely relevant memories phrased differently -- broader similarity-based relevance assessment helps address this limitation."
+      "rule_of_thumb": "Retrieve with a real relevance measure, keep the set small, and put the strongest items at the edges -- in the prompt is not the same as used."
     },
     "tags": [
       "relevance-based-retrieval",
-      "memory-retrieval"
+      "position-effects",
+      "top-k"
     ],
     "concepts": [
       "Memory",

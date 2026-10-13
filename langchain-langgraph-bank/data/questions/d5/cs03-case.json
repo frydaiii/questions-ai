@@ -1,0 +1,56 @@
+[
+  {
+    "id": "Q-D5-0088",
+    "domain": 5,
+    "task_statement": "5.4",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D5-020",
+      "TH-D5-008"
+    ],
+    "case_study_id": "CS-03",
+    "stem": "In the drill, the remediation and reviewer agents traded rollback proposals for hundreds of turns while the outage continued and the budget drained. Which change most directly addresses the failure?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Instruct both agents to stop whenever they notice they are repeating themselves"
+      },
+      {
+        "key": "B",
+        "text": "Enforce limits on turns, tokens, and elapsed time outside the agents, and on reaching a limit return the partial findings and page the on-call engineer"
+      },
+      {
+        "key": "C",
+        "text": "Raise the remediation agent's retry allowance so it has more attempts to satisfy the reviewer"
+      },
+      {
+        "key": "D",
+        "text": "Give the reviewer the same prompt as the remediation agent so that the two agree sooner"
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "explanation": {
+      "why_correct": "Ping-pong delegation is a classic runaway loop, and agents cannot be relied on to recognize that they are stuck, which the postmortem confirmed. Bounds on turns, spend, and wall-clock time must be enforced outside the agents' judgment, together with a defined degraded behavior when a bound is hit: return what was learned so far and escalate to a human. That contains the failure and keeps the outage from being ignored while the loop burns budget.",
+      "why_incorrect": {
+        "A": "A prompt asking agents to self-detect repetition relies on the same judgment that already failed; the postmortem found nothing external limiting the exchange.",
+        "C": "More retries lengthens the loop instead of ending it, and it does nothing about the disagreement driving the exchange.",
+        "D": "Giving the reviewer the generator's prompt removes the independence that makes review useful and creates agreement through shared bias, not through a better remediation."
+      },
+      "rule_of_thumb": "Every loop needs an externally enforced bound and a defined behavior, such as escalation, when the bound is hit."
+    },
+    "tags": [
+      "runaway-loop",
+      "termination",
+      "escalation",
+      "failure-containment"
+    ],
+    "concepts": [
+      "Multi-Agent Systems",
+      "Human-in-the-Loop (HITL)"
+    ]
+  }
+]

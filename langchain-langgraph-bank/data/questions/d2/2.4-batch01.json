@@ -6,7 +6,8 @@
     "type": "single_choice",
     "difficulty": "medium",
     "theory_refs": [
-      "TH-D2-013"
+      "TH-D2-013",
+      "TH-D2-019"
     ],
     "case_study_id": null,
     "stem": "Why is the confident TONE of a model's answer not a reliable indicator of whether the answer is actually correct?",

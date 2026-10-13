@@ -1,0 +1,56 @@
+[
+  {
+    "id": "Q-D4-0083",
+    "domain": 4,
+    "task_statement": "4.1",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D4-013",
+      "TH-D4-014"
+    ],
+    "case_study_id": "CS-02",
+    "stem": "Months of correspondence with one importer overflow the orchestrator's context window, yet accepted tariff codes, declared values, and the importer's special instructions must still be correct later. Which memory design best handles this?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Truncate the oldest messages once the window fills, since recent messages are the most relevant"
+      },
+      {
+        "key": "B",
+        "text": "Repeatedly fold the entire history, including all exact values, into one running summary and discard the originals"
+      },
+      {
+        "key": "C",
+        "text": "Keep only the last twenty messages and have the agents ask the importer to repeat anything they need"
+      },
+      {
+        "key": "D",
+        "text": "Keep recent turns verbatim with a running summary of older ones, and write exact values to an external store the orchestrator can search on demand"
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "Rolling summarization preserves the gist of older correspondence at lower token cost while the newest turns stay verbatim. Summaries are lossy, though, and exact values such as codes, amounts, and instructions are the details most likely to be distorted. Writing those to an external store the agent can search follows the tiered-memory idea: the context holds what is needed now, and everything else is retrievable. This protects the details the declaration depends on.",
+      "why_incorrect": {
+        "A": "Truncation silently discards facts and constraints from early in the relationship, and the oldest messages may contain the special instructions that still apply.",
+        "B": "Summarizing everything repeatedly, with the originals discarded, lets errors compound and blurs exact numbers; nothing remains to correct the drift.",
+        "C": "Dropping history and re-asking the importer shifts the cost onto customers and still loses earlier decisions; it is truncation with extra friction."
+      },
+      "rule_of_thumb": "Summarize for gist, keep recent turns verbatim, and pin must-keep exact facts outside the summary."
+    },
+    "tags": [
+      "context-overflow",
+      "summarization",
+      "tiered-memory",
+      "working-memory"
+    ],
+    "concepts": [
+      "Memory",
+      "Context Engineering"
+    ]
+  }
+]

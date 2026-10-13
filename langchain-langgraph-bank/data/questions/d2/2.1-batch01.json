@@ -53,52 +53,58 @@
     "id": "Q-D2-0002",
     "domain": 2,
     "task_statement": "2.1",
-    "type": "single_choice",
-    "difficulty": "medium",
+    "type": "multi_response",
+    "difficulty": "easy",
     "theory_refs": [
-      "TH-D2-002"
+      "TH-D2-002",
+      "TH-D2-017"
     ],
     "case_study_id": null,
-    "stem": "Why does grounding reasoning in real observations throughout a reasoning chain reduce the risk of a confidently wrong final answer?",
-    "select_count": 1,
+    "stem": "A customer-support agent writes the thought 'The refund was already issued' before replying to a customer. Which TWO behaviors show the agent grounding its reasoning in real observations rather than relying on its own narration? (Select TWO)",
+    "select_count": 2,
     "options": [
       {
         "key": "A",
-        "text": "Because it makes the model generate longer responses"
+        "text": "Writing a longer and more detailed thought that explains why the refund must have been issued"
       },
       {
         "key": "B",
-        "text": "Because incorrect assumptions can be caught and corrected early, before later reasoning steps build further on top of them"
+        "text": "Calling the billing lookup tool and basing its next thought on the returned refund status"
       },
       {
         "key": "C",
-        "text": "Because grounding actions always run faster than reasoning steps"
+        "text": "Re-reading its own earlier thoughts to confirm they sound coherent and well argued"
       },
       {
         "key": "D",
-        "text": "Because grounding eliminates the need for any reasoning at all"
+        "text": "Comparing the outcome of a consequential action with the tool result instead of trusting its own description of what happened"
+      },
+      {
+        "key": "E",
+        "text": "Raising the sampling temperature so the thought sounds more varied and natural"
       }
     ],
     "correct": [
-      "B"
+      "B",
+      "D"
     ],
     "explanation": {
-      "why_correct": "Checking assumptions against real observations throughout the process (not just at the end) allows errors to be caught early, before subsequent reasoning compounds on top of a flawed premise.",
+      "why_correct": "Grounding means tying the next step to evidence from the environment. Querying the billing tool and reasoning from the actual status turns an unverified assumption into an observation, and checking a consequential action's outcome against the tool result avoids trusting a narration that may be a plausible but unfaithful account of what really happened.",
       "why_incorrect": {
-        "A": "Response length has no inherent bearing on whether grounding reduces compounding errors; the mechanism is about catching flawed assumptions early, not verbosity.",
-        "C": "Relative speed between grounding actions and reasoning steps is unrelated to why grounding reduces compounding error risk.",
-        "D": "Grounding supplements reasoning with verified external information; it does not eliminate the need to reason about what that information means for the task."
+        "A": "A longer, more elaborate thought is still just the model's own text; detail and fluency do not make an unverified claim any more true.",
+        "C": "Coherence of the trace is not evidence. A thought can be internally consistent and still rationalize a wrong assumption, so rereading it adds no external grounding.",
+        "E": "Sampling temperature changes the variety of generated text; it has no bearing on whether claims are checked against real observations."
       },
-      "rule_of_thumb": "Grounding throughout a reasoning chain catches flawed assumptions early, limiting how far an error can compound before being corrected."
+      "rule_of_thumb": "Trust observations over narration: verify claims and consequential outcomes against tool results instead of against how convincing the thought sounds."
     },
     "tags": [
       "grounding",
-      "error-compounding"
+      "trace-faithfulness",
+      "verification"
     ],
     "concepts": [
-      "Tools & Tool Discovery",
       "Reasoning Loop (ReAct)",
-      "Error Recovery"
+      "Tools & Tool Discovery"
     ]
   },
   {
@@ -262,7 +268,8 @@
     "type": "single_choice",
     "difficulty": "hard",
     "theory_refs": [
-      "TH-D2-004"
+      "TH-D2-004",
+      "TH-D2-017"
     ],
     "case_study_id": null,
     "stem": "After a tool call returns a result that contradicts the agent's prior assumption, the agent's next thought proceeds exactly as if the tool had never been called, repeating its original flawed assumption. Which failure pattern does this best illustrate?",

@@ -56,7 +56,8 @@
     "type": "ordering",
     "difficulty": "medium",
     "theory_refs": [
-      "TH-D3-011"
+      "TH-D3-011",
+      "TH-D3-019"
     ],
     "case_study_id": null,
     "stem": "Place the following steps of a well-designed retry strategy in the correct order.",

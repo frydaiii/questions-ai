@@ -1,0 +1,13 @@
+[
+  {
+    "id": "CS-05",
+    "title": "DevOps incident-response agent team with timeout, memory, contention, and approval concerns",
+    "scenario": "A software-as-a-service company runs an incident-response agent team alongside its human on-call engineers. A triage agent reads alerts and application logs, a diagnosis agent queries metrics and traces, a remediation agent holds cloud tools that restart services, roll back deployments, scale clusters, and fail over databases, a cost-control agent trims over-provisioned capacity, and a scribe agent writes post-incident notes into a long-term memory store that later incidents retrieve from, together with the runbooks.\n\nSeveral operational realities shape the design. The cloud APIs occasionally time out without returning a response, so the team cannot tell whether a requested change was applied. Log lines include strings supplied by end users, which means that text the scribe copies into memory may not be trustworthy. The scaling and cost agents share one cloud account and one API rate limit. Finally, an early version asked a human to approve every single action, including read-only queries, and during busy nights the on-call engineers began approving prompts almost automatically.\n\nIn a recent pilot week the team observed duplicate capacity after a timed-out scale request, a stale runbook overriding what live telemetry showed, a burst of API calls as two agents repeatedly reversed each other's changes, and a database failover that was approved with almost no supporting context. The team wants to address the tool, memory, coordination, and oversight problems together.",
+    "question_ids": [
+      "Q-D3-0094",
+      "Q-D4-0085",
+      "Q-D5-0090",
+      "Q-D6-0075"
+    ]
+  }
+]

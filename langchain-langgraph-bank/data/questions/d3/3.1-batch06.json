@@ -110,7 +110,8 @@
     "difficulty": "hard",
     "theory_refs": [
       "TH-D3-004",
-      "TH-D3-005"
+      "TH-D3-005",
+      "TH-D3-015"
     ],
     "case_study_id": null,
     "stem": "A high-stakes financial report requires several facts, some stable (basic accounting definitions) and some current (today's specific exchange rate). What is the most appropriate approach?",

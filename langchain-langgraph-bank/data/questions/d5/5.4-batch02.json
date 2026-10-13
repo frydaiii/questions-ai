@@ -1,0 +1,541 @@
+[
+  {
+    "id": "Q-D5-0021",
+    "domain": 5,
+    "task_statement": "5.4",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D5-005"
+    ],
+    "case_study_id": null,
+    "stem": "A retailer runs 200 shelf-scanning agents across a large store. Nobody wrote an aisle-assignment plan; each agent only reads the signals of agents within a few meters and follows the same simple rule about which direction to scan next. Coverage of the store nonetheless emerges over time. Which characteristic makes this coordination swarm-like rather than another multi-agent pattern?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "A lead agent decomposes the audit into aisle assignments and dispatches each one to a specialist worker"
+      },
+      {
+        "key": "B",
+        "text": "The agents run in a fixed order, and each consumes the structured artifact produced by the previous agent"
+      },
+      {
+        "key": "C",
+        "text": "Each agent applies the same local rule to nearby agents' signals, and store-wide coverage emerges with no global plan"
+      },
+      {
+        "key": "D",
+        "text": "Agents post findings to a shared workspace, and a scheduler picks the next agent to act based on its contents"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "Swarm coordination is defined by agents acting on local observations and local interaction rules, with global organization emerging rather than being planned. In this store, no component owns the aisle plan; coverage appears from many agents applying the same neighbor-based rule. That is the signature that separates a swarm from patterns where some structure decides who does what.",
+      "why_incorrect": {
+        "A": "This describes orchestrator-worker coordination, where one coordinator decomposes the task and assigns subtasks. The scenario explicitly has no such planner.",
+        "B": "This is a sequential pipeline: a fixed order and artifact hand-off between stages. The scanners react to nearby agents, not to a predecessor's output.",
+        "D": "This is a blackboard architecture, where a controller selects the next agent from shared-workspace content. The scenario relies on direct local signals, not a shared board or scheduler."
+      },
+      "rule_of_thumb": "If no one assigns the work and the global pattern comes from many agents applying local rules to nearby signals, it is a swarm."
+    },
+    "tags": [
+      "swarm",
+      "local-rules",
+      "orchestrator-comparison",
+      "emergence"
+    ],
+    "concepts": [
+      "Swarm Intelligence",
+      "Multi-Agent Systems"
+    ]
+  },
+  {
+    "id": "Q-D5-0022",
+    "domain": 5,
+    "task_statement": "5.4",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D5-005",
+      "TH-D5-008"
+    ],
+    "case_study_id": null,
+    "stem": "A flood-response team deploys mapping agents over a wide area where the link to the base station drops often. A design review notes that if one coordinating agent crashes, every other agent stalls waiting for assignments. The team considers moving to decentralized swarm-style coordination. What is the principal benefit they should expect?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "The agents' combined plan becomes globally optimal even when links drop, since local decisions average out errors"
+      },
+      {
+        "key": "B",
+        "text": "Safety limits become unnecessary because no single agent has authority over the behavior of the others"
+      },
+      {
+        "key": "C",
+        "text": "The base station gains tighter step-by-step predictability over every agent's movement and individual choices"
+      },
+      {
+        "key": "D",
+        "text": "Remaining agents can keep working from local observations when a single agent or the coordinator link fails"
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "Because swarm agents act on local observations and local rules, no single controller owns every decision. Losing one agent, or the link to the base station, degrades coverage gracefully instead of halting the whole system. That resilience is the main reason to choose decentralization when a coordinator would be a single point of failure.",
+      "why_incorrect": {
+        "A": "Emergent coordination offers no optimality guarantee; local rules can produce inefficient global outcomes. Resilience is the benefit, not a provably best plan.",
+        "B": "Decentralizing control does not remove the need for global safety constraints. Local rules can still produce harmful collective behavior.",
+        "C": "This is the opposite trade-off. Swarms usually give up centralized predictability in exchange for autonomy and resilience."
+      },
+      "rule_of_thumb": "Choose decentralization for resilience when a single coordinator would be a point of failure; do not expect optimality or predictability in return."
+    },
+    "tags": [
+      "swarm",
+      "resilience",
+      "single-point-of-failure",
+      "decentralization"
+    ],
+    "concepts": [
+      "Swarm Intelligence",
+      "Multi-Agent Systems"
+    ]
+  },
+  {
+    "id": "Q-D5-0023",
+    "domain": 5,
+    "task_statement": "5.4",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D5-005"
+    ],
+    "case_study_id": null,
+    "stem": "In a delivery-robot simulation, each agent slows down when it senses more than three neighbors within five meters and steers away from the most crowded direction. No agent knows the full map or the other agents' destinations, yet traffic jams dissolve across the whole floor. Which property of swarm-style coordination does this primarily illustrate?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Hierarchical delegation, because the slow-down rule is pushed down from a parent agent to its children"
+      },
+      {
+        "key": "B",
+        "text": "Shared-blackboard arbitration, because neighbors post positions to a central workspace that resolves conflicts"
+      },
+      {
+        "key": "C",
+        "text": "Global replanning, because the agents jointly recompute an optimal route for the entire fleet each cycle"
+      },
+      {
+        "key": "D",
+        "text": "Local interaction, because behavior is driven by nearby observations and a shared rule rather than system-wide knowledge"
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "Each robot reacts only to what it senses nearby, using the same simple rule. The jam-dissolving pattern on the whole floor is a global effect produced by local interaction, with no agent having a view of the full system. That is the defining mechanism of swarm coordination.",
+      "why_incorrect": {
+        "A": "Nothing in the scenario involves a parent agent delegating to children. The rule is shared, but each agent applies it independently.",
+        "B": "No central workspace or arbiter exists; agents sense neighbors directly. A blackboard would require a shared state store and a controller choosing who acts.",
+        "C": "Global replanning requires full-system knowledge and a planner. The agents explicitly lack the full map and others' destinations."
+      },
+      "rule_of_thumb": "If the decision uses only nearby information and a common rule, the property at work is local interaction."
+    },
+    "tags": [
+      "swarm",
+      "locality",
+      "local-interaction",
+      "simulation"
+    ],
+    "concepts": [
+      "Swarm Intelligence",
+      "Multi-Agent Systems"
+    ]
+  },
+  {
+    "id": "Q-D5-0024",
+    "domain": 5,
+    "task_statement": "5.4",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D5-005",
+      "TH-D5-007"
+    ],
+    "case_study_id": null,
+    "stem": "A marketplace team runs a swarm of pricing agents. Each follows a rule that looks safe locally: lower my price by one percent whenever a nearby seller undercuts me. Because every rule passes review, an engineer proposes dropping system-wide price floors and spend limits. How should the team respond?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Keep independently enforced system-level bounds, because feedback among safe-looking local rules can compound into a harmful collective outcome such as a price collapse"
+      },
+      {
+        "key": "B",
+        "text": "Keep the bounds only so that every agent behaves identically, which makes the run reproducible rather than safer"
+      },
+      {
+        "key": "C",
+        "text": "Drop the bounds, because per-agent unit tests of the local rule are sufficient evidence that the aggregate cannot breach market limits"
+      },
+      {
+        "key": "D",
+        "text": "Drop the bounds, because swarms have no collective effects beyond what each individual agent's behavior already shows"
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "explanation": {
+      "why_correct": "Local rules that are acceptable in isolation can interact through feedback and amplify, producing unsafe behavior at population scale; here, mutual undercutting can spiral prices downward. Decentralized control does not remove the need for global constraints, and those bounds should be enforced outside the agents' own rules so they hold even when emergent dynamics go wrong.",
+      "why_incorrect": {
+        "B": "Global bounds are not meant to make agents identical. Their purpose is to cap harmful collective outcomes that no individual rule would reveal.",
+        "C": "Testing each agent's rule in isolation does not predict population behavior. Emergence must be evaluated at the system level.",
+        "D": "This reverses the lesson of emergence: collective behavior can differ qualitatively from individual behavior, which is exactly why system-level checks are needed."
+      },
+      "rule_of_thumb": "Decentralized control still needs centralized safety bounds; safe local rules do not guarantee a safe collective."
+    },
+    "tags": [
+      "swarm",
+      "safety-bounds",
+      "emergence",
+      "pricing"
+    ],
+    "concepts": [
+      "Swarm Intelligence",
+      "Multi-Agent Systems"
+    ]
+  },
+  {
+    "id": "Q-D5-0025",
+    "domain": 5,
+    "task_statement": "5.4",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D5-007",
+      "TH-D5-005"
+    ],
+    "case_study_id": null,
+    "stem": "A team monitors a 500-agent evacuation simulation in which every agent follows a local rule to avoid neighbors and move toward the nearest open exit. Logs show every individual move is valid and collision-free. Which observation is the strongest sign that the rule is not producing the intended global behavior?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Individual agents occasionally hold slightly different local states than the neighbors they are observing"
+      },
+      {
+        "key": "B",
+        "text": "Per-agent message volume is low because agents exchange only short signals with nearby peers"
+      },
+      {
+        "key": "C",
+        "text": "Across many runs, the crowd repeatedly piles into the same exit corridor even though each single move satisfies the rule"
+      },
+      {
+        "key": "D",
+        "text": "Average per-agent decision time rises slightly when more neighbors fall inside the sensing radius"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "Swarm rules are judged by the collective outcome, not by whether each move is locally valid. A repeated, population-level pattern, such as everyone converging on one corridor, shows that the rule produces an undesirable emergent behavior despite every individual action being legal. This is why population-level metrics must be monitored.",
+      "why_incorrect": {
+        "A": "Differing local states are expected in a decentralized system, since each agent sees different neighbors. They do not indicate a bad global outcome.",
+        "B": "Short, low-volume local signals are a normal property of swarm communication and say nothing about the quality of the emergent behavior.",
+        "D": "A small latency increase with more neighbors is a performance detail. It does not show that the collective behavior is wrong."
+      },
+      "rule_of_thumb": "Judge a swarm rule by population-level outcomes; locally valid moves do not prove a good global result."
+    },
+    "tags": [
+      "swarm",
+      "emergent-failure",
+      "monitoring",
+      "evacuation-simulation"
+    ],
+    "concepts": [
+      "Swarm Intelligence",
+      "Multi-Agent Systems"
+    ]
+  },
+  {
+    "id": "Q-D5-0026",
+    "domain": 5,
+    "task_statement": "5.4",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D5-005",
+      "TH-D5-002"
+    ],
+    "case_study_id": null,
+    "stem": "A yard-logistics team is choosing between two designs for 300 autonomous trucks. In the first, an orchestrator assigns every truck's route. In the second, trucks adjust their routes using signals from nearby trucks and no one holds the full plan. What does the team accept by choosing the second design?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Lower resilience to failures, in exchange for a guarantee that work is allocated optimally across the fleet"
+      },
+      {
+        "key": "B",
+        "text": "Fewer interactions between trucks, in exchange for an easier audit of why each individual decision was made"
+      },
+      {
+        "key": "C",
+        "text": "A requirement for human sequencing of each truck's tasks, in exchange for faster average runtime across the fleet"
+      },
+      {
+        "key": "D",
+        "text": "Less predictable and harder-to-audit global behavior, in exchange for local autonomy and tolerance of a lost coordinator"
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "An orchestrator gives explicit assignments and an inspectable global state, but it can become a bottleneck or single point of failure. A swarm trades that centralized predictability for local autonomy and potential resilience, while accepting that global behavior is emergent and harder to predict and audit.",
+      "why_incorrect": {
+        "A": "This inverts both sides. Swarms tend to improve resilience, and they provide no guarantee of optimal allocation.",
+        "B": "A swarm relies on continual local interaction, and its decisions are harder, not easier, to audit than an orchestrator's explicit assignments.",
+        "C": "Swarms do not require human sequencing; they remove the need for any central sequencer, human or automated."
+      },
+      "rule_of_thumb": "Orchestrator buys predictability and inspectability; swarm buys autonomy and resilience at the cost of global predictability."
+    },
+    "tags": [
+      "swarm",
+      "orchestrator-comparison",
+      "tradeoff",
+      "logistics"
+    ],
+    "concepts": [
+      "Swarm Intelligence",
+      "Multi-Agent Systems"
+    ]
+  },
+  {
+    "id": "Q-D5-0027",
+    "domain": 5,
+    "task_statement": "5.4",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D5-007",
+      "TH-D5-020"
+    ],
+    "case_study_id": null,
+    "stem": "A drone-inspection swarm will have its repulsion threshold changed so agents keep a larger distance from each other. The rule behaves correctly in a single-drone test. What is the safest way to roll the change out to production?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Deploy to the full fleet at once, since a rule validated on one agent behaves the same way at any population size"
+      },
+      {
+        "key": "B",
+        "text": "Run the revised rule in a bounded simulation at realistic fleet size, track collective metrics with stop conditions in place, then stage the rollout"
+      },
+      {
+        "key": "C",
+        "text": "Approve the change from the single-agent test, extending it to the fleet once that agent's individual behavior stays correct"
+      },
+      {
+        "key": "D",
+        "text": "Disable the stop conditions during the pilot so the swarm can settle into its natural steady state before evaluation"
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "explanation": {
+      "why_correct": "Changing a local rule changes the interaction dynamics, so its effect has to be observed on the collective. A bounded simulation at realistic population size, with stop conditions and population-level metrics, reveals emergent problems before they affect production, and a staged rollout limits the blast radius if something still goes wrong.",
+      "why_incorrect": {
+        "A": "Single-agent results do not transfer to population behavior, and deploying everywhere without observation removes any chance to contain a harmful emergent effect.",
+        "C": "Evaluating one agent in isolation cannot show feedback or crowding effects, which only appear when many agents interact.",
+        "D": "Removing stop conditions eliminates the externally enforced bounds that contain runaway behavior during exactly the period of greatest uncertainty."
+      },
+      "rule_of_thumb": "Test collective behavior at realistic scale, with bounds and stop conditions, before and during a staged rollout."
+    },
+    "tags": [
+      "swarm-evaluation",
+      "simulation",
+      "staged-rollout",
+      "stop-conditions"
+    ],
+    "concepts": [
+      "Swarm Intelligence",
+      "Multi-Agent Systems"
+    ]
+  },
+  {
+    "id": "Q-D5-0028",
+    "domain": 5,
+    "task_statement": "5.4",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D5-007",
+      "TH-D5-005"
+    ],
+    "case_study_id": null,
+    "stem": "In a town simulation with 25 language-model agents, developers notice that most agents gather at the same café around noon, although no agent's prompt mentions that place or time. A reviewer suspects a hidden global plan. Which explanation best accounts for the behavior?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "One agent is silently acting as a central planner and instructing the others to gather at noon"
+      },
+      {
+        "key": "B",
+        "text": "The behavior must come from a software bug, because anything absent from every agent's prompt cannot appear in the simulation"
+      },
+      {
+        "key": "C",
+        "text": "Repeated interactions and shared memories feed back into each agent's local decisions, producing a system-level pattern none of them planned"
+      },
+      {
+        "key": "D",
+        "text": "The agents share identical prompts, so each one independently computed the same global schedule for the whole town"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "In interacting agents, memory and repeated exchanges create feedback loops: what one agent says or does changes what its neighbors remember and do next. Over time this can produce coherent group behavior that no single agent explicitly planned. Emergent patterns are a property of the interaction dynamics, not evidence of a hidden planner.",
+      "why_incorrect": {
+        "A": "Nothing in the scenario indicates a controlling agent. Attributing the pattern to a hidden planner overlooks that interaction alone can generate it.",
+        "B": "Emergent behavior is a known, legitimate outcome of repeated interaction. Its absence from the prompts does not make it a bug.",
+        "D": "Identical prompts do not give an agent a global schedule; it would still need information about the others. The coordination arises from interaction and shared memory."
+      },
+      "rule_of_thumb": "Group-level patterns can arise from feedback among local interactions; do not infer a hidden planner from an unplanned outcome."
+    },
+    "tags": [
+      "emergence",
+      "feedback",
+      "generative-agents",
+      "memory"
+    ],
+    "concepts": [
+      "Swarm Intelligence",
+      "Multi-Agent Systems"
+    ]
+  },
+  {
+    "id": "Q-D5-0029",
+    "domain": 5,
+    "task_statement": "5.4",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D5-007",
+      "TH-D5-008"
+    ],
+    "case_study_id": null,
+    "stem": "A decentralized fleet of procurement agents over-ordered a component by a factor of ten. No orchestrator exists, and each agent adjusts orders based on neighbors' signals. An auditor must reconstruct how the excess arose. Which set of artifacts is most useful?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "The final purchase order and the system prompt of the agent that submitted it"
+      },
+      {
+        "key": "B",
+        "text": "A roster listing every agent's name, version, and configured model"
+      },
+      {
+        "key": "C",
+        "text": "The full conversation transcript of the single agent that spent the most money"
+      },
+      {
+        "key": "D",
+        "text": "Versioned local rule definitions, timestamped interaction logs with agent origin, and population-level metrics over time"
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "In a decentralized system, the outcome comes from rules plus the history of interactions, so an audit needs all three: which local rules were in force, who signaled what to whom and when, and how collective quantities such as total order volume evolved. Origin-tagged logs also support provenance, showing where a questionable value first entered and how it spread.",
+      "why_incorrect": {
+        "A": "The final output and one prompt cannot explain a collective, feedback-driven outcome. Neither shows how other agents influenced the decision.",
+        "B": "A roster identifies participants but records no events or interactions, so it cannot reconstruct how the excess developed.",
+        "C": "The largest spender may only be the last link in a chain. Looking at one agent hides the amplification among the others."
+      },
+      "rule_of_thumb": "Audit decentralized behavior with rules, origin-tagged interaction logs, and collective metrics, not just the final answer or one agent."
+    },
+    "tags": [
+      "audit",
+      "provenance",
+      "interaction-logs",
+      "collective-metrics"
+    ],
+    "concepts": [
+      "Swarm Intelligence",
+      "Multi-Agent Systems"
+    ]
+  },
+  {
+    "id": "Q-D5-0030",
+    "domain": 5,
+    "task_statement": "5.4",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D5-007",
+      "TH-D5-008",
+      "TH-D5-019"
+    ],
+    "case_study_id": null,
+    "stem": "A group of sensor-fusion agents each average their own reading with neighbors' latest estimates and rebroadcast the result. One thermometer is miscalibrated by 2 degrees. After several rounds, nearly all agents report values 8 degrees too high and agree closely with each other. One engineer says the tight agreement shows the estimate is reliable. What kind of risk is this?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "A message-formatting problem that a stricter output schema would fully resolve on its own"
+      },
+      {
+        "key": "B",
+        "text": "A single-agent context-window limit that would disappear if each agent were given a larger window"
+      },
+      {
+        "key": "C",
+        "text": "A feedback-driven collective failure, where each exchange round reinforces and spreads the initial error among correlated agents"
+      },
+      {
+        "key": "D",
+        "text": "A sign of high consensus quality, since close agreement among independent agents indicates the estimate is correct"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "Repeated local averaging and rebroadcast forms a feedback loop that reinforces and propagates the original error, so a small fault becomes a population-wide one. Agreement is also weak evidence here: the agents are not independent, because they are consuming each other's estimates. Correlated errors can produce confident consensus on a wrong value.",
+      "why_incorrect": {
+        "A": "The values are well-formed but wrong. A schema would validate the format of messages, not stop an error from being amplified by the exchange process.",
+        "B": "Nothing here is limited by a context window. The failure comes from interaction dynamics among agents, not from one agent's capacity.",
+        "D": "The agents are not independent, since each updates from the others' outputs. Close agreement among correlated agents does not verify correctness and here reflects the error spreading."
+      },
+      "rule_of_thumb": "When agents feed on one another's outputs, errors can amplify and agreement is not verification."
+    },
+    "tags": [
+      "cascading-error",
+      "feedback",
+      "correlated-errors",
+      "sensor-fusion"
+    ],
+    "concepts": [
+      "Swarm Intelligence",
+      "Multi-Agent Systems"
+    ]
+  }
+]

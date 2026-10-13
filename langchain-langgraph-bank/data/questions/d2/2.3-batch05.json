@@ -111,7 +111,8 @@
     "type": "single_choice",
     "difficulty": "medium",
     "theory_refs": [
-      "TH-D2-012"
+      "TH-D2-012",
+      "TH-D2-020"
     ],
     "case_study_id": null,
     "stem": "Which statement most accurately summarizes the value and limits of self-reflection together?",

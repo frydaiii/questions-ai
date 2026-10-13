@@ -1,0 +1,668 @@
+[
+  {
+    "id": "Q-D6-0025",
+    "domain": 6,
+    "task_statement": "6.1",
+    "type": "single_choice",
+    "difficulty": "easy",
+    "theory_refs": [
+      "TH-D6-007"
+    ],
+    "case_study_id": null,
+    "stem": "A finance operations team is choosing between two invoice-triage agents for 50,000 invoices a month. Agent X reaches 89% task success but averages 41 model calls, $1.30 per invoice, and a 3-minute 95th-percentile latency. Agent Y reaches 86% task success with 6 model calls, $0.12 per invoice, and an 18-second 95th-percentile latency. Which evaluation conclusion is most defensible?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Agent X is strictly better, because task success is the only metric that matters for a finance workload"
+      },
+      {
+        "key": "B",
+        "text": "Agent Y is strictly better, because lower cost per task outweighs any accuracy difference"
+      },
+      {
+        "key": "C",
+        "text": "The agents should be compared on an accuracy-versus-cost frontier, asking whether the 3-point gain justifies roughly ten times the cost and latency at this volume"
+      },
+      {
+        "key": "D",
+        "text": "Cost and latency should be dropped from the comparison because they depend on vendor pricing, leaving task success as the deciding figure"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "A 3-point accuracy gain that costs roughly ten times more per task and is far slower has to be weighed on an accuracy-versus-cost frontier. At 50,000 invoices a month the extra spend and latency may or may not be justified by the value of the avoided errors, so both numbers belong in the decision.",
+      "why_incorrect": {
+        "A": "Accuracy is not the only axis; ignoring a roughly tenfold cost and latency difference at this volume makes the comparison cost-blind.",
+        "B": "Lower cost does not automatically outweigh accuracy; if each error is expensive, the extra 3 points could still pay for themselves.",
+        "D": "Cost and latency are not noise that depends only on pricing; they are measurable properties of the agent design (steps, tool calls) and must be reported."
+      },
+      "rule_of_thumb": "Report accuracy with cost and latency per task, then decide where on the frontier the extra spend stops paying off."
+    },
+    "tags": [
+      "cost-per-task",
+      "pareto-frontier",
+      "latency"
+    ],
+    "concepts": [
+      "Evaluation & Learning Loops",
+      "Orchestration"
+    ]
+  },
+  {
+    "id": "Q-D6-0026",
+    "domain": 6,
+    "task_statement": "6.1",
+    "type": "single_choice",
+    "difficulty": "easy",
+    "theory_refs": [
+      "TH-D6-008"
+    ],
+    "case_study_id": null,
+    "stem": "A customer-support agent once mishandled a refund request that contained a long forwarded email chain, and the team fixed it with a prompt edit. Two months later a model upgrade quietly brings the same failure back. What practice would most directly have caught this?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Retrying the refund transcript by hand once after the prompt edit and closing the ticket if it passes"
+      },
+      {
+        "key": "B",
+        "text": "Adding the transcript to the prompt as a worked example and skipping further testing since the model has now seen it"
+      },
+      {
+        "key": "C",
+        "text": "Retesting the case only when the model provider announces a major new version"
+      },
+      {
+        "key": "D",
+        "text": "Adding the transcript with an expected-behavior check to a permanent regression suite that reruns after every prompt, model, tool, or memory change"
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "Turning the failing transcript into a permanent regression case with an explicit expected-behavior check, and rerunning the whole suite after every prompt, model, tool, or memory change, would have flagged the reappearing failure at upgrade time instead of in production.",
+      "why_incorrect": {
+        "A": "A single manual retry right after the fix proves nothing about later changes; the failure returned after a different change.",
+        "B": "Embedding the transcript as a worked example does not test anything, and skipping further testing leaves later changes unchecked.",
+        "C": "Waiting for a major version announcement misses quiet model updates and changes to prompts or tools, which can also reintroduce failures."
+      },
+      "rule_of_thumb": "Every fixed failure becomes a test, and every change to the agent reruns all tests."
+    },
+    "tags": [
+      "regression-suite",
+      "model-upgrade",
+      "customer-support"
+    ],
+    "concepts": [
+      "Evaluation & Learning Loops",
+      "Error Recovery"
+    ]
+  },
+  {
+    "id": "Q-D6-0027",
+    "domain": 6,
+    "task_statement": "6.1",
+    "type": "single_choice",
+    "difficulty": "easy",
+    "theory_refs": [
+      "TH-D6-009"
+    ],
+    "case_study_id": null,
+    "stem": "A team grades pairs of agent answers with an LLM judge. They notice that the answer shown first wins about 70% of the time, and when they rerun the same pairs with the order swapped, the winner often flips. Which bias is most likely at work, and what is the standard mitigation?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Verbosity bias; lengthen every answer so the judge sees equal amounts of text"
+      },
+      {
+        "key": "B",
+        "text": "Self-enhancement bias; use the agent's own model as the judge so styles match"
+      },
+      {
+        "key": "C",
+        "text": "Position bias; run each pair twice with the order swapped and count only verdicts that stay consistent"
+      },
+      {
+        "key": "D",
+        "text": "Agent hallucination; lower the agent's temperature to zero before regrading"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "A verdict that follows presentation order rather than content is position bias. Running each pair in both orders and counting only consistent verdicts (treating flips as ties) removes the order effect from the score.",
+      "why_incorrect": {
+        "A": "Verbosity bias favors longer answers, not the first-shown one, and lengthening answers would only reward the bias.",
+        "B": "Self-enhancement bias favors outputs that resemble the judge's own style; grading with the generator's model would make it worse, and it does not explain order-dependent flips.",
+        "D": "Lowering the agent's temperature changes the answers being graded, not how the judge reacts to their position."
+      },
+      "rule_of_thumb": "Randomize or swap answer order, and trust only verdicts that survive the swap."
+    },
+    "tags": [
+      "llm-as-judge",
+      "position-bias",
+      "pairwise-evaluation"
+    ],
+    "concepts": [
+      "Evaluation & Learning Loops"
+    ]
+  },
+  {
+    "id": "Q-D6-0028",
+    "domain": 6,
+    "task_statement": "6.1",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D6-007",
+      "TH-D6-006"
+    ],
+    "case_study_id": null,
+    "stem": "A research-assistant team adds a 'reflect and retry up to 10 times' loop. On their benchmark, task success rises from 71% to 74%, median cost per task rises from $0.08 to $0.55, and 95th-percentile latency grows from 20 seconds to 2.5 minutes. Trace review shows many runs repeating near-identical search calls. What should the team do before adopting the loop?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Adopt it, because any improvement in task success justifies the additional cost and latency"
+      },
+      {
+        "key": "B",
+        "text": "Report only median latency, since the slowest runs are outliers that do not reflect typical use"
+      },
+      {
+        "key": "C",
+        "text": "Raise the retry cap to 30, since repeated attempts show the agent needs more reasoning steps"
+      },
+      {
+        "key": "D",
+        "text": "Compare it with a simple retried-call baseline at matched cost and report cost per task and percentile latency next to success, counting step-cap hits and redundant calls as failures"
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "A 3-point gain bought with a large cost and latency increase has to be compared with a cheap baseline, such as a single call retried a couple of times at matched cost. Reporting cost per task and percentile latency alongside success, and treating step-cap hits and repeated calls as measurable failures, shows whether the loop is genuinely better or just expensive.",
+      "why_incorrect": {
+        "A": "An accuracy gain does not justify unlimited spend; the trade-off depends on the cost and latency the gain buys.",
+        "B": "Median latency hides the slow tail, which here grew from 20 seconds to 2.5 minutes and is exactly what users feel.",
+        "C": "Repeated near-identical calls suggest wasted steps, not better reasoning; raising the cap would likely add cost without a proportional gain."
+      },
+      "rule_of_thumb": "Judge extra reasoning steps against a cheap baseline at matched cost, and report cost and tail latency with accuracy."
+    },
+    "tags": [
+      "cost-controlled-evaluation",
+      "step-limits",
+      "baseline-comparison"
+    ],
+    "concepts": [
+      "Evaluation & Learning Loops",
+      "Reasoning Loop (ReAct)"
+    ]
+  },
+  {
+    "id": "Q-D6-0029",
+    "domain": 6,
+    "task_statement": "6.1",
+    "type": "multi_response",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D6-008"
+    ],
+    "case_study_id": null,
+    "stem": "A travel-booking agent scores 94% on a clean 200-prompt evaluation set, but production users write with typos, paste irrelevant itineraries, and rely on flight-search APIs that sometimes time out. Select TWO additions that best test the agent's robustness before the next release.",
+    "select_count": 2,
+    "options": [
+      {
+        "key": "A",
+        "text": "Rerun the same 200 clean prompts three times and average the results"
+      },
+      {
+        "key": "B",
+        "text": "Create paraphrased, typo-ridden, and distractor-laden variants of each request and assert the agent still selects the same booking tool with equivalent arguments"
+      },
+      {
+        "key": "C",
+        "text": "Inject tool faults such as search-API timeouts, malformed responses, and empty results, and check the agent retries, falls back, or escalates rather than fabricating a booking"
+      },
+      {
+        "key": "D",
+        "text": "Expand the judge's rubric with more scoring criteria for the same clean set"
+      },
+      {
+        "key": "E",
+        "text": "Tune the prompt on the failing perturbed cases and report the improved score on those same cases as the robustness result"
+      }
+    ],
+    "correct": [
+      "B",
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "Perturbation tests (paraphrases, typos, irrelevant context) with an invariant such as 'same booking tool and arguments' check stability under input variation. Fault-injection tests (timeouts, malformed JSON, empty results) check that the agent retries, falls back, or escalates instead of inventing a booking. Together they probe the variation the clean set never exercises.",
+      "why_incorrect": {
+        "A": "Rerunning the same clean prompts measures sampling noise on the happy path, not robustness to varied inputs or tool failures.",
+        "D": "A more detailed judge rubric on the clean set refines grading but adds no new input variation or failure conditions.",
+        "E": "Tuning on the perturbed cases and reporting those same cases as the final result inflates the score; tuning and reporting need separate dev and holdout sets."
+      },
+      "rule_of_thumb": "Perturb the inputs, break the tools, and keep tuning data apart from the reporting data."
+    },
+    "tags": [
+      "robustness",
+      "perturbation-tests",
+      "fault-injection"
+    ],
+    "concepts": [
+      "Evaluation & Learning Loops",
+      "Error Recovery"
+    ]
+  },
+  {
+    "id": "Q-D6-0030",
+    "domain": 6,
+    "task_statement": "6.1",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D6-009",
+      "TH-D6-004"
+    ],
+    "case_study_id": null,
+    "stem": "A data-migration agent moves customer records between two databases. Success can be verified by comparing row counts and per-table checksums against the source. A teammate proposes grading each run by feeding the transcript to an LLM judge, because its written explanations are easy to read. Which approach is best?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Grade success with the row-count and checksum comparison, and use a calibrated judge only for subjective qualities such as report clarity"
+      },
+      {
+        "key": "B",
+        "text": "Use the judge as the primary success measure, since a rubric lets it capture nuances that checksums miss"
+      },
+      {
+        "key": "C",
+        "text": "Use a panel of three judge models and take the majority vote as the success label, since voting removes judge bias"
+      },
+      {
+        "key": "D",
+        "text": "Use the judge only if it is a stronger model than the agent, since stronger judges are unbiased about data correctness"
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "explanation": {
+      "why_correct": "Row counts and checksum comparison are deterministic end-state checks, so they should be the primary success measure; a judge can only guess from the transcript whether data really arrived. The judge remains useful for subjective aspects without a programmatic check, such as the clarity of the final report, provided it is calibrated against human labels.",
+      "why_incorrect": {
+        "B": "A rubric-guided judge may match human preferences on open-ended text, but it should not replace an executable check where one exists, and checksums are not blind to correctness.",
+        "C": "Averaging several judges reduces variance but does not remove shared biases or make a transcript a substitute for verifying the actual database state.",
+        "D": "Judge strength does not make it unbiased, and a judge cannot confirm the state of a database it never inspects."
+      },
+      "rule_of_thumb": "Use deterministic state checks when they exist; reserve a calibrated judge for what cannot be checked programmatically."
+    },
+    "tags": [
+      "end-state-verification",
+      "llm-as-judge",
+      "data-migration"
+    ],
+    "concepts": [
+      "Evaluation & Learning Loops"
+    ]
+  },
+  {
+    "id": "Q-D6-0031",
+    "domain": 6,
+    "task_statement": "6.1",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D6-007",
+      "TH-D6-005"
+    ],
+    "case_study_id": null,
+    "stem": "A telecom builds a customer-facing billing-dispute agent where every run reaches a customer and no verifier checks outputs before delivery. Across repeated trials, a single-attempt success rate is 82% but success on all 8 of 8 repeated trials of the same task is only 41%, at $0.20 per task and a 12-second 95th-percentile latency. Which report is most decision-useful for the launch review?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Success if any of 8 attempts passes, together with mean token count"
+      },
+      {
+        "key": "B",
+        "text": "Success on all repeated trials of each task, reported with cost per task and 95th-percentile latency"
+      },
+      {
+        "key": "C",
+        "text": "Single-attempt success rate together with best-case latency across runs"
+      },
+      {
+        "key": "D",
+        "text": "A single run on 20 hand-picked tasks, with the transcript of the best run attached"
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "explanation": {
+      "why_correct": "Because every attempt reaches a user, the consistency metric (success on all k repeated trials) reflects the experience customers will have, and it is far lower than the single-run figure suggests. Presenting it with cost per task and tail latency lets the review judge reliability and efficiency together.",
+      "why_incorrect": {
+        "A": "Best-of-8 success assumes a verifier can pick the winner, which this deployment lacks, so it overstates dependability.",
+        "C": "Single-attempt success and best-case latency hide both inconsistency across runs and the slow tail customers will encounter.",
+        "D": "A single run on a handful of tasks is too noisy to say anything about a stochastic agent's reliability."
+      },
+      "rule_of_thumb": "Use pass^k for customer-facing runs without a verifier, and report it with cost and tail latency."
+    },
+    "tags": [
+      "pass-hat-k",
+      "reliability",
+      "cost-per-task"
+    ],
+    "concepts": [
+      "Evaluation & Learning Loops",
+      "Agent"
+    ]
+  },
+  {
+    "id": "Q-D6-0032",
+    "domain": 6,
+    "task_statement": "6.1",
+    "type": "multi_response",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D6-009"
+    ],
+    "case_study_id": null,
+    "stem": "A company wants to use an LLM judge to score the quality of summaries written by its support-ticket agent, since no programmatic check exists for summary quality. Select THREE steps that make the judge's scores more trustworthy.",
+    "select_count": 3,
+    "options": [
+      {
+        "key": "A",
+        "text": "Use the same model that powers the agent as the judge so that writing styles align"
+      },
+      {
+        "key": "B",
+        "text": "Hand-label a sample of summaries and measure how well the judge's scores agree with the human labels"
+      },
+      {
+        "key": "C",
+        "text": "Swap or randomize the order of the answers in pairwise comparisons across runs"
+      },
+      {
+        "key": "D",
+        "text": "Add a rubric line giving higher scores to more detailed, longer summaries"
+      },
+      {
+        "key": "E",
+        "text": "Provide an explicit rubric and a reference answer so the judge grades against stated criteria"
+      }
+    ],
+    "correct": [
+      "B",
+      "C",
+      "E"
+    ],
+    "explanation": {
+      "why_correct": "Hand-labeling a sample and measuring judge-human agreement shows whether the judge can be trusted at all. Swapping or randomizing order in pairwise comparisons neutralizes position bias. Giving the judge an explicit rubric and a reference answer anchors it to stated criteria instead of its own style preferences.",
+      "why_incorrect": {
+        "A": "Using the agent's own model as judge invites self-enhancement bias, since it tends to prefer outputs resembling its own.",
+        "D": "Rewarding longer summaries builds the judge's verbosity bias into the metric instead of correcting for it."
+      },
+      "rule_of_thumb": "Calibrate against humans, randomize order, and anchor the judge with a rubric and reference."
+    },
+    "tags": [
+      "llm-as-judge",
+      "rubric-grading",
+      "calibration"
+    ],
+    "concepts": [
+      "Evaluation & Learning Loops"
+    ]
+  },
+  {
+    "id": "Q-D6-0033",
+    "domain": 6,
+    "task_statement": "6.1",
+    "type": "matching",
+    "difficulty": "easy",
+    "theory_refs": [
+      "TH-D6-007",
+      "TH-D6-008",
+      "TH-D6-009"
+    ],
+    "case_study_id": null,
+    "stem": "Match each agent-evaluation problem on the left with the practice that best addresses it.",
+    "select_count": 4,
+    "matching": {
+      "left": [
+        {
+          "key": "L1",
+          "text": "A planner agent uses 40 model calls per task where a simple baseline uses 5 for nearly the same accuracy"
+        },
+        {
+          "key": "L2",
+          "text": "A bug fixed last month reappears after a model upgrade"
+        },
+        {
+          "key": "L3",
+          "text": "An LLM judge tends to prefer whichever answer is shown first"
+        },
+        {
+          "key": "L4",
+          "text": "An agent works on clean prompts but fails when users make typos or an API times out"
+        }
+      ],
+      "right": [
+        {
+          "key": "R1",
+          "text": "Swap answer order and calibrate the judge against human labels"
+        },
+        {
+          "key": "R2",
+          "text": "Perturbation and fault-injection tests with expected invariants"
+        },
+        {
+          "key": "R3",
+          "text": "Report cost per task and compare on an accuracy-versus-cost frontier"
+        },
+        {
+          "key": "R4",
+          "text": "A permanent regression suite rerun after every change"
+        },
+        {
+          "key": "R5",
+          "text": "Grade the final database state against an annotated goal state"
+        }
+      ]
+    },
+    "correct_pairs": {
+      "L1": "R3",
+      "L2": "R4",
+      "L3": "R1",
+      "L4": "R2"
+    },
+    "explanation": {
+      "why_correct": "A planner using 40 calls where a baseline uses 5 for similar accuracy is an efficiency problem, addressed by reporting cost per task on an accuracy-versus-cost frontier. A bug that returns after a model upgrade is a regression problem, addressed by a permanent suite rerun after every change. A judge favoring the first-shown answer is position bias, addressed by swapping order and calibrating against humans. An agent that breaks on typos and API timeouts lacks robustness testing, addressed by perturbation and fault-injection tests. The end-state grading option fits none of these problems.",
+      "why_incorrect": {},
+      "rule_of_thumb": "Name the failure first: cost-blind, regression, judge bias, or fragility, and each has its own test."
+    },
+    "tags": [
+      "evaluation-practices",
+      "matching",
+      "regression-suite"
+    ],
+    "concepts": [
+      "Evaluation & Learning Loops"
+    ]
+  },
+  {
+    "id": "Q-D6-0034",
+    "domain": 6,
+    "task_statement": "6.1",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D6-008",
+      "TH-D6-006"
+    ],
+    "case_study_id": null,
+    "stem": "A warehouse agent checks stock through an inventory API. In the test sandbox the API always responds instantly and the agent scores 97%. In production the API occasionally returns a 504 timeout, and the agent then tells customers the item is in stock without any confirmation. Which change to the evaluation best exposes this class of problem?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Grow the clean sandbox set to 10,000 cases so the 97% estimate has a tighter confidence interval"
+      },
+      {
+        "key": "B",
+        "text": "Have an LLM judge rate the politeness and tone of the final stock replies"
+      },
+      {
+        "key": "C",
+        "text": "Add fault-injection cases where the API times out, errors, or returns empty or malformed data, asserting the agent retries, falls back, or escalates instead of claiming stock"
+      },
+      {
+        "key": "D",
+        "text": "Set the agent's temperature to zero so its behavior is deterministic and no new inputs are needed"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "The failure only appears when the tool misbehaves, so the suite needs fault-injection cases (timeouts, errors, malformed or empty responses) with an invariant that the agent never asserts unverified stock and instead retries, falls back, or escalates. Checking the trajectory confirms it did not skip verification on the way to a fluent answer.",
+      "why_incorrect": {
+        "A": "More clean-path cases reduce variance in a score that already never exercises the failing condition.",
+        "B": "Politeness ratings measure style, not whether the agent made an unsupported claim after a tool error.",
+        "D": "Temperature zero makes sampling more repeatable but does not create the tool failures the agent never saw in testing."
+      },
+      "rule_of_thumb": "If production breaks tools in ways the sandbox never does, add those breakages to the test suite."
+    },
+    "tags": [
+      "fault-injection",
+      "tool-failure",
+      "robustness"
+    ],
+    "concepts": [
+      "Evaluation & Learning Loops",
+      "Error Recovery",
+      "Tools & Tool Discovery"
+    ]
+  },
+  {
+    "id": "Q-D6-0035",
+    "domain": 6,
+    "task_statement": "6.1",
+    "type": "single_choice",
+    "difficulty": "hard",
+    "theory_refs": [
+      "TH-D6-009",
+      "TH-D6-004"
+    ],
+    "case_study_id": null,
+    "stem": "A team compares agent v2 with v1 on a 300-case coding-task suite using an LLM judge from the same model family as the agent. The judge prefers v2 in 64% of pairs. Investigation finds that v2's answers are on average 2.1 times longer, that swapping the presentation order drops v2's win rate to 51%, and that hidden unit tests show v1 passing 78% of tasks and v2 passing 77%. What is the best interpretation and next step?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "v2 is better, because the 64% judge win rate is the most direct signal and a one-point test difference is noise"
+      },
+      {
+        "key": "B",
+        "text": "Switch to a larger judge model, since stronger judges are unbiased about order and length"
+      },
+      {
+        "key": "C",
+        "text": "Truncate v2's answers to v1's length and rerun the same judge, accepting the new win rate as the final comparison"
+      },
+      {
+        "key": "D",
+        "text": "The win rate reflects position and verbosity bias, so treat the hidden unit tests as the primary metric and keep the judge only for subjective qualities with order randomization, length control, and human calibration"
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "The 64% win rate largely disappears under order swapping and tracks answer length, indicating position and verbosity bias (with possible self-enhancement from a same-family judge), while the executable tests show no real improvement. Hidden unit tests should be the primary success metric; the judge should be limited to qualities without a programmatic check, with order randomization, length control, and calibration against human labels.",
+      "why_incorrect": {
+        "A": "The judge's headline win rate is exactly the number the diagnostics undermine; trusting it over executable tests reverses the right priority.",
+        "B": "A larger judge may be more capable, but it is not unbiased, and swapping models does not address order or length effects or replace the tests.",
+        "C": "Truncating answers addresses only verbosity, leaves position bias and same-family preference untouched, and still ranks by a judge when tests exist."
+      },
+      "rule_of_thumb": "When a judge's preference disappears under order swap or length control, trust the executable check."
+    },
+    "tags": [
+      "llm-as-judge",
+      "verbosity-bias",
+      "unit-test-grading"
+    ],
+    "concepts": [
+      "Evaluation & Learning Loops"
+    ]
+  },
+  {
+    "id": "Q-D6-0036",
+    "domain": 6,
+    "task_statement": "6.1",
+    "type": "multi_response",
+    "difficulty": "hard",
+    "theory_refs": [
+      "TH-D6-007",
+      "TH-D6-008"
+    ],
+    "case_study_id": null,
+    "stem": "A team is preparing to ship an agent upgrade that changes both the underlying model version and the tool descriptions. Dev-set accuracy rose from 80% to 83%, but the dev set was used heavily to tune the prompt, and an early trace review shows the new model taking about three times as many steps. Select TWO practices that should gate the release.",
+    "select_count": 2,
+    "options": [
+      {
+        "key": "A",
+        "text": "Compare accuracy on the tuned dev set only, since it has the most cases"
+      },
+      {
+        "key": "B",
+        "text": "Rerun the full regression suite, including all previously fixed production failures, against the new model and tool descriptions"
+      },
+      {
+        "key": "C",
+        "text": "Skip the regression suite because higher overall accuracy implies earlier fixes still hold"
+      },
+      {
+        "key": "D",
+        "text": "Report cost per task, step counts, and tail latency alongside held-out accuracy, and enforce step or budget limits so loops count as failures"
+      },
+      {
+        "key": "E",
+        "text": "Merge the dev set into the holdout set to get more statistical power for the final report"
+      }
+    ],
+    "correct": [
+      "B",
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "Because both the model and the tool descriptions changed, the full regression suite, including every previously fixed production failure, must be rerun to make sure old fixes still hold. Cost per task, step counts, and tail latency should be reported next to accuracy on a held-out set, with step or budget limits so runaway loops register as failures, since the apparent 3-point gain may come with a threefold step increase.",
+      "why_incorrect": {
+        "A": "Dev-set accuracy after heavy tuning is optimistic; relying on it alone ignores both overfitting and the cost increase.",
+        "C": "A higher accuracy number does not show that earlier fixes still hold; changes to model and tools are exactly when regressions reappear.",
+        "E": "Folding the tuned dev set into the holdout removes the one clean estimate of generalization and inflates the reported score."
+      },
+      "rule_of_thumb": "Gate releases on regression results plus held-out accuracy reported with cost and latency."
+    },
+    "tags": [
+      "release-gating",
+      "regression-suite",
+      "holdout-set"
+    ],
+    "concepts": [
+      "Evaluation & Learning Loops",
+      "Orchestration"
+    ]
+  }
+]

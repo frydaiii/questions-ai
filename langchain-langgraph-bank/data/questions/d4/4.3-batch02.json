@@ -111,7 +111,8 @@
     "type": "single_choice",
     "difficulty": "medium",
     "theory_refs": [
-      "TH-D4-010"
+      "TH-D4-010",
+      "TH-D4-020"
     ],
     "case_study_id": null,
     "stem": "A fact has been independently observed and confirmed across many separate past interactions, each time consistently. What does this high frequency suggest about the fact's reliability as a generalizable pattern?",

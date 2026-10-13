@@ -54,47 +54,54 @@
     "id": "Q-D3-0020",
     "domain": 3,
     "task_statement": "3.1",
-    "type": "single_choice",
-    "difficulty": "medium",
+    "type": "multi_response",
+    "difficulty": "easy",
     "theory_refs": [
-      "TH-D3-005"
+      "TH-D3-005",
+      "TH-D3-016"
     ],
     "case_study_id": null,
-    "stem": "An agent needs to answer a question about a specific user's current private order status, which only exists in that company's internal system. Why can the model not reliably answer this from internal knowledge alone?",
-    "select_count": 1,
+    "stem": "A finance-operations agent receives five requests. Which TWO can the model NOT handle reliably from its training knowledge alone, and so should be delegated to a tool? (Select TWO)",
+    "select_count": 2,
     "options": [
       {
         "key": "A",
-        "text": "Order statuses are universal and identical for every user"
+        "text": "Define what an invoice is"
       },
       {
         "key": "B",
-        "text": "This private, system-specific data could not have been part of the model's general training data"
+        "text": "Report the current payment status of one specific customer's invoice stored in the billing system"
       },
       {
         "key": "C",
-        "text": "The model has memorized every company's private database by default"
+        "text": "Explain what 'net 30' payment terms mean"
       },
       {
         "key": "D",
-        "text": "This type of question is always unanswerable regardless of tool access"
+        "text": "Compute the exact total of a 240-line invoice with per-line tax rounding"
+      },
+      {
+        "key": "E",
+        "text": "Describe in general terms why companies reconcile their ledgers"
       }
     ],
     "correct": [
-      "B"
+      "B",
+      "D"
     ],
     "explanation": {
-      "why_correct": "A specific user's private, system-internal order status is exactly the kind of system-specific private data that a general-purpose model's training data could never have contained, making a tool-based lookup against that system necessary.",
+      "why_correct": "The current status of one customer's invoice lives only in the company's billing system and was never part of training data, so it needs a lookup tool. An exact 240-line total with per-line tax rounding is multi-step arithmetic that is far more reliable when the model writes code and a sandboxed interpreter runs it.",
       "why_incorrect": {
-        "C": "Models are not trained on arbitrary companies' private internal databases; this data is inherently inaccessible to general training.",
-        "D": "With appropriate tool access to the relevant internal system, this type of question becomes readily answerable; it is not inherently unanswerable.",
-        "A": "Order statuses are specific to each individual order and user, not universal or identical across users."
+        "A": "Defining an invoice is stable, well-established knowledge that the model can answer without any tool.",
+        "C": "Explaining 'net 30' terms is stable, self-contained knowledge that does not depend on current or private data.",
+        "E": "A general explanation of why ledgers are reconciled is conceptual, stable knowledge and needs no tool."
       },
-      "rule_of_thumb": "Private, system-specific data that was never part of general training data requires a tool-based lookup against the actual system that holds it."
+      "rule_of_thumb": "Private system data and exact multi-step computation call for tools; stable general knowledge does not."
     },
     "tags": [
       "tool-necessity",
-      "private-data"
+      "private-data",
+      "precise-computation"
     ],
     "concepts": [
       "Tools & Tool Discovery"
@@ -104,50 +111,77 @@
     "id": "Q-D3-0021",
     "domain": 3,
     "task_statement": "3.1",
-    "type": "single_choice",
-    "difficulty": "medium",
+    "type": "matching",
+    "difficulty": "hard",
     "theory_refs": [
-      "TH-D3-004"
+      "TH-D3-004",
+      "TH-D3-015",
+      "TH-D3-002"
     ],
     "case_study_id": null,
-    "stem": "Which scenario best illustrates grounding working as intended?",
-    "select_count": 1,
-    "options": [
-      {
-        "key": "A",
-        "text": "An agent generates a plausible-sounding but entirely unverified claim"
-      },
-      {
-        "key": "B",
-        "text": "An agent states a fact with no reference to where the information came from"
-      },
-      {
-        "key": "C",
-        "text": "An agent refuses to answer any question involving facts"
-      },
-      {
-        "key": "D",
-        "text": "An agent states a current fact and cites the specific retrieved source it came from, allowing that source to be checked"
-      }
-    ],
-    "correct": [
-      "D"
-    ],
+    "stem": "A research agent returned four answers with source links. Match each observed problem on the left to its diagnosis on the right. One diagnosis on the right applies to none of the four.",
+    "select_count": 4,
+    "matching": {
+      "left": [
+        {
+          "key": "L1",
+          "text": "The linked page is on topic but never mentions the specific figure the answer states"
+        },
+        {
+          "key": "L2",
+          "text": "The linked page states the opposite of what the answer claims"
+        },
+        {
+          "key": "L3",
+          "text": "The answer is fluent and happens to be correct, but includes no source links"
+        },
+        {
+          "key": "L4",
+          "text": "The link is a 2019 page backing a figure that changes every quarter"
+        }
+      ],
+      "right": [
+        {
+          "key": "R1",
+          "text": "Uncited claim: possibly correct, but it cannot be audited"
+        },
+        {
+          "key": "R2",
+          "text": "Attribution exists but the source is stale for a fast-changing fact"
+        },
+        {
+          "key": "R3",
+          "text": "Unsupported citation: the evidence does not contain the claim"
+        },
+        {
+          "key": "R4",
+          "text": "Contradicted citation: the evidence refutes the claim"
+        },
+        {
+          "key": "R5",
+          "text": "Fully grounded and attributed answer"
+        }
+      ]
+    },
+    "correct_pairs": {
+      "L1": "R3",
+      "L2": "R4",
+      "L3": "R1",
+      "L4": "R2"
+    },
     "explanation": {
-      "why_correct": "Citing the specific retrieved source behind a claim is exactly what grounding looks like in practice -- it gives the claim a traceable, checkable origin.",
-      "why_incorrect": {
-        "B": "Stating a fact with no reference to its origin is the definition of an ungrounded claim, the opposite of grounding working as intended.",
-        "C": "Refusing to answer any factual question entirely sidesteps the task rather than demonstrating grounding.",
-        "A": "An unverified, plausible-sounding claim with no traceable source is exactly the kind of ungrounded claim that risks hallucination."
-      },
-      "rule_of_thumb": "Grounding in practice means citing a specific, checkable source behind a claim -- not omitting sources or generating unverified assertions."
+      "why_correct": "A linked page that is on topic but never contains the stated figure is an unsupported citation. A page that states the opposite is a contradicted citation. A correct, fluent answer with no links is uncited: it may be right, but nobody can audit it. A 2019 page backing a quarterly-changing figure shows that attribution exists but the source is stale, which is a freshness failure. The fully grounded diagnosis fits none of the four.",
+      "why_incorrect": {},
+      "rule_of_thumb": "A citation is useful only if the source actually supports the claim and is current enough for the fact."
     },
     "tags": [
-      "grounding"
+      "grounding",
+      "attribution",
+      "citation-quality"
     ],
     "concepts": [
-      "Environment",
-      "Tools & Tool Discovery"
+      "Tools & Tool Discovery",
+      "Environment"
     ]
   }
 ]

@@ -108,7 +108,8 @@
     "type": "single_choice",
     "difficulty": "medium",
     "theory_refs": [
-      "TH-D3-004"
+      "TH-D3-004",
+      "TH-D3-015"
     ],
     "case_study_id": null,
     "stem": "A model answers a factual question entirely from internal knowledge with no tool call, and the answer turns out wrong. Why is this error harder to diagnose than an error in a grounded, tool-sourced claim?",

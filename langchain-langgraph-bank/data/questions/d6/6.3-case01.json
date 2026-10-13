@@ -1,0 +1,55 @@
+[
+  {
+    "id": "Q-D6-0011",
+    "domain": 6,
+    "task_statement": "6.3",
+    "type": "single_choice",
+    "difficulty": "hard",
+    "theory_refs": [
+      "TH-D6-001",
+      "TH-D6-002"
+    ],
+    "case_study_id": "CS-01",
+    "stem": "The warehouse agent can release a vehicle into a human work area. Which HITL control is most appropriate?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Require human approval with the proposed route, evidence, and stop/modify controls before release"
+      },
+      {
+        "key": "B",
+        "text": "Ask for approval after the vehicle moves"
+      },
+      {
+        "key": "C",
+        "text": "Let the agent decide because the route tool succeeded"
+      },
+      {
+        "key": "D",
+        "text": "Require a human to approve every harmless status read"
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "explanation": {
+      "why_correct": "Require human approval with the proposed route, evidence, and stop/modify controls before release This follows the cited research principle and fits the scenario.",
+      "why_incorrect": {
+        "B": "This does not address the central principle: require human approval with the proposed route, evidence, and stop/modify controls before release",
+        "C": "This does not address the central principle: require human approval with the proposed route, evidence, and stop/modify controls before release",
+        "D": "This does not address the central principle: require human approval with the proposed route, evidence, and stop/modify controls before release"
+      },
+      "rule_of_thumb": "Prefer the option that reflects require human approval with the proposed route, evidence, and stop/modify controls before release."
+    },
+    "tags": [
+      "case-study",
+      "hitl",
+      "high-impact"
+    ],
+    "concepts": [
+      "Human-in-the-Loop (HITL)",
+      "Guardrails"
+    ]
+  }
+]

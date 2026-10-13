@@ -1,0 +1,13 @@
+[
+  {
+    "id": "CS-03",
+    "title": "Incident-response agent team at a payments processor",
+    "scenario": "Meridian Pay, an online payments processor, runs a team of agents to support on-call engineers during production incidents. A triage agent reads incoming alerts and assigns severity; an investigator agent queries logs, metrics, and deploy history; a remediation agent can execute runbook actions such as restarting a service, rolling back a deploy, or scaling a cluster; and a reviewer agent checks every proposed remediation before it runs. All four are built on the same underlying model. The investigator works in a loop: it queries a tool, reads the result, forms a hypothesis, and queries again. Thousands of alerts a day match known signatures and must be handled quickly, while a novel multi-service outage is rare but costly if mishandled.\n\nMeridian keeps memory for the team. Every resolved incident is stored with its symptoms, root cause, fix, and outcome. After a successful remediation, the agent drafts a new runbook entry summarizing what worked, and that entry is retrievable by every agent in later incidents. The drafts are built partly from incident tickets, which include free text pasted in by customers and by third-party vendors. In drills, when a fix fails, the investigator writes a short lesson about what went wrong so that the next attempt can use it.\n\nDuring one drill, the remediation agent proposed a rollback, the reviewer rejected it with a request for changes, the remediation agent re-proposed a slightly different rollback, and the two exchanged proposals for hundreds of turns. The simulated outage continued the whole time while the token budget drained. The postmortem concluded that nothing outside the agents themselves was limiting the exchange.",
+    "question_ids": [
+      "Q-D1-0074",
+      "Q-D2-0089",
+      "Q-D4-0084",
+      "Q-D5-0088"
+    ]
+  }
+]

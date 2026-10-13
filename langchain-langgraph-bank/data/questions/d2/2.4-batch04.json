@@ -6,7 +6,8 @@
     "type": "single_choice",
     "difficulty": "medium",
     "theory_refs": [
-      "TH-D2-014"
+      "TH-D2-014",
+      "TH-D2-021"
     ],
     "case_study_id": null,
     "stem": "A user asks an interactive agent to 'send the report to the team,' but it's unclear whether 'the team' refers to the engineering team or the marketing team, and the consequences of guessing wrong (sending sensitive data to the wrong group) are significant. What is the most appropriate action?",
@@ -109,7 +110,8 @@
     "type": "single_choice",
     "difficulty": "medium",
     "theory_refs": [
-      "TH-D2-013"
+      "TH-D2-013",
+      "TH-D2-019"
     ],
     "case_study_id": null,
     "stem": "Which mechanism would help an agent distinguish well-supported conclusions from under-supported ones, beyond relying on the model's own phrasing?",

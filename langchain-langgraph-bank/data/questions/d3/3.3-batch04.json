@@ -53,47 +53,48 @@
     "id": "Q-D3-0066",
     "domain": 3,
     "task_statement": "3.3",
-    "type": "single_choice",
-    "difficulty": "medium",
+    "type": "ordering",
+    "difficulty": "easy",
     "theory_refs": [
-      "TH-D3-011"
+      "TH-D3-011",
+      "TH-D3-019"
     ],
     "case_study_id": null,
-    "stem": "An agent retries a failed call exactly once with no backoff, immediately and identically, and the retry also fails for the same transient reason that hadn't yet resolved. What design improvement would most likely help?",
-    "select_count": 1,
+    "stem": "A payment-capture tool call times out with no response, and the agent must recover without charging the customer twice. Place the steps in the correct order.",
+    "select_count": 4,
     "options": [
       {
         "key": "A",
-        "text": "Retrying infinitely with no delay between attempts"
+        "text": "Query the payment system read-only to see whether the charge was recorded"
       },
       {
         "key": "B",
-        "text": "Removing all retry logic entirely"
+        "text": "The capture call times out, so it is unclear whether the charge succeeded"
       },
       {
         "key": "C",
-        "text": "Adding a backoff delay between attempts, giving the transient condition more time to actually resolve before retrying"
+        "text": "If no charge exists, retry the capture carrying the same idempotency key"
       },
       {
         "key": "D",
-        "text": "Switching to a completely unrelated tool with no connection to the original task"
+        "text": "If the retry still fails at the attempt limit, escalate to a human instead of looping"
       }
     ],
     "correct": [
-      "C"
+      "B",
+      "A",
+      "C",
+      "D"
     ],
     "explanation": {
-      "why_correct": "Since the condition was transient but hadn't resolved yet, adding a backoff delay gives it more time to actually clear before the next attempt, increasing the odds that a subsequent retry succeeds.",
-      "why_incorrect": {
-        "B": "Removing retry logic entirely would prevent the agent from ever recovering from genuinely transient failures.",
-        "D": "Switching to a completely unrelated tool would not address the actual task's needs; a fallback should still be relevant to the original need.",
-        "A": "Retrying infinitely with no delay could worsen the situation (e.g. if the issue is server overload) and provides no stopping condition."
-      },
-      "rule_of_thumb": "When an immediate retry fails for a transient reason, adding backoff gives the condition more time to clear before trying again."
+      "why_correct": "The sequence is: the capture call times out, leaving it unclear whether the charge happened; a read-only query checks the real state; if no charge exists, the call is retried with the same idempotency key so a duplicate cannot create a second charge; and if the attempt limit is reached the agent escalates instead of looping. Verifying state before repeating a side-effecting call is the key ordering point.",
+      "why_incorrect": {},
+      "rule_of_thumb": "After an ambiguous timeout on an action tool: check state, retry idempotently, then escalate at the limit."
     },
     "tags": [
       "retry-strategy",
-      "backoff"
+      "idempotency",
+      "action-tools"
     ],
     "concepts": [
       "Tools & Tool Discovery",
@@ -104,54 +105,59 @@
     "id": "Q-D3-0067",
     "domain": 3,
     "task_statement": "3.3",
-    "type": "single_choice",
-    "difficulty": "medium",
+    "type": "multi_response",
+    "difficulty": "easy",
     "theory_refs": [
-      "TH-D3-013"
+      "TH-D3-013",
+      "TH-D3-020"
     ],
     "case_study_id": null,
-    "stem": "An agent is told by a lookup tool that a given database table has 'zero matching records' for a high-stakes compliance check. What is the most prudent next step before concluding the check passed?",
-    "select_count": 1,
+    "stem": "A compliance agent's lookup tool returns 'zero matching records' for a high-stakes sanctions screening. Which TWO follow-up actions are appropriate before treating the screening as passed? (Select TWO)",
+    "select_count": 2,
     "options": [
       {
         "key": "A",
-        "text": "Sanity-check the query itself and consider cross-checking against another source, given the high stakes, before treating the zero result as conclusive"
+        "text": "Record the screening as passed because the tool raised no error"
       },
       {
         "key": "B",
-        "text": "Immediately conclude the compliance check passed with full confidence and no further scrutiny"
+        "text": "Conclude that the sanctions database must have been permanently deleted"
       },
       {
         "key": "C",
-        "text": "Assume the database itself has been permanently deleted"
+        "text": "Re-examine the query for typos, over-narrow filters, or a wrongly targeted data source"
       },
       {
         "key": "D",
-        "text": "Ignore the result entirely and make up an answer instead"
+        "text": "Cross-check the same entity against a second independent source"
+      },
+      {
+        "key": "E",
+        "text": "Fill in the expected result from training knowledge and move on"
       }
     ],
     "correct": [
-      "A"
+      "C",
+      "D"
     ],
     "explanation": {
-      "why_correct": "Given the high stakes of a compliance check, sanity-checking whether the zero-result query was actually correct, and potentially cross-checking against another source, is the prudent step before treating the result as a conclusive true negative.",
+      "why_correct": "An empty result can mean a true negative or a flawed query. Re-examining the query for typos, over-narrow filters, or the wrong data source tests the first explanation, and cross-checking the entity against a second independent source gives external evidence that does not depend on the first tool.",
       "why_incorrect": {
-        "B": "Concluding immediately with full confidence skips exactly the scrutiny that high-stakes, surprising, or pivotal results warrant.",
-        "C": "A zero-record result does not imply the entire database was deleted; this is an unsupported leap unrelated to the actual finding.",
-        "D": "Ignoring the actual result and fabricating an answer discards real information in favor of an ungrounded guess, which is clearly worse."
+        "A": "No error being raised does not prove the result answers the question. Accepting it unexamined is exactly the trap of a misleading-success result.",
+        "B": "Concluding that the whole database was deleted is an unsupported leap. Zero matches does not imply a missing database.",
+        "E": "Filling in the expected answer from training knowledge discards real evidence and replaces it with an ungrounded guess."
       },
-      "rule_of_thumb": "For high-stakes, surprising, or pivotal results, sanity-check the query and consider cross-checking against another source before treating the result as conclusive."
+      "rule_of_thumb": "For a surprising empty result in a high-stakes check, inspect the query and verify with an independent source."
     },
     "tags": [
       "sanity-checking",
       "high-stakes",
-      "misleading-results"
+      "cross-checking"
     ],
     "concepts": [
       "Tools & Tool Discovery",
       "Guardrails",
-      "Error Recovery",
-      "Evaluation & Learning Loops"
+      "Error Recovery"
     ]
   }
 ]

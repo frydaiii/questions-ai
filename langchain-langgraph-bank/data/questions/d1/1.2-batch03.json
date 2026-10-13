@@ -50,53 +50,57 @@
     "id": "Q-D1-0042",
     "domain": 1,
     "task_statement": "1.2",
-    "type": "ordering",
+    "type": "single_choice",
     "difficulty": "hard",
     "theory_refs": [
       "TH-D1-011",
-      "TH-D1-012"
+      "TH-D1-012",
+      "TH-D1-017"
     ],
     "case_study_id": null,
-    "stem": "An agent's search tool call initially returns irrelevant results. Place the following events in the order they occur in a well-functioning, adaptive agent loop, from first to last.",
-    "select_count": 4,
+    "stem": "A ReAct-style agent researching flight delays logs the same pair over and over: 'Thought: I should search for the delay statistics', followed by an identical search call that returns an empty result, until the step limit halts the run. Which diagnosis and fix best match this behavior?",
+    "select_count": 1,
     "options": [
       {
         "key": "A",
-        "text": "The agent calls the search tool with its first query"
+        "text": "Reasoning is slowing the loop; remove the thoughts and let the model emit actions only so it reacts to empty results faster"
       },
       {
         "key": "B",
-        "text": "The agent observes that the returned results are irrelevant to the task"
+        "text": "Reasoning is interleaved too early; require the model to finish all its thinking before the first tool call so the plan is complete up front"
       },
       {
         "key": "C",
-        "text": "The agent reasons about how to refine the query based on what was irrelevant"
+        "text": "The agent lacks a planner; replace the loop with a fixed script of three predetermined queries so the retries are guaranteed to differ"
       },
       {
         "key": "D",
-        "text": "The agent calls the search tool again with a refined query"
+        "text": "The empty result never reaches the next thought as an explicit observation; surface 'no results' in context and add repeated-action detection"
       }
     ],
     "correct": [
-      "A",
-      "B",
-      "C",
       "D"
     ],
     "explanation": {
-      "why_correct": "The adaptive sequence starts with the initial action (first search), followed by observing the outcome (irrelevant results), then reasoning about how to improve based on that observation, and finally acting again with the improved query -- a complete cycle of the feedback loop in action.",
-      "why_incorrect": {},
-      "rule_of_thumb": "Each adaptive cycle follows act, then observe the outcome, then reason about adjustment, then act again -- repeating the loop with each outcome informing the next attempt."
+      "why_correct": "In an interleaved thought-action-observation loop, each new thought must be conditioned on the previous observation. Identical thoughts and calls show that the empty outcome is not influencing reasoning, so the feedback loop is effectively broken. Returning an explicit 'no results' observation lets the next thought revise the query, and a repeated-action check plus the step cap bounds the damage if it still stalls.",
+      "why_incorrect": {
+        "A": "Removing thoughts discards the running plan that lets the agent interpret observations and change course; an action-only loop is even less likely to adapt to an empty result.",
+        "B": "Finishing all reasoning before acting removes the interleaving that lets observations revise the plan, and reasoning done up front cannot know that the search will come back empty.",
+        "C": "A fixed query script turns the agent into a workflow and sacrifices adaptivity; it varies the queries but still ignores what the observations actually say."
+      },
+      "rule_of_thumb": "When an interleaved agent repeats the same thought and action, check first whether the last observation is actually reaching the next thought, and always keep a step cap as a backstop."
     },
     "tags": [
+      "react",
       "feedback-loop",
-      "execution-order",
-      "adaptive-behavior"
+      "loop-diagnosis",
+      "step-limit"
     ],
     "concepts": [
       "Agent",
       "State / State Management",
-      "Reasoning Loop (ReAct)"
+      "Reasoning Loop (ReAct)",
+      "Error Recovery"
     ]
   },
   {

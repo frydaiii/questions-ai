@@ -217,7 +217,8 @@
     "type": "single_choice",
     "difficulty": "medium",
     "theory_refs": [
-      "TH-D1-011"
+      "TH-D1-011",
+      "TH-D1-017"
     ],
     "case_study_id": null,
     "stem": "An agent calls a search tool, gets back zero relevant results, but proceeds to the next hard-coded step in its script without ever checking whether the search succeeded. What does this indicate about the system?",
@@ -375,7 +376,8 @@
     "type": "single_choice",
     "difficulty": "medium",
     "theory_refs": [
-      "TH-D1-009"
+      "TH-D1-009",
+      "TH-D1-017"
     ],
     "case_study_id": null,
     "stem": "What is one practical benefit of an agent producing an explicit, written-out chain of thought during the reasoning step, beyond the decision quality itself?",

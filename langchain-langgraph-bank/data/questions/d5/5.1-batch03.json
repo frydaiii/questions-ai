@@ -1,0 +1,549 @@
+[
+  {
+    "id": "Q-D5-0041",
+    "domain": 5,
+    "task_statement": "5.1",
+    "type": "single_choice",
+    "difficulty": "easy",
+    "theory_refs": [
+      "TH-D5-009",
+      "TH-D5-001"
+    ],
+    "case_study_id": null,
+    "stem": "A logistics startup's single agent resolves delivery-exception tickets acceptably. An engineer proposes splitting it into a router agent, a shipment-lookup agent, and a reply-drafting agent. Compared with the single agent, what is the most reliable expected change in resource use?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Total token usage usually falls because each agent works from a shorter prompt"
+      },
+      {
+        "key": "B",
+        "text": "End-to-end latency always falls because the three roles run at the same time"
+      },
+      {
+        "key": "C",
+        "text": "Total token usage usually rises because each agent repeats instructions and handoffs add summaries"
+      },
+      {
+        "key": "D",
+        "text": "Cost stays about the same because the same ticket work is simply divided up"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "Each added agent carries its own instructions, tool descriptions, and intermediate reasoning, and agents re-communicate findings through handoff messages. Those repeated and relayed tokens mean total usage typically goes up, not down, even when each individual prompt is shorter. Here the three roles are also sequentially dependent (route, look up, draft), so there is little parallelism to offset the cost.",
+      "why_incorrect": {
+        "A": "Shorter per-agent prompts do not offset the repeated instructions and handoff summaries; total tokens across all agents normally exceed the single-agent total.",
+        "B": "The roles depend on each other's output, so they run in sequence and each handoff adds delay; latency can even increase.",
+        "D": "Dividing work does not keep cost constant, because coordination messages and duplicated context are extra tokens that the single agent never spent."
+      },
+      "rule_of_thumb": "Splitting an agent adds tokens before it saves any; count the repeated prompts and handoffs."
+    },
+    "tags": [
+      "token-overhead",
+      "cost",
+      "decomposition"
+    ],
+    "concepts": [
+      "Multi-Agent Systems",
+      "Orchestration"
+    ]
+  },
+  {
+    "id": "Q-D5-0042",
+    "domain": 5,
+    "task_statement": "5.1",
+    "type": "single_choice",
+    "difficulty": "easy",
+    "theory_refs": [
+      "TH-D5-010",
+      "TH-D5-001"
+    ],
+    "case_study_id": null,
+    "stem": "A coordinator agent delegates reading a 200-page clinical guideline to a sub-agent, which returns a half-page list of the dosing rules relevant to the patient. What is the main benefit of this design?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "The sub-agent's permissions are automatically restricted to read-only access"
+      },
+      {
+        "key": "B",
+        "text": "The guideline summary is guaranteed to be complete and accurate"
+      },
+      {
+        "key": "C",
+        "text": "The coordinator no longer needs to define what the sub-agent should look for"
+      },
+      {
+        "key": "D",
+        "text": "The coordinator's context stays small and focused while the heavy reading happens in a separate context"
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "The sub-agent explores the long document in its own fresh context window and passes back only a condensed result. The coordinator therefore never has to hold the 200 pages, which keeps its context compact and focused on the overall task. This is context isolation and compression, one of the genuine reasons to decompose.",
+      "why_incorrect": {
+        "A": "A separate context window is not a permission boundary; access rights must be enforced separately through tool and credential limits.",
+        "B": "Compression is lossy, so the summary can omit or distort details; nothing guarantees completeness or accuracy.",
+        "C": "The coordinator must still give a clear task description, because the sub-agent starts with none of the coordinator's context."
+      },
+      "rule_of_thumb": "Let the sub-agent read the pile; the caller should receive only the conclusion."
+    },
+    "tags": [
+      "context-isolation",
+      "sub-agents",
+      "summarization"
+    ],
+    "concepts": [
+      "Sub-agents & Handoffs",
+      "Context Engineering"
+    ]
+  },
+  {
+    "id": "Q-D5-0043",
+    "domain": 5,
+    "task_statement": "5.1",
+    "type": "single_choice",
+    "difficulty": "hard",
+    "theory_refs": [
+      "TH-D5-009",
+      "TH-D5-001",
+      "TH-D5-010"
+    ],
+    "case_study_id": null,
+    "stem": "A team's multi-agent research prototype, with four parallel sub-agents, beat its single-agent baseline on deep market-analysis questions at roughly ten times the tokens, finishing faster in wall-clock time. The product owner now wants it for a free-tier assistant that answers quick factual lookups under a tight per-query spend cap. Which conclusion is best supported?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Keep a single agent for the quick lookups and reserve the multi-agent design for high-value, breadth-heavy queries where the extra tokens are justified"
+      },
+      {
+        "key": "B",
+        "text": "Adopt it everywhere, because finishing faster in wall-clock time shows it is also cheaper per query"
+      },
+      {
+        "key": "C",
+        "text": "Adopt it everywhere, because a quality gain on research questions will transfer to any question type"
+      },
+      {
+        "key": "D",
+        "text": "Reject it entirely, because any increase in token usage makes a multi-agent design unacceptable"
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "explanation": {
+      "why_correct": "The multi-agent gain was measured on broad, valuable research questions and came with a large token increase. Quick lookups are low value and tightly capped on spend, so the extra quality and parallelism buy little while the multiplied cost is a real problem. Routing by task value and breadth, with a single agent for simple queries, matches the cost-benefit logic of decomposition.",
+      "why_incorrect": {
+        "B": "Parallel agents often finish sooner while spending more tokens in total, so lower wall-clock time says nothing about lower cost.",
+        "C": "Benefits measured on one task type do not automatically transfer; simple lookups are exactly where a single agent is already adequate.",
+        "D": "Higher token usage is acceptable when task value is high and the measured gain justifies it; the research workload may still deserve the design."
+      },
+      "rule_of_thumb": "Decide per workload: pay for extra agents only where value and breadth justify the tokens."
+    },
+    "tags": [
+      "cost-benefit",
+      "token-overhead",
+      "workload-routing"
+    ],
+    "concepts": [
+      "Multi-Agent Systems",
+      "Orchestration"
+    ]
+  },
+  {
+    "id": "Q-D5-0044",
+    "domain": 5,
+    "task_statement": "5.1",
+    "type": "multi_response",
+    "difficulty": "easy",
+    "theory_refs": [
+      "TH-D5-009",
+      "TH-D5-012"
+    ],
+    "case_study_id": null,
+    "stem": "A news-monitoring team fans a broad survey task out to several parallel sub-agents, then merges their findings. Select TWO statements that are accurate about this design.",
+    "select_count": 2,
+    "options": [
+      {
+        "key": "A",
+        "text": "Total cost falls roughly in proportion to the number of parallel agents"
+      },
+      {
+        "key": "B",
+        "text": "Wall-clock time can drop while the total number of tokens spent rises"
+      },
+      {
+        "key": "C",
+        "text": "Running in parallel removes the need to compare against a single-agent baseline"
+      },
+      {
+        "key": "D",
+        "text": "The final join step still adds sequential latency that parallelism does not remove"
+      },
+      {
+        "key": "E",
+        "text": "Parallel agents avoid repeating instructions, so their prompts add no extra tokens"
+      }
+    ],
+    "correct": [
+      "B",
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "Independent branches can run at the same time, which shortens elapsed time, but every branch carries its own prompt, tool results, and reasoning, so the total compute spent goes up. The merge or synthesis step must wait for all branches and adds its own latency, so it can become the new bottleneck.",
+      "why_incorrect": {
+        "A": "More parallel agents mean more repeated prompts and results, so total cost generally rises rather than falls.",
+        "C": "A baseline comparison is still needed to show that the quality or speed gain justifies the extra cost.",
+        "E": "Each agent carries its own instructions and tool descriptions, so parallel agents add token overhead rather than avoiding it."
+      },
+      "rule_of_thumb": "Parallelism buys time, not tokens; the join step is still serial."
+    },
+    "tags": [
+      "parallelism",
+      "latency",
+      "token-overhead"
+    ],
+    "concepts": [
+      "Multi-Agent Systems",
+      "Orchestration"
+    ]
+  },
+  {
+    "id": "Q-D5-0045",
+    "domain": 5,
+    "task_statement": "5.1",
+    "type": "multi_response",
+    "difficulty": "hard",
+    "theory_refs": [
+      "TH-D5-010",
+      "TH-D5-009"
+    ],
+    "case_study_id": null,
+    "stem": "A coordinator for competitive-intelligence reports was overflowing its context with raw web pages, so the team delegates each competitor to a sub-agent that returns a condensed brief. Select THREE practices that let this design keep its benefit without losing information the coordinator needs.",
+    "select_count": 3,
+    "options": [
+      {
+        "key": "A",
+        "text": "Copy the coordinator's full transcript into every sub-agent so none lacks context"
+      },
+      {
+        "key": "B",
+        "text": "Give each sub-agent a self-contained task description stating objective, scope, and output format"
+      },
+      {
+        "key": "C",
+        "text": "Require every brief to be a single sentence so the coordinator's context is as small as possible"
+      },
+      {
+        "key": "D",
+        "text": "Require briefs to include source references and key figures so the coordinator can spot-check claims"
+      },
+      {
+        "key": "E",
+        "text": "Measure quality, tokens, and latency against a single-agent baseline on the same questions"
+      }
+    ],
+    "correct": [
+      "B",
+      "D",
+      "E"
+    ],
+    "explanation": {
+      "why_correct": "A sub-agent starts with a clean context, so it needs a self-contained task description to know what to look for and what to return. Because compression is lossy, briefs should keep sources and key figures that allow verification. Finally, the extra agents spend more tokens, so the design should be justified by comparing quality, cost, and latency with a single-agent baseline.",
+      "why_incorrect": {
+        "A": "Copying the full transcript to every sub-agent defeats isolation, inflates token cost, and reintroduces the long-context dilution the design aims to avoid.",
+        "C": "A one-sentence brief is over-aggressive compression that will drop details the coordinator later needs."
+      },
+      "rule_of_thumb": "Isolate context, but brief precisely, return verifiable summaries, and measure against a baseline."
+    },
+    "tags": [
+      "context-isolation",
+      "summarization",
+      "baseline"
+    ],
+    "concepts": [
+      "Sub-agents & Handoffs",
+      "Context Engineering"
+    ]
+  },
+  {
+    "id": "Q-D5-0046",
+    "domain": 5,
+    "task_statement": "5.1",
+    "type": "multi_response",
+    "difficulty": "hard",
+    "theory_refs": [
+      "TH-D5-010",
+      "TH-D5-011"
+    ],
+    "case_study_id": null,
+    "stem": "An in-house legal-intake assistant is currently one generalist agent. Select TWO observations that would justify splitting a separate sub-agent out of it rather than keeping everything in one agent.",
+    "select_count": 2,
+    "options": [
+      {
+        "key": "A",
+        "text": "One step needs a distinct tool set with narrower permissions than the rest of the workflow"
+      },
+      {
+        "key": "B",
+        "text": "The proposed new agent would differ from the generalist only by a persona such as \"senior partner\""
+      },
+      {
+        "key": "C",
+        "text": "The team wants the agent layout to mirror the law firm's organizational chart"
+      },
+      {
+        "key": "D",
+        "text": "One step reads very long filings, producing large intermediate material when the caller needs only a short conclusion"
+      },
+      {
+        "key": "E",
+        "text": "Every step edits the same evolving draft and needs the full details of the previous step's reasoning"
+      }
+    ],
+    "correct": [
+      "A",
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "A separate agent is justified when it has a different tool set or permission scope, which supports least privilege, or when its work generates a lot of intermediate material that the caller does not need, so isolating and compressing context helps. Both reasons give the new agent something real that a single generalist handles poorly.",
+      "why_incorrect": {
+        "B": "A persona prompt changes framing, not capability, so a role distinguished only by persona adds handoff cost without real benefit.",
+        "C": "Mirroring an organizational chart is not a performance reason; human structures are not automatically optimal agent topologies.",
+        "E": "Tightly coupled steps sharing one evolving artifact are costly to split because the shared context must be rebuilt at each handoff."
+      },
+      "rule_of_thumb": "Split on real differences in tools, permissions, or context load, not on labels or org charts."
+    },
+    "tags": [
+      "role-specialization",
+      "least-privilege",
+      "context-isolation"
+    ],
+    "concepts": [
+      "Multi-Agent Systems",
+      "Sub-agents & Handoffs"
+    ]
+  },
+  {
+    "id": "Q-D5-0047",
+    "domain": 5,
+    "task_statement": "5.1",
+    "type": "ordering",
+    "difficulty": "hard",
+    "theory_refs": [
+      "TH-D5-009",
+      "TH-D5-010",
+      "TH-D5-001"
+    ],
+    "case_study_id": null,
+    "stem": "A data-pipeline team suspects that its single debugging agent is struggling with log-heavy incidents and wants to know whether splitting into sub-agents is worthwhile. Arrange the evaluation steps in the sequence that best supports a sound decision.",
+    "select_count": 5,
+    "options": [
+      {
+        "key": "A",
+        "text": "Re-run the same evaluation set on the prototype and compare quality, tokens, and latency with the baseline"
+      },
+      {
+        "key": "B",
+        "text": "Run the strong single-agent system on a fixed evaluation set and record quality, tokens, and latency"
+      },
+      {
+        "key": "C",
+        "text": "Adopt the multi-agent design only for the workloads where the measured gain justifies the added cost"
+      },
+      {
+        "key": "D",
+        "text": "Prototype a decomposition aimed at the specific bottleneck that was identified"
+      },
+      {
+        "key": "E",
+        "text": "Inspect the baseline's failures to find the bottleneck, such as context overflow, breadth, or conflicting tool needs"
+      }
+    ],
+    "correct": [
+      "B",
+      "E",
+      "D",
+      "A",
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "The single-agent baseline comes first because every decomposition must beat it, and it provides the quality, token, and latency numbers for comparison. Inspecting its failures then shows what actually needs fixing, for example an overloaded context that sub-agents could isolate. The prototype should target that bottleneck rather than copy a generic team layout. Re-running the same evaluation set makes the comparison fair, and adoption comes last and only where the measured gain justifies the extra tokens and coordination latency.",
+      "why_incorrect": {},
+      "rule_of_thumb": "Baseline, diagnose, targeted prototype, same-set comparison, then selective adoption."
+    },
+    "tags": [
+      "baseline",
+      "evaluation",
+      "decomposition-decision"
+    ],
+    "concepts": [
+      "Multi-Agent Systems",
+      "Evaluation & Learning Loops"
+    ]
+  },
+  {
+    "id": "Q-D5-0048",
+    "domain": 5,
+    "task_statement": "5.1",
+    "type": "matching",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D5-009",
+      "TH-D5-010",
+      "TH-D5-012"
+    ],
+    "case_study_id": null,
+    "stem": "Match each term used when deciding whether to decompose a task across agents to the statement that describes it.",
+    "select_count": 4,
+    "matching": {
+      "left": [
+        {
+          "key": "L1",
+          "text": "Token overhead"
+        },
+        {
+          "key": "L2",
+          "text": "Lossy compression"
+        },
+        {
+          "key": "L3",
+          "text": "Single-agent baseline"
+        },
+        {
+          "key": "L4",
+          "text": "Critical path"
+        }
+      ],
+      "right": [
+        {
+          "key": "R1",
+          "text": "The reference system that any decomposition must outperform on quality, cost, and latency"
+        },
+        {
+          "key": "R2",
+          "text": "The longest chain of dependent steps, which limits the speedup no matter how many agents are added"
+        },
+        {
+          "key": "R3",
+          "text": "Repeated prompts, tool results, and handoff messages that raise total usage as agents are added"
+        },
+        {
+          "key": "R4",
+          "text": "A condensed sub-agent result may omit a detail the coordinator later needs"
+        },
+        {
+          "key": "R5",
+          "text": "A guarantee that each sub-agent receives only the permissions its subtask needs"
+        }
+      ]
+    },
+    "correct_pairs": {
+      "L1": "R3",
+      "L2": "R4",
+      "L3": "R1",
+      "L4": "R2"
+    },
+    "explanation": {
+      "why_correct": "Token overhead is the extra usage from repeated instructions, tool results, and agent-to-agent messages. Lossy compression describes the risk that a summary returned by a sub-agent drops something the coordinator needs. The single-agent baseline is the comparison point a multi-agent design must beat. The critical path is the longest dependency chain, which bounds speedup regardless of agent count. R5 describes least privilege, a separate concern that context isolation does not provide by itself.",
+      "why_incorrect": {},
+      "rule_of_thumb": "Overhead costs tokens, compression loses detail, the baseline sets the bar, and the critical path caps speedup."
+    },
+    "tags": [
+      "decomposition-terms",
+      "token-overhead",
+      "critical-path"
+    ],
+    "concepts": [
+      "Multi-Agent Systems",
+      "Context Engineering"
+    ]
+  },
+  {
+    "id": "Q-D5-0049",
+    "domain": 5,
+    "task_statement": "5.1",
+    "type": "matching",
+    "difficulty": "hard",
+    "theory_refs": [
+      "TH-D5-010",
+      "TH-D5-011",
+      "TH-D5-012"
+    ],
+    "case_study_id": null,
+    "stem": "Match each workload on the left to the design decision that best fits it on the right.",
+    "select_count": 4,
+    "matching": {
+      "left": [
+        {
+          "key": "L1",
+          "text": "An assistant must read dozens of long vendor contracts, yet the caller needs only a list of termination clauses"
+        },
+        {
+          "key": "L2",
+          "text": "One agent with a 60-tool toolkit often picks the wrong tool, and the payment tools need tighter credentials than the rest"
+        },
+        {
+          "key": "L3",
+          "text": "A refactor touches three modules that share one changing interface, and each edit depends on the previous one"
+        },
+        {
+          "key": "L4",
+          "text": "A literature survey covers 25 sources whose findings do not depend on each other"
+        }
+      ],
+      "right": [
+        {
+          "key": "R1",
+          "text": "Fan out to parallel agents over the independent branches, then join the results"
+        },
+        {
+          "key": "R2",
+          "text": "Role-specialized agents with narrow tool sets and permissions"
+        },
+        {
+          "key": "R3",
+          "text": "Keep a single agent, because tight coupling would make the cost of rebuilding shared context exceed the benefit"
+        },
+        {
+          "key": "R4",
+          "text": "Delegate the reading to sub-agents with fresh contexts and take back condensed results"
+        },
+        {
+          "key": "R5",
+          "text": "Add a debate round so that agents can verify one another's answers"
+        }
+      ]
+    },
+    "correct_pairs": {
+      "L1": "R4",
+      "L2": "R2",
+      "L3": "R3",
+      "L4": "R1"
+    },
+    "explanation": {
+      "why_correct": "Long contracts that yield a short conclusion are the classic case for context isolation and compression, since sub-agents absorb the bulk and return condensed results. A bloated toolkit with differing credential needs points to role specialization with narrow tool sets and least-privilege permissions. A chain of dependent edits to a shared interface is tightly coupled, so a single agent avoids the cost of re-sharing context and conflicting changes. Independent sources are a breadth task that parallelizes well, and the results are joined at the end. Debate verifies answers but addresses none of these workloads.",
+      "why_incorrect": {},
+      "rule_of_thumb": "Match the split to the real constraint: context load, tools or permissions, coupling, or independence."
+    },
+    "tags": [
+      "decomposition-fit",
+      "parallelism",
+      "role-specialization",
+      "context-isolation"
+    ],
+    "concepts": [
+      "Multi-Agent Systems",
+      "Orchestration"
+    ]
+  }
+]

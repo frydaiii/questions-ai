@@ -2,7 +2,9 @@
   {
     "id": "TH-D3-001",
     "domain": 3,
-    "task_statements": ["3.1"],
+    "task_statements": [
+      "3.1"
+    ],
     "title": "Why language models alone cannot act in or observe the real world",
     "summary": "A language model, by itself, can only produce text based on patterns learned during training -- it has no inherent ability to observe the current state of the world, fetch live data, or cause real-world side effects like sending an email or modifying a database. Tools bridge this gap by giving the model a way to invoke external functionality: a tool call lets the model request that some external system perform an action or return information, and the result is fed back into the model's context as an observation. Without tools, a model is fundamentally limited to producing plausible-sounding text derived from its training data and the current conversation, with no way to verify that text against reality or to actually change anything outside the conversation.",
     "key_points": [
@@ -17,13 +19,21 @@
       "Assuming a sufficiently advanced model could eventually act in the real world without tools -- the fundamental limitation isn't model capability, it's that text generation alone has no mechanism to cause external side effects or access live data.",
       "Believing the model itself executes the tool's underlying code -- in practice, a separate execution layer runs the actual action and returns a result, which the model then incorporates as an observation."
     ],
-    "related_tech": ["tool use", "grounding", "action execution"],
-    "references": ["https://arxiv.org/abs/2302.04761"]
+    "related_tech": [
+      "tool use",
+      "grounding",
+      "action execution"
+    ],
+    "references": [
+      "https://arxiv.org/abs/2302.04761"
+    ]
   },
   {
     "id": "TH-D3-002",
     "domain": 3,
-    "task_statements": ["3.1"],
+    "task_statements": [
+      "3.1"
+    ],
     "title": "Freshness: tools provide access to information a model's training cannot have",
     "summary": "A model's knowledge is fixed at the point its training data was collected, meaning anything that has changed, or any information that didn't exist, since that point is simply unavailable to the model from its training alone. Tools that query live external sources (search, databases, APIs) address this by fetching current information at the moment it's actually needed, rather than relying on the model's necessarily stale internal knowledge. This is especially important for rapidly changing information (prices, weather, news, inventory levels) where even a small gap between training cutoff and current use could make the model's unaided answer meaningfully wrong.",
     "key_points": [
@@ -38,13 +48,21 @@
       "Assuming a model trained very recently has no freshness problem -- any gap between training cutoff and actual use, however small, still exposes the model to being wrong about fast-changing facts.",
       "Treating all information as equally freshness-sensitive -- stable facts (e.g. historical events, well-established scientific principles) are much less at risk from staleness than rapidly changing data."
     ],
-    "related_tech": ["freshness", "stale knowledge", "live data retrieval"],
-    "references": ["https://arxiv.org/abs/2302.04761"]
+    "related_tech": [
+      "freshness",
+      "stale knowledge",
+      "live data retrieval"
+    ],
+    "references": [
+      "https://arxiv.org/abs/2302.04761"
+    ]
   },
   {
     "id": "TH-D3-003",
     "domain": 3,
-    "task_statements": ["3.1"],
+    "task_statements": [
+      "3.1"
+    ],
     "title": "Real-world actions: tools enable agents to actually change external state",
     "summary": "Beyond fetching information, tools also allow an agent to cause real changes in the external world: sending a message, creating a calendar event, placing an order, modifying a database record. These are fundamentally different from information-retrieval tools because they have side effects that persist and affect systems outside the conversation, meaning a mistaken or premature action-tool call can have real consequences that a mistaken information-retrieval call does not (a wrong search query just gives a wrong answer; a wrong 'send payment' call actually sends money). This distinction matters for how cautiously different categories of tools should be invoked -- side-effecting action tools generally warrant more scrutiny, confirmation, or safeguards than read-only information tools.",
     "key_points": [
@@ -59,13 +77,21 @@
       "Treating all tool calls as equally low-risk -- action tools with real side effects carry categorically different risk than read-only information retrieval, and should be designed and reviewed with that difference in mind.",
       "Assuming a confirmation step is always needed for every action tool regardless of its actual reversibility or stakes -- the appropriate level of caution should scale with how consequential and reversible the specific action actually is."
     ],
-    "related_tech": ["action tools", "side effects", "tool risk tiers"],
-    "references": ["https://arxiv.org/abs/2302.04761"]
+    "related_tech": [
+      "action tools",
+      "side effects",
+      "tool risk tiers"
+    ],
+    "references": [
+      "https://arxiv.org/abs/2302.04761"
+    ]
   },
   {
     "id": "TH-D3-004",
     "domain": 3,
-    "task_statements": ["3.1"],
+    "task_statements": [
+      "3.1"
+    ],
     "title": "Grounding reduces hallucination by anchoring claims to verifiable sources",
     "summary": "Grounding means basing a claim or answer on a specific, verifiable, external source rather than solely on the model's internal, generated knowledge. When a model answers purely from internal knowledge, there is no external check on whether that knowledge is accurate for the specific case at hand, which creates room for hallucination -- confidently stated claims that are actually incorrect. Grounding a claim in a tool-retrieved source gives that claim a traceable origin: if the claim turns out wrong, it's possible to check whether the retrieved source itself was wrong, or whether the model misrepresented a correct source, which is a meaningfully different (and more fixable) situation than an ungrounded claim with no traceable origin at all.",
     "key_points": [
@@ -80,13 +106,21 @@
       "Assuming grounding guarantees correctness -- a retrieved source can itself be wrong, outdated, or misread; grounding provides traceability and a path to verification, not an absolute correctness guarantee.",
       "Assuming every single claim needs explicit grounding -- stable, well-established facts can reasonably come from internal knowledge, while grounding's value is highest for current, specific, or high-stakes claims."
     ],
-    "related_tech": ["grounding", "hallucination mitigation", "traceability"],
-    "references": ["https://arxiv.org/abs/2302.04761"]
+    "related_tech": [
+      "grounding",
+      "hallucination mitigation",
+      "traceability"
+    ],
+    "references": [
+      "https://arxiv.org/abs/2302.04761"
+    ]
   },
   {
     "id": "TH-D3-005",
     "domain": 3,
-    "task_statements": ["3.1"],
+    "task_statements": [
+      "3.1"
+    ],
     "title": "Deciding when a task genuinely requires a tool vs. when it does not",
     "summary": "Not every task benefits from or requires tool use -- deciding when a tool is genuinely needed depends on whether the task requires information or capabilities the model doesn't already reliably have. Signals that a tool is needed include: the task references current or frequently changing information, the task requires a real-world side effect (sending something, modifying a record), the task requires precise computation beyond reliable mental arithmetic, or the task requires information specific to a system the model has no way to have memorized (e.g. a specific user's private account data). Conversely, tasks that are self-contained, stable, and fully specified within the prompt typically do not need a tool, and reaching for one anyway adds unnecessary latency and complexity.",
     "key_points": [
@@ -101,13 +135,21 @@
       "Assuming more tool calls always make an agent more capable or reliable -- unnecessary tool calls on self-contained tasks add cost and complexity without improving the outcome.",
       "Assuming tools are only needed for exotic or rare tasks -- common tasks like checking current prices, dates, or user-specific account details routinely require tool-based grounding even though they feel mundane."
     ],
-    "related_tech": ["tool necessity assessment", "grounding", "task analysis"],
-    "references": ["https://arxiv.org/abs/2210.03629"]
+    "related_tech": [
+      "tool necessity assessment",
+      "grounding",
+      "task analysis"
+    ],
+    "references": [
+      "https://arxiv.org/abs/2210.03629"
+    ]
   },
   {
     "id": "TH-D3-006",
     "domain": 3,
-    "task_statements": ["3.2"],
+    "task_statements": [
+      "3.2"
+    ],
     "title": "Tool selection: choosing the right tool among several available options",
     "summary": "When an agent has access to multiple tools, selecting the correct one for a given sub-task requires matching the task's actual need against each tool's documented purpose and capabilities, rather than guessing based on superficial similarity in naming or defaulting to the most frequently used tool. Clear, specific tool descriptions (what the tool does, what inputs it expects, what it returns) are essential for correct selection, since an agent reasoning about which tool to use can only reason as well as the information available to it about each candidate tool. Ambiguous or overlapping tool descriptions increase the risk of selecting the wrong tool for a given need.",
     "key_points": [
@@ -122,13 +164,21 @@
       "Assuming tool selection errors are always a reasoning failure -- they can equally stem from unclear or overlapping tool descriptions that give the agent insufficient information to distinguish between candidates.",
       "Assuming the most recently used or most familiar tool is always the right choice -- selection should be based on actual fit to the current need, not habit or recency."
     ],
-    "related_tech": ["tool selection", "tool descriptions", "tool documentation"],
-    "references": ["https://arxiv.org/abs/2302.04761"]
+    "related_tech": [
+      "tool selection",
+      "tool descriptions",
+      "tool documentation"
+    ],
+    "references": [
+      "https://arxiv.org/abs/2302.04761"
+    ]
   },
   {
     "id": "TH-D3-007",
     "domain": 3,
-    "task_statements": ["3.2"],
+    "task_statements": [
+      "3.2"
+    ],
     "title": "Constructing correct tool call parameters/arguments",
     "summary": "Beyond selecting the right tool, an agent must also construct the call's parameters correctly: supplying required arguments, using the correct format or type for each, and avoiding missing or malformed values that would cause the call to fail or return a misleading result. Parameter construction errors can occur even when tool selection was correct -- for example, selecting the right search tool but passing an overly vague or malformed query, or passing a date in the wrong format for the tool's expected input. Robust tool interfaces often include validation that rejects malformed calls early with a clear error, which is preferable to the call either failing silently or producing a nonsensical but 'successful' result.",
     "key_points": [
@@ -143,13 +193,21 @@
       "Assuming a tool failure always means the wrong tool was selected -- correct tool selection with poorly constructed parameters is an equally common and distinct failure mode.",
       "Assuming a 'successful' tool call result is automatically a useful or correct one -- a call can execute without error yet return a nonsensical or unhelpful result due to vague or poorly chosen parameters."
     ],
-    "related_tech": ["parameter construction", "tool call validation", "argument formatting"],
-    "references": ["https://arxiv.org/abs/2302.04761"]
+    "related_tech": [
+      "parameter construction",
+      "tool call validation",
+      "argument formatting"
+    ],
+    "references": [
+      "https://arxiv.org/abs/2302.04761"
+    ]
   },
   {
     "id": "TH-D3-008",
     "domain": 3,
-    "task_statements": ["3.2"],
+    "task_statements": [
+      "3.2"
+    ],
     "title": "Sequential vs. parallel tool invocation",
     "summary": "When a task requires multiple tool calls, those calls can be made sequentially (one at a time, with each call potentially informed by the previous one's result) or in parallel (multiple independent calls issued at once, since they don't depend on each other's results). Parallel invocation is appropriate when the needed calls are genuinely independent -- the outcome of one does not affect what should be requested in another -- and offers a latency advantage by avoiding needless waiting between unrelated calls. Sequential invocation is required when a later call's parameters or necessity actually depend on an earlier call's result, since parallelizing in that case would mean making the later call before the information it needs is even available.",
     "key_points": [
@@ -164,13 +222,21 @@
       "Assuming parallel invocation is always faster and therefore always better -- it is only valid (and only actually faster in a meaningful sense) when the calls involved are truly independent of each other's results.",
       "Assuming all multi-tool tasks must be sequential by default -- unnecessarily sequentializing independent calls wastes time without any correctness benefit."
     ],
-    "related_tech": ["parallel tool calls", "sequential tool calls", "dependency analysis"],
-    "references": ["https://arxiv.org/abs/2305.04091"]
+    "related_tech": [
+      "parallel tool calls",
+      "sequential tool calls",
+      "dependency analysis"
+    ],
+    "references": [
+      "https://arxiv.org/abs/2305.04091"
+    ]
   },
   {
     "id": "TH-D3-009",
     "domain": 3,
-    "task_statements": ["3.2"],
+    "task_statements": [
+      "3.2"
+    ],
     "title": "Deciding how many tools to expose to an agent at once",
     "summary": "The number and variety of tools made available to an agent at a given time is itself a design choice: too few tools can leave genuine task needs unmet, while too many tools -- especially with overlapping or poorly distinguished purposes -- increases the risk of incorrect selection and can also increase the cognitive/computational burden of reasoning about which to use. A common mitigation is to expose only the subset of tools actually relevant to the current context or task category, rather than always exposing every tool the system has ever defined, which both reduces selection errors and can reduce latency/cost from processing a large tool list on every request.",
     "key_points": [
@@ -185,13 +251,20 @@
       "Assuming exposing every available tool at all times is always safer -- a large, overlapping tool list can itself increase the risk of incorrect selection, which is its own source of error.",
       "Assuming tool exposure should be fixed once and never adjusted per context -- scoping the exposed tool set to the current task category is a practical, commonly used mitigation."
     ],
-    "related_tech": ["tool exposure scoping", "tool list design"],
-    "references": ["https://arxiv.org/abs/2302.04761"]
+    "related_tech": [
+      "tool exposure scoping",
+      "tool list design"
+    ],
+    "references": [
+      "https://arxiv.org/abs/2302.04761"
+    ]
   },
   {
     "id": "TH-D3-010",
     "domain": 3,
-    "task_statements": ["3.3"],
+    "task_statements": [
+      "3.3"
+    ],
     "title": "Categorizing tool-use failures: unavailable, erroring, and misleading results",
     "summary": "Tool-use failures broadly fall into a few categories: the tool is unavailable (times out, is down, or cannot be reached), the tool returns an explicit error (invalid input, permission denied, rate limited), or the tool returns a result that looks successful but is actually misleading or wrong (e.g. an empty result set that gets misinterpreted as 'nothing exists' rather than 'the query was malformed'). Each category calls for a different response: unavailability often calls for a retry (possibly with backoff) or a fallback tool; explicit errors often call for correcting the input and retrying, or reporting the specific failure if it cannot be corrected; misleading-but-successful results are the most dangerous category, since nothing on the surface signals a problem, requiring the agent to sanity-check results rather than accept them uncritically.",
     "key_points": [
@@ -206,13 +279,21 @@
       "Assuming all tool failures look the same and can be handled with one blanket strategy (e.g. always retry) -- unavailability, explicit errors, and misleading-success results need meaningfully different responses.",
       "Assuming a tool call that returns without an explicit error must have succeeded meaningfully -- misleading-success results specifically present this trap, requiring active result sanity-checking."
     ],
-    "related_tech": ["tool-use failure modes", "misleading results", "failure categorization"],
-    "references": ["https://arxiv.org/abs/2302.04761"]
+    "related_tech": [
+      "tool-use failure modes",
+      "misleading results",
+      "failure categorization"
+    ],
+    "references": [
+      "https://arxiv.org/abs/2302.04761"
+    ]
   },
   {
     "id": "TH-D3-011",
     "domain": 3,
-    "task_statements": ["3.3"],
+    "task_statements": [
+      "3.3"
+    ],
     "title": "Retry strategies: when to retry, how, and when to stop",
     "summary": "Retrying a failed tool call is appropriate when the failure is plausibly transient (e.g. a timeout or temporary unavailability) and the retry can reasonably be expected to succeed if conditions change. Blind, unlimited retrying of a call that fails for a persistent reason (e.g. consistently invalid input, or a permanently unavailable service) wastes time and resources without ever succeeding. Good retry design typically includes a limited number of attempts, some backoff (waiting longer between successive attempts) to avoid overwhelming a struggling service, and a clear stopping point after which the agent gives up on that specific approach and either tries an alternative or reports the failure.",
     "key_points": [
@@ -227,13 +308,21 @@
       "Assuming retrying is always a safe, harmless default response to any failure -- retrying a persistently failing call (e.g. due to permanently invalid input) wastes time without any realistic chance of success.",
       "Assuming unlimited retries are more thorough and therefore better -- a sensible stopping condition is necessary to avoid wasting resources on a call that will never succeed."
     ],
-    "related_tech": ["retry strategy", "backoff", "transient vs persistent failure"],
-    "references": ["https://arxiv.org/abs/2302.04761"]
+    "related_tech": [
+      "retry strategy",
+      "backoff",
+      "transient vs persistent failure"
+    ],
+    "references": [
+      "https://arxiv.org/abs/2302.04761"
+    ]
   },
   {
     "id": "TH-D3-012",
     "domain": 3,
-    "task_statements": ["3.3"],
+    "task_statements": [
+      "3.3"
+    ],
     "title": "Fallback strategies: alternative tools or approaches when the primary one fails",
     "summary": "A fallback strategy involves having an alternative tool, data source, or approach ready to use if the primary one fails or is unavailable, rather than the agent having only a single path with no alternative when that path doesn't work. Fallbacks are valuable specifically for failures that are unlikely to resolve through retrying (e.g. a tool being fully deprecated or a particular data source genuinely lacking the needed information), where an alternative path offers a real chance of still completing the task. Designing good fallbacks requires anticipating, in advance, which failures are plausible for a given primary approach and what a reasonable alternative would be -- fallback behavior invented ad hoc in the moment of failure, with no advance thought, is less reliable than a deliberately designed fallback path.",
     "key_points": [
@@ -248,13 +337,21 @@
       "Assuming a fallback must be functionally identical to the primary approach -- a reasonable, even if partial, alternative that lets the task still make progress is valuable, not just a perfect substitute.",
       "Assuming retrying is always a substitute for having a fallback -- retrying only helps with transient failures; a fallback is specifically needed for failures that retrying cannot fix."
     ],
-    "related_tech": ["fallback strategy", "alternative tools", "failure anticipation"],
-    "references": ["https://arxiv.org/abs/2302.04761"]
+    "related_tech": [
+      "fallback strategy",
+      "alternative tools",
+      "failure anticipation"
+    ],
+    "references": [
+      "https://arxiv.org/abs/2302.04761"
+    ]
   },
   {
     "id": "TH-D3-013",
     "domain": 3,
-    "task_statements": ["3.3"],
+    "task_statements": [
+      "3.3"
+    ],
     "title": "Detecting misleading 'successful' tool results through sanity-checking",
     "summary": "The most insidious tool-use failure is a call that returns without an explicit error but produces a result that is actually wrong, empty, or misleading for the agent's actual purpose -- for example, a search tool returning zero results that gets misinterpreted as definitive proof something doesn't exist, when the real cause was an overly narrow or malformed query. Guarding against this requires the agent to sanity-check a tool's result against what was actually expected, rather than treating 'no explicit error' as equivalent to 'this result answers my question correctly.' Useful sanity checks include considering whether an empty or surprising result might indicate a flawed query rather than a true negative, and cross-checking surprising results against another source when the stakes are high enough to warrant it.",
     "key_points": [
@@ -269,7 +366,233 @@
       "Assuming an empty search result always means 'nothing exists' -- it may just as easily mean the query itself was too narrow, malformed, or pointed at the wrong source.",
       "Assuming the absence of an explicit error is sufficient confirmation that a tool call fully and correctly answered the actual question -- this is exactly the gap that misleading-success failures exploit."
     ],
-    "related_tech": ["sanity-checking", "misleading results", "result verification"],
-    "references": ["https://arxiv.org/abs/2302.04761"]
+    "related_tech": [
+      "sanity-checking",
+      "misleading results",
+      "result verification"
+    ],
+    "references": [
+      "https://arxiv.org/abs/2302.04761"
+    ]
+  },
+  {
+    "id": "TH-D3-014",
+    "domain": 3,
+    "task_statements": [
+      "3.2"
+    ],
+    "title": "Protocol-mediated tool discovery and context exchange",
+    "summary": "Protocol-mediated tool discovery gives an agent structured descriptions of available capabilities, inputs, outputs, and operational boundaries. The research literature on tool-using language models shows why models need explicit interfaces and schemas rather than guessing how external functions work. An MCP-style protocol applies that interface principle at the host-to-tool boundary; it improves discoverability and interoperability but does not itself grant authorization or guarantee safe results.",
+    "key_points": [
+      "Tool schemas make capability discovery and argument construction more explicit.",
+      "A protocol is an interoperability layer, not an authorization policy.",
+      "Descriptions should state inputs, outputs, errors, and side effects.",
+      "Discovered tools still require validation, least privilege, and result checking."
+    ],
+    "rule_of_thumb": "A protocol can make tools discoverable and interoperable; it cannot replace permission checks or evaluation.",
+    "common_confusions": [
+      "Assuming protocol discovery makes every tool safe.",
+      "Confusing a tool schema with authorization.",
+      "Treating a successful invocation as proof that the result is correct."
+    ],
+    "related_tech": [
+      "tool protocols",
+      "tool discovery",
+      "schemas",
+      "interoperability"
+    ],
+    "references": [
+      "https://arxiv.org/abs/2302.04761",
+      "https://arxiv.org/abs/2305.15334"
+    ]
+  },
+  {
+    "id": "TH-D3-015",
+    "domain": 3,
+    "task_statements": [
+      "3.1"
+    ],
+    "title": "Citation and attribution: grounded answers should point to the evidence behind each claim",
+    "summary": "Retrieving a source is only half of grounding; the answer must also make clear which claim rests on which piece of evidence. Systems such as WebGPT required the model to collect references while browsing so that humans could check factual accuracy, and the ALCE benchmark evaluates citations separately from fluency and correctness. Attribution turns 'trust me' into 'check this passage', but a citation is only useful if the cited source really supports the specific claim attached to it.",
+    "key_points": [
+      "Attribution links individual claims in an answer to the specific retrieved passages that support them, making the answer auditable.",
+      "Citation quality is a separate dimension from answer fluency and answer correctness: an answer can read well and be right yet still lack supporting citations, or carry citations that do not support it.",
+      "A citation can be wrong in two ways: pointing to a source that does not contain the claim (unsupported), or pointing to a source that contradicts it.",
+      "Requiring the agent to record references as it gathers evidence (rather than reconstructing them afterward) makes attribution far more reliable.",
+      "Even strong systems often leave a meaningful share of statements without complete citation support, so attribution should be checked, not assumed."
+    ],
+    "rule_of_thumb": "A claim is grounded only if the cited passage actually supports it -- verify that each citation entails its claim, not merely that a citation exists.",
+    "common_confusions": [
+      "Assuming that attaching a source link to an answer proves the answer is supported -- the link may point to a passage that does not contain or even contradicts the claim.",
+      "Treating citation quality as the same thing as answer correctness -- a correct answer can be uncited, and a well-cited answer can still be wrong if the source itself is wrong.",
+      "Assuming citations must be generated after the fact -- recording provenance at retrieval time is more reliable than asking the model to recall sources later."
+    ],
+    "related_tech": [
+      "WebGPT",
+      "ALCE",
+      "attribution",
+      "provenance",
+      "citation evaluation"
+    ],
+    "references": [
+      "https://arxiv.org/abs/2112.09332",
+      "https://arxiv.org/abs/2305.14627"
+    ]
+  },
+  {
+    "id": "TH-D3-016",
+    "domain": 3,
+    "task_statements": [
+      "3.1"
+    ],
+    "title": "Delegating exact computation to a code-execution tool instead of reasoning it out in text",
+    "summary": "Language models decompose problems well but often make arithmetic and logic slips when they carry out the calculation step themselves. Program-aided approaches such as PAL and Program of Thoughts have the model write a program as its reasoning and delegate the actual execution to an interpreter, so the model handles understanding and the runtime handles exact computation. This makes a code-execution tool the right choice for precise numeric, date, or data-transformation work, with the caveat that generated code is itself untrusted and must run in a restricted environment.",
+    "key_points": [
+      "Separating problem formulation (the model's strength) from calculation (the interpreter's strength) improves accuracy on numerical and symbolic tasks.",
+      "The model's output becomes a program whose execution result is the observation, rather than a chain of text calculations the model must get right token by token.",
+      "A correct-looking program can still encode a wrong formulation of the problem, so the result should be sanity-checked against expectations.",
+      "Generated code is untrusted input: execution should be sandboxed with limited permissions, resources, and network access.",
+      "Code execution is unnecessary for simple tasks the model handles reliably; it adds latency and a new failure surface."
+    ],
+    "rule_of_thumb": "When a task needs exact multi-step computation, have the model write the code and let a sandboxed interpreter run it, then sanity-check the formulation rather than trusting the number blindly.",
+    "common_confusions": [
+      "Assuming a code tool makes the answer automatically correct -- the interpreter computes exactly what the program says, so a mis-specified program yields a precisely wrong result.",
+      "Assuming a longer written chain of thought is just as reliable as executing code for exact arithmetic -- text-based calculation remains error-prone even when the decomposition is right.",
+      "Treating model-generated code as safe to run directly with full privileges -- it must be executed in a restricted sandbox."
+    ],
+    "related_tech": [
+      "PAL",
+      "Program of Thoughts",
+      "code interpreter",
+      "sandboxed execution"
+    ],
+    "references": [
+      "https://arxiv.org/abs/2211.10435",
+      "https://arxiv.org/abs/2211.12588"
+    ]
+  },
+  {
+    "id": "TH-D3-017",
+    "domain": 3,
+    "task_statements": [
+      "3.2"
+    ],
+    "title": "Structured function calling: schema-conformant arguments are not the same as correct arguments",
+    "summary": "Structured function calling asks the model to emit tool arguments as data that must match a declared schema, and constrained decoding can enforce that every output parses and respects field names, types, and enumerations. This removes a whole class of malformed-call failures such as invalid JSON, missing required fields, or wrong types. It does not make the values correct: a call can be perfectly schema-valid while naming the wrong customer, an out-of-range quantity, or a nonexistent record, so semantic validation and authorization checks must still happen in the execution layer.",
+    "key_points": [
+      "Schema-constrained output guarantees syntactic validity (parseable, required fields present, types and enums respected) but not semantic correctness.",
+      "Constraining the output format is different from merely asking for JSON in the prompt, which gives no guarantee that a particular schema is followed.",
+      "Tight schemas -- enums for closed sets, explicit formats, required versus optional fields -- shrink the space of possible mistakes at the interface.",
+      "Business-rule validation (does this record exist, is this amount within limits, is the caller permitted) belongs in the execution layer, after schema validation.",
+      "A refusal or truncated output can still occur, so the caller must handle responses that do not contain a complete, valid call."
+    ],
+    "rule_of_thumb": "Use schema constraints to eliminate malformed calls, then validate meaning and permission separately -- a valid shape says nothing about whether the values are right.",
+    "common_confusions": [
+      "Assuming a schema-valid call is a correct call -- it can be well-formed yet reference the wrong entity or an unsafe value.",
+      "Equating 'the model was told to answer in JSON' with 'the output is guaranteed to match the schema' -- only constrained generation or validation provides that guarantee.",
+      "Assuming strict schemas remove the need for error handling -- incomplete, refused, or semantically invalid calls still need a defined response path."
+    ],
+    "related_tech": [
+      "function calling",
+      "structured outputs",
+      "constrained decoding",
+      "JSON Schema"
+    ],
+    "references": [
+      "https://openai.com/index/introducing-structured-outputs-in-the-api/"
+    ]
+  },
+  {
+    "id": "TH-D3-018",
+    "domain": 3,
+    "task_statements": [
+      "3.2"
+    ],
+    "title": "Designing tool responses for the agent: concise, meaningful, and actionable output",
+    "summary": "A tool's return value is the observation the agent reasons over, so its design directly shapes later decisions. Responses that dump low-level identifiers, huge payloads, or opaque error codes waste context and invite mistakes, while responses that return high-signal, human-meaningful fields, limit size through pagination or filtering with sensible defaults, and explain errors in actionable terms help the agent choose its next call correctly. Tool design is therefore partly interface design for a non-deterministic reader, and it benefits from being evaluated with real agent runs.",
+    "key_points": [
+      "Return high-signal fields that inform the next step (names, statuses) rather than cryptic internal identifiers; resolving opaque IDs to meaningful values reduces retrieval errors.",
+      "Bound response size with pagination, filtering, range selection, or truncation, and tell the agent how to narrow its request when output is cut off.",
+      "Error messages should say what was wrong and how to fix the call, rather than returning bare codes or stack traces.",
+      "Offering a concise-versus-detailed option lets the agent fetch identifiers only when it needs them for a follow-up call.",
+      "Good tool design is validated empirically by running agents against evaluation tasks, since the best response format varies by task and model."
+    ],
+    "rule_of_thumb": "Write each tool's output for the agent that must act on it next: small, meaningful, and with errors that explain the fix.",
+    "common_confusions": [
+      "Assuming returning everything the API provides is safest -- oversized or noisy responses consume context and can bury the signal the agent needs.",
+      "Assuming an error response only needs a status code -- actionable error text is what lets the agent self-correct its next call.",
+      "Treating tool design like designing an API for deterministic developers -- the consumer is a non-deterministic reader whose behavior depends on how the output is phrased."
+    ],
+    "related_tech": [
+      "tool response design",
+      "context efficiency",
+      "actionable errors",
+      "tool evaluation"
+    ],
+    "references": [
+      "https://www.anthropic.com/engineering/writing-tools-for-agents"
+    ]
+  },
+  {
+    "id": "TH-D3-019",
+    "domain": 3,
+    "task_statements": [
+      "3.3"
+    ],
+    "title": "Idempotency and side-effect safety when retrying action tools",
+    "summary": "Retrying a read-only call is harmless, but retrying an action tool after an ambiguous failure can repeat the side effect: a timeout on a payment or ticket-creation call does not reveal whether the action actually happened. Making such operations idempotent, for example by attaching a unique request key so a repeated call is recognized as the same request, lets the system retry safely. Where idempotency is unavailable, the agent should first check the current state of the external system, or escalate to a human, before repeating a non-reversible action.",
+    "key_points": [
+      "A timeout or dropped connection on an action tool is ambiguous: the action may have been completed even though no confirmation arrived.",
+      "An idempotent operation produces the same end state whether it is executed once or several times, which makes retries safe.",
+      "A client-generated unique request key lets the receiving system detect and ignore duplicate submissions of the same intended action.",
+      "When an action is not idempotent, verify the actual state by a read-only query before retrying, rather than blindly repeating the call.",
+      "Retry policy should differ by tool risk tier: automatic retries for reads, guarded retries for idempotent writes, human confirmation for non-idempotent irreversible actions."
+    ],
+    "rule_of_thumb": "Before retrying a side-effecting call, ask whether the first attempt may already have succeeded -- if so, use an idempotency key or check state first.",
+    "common_confusions": [
+      "Assuming a failed or timed-out response means the action did not happen -- the effect may have occurred and only the response was lost.",
+      "Assuming backoff and attempt limits alone make retrying an action tool safe -- they bound load but do nothing to prevent duplicate side effects.",
+      "Assuming idempotency means the call can only be made once -- it means repeated calls converge to the same end state, not that repeats are rejected with an error."
+    ],
+    "related_tech": [
+      "idempotency key",
+      "at-least-once delivery",
+      "side-effect safety",
+      "tool risk tiers"
+    ],
+    "references": [
+      "https://www.anthropic.com/research/building-effective-agents"
+    ]
+  },
+  {
+    "id": "TH-D3-020",
+    "domain": 3,
+    "task_statements": [
+      "3.3"
+    ],
+    "title": "Verifying outputs with external tools: tool-interactive critique and revision",
+    "summary": "Models are unreliable at judging their own outputs from introspection alone, but they can improve when they check claims against external tools and revise based on the evidence. The CRITIC framework has the model draft an answer, use appropriate tools (a search engine for factual claims, a code interpreter for program correctness) to evaluate it, and then revise using that feedback. The key lesson is that independent external feedback, not self-assessment, is what makes the correction loop trustworthy.",
+    "key_points": [
+      "A verify-then-revise loop uses tools as independent checks on a draft, for example search for facts or execution for code.",
+      "External feedback is more reliable than asking the model to re-read its own answer, which tends to reinforce its original mistakes.",
+      "The choice of verification tool should match the property being checked: factual claims need evidence sources, code needs execution or tests, format needs a validator.",
+      "The loop needs a stopping rule, such as a verification pass or a revision limit, to avoid endless revision.",
+      "The verification tool can itself be wrong or incomplete, so a failed check is a signal to investigate rather than automatic proof of an error."
+    ],
+    "rule_of_thumb": "Verify with a tool that is independent of the model and suited to the property being checked, and cap the number of revision rounds.",
+    "common_confusions": [
+      "Assuming self-reflection without new evidence is as good as tool-based verification -- without external feedback the model often just reaffirms its draft.",
+      "Assuming any tool can verify any claim -- the verifier must be capable of testing the specific property in question.",
+      "Treating the verifier's verdict as infallible -- an empty search result or a missing test case does not prove the draft is wrong or right."
+    ],
+    "related_tech": [
+      "CRITIC",
+      "tool-interactive critiquing",
+      "self-correction",
+      "verification loop"
+    ],
+    "references": [
+      "https://arxiv.org/abs/2305.11738"
+    ]
   }
 ]

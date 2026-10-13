@@ -107,47 +107,53 @@
     "id": "Q-D4-0003",
     "domain": 4,
     "task_statement": "4.1",
-    "type": "single_choice",
-    "difficulty": "medium",
+    "type": "multi_response",
+    "difficulty": "easy",
     "theory_refs": [
-      "TH-D4-003"
+      "TH-D4-003",
+      "TH-D4-013"
     ],
     "case_study_id": null,
-    "stem": "A team designs an agent that relies exclusively on an ever-growing context window with no long-term memory system at all, intending to simply never truncate anything. What problem does this design eventually face?",
-    "select_count": 1,
+    "stem": "A team plans to give an assistant agent only an ever-growing context window, with no long-term memory and no summarization step. Which TWO problems will this design eventually run into? (Select TWO)",
+    "select_count": 2,
     "options": [
       {
         "key": "A",
-        "text": "Even a very large context window is still finite, so the design will eventually hit a limit as the conversation grows indefinitely"
+        "text": "Even a very large context window is finite, so a long enough conversation will eventually exceed it"
       },
       {
         "key": "B",
-        "text": "No problem at all, since context windows have no upper bound in practice"
+        "text": "Older messages stay equally accessible to the agent no matter how long the conversation runs"
       },
       {
         "key": "C",
-        "text": "The agent will gain the ability to remember things across completely separate sessions automatically"
+        "text": "Facts from a previous, separate session are automatically available in the next one"
       },
       {
         "key": "D",
-        "text": "This design is strictly superior to any system that uses long-term memory"
+        "text": "Per-request cost and latency stay flat no matter how much history accumulates"
+      },
+      {
+        "key": "E",
+        "text": "Nothing from an earlier, separate session is available when a new session starts, because the window does not persist"
       }
     ],
     "correct": [
-      "A"
+      "A",
+      "E"
     ],
     "explanation": {
-      "why_correct": "Any context window, however large, is still finite -- a design that assumes unlimited growth will eventually hit that limit as the conversation or task continues to grow indefinitely.",
+      "why_correct": "A context window is always bounded, so unlimited growth eventually overflows it, and a window by itself is not a persistent store, so a new session starts empty. Both limitations are why designs add summarization, truncation policies, or a long-term memory tier.",
       "why_incorrect": {
-        "B": "All context windows have some finite upper bound in practice, even if large; assuming otherwise is the exact flaw being described.",
-        "C": "A large context window within a single session does not provide cross-session persistence; that specifically requires long-term memory, which this design lacks.",
-        "D": "This design has a real limitation (eventual context exhaustion and no cross-session persistence) that a combined working/long-term memory design would not have."
+        "B": "A bounded window cannot keep every message equally accessible indefinitely; overflow forces older content out or into a compressed form.",
+        "C": "Cross-session recall needs a persistent store with retrieval; a window that is rebuilt per session provides no such carry-over.",
+        "D": "Longer histories mean more tokens per request, which raises cost and latency rather than keeping them flat."
       },
-      "rule_of_thumb": "Even very large context windows are finite -- relying solely on an ever-growing window is not a scalable substitute for a proper long-term memory system."
+      "rule_of_thumb": "An ever-growing window is finite and non-persistent: expect overflow within a session and amnesia across sessions unless you add summarization or long-term memory."
     },
     "tags": [
+      "context-window",
       "working-memory",
-      "long-term-memory",
       "memory-architecture"
     ],
     "concepts": [

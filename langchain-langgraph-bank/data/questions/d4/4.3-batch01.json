@@ -6,7 +6,8 @@
     "type": "single_choice",
     "difficulty": "medium",
     "theory_refs": [
-      "TH-D4-009"
+      "TH-D4-009",
+      "TH-D4-018"
     ],
     "case_study_id": null,
     "stem": "Why is retrieving everything stored, rather than the most relevant few memories, generally a poor retrieval strategy?",
@@ -107,7 +108,8 @@
     "type": "single_choice",
     "difficulty": "hard",
     "theory_refs": [
-      "TH-D4-011"
+      "TH-D4-011",
+      "TH-D4-020"
     ],
     "case_study_id": null,
     "stem": "A system with no forgetting mechanism at all has accumulated years of memories, including many clearly superseded facts (e.g. five different old addresses for the same user). What problem does this illustrate?",

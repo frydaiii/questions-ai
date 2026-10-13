@@ -3,45 +3,52 @@
     "id": "Q-D4-0019",
     "domain": 4,
     "task_statement": "4.1",
-    "type": "single_choice",
-    "difficulty": "medium",
+    "type": "multi_response",
+    "difficulty": "easy",
     "theory_refs": [
-      "TH-D4-001"
+      "TH-D4-001",
+      "TH-D4-015"
     ],
     "case_study_id": null,
-    "stem": "What practical constraint does working memory face that long-term memory, in principle, does not?",
-    "select_count": 1,
+    "stem": "An agent writes partial results and notes into its prompt while solving a multi-step budgeting problem. Which TWO statements about this working-memory scratchpad are correct? (Select TWO)",
+    "select_count": 2,
     "options": [
       {
         "key": "A",
-        "text": "A total inability to hold more than one piece of information"
+        "text": "Anything written there is automatically saved to long-term storage when the task ends"
       },
       {
         "key": "B",
-        "text": "An inability to be used during reasoning"
+        "text": "Its size is bounded by the context window, so long notes compete with other content for space"
       },
       {
         "key": "C",
-        "text": "A requirement to be manually re-typed by the user every time"
+        "text": "It has no size limit because it lives outside the context window"
       },
       {
         "key": "D",
-        "text": "A bounded size limit tied to the context window"
+        "text": "Later steps can read earlier intermediate results from it without a separate retrieval step"
+      },
+      {
+        "key": "E",
+        "text": "It can hold only a single value at a time"
       }
     ],
     "correct": [
+      "B",
       "D"
     ],
     "explanation": {
-      "why_correct": "Working memory is bounded by the context window's size, while long-term memory can, in principle, store far more information outside that constraint.",
+      "why_correct": "A scratchpad is part of the working context: it is directly readable by later steps, but it consumes the same bounded token budget as everything else in the prompt. Only conclusions deliberately promoted elsewhere persist.",
       "why_incorrect": {
-        "B": "Working memory is specifically what IS used during active reasoning; it's directly available for that purpose, unlike this claim suggests.",
-        "C": "Information in working memory doesn't need to be manually re-typed by the user; it's part of the ongoing context automatically.",
-        "A": "Working memory can hold many pieces of information simultaneously, up to its size limit -- not just one."
+        "A": "Working-memory content is transient; it is lost or displaced unless the agent deliberately promotes something to long-term storage.",
+        "C": "The scratchpad is inside the prompt, so it counts against the context window.",
+        "E": "A scratchpad can hold many notes and partial results at once, up to the window limit."
       },
-      "rule_of_thumb": "Working memory's defining practical constraint is its bounded size tied to the context window, unlike long-term memory's much larger storage capacity."
+      "rule_of_thumb": "A scratchpad is directly readable but bounded and transient: it shares the context budget, and only what you promote survives."
     },
     "tags": [
+      "scratchpad",
       "working-memory",
       "context-window"
     ],
@@ -265,7 +272,8 @@
     "difficulty": "medium",
     "theory_refs": [
       "TH-D4-001",
-      "TH-D4-002"
+      "TH-D4-002",
+      "TH-D4-015"
     ],
     "case_study_id": null,
     "stem": "Which of the following statements correctly describe working memory, long-term memory, or both? (Select 2)",
@@ -317,7 +325,8 @@
     "type": "single_choice",
     "difficulty": "medium",
     "theory_refs": [
-      "TH-D4-003"
+      "TH-D4-003",
+      "TH-D4-014"
     ],
     "case_study_id": null,
     "stem": "A task requires both reasoning about the current message AND recalling a fact from a conversation that happened last week. Which memory capability does each part require?",
@@ -475,7 +484,8 @@
     "difficulty": "medium",
     "theory_refs": [
       "TH-D4-003",
-      "TH-D4-004"
+      "TH-D4-004",
+      "TH-D4-014"
     ],
     "case_study_id": null,
     "stem": "What is the key design question that arises specifically from combining working memory and long-term memory in a single agent architecture?",

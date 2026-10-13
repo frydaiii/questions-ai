@@ -1,0 +1,459 @@
+[
+  {
+    "id": "Q-D5-0050",
+    "domain": 5,
+    "task_statement": "5.1",
+    "type": "single_choice",
+    "difficulty": "easy",
+    "theory_refs": [
+      "TH-D5-011"
+    ],
+    "case_study_id": null,
+    "stem": "A startup runs three agents titled 'Senior Engineer', 'Staff Engineer', and 'Principal Engineer'. All three use the same model, the same tools, the same instructions, and the same success check; only the job title in the system prompt differs. Which assessment is most accurate?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Each title unlocks deeper expertise, so the three agents bring genuinely different capabilities"
+      },
+      {
+        "key": "B",
+        "text": "The title differences guarantee independent verification because each agent holds a different rank"
+      },
+      {
+        "key": "C",
+        "text": "The roles differ in name only, so the handoffs add cost without a new tool set, criterion, or perspective"
+      },
+      {
+        "key": "D",
+        "text": "The titles enforce least-privilege boundaries because each agent now has a separate level of authority"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "A role is only worth its handoff cost when it differs in tool set, success criterion, or perspective. Here every substantive element is identical, so the title is just a persona label that changes framing, not underlying knowledge or permissions. The team is paying for extra prompts, transfers, and tokens while a single agent would behave essentially the same way.",
+      "why_incorrect": {
+        "A": "A persona prompt changes tone and framing, not the model's knowledge or tools, so a seniority label does not create new capability.",
+        "B": "Independence needs different evidence, tools, or criteria. Agents with identical model, prompt body, and checks share the same blind spots whatever they are called.",
+        "D": "Least privilege requires different enforced permissions per role. A title in the prompt grants or restricts nothing, because the tool access is identical."
+      },
+      "rule_of_thumb": "A role label is not a role: separate agents need a different tool set, success criterion, or perspective."
+    },
+    "tags": [
+      "role-specialization",
+      "persona-prompting",
+      "decomposition"
+    ],
+    "concepts": [
+      "Multi-Agent Systems"
+    ]
+  },
+  {
+    "id": "Q-D5-0051",
+    "domain": 5,
+    "task_statement": "5.1",
+    "type": "single_choice",
+    "difficulty": "easy",
+    "theory_refs": [
+      "TH-D5-012"
+    ],
+    "case_study_id": null,
+    "stem": "A travel assistant must retrieve the weather forecast, current flight prices, and hotel availability for the same city. None of the three lookups needs the output of another. Which execution strategy best fits this structure?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Run the lookups one after another so each call can read the previous results"
+      },
+      {
+        "key": "B",
+        "text": "Have one agent perform all lookups while the others wait for it to finish"
+      },
+      {
+        "key": "C",
+        "text": "Add a review agent that must approve the plan before any lookup is allowed to begin"
+      },
+      {
+        "key": "D",
+        "text": "Dispatch the three lookups concurrently and join their results in one synthesis step"
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "Subtasks that do not depend on each other's outputs can run concurrently, which cuts wall-clock latency compared with a strictly sequential loop. The independent results are then combined in a single join or synthesis step. Parallelism comes from the independent branches in the task, not from adding more agents for their own sake.",
+      "why_incorrect": {
+        "A": "Sequential execution is needed only when a step consumes an upstream result. Here nothing is consumed, so serializing wastes time.",
+        "B": "Letting one agent do everything while others idle gives up the available concurrency and adds agents with no benefit.",
+        "C": "A pre-approval gate adds latency and a coordination step, yet it does nothing about the independence of the lookups."
+      },
+      "rule_of_thumb": "Independent subtasks fan out in parallel and then join; dependent subtasks wait for their inputs."
+    },
+    "tags": [
+      "parallelism",
+      "fan-out-fan-in",
+      "independent-subtasks"
+    ],
+    "concepts": [
+      "Orchestration",
+      "Planning"
+    ]
+  },
+  {
+    "id": "Q-D5-0052",
+    "domain": 5,
+    "task_statement": "5.1",
+    "type": "single_choice",
+    "difficulty": "hard",
+    "theory_refs": [
+      "TH-D5-011",
+      "TH-D5-001"
+    ],
+    "case_study_id": null,
+    "stem": "A team fixes bugs in a single 400-line module using four agents: Planner, Coder, Reviewer, and Tester. Traces show the Coder re-pasting the whole module for the Reviewer, the Tester re-deriving the intent from scratch, and fix quality matching a single-agent baseline at roughly three times the token cost. What is the best change?",
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Collapse to one agent that has a test-runner tool, and reintroduce a role only if measurements show it beats this baseline"
+      },
+      {
+        "key": "B",
+        "text": "Add a fifth Manager agent that summarizes every handoff so the four roles stay informed"
+      },
+      {
+        "key": "C",
+        "text": "Lengthen each role's persona description so the agents specialize more deeply"
+      },
+      {
+        "key": "D",
+        "text": "Let the Coder and Reviewer work in parallel so the shared module is edited and judged simultaneously"
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "explanation": {
+      "why_correct": "The work is tightly coupled around one shared artifact, so each role boundary forces the shared context to be reconstructed, which is the cost seen in the traces. The roles add no distinct permissions or criteria except executing tests, and that capability is a tool, not a separate agent. A single agent with a test runner is the baseline any specialization must beat, so extra roles should return only with measured gains.",
+      "why_incorrect": {
+        "B": "A Manager adds another agent and another summarization step, which increases coordination cost and lossy compression on a task that is already over-split.",
+        "C": "Longer persona text changes framing, not tools, permissions, or knowledge, so it cannot repair handoff overhead that comes from the task being tightly coupled.",
+        "D": "Parallel editing and review of the same module creates conflicting changes and stale reviews, because the reviewer needs the finished edit as its input."
+      },
+      "rule_of_thumb": "If roles share one tightly coupled artifact and gain nothing in tools or criteria, merge them and keep a single-agent baseline."
+    },
+    "tags": [
+      "role-specialization",
+      "single-agent-baseline",
+      "handoff-overhead",
+      "code-review"
+    ],
+    "concepts": [
+      "Multi-Agent Systems",
+      "Sub-agents & Handoffs"
+    ]
+  },
+  {
+    "id": "Q-D5-0053",
+    "domain": 5,
+    "task_statement": "5.1",
+    "type": "multi_response",
+    "difficulty": "hard",
+    "theory_refs": [
+      "TH-D5-011",
+      "TH-D5-001"
+    ],
+    "case_study_id": null,
+    "stem": "A claims-processing team is deciding which responsibilities deserve their own agent instead of staying inside one generalist agent. Select THREE reasons that justify a separate role.",
+    "select_count": 3,
+    "options": [
+      {
+        "key": "A",
+        "text": "The role's title matches a job that already exists on the human organization chart"
+      },
+      {
+        "key": "B",
+        "text": "The role needs read access to a payments ledger that the drafting role must not hold, so permissions differ"
+      },
+      {
+        "key": "C",
+        "text": "The role is given a friendlier tone and a distinct persona name in its system prompt"
+      },
+      {
+        "key": "D",
+        "text": "The role is judged against a separate success criterion, such as a policy checklist, rather than writing fluency"
+      },
+      {
+        "key": "E",
+        "text": "The role brings an independent perspective by using evidence from a source the drafting role never sees"
+      }
+    ],
+    "correct": [
+      "B",
+      "D",
+      "E"
+    ],
+    "explanation": {
+      "why_correct": "A role earns its handoff cost when it differs in a way a single agent would handle poorly. Distinct permissions support least privilege, since the drafter never touches the ledger. A separate success criterion makes the output checkable on its own terms. Independent evidence gives a genuinely different perspective instead of repeating the drafter's view. Each of these changes what the agent can do or verify, not just how it is described.",
+      "why_incorrect": {
+        "A": "Mirroring a human org chart is not evidence of a better agent topology; the roles must justify themselves by tools, criteria, or perspective.",
+        "C": "Tone and persona names alter framing only, so they add handoff cost without new capability or independence."
+      },
+      "rule_of_thumb": "Justify a role by different permissions, criteria, or evidence, never by a name or a tone."
+    },
+    "tags": [
+      "role-specialization",
+      "least-privilege",
+      "claims-processing"
+    ],
+    "concepts": [
+      "Multi-Agent Systems",
+      "Guardrails"
+    ]
+  },
+  {
+    "id": "Q-D5-0054",
+    "domain": 5,
+    "task_statement": "5.1",
+    "type": "multi_response",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D5-012",
+      "TH-D5-009"
+    ],
+    "case_study_id": null,
+    "stem": "A report builder fans out five independent source-lookup agents and then uses one synthesis agent to combine their findings. Select TWO statements that correctly describe the performance of this design.",
+    "select_count": 2,
+    "options": [
+      {
+        "key": "A",
+        "text": "Doubling the lookup agents to ten will halve end-to-end latency because the work splits evenly"
+      },
+      {
+        "key": "B",
+        "text": "End-to-end latency is bounded below by the slowest branch plus the join and synthesis step"
+      },
+      {
+        "key": "C",
+        "text": "Parallel lookups reduce total tokens consumed because shared instructions are read only once"
+      },
+      {
+        "key": "D",
+        "text": "After the branches finish concurrently, no synthesis step is needed to reconcile their findings"
+      },
+      {
+        "key": "E",
+        "text": "Wall-clock time can fall while total token spend rises, because each agent carries its own prompt and results"
+      }
+    ],
+    "correct": [
+      "B",
+      "E"
+    ],
+    "explanation": {
+      "why_correct": "Speedup is limited by the longest chain of dependent work: the slowest lookup must finish, and then the join and synthesis still run sequentially after it. Parallelism also does not make the work cheaper. Each agent repeats its own instructions and tool results, so a faster run usually spends more tokens in total. Treating speed and cost as the same quantity is a common mistake.",
+      "why_incorrect": {
+        "A": "Speedup is bounded by the critical path and the join step, so more agents give diminishing returns and not a proportional halving.",
+        "C": "Each agent carries its own prompt and intermediate results, so parallel agents repeat context and usually raise total token use.",
+        "D": "Concurrent branches still produce separate findings that must be merged and reconciled, so the synthesis step remains necessary."
+      },
+      "rule_of_thumb": "Parallelism buys wall-clock time, not savings: speedup is capped by the critical path, and cost usually goes up."
+    },
+    "tags": [
+      "parallelism",
+      "latency-cost-tradeoff",
+      "critical-path"
+    ],
+    "concepts": [
+      "Orchestration",
+      "Multi-Agent Systems"
+    ]
+  },
+  {
+    "id": "Q-D5-0055",
+    "domain": 5,
+    "task_statement": "5.1",
+    "type": "multi_response",
+    "difficulty": "hard",
+    "theory_refs": [
+      "TH-D5-012",
+      "TH-D5-009"
+    ],
+    "case_study_id": null,
+    "stem": "In a database migration, three agents run in parallel to rewrite three tables. The column types of table B depend on key decisions made while rewriting table A. At the join step the outputs conflict, and repeated merge retries consume most of the token budget. Select TWO changes that address the root cause.",
+    "select_count": 2,
+    "options": [
+      {
+        "key": "A",
+        "text": "Serialize along the dependency edge so table B starts only after table A's decisions exist, and parallelize only the truly independent tables"
+      },
+      {
+        "key": "B",
+        "text": "Add more parallel agents so conflicting schema choices are settled by majority vote"
+      },
+      {
+        "key": "C",
+        "text": "Give each shared artifact a single owner and have the join step flag conflicting writes instead of silently overwriting"
+      },
+      {
+        "key": "D",
+        "text": "Lengthen each worker prompt so it can anticipate what the other branches will decide"
+      },
+      {
+        "key": "E",
+        "text": "Let the last branch to finish overwrite earlier results so the join completes without retries"
+      }
+    ],
+    "correct": [
+      "A",
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "The failure comes from fanning out work that is not actually independent: table B needs table A's output, so running them concurrently forces guesses that later conflict. Respecting the dependency edge removes the conflict at its source while still parallelizing the independent tables. Because parallel branches may still write to shared artifacts, single ownership and conflict flagging at the join stop silent corruption and wasteful retries.",
+      "why_incorrect": {
+        "B": "A vote among agents that all guessed the missing dependency produces consensus on a guess, and extra agents also add tokens and conflicts.",
+        "D": "A longer prompt cannot supply information that does not exist yet; the branch still has to guess table A's decisions.",
+        "E": "Last-write-wins hides the conflict and can silently discard correct work, trading visible retries for undetected corruption."
+      },
+      "rule_of_thumb": "Serialize dependencies, parallelize independent branches, and give every shared artifact one owner and a conflict rule."
+    },
+    "tags": [
+      "parallelism",
+      "dependency-graph",
+      "conflict-handling",
+      "data-pipelines"
+    ],
+    "concepts": [
+      "Orchestration",
+      "Error Recovery"
+    ]
+  },
+  {
+    "id": "Q-D5-0056",
+    "domain": 5,
+    "task_statement": "5.1",
+    "type": "ordering",
+    "difficulty": "hard",
+    "theory_refs": [
+      "TH-D5-012"
+    ],
+    "case_study_id": null,
+    "stem": "A planner is asked to compare three vendors on pricing and security posture and then recommend one. Arrange the steps of an efficient parallel execution in the correct sequence, from first to last.",
+    "select_count": 5,
+    "options": [
+      {
+        "key": "A",
+        "text": "The independent per-vendor lookups are dispatched concurrently"
+      },
+      {
+        "key": "B",
+        "text": "The system waits at a join point until every upstream branch has returned"
+      },
+      {
+        "key": "C",
+        "text": "The planner expresses the task as subtasks and marks which ones depend on others"
+      },
+      {
+        "key": "D",
+        "text": "A synthesis step compares the collected findings and drafts the recommendation"
+      },
+      {
+        "key": "E",
+        "text": "A reviewer checks the claims in the recommendation against the collected sources"
+      }
+    ],
+    "correct": [
+      "C",
+      "A",
+      "B",
+      "D",
+      "E"
+    ],
+    "explanation": {
+      "why_correct": "Concurrent dispatch is only safe once the planner has made the dependency structure explicit, so the dependency graph comes first. The independent vendor lookups can then fan out together. A join point holds the flow until all branches return, because synthesis depends on every result. The synthesis step then compares vendors and drafts the recommendation, and the reviewer checks it against the gathered sources last, since it needs the finished draft as its input.",
+      "why_incorrect": {},
+      "rule_of_thumb": "Map dependencies, fan out the independent work, join, synthesize, then verify."
+    },
+    "tags": [
+      "dependency-graph",
+      "fan-out-fan-in",
+      "vendor-comparison"
+    ],
+    "concepts": [
+      "Planning",
+      "Orchestration"
+    ]
+  },
+  {
+    "id": "Q-D5-0057",
+    "domain": 5,
+    "task_statement": "5.1",
+    "type": "matching",
+    "difficulty": "hard",
+    "theory_refs": [
+      "TH-D5-011",
+      "TH-D5-012",
+      "TH-D5-001"
+    ],
+    "case_study_id": null,
+    "stem": "Match each task on the left to the design that best fits its structure on the right.",
+    "select_count": 3,
+    "matching": {
+      "left": [
+        {
+          "key": "L1",
+          "text": "Summarizing forty independent regulatory filings into one digest"
+        },
+        {
+          "key": "L2",
+          "text": "Editing a single shared function through a series of changes that each depend on the previous one"
+        },
+        {
+          "key": "L3",
+          "text": "Drafting a contract while a reviewer checks it against a clause database the drafter must not access"
+        }
+      ],
+      "right": [
+        {
+          "key": "R1",
+          "text": "Role-separated agents with distinct tool permissions and criteria"
+        },
+        {
+          "key": "R2",
+          "text": "Parallel fan-out workers followed by a join and synthesis step"
+        },
+        {
+          "key": "R3",
+          "text": "A single agent with the right tools and no decomposition"
+        },
+        {
+          "key": "R4",
+          "text": "Several persona-labelled agents with identical tools and prompts"
+        }
+      ]
+    },
+    "correct_pairs": {
+      "L1": "R2",
+      "L2": "R3",
+      "L3": "R1"
+    },
+    "explanation": {
+      "why_correct": "Forty independent filings are breadth work with no dependencies between them, so parallel workers and a final join give real speedup. A chain of dependent edits on one shared function gains nothing from fan-out and risks conflicting changes, so a single capable agent with tools is the right baseline. The contract task has a genuine need for different permissions and a different success criterion, which justifies separate roles. Persona-labelled agents with identical tools add handoff cost without new capability, so that option fits none of the three.",
+      "why_incorrect": {},
+      "rule_of_thumb": "Fan out independent breadth, keep coupled work in one agent, and split roles only for different permissions or criteria."
+    },
+    "tags": [
+      "decomposition",
+      "parallelism",
+      "role-specialization",
+      "design-selection"
+    ],
+    "concepts": [
+      "Multi-Agent Systems",
+      "Orchestration"
+    ]
+  }
+]

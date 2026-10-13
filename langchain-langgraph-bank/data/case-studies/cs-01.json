@@ -1,1 +1,13 @@
-[]
+[
+  {
+    "id": "CS-01",
+    "title": "Warehouse operations agent with protocol tools and human release control",
+    "scenario": "A logistics company is piloting an AI agent for a warehouse. The system receives sensor observations, plans routes, queries live inventory, and can request a vehicle release. Immediate obstacle avoidance must be fast, while route planning may take longer. Inventory and route capabilities are exposed through a standardized tool protocol with declared schemas. Releasing a vehicle into a shared human work area is consequential and can be difficult to reverse, so the company wants an explicit approval checkpoint. The team is comparing reactive control, reasoning strategies, protocol-level tool discovery, and human oversight in one design.",
+    "question_ids": [
+      "Q-D1-0073",
+      "Q-D2-0087",
+      "Q-D3-0083",
+      "Q-D6-0011"
+    ]
+  }
+]

@@ -1,0 +1,636 @@
+[
+  {
+    "id": "Q-D5-0076",
+    "domain": 5,
+    "task_statement": "5.4",
+    "type": "single_choice",
+    "difficulty": "easy",
+    "theory_refs": [
+      "TH-D5-019",
+      "TH-D5-007"
+    ],
+    "case_study_id": null,
+    "stem": "A claims-triage team runs three agents on the same base model. Each agent reads the previous agent's answer before writing its own, and all three return the same incorrect coverage decision. What is the most likely explanation?",
+    "tags": [
+      "groupthink",
+      "correlated-errors",
+      "anchoring"
+    ],
+    "concepts": [
+      "Multi-Agent Systems",
+      "Agent Debate"
+    ],
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "The third agent has the largest context window and silently overrides the other two"
+      },
+      {
+        "key": "B",
+        "text": "Random sampling noise happened to align across all three agents by coincidence"
+      },
+      {
+        "key": "C",
+        "text": "Correlated errors plus anchoring on earlier answers produced agreement that is not independent verification"
+      },
+      {
+        "key": "D",
+        "text": "The agents' persona prompts were too different from one another to reach a correct answer"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "Agents built on the same model share biases and knowledge gaps, so their errors are correlated. When each agent also reads a peer's answer before committing, it anchors on that answer and tends to agree with it. The unanimous result therefore looks like three confirmations but is closer to one answer copied three times, which is the conformity or groupthink failure mode in agent teams.",
+      "why_incorrect": {
+        "A": "Context window size does not explain why independent-looking agents converge; the issue is shared model bias and exposure to a peer's answer, not one agent overriding others.",
+        "B": "Three agents landing on the same wrong decision by chance is very unlikely; the systematic cause is correlated errors and anchoring, not coincidental sampling noise.",
+        "D": "Persona differences would, if anything, add variety; the underlying problem is that different personas on one model still share the same training biases and are being shown each other's answers."
+      },
+      "rule_of_thumb": "Agreement among correlated agents that saw each other's answers is not verification; collect independent answers first."
+    }
+  },
+  {
+    "id": "Q-D5-0077",
+    "domain": 5,
+    "task_statement": "5.4",
+    "type": "single_choice",
+    "difficulty": "easy",
+    "theory_refs": [
+      "TH-D5-020"
+    ],
+    "case_study_id": null,
+    "stem": "In a travel-booking system, a planner agent keeps re-delegating the same request to a booking agent, which keeps replying 'need clarification'. After 200 turns neither has produced a result. Which control most directly addresses this failure?",
+    "tags": [
+      "runaway-loop",
+      "turn-budget",
+      "termination"
+    ],
+    "concepts": [
+      "Multi-Agent Systems",
+      "Error Recovery"
+    ],
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Instruct each agent in its prompt to notice repeated exchanges and stop on its own"
+      },
+      {
+        "key": "B",
+        "text": "Add a third agent that rephrases the request at the start of every round"
+      },
+      {
+        "key": "C",
+        "text": "Increase the context window so both agents can see the full exchange history"
+      },
+      {
+        "key": "D",
+        "text": "An externally enforced turn budget that escalates to a human or returns a partial result when reached"
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "This is a ping-pong runaway loop caused by a missing termination condition. A turn budget enforced by the runtime, outside the agents' own judgment, guarantees the loop ends, and defining what happens at the limit (partial result or human escalation) keeps the failure graceful rather than silent.",
+      "why_incorrect": {
+        "A": "Agents cannot be relied on to recognize that they are looping; a prompt-level instruction leaves termination up to the same judgment that is failing.",
+        "B": "A rephrasing agent adds another participant and more tokens to the loop without bounding it, so the exchange can still continue indefinitely.",
+        "C": "A larger window lets the agents see the repetition but does not force them to stop; the loop can simply grow longer."
+      },
+      "rule_of_thumb": "Bound every delegation loop with an external budget and a defined action when the bound is hit."
+    }
+  },
+  {
+    "id": "Q-D5-0078",
+    "domain": 5,
+    "task_statement": "5.4",
+    "type": "single_choice",
+    "difficulty": "easy",
+    "theory_refs": [
+      "TH-D5-021"
+    ],
+    "case_study_id": null,
+    "stem": "Why should a research-assistant agent treat a message from a peer agent as untrusted input rather than as a trusted instruction?",
+    "tags": [
+      "contagion",
+      "prompt-injection",
+      "untrusted-input"
+    ],
+    "concepts": [
+      "Multi-Agent Systems",
+      "Guardrails"
+    ],
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Peer agents run on weaker models, so their messages are usually of lower quality"
+      },
+      {
+        "key": "B",
+        "text": "The peer may have ingested injected content and passed its instruction along, so trusting it extends the attack"
+      },
+      {
+        "key": "C",
+        "text": "Messages between agents are encrypted, so the receiving agent cannot verify what they contain"
+      },
+      {
+        "key": "D",
+        "text": "Peer agents are not permitted to send messages unless a human approves each one"
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "explanation": {
+      "why_correct": "Injected instructions can travel from one agent's input into its output and onward to connected agents. If the receiver treats peer messages as trusted commands, a single poisoned document can become system-wide impact. Handling peer messages as untrusted data, with origin tagging, stops that trust chain.",
+      "why_incorrect": {
+        "A": "Peers often run on the same or stronger models; the concern is security and provenance, not model quality.",
+        "C": "Encryption is not the issue; even readable messages may carry injected instructions that the receiver should not obey.",
+        "D": "Peer messaging does not generally require per-message human approval, and permission to send says nothing about whether the content is trustworthy."
+      },
+      "rule_of_thumb": "An agent's message deserves no more trust than the least-trusted source that could have influenced it."
+    }
+  },
+  {
+    "id": "Q-D5-0079",
+    "domain": 5,
+    "task_statement": "5.4",
+    "type": "single_choice",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D5-019",
+      "TH-D5-007"
+    ],
+    "case_study_id": null,
+    "stem": "An engineering team is designing a three-agent fact-checking panel and wants the panel's agreement to carry real evidential weight. Which design best protects against conformity?",
+    "tags": [
+      "conformity",
+      "independence",
+      "fact-checking"
+    ],
+    "concepts": [
+      "Multi-Agent Systems",
+      "Agent Debate"
+    ],
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "Run extra discussion rounds until all three agents reach the same answer"
+      },
+      {
+        "key": "B",
+        "text": "Give each agent a different persona name while keeping the same model, prompt, and evidence"
+      },
+      {
+        "key": "C",
+        "text": "Have each agent post its draft to a shared channel immediately so peers can correct it early"
+      },
+      {
+        "key": "D",
+        "text": "Collect answers before any exchange, vary the evidence each agent sees, and have a judge weigh evidence rather than count votes"
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "Independent first answers prevent anchoring, varied evidence or models reduce correlated errors, and an evidence-based judge avoids rewarding mere agreement. Together they make convergence informative. The panel's collective behavior should also be tested as a system, since individually reasonable agents can still reinforce each other.",
+      "why_incorrect": {
+        "A": "Forcing consensus through more rounds can entrench a shared mistake and measures persuasion rather than correctness.",
+        "B": "Persona names on the same model, prompt, and evidence do not create independent viewpoints; the errors remain correlated.",
+        "C": "Posting drafts immediately exposes every agent to anchoring on the earliest answer, which is the opposite of independence."
+      },
+      "rule_of_thumb": "Collect independent answers first, diversify the inputs, and judge on evidence rather than agreement."
+    }
+  },
+  {
+    "id": "Q-D5-0080",
+    "domain": 5,
+    "task_statement": "5.4",
+    "type": "single_choice",
+    "difficulty": "hard",
+    "theory_refs": [
+      "TH-D5-020",
+      "TH-D5-008"
+    ],
+    "case_study_id": null,
+    "stem": "In a data pipeline, an ingest agent and a repair agent share one API rate limit. The repair agent retries failed calls aggressively, which starves the ingest agent; ingest then times out and triggers the repair agent again. Throughput collapses. Which diagnosis and fix fit best?",
+    "tags": [
+      "resource-contention",
+      "starvation",
+      "retry-budget",
+      "feedback-loop"
+    ],
+    "concepts": [
+      "Multi-Agent Systems",
+      "Error Recovery"
+    ],
+    "select_count": 1,
+    "options": [
+      {
+        "key": "A",
+        "text": "A reasoning weakness in the repair agent; swap in a larger model so it judges better when to stop"
+      },
+      {
+        "key": "B",
+        "text": "A classic deadlock between the two agents; add a lock so only one agent may use the API at any moment"
+      },
+      {
+        "key": "C",
+        "text": "Shared-resource contention amplified by a feedback loop; add per-agent quotas or a queue plus a global attempt budget with escalation"
+      },
+      {
+        "key": "D",
+        "text": "Hallucinated tool results; add a verifier agent to check the output of every API call"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "explanation": {
+      "why_correct": "Neither agent is waiting on the other; they are competing for a shared rate limit, and the ingest timeout feeds back into more repair retries. The fix is to partition or queue the contended resource and impose an externally enforced attempt budget with a defined escalation path, so retries cannot multiply without bound.",
+      "why_incorrect": {
+        "A": "A larger model does not remove the structural contention or the feedback loop, and agents cannot be counted on to throttle themselves reliably.",
+        "B": "There is no circular wait here, so this is not deadlock; a single global lock would serialize access but leaves the retry feedback loop and starvation in place.",
+        "D": "The symptoms are timeouts and starvation, not fabricated results, so a verifier agent adds cost without addressing the cause."
+      },
+      "rule_of_thumb": "Shared rate limits and budgets need quotas or queues, and retry loops need an external attempt cap."
+    }
+  },
+  {
+    "id": "Q-D5-0081",
+    "domain": 5,
+    "task_statement": "5.4",
+    "type": "multi_response",
+    "difficulty": "medium",
+    "theory_refs": [
+      "TH-D5-019"
+    ],
+    "case_study_id": null,
+    "stem": "A medical-coding system uses several agents to verify each code assignment. Select TWO measures that most increase the real independence of their verdicts.",
+    "tags": [
+      "independence",
+      "diversity",
+      "anchoring",
+      "verification"
+    ],
+    "concepts": [
+      "Multi-Agent Systems",
+      "Agent Debate"
+    ],
+    "select_count": 2,
+    "options": [
+      {
+        "key": "A",
+        "text": "Run additional debate rounds until the agents' votes are unanimous"
+      },
+      {
+        "key": "B",
+        "text": "Have each agent record its answer before seeing any peer's answer"
+      },
+      {
+        "key": "C",
+        "text": "Rename the agents with different professional titles while keeping everything else the same"
+      },
+      {
+        "key": "D",
+        "text": "Vary the underlying model or the retrieved evidence across agents"
+      },
+      {
+        "key": "E",
+        "text": "Share all agents' drafts from the first step so errors are caught as early as possible"
+      }
+    ],
+    "correct": [
+      "B",
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "Recording answers before exchange prevents anchoring on a peer's output, and varying the model or evidence reduces correlated errors that come from shared training and shared inputs. Both increase the chance that agreement reflects separate lines of reasoning rather than copying.",
+      "why_incorrect": {
+        "A": "Pushing for unanimity through more rounds can entrench a shared mistake and treats agreement as proof of correctness.",
+        "C": "Titles alone leave the same model, prompt, and evidence in place, so the viewpoints are not meaningfully independent.",
+        "E": "Sharing drafts from the start exposes agents to anchoring and sycophantic agreement before they commit to their own view."
+      },
+      "rule_of_thumb": "Independence comes from sequencing and diversity of inputs, not from labels or from forced consensus."
+    }
+  },
+  {
+    "id": "Q-D5-0082",
+    "domain": 5,
+    "task_statement": "5.4",
+    "type": "multi_response",
+    "difficulty": "hard",
+    "theory_refs": [
+      "TH-D5-020",
+      "TH-D5-008"
+    ],
+    "case_study_id": null,
+    "stem": "A multi-agent report generator occasionally exhausts its budget when two agents keep re-delegating to each other and a shared search API is saturated. Select THREE controls that bound this failure without relying on the agents' own judgment.",
+    "tags": [
+      "runaway-loop",
+      "budget",
+      "containment",
+      "rate-limit"
+    ],
+    "concepts": [
+      "Multi-Agent Systems",
+      "Error Recovery"
+    ],
+    "select_count": 3,
+    "options": [
+      {
+        "key": "A",
+        "text": "A runtime-enforced cap on total turns and delegation depth"
+      },
+      {
+        "key": "B",
+        "text": "A system-prompt instruction telling each agent to stop when it notices repetition"
+      },
+      {
+        "key": "C",
+        "text": "Spend and wall-clock limits that return a partial result or escalate to a human when reached"
+      },
+      {
+        "key": "D",
+        "text": "Doubling the retry count so transient errors are more likely to be overcome"
+      },
+      {
+        "key": "E",
+        "text": "A queue or per-agent quota in front of the shared search API"
+      }
+    ],
+    "correct": [
+      "A",
+      "C",
+      "E"
+    ],
+    "explanation": {
+      "why_correct": "Caps on turns and depth stop ping-pong delegation even through circular chains, spend and time limits define graceful degradation, and a queue or quota prevents starvation on the shared API. All three are enforced outside the agents, so they hold even when the agents misjudge the situation. Escalation on a limit also preserves containment.",
+      "why_incorrect": {
+        "B": "Agents often do not recognize that they are looping, so a prompt-level instruction is not an enforced bound.",
+        "D": "More retries multiply load on the saturated API and extend runaway behavior; retries need an attempt budget, not a larger count."
+      },
+      "rule_of_thumb": "Enforce limits in the runtime, not in the prompt, and decide in advance what happens when a limit is hit."
+    }
+  },
+  {
+    "id": "Q-D5-0083",
+    "domain": 5,
+    "task_statement": "5.4",
+    "type": "multi_response",
+    "difficulty": "hard",
+    "theory_refs": [
+      "TH-D5-021",
+      "TH-D5-008"
+    ],
+    "case_study_id": null,
+    "stem": "In a support system, an email-reading agent summarizes inbound mail and forwards it to a billing agent that holds a refund tool. A crafted email caused the billing agent to issue fraudulent refunds. Select TWO changes that best reduce the risk and impact of a repeat.",
+    "tags": [
+      "prompt-injection",
+      "least-privilege",
+      "provenance",
+      "contagion"
+    ],
+    "concepts": [
+      "Multi-Agent Systems",
+      "Guardrails"
+    ],
+    "select_count": 2,
+    "options": [
+      {
+        "key": "A",
+        "text": "Add a second billing agent from the same model family to approve every refund"
+      },
+      {
+        "key": "B",
+        "text": "Tag each forwarded message with its origin and treat it as data, not as instructions to execute"
+      },
+      {
+        "key": "C",
+        "text": "Merge the two agents into one so no messages are passed between agents"
+      },
+      {
+        "key": "D",
+        "text": "Tell the email agent in its prompt to be more careful when summarizing"
+      },
+      {
+        "key": "E",
+        "text": "Apply least privilege to the refund tool with amount caps and human approval above a threshold"
+      }
+    ],
+    "correct": [
+      "B",
+      "E"
+    ],
+    "explanation": {
+      "why_correct": "Origin tagging and untrusted-data handling stop an injected instruction from being obeyed as a peer command, while least privilege limits what a compromised agent can do even if the injection succeeds. One addresses propagation and the other addresses blast radius, which together limit contagion.",
+      "why_incorrect": {
+        "A": "An overseer from the same model family can share the same blind spots and be fooled by the same injection, so it is not an independent check.",
+        "C": "Merging agents does not remove the injected content, and the single agent would still hold both the untrusted input and the refund tool.",
+        "D": "A prompt reminder is a soft request that a crafted instruction can override; it is not an enforced control."
+      },
+      "rule_of_thumb": "Handle peer messages as untrusted data and cap what any single agent can do."
+    }
+  },
+  {
+    "id": "Q-D5-0084",
+    "domain": 5,
+    "task_statement": "5.4",
+    "type": "multi_response",
+    "difficulty": "hard",
+    "theory_refs": [
+      "TH-D5-019",
+      "TH-D5-007"
+    ],
+    "case_study_id": null,
+    "stem": "Four same-model agents in a code-review debate converged by round two on the claim that a function is thread-safe. The claim, posted by the first speaker, was wrong. Select THREE changes most likely to reduce this failure.",
+    "tags": [
+      "groupthink",
+      "debate",
+      "dissent",
+      "code-review"
+    ],
+    "concepts": [
+      "Multi-Agent Systems",
+      "Agent Debate"
+    ],
+    "select_count": 3,
+    "options": [
+      {
+        "key": "A",
+        "text": "Add two more debate rounds so the agents have time to reconsider"
+      },
+      {
+        "key": "B",
+        "text": "Require each agent to commit a written verdict with evidence before the first exchange"
+      },
+      {
+        "key": "C",
+        "text": "Always let the most confident agent speak first to set a strong baseline"
+      },
+      {
+        "key": "D",
+        "text": "Assign one agent a dissenting role to seek counter-evidence, such as concurrency tests"
+      },
+      {
+        "key": "E",
+        "text": "Have the judge score arguments on cited evidence rather than on how many agents agree"
+      }
+    ],
+    "correct": [
+      "B",
+      "D",
+      "E"
+    ],
+    "explanation": {
+      "why_correct": "Committing verdicts first removes the anchoring effect of the first speaker. A designated dissenter that gathers counter-evidence breaks premature consensus, and an evidence-based judge stops agreement from substituting for proof. Extra rounds and confident-first ordering both strengthen anchoring on the initial claim instead.",
+      "why_incorrect": {
+        "A": "More rounds among agents that already agree tend to entrench the shared mistake because a confident agent rarely revises by discussion alone.",
+        "C": "Letting the most confident agent speak first amplifies anchoring, and confidence is not a reliable signal of correctness."
+      },
+      "rule_of_thumb": "Break conformity with independent commitments, a designated dissenter, and evidence-based judging."
+    }
+  },
+  {
+    "id": "Q-D5-0085",
+    "domain": 5,
+    "task_statement": "5.4",
+    "type": "ordering",
+    "difficulty": "hard",
+    "theory_refs": [
+      "TH-D5-021",
+      "TH-D5-008"
+    ],
+    "case_study_id": null,
+    "stem": "A prompt injection has spread across agents in a document-processing pipeline. Place the incident response steps in the correct sequence, from first to last.",
+    "tags": [
+      "incident-response",
+      "containment",
+      "provenance",
+      "contagion"
+    ],
+    "concepts": [
+      "Multi-Agent Systems",
+      "Guardrails"
+    ],
+    "select_count": 5,
+    "options": [
+      {
+        "key": "A",
+        "text": "Trace the instruction through origin tags and provenance logs to the external document where it entered"
+      },
+      {
+        "key": "B",
+        "text": "An independent monitor flags an agent action that is inconsistent with its assigned task"
+      },
+      {
+        "key": "C",
+        "text": "Restore shared state from before the first tainted write and quarantine the source document"
+      },
+      {
+        "key": "D",
+        "text": "Suspend the affected agents and revoke their tool credentials to stop further propagation"
+      },
+      {
+        "key": "E",
+        "text": "Add detection for the injection pattern and rerun tests before reconnecting the agents"
+      }
+    ],
+    "correct": [
+      "B",
+      "D",
+      "A",
+      "C",
+      "E"
+    ],
+    "explanation": {
+      "why_correct": "Detection comes first, ideally from a monitor the agents cannot influence. Containment follows immediately, suspending agents and revoking credentials before any investigation so the instruction cannot keep spreading. Provenance tracing then identifies the entry point, which defines how far corruption reached. Recovery restores state from before the first tainted write and quarantines the source. Hardening and retesting come last, so agents are reconnected only once the gap is closed.",
+      "why_incorrect": {},
+      "rule_of_thumb": "Detect, contain, trace, recover, then harden; stop the spread before you investigate it."
+    }
+  },
+  {
+    "id": "Q-D5-0086",
+    "domain": 5,
+    "task_statement": "5.4",
+    "type": "matching",
+    "difficulty": "hard",
+    "theory_refs": [
+      "TH-D5-019",
+      "TH-D5-020",
+      "TH-D5-021"
+    ],
+    "case_study_id": null,
+    "stem": "Match each multi-agent failure scenario on the left to the countermeasure that most directly addresses it on the right.",
+    "tags": [
+      "failure-modes",
+      "countermeasures",
+      "multi-agent"
+    ],
+    "concepts": [
+      "Multi-Agent Systems",
+      "Error Recovery"
+    ],
+    "select_count": 4,
+    "matching": {
+      "left": [
+        {
+          "key": "L1",
+          "text": "Four same-model agents unanimously endorse a wrong answer after reading each other's drafts"
+        },
+        {
+          "key": "L2",
+          "text": "A planner and an executor re-delegate the same request to one another with no output"
+        },
+        {
+          "key": "L3",
+          "text": "A hijacked summarizer's output instructs downstream agents to exfiltrate data"
+        },
+        {
+          "key": "L4",
+          "text": "Two agents share one API quota and one crowds the other out"
+        }
+      ],
+      "right": [
+        {
+          "key": "R1",
+          "text": "Per-agent quotas or a queue in front of the shared resource"
+        },
+        {
+          "key": "R2",
+          "text": "Collect independent first answers and weigh the evidence behind them"
+        },
+        {
+          "key": "R3",
+          "text": "Externally enforced turn budget with escalation when it is reached"
+        },
+        {
+          "key": "R4",
+          "text": "Treat peer messages as untrusted, tag their origin, and limit privileges"
+        },
+        {
+          "key": "R5",
+          "text": "Add another agent to argue persuasively for the majority view"
+        }
+      ]
+    },
+    "correct_pairs": {
+      "L1": "R2",
+      "L2": "R3",
+      "L3": "R4",
+      "L4": "R1"
+    },
+    "explanation": {
+      "why_correct": "Unanimity among correlated agents that saw each other's drafts is conformity, so independent first answers and evidence-based comparison are the remedy. Mutual re-delegation with no output is a runaway loop, so it needs a turn budget enforced outside the agents with a defined escalation. A hijacked summarizer spreading instructions is malicious contagion, countered by treating peer messages as untrusted, tagging origin, and limiting privileges. Two agents competing for one quota is resource contention, solved by quotas or a queue. Adding a persuasive majority advocate would deepen conformity, so R5 matches nothing.",
+      "why_incorrect": {},
+      "rule_of_thumb": "Name the failure mode first: conformity needs independence, loops need external bounds, contagion needs distrust and least privilege, and contention needs quotas."
+    }
+  }
+]

@@ -1,0 +1,122 @@
+[
+  {
+    "id": "Q-D4-0081",
+    "domain": 4,
+    "task_statement": "4.2",
+    "type": "multi_response",
+    "difficulty": "hard",
+    "theory_refs": [
+      "TH-D4-016",
+      "TH-D4-008"
+    ],
+    "case_study_id": null,
+    "stem": "A research-assistant agent stores raw notes from each literature-search session. A weekly job has the model reread recent notes and write higher-level 'lessons', which are stored back and retrieved in later sessions. After a month, the agent keeps steering users away from one database because of a lesson derived from a single outage. Which THREE changes best improve this consolidation design? (Select THREE)",
+    "select_count": 3,
+    "options": [
+      {
+        "key": "A",
+        "text": "Fine-tune the model weights on every reflection so each lesson becomes permanent"
+      },
+      {
+        "key": "B",
+        "text": "Store each reflection with links to the source episodes it was derived from, so a questionable lesson can be traced and corrected"
+      },
+      {
+        "key": "C",
+        "text": "Delete the raw episodic notes once a reflection is written so only one version of the truth remains"
+      },
+      {
+        "key": "D",
+        "text": "Trigger reflection from accumulated importance and require support from several episodes before stating a general rule"
+      },
+      {
+        "key": "E",
+        "text": "Let later contradicting episodes revise or retire a reflection instead of treating it as fixed"
+      }
+    ],
+    "correct": [
+      "B",
+      "D",
+      "E"
+    ],
+    "explanation": {
+      "why_correct": "Reflections are model-written inferences from limited evidence, so a wrong one is retrieved as confidently as a right one. Linking each to its source episodes allows auditing, requiring support from several episodes avoids generalizing from a single outage, and allowing new evidence to revise or retire a lesson keeps the semantic layer correctable.",
+      "why_incorrect": {
+        "A": "Reflection writes text into memory that is retrieved into context; hard-coding lessons into weights would make a mistaken lesson permanent and far harder to correct.",
+        "C": "Deleting the evidence removes the ability to check or repair a bad lesson, and it discards details that later reflections may need."
+      },
+      "rule_of_thumb": "Consolidate episodes into lessons only with multi-episode support, keep provenance to the evidence, and keep every lesson revisable."
+    },
+    "tags": [
+      "reflection",
+      "memory-consolidation",
+      "provenance",
+      "episodic-memory"
+    ],
+    "concepts": [
+      "Memory",
+      "Context Engineering",
+      "Evaluation & Learning Loops"
+    ]
+  },
+  {
+    "id": "Q-D4-0082",
+    "domain": 4,
+    "task_statement": "4.3",
+    "type": "multi_response",
+    "difficulty": "hard",
+    "theory_refs": [
+      "TH-D4-019",
+      "TH-D4-018"
+    ],
+    "case_study_id": null,
+    "stem": "A customer-support agent with long-term memory shared across all users summarizes web pages it browses and emails it reads into that memory. Later it starts recommending a competitor's refund link whenever refunds come up, traced to a stored note that originated from an inbound email. Which THREE measures best reduce this risk? (Select THREE)",
+    "select_count": 3,
+    "options": [
+      {
+        "key": "A",
+        "text": "Record source and trust level for every memory entry and screen untrusted content before it is written to shared memory"
+      },
+      {
+        "key": "B",
+        "text": "Raise top-k so legitimate entries outnumber the planted one"
+      },
+      {
+        "key": "C",
+        "text": "Keep per-user memory separate from shared memory and support auditing and deletion of entries"
+      },
+      {
+        "key": "D",
+        "text": "Give retrieved memories higher priority than the system prompt because they have been stored and are therefore verified"
+      },
+      {
+        "key": "E",
+        "text": "Treat retrieved memory as data to reason about, not as instructions the agent must follow"
+      }
+    ],
+    "correct": [
+      "A",
+      "C",
+      "E"
+    ],
+    "explanation": {
+      "why_correct": "Memory is a persistent attack surface: anything written from an untrusted source can steer later answers across sessions. Provenance and screening reduce what gets in, separation plus audit and deletion limits blast radius and lets bad entries be removed, and treating retrieved memory as data limits damage when a poisoned entry is retrieved anyway.",
+      "why_incorrect": {
+        "B": "Dilution is not a defense: a crafted entry only needs to be retrieved and followed, and larger result sets add distractors and position effects.",
+        "D": "Being stored does not make content verified; it may have come from an untrusted source, and ranking it above the system prompt would hand an attacker more control."
+      },
+      "rule_of_thumb": "Treat every memory write as a trust decision: track provenance, isolate scopes, allow deletion, and never treat retrieved memory as instructions."
+    },
+    "tags": [
+      "memory-poisoning",
+      "provenance",
+      "memory-isolation",
+      "security"
+    ],
+    "concepts": [
+      "Memory",
+      "Context Engineering",
+      "Guardrails"
+    ]
+  }
+]

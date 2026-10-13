@@ -59,7 +59,8 @@
     "type": "single_choice",
     "difficulty": "medium",
     "theory_refs": [
-      "TH-D3-007"
+      "TH-D3-007",
+      "TH-D3-018"
     ],
     "case_study_id": null,
     "stem": "What is the main advantage of a tool interface that validates parameters and rejects malformed calls early with a clear error message?",

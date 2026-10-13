@@ -1,0 +1,61 @@
+[
+  {
+    "id": "Q-D3-0093",
+    "domain": 3,
+    "task_statement": "3.3",
+    "type": "multi_response",
+    "difficulty": "hard",
+    "theory_refs": [
+      "TH-D3-019",
+      "TH-D3-011"
+    ],
+    "case_study_id": "CS-02",
+    "stem": "A declaration-filing call times out with no response, and the agent cannot tell whether the declaration was recorded. Select TWO actions that let Harborline's agent recover safely without creating a duplicate filing.",
+    "select_count": 2,
+    "options": [
+      {
+        "key": "A",
+        "text": "Resubmit immediately and repeatedly with no delay, because a timeout shows the first call failed"
+      },
+      {
+        "key": "B",
+        "text": "Generate the declaration reference before the first submission and reuse the same reference on any retry so the service can recognize a duplicate"
+      },
+      {
+        "key": "C",
+        "text": "Tell the importer to restart the clearance process, since a timeout proves nothing was filed"
+      },
+      {
+        "key": "D",
+        "text": "Query the filing service by that reference to see whether the declaration already exists before deciding whether to resubmit"
+      },
+      {
+        "key": "E",
+        "text": "Slightly rewrite the payload on each retry so the service does not treat it as the same request"
+      }
+    ],
+    "correct": [
+      "B",
+      "D"
+    ],
+    "explanation": {
+      "why_correct": "A timeout on an action tool is ambiguous: the side effect may have happened and only the response was lost. Attaching a stable client-generated reference makes the submission idempotent, so a repeat is recognized as the same request. Checking state through the read-only lookup by that reference confirms whether the filing exists before anything is repeated. Together they cover the case where the first attempt succeeded and the case where it did not, and any retry that remains should still be limited and backed off.",
+      "why_incorrect": {
+        "A": "Rapid unlimited resubmission ignores that the first call may have succeeded and is exactly what produced duplicate declarations and fees in the pilot; backoff and caps bound load but do not prevent duplicate effects.",
+        "C": "A timeout does not prove the action failed, so asserting nothing was filed is a false assumption and pushes avoidable work onto the importer.",
+        "E": "Changing the payload defeats duplicate detection and makes a second binding declaration more likely, not less."
+      },
+      "rule_of_thumb": "Before retrying a side-effecting call, assume the first attempt may have succeeded: use an idempotency key and check state."
+    },
+    "tags": [
+      "idempotency",
+      "retry",
+      "side-effects",
+      "tool-failure"
+    ],
+    "concepts": [
+      "Tools & Tool Discovery",
+      "Error Recovery"
+    ]
+  }
+]

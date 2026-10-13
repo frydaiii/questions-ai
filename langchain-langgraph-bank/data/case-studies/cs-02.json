@@ -1,0 +1,13 @@
+[
+  {
+    "id": "CS-02",
+    "title": "Customs-clearance agent team at a freight forwarder",
+    "scenario": "Harborline Freight, a mid-sized freight forwarder, is building an automated customs-clearance assistant for import shipments. A lead orchestrator agent receives a shipment bundle (commercial invoice, packing list, bill of lading) and splits the job into stages: extract line items, classify each item under a tariff code, screen the parties against sanctions lists, and file the declaration with the customs authority. Three specialist worker agents handle extraction, classification, and compliance screening, and the orchestrator assembles their outputs and decides when a declaration is ready. Most bundles follow the same stage order, but an unusual item description or a sanctions hit can change what has to happen next.\n\nThe agents act through tools: a tariff-schedule search tool, a sanctions-screening service, and a declaration-filing tool that submits a legally binding declaration and charges a fee. The filing service is sometimes slow. During the pilot, a few submissions timed out without any response, and it later turned out that some of them had actually been recorded; a blind retry then created duplicate declarations and duplicate fees. The filing tool accepts a caller-supplied reference string and can also be queried by that reference to report whether a declaration exists.\n\nMemory is a second design concern. Shipments for the same importer can span months of email correspondence, so the orchestrator's context regularly overflows, and the team must not lose details such as accepted tariff codes, declared values, and the importer's special instructions. Past clearance outcomes and tariff-rule notes are stored for reuse. Finally, the workers post findings to a shared case file that the orchestrator and the other workers can read. That file would also be the natural place to store the importer's negotiated pricing and the raw sanctions-screening hits, both of which are confidential and should be visible only to the roles that need them.",
+    "question_ids": [
+      "Q-D2-0088",
+      "Q-D3-0093",
+      "Q-D4-0083",
+      "Q-D5-0087"
+    ]
+  }
+]

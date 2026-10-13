@@ -3,51 +3,58 @@
     "id": "Q-D2-0047",
     "domain": 2,
     "task_statement": "2.3",
-    "type": "single_choice",
-    "difficulty": "medium",
+    "type": "multi_response",
+    "difficulty": "easy",
     "theory_refs": [
-      "TH-D2-010"
+      "TH-D2-010",
+      "TH-D2-020"
     ],
     "case_study_id": null,
-    "stem": "Why can a model sometimes catch an error during a reflection pass that it missed during the original generation pass?",
-    "select_count": 1,
+    "stem": "A coding agent's first attempt at a function fails two unit tests. Which TWO statements describe how reflection can help the agent on its next attempt? (Select TWO)",
+    "select_count": 2,
     "options": [
       {
         "key": "A",
-        "text": "Reflection is mathematically guaranteed to find every error"
+        "text": "It can write a short lesson from the failing test output and keep it in context when it retries"
       },
       {
         "key": "B",
-        "text": "Reflection always uses a completely different, more powerful model"
+        "text": "It permanently updates the model's weights with a gradient step after each failed attempt"
       },
       {
         "key": "C",
-        "text": "Reflection physically re-reads the user's original prompt character by character"
+        "text": "It guarantees that the next attempt passes every test"
       },
       {
         "key": "D",
-        "text": "Generating an answer and critically evaluating that same answer are different cognitive tasks that can surface different issues"
+        "text": "Critically examining the draft against the failing tests is a different task from generating it and can reveal the bug"
+      },
+      {
+        "key": "E",
+        "text": "It removes the need for any feedback about what went wrong"
       }
     ],
     "correct": [
+      "A",
       "D"
     ],
     "explanation": {
-      "why_correct": "Generation and critical evaluation engage the model in different ways -- one producing content, the other scrutinizing it against criteria -- which is why a second, critical pass can sometimes surface issues missed during the original generation.",
+      "why_correct": "Reflection helps in two ways here. Evaluating the draft against concrete evidence (the failing tests) is a different task from generating it, so it can surface the defect, and in Reflexion-style agents the resulting written lesson is stored and added to the context of the next attempt, which changes behavior without touching the weights.",
       "why_incorrect": {
-        "B": "Reflection does not require switching to a different or more powerful model; the same model can serve both the generation and critique roles.",
-        "C": "There's no special mechanical re-reading process that explains reflection's value; the benefit comes from the different cognitive framing of critique versus generation.",
-        "A": "Reflection is not a guarantee of catching every error, especially those rooted in genuine knowledge gaps shared between generation and critique."
+        "B": "Reflexion-style learning happens through text carried in memory and context; the model's parameters stay fixed.",
+        "C": "Reflection improves the odds of a better attempt but guarantees nothing, particularly when the model misunderstands the requirement.",
+        "E": "Reflection works best when anchored to a concrete signal such as test results; without reliable feedback it may just restate the original mistake."
       },
-      "rule_of_thumb": "Reflection helps because critique and generation are different cognitive framings of the same content, not because of model switching or guaranteed completeness."
+      "rule_of_thumb": "Reflection turns a concrete failure signal into a written lesson that the next attempt can use; it does not change weights and does not guarantee success."
     },
     "tags": [
       "reflection",
-      "self-critique"
+      "reflexion",
+      "episodic-memory"
     ],
     "concepts": [
-      "Context Engineering",
-      "Evaluation & Learning Loops"
+      "Evaluation & Learning Loops",
+      "Memory"
     ]
   },
   {

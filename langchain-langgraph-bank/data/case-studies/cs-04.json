@@ -1,0 +1,13 @@
+[
+  {
+    "id": "CS-04",
+    "title": "Multi-agent insurance claims adjudication with uncertainty, independent review, and injection risk",
+    "scenario": "A regional health insurer is piloting a team of cooperating AI agents to adjudicate outpatient claims. An intake agent extracts the same set of fields (member ID, procedure code, dates, billed amount) from standardized claim forms and from attachments such as clinical notes and provider letters. A policy agent retrieves benefit rules, a fraud-screening agent investigates anomalies by querying provider history, a drafting agent writes the decision letter, and a reviewer agent checks each draft before a payment tool releases funds. All agents run on the same underlying language model.\n\nMost claims are routine and follow identical steps, but a small share involve rare procedures where the policy wording can plausibly be read as either covering or excluding the service. A wrong denial harms a member and creates regulatory exposure, while a wrong payment is costly and hard to claw back. Attachments are written by third parties, so their content is not under the insurer's control.\n\nThe pilot is evaluated on a held-out set of claims with known adjudicated outcomes, with each claim run several times. Early results show that the reviewer approves nearly every draft, that drafts for rare procedures sometimes disagree with each other from run to run, and that one test attachment contained text addressed to the system rather than to a human reader. The team now has to decide how much autonomy each stage should have, how the system handles uncertainty, how to make review genuinely independent, and how to protect the payment path.",
+    "question_ids": [
+      "Q-D1-0075",
+      "Q-D2-0090",
+      "Q-D5-0089",
+      "Q-D6-0074"
+    ]
+  }
+]
