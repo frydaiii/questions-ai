@@ -46,11 +46,15 @@ tools/
   stats.py                   Coverage dashboard (progress bars, format/difficulty breakdown,
                               theory usage histogram, tag frequency).
   export_xlsx.py              Export all questions to an Excel workbook.
+  export_web.py              Export standalone questions + theory cards to web/public/bank.json
+                              for the practice web app (runs the validator first).
   requirements.txt           jsonschema, pytest, rapidfuzz, openpyxl.
 tests/
   test_validate.py           pytest suite covering every validator rule.
   test_blueprint.py          Smoke tests on blueprint.json's internal arithmetic.
+  test_export_web.py         Tests for the web data bundle export.
   fixtures/                  One deliberately-broken file per validator rule.
+web/                         Static practice web app (Vite + React + TypeScript). See web/README.md.
 ```
 
 ## Curriculum structure this bank targets
@@ -153,6 +157,27 @@ python tools/make_slides.py         # build exports/langchain-langgraph-bank-ove
 
 pytest tests/                       # validator rule test suite
 ```
+
+## Web app
+
+`web/` contains a static practice site built from this bank. Learners pick a level (easy, medium,
+or hard) and take a 30-question set: 5 from each domain, with a mix of formats, scored
+all-or-nothing. The report shows the score, per-domain results flagged "needs improvement" below
+70%, a ranked list of weak concepts linked to the theory cards to study, and a review of every
+question with its explanation, theory card, and references. Progress and history stay in the
+browser.
+
+```bash
+python tools/export_web.py          # write web/public/bank.json (480 standalone questions + cards)
+cd web
+npm install
+npm run dev                         # local dev server
+npm test                            # app test suite
+npm run build                       # static site in web/dist
+```
+
+The bundle includes answers, so the site is for practice, not secure assessment. See
+`web/README.md` for deployment (GitHub Pages, Netlify) and details.
 
 
 
